@@ -39,7 +39,5 @@
       "last 1 safari version"
     ]
   },
-  "devDependencies": {
-    "jest": "^25.1.0"
-  }
+  "devDependencies": {}
 }
