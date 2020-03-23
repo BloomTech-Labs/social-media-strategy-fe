@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-const url = 'placeholder';
+const url = process.env.API_URL;
 
 export const axiosWithAuth = () => {
   return axios.create({
