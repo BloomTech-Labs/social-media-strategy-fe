@@ -87,4 +87,4 @@ export const initialState = {
   ]
 };
 
-export const reducer = combineReducers({ userAuthReducer });
+export const reducer = combineReducers(userAuthReducer);

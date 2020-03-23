@@ -1,13 +1,13 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { BrowswerRouter as Router } from 'react-router-dom';
+import { BrowserRouter as Router } from "react-router-dom";
 import './index.css';
 import App from './App';
 import * as serviceWorker from './serviceWorker';
 
 // imports for redux setup
-import { createStore, applyMiddleware } from redux;
-import { Provider } from 'react-redux';
+import { createStore, applyMiddleware } from 'redux';
+import { Provider } from 'react-redux'
 import thunk from 'redux-thunk';
 import logger from 'redux-logger';
 import { reducer } from './reducers';

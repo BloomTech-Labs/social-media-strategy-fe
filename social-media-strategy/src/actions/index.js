@@ -1,5 +1,4 @@
 import { axiosWithAuth } from "../utils/axiosWithAuth";
-import { push } from 'react-router-dom';
 
 export const USER_LOGIN_START = "USER_LOGIN_START";
 export const USER_LOGIN_SUCCESS = "USER_LOGIN_SUCCESS";
@@ -16,7 +15,6 @@ export const registerUser = userData => dispatch => {
     .then(response => {
       dispatch({ type: USER_REGISTER_SUCCESS });
       localStorage.setItem("token", response.data.payload);
-      dispatch(push("/profile"));
     })
     .catch(error => {
       dispatch({ type: USER_REGISTER_FAILURE, payload: error.data });
@@ -31,7 +29,6 @@ export const login = userData => dispatch => {
     .then(response => {
       dispatch({ type: USER_LOGIN_SUCCESS, payload: userData.username });
       localStorage.setItem("token", response.data.token);
-      dispatch(push("/profile"));
     })
     .catch(error => {
       dispatch({ type: USER_LOGIN_FAILURE, payload: error.data });
