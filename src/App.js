@@ -1,11 +1,12 @@
-
-import "./sass/index.scss";
-import Navigation from "./components/navigation";
 import React from "react";
 //import { BrowserRouter as Router, Route, Link, Switch } from "react-router-dom";
 
-//import AddAccount from "./components/AddAccount";
+import Navigation from "./components/navigation";
+import Dashboard from "./components/Dashboard";
 
+import "./sass/index.scss";
+
+//import AddAccount from "./components/AddAccount";
 
 /*const routes = (
   <Router>
@@ -16,14 +17,10 @@ import React from "react";
 )*/
 
 export default function App() {
-
   return (
     <>
       <Navigation />
-   
-    <main>
-      
-    </main>
-     </>
+      <Dashboard />
+    </>
   );
 }
