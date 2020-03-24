@@ -1,11 +1,11 @@
 import React from "react";
-import logo from "./logo.svg";
-import "./App.css";
+import "./sass/index.scss";
+import Navigation from "./components/navigation";
 
 function App() {
   return (
     <>
-      <h1>Social Media Manager</h1>
+      <Navigation />
     </>
   );
 }
