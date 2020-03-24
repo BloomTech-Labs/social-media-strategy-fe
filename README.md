@@ -1,12 +1,15 @@
+[![Maintainability](https://api.codeclimate.com/v1/badges/f93fbc62f8d991e5acc2/maintainability)](https://codeclimate.com/github/Lambda-School-Labs/social-media-strategy-fe/maintainability)
+[![Test Coverage](https://api.codeclimate.com/v1/badges/f93fbc62f8d991e5acc2/test_coverage)](https://codeclimate.com/github/Lambda-School-Labs/social-media-strategy-fe/test_coverage)
+
 🚫 Note: All lines that start with 🚫 are instructions and should be deleted before this is posted to your portfolio. This is intended to be a guideline, feel free to add your own flare to it.
 
 🚫 The numbers 1️⃣ through 5️⃣ next to each item represent the week that part of the docs needs to be comepleted by.  Make sure to delete the numbers by the end of Labs.
 
 🚫 Each student has a required minimum number of meaningful PRs each week per the rubric. Contributing to docs does NOT count as a PR to meet your weekly requirements.
 
-# 1️⃣ Title of project goes here
+# 1️⃣ Social Media Strategy
 
-1️⃣ You can find the deployed project at [🚫URL NAME GOES HERE](🚫copy and paste URL here).
+1️⃣ You can find the deployed project at [Social Media Strategy](https://master.d3i3b4v5age2lf.amplifyapp.com/).
 
 ## 4️⃣ Contributors
 
@@ -33,11 +36,11 @@
 
 ## Project Overview
 
-1️⃣ [Trello Board](🚫add link to trello board here)
+1️⃣ [Trello Board](https://trello.com/b/tn4nvK97/labs-22-social-media-strategy)
 
-1️⃣ [Product Canvas](🚫add link to product canvas here)
+1️⃣ [Product Canvas](https://www.notion.so/Social-Media-Strategy-9d1840703db34c5cb44d0f4a0cc45543)
 
-1️⃣ [UX Design files](🚫add link to design files here) - 🚫 delete if not applicable
+1️⃣ [UX Design files](https://www.figma.com/file/ssdhBZL2Yr9GYaRyZtO8Cu/Social-Media-Strategy%2C-JP)
 
 🚫 Replace lorem ipsum with a description of your project
 
