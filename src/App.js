@@ -3,7 +3,7 @@ import "./sass/index.scss";
 import Navigation from "./components/navigation";
 import React from "react";
 //import { BrowserRouter as Router, Route, Link, Switch } from "react-router-dom";
-import Dashboard from "./components/Dashboard";
+
 //import AddAccount from "./components/AddAccount";
 
 
@@ -22,7 +22,7 @@ export default function App() {
       <Navigation />
    
     <main>
-      <Dashboard />
+      
     </main>
      </>
   );
