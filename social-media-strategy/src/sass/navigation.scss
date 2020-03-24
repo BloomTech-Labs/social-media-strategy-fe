@@ -1,0 +1,53 @@
+.navButtonContainer {
+  display: flex;
+  margin: 30% auto;
+
+  .navButton {
+    width: 65%;
+    display: flex;
+    margin: 0 auto;
+    justify-content: center;
+    text-align: center;
+    align-content: center;
+  }
+}
+
+.navContainer {
+  width: 15%;
+  height: 100vh;
+  position: absolute;
+  background-color: #e5e5e5;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+
+ul {
+  
+  .link {
+    list-style: none;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    margin: 20% 0%;
+  }
+  .navImage {
+    margin-right: 5%;
+  }
+}
+
+.avatar {
+  position: absolute;
+  left: 62px;
+  top: 800px;
+}
+
+.linkNav {
+  text-decoration: none;
+  color: #848484;
+  font-size: 1.4rem;
+}
+
+.linkActive {
+  text-decoration: none;
+  color: #E85556;
+  font-size: 1.4rem;
+}
