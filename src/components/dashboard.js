@@ -6,7 +6,7 @@ import AddAccount from "./AddAccount";
 
 const Dashboard = () => {
   return (
-    /*<header>
+    <header>
       <div className='App'>
         <div className='title'>
           <h1 className='bold'>Dashboard</h1>
@@ -33,7 +33,7 @@ const Dashboard = () => {
           <AccountList list={AccountList} />
         </div>
       </div>
-    </header>*/<div>Hello from dashboard</div>
+    </header>
   );
 };
 

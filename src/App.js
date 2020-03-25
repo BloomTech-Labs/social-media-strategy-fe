@@ -2,7 +2,7 @@ import React from "react";
 //import { BrowserRouter as Router, Route, Link, Switch } from "react-router-dom";
 
 import Navigation from "./components/navigation";
-import Dashboard from './components/Dashboard';
+import Dashboard from './components/delete';
 
 import "./sass/index.scss";
 
