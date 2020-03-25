@@ -1,6 +1,7 @@
-import "./sass/index.scss";
-import Navigation from "./components/Navigation";
 import React from "react";
+
+import "./sass/index.scss";
+
 //import { BrowserRouter as Router, Route, Link, Switch } from "react-router-dom";
 
 //import AddAccount from "./components/AddAccount";
@@ -15,9 +16,7 @@ import React from "react";
 
 export default function App() {
   return (
-    <>
-      <Navigation />
-    </>
+    <div>Please work</div>
   );
 }
 
