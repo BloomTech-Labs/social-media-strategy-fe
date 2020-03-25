@@ -1,8 +1,9 @@
 import React from "react";
 
 import "./sass/index.scss";
-import Navigation from "./components/Navigation";
+
 import Dashboard from "./components/Dashboard";
+
 //import { BrowserRouter as Router, Route, Link, Switch } from "react-router-dom";
 
 //import AddAccount from "./components/AddAccount";
@@ -20,7 +21,7 @@ export default function App() {
 
   return (
     <>
-      <Navigation />
+      
       <Dashboard />
      </>
   );
