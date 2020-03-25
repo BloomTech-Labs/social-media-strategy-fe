@@ -17,9 +17,13 @@ import "./sass/index.scss";
 
 export default function App() {
   return (
-    <div>
+    <div className='container'>
+      <div className="nav" >
       <Navigation />
+      </div>
+      <div className="dash">
       <Dashboard />
+      </div>
     </div>
   );
 }
