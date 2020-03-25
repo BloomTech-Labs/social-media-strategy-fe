@@ -5,6 +5,21 @@ import { USER_LOGIN_START,
     USER_REGISTER_SUCCESS,
     USER_REGISTER_FAILURE } from '../actions'
 
+export const initialState = {
+    twitterAccountInformation: {
+        firstName: "Asami",
+        lastName: "Arata",
+        twitterHandle: "@AsamiArata",
+        location: "San Francisco Bay Area",
+        posts: 451,
+        following: 250,
+        followers: 2.6
+    },
+    isLoading: false,
+    isLoggedIn: true,
+    error: null,
+    };
+
 export const userAuthReducer = (state, action) => {
     switch(action.type) {
         case USER_LOGIN_START:
