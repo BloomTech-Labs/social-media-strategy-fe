@@ -1,10 +1,10 @@
 import React from "react";
 
+import Dashboard from "./components/Dashboard";
+
 import "./sass/index.scss";
 
 //import { BrowserRouter as Router, Route, Link, Switch } from "react-router-dom";
-
-//import AddAccount from "./components/AddAccount";
 
 /*const routes = (
   <Router>
@@ -15,8 +15,5 @@ import "./sass/index.scss";
 )*/
 
 export default function App() {
-  return (
-    <div>Please work</div>
-  );
+  return <Dashboard />;
 }
-
