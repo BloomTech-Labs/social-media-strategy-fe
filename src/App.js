@@ -2,7 +2,7 @@ import React from "react";
 //import { BrowserRouter as Router, Route, Link, Switch } from "react-router-dom";
 
 import Navigation from "./components/navigation";
-
+import Dashboard from './components/Dashboard';
 
 import "./sass/index.scss";
 
@@ -20,7 +20,7 @@ export default function App() {
   return (
     <>
       <Navigation />
-      
+      <Dashboard />
     </>
   );
 }
