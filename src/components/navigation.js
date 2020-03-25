@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 
 //component imports
-import HomeNav from "./Home-navigation";
+import HomeNav from "./home-navigation";
 
 // material ui imports
 import { Button } from "@material-ui/core";
@@ -27,7 +27,7 @@ import AnalyticsAlt from "../assets/icons8-bar-chart2-30.svg";
 import Alert from "../assets/icons8-doorbell-30.svg";
 import AlertAlt from "../assets/icons8-doorbell2-30.svg";
 
-import TransitionsModal from "./Modal";
+import TransitionsModal from "./modal";
 
 const Navigation = () => {
   const ColorButton = withStyles(theme => ({
