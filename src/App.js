@@ -1,6 +1,7 @@
 import React from "react";
 
 import Dashboard from "./components/Dashboard";
+import Navigation from "./components/Navigation";
 
 import "./sass/index.scss";
 
@@ -15,5 +16,10 @@ import "./sass/index.scss";
 )*/
 
 export default function App() {
-  return <Dashboard />;
+  return (
+    <div>
+      <Navigation />
+      <Dashboard />
+    </div>
+  );
 }
