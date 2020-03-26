@@ -1,45 +1,46 @@
-import { DRAG_HAPPENED } from "../actions";
+import { ON_DRAG_END_SUCCESS } from "../actions/topicAction";
 
 export const initialState = {
-    cards: {
-        'card-1': { id: 'card-1', content: 'This is content from card 1'},
-        'card-2': { id: 'card-2', content: 'This is content from card 2'},
-        'card-3': { id: 'card-3', content: 'This is content from card 3'},
-        'card-4': { id: 'card-4', content: 'This is content from card 4'},
-        'card-5': { id: 'card-5', content: 'This is content from card 5'}
+  cards: {
+    "card-1": { id: "card-1", content: "This is content from card 1" },
+    "card-2": { id: "card-2", content: "This is content from card 2" },
+    "card-3": { id: "card-3", content: "This is content from card 3" },
+    "card-4": { id: "card-4", content: "This is content from card 4" },
+    "card-5": { id: "card-5", content: "This is content from card 5" }
+  },
+  topics: {
+    "topic-1": {
+      id: "topic-1",
+      title: "Drafts",
+      cardsIds: ["card-1", "card-2", "card-3", "card-4", "card-5"]
     },
-    topics: {
-        'topic-1': {
-            id: 'topic-1',
-            title: 'Drafts',
-            cardsIds: ['card-1', 'card-2', 'card-3', 'card-4', 'card-5']
-
-        }
-    },
-    topicOrder: ['topic-1']
+    "topic-2": {
+        id: "topic-2",
+        title: "Women of Lambda",
+        cardsIds: []
+      },
+      "topic-3": {
+        id: "topic-3",
+        title: "Misc",
+        cardsIds: []
+      }
+  },
+  topicOrder: ["topic-1", 'topic-2', 'topic-3']
 };
-    
 
 const topicsReducer = (state = initialState, action) => {
-    switch(action.type) {
-        case DRAG_HAPPENED: 
-            const { 
-                droppableIdStart,
-                droppableIdEnd,
-                droppableIndexStart,
-                droppableIndexEnd,
-                draggableId} = action.payload;
-            const newState = [...state];
-            // moves in same topic
-            if(droppableIdStart === droppableIdEnd) {
-                const list = state.find(list => droppableIdStart === list.id);
-                const card = list.cards.splice(droppableIndexStart, 1)
-                list.cards.splice(droppableIndexEnd, 0, ...card)
-            }
-            return newState;
-        default:
-            return state;
-    }
-}
+  switch (action.type) {
+    case ON_DRAG_END_SUCCESS:
+      return {
+        ...state,
+        topics: {
+          ...state.topics,
+          [action.payload.id]: action.payload
+        }
+      };
+    default:
+      return state;
+  }
+};
 
 export default topicsReducer;

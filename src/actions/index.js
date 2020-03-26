@@ -8,8 +8,6 @@ export const USER_REGISTER_START = "USER_REGISTER_START";
 export const USER_REGISTER_SUCCESS = "USER_REGISTER_SUCCESS";
 export const USER_REGISTER_FAILURE = "USER_REGISTER_FAILURE";
 
-export const DRAG_HAPPENED = "DRAG_HAPPENED";
-
 export const registerUser = userData => dispatch => {
   dispatch({ type: USER_REGISTER_START });
   axiosWithAuth()
@@ -38,19 +36,4 @@ export const login = userData => dispatch => {
     });
 };
 
-export const sort = (
-  droppableIdStart,
-  droppableIdEnd,
-  droppableIndexStart,
-  droppableIndexEnd,
-  draggableId
-) => dispatch => {
-  return dispatch({
-    type: DRAG_HAPPENED,
-    payload: droppableIdStart,
-    droppableIdEnd,
-    droppableIndexStart,
-    droppableIndexEnd,
-    draggableId
-  });
-};
+
