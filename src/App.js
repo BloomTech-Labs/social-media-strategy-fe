@@ -1,12 +1,12 @@
 import React from "react";
 import { connect } from "react-redux";
 import { DragDropContext, Droppable } from "react-beautiful-dnd";
-import { onDragEndSingle, onDragEndDouble, onDragEndTopic } from "./actions/topicAction";
+import { onDragEndSingle, onDragEndDouble, onDragEndTopic } from "./actions/topicsActions";
 
 import styled from "styled-components";
 
-//import Dashboard from "./components/Dashboard";
-//import Navigation from "./components/Navigation";
+import Dashboard from "./components/Dashboard";
+import Navigation from "./components/Navigation";
 import TopicBucket from "./components/TopicBucket";
 
 import "./sass/index.scss";
@@ -90,12 +90,12 @@ const App = props => {
 
   return (
     <div className='container'>
-      {/*<div className="nav" >
+      <div className="nav" >
       <Navigation />
       </div>
       <div className="dash">
       <Dashboard />
-      </div>*/}
+      </div>
       <DragDropContext onDragEnd={onDragEnd}>
         <Droppable droppableId='all-topics' direction='horizontal' type='topic'>
           {provided => (

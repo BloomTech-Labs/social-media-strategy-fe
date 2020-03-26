@@ -1,4 +1,4 @@
-import { ON_DRAG_END_SUCCESS, ON_DRAG_TOPIC_END_SUCCESS } from "../actions/topicAction";
+import { ON_DRAG_END_SUCCESS, ON_DRAG_TOPIC_END_SUCCESS } from "../actions/topicsActions";
 
 export const initialState = {
   cards: {
