@@ -20,26 +20,21 @@ import "./sass/index.scss";
 )*/
 
 const App = props => {
-  
-
 
   const onDragEnd = result => {
     const { destination, source, draggableId } = result;
 
-    const mapDispatchToProps = dispatch => {
-      sort(source.droppableId, destination.droppableId, source.index, destination.index, draggableId)
-    }
-
     if (!destination) {
       return;
-    }
+    } // if no destination, no action is needed
 
-   mapDispatchToProps();
-
-
-  }; // end onDragEnd
-
-  const { topics } = props;
+    if (destination.droppableId === source.droppableId && destination.index === source.index) {
+      return;
+    };
+    // has the location of the draggable changed?
+    
+    //this.props.dispatch(sort(source.droppableId, destination.droppableId, source.index, destination.index, draggableId))
+  }; 
 
   return (
     <div className='container'>
@@ -49,19 +44,20 @@ const App = props => {
       <div className="dash">
       <Dashboard />
       </div>*/}
-      <DragDropContext onDragEnd={onDragEnd}>
-        <div className='topics'>
-          {topics.map((topic, index) => (
-            <TopicBucket title={topic.title} cards={topic.cards} index={index} id={topic.id}/>
-          ))}
-        </div>
-      </DragDropContext>
+      {props.topicOrder.map((topicId) => {
+        const topic = props.topics[topicId];
+        const cards = topic.cardsIds.map(cardId => props.cards[cardId]);
+
+        return topic.title;
+      })}
     </div>
   );
 };
 
 const mapStateToProps = state => ({
-  topics: state.topics
+  topics: state.topics.topics,
+  cards: state.topics.cards,
+  topicOrder: state.topics.topicOrder
 });
 
 export default connect(mapStateToProps, { sort })(App);

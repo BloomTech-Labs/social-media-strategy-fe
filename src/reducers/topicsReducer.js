@@ -1,39 +1,24 @@
 import { DRAG_HAPPENED } from "../actions";
 
-const initialState =[
-    {
-        id: `list-${0}`,
-        title: 'Drafts',
-        cards: [
-            {
-                id: `card=${2}`,
-                text: 'This is a test card from the reducer initial state'
-            },
-            {
-                id: `card=${3}`,
-                text: 'This is also a test card from the reducer initial state'
-            }
-        ]
+export const initialState = {
+    cards: {
+        'card-1': { id: 'card-1', content: 'This is content from card 1'},
+        'card-2': { id: 'card-2', content: 'This is content from card 2'},
+        'card-3': { id: 'card-3', content: 'This is content from card 3'},
+        'card-4': { id: 'card-4', content: 'This is content from card 4'},
+        'card-5': { id: 'card-5', content: 'This is content from card 5'}
     },
-    {
-        id: `list-${1}`,
-        title: 'User Created Title',
-        cards: [
-            {
-                id: `card=${4}`,
-                text: 'Card number 1 for fun'
-            },
-            {
-                id: `card=${5}`,
-                text: 'again'
-            },
-            {
-                id: `card=${6}`,
-                text: 'and again'
-            }
-        ]
-    }
-]
+    topics: {
+        'topic-1': {
+            id: 'topic-1',
+            title: 'Drafts',
+            cardsIds: ['card-1', 'card-2', 'card-3', 'card-4', 'card-5']
+
+        }
+    },
+    topicOrder: ['topic-1']
+};
+    
 
 const topicsReducer = (state = initialState, action) => {
     switch(action.type) {
