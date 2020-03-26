@@ -1,9 +1,9 @@
 import React from "react";
 import { connect } from "react-redux";
-import { DragDropContext } from "react-beautiful-dnd";
-import { onDragEndSingle, onDragEndDouble } from "./actions/topicAction";
+import { DragDropContext, Droppable } from "react-beautiful-dnd";
+import { onDragEndSingle, onDragEndDouble, onDragEndTopic } from "./actions/topicAction";
 
-import styled from 'styled-components';
+import styled from "styled-components";
 
 //import Dashboard from "./components/Dashboard";
 //import Navigation from "./components/Navigation";
@@ -26,38 +26,49 @@ const TopicsContainer = styled.div`
   justify: space-evenly;
 `;
 
-
 const App = props => {
-
   const onDragEnd = result => {
-    const { destination, source, draggableId } = result;
-  
-    if (!destination){
+    const { destination, source, draggableId, type } = result;
+
+    if (!destination) {
       return;
     }
-  
-    if (destination.droppableId === source.droppableId && destination.index === source.index) {
+
+    if (
+      destination.droppableId === source.droppableId &&
+      destination.index === source.index
+    ) {
       return;
     }
-  
+
+    if (type === 'topic') {
+      const newTopicOrder = Array.from(props.topicOrder);
+      newTopicOrder.splice(source.index, 1);
+      newTopicOrder.splice(destination.index, 0, draggableId);
+
+      props.onDragEndTopic(newTopicOrder);
+      console.log(newTopicOrder)
+      return;
+    }
+
     const topicStart = props.topics[source.droppableId];
     const topicFinish = props.topics[destination.droppableId];
 
     if (topicStart === topicFinish) {
       const newCardsIds = Array.from(topicStart.cardsIds);
 
-    newCardsIds.splice(source.index, 1);
-    newCardsIds.splice(destination.index, 0, draggableId);
+      newCardsIds.splice(source.index, 1);
+      newCardsIds.splice(destination.index, 0, draggableId);
 
-    const newTopic = {
-      ...topicStart,
-      cardsIds: newCardsIds
-    };
+      const newTopic = {
+        ...topicStart,
+        cardsIds: newCardsIds
+      };
 
-    props.onDragEndSingle(newTopic);
-    return;
-    } // if same topic 
-    
+      props.onDragEndSingle(newTopic);
+      return;
+    } // if same topic
+
     // Moving from one topic to another
     const startCardsIds = Array.from(topicStart.cardsIds);
     startCardsIds.splice(source.index, 1);
@@ -71,11 +82,11 @@ const App = props => {
     const newFinish = {
       ...topicFinish,
       cardsIds: finishCardsIds
-    }
+    };
 
     props.onDragEndDouble(newStart, newFinish);
-    
-  }
+    return;
+  };
 
   return (
     <div className='container'>
@@ -85,18 +96,30 @@ const App = props => {
       <div className="dash">
       <Dashboard />
       </div>*/}
-      <TopicsContainer>
       <DragDropContext onDragEnd={onDragEnd}>
-        <div className='topics'>
-          {props.topicOrder.map(topicId => {
-            const topic = props.topics[topicId]; // pulls a topic from state
-            const cards = topic.cardsIds.map(cardId => props.cards[cardId]); // pulls that topics cards from state
+        <Droppable droppableId='all-topics' direction='horizontal' type='topic'>
+          {provided => (
+            <TopicsContainer
+              {...provided.droppableProps}
+              ref={provided.innerRef}
+            >
+              <div className='topics'>
+                {props.topicOrder.map((topicId, index) => {
+                  const topic = props.topics[topicId]; // pulls a topic from state
+                  const cards = topic.cardsIds.map(
+                    cardId => props.cards[cardId]
+                  ); // pulls that topics cards from state
 
-            return <TopicBucket key={topic.id} topic={topic} cards={cards} />;
-          })}
-        </div>
+                  return (
+                    <TopicBucket key={topic.id} topic={topic} cards={cards} index={index}/>
+                  );
+                })}
+              </div>
+              {provided.placeholder}
+            </TopicsContainer>
+          )}
+        </Droppable>
       </DragDropContext>
-      </TopicsContainer>
     </div>
   );
 };
@@ -107,4 +130,6 @@ const mapStateToProps = state => ({
   topicOrder: state.topics.topicOrder
 });
 
-export default connect(mapStateToProps, { onDragEndSingle, onDragEndDouble })(App);
+export default connect(mapStateToProps, { onDragEndSingle, onDragEndDouble, onDragEndTopic })(
+  App
+);

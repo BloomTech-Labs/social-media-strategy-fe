@@ -1,4 +1,4 @@
-import { ON_DRAG_END_SUCCESS } from "../actions/topicAction";
+import { ON_DRAG_END_SUCCESS, ON_DRAG_TOPIC_END_SUCCESS } from "../actions/topicAction";
 
 export const initialState = {
   cards: {
@@ -19,13 +19,9 @@ export const initialState = {
         title: "Women of Lambda",
         cardsIds: []
       },
-      "topic-3": {
-        id: "topic-3",
-        title: "Misc",
-        cardsIds: []
-      }
+      
   },
-  topicOrder: ["topic-1", 'topic-2', 'topic-3']
+  topicOrder: ["topic-1", 'topic-2']
 };
 
 const topicsReducer = (state = initialState, action) => {
@@ -38,6 +34,11 @@ const topicsReducer = (state = initialState, action) => {
           [action.payload.id]: action.payload
         }
       };
+    case ON_DRAG_TOPIC_END_SUCCESS:
+        return {
+            ...state,
+            topicOrder: action.payload
+        }
     default:
       return state;
   }
