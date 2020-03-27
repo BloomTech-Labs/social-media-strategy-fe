@@ -8,9 +8,18 @@
     "@testing-library/react": "^10.0.1",
     "@testing-library/user-event": "^10.0.0",
     "axios": "^0.19.2",
+<<<<<<< HEAD:social-media-strategy/package.json
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
     "react-hook-form": "^5.1.3",
+=======
+    "fibers": "^4.0.2",
+    "node-sass": "^4.13.1",
+    "react": "^16.13.0",
+    "react-dom": "^16.13.0",
+    "react-hook-form": "^5.1.1",
+    "react-redux": "^7.2.0",
+>>>>>>> master:package.json
     "react-router": "^5.1.2",
     "react-router-dom": "^5.1.2",
     "react-scripts": "3.4.1",
@@ -19,6 +28,7 @@
     "redux-logger": "^3.0.6",
     "redux-thunk": "^2.3.0",
     "sass": "^1.26.3",
+    "typescript": "^3.8.3",
     "yup": "^0.28.3"
   },
   "scripts": {
