@@ -22,7 +22,7 @@ const Register_Login = () => {
       .then(res => {
         console.log(res, `success`);
         localStorage.setItem('token', res.data.token);
-        push(`/profile`);
+        push(`/`);
       })
       .catch(err => console.log(err));
   };
