@@ -59,6 +59,16 @@ const Navigation = () => {
     let user = await axiosWithAuth().get(`/users/user`);
 
     let ax = await axiosWithAuth().get(`/auth/${user.data.subject}/oauth`);
+    // let ax = await Axios.get(
+    //   `https://post-route-feature.herokuapp.com/api/auth/${state}/oauth`,
+    //   // `http://localhost:5000/api/auth/5/oauth`,
+    //   {
+    //     headers: {
+    //       Authorization: localStorage.getItem('token')
+    //     }
+    //   },
+    //   { crossDomain: true }
+    // );
     console.log(ax);
   }
   useEffect(() => {
