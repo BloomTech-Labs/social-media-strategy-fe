@@ -6,6 +6,7 @@ import Navigation from './components/Navigation';
 import './sass/index.scss';
 import { Route, Switch } from 'react-router';
 import REGISTER_LOGIN from './components/Register_Login';
+import Callback from './components/Callback';
 
 //import { BrowserRouter as Router, Route, Link, Switch } from "react-router-dom";
 
@@ -20,6 +21,9 @@ import REGISTER_LOGIN from './components/Register_Login';
 export default function App() {
   return (
     <div className='container'>
+      <Route path='/callback'>
+        <Callback />
+      </Route>
       <Switch>
         <Route path='/login'>
           <REGISTER_LOGIN />

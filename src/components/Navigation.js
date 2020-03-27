@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 
 //component imports
 import HomeNav from './HomeNav';
@@ -27,6 +27,8 @@ import Analytics from '../assets/icons8-bar-chart-30.svg';
 import AnalyticsAlt from '../assets/icons8-bar-chart2-30.svg';
 import Alert from '../assets/icons8-doorbell-30.svg';
 import AlertAlt from '../assets/icons8-doorbell2-30.svg';
+import Axios from 'axios';
+import { axiosWithAuth } from '../utils/axiosWithAuth';
 
 //import TransitionsModal from "./modal";
 
@@ -48,6 +50,20 @@ const Navigation = () => {
   const [account, setAccount] = useState(false);
   const [analytics, setAnalytics] = useState(false);
   const [alert, setAlert] = useState(false);
+
+  async function twittercheck() {
+    let user = await axiosWithAuth().get(`/users/user`);
+    console.log(user);
+  }
+  async function twitter() {
+    let user = await axiosWithAuth().get(`/users/user`);
+
+    let ax = await axiosWithAuth().get(`/auth/${user.data.subject}/oauth`);
+    console.log(ax);
+  }
+  useEffect(() => {
+    twittercheck();
+  }, []);
 
   const homeHandler = () => {
     setHome(true);
@@ -227,10 +243,23 @@ const Navigation = () => {
                 Login
               </li>
             </NavLink>
+            <NavLink
+              className={menu ? 'linkActive' : 'linkNav'}
+              to='/callback'
+              onClick={menuHandler}>
+              <li className='link'>
+                <img
+                  className='navImage'
+                  src={menu ? MenuAlt : Menu}
+                  alt='Menu icon'
+                />
+                Callback test
+              </li>
+            </NavLink>
           </ul>
         </nav>
         <div className='avatar'>
-          <p>Hello, Programmers</p>
+          <p onClick={twitter}>Twitter</p>
         </div>
       </div>
       <Switch>
