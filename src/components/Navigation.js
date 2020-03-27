@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 
 //component imports
 import HomeNav from './HomeNav';
+import REGISTER_LOGIN from '../components/Register_Login';
 
 // material ui imports
 import { Button } from '@material-ui/core';
@@ -240,7 +241,6 @@ const Navigation = () => {
         <Route path='/messages'></Route>
         <Route path='/notifications'></Route>
         <Route path='/more'></Route>
-        <Route path='/login'></Route>
       </Switch>
     </div>
   );

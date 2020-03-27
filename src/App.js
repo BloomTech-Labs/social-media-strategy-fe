@@ -21,6 +21,9 @@ export default function App() {
   return (
     <div className='container'>
       <Switch>
+        <Route path='/login'>
+          <REGISTER_LOGIN />
+        </Route>
         <Route exact path='/'>
           <div className='nav'>
             <Navigation />
@@ -28,9 +31,6 @@ export default function App() {
           <div className='dash'>
             <Dashboard />
           </div>
-          <Route path='/home/login'>
-            <REGISTER_LOGIN />
-          </Route>
         </Route>
       </Switch>
     </div>
