@@ -58,16 +58,16 @@ const Navigation = () => {
   async function twitter() {
     let user = await axiosWithAuth().get(`/users/user`);
 
-    // let ax = await axiosWithAuth().get(`/auth/${user.data.subject}/oauth`);
-    let ax = await Axios.get(
-      // `https://post-route-feature.herokuapp.com/api/auth/${state}/oauth`,
-      `http://localhost:5000/api/auth/6/oauth`,
-      {
-        headers: {
-          Authorization: localStorage.getItem('token')
-        }
-      }
-    );
+    let ax = await axiosWithAuth().get(`/auth/${user.data.subject}/oauth`);
+    // let ax = await Axios.get(
+    //   `https://post-route-feature.herokuapp.com/api/auth/${state}/oauth`,
+    //   // `http://localhost:5000/api/auth/6/oauth`,
+    //   {
+    //     headers: {
+    //       Authorization: localStorage.getItem('token')
+    //     }
+    //   }
+    // );
     console.log(ax);
   }
   useEffect(() => {
