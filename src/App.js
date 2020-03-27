@@ -28,7 +28,7 @@ export default function App() {
           <div className='dash'>
             <Dashboard />
           </div>
-          <Route path='/login'>
+          <Route path='/home/login'>
             <REGISTER_LOGIN />
           </Route>
         </Route>
