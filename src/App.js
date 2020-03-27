@@ -21,7 +21,7 @@ import Callback from './components/Callback';
 export default function App() {
   return (
     <div className='container'>
-      <Route path='/callback'>
+      <Route exact path='/callback'>
         <Callback />
       </Route>
       <Switch>
