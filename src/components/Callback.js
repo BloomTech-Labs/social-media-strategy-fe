@@ -1,33 +1,63 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
-import { useLocation } from 'react-router-dom';
+import { useLocation, useHistory } from 'react-router-dom';
 import { axiosWithAuth } from '../utils/axiosWithAuth';
 const queryString = require('query-string');
 
 const Callback = () => {
   const location = useLocation();
   const [state, setstate] = useState('');
+  const { push } = useHistory();
+  const [time, setTime] = useState(4);
 
   async function fetchdata() {
     const parse = queryString.parse(location.search);
+    try {
+      let user = await axiosWithAuth().get(`/users/user`);
+      setstate(user.data.subject);
+      console.log(parse, 'QUERIYSTRINGSTUFF');
 
-    let user = await axiosWithAuth().get(`/users/user`);
-    setstate(user.data.subject);
+      let post = await axiosWithAuth().get(
+        `https://post-route-feature.herokuapp.com/api/auth/${user.data.subject}/callback`,
+        // `https://post-route-feature.herokuapp.com/api/users`,
 
-    let post = await axiosWithAuth().post(
-      `https://post-route-feature.herokuapp.com/api/auth/${user.data.subject}/callback`,
-      { parse: parse, location: location }
-    );
+        { parse: parse, location: location }
+      );
 
-    console.log(user.data, post, 'AXXX');
-    console.log(user.data.subject, 'SHOWUPPPPP');
-    console.log(location.search);
-    console.log(parse, 'QUERIYSTRINGSTUFF');
+      let promise = await [user, post];
+
+      let check = await Promise.all(promise);
+      console.log(check, 'promise check');
+      console.log(user.data, post, 'AXXX');
+      console.log(user.data.subject, 'SHOWUPPPPP');
+      console.log(location.search);
+
+      let move = setTimeout(() => {
+        push('/');
+      }, 4000);
+      let countdown = setInterval(timer, 1000);
+      function timer() {
+        if (window.location.pathname !== '/callback') {
+          console.log('Interval Cleared');
+          clearInterval(countdown);
+        } else {
+          setTime(time => time - 1);
+          console.log(window.location.pathname, 'TIME');
+        }
+      }
+    } catch (error) {
+      console.log({
+        message: error.message,
+        error: error.stack,
+        name: error.name,
+        code: error.code
+      });
+    }
   }
 
   useEffect(() => {
     fetchdata();
-  }, [state]);
+  }, []);
 
   return (
     <div>
@@ -45,17 +75,19 @@ const Callback = () => {
       <ul>
         <li>
           You have Tweeted{' '}
-          <span class='label label-success'>{'statuses_count'}</span> times.
+          <span className='label label-success'>{'statuses_count'}</span> times.
         </li>
         <li>
-          You have <span class='label label-success'>{'followers_count'}</span>{' '}
+          You have{' '}
+          <span className='label label-success'>{'followers_count'}</span>{' '}
           followers.
         </li>
         <li>
-          You follow <span class='label label-success'>{'friends_count'}</span>{' '}
-          users.
+          You follow{' '}
+          <span className='label label-success'>{'friends_count'}</span> users.
         </li>
       </ul>
+      <h2>Redirecting you back to your SoMe profile in {time} </h2>
     </div>
   );
 };

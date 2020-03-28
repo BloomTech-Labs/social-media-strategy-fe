@@ -133,6 +133,7 @@ const Navigation = () => {
       <div className='navContainer'>
         <div className='navButtonContainer'>
           {/* <TransitionsModal /> */}
+          {console.log(window.location.pathname)}
           {console.log(currentuser)}
           <ColorButton className='navButton'>Post</ColorButton>
         </div>
