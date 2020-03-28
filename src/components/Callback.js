@@ -17,7 +17,7 @@ const Callback = () => {
       setstate(user.data.subject);
       console.log(parse, 'QUERIYSTRINGSTUFF');
 
-      let post = await axiosWithAuth().get(
+      let post = await axiosWithAuth().post(
         `https://post-route-feature.herokuapp.com/api/auth/${user.data.subject}/callback`,
         // `https://post-route-feature.herokuapp.com/api/users`,
 
