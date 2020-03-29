@@ -9,6 +9,7 @@ const Callback = () => {
   const [state, setstate] = useState('');
   const { push } = useHistory();
   const [time, setTime] = useState(4);
+  const [data, setData] = useState('');
 
   async function fetchdata() {
     const parse = queryString.parse(location.search);
@@ -24,10 +25,11 @@ const Callback = () => {
         { parse: parse, location: location }
       );
 
-      let promise = await [user, post];
+      let promise = [user, post];
 
       let check = await Promise.allSettled(promise);
       console.log(check, 'promise check');
+      setData(post.data);
 
       let move = setTimeout(() => {
         push('/');
@@ -59,30 +61,33 @@ const Callback = () => {
   return (
     <div>
       <h1 style={{ color: 'blue' }}>
-        Testing Social Media {console.log(state)}
+        Testing Social Media {console.log(state, data)}
       </h1>
       <h2>success</h2>
       <p>
         Thank you, <strong>name</strong>, for authorizing SoMe an access token
-        for <a href='https://twitter.com/{{ screen_name }}'>@</a>. We've
-        successfully received your access token and confirmed it by retrieving
-        some basic details on your behalf from the Twitter API. Yay!
+        for{' '}
+        <a href={`https://twitter.com/${data.twitter_screenName}`}>
+          `@${data.twitter_screenName}`
+        </a>
+        . We've successfully received your access token and confirmed it by
+        retrieving some basic details on your behalf from the Twitter API. Yay!
       </p>
       <p>Here is what we pulled from the API on your behalf:</p>
       <ul>
-        <li>
+        {/* <li>
           You have Tweeted{' '}
           <span className='label label-success'>{'statuses_count'}</span> times.
-        </li>
+        </li> */}
         <li>
           You have{' '}
-          <span className='label label-success'>{'followers_count'}</span>{' '}
+          <span className='label label-success'>{data.total_followers}</span>{' '}
           followers.
         </li>
-        <li>
+        {/* <li>
           You follow{' '}
           <span className='label label-success'>{'friends_count'}</span> users.
-        </li>
+        </li> */}
       </ul>
       <h2>Redirecting you back to your SoMe profile in {time} </h2>
     </div>
