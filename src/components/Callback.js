@@ -69,7 +69,7 @@ const Callback = () => {
         Thank you, <strong>name</strong>, for authorizing SoMe an access token
         for{' '}
         <a href={`https://twitter.com/${data.twitter_screenName}`}>
-          `@${data.twitter_screenName}`
+          @${data.twitter_screenName}
         </a>
         . We've successfully received your access token and confirmed it by
         retrieving some basic details on your behalf from the Twitter API. Yay!

@@ -257,19 +257,6 @@ const Navigation = () => {
                 Login
               </li>
             </NavLink>
-            <NavLink
-              className={menu ? 'linkActive' : 'linkNav'}
-              to='/callback'
-              onClick={menuHandler}>
-              <li className='link'>
-                <img
-                  className='navImage'
-                  src={menu ? MenuAlt : Menu}
-                  alt='Menu icon'
-                />
-                Callback test
-              </li>
-            </NavLink>
           </ul>
         </nav>
         <div className='avatar'>
