@@ -56,22 +56,28 @@ const Navigation = () => {
     setCurrentuser(user.data.subject);
   }
   async function twitter() {
-    let ax = await (
-      await fetch(
-        ` https://post-route-feature.herokuapp.com/api/auth/${currentuser}/oauth`,
-        {
-          method: 'GET',
-          redirect: 'follow',
-          headers: {
-            accept: 'application/json',
-            Authorization: localStorage.getItem('token')
+    if (!localStorage.getItem('token')) {
+      window.alert(
+        'No token, please hit log in button and login/signup, Thank you'
+      );
+    } else {
+      let ax = await (
+        await fetch(
+          ` https://post-route-feature.herokuapp.com/api/auth/${currentuser}/oauth`,
+          {
+            method: 'GET',
+            redirect: 'follow',
+            headers: {
+              accept: 'application/json',
+              Authorization: localStorage.getItem('token')
+            }
           }
-        }
-      )
-    ).json();
+        )
+      ).json();
 
-    console.log(ax);
-    let move = await (window.location.href = ax);
+      console.log(ax);
+      let move = await (window.location.href = ax);
+    }
   }
   useEffect(() => {
     twittercheck();
