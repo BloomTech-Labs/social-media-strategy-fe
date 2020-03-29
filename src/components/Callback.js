@@ -26,11 +26,8 @@ const Callback = () => {
 
       let promise = await [user, post];
 
-      let check = await Promise.all(promise);
+      let check = await Promise.allSettled(promise);
       console.log(check, 'promise check');
-      console.log(user.data, post, 'AXXX');
-      console.log(user.data.subject, 'SHOWUPPPPP');
-      console.log(location.search);
 
       let move = setTimeout(() => {
         push('/');

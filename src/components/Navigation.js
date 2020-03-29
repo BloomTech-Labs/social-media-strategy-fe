@@ -56,9 +56,22 @@ const Navigation = () => {
     setCurrentuser(user.data.subject);
   }
   async function twitter() {
-    let ax = await axiosWithAuth().get(`/auth/${currentuser}/oauth`);
+    let ax = await (
+      await fetch(
+        ` https://post-route-feature.herokuapp.com/api/auth/${currentuser}/oauth`,
+        {
+          method: 'GET',
+          redirect: 'follow',
+          headers: {
+            accept: 'application/json',
+            Authorization: localStorage.getItem('token')
+          }
+        }
+      )
+    ).json();
 
     console.log(ax);
+    let move = await (window.location.href = ax);
   }
   useEffect(() => {
     twittercheck();
