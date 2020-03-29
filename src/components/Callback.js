@@ -32,7 +32,8 @@ const Callback = () => {
       setData(post.data);
 
       let move = setTimeout(() => {
-        push('/');
+        // push('/');
+        window.location.replace('/');
       }, 4000);
       let countdown = setInterval(timer, 1000);
       function timer() {
