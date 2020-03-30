@@ -35,8 +35,8 @@ const Register_Login = () => {
       .then(
         res =>
           alert('Sign up successful') &
-          console.log(res) &
-          window.location.reload(false)
+          localStorage.setItem('token', res.data.token) &
+          push(`/`)
       )
       .catch(err => console.log(err));
   };
