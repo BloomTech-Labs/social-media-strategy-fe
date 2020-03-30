@@ -11,6 +11,12 @@ const Callback = () => {
   const [time, setTime] = useState(4);
   const [data, setData] = useState('');
 
+  function displayiferror() {
+    let s = document.querySelector(`.redirect`);
+
+    s.style['display'] = 'block';
+  }
+
   async function fetchdata() {
     const parse = queryString.parse(location.search);
     try {
@@ -57,6 +63,9 @@ const Callback = () => {
 
   useEffect(() => {
     fetchdata();
+    setTimeout(() => {
+      displayiferror();
+    }, 4500);
   }, []);
 
   return (
@@ -91,6 +100,10 @@ const Callback = () => {
         </li> */}
       </ul>
       <h2>Redirecting you back to your SoMe profile in {time} </h2>
+      <p className='redirect'>
+        if countdown didn't redirect you to profile page please click{' '}
+        <a href='/'>here</a>
+      </p>
     </div>
   );
 };
