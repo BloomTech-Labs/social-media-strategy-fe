@@ -7,7 +7,6 @@ const queryString = require('query-string');
 const Callback = () => {
   const location = useLocation();
   const [state, setstate] = useState('');
-  const { push } = useHistory();
   const [time, setTime] = useState(4);
   const [data, setData] = useState('');
 
@@ -16,17 +15,14 @@ const Callback = () => {
 
     s.style['display'] = 'block';
   }
-
   async function fetchdata() {
     const parse = queryString.parse(location.search);
     try {
       let user = await axiosWithAuth().get(`/users/user`);
       setstate(user.data.subject);
-      console.log(parse, 'QUERIYSTRINGSTUFF');
 
       let post = await axiosWithAuth().post(
         `https://post-route-feature.herokuapp.com/api/auth/${user.data.subject}/callback`,
-        // `https://post-route-feature.herokuapp.com/api/users`,
 
         { parse: parse, location: location }
       );
@@ -38,7 +34,6 @@ const Callback = () => {
       setData(post.data);
 
       let move = setTimeout(() => {
-        // push('/');
         window.location.replace('/');
       }, 4000);
       let countdown = setInterval(timer, 1000);
