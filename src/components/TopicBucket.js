@@ -2,6 +2,7 @@ import React from "react";
 import styled from "styled-components";
 import TopicCard from "./TopicCard";
 import { Droppable, Draggable } from "react-beautiful-dnd";
+import ActionButton from './ActionButton';
 
 const Container = styled.div`
   background-color: white;
@@ -11,6 +12,7 @@ const Container = styled.div`
   width: 300px;
   display: flex;
   flex-direction: column;
+  height: 100%;
 `;
 const Title = styled.h4`
   color: gray;
@@ -24,6 +26,7 @@ const CardList = styled.div`
 
 const TopicBucket = props => {
   return (
+    <>
     <Draggable draggableId={props.topic.id} index={props.index}>
       {(provided) => (
         <Container
@@ -45,6 +48,8 @@ const TopicBucket = props => {
       )}
       
     </Draggable>
+    <ActionButton />
+    </>
   );
 };
 

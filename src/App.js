@@ -1,7 +1,7 @@
 import React from "react";
 import { connect } from "react-redux";
 import { DragDropContext, Droppable } from "react-beautiful-dnd";
-import { onDragEndSingle, onDragEndDouble, onDragEndTopic } from "./actions/topicsActions";
+import { onDragEndSingle, onDragEndDouble, onDragEndTopic, addTopic } from "./actions";
 
 import styled from "styled-components";
 
@@ -120,6 +120,7 @@ const App = props => {
           )}
         </Droppable>
       </DragDropContext>
+      <button onClick={() => {props.addTopic('Topic Text')}}>New Topic</button>
     </div>
   );
 };
@@ -130,6 +131,6 @@ const mapStateToProps = state => ({
   topicOrder: state.topics.topicOrder
 });
 
-export default connect(mapStateToProps, { onDragEndSingle, onDragEndDouble, onDragEndTopic })(
+export default connect(mapStateToProps, { onDragEndSingle, onDragEndDouble, onDragEndTopic, addTopic })(
   App
 );

@@ -1,4 +1,7 @@
-import { ON_DRAG_END_SUCCESS, ON_DRAG_TOPIC_END_SUCCESS } from "../actions/topicsActions";
+import { ON_DRAG_END_SUCCESS, ON_DRAG_TOPIC_END_SUCCESS, ON_ADD_TOPIC } from "../actions/topicsActions";
+
+let tempTopicId = 3;
+let tempCardId = 5;
 
 export const initialState = {
   cards: {
@@ -18,7 +21,7 @@ export const initialState = {
         id: "topic-2",
         title: "Women of Lambda",
         cardsIds: []
-      },
+    },
       
   },
   topicOrder: ["topic-1", 'topic-2']
@@ -39,8 +42,21 @@ const topicsReducer = (state = initialState, action) => {
             ...state,
             topicOrder: action.payload
         }
+    case ON_ADD_TOPIC: // temporary - will need to post to back end and get an ID
+      const newTopic = {
+        title: action.payload,
+        cardsIds: [],
+        id: `topic-${tempTopicId}`
+      }
+      tempTopicId += 1;
+      return {
+        ...state,
+        topics: {...state.topics, newTopic},
+        topicOrder: [...state.topicOrder, newTopic.id]
+      };
     default:
       return state;
+      
   }
 };
 
