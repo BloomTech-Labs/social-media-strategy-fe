@@ -94,7 +94,7 @@ const App = props => {
       <div className="column is-2" >
       <Navigation />
       </div>
-      <div className="column is-3">
+      <div className="column is-2">
       <Dashboard />
       </div>
       <DragDropContext onDragEnd={onDragEnd}>

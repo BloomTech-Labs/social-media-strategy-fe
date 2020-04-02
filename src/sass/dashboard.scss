@@ -1,39 +1,41 @@
 @import url('https://fonts.googleapis.com/css?family=Montserrat&display=swap');
-    .app {
+    .dash-app {
     text-align: center;
     background-color:white;
     font-family: 'Montserrat', sans-serif;
     overflow-y: scroll;
     height: 100vh;
-
     }
-    h1{
-    font-family: 'Montserrat', sans-serif;
-    }
+    
     h3{
     color: #1B262C;
     font-weight: 300;
     font-size:1.6rem;
     }
+
     h4, h6{
     color: #848484;
     font-weight: 300;
     font-size: 1rem;
     }
+
     h5{
     font-size:1.2rem;
     } 
+
     /* DASHBOARD TITLE */
     .title{
     flex-direction: column;
     background-color:#2F414B;
     padding:2rem;
     }
+
     .dash-title{
     display: flex;
     justify-content: flex-start;
     flex-direction:row;
     }
+
     .bold{
     font-weight: 700;
     font-size:3rem;
@@ -41,9 +43,11 @@
     color:white;
     margin-bottom: .2rem;
     }
+
     .highlight{
     color: #E85556;
     }
+
     .acct-title{
     display: flex;
     justify-content: space-between;
@@ -62,6 +66,18 @@
         font-weight: 300;
         }
     }
+
+    .location{
+        display:flex;
+        flex-direction:row;
+        align-items:center;
+        justify-content:center;
+
+        .location-img{
+            height:3vh;
+        }
+    }
+
     /* ACCT-CARD */
     .acct-card{
     background-color:white;

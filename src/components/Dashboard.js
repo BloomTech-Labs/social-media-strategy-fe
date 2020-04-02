@@ -4,10 +4,11 @@ import { Link } from 'react-router-dom';
 import data from "./accounts.json";
 import img from "../assets/headshot.png";
 import "../sass/dashboard.scss";
+import pin from "../assets/pin.svg";
 const accountData = data.accounts;
 const Dashboard = () => {
   return (
-      <div className="app">
+      <div className="dash-app">
       <div className="title">
       <h1 className="bold">Dashboard</h1>
       <div className="dash-title">
@@ -25,7 +26,12 @@ const Dashboard = () => {
         <img className='icon' src={img} alt='Profile'/>
         <h3>{e.firstName}{e.lastName}</h3>
         <h5>{e.twitterHandle}</h5>
-        <h4>{e.location}</h4>
+        <div className="location">
+          <img 
+            className="location-img"
+            src={pin}/>
+          <h4>{e.location}</h4>
+        </div>
                 <div className="all-stats">
                 <div className="headers">
                     <h5>Posts</h5>
