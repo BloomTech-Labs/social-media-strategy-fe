@@ -5,24 +5,25 @@ import { Droppable, Draggable } from "react-beautiful-dnd";
 import ActionButton from './ActionButton';
 
 const Container = styled.div`
-  background-color: white;
+  background-color: #EBECF0;
   margin: 1rem;
   padding: 1rem;
   border-radius: 0.5rem;
-  width: 300px;
   display: flex;
   flex-direction: column;
   height: 100%;
 `;
 const Title = styled.h4`
-  color: gray;
+  color: white;
   font-size: 1.6rem;
 `;
 const CardList = styled.div`
   padding: 8px;
   flex-grow: 1;
   min-height: 100px;
+  background-color: white;
 `;
+
 
 const TopicBucket = props => {
   return (

@@ -4,16 +4,17 @@ import { Draggable } from "react-beautiful-dnd";
 import "../sass/topicBuckets.scss";
 
 const Container = styled.div`
-  background-color: grey;
-  width: 90%;
+  background-color: white;
+  width: 100%;
   border-radius: 0.5rem;
   padding: 0.5rem;
   margin: 0.75rem;
 `;
 
+
 const TopicCard = props => {
   return (
-    <Draggable draggableId={props.card.id} index={props.index}>
+    <Draggable className="drag-cont" draggableId={props.card.id} index={props.index}>
       {provided => (
         <Container
           {...provided.draggableProps}

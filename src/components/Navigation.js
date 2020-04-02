@@ -4,9 +4,9 @@ import React, { useState } from "react";
 import HomeNav from "./HomeNav";
 
 // material ui imports
-import { Button } from "@material-ui/core";
+import { Button, Container } from "@material-ui/core";
 import { blue } from "@material-ui/core/colors";
-import { withStyles } from "@material-ui/core/styles";
+import { withStyles, styled } from "@material-ui/core/styles";
 
 // react router dom imports
 import { NavLink, Route, Switch } from "react-router-dom";
@@ -28,17 +28,27 @@ import Alert from "../assets/icons8-doorbell-30.svg";
 import AlertAlt from "../assets/icons8-doorbell2-30.svg";
 
 //import TransitionsModal from "./modal";
+// MaterialUI Styled-Components
+const ColorBtn = styled(Button)({
+  background: "#2F85CA",
+  borderRadius: "1rem",
+  color: "white",
+  padding: ".5rem 5rem"
+});
+
+
+
 
 const Navigation = () => {
-  const ColorButton = withStyles(theme => ({
-    root: {
-      color: theme.palette.getContrastText(blue[700]),
-      backgroundColor: blue[700],
-      "&:hover": {
-        backgroundColor: blue[500]
-      }
-    }
-  }))(Button);
+  // const ColorButton = withStyles(theme => ({
+  //   root: {
+  //     color: theme.palette.getContrastText(blue[700]),
+  //     backgroundColor: blue[700],
+  //     "&:hover": {
+  //       backgroundColor: blue[500]
+  //     }
+  //   }
+  // }))(Button);
 
   const [home, setHome] = useState(true);
   const [search, setSearch] = useState(false);
@@ -117,7 +127,7 @@ const Navigation = () => {
       <div className="navContainer">
         <div className="navButtonContainer">
           {/* <TransitionsModal /> */}
-          <ColorButton className="navButton">Post</ColorButton>
+          <ColorBtn className="navButton">Post</ColorBtn>
         </div>
         <nav className="navLinks">
           <ul>

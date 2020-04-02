@@ -2,3 +2,9 @@
 @import "./navigation.scss";
 @import "./homeNav.scss";
 @import './dashboard.scss';
+@import "bulma/sass/utilities/_all.sass";
+@import "bulma/sass/grid/columns.sass";
+
+.column{
+    padding: 0;
+}

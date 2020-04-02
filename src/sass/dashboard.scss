@@ -3,6 +3,9 @@
     text-align: center;
     background-color:white;
     font-family: 'Montserrat', sans-serif;
+    overflow-y: scroll;
+    height: 100vh;
+
     }
     h1{
     font-family: 'Montserrat', sans-serif;
@@ -23,7 +26,6 @@
     /* DASHBOARD TITLE */
     .title{
     flex-direction: column;
-    width: 20vw;
     background-color:#2F414B;
     padding:2rem;
     }

@@ -3,6 +3,7 @@ import { connect } from "react-redux";
 import { DragDropContext, Droppable } from "react-beautiful-dnd";
 import { onDragEndSingle, onDragEndDouble, onDragEndTopic, addTopic } from "./actions";
 
+
 import styled from "styled-components";
 
 import Dashboard from "./components/Dashboard";
@@ -89,15 +90,15 @@ const App = props => {
   };
 
   return (
-    <div className='container'>
-      <div className="nav" >
+    <div className='columns is-gapless'>
+      <div className="column is-2" >
       <Navigation />
       </div>
-      <div className="dash">
+      <div className="column is-3">
       <Dashboard />
       </div>
       <DragDropContext onDragEnd={onDragEnd}>
-        <Droppable droppableId='all-topics' direction='horizontal' type='topic'>
+        <Droppable className="column is-9" droppableId='all-topics' direction='horizontal' type='topic'>
           {provided => (
             <TopicsContainer
               {...provided.droppableProps}
@@ -120,7 +121,7 @@ const App = props => {
           )}
         </Droppable>
       </DragDropContext>
-      <button onClick={() => {props.addTopic('Topic Text')}}>New Topic</button>
+      <button className="column" onClick={() => {props.addTopic('Topic Text')}}>New Topic</button>
     </div>
   );
 };
