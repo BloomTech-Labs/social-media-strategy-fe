@@ -5,7 +5,7 @@ import "../sass/topicBuckets.scss";
 
 const Container = styled.div`
   background-color: white;
-  width: 100%;
+  width: 90%;
   border-radius: 0.5rem;
   padding: 0.5rem;
   margin: 0.75rem;
@@ -14,7 +14,7 @@ const Container = styled.div`
 
 const TopicCard = props => {
   return (
-    <Draggable className="drag-cont" draggableId={props.card.id} index={props.index}>
+    <Draggable draggableId={props.card.id} index={props.index}>
       {provided => (
         <Container
           {...provided.draggableProps}

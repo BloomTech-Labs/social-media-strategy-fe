@@ -2,7 +2,7 @@ import React from "react";
 import { Link } from 'react-router-dom';
 // import AddAccount from "./AddAccount";
 import data from "./accounts.json";
-import img from "../assets/headshot.png";
+import img from "../assets/headshot.jpg";
 import "../sass/dashboard.scss";
 import pin from "../assets/pin.svg";
 const accountData = data.accounts;

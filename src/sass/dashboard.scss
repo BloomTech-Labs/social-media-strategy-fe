@@ -3,7 +3,7 @@
     text-align: center;
     background-color:white;
     font-family: 'Montserrat', sans-serif;
-    overflow-y: scroll;
+    overflow-y: auto;
     height: 100vh;
     }
     
@@ -87,10 +87,13 @@
     padding: 1rem;
     padding-top: 2rem;
     margin-bottom: 3rem;
+    line-height: .1rem;
+
     .all-stats{
     display:flex;
     justify-content: space-evenly;
     }
+
     .headers{
     color: rgb(102, 111, 126);
     font-size: 1.2rem;
@@ -98,6 +101,7 @@
     font-weight: 200;
     line-height: .5rem;
     }
+
     .icon{
     border-radius: 5rem;
     width:6rem;

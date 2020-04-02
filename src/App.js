@@ -98,7 +98,9 @@ const App = props => {
       <Dashboard />
       </div>
       <DragDropContext onDragEnd={onDragEnd}>
-        <Droppable className="column is-9" droppableId='all-topics' direction='horizontal' type='topic'>
+        <div className="drag-drop-content">
+        <h1>Here's a header</h1>
+        <Droppable className="column" droppableId='all-topics' direction='horizontal' type='topic'>
           {provided => (
             <TopicsContainer
               {...provided.droppableProps}
@@ -120,6 +122,7 @@ const App = props => {
             </TopicsContainer>
           )}
         </Droppable>
+        </div>
       </DragDropContext>
       <button className="column" onClick={() => {props.addTopic('Topic Text')}}>New Topic</button>
     </div>

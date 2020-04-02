@@ -21,7 +21,7 @@ const CardList = styled.div`
   padding: 8px;
   flex-grow: 1;
   min-height: 100px;
-  background-color: white;
+  background-color: #F5F7F8;
 `;
 
 
