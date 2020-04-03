@@ -63,7 +63,6 @@
         text-decoration: none;
         color: rgb(102, 111, 126);
         padding: 1rem;
-        font-weight: 300;
         }
     }
 
@@ -87,12 +86,12 @@
     padding: 1rem;
     padding-top: 2rem;
     margin-bottom: 3rem;
-    line-height: .1rem;
+    // line-height: .1rem;
 
     .all-stats{
     display:flex;
     justify-content: space-evenly;
-    }
+}
 
     .headers{
     color: rgb(102, 111, 126);
@@ -119,5 +118,5 @@
     top: 0;
     width: 100%;
     height: 100vh;
-    overflow-y: scroll;
+    overflow-y: auto;
     } 

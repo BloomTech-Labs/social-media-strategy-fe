@@ -94,12 +94,13 @@ const App = props => {
       <div className="column is-2" >
       <Navigation />
       </div>
-      <div className="column is-2">
+      <div className="column is-3">
       <Dashboard />
       </div>
-      <DragDropContext onDragEnd={onDragEnd}>
-        <div className="drag-drop-content">
+        <div className="column drag-drop-content">
         <h1>Here's a header</h1>
+          <button id="topic-btn" className="column is-1" onClick={() => {props.addTopic('Topic Text')}}>New Topic</button>
+      <DragDropContext onDragEnd={onDragEnd}>
         <Droppable className="column" droppableId='all-topics' direction='horizontal' type='topic'>
           {provided => (
             <TopicsContainer
@@ -122,9 +123,8 @@ const App = props => {
             </TopicsContainer>
           )}
         </Droppable>
-        </div>
       </DragDropContext>
-      <button className="column" onClick={() => {props.addTopic('Topic Text')}}>New Topic</button>
+        </div>
     </div>
   );
 };
