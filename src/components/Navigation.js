@@ -4,12 +4,15 @@ import React, { useState } from "react";
 import HomeNav from "./HomeNav";
 
 // material ui imports
-import { Button } from "@material-ui/core";
+import { Button, Typography, Box } from "@material-ui/core";
 import { blue } from "@material-ui/core/colors";
-import { withStyles } from "@material-ui/core/styles";
+import { withStyles, makeStyles } from "@material-ui/core/styles";
 
 // react router dom imports
 import { NavLink, Route, Switch } from "react-router-dom";
+
+// Styles
+import "../sass/navigation.scss";
 
 // asset imports
 import Home from "../assets/icons8-home-30.svg";
@@ -29,11 +32,53 @@ import AlertAlt from "../assets/icons8-doorbell2-30.svg";
 
 //import TransitionsModal from "./modal";
 
+// Material UI Styled Components
+const navStyles = makeStyles({
+  root: {
+    fontFamily: "Montserrat, sans-serif",
+    backgroundColor: "#1B262C",
+    height: "100vh",
+    padding: "1rem"
+  },
+  navBtn: {
+    margin: "30% auto"
+  },
+  link: {
+    fontSize:"1.2rem",
+    fontFamily: "Montserrat, sans-serif",
+    padding:"1rem",
+    textDecoration: "none"
+  },
+  handle: {
+    fontSize: "1.2rem",
+    fontFamily: "Montserrat, sans-serif",
+    padding:"1rem"
+  },
+  locationIcon: {
+    height:"3vh"
+  },
+  secondaryTitle: {
+    fontSize: "1.2rem",
+    color: "#848484",
+    fontFamily: "Montserrat, sans-serif",
+  },
+  statLabel: {
+    fontSize: "1rem",
+    color: "#848484",
+    fontFamily: "Montserrat, sans-serif"
+  },
+  boxCtr: {
+    textAlign: "center",
+    justifyContent: "center",
+    alignItems: "center",
+  }
+})
 
 const Navigation = () => {
   const ColorButton = withStyles(theme => ({
     root: {
-      padding: "0rem 5rem",
+      padding: ".5rem 5rem",
+      borderRadius: "2rem",
       color: theme.palette.getContrastText(blue[700]),
       backgroundColor: blue[700],
       "&:hover": {
@@ -41,6 +86,8 @@ const Navigation = () => {
       }
     }
   }))(Button);
+
+  const st = navStyles();
 
   const [home, setHome] = useState(true);
   const [search, setSearch] = useState(false);
@@ -116,68 +163,67 @@ const Navigation = () => {
 
   return (
     <div>
-      <div className="navContainer">
-        <div className="navButtonContainer">
+      <div className={st.root}>
+        <div className={st.navBtn}>
           {/* <TransitionsModal /> */}
           <ColorButton>Post</ColorButton>
         </div>
         <nav className="navLinks">
-          <ul>
             <NavLink
               className={home ? "linkActive" : "linkNav"}
               to="/home"
               onClick={homeHandler}
             >
-              <li className="link">
+              <Typography className={st.link}>
                 <img
-                  className="navImage"
+                  className={st.locationIcon}
                   src={home ? HomeAlt : Home}
                   alt="home icon"
                 />
                 Home
-              </li>
+              </Typography>
             </NavLink>
             <NavLink
               className={search ? "linkActive" : "linkNav"}
               to="/search"
               onClick={searchHandler}
             >
-              <li className="link">
+              <Typography className={st.link}>
                 <img
                   className="navImage"
                   src={search ? SearchAlt : Search}
                   alt="Search icon"
                 />
                 Search
-              </li>
+              </Typography>
             </NavLink>
             <NavLink
               className={account ? "linkActive" : "linkNav"}
               to="/account"
               onClick={accountHandler}
             >
-              <li className="link">
+              <Typography className={st.link}>
                 <img
                   className="navImage"
                   src={account ? AccountAlt : Account}
                   alt="Account icon"
                 />
                 Account
-              </li>
+              </Typography>
             </NavLink>
             <NavLink
               className={analytics ? "linkActive" : "linkNav"}
               to="/analytics"
               onClick={analyticsHandler}
             >
-              <li className="link">
+              <Typography className={st.link}>
                 <img
                   className="navImage"
                   src={analytics ? AnalyticsAlt : Analytics}
                   alt="Analytics icon"
                 />
                 Analytics
-              </li>
+              </Typography>
             </NavLink>
             <NavLink
               className={message ? "linkActive" : "linkNav"}
@@ -185,48 +231,47 @@ const Navigation = () => {
               to="/messages"
               onClick={messageHandler}
             >
-              <li className="link">
+              <Typography className={st.link}>
                 <img
                   className="navImage"
                   src={message ? MessageAlt : Message}
                   alt="Message icon"
                 />
                 Messages
-              </li>
+              </Typography>
             </NavLink>
             <NavLink
               className={alert ? "linkActive" : "linkNav"}
               to="/notifications"
               onClick={alertHandler}
             >
-              <li className="link">
+              <Typography className={st.link}>
                 <img
                   className="navImage"
                   src={alert ? AlertAlt : Alert}
                   alt="bell icon"
                 />
                 Notifications
-              </li>
+              </Typography>
             </NavLink>
             <NavLink
               className={menu ? "linkActive" : "linkNav"}
               to="/more"
               onClick={menuHandler}
             >
-              <li className="link">
+              <Typography className={st.link}>
                 <img
                   className="navImage"
                   src={menu ? MenuAlt : Menu}
                   alt="Menu icon"
                 />
                 More
-              </li>
+              </Typography>
             </NavLink>
-          </ul>
         </nav>
-        <div className="avatar">
+        {/* <div className="avatar">
           <p>Hello, Programmers</p>
-        </div>
+        </div> */}
       </div>
       <Switch>
         <Route path="/home">{HomeNav}</Route>

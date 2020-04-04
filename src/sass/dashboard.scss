@@ -1,29 +1,11 @@
 @import url('https://fonts.googleapis.com/css?family=Montserrat&display=swap');
     .dash-app {
-    text-align: center;
-    background-color:white;
     font-family: 'Montserrat', sans-serif;
     overflow-y: auto;
-    height: 100vh;
-    }
-    
-    h3{
-    color: #1B262C;
-    font-weight: 300;
-    font-size:1.6rem;
+    height:100vh;
     }
 
-    h4, h6{
-    color: #848484;
-    font-weight: 300;
-    font-size: 1rem;
-    }
-
-    h5{
-    font-size:1.2rem;
-    } 
-
-    /* DASHBOARD TITLE */
+//     /* DASHBOARD TITLE */
     .title{
     flex-direction: column;
     background-color:#2F414B;
@@ -48,6 +30,10 @@
     color: #E85556;
     }
 
+    .date{
+        color: rgb(102, 111, 126);
+    }
+
     .acct-title{
     display: flex;
     justify-content: space-between;
@@ -66,57 +52,21 @@
         }
     }
 
-    .location{
-        display:flex;
-        flex-direction:row;
-        align-items:center;
-        justify-content:center;
-
-        .location-img{
-            height:3vh;
-        }
-    }
-
-    /* ACCT-CARD */
-    .acct-card{
-    background-color:white;
-    border-radius: .5rem;
-    width: 90%;
-    justify-content: center;
-    padding: 1rem;
-    padding-top: 2rem;
-    margin-bottom: 3rem;
-    // line-height: .1rem;
-
-    .all-stats{
-    display:flex;
-    justify-content: space-evenly;
-}
-
-    .headers{
-    color: rgb(102, 111, 126);
-    font-size: 1.2rem;
-    flex-direction: row;
-    font-weight: 200;
-    line-height: .5rem;
-    }
-
     .icon{
     border-radius: 5rem;
     width:6rem;
     height: 6rem;
-    margin-top: 13rem;
-    margin: 0 auto;
+    margin: 2rem;
     border: solid .1rem #BBE1FA;
     padding: .25rem;
     } 
-}
-    /* ADD ACCOUNT MODAL */
-    .modal-wrapper {
-    position: fixed;
-    left: 0;
-    top: 0;
-    width: 100%;
-    height: 100vh;
-    overflow-y: auto;
-    } 
+// }
+//     /* ADD ACCOUNT MODAL */
+//     .modal-wrapper {
+//     position: fixed;
+//     left: 0;
+//     top: 0;
+//     width: 100%;
+//     height: 100vh;
+//     overflow-y: scroll;
+//     } 

@@ -92,22 +92,22 @@ const App = props => {
   return (
     <div className='columns is-gapless'>
       <div className="column is-2" >
-      <Navigation />
-      </div>
+        <Navigation />
+    </div>
       <div className="column is-3">
       <Dashboard />
       </div>
-        <div className="column drag-drop-content">
-        <h1>Here's a header</h1>
-          <button id="topic-btn" className="column is-1" onClick={() => {props.addTopic('Topic Text')}}>New Topic</button>
+      {/* <div className="column drag-drop-content">
+        <h1 className="column is-4 drag-drop-content">Here's a header</h1>
+          <button id="topic-btn" className="column is-2 drag-drop-content" onClick={() => {props.addTopic('Topic Text')}}>New Topic</button>
       <DragDropContext onDragEnd={onDragEnd}>
-        <Droppable className="column" droppableId='all-topics' direction='horizontal' type='topic'>
+        <Droppable className="columns" droppableId='all-topics' direction='horizontal' type='topic'>
           {provided => (
             <TopicsContainer
               {...provided.droppableProps}
               ref={provided.innerRef}
             >
-              <div className='topics'>
+              <div className='column topics'>
                 {props.topicOrder.map((topicId, index) => {
                   const topic = props.topics[topicId]; // pulls a topic from state
                   const cards = topic.cardsIds.map(
@@ -124,7 +124,7 @@ const App = props => {
           )}
         </Droppable>
       </DragDropContext>
-        </div>
+        </div> */}
     </div>
   );
 };
