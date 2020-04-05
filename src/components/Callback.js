@@ -42,7 +42,7 @@ const Callback = () => {
           console.log('Interval Cleared');
           clearInterval(countdown);
         } else {
-          setTime(time => time - 1);
+          setTime((time) => time - 1);
           console.log(window.location.pathname, 'TIME');
         }
       }
@@ -51,7 +51,7 @@ const Callback = () => {
         message: error.message,
         error: error.stack,
         name: error.name,
-        code: error.code
+        code: error.code,
       });
     }
   }
@@ -70,23 +70,25 @@ const Callback = () => {
       </h1>
       <h2>success</h2>
       <p>
-        Thank you, <strong>name</strong>, for authorizing SoMe an access token
-        for{' '}
-        <a href={`https://twitter.com/${data.twitter_screenName}`}>
-          @${data.twitter_screenName}
-        </a>
-        . We've successfully received your access token and confirmed it by
-        retrieving some basic details on your behalf from the Twitter API. Yay!
+        Thank you,{' '}
+        <strong>
+          <a href={`https://twitter.com/${data.twitter_screenName}`}>
+            @${data.twitter_screenName}
+          </a>
+        </strong>
+        , for authorizing SoMe an access token. We've successfully received your
+        access token and confirmed it!
       </p>
-      <p>Here is what we pulled from the API on your behalf:</p>
       <ul>
         {/* <li>
           You have Tweeted{' '}
           <span className='label label-success'>{'statuses_count'}</span> times.
         </li> */}
         <li>
-          You have{' '}
-          <span className='label label-success'>{data.total_followers}</span>{' '}
+          You have currently have
+          <span className='label label-success'>
+            {data.total_followers}
+          </span>{' '}
           followers.
         </li>
         {/* <li>
