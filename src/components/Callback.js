@@ -87,7 +87,7 @@ const Callback = () => {
         <li>
           You have currently have
           <span className='label label-success'>
-            {data.total_followers}
+            &nbsp;{data.total_followers}
           </span>{' '}
           followers.
         </li>
