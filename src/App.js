@@ -97,8 +97,8 @@ const App = props => {
       <div className="column is-3">
       <Dashboard />
       </div>
-      {/* <div className="column drag-drop-content">
-        <h1 className="column is-4 drag-drop-content">Here's a header</h1>
+      <div className="column drag-drop-content">
+        <h1 className="column is-4 drag-drop-content">Buckets</h1>
           <button id="topic-btn" className="column is-2 drag-drop-content" onClick={() => {props.addTopic('Topic Text')}}>New Topic</button>
       <DragDropContext onDragEnd={onDragEnd}>
         <Droppable className="columns" droppableId='all-topics' direction='horizontal' type='topic'>
@@ -124,7 +124,7 @@ const App = props => {
           )}
         </Droppable>
       </DragDropContext>
-        </div> */}
+        </div>
     </div>
   );
 };
