@@ -5,7 +5,6 @@ import {
   ON_ADD_CARD,
   ON_DRAG_END,
 } from "../actions/topicsActions";
-import { CardMedia } from "@material-ui/core";
 
 let topicId = 2;
 let cardId = 5;
@@ -74,7 +73,7 @@ const topicsReducer = (state = initialState, action) => {
       return newState;
     }
     case ON_DRAG_END:{
-      const { droppableIdStart, droppableIdEnd, droppableIndexStart, droppableIndexEnd, draggableId, type } = action.payload;
+      const { droppableIdStart, droppableIdEnd, droppableIndexStart, droppableIndexEnd, type } = action.payload;
       const newState = [...state];
       
       // dragging topics
