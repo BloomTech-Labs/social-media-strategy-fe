@@ -2,7 +2,7 @@ import React from "react";
 import styled from "styled-components";
 import TopicCard from "./TopicCard";
 import { Droppable, Draggable } from "react-beautiful-dnd";
-import ActionButton from './ActionButton';
+import ActionButton from "./ActionButton";
 
 
 const Container = styled.div`
@@ -30,41 +30,46 @@ const CardList = styled.div`
   border-radius: .5rem;
 `;
 
-const Header = styled.div`
+
+const TopicBucket = (props) => {
+  
+  const Header = styled.div`
   display: flex;
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
 `;
-
-
-const TopicBucket = props => {
   return (
     <>
-    <Draggable draggableId={props.topic.id} index={props.index}>
-      {(provided) => (
-        <Container
-          {...provided.draggableProps}
-          ref={provided.innerRef}
-        >
-        <Header>
-        <Title {...provided.dragHandleProps}>{props.topic.title}</Title>
-        <ActionButton />
-        </Header>
-        <Droppable droppableId={props.topic.id} type='card'>
-          {provided => (
-            <CardList ref={provided.innerRef} {...provided.droppableProps}>
-              {props.cards.map((card, index) => (
-                <TopicCard key={card.id} card={card} index={index} />
-              ))}
-              {provided.placeholder}
-            </CardList>
-          )}
-        </Droppable>
-      </Container>
-      )}
-      
-    </Draggable>
+      <Draggable draggableId={String(props.topic.id)} index={props.index}>
+        {(provided) => (
+          <Container
+            {...provided.draggableProps}
+            ref={provided.innerRef}
+            {...provided.dragHandleProps}
+          >
+            <Droppable droppableId={String(props.topic.id)} type='card'>
+              {(provided) => (
+                <CardList ref={provided.innerRef} {...provided.droppableProps}>
+                  <Header>
+                  <Title>{props.topic.title}</Title>
+                  </Header>
+                  {props.cards.map((card, index) => (
+                    <TopicCard
+                      key={card.id}
+                      card={card}
+                      index={index}
+                      id={card.id}
+                    />
+                  ))}
+                  {provided.placeholder}
+                </CardList>
+              )}
+            </Droppable>
+          </Container>
+        )}
+      </Draggable>
+      <ActionButton topicId={props.topicId} />
     </>
   );
 };

@@ -4,9 +4,10 @@ import TextareaAutosize from 'react-textarea-autosize';
 import Card from '@material-ui/core/Card';
 import Button from '@material-ui/core/Button';
 import CloseIcon from '@material-ui/icons/Close';
+import { connect } from 'react-redux';
+import { addTopic, addCard } from '../actions';
 import { Box } from "@material-ui/core";
 import TextField from '@material-ui/core/TextField';
-
 
 
 class ActionButton extends React.Component {
@@ -34,17 +35,39 @@ class ActionButton extends React.Component {
         })
     }
 
+    handleAddTopic = () => {
+        const { dispatch } = this.props;
+        const { text } = this.state;
+
+        if(text) {
+            dispatch(addTopic(text));
+        }
+
+        return;
+    }
+
+    handleAddCard = () => {
+        const { dispatch, topicId } = this.props;
+        const { text } = this.state;
+
+        if(text) {
+            dispatch(addCard(topicId, text));
+        }
+    }
+
     renderAddButton = () => {
+        const buttonText = this.props.topic ? 'Add another topic' : 'Add another card'
 
         return (
             <div onClick={this.openForm}>
-                <AddCircleIcon style={{"color": "white"}}/>
+                <p><AddCircleIcon style={{"color": "white"}} />{buttonText}</p>
             </div>
         )
     }
 
     renderForm = () => {
-        const placeholder = 'Enter text for this post';
+        const placeholder = this.props.topic ? 'Enter title for this topic' : 'Enter text for this post';
+        const buttonTitle = this.props.topic ? 'Add Topic' : 'Add Card';
         return <div style={{"backgroundColor": "white", "padding": "1rem", "borderRadius": ".5rem", "margin": ".5rem 0rem"}}>
             <div style={{"display": "flex", "width":"100%", "justifyContent": "spaceBetween", "alignItems": "center"}}>
             <h2 style={{"color": "black", "lineHeight": ".5rem"}}>Add Card</h2>
@@ -61,6 +84,7 @@ class ActionButton extends React.Component {
                 shrink: true,
                 }}
                 />
+
             <Card style={{
                 overflow: 'visible',
                 minHeight: 80,
@@ -85,6 +109,7 @@ class ActionButton extends React.Component {
             </Card>
             <Box>
                 <Button 
+                    onMouseDown={this.props.topic ? this.handleAddTopic : this.handleAddCard}
                     variant='contained' 
                     style={{
                     color: 'white',
@@ -93,7 +118,8 @@ class ActionButton extends React.Component {
                     margin: "1rem 0rem",
                     width: "100%"
                 }}>
-                    Schedule
+                    {buttonTitle}
+
                 </Button>
                 <Button 
                     variant='contained' 
@@ -114,4 +140,4 @@ class ActionButton extends React.Component {
     }
 }
 
-export default ActionButton;
+export default connect()(ActionButton);

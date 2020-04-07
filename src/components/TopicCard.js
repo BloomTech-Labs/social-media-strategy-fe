@@ -27,7 +27,7 @@ justify-content: flex-end;
 
 const TopicCard = props => {
   return (
-    <Draggable draggableId={props.card.id} index={props.index}>
+    <Draggable draggableId={String(props.id)} index={props.index}>
       {provided => (
         <Container
           {...provided.draggableProps}
