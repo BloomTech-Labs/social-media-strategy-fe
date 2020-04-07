@@ -30,6 +30,13 @@ const CardList = styled.div`
   border-radius: .5rem;
 `;
 
+const Header = styled.div`
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+`;
+
 
 const TopicBucket = props => {
   return (
@@ -40,8 +47,10 @@ const TopicBucket = props => {
           {...provided.draggableProps}
           ref={provided.innerRef}
         >
+        <Header>
         <Title {...provided.dragHandleProps}>{props.topic.title}</Title>
         <ActionButton />
+        </Header>
         <Droppable droppableId={props.topic.id} type='card'>
           {provided => (
             <CardList ref={provided.innerRef} {...provided.droppableProps}>
@@ -56,7 +65,6 @@ const TopicBucket = props => {
       )}
       
     </Draggable>
-    {/* <ActionButton /> */}
     </>
   );
 };
