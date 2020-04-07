@@ -4,12 +4,15 @@ import React, { useState } from "react";
 import HomeNav from "./HomeNav";
 
 // material ui imports
-import { Button } from "@material-ui/core";
+import { Button, Typography, Box } from "@material-ui/core";
 import { blue } from "@material-ui/core/colors";
-import { withStyles } from "@material-ui/core/styles";
+import { withStyles, makeStyles } from "@material-ui/core/styles";
 
 // react router dom imports
 import { NavLink, Route, Switch } from "react-router-dom";
+
+// Styles
+import "../sass/navigation.scss";
 
 // asset imports
 import Home from "../assets/icons8-home-30.svg";
@@ -29,9 +32,14 @@ import AlertAlt from "../assets/icons8-doorbell2-30.svg";
 
 //import TransitionsModal from "./modal";
 
+// Material UI Styled Components
+
+
 const Navigation = () => {
   const ColorButton = withStyles(theme => ({
     root: {
+      padding: ".5rem 5rem",
+      borderRadius: "2rem",
       color: theme.palette.getContrastText(blue[700]),
       backgroundColor: blue[700],
       "&:hover": {
@@ -39,6 +47,7 @@ const Navigation = () => {
       }
     }
   }))(Button);
+
 
   const [home, setHome] = useState(true);
   const [search, setSearch] = useState(false);
@@ -117,7 +126,7 @@ const Navigation = () => {
       <div className="navContainer">
         <div className="navButtonContainer">
           {/* <TransitionsModal /> */}
-          <ColorButton className="navButton">Post</ColorButton>
+          <ColorButton>Post</ColorButton>
         </div>
         <nav className="navLinks">
           <ul>
@@ -195,7 +204,7 @@ const Navigation = () => {
             <NavLink
               className={alert ? "linkActive" : "linkNav"}
               to="/notifications"
-              onClick={alertHandler}
+              // onClick={alertHandler}
             >
               <li className="link">
                 <img
@@ -220,11 +229,11 @@ const Navigation = () => {
                 More
               </li>
             </NavLink>
-          </ul>
+            </ul>
         </nav>
-        <div className="avatar">
+        {/* <div className="avatar">
           <p>Hello, Programmers</p>
-        </div>
+        </div> */}
       </div>
       <Switch>
         <Route path="/home">{HomeNav}</Route>

@@ -2,14 +2,28 @@ import React from "react";
 import styled from "styled-components";
 import { Draggable } from "react-beautiful-dnd";
 import "../sass/topicBuckets.scss";
+import CreateIcon from '@material-ui/icons/Create';
+import MoreVertIcon from '@material-ui/icons/MoreVert';
 
 const Container = styled.div`
-  background-color: grey;
-  width: 90%;
+  background-color: white;
+  width: 95%;
   border-radius: 0.5rem;
-  padding: 0.5rem;
+  padding: 1rem 1rem;
   margin: 0.75rem;
 `;
+
+const BtnCont = styled.div`
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+`;
+
+const Icons = styled.div`
+display: flex;
+justify-content: flex-end;
+`;
+
 
 const TopicCard = props => {
   return (
@@ -20,6 +34,13 @@ const TopicCard = props => {
           {...provided.dragHandleProps}
           ref={provided.innerRef}
         >
+          <BtnCont>
+            <h4>Title</h4>
+            <Icons>
+            <CreateIcon/>
+            <MoreVertIcon />
+            </Icons>
+          </BtnCont>
           {props.card.content}
         </Container>
       )}

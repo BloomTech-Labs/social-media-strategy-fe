@@ -1,33 +1,45 @@
 @import url("https://fonts.googleapis.com/css?family=Montserrat&display=swap");
 
-.eachBucket{
-    background-color:white;
-    margin:1rem;
-    padding:1rem;
-    border-radius: .5rem;
-}
-
-.topics {
-  background-color: gray;
-  padding:1rem;
-  display:flex;
-  justify-content: center;
-  border-radius: .5rem;
+.drag-drop-content{
   font-family: "Montserrat", sans-serif;
-  flex-direction: row;
-  width: 50%;
-  margin:1rem;
+  background-color: #F5F7F8;
+  padding: 1rem;
+  // margin: 4.25rem 0 0 1rem;
+  overflow-y: auto;
+  height:110vh;
 
- h4{
-    color:gray;
-    font-size: 1.6rem;
- }
+  .select-a-header{
+    display: flex;
+    flex-direction: row;
+    justify-content: start;
+    align-items: flex-end;
+    margin: 3.25rem 0 0 1rem;
+  }
+
+  .headers{
+    color: black;
+
+  }
+
+  .unselected-headers{
+    color: #848484;
+    padding: .5rem;
+  }
+  
+  #topic-btn{
+    border: none;
+    background:none;
+    font-family: "Montserrat", sans-serif;
+    font-size:1rem;
+    text-align: left;
+    margin: 2.5rem 0 0 1rem;
+    color: #E85556;
 }
 
-.topic-card {
-  background-color: grey;
-  width: 90%;
-  border-radius: 0.5rem;
-  padding:.5rem;
-  margin:.75rem;
+  .topics {
+    display:flex;
+    border-radius: .5rem;
+    font-family: "Montserrat", sans-serif;
+    flex-direction: row;
+  }
 }

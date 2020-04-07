@@ -2,8 +2,8 @@ import React from "react";
 import { connect } from "react-redux";
 import { DragDropContext, Droppable } from "react-beautiful-dnd";
 import { sort } from "./actions";
-
 import styled, { ThemeProvider } from "styled-components";
+
 
 import Dashboard from "./components/Dashboard";
 import Navigation from "./components/Navigation";
@@ -39,21 +39,30 @@ const App = (props) => {
   };
 
   return (
-    <div className='container'>
-      <div className='nav'>
+    <div className='columns is-gapless'>
+      <div className="column is-2" >
         <Navigation />
+    </div>
+      <div className="column is-3">
+      <Dashboard />
       </div>
-      <div className='dash'>
-        <Dashboard />
-      </div>
+      <div className="column drag-drop-content">
+        <div className="column select-a-header">
+        <h1 className="headers">Buckets</h1>
+        <h3 className="unselected-headers">Social Board Queue</h3>
+        <h3 className="unselected-headers">Analytics</h3>
+        </div>
+          <button id="topic-btn" className="column is-2 headers" onClick={() => {props.addTopic('Topic Text')}}>New Topic</button>
       <DragDropContext onDragEnd={onDragEnd}>
-        <Droppable droppableId='all-topics' direction='horizontal' type='topic'>
-          {(provided) => (
+
+        <Droppable className="columns" droppableId='all-topics' direction='horizontal' type='topic'>
+          {provided => (
             <TopicsContainer
               {...provided.droppableProps}
               ref={provided.innerRef}
             >
-              <div className='topics'>
+
+              <div className='column topics'>
                 {props.topics.map((topic, index) => (
                   <TopicBucket
                     key={topic.id}
@@ -63,6 +72,7 @@ const App = (props) => {
                     index={index}
                   />
                 ))}
+
               </div>
               {provided.placeholder}
             </TopicsContainer>
@@ -70,6 +80,9 @@ const App = (props) => {
         </Droppable>
       </DragDropContext>
       <ActionButton topic />
+
+//         </div>
+
     </div>
   );
 };

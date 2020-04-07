@@ -4,27 +4,41 @@ import TopicCard from "./TopicCard";
 import { Droppable, Draggable } from "react-beautiful-dnd";
 import ActionButton from "./ActionButton";
 
+
 const Container = styled.div`
-  background-color: white;
-  margin: 1rem;
+  background-color: #817BAB;
   padding: 1rem;
   border-radius: 0.5rem;
-  width: 300px;
   display: flex;
   flex-direction: column;
   height: 100%;
+  margin: 1rem;
 `;
 const Title = styled.h4`
-  color: gray;
+  color: white;
   font-size: 1.6rem;
 `;
 const CardList = styled.div`
-  padding: 8px;
+  padding:1rem;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
   flex-grow: 1;
   min-height: 100px;
+  background-color: #F5F7F8;
+  width: 18rem;
+  border-radius: .5rem;
 `;
 
+
 const TopicBucket = (props) => {
+  
+  const Header = styled.div`
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+`;
   return (
     <>
       <Draggable draggableId={String(props.topic.id)} index={props.index}>
@@ -37,7 +51,9 @@ const TopicBucket = (props) => {
             <Droppable droppableId={String(props.topic.id)} type='card'>
               {(provided) => (
                 <CardList ref={provided.innerRef} {...provided.droppableProps}>
+                  <Header>
                   <Title>{props.topic.title}</Title>
+                  </Header>
                   {props.cards.map((card, index) => (
                     <TopicCard
                       key={card.id}
