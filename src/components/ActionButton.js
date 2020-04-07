@@ -4,7 +4,8 @@ import TextareaAutosize from 'react-textarea-autosize';
 import Card from '@material-ui/core/Card';
 import Button from '@material-ui/core/Button';
 import CloseIcon from '@material-ui/icons/Close';
-
+import { connect } from 'react-redux';
+import { addTopic, addCard } from '../actions';
 
 class ActionButton extends React.Component {
 
@@ -31,17 +32,41 @@ class ActionButton extends React.Component {
         })
     }
 
+    handleAddTopic = () => {
+        const { dispatch } = this.props;
+        const { text } = this.state;
+
+        if(text) {
+            dispatch(addTopic(text));
+        }
+
+        return;
+    }
+
+    handleAddCard = () => {
+        const { dispatch, topicId } = this.props;
+        const { text } = this.state;
+
+        if(text) {
+            dispatch(addCard(topicId, text));
+        }
+    }
+
     renderAddButton = () => {
+        const buttonText = this.props.topic ? 'Add another topic' : 'Add another card'
 
         return (
             <div onClick={this.openForm}>
-                <AddBoxIcon />
+                <p><AddBoxIcon />{buttonText}</p>
             </div>
         )
     }
 
     renderForm = () => {
-        const placeholder = 'Enter text for this post';
+        const placeholder = this.props.topic ? 'Enter title for this topic' : 'Enter text for this post';
+
+        const buttonTitle = this.props.topic ? 'Add Topic' : 'Add Card';
+
         return <div>
             <Card style={{
                 overflow: 'visible',
@@ -66,13 +91,14 @@ class ActionButton extends React.Component {
             </Card>
             <div>
                 <Button 
+                    onMouseDown={this.props.topic ? this.handleAddTopic : this.handleAddCard}
                     variant='contained' 
                     style={{
                     color: 'white',
                     backgroundColor: 'green',
                     borderRadius: 8
                 }}>
-                    Stuff
+                    {buttonTitle}
                 </Button>
                 <CloseIcon />
             </div>
@@ -84,4 +110,4 @@ class ActionButton extends React.Component {
     }
 }
 
-export default ActionButton;
+export default connect()(ActionButton);

@@ -13,7 +13,7 @@ const Container = styled.div`
 
 const TopicCard = props => {
   return (
-    <Draggable draggableId={props.card.id} index={props.index}>
+    <Draggable draggableId={String(props.id)} index={props.index}>
       {provided => (
         <Container
           {...provided.draggableProps}

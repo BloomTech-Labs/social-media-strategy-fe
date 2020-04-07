@@ -2,7 +2,7 @@ import React from "react";
 import styled from "styled-components";
 import TopicCard from "./TopicCard";
 import { Droppable, Draggable } from "react-beautiful-dnd";
-import ActionButton from './ActionButton';
+import ActionButton from "./ActionButton";
 
 const Container = styled.div`
   background-color: white;
@@ -24,31 +24,36 @@ const CardList = styled.div`
   min-height: 100px;
 `;
 
-const TopicBucket = props => {
+const TopicBucket = (props) => {
   return (
     <>
-    <Draggable draggableId={props.topic.id} index={props.index}>
-      {(provided) => (
-        <Container
-          {...provided.draggableProps}
-          ref={provided.innerRef}
-        >
-        <Title {...provided.dragHandleProps}>{props.topic.title}</Title>
-        <Droppable droppableId={props.topic.id} type='card'>
-          {provided => (
-            <CardList ref={provided.innerRef} {...provided.droppableProps}>
-              {props.cards.map((card, index) => (
-                <TopicCard key={card.id} card={card} index={index} />
-              ))}
-              {provided.placeholder}
-            </CardList>
-          )}
-        </Droppable>
-      </Container>
-      )}
-      
-    </Draggable>
-    <ActionButton />
+      <Draggable draggableId={String(props.topic.id)} index={props.index}>
+        {(provided) => (
+          <Container
+            {...provided.draggableProps}
+            ref={provided.innerRef}
+            {...provided.dragHandleProps}
+          >
+            <Droppable droppableId={String(props.topic.id)} type='card'>
+              {(provided) => (
+                <CardList ref={provided.innerRef} {...provided.droppableProps}>
+                  <Title>{props.topic.title}</Title>
+                  {props.cards.map((card, index) => (
+                    <TopicCard
+                      key={card.id}
+                      card={card}
+                      index={index}
+                      id={card.id}
+                    />
+                  ))}
+                  {provided.placeholder}
+                </CardList>
+              )}
+            </Droppable>
+          </Container>
+        )}
+      </Draggable>
+      <ActionButton topicId={props.topicId} />
     </>
   );
 };
