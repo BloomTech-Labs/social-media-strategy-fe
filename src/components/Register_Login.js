@@ -1,124 +1,50 @@
-import React, { useState } from 'react';
-import Axios from 'axios';
-import { useHistory } from 'react-router-dom';
-import '../sass/Register_login.scss';
+import React, { useState } from "react";
+import { useForm } from "react-hook-form";
+
+import { login, registerUser } from '../actions'
+import "../sass/Register_login.scss";
 
 const Register_Login = () => {
-  const [state, setstate] = useState({
-    email: '',
-    password: ''
-  });
+  const { register, handleSubmit } = useForm();
   const [signup, setsignup] = useState(false);
-  const { push } = useHistory();
 
-  const handlechange = e => {
-    e.preventDefault();
-    setstate({ ...state, [e.target.name]: e.target.value });
-  };
-
-  const handleSubmit = e => {
-    e.preventDefault();
-    Axios.post('https://social-media-strategy.herokuapp.com/api/auth/login', state)
-      .then(res => {
-        console.log(res, `success`);
-        localStorage.setItem('token', res.data.token);
-        push(`/`);
-      })
-      .catch(err => console.log(err));
-  };
-  const handleSubmitSignup = e => {
-    e.preventDefault();
-    Axios.post(
-      'https://social-media-strategy.herokuapp.com/api/auth/register',
-      state
-    )
-      .then(
-        res =>
-          alert('Sign up successful') &
-          localStorage.setItem('token', res.data.token) &
-          push(`/`)
-      )
-      .catch(err => console.log(err));
+  const onSubmit = (data) => {
+    if (!signup) {
+      return login(data);
+    } else {
+      return registerUser(data);
+    }
   };
 
   return (
     <div
       style={{
-        margin: '0 auto',
-        maxWidth: '800px',
-        display: 'flex',
-        flexDirection: 'column'
-      }}>
-      {!signup ? (
-        <>
-          <h1 style={{ width: '100%', textAlign: 'center' }}>
-            Login <br />
-            <span style={{ fontSize: '15px' }}>
-              Need to sign up? click{' '}
-              <span className='signup' onClick={() => setsignup(!signup)}>
-                here
-              </span>
-            </span>
-          </h1>
-          <form onSubmit={handleSubmit}>
-            <label>
-              email {console.log(state)}
-              <input
-                name='email'
-                value={state.email}
-                type='text'
-                onChange={handlechange}
-              />
-            </label>
-            <label>
-              Password:
-              <input
-                name='password'
-                value={state.password}
-                type='password'
-                onChange={handlechange}
-              />
-            </label>
-
-            <input type='submit' />
-          </form>
-        </>
-      ) : (
-        <>
-          <h1 style={{ width: '100%', textAlign: 'center' }}>
-            Signup <br />
-            <span style={{ fontSize: '15px' }}>
-              Already signed up? click&nbsp;
-              <span className='signup' onClick={() => setsignup(!signup)}>
-                here
-              </span>
-            </span>
-          </h1>
-
-          <form onSubmit={handleSubmitSignup}>
-            <label>
-              email {console.log(state)}
-              <input
-                name='email'
-                value={state.email}
-                type='text'
-                onChange={handlechange}
-              />
-            </label>
-            <label>
-              Password:
-              <input
-                name='password'
-                value={state.password}
-                type='password'
-                onChange={handlechange}
-              />
-            </label>
-
-            <input type='submit' />
-          </form>
-        </>
-      )}
+        margin: "0 auto",
+        maxWidth: "800px",
+        display: "flex",
+        flexDirection: "column",
+      }}
+    >
+      <h1 style={{ width: "100%", textAlign: "center" }}>
+        {!signup ? "Login" : "Sign Up"} <br />
+        <span style={{ fontSize: "15px" }}>
+          {!signup ? "Need to sign up?" : "Already signed up?"} click{" "}
+          <span className='signup' onClick={() => setsignup(!signup)}>
+            here
+          </span>
+        </span>
+      </h1>
+      <form onSubmit={handleSubmit(onSubmit)}>
+        <label>
+          Email:
+          <input name='email' ref={register} />
+        </label>
+        <label>
+          Password:
+          <input name='password' ref={register} />
+        </label>
+        <input type='submit' />
+      </form>
     </div>
   );
 };
