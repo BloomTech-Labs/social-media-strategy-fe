@@ -2,8 +2,7 @@ import React from "react";
 import { connect } from "react-redux";
 import { DragDropContext, Droppable } from "react-beautiful-dnd";
 import { sort } from "./actions";
-import styled, { ThemeProvider } from "styled-components";
-
+import styled from "styled-components";
 
 import Dashboard from "./components/Dashboard";
 import Navigation from "./components/Navigation";
@@ -11,6 +10,9 @@ import TopicBucket from "./components/TopicBucket";
 import ActionButton from "./components/ActionButton";
 
 import "./sass/index.scss";
+import { Route, Switch } from "react-router";
+import REGISTER_LOGIN from "./components/Register_Login";
+import Callback from "./components/Callback";
 
 //import { BrowserRouter as Router, Route, Link, Switch } from "react-router-dom";
 
@@ -35,22 +37,39 @@ const App = (props) => {
       return;
     } // if there is no destination, nothing needs to be done
 
-    props.dispatch(sort(source.droppableId, destination.droppableId, source.index, destination.index, draggableId, type))
+    props.dispatch(
+      sort(
+        source.droppableId,
+        destination.droppableId,
+        source.index,
+        destination.index,
+        draggableId,
+        type
+      )
+    );
   };
 
   return (
     <div className='columns is-gapless'>
-      <div className="column is-2" >
+      <div className='column is-2'>
         <Navigation />
-    </div>
-      <div className="column is-3">
-      <Dashboard />
       </div>
-      <div className="column drag-drop-content">
-        <div className="column select-a-header">
-        <h1 className="headers">Buckets</h1>
-        <h3 className="unselected-headers">Social Board Queue</h3>
-        <h3 className="unselected-headers">Analytics</h3>
+      <Route exact path='/callback'>
+        <Callback />
+      </Route>
+      <Switch>
+        <Route path='/login'>
+          <REGISTER_LOGIN />
+        </Route>
+      </Switch>
+      <div className='column is-3'>
+        <Dashboard />
+      </div>
+      <div className='column drag-drop-content'>
+        <div className='column select-a-header'>
+          <h1 className='headers'>Buckets</h1>
+          <h3 className='unselected-headers'>Social Board Queue</h3>
+          <h3 className='unselected-headers'>Analytics</h3>
         </div>
       <ActionButton className="column is-2 headers" topic />
       <DragDropContext onDragEnd={onDragEnd}>

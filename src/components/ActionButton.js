@@ -56,13 +56,15 @@ class ActionButton extends React.Component {
     }
 
     renderAddButton = () => {
-        const buttonText = this.props.topic ? 'Add a topic' : 'Add a card'
 
-        return (
+        const buttonText = this.props.topic ? 'Add Topic' : 'Add Card'
+
+        return(
             <div onClick={this.openForm}>
-                <p><AddCircleIcon style={{"color": "white"}} />{buttonText}</p>
+                <p style={{"color": this.props.buttonColor}}><AddCircleIcon style={{"color": this.props.buttonColor}} />{buttonText}</p>
             </div>
         )
+        
     }
 
     renderForm = () => {

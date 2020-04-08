@@ -53,6 +53,7 @@ const TopicBucket = (props) => {
           >
           <ActionButton topicId={props.topicId} />
 
+
             <Droppable droppableId={String(props.topic.id)} type='card'>
               {(provided) => (
                 <CardList ref={provided.innerRef} {...provided.droppableProps}>
