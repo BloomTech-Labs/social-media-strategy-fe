@@ -13,9 +13,10 @@ const Container = styled.div`
   flex-direction: column;
   height: 100%;
   margin: 1rem;
+  text-align: center;
 `;
 const Title = styled.h4`
-  color: white;
+  color: #E85556;
   font-size: 1.6rem;
 `;
 const CardList = styled.div`
@@ -30,6 +31,7 @@ const CardList = styled.div`
   border-radius: .5rem;
 `;
 
+// style={{if(props.topic.title) == "Drafts"}}
 
 const TopicBucket = (props) => {
   
@@ -44,11 +46,14 @@ const TopicBucket = (props) => {
       <Draggable draggableId={String(props.topic.id)} index={props.index}>
         {(provided) => (
           <Container
-            {...provided.draggableProps}
-            ref={provided.innerRef}
-            {...provided.dragHandleProps}
-            >
-            <ActionButton topicId={props.topicId} />
+          className={`${props.className}`}
+          {...provided.draggableProps}
+          ref={provided.innerRef}
+          {...provided.dragHandleProps}
+          >
+          <ActionButton topicId={props.topicId} />
+
+
             <Droppable droppableId={String(props.topic.id)} type='card'>
               {(provided) => (
                 <CardList ref={provided.innerRef} {...provided.droppableProps}>
@@ -66,6 +71,7 @@ const TopicBucket = (props) => {
                   {provided.placeholder}
                 </CardList>
               )}
+              {/* <ActionButton topicId={props.topicId} /> */}
             </Droppable>
           </Container>
         )}

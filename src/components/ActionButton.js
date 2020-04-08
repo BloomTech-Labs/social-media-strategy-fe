@@ -56,6 +56,7 @@ class ActionButton extends React.Component {
     }
 
     renderAddButton = () => {
+
         const buttonText = this.props.topic ? 'Add Topic' : 'Add Card'
 
         return(
@@ -69,22 +70,25 @@ class ActionButton extends React.Component {
     renderForm = () => {
         const placeholder = this.props.topic ? 'Enter title for this topic' : 'Enter text for this post';
         const buttonTitle = this.props.topic ? 'Add Topic' : 'Add Card';
-        return <div style={{"backgroundColor": "white", "padding": "1rem", "borderRadius": ".5rem", "margin": ".5rem 0rem"}}>
+        return <div style={{"backgroundColor": "white", "padding": ".5rem"}}>
             <div style={{"display": "flex", "width":"100%", "justifyContent": "spaceBetween", "alignItems": "center"}}>
-            <h2 style={{"color": "black", "lineHeight": ".5rem"}}>Add Card</h2>
+            <h2 style={{"color": "black", "lineHeight": ".5rem"}}>Add</h2>
             <CloseIcon  style={{"color": "#E85556"}}/>
             </div>
             <p style={{"color": "#E85556"}}> Draft, Schedule, or Post </p>
-            <TextField
-                id="datetime-local"
-                label="Schedule"
-                type="datetime-local"
-                defaultValue="2017-05-24T10:30"
-                className="date"
-                InputLabelProps={{
-                shrink: true,
-                }}
-                />
+            {/* ==Schedule option for RC2==
+                <TextField
+                    position="absolute"
+                    id="datetime-local"
+                    label="Schedule"
+                    type="datetime-local"
+                    defaultValue="2017-05-24T10:30"
+                    className="date"
+                    InputLabelProps={{
+                    shrink: true,
+                    }}
+                    />
+            ========================== */}
 
             <Card style={{
                 overflow: 'visible',
@@ -120,17 +124,6 @@ class ActionButton extends React.Component {
                     width: "100%"
                 }}>
                     {buttonTitle}
-
-                </Button>
-                <Button 
-                    variant='contained' 
-                    style={{
-                    color: '#3282B8',
-                    background: "none",
-                    borderRadius: "5rem",
-                    width: "100%"
-                }}>
-                    Save to Drafts
                 </Button>
             </Box>
         </div>
