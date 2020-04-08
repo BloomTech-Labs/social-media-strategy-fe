@@ -72,7 +72,7 @@ const Callback = () => {
       <p>
         Thank you,{' '}
         <strong>
-          <a href={`https://twitter.com/${data.twitter_screenName}`}>
+          <a style={{color:'orange'}} href={`https://twitter.com/${data.twitter_screenName}`}>
             @${data.twitter_screenName}
           </a>
         </strong>
@@ -99,7 +99,7 @@ const Callback = () => {
       <h2>Redirecting you back to your SoMe profile in {time} </h2>
       <p className='redirect'>
         if countdown didn't redirect you to profile page please click{' '}
-        <a href='/'>here</a>
+        <a style={{color:'orange'}}href='/'>here</a>
       </p>
     </div>
   );
