@@ -47,7 +47,8 @@ const TopicBucket = (props) => {
             {...provided.draggableProps}
             ref={provided.innerRef}
             {...provided.dragHandleProps}
-          >
+            >
+            <ActionButton topicId={props.topicId} />
             <Droppable droppableId={String(props.topic.id)} type='card'>
               {(provided) => (
                 <CardList ref={provided.innerRef} {...provided.droppableProps}>
@@ -69,7 +70,6 @@ const TopicBucket = (props) => {
           </Container>
         )}
       </Draggable>
-      <ActionButton topicId={props.topicId} />
     </>
   );
 };

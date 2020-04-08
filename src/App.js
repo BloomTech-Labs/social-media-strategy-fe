@@ -7,12 +7,12 @@ import styled from "styled-components";
 import Dashboard from "./components/Dashboard";
 import Navigation from "./components/Navigation";
 import TopicBucket from "./components/TopicBucket";
-import ActionButton from './components/ActionButton';
+import ActionButton from "./components/ActionButton";
 
-import './sass/index.scss';
-import { Route, Switch } from 'react-router';
-import REGISTER_LOGIN from './components/Register_Login';
-import Callback from './components/Callback';
+import "./sass/index.scss";
+import { Route, Switch } from "react-router";
+import REGISTER_LOGIN from "./components/Register_Login";
+import Callback from "./components/Callback";
 
 //import { BrowserRouter as Router, Route, Link, Switch } from "react-router-dom";
 
@@ -53,19 +53,15 @@ const App = (props) => {
     <div className='columns is-gapless'>
       <div className='column is-2'>
         <Navigation />
-
-    </div>
-
-    <Route exact path='/callback'>
+      </div>
+      <Route exact path='/callback'>
         <Callback />
       </Route>
       <Switch>
         <Route path='/login'>
           <REGISTER_LOGIN />
         </Route>
-    </Switch>
-
-      </div>
+      </Switch>
       <div className='column is-3'>
         <Dashboard />
       </div>
@@ -75,12 +71,8 @@ const App = (props) => {
           <h3 className='unselected-headers'>Social Board Queue</h3>
           <h3 className='unselected-headers'>Analytics</h3>
         </div>
-        <ActionButton 
-          topic 
-          id='topic-btn'
-          className='column is-2 headers'
-          buttonColor='red'
-        />
+        <ActionButton topic />
+
         <DragDropContext onDragEnd={onDragEnd}>
           <Droppable
             className='columns'
@@ -96,6 +88,7 @@ const App = (props) => {
                 <div className='column topics'>
                   {props.topics.map((topic, index) => (
                     <TopicBucket
+                      className={`topic-${topic.id}`}
                       key={topic.id}
                       topicId={topic.id}
                       topic={topic}
