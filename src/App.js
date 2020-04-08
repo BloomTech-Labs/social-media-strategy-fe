@@ -54,14 +54,14 @@ const App = (props) => {
         <Route path='/login'>
           <REGISTER_LOGIN />
         </Route>
-        <Route exact path='/'>
+        {/* <Route exact path='/'>
           <div className='nav'>
             <Navigation />
           </div>
           <div className='dash'>
             <Dashboard />
           </div>
-        </Route>
+        </Route> */}
     </Switch>
       <div className="column is-3">
       <Dashboard />

@@ -18,7 +18,7 @@ const Register_Login = () => {
 
   const handleSubmit = e => {
     e.preventDefault();
-    Axios.post('https://post-route-feature.herokuapp.com/api/auth/login', state)
+    Axios.post('https://social-media-strategy.herokuapp.com/api/auth/login', state)
       .then(res => {
         console.log(res, `success`);
         localStorage.setItem('token', res.data.token);
@@ -29,7 +29,7 @@ const Register_Login = () => {
   const handleSubmitSignup = e => {
     e.preventDefault();
     Axios.post(
-      'https://post-route-feature.herokuapp.com/api/auth/register',
+      'https://social-media-strategy.herokuapp.com/api/auth/register',
       state
     )
       .then(

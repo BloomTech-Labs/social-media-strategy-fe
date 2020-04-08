@@ -5,15 +5,9 @@ import HomeNav from './HomeNav';
 import REGISTER_LOGIN from '../components/Register_Login';
 
 // material ui imports
-<<<<<<< HEAD
 import { Button, Typography, Box } from "@material-ui/core";
 import { blue } from "@material-ui/core/colors";
 import { withStyles, makeStyles } from "@material-ui/core/styles";
-=======
-import { Button } from '@material-ui/core';
-import { blue } from '@material-ui/core/colors';
-import { withStyles } from '@material-ui/core/styles';
->>>>>>> dev/oauth
 
 // react router dom imports
 import { NavLink, Route, Switch } from 'react-router-dom';
@@ -56,12 +50,9 @@ const Navigation = () => {
       }
     }
   }))(Button);
-<<<<<<< HEAD
 
 
-=======
   const [currentuser, setCurrentuser] = useState('');
->>>>>>> dev/oauth
   const [home, setHome] = useState(true);
   const [search, setSearch] = useState(false);
   const [menu, setMenu] = useState(false);
@@ -82,7 +73,7 @@ const Navigation = () => {
     } else {
       let ax = await (
         await fetch(
-          ` https://post-route-feature.herokuapp.com/api/auth/${currentuser}/oauth`,
+          ` https://social-media-strategy.herokuapp.com/api/auth/${currentuser}/oauth`,
           {
             method: 'GET',
             redirect: 'follow',
@@ -171,13 +162,7 @@ const Navigation = () => {
       <div className='navContainer'>
         <div className='navButtonContainer'>
           {/* <TransitionsModal /> */}
-<<<<<<< HEAD
           <ColorButton>Post</ColorButton>
-=======
-          {console.log(window.location.pathname)}
-          {console.log(currentuser)}
-          <ColorButton className='navButton'>Post</ColorButton>
->>>>>>> dev/oauth
         </div>
         <nav className='navLinks'>
           <ul>
@@ -248,18 +233,11 @@ const Navigation = () => {
               </li>
             </NavLink>
             <NavLink
-<<<<<<< HEAD
               className={alert ? "linkActive" : "linkNav"}
               to="/notifications"
               // onClick={alertHandler}
             >
               <li className="link">
-=======
-              className={alert ? 'linkActive' : 'linkNav'}
-              to='/notifications'
-              onClick={alertHandler}>
-              <li className='link'>
->>>>>>> dev/oauth
                 <img
                   className='navImage'
                   src={alert ? AlertAlt : Alert}
@@ -281,13 +259,6 @@ const Navigation = () => {
                 More
               </li>
             </NavLink>
-<<<<<<< HEAD
-            </ul>
-        </nav>
-        {/* <div className="avatar">
-          <p>Hello, Programmers</p>
-        </div> */}
-=======
             <NavLink
               className={menu ? 'linkActive' : 'linkNav'}
               to='/login'
@@ -304,14 +275,14 @@ const Navigation = () => {
           </ul>
         </nav>
         <div className='avatar'>
+          Hello
           <img
-            style={{ position: 'absolute', right: '-115px', cursor: 'pointer' }}
+            style={{ position: 'absolute',  cursor: 'pointer' }}
             alt=''
             src='https://cdn.cms-twdigitalassets.com/content/dam/developer-twitter/icons/sign-in-with-twitter-gray-png-img-fullhd-medium.png.img.fullhd.medium.png'
             onClick={twitter}
           />
         </div>
->>>>>>> dev/oauth
       </div>
       <Switch>
         <Route path='/home'>{HomeNav}</Route>

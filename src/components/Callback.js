@@ -22,7 +22,7 @@ const Callback = () => {
       setstate(user.data.subject);
 
       let post = await axiosWithAuth().post(
-        `https://post-route-feature.herokuapp.com/api/auth/${user.data.subject}/callback`,
+        `https://social-media-strategy.herokuapp.com/api/auth/${user.data.subject}/callback`,
 
         { parse: parse, location: location }
       );
