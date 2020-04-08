@@ -1,6 +1,7 @@
 {
   "name": "social-media-strategy",
   "version": "0.1.0",
+  "proxy":"https://post-route-feature.herokuapp.com",
   "private": true,
   "dependencies": {
     "@material-ui/core": "^4.9.8",
@@ -12,6 +13,8 @@
     "bulma": "^0.8.1",
     "fibers": "^4.0.2",
     "node-sass": "^4.13.1",
+    "query-string": "^6.11.1",
+    "dotenv": "^8.2.0",
     "react": "^16.13.0",
     "react-beautiful-dnd": "^13.0.0",
     "react-dom": "^16.13.0",
