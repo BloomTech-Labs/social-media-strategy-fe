@@ -19,16 +19,14 @@ Please delete options that are not relevant.
 
 # How Has This Been Tested?
 
-
-
 # Checklist
 
-- [ ] My code follows the style guidelines of this project
+- [x] My code follows the style guidelines of this project
 - [x] I have performed a self-review of my own code
 - [x] My code has been reviewed by at least one peer
 - [ ] I have commented my code, particularly in hard-to-understand areas
 - [ ] I have made corresponding changes to the documentation
 - [x] My changes generate no new warnings
-- [ ] I have added tests that prove my fix is effective or that my feature works
-- [ ] New and existing unit tests pass locally with my changes
+- [x] I have added tests that prove my fix is effective or that my feature works
+- [x] New and existing unit tests pass locally with my changes
 - [x] There are no merge conflicts
