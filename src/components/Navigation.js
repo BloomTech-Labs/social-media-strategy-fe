@@ -286,7 +286,7 @@ const Navigation = () => {
         </div>
       </div>
       <Switch>
-        <Route path='/home'>{HomeNav}</Route>
+        {/* <Route path='/home'>{HomeNav}</Route> */}
         <Route path='/search'></Route>
         <Route path='/account'></Route>
         <Route path='/analytics'></Route>

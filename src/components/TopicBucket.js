@@ -29,12 +29,13 @@ const CardList = styled.div`
   background-color: #F5F7F8;
   width: 18rem;
   border-radius: .5rem;
+
 `;
 
 // style={{if(props.topic.title) == "Drafts"}}
 
 const TopicBucket = (props) => {
-  
+
   const Header = styled.div`
   display: flex;
   flex-direction: row;
@@ -46,30 +47,36 @@ const TopicBucket = (props) => {
       <Draggable draggableId={String(props.topic.id)} index={props.index}>
         {(provided) => (
           <Container
-          className={`${props.className}`}
-          {...provided.draggableProps}
-          ref={provided.innerRef}
-          {...provided.dragHandleProps}
+            className={`${props.className}`}
+            {...provided.draggableProps}
+            ref={provided.innerRef}
+            {...provided.dragHandleProps}
           >
-          <ActionButton topicId={props.topicId} />
+            <ActionButton topicId={props.topicId} />
 
 
             <Droppable droppableId={String(props.topic.id)} type='card'>
+
               {(provided) => (
-                <CardList ref={provided.innerRef} {...provided.droppableProps}>
-                  <Header>
-                  <Title>{props.topic.title}</Title>
-                  </Header>
-                  {props.cards.map((card, index) => (
-                    <TopicCard
-                      key={card.id}
-                      card={card}
-                      index={index}
-                      id={card.id}
-                    />
-                  ))}
-                  {provided.placeholder}
-                </CardList>
+                <>
+                  <CardList ref={provided.innerRef} {...provided.droppableProps}>
+
+                    <Header>
+                      <Title>{props.topic.title}</Title>
+                    </Header>
+                    {props.cards.map((card, index) => (
+                      <TopicCard
+                        key={card.id}
+                        card={card}
+                        index={index}
+                        id={card.id}
+                      />
+                    ))}
+                    {provided.placeholder}
+                  </CardList>
+
+                  <ActionButton topicId={props.topicId} />
+                </>
               )}
               {/* <ActionButton topicId={props.topicId} /> */}
             </Droppable>
