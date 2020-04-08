@@ -52,12 +52,13 @@ const App = (props) => {
         <h3 className="unselected-headers">Social Board Queue</h3>
         <h3 className="unselected-headers">Analytics</h3>
         </div>
-          <button id="topic-btn" className="column is-2 headers" onClick={() => {props.addTopic('Topic Text')}}>New Topic</button>
+      <ActionButton className="column is-2 headers" topic />
       <DragDropContext onDragEnd={onDragEnd}>
 
         <Droppable className="columns" droppableId='all-topics' direction='horizontal' type='topic'>
           {provided => (
             <TopicsContainer
+              // style={{"overflow":"scroll"}}
               {...provided.droppableProps}
               ref={provided.innerRef}
             >
@@ -65,6 +66,7 @@ const App = (props) => {
               <div className='column topics'>
                 {props.topics.map((topic, index) => (
                   <TopicBucket
+                    className={`${topic.id}`}
                     key={topic.id}
                     topicId={topic.id}
                     topic={topic}
@@ -79,10 +81,7 @@ const App = (props) => {
           )}
         </Droppable>
       </DragDropContext>
-      <ActionButton topic />
-
-//         </div>
-
+      </div>
     </div>
   );
 };
