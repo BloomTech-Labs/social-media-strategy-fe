@@ -35,7 +35,6 @@ const TopicCard = props => {
           ref={provided.innerRef}
         >
           <BtnCont>
-            <h4>Title</h4>
             <Icons>
             <CreateIcon/>
             <MoreVertIcon />
