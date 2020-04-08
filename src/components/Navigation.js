@@ -63,6 +63,7 @@ const Navigation = () => {
 
   async function twittercheck() {
     let user = await axiosWithAuth().get(`/users/user`);
+    console.log(user.data.subject)
     setCurrentuser(user.data.subject);
   }
   async function twitter() {
