@@ -11,17 +11,19 @@ const Container = styled.div`
   border-radius: 0.5rem;
   padding: 1rem 1rem;
   margin: 0.75rem;
+  text-align: center;
 `;
 
 const BtnCont = styled.div`
   display: flex;
-  justify-content: space-between;
-  align-items: center;
+  justify-content: flex-end;
+  width: 100%;
 `;
 
 const Icons = styled.div`
 display: flex;
 justify-content: flex-end;
+padding: .5rem;
 `;
 
 
@@ -35,7 +37,6 @@ const TopicCard = props => {
           ref={provided.innerRef}
         >
           <BtnCont>
-            <h4>Title</h4>
             <Icons>
             <CreateIcon/>
             <MoreVertIcon />
