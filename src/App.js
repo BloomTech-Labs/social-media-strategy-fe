@@ -2,13 +2,12 @@ import React from "react";
 import { connect } from "react-redux";
 import { DragDropContext, Droppable } from "react-beautiful-dnd";
 import { sort } from "./actions";
-import styled, { ThemeProvider } from "styled-components";
-
+import styled from "styled-components";
 
 import Dashboard from "./components/Dashboard";
 import Navigation from "./components/Navigation";
 import TopicBucket from "./components/TopicBucket";
-import ActionButton from "./components/ActionButton";
+import ActionButton from './components/ActionButton';
 
 import './sass/index.scss';
 import { Route, Switch } from 'react-router';
@@ -38,13 +37,23 @@ const App = (props) => {
       return;
     } // if there is no destination, nothing needs to be done
 
-    props.dispatch(sort(source.droppableId, destination.droppableId, source.index, destination.index, draggableId, type))
+    props.dispatch(
+      sort(
+        source.droppableId,
+        destination.droppableId,
+        source.index,
+        destination.index,
+        draggableId,
+        type
+      )
+    );
   };
 
   return (
     <div className='columns is-gapless'>
-      <div className="column is-2" >
+      <div className='column is-2'>
         <Navigation />
+
     </div>
 
     <Route exact path='/callback'>
@@ -54,55 +63,53 @@ const App = (props) => {
         <Route path='/login'>
           <REGISTER_LOGIN />
         </Route>
-        {/* <Route exact path='/'>
-          <div className='nav'>
-            <Navigation />
-          </div>
-          <div className='dash'>
-            <Dashboard />
-          </div>
-        </Route> */}
     </Switch>
-      <div className="column is-3">
-      <Dashboard />
+
       </div>
-      <div className="column drag-drop-content">
-        <div className="column select-a-header">
-        <h1 className="headers">Buckets</h1>
-        <h3 className="unselected-headers">Social Board Queue</h3>
-        <h3 className="unselected-headers">Analytics</h3>
+      <div className='column is-3'>
+        <Dashboard />
+      </div>
+      <div className='column drag-drop-content'>
+        <div className='column select-a-header'>
+          <h1 className='headers'>Buckets</h1>
+          <h3 className='unselected-headers'>Social Board Queue</h3>
+          <h3 className='unselected-headers'>Analytics</h3>
         </div>
-          <button id="topic-btn" className="column is-2 headers" onClick={() => {props.addTopic('Topic Text')}}>New Topic</button>
-      <DragDropContext onDragEnd={onDragEnd}>
-
-        <Droppable className="columns" droppableId='all-topics' direction='horizontal' type='topic'>
-          {provided => (
-            <TopicsContainer
-              {...provided.droppableProps}
-              ref={provided.innerRef}
-            >
-
-              <div className='column topics'>
-                {props.topics.map((topic, index) => (
-                  <TopicBucket
-                    key={topic.id}
-                    topicId={topic.id}
-                    topic={topic}
-                    cards={topic.cards}
-                    index={index}
-                  />
-                ))}
-
-              </div>
-              {provided.placeholder}
-            </TopicsContainer>
-          )}
-        </Droppable>
-      </DragDropContext>
-      <ActionButton topic />
-
-//         </div>
-
+        <ActionButton 
+          topic 
+          id='topic-btn'
+          className='column is-2 headers'
+          buttonColor='red'
+        />
+        <DragDropContext onDragEnd={onDragEnd}>
+          <Droppable
+            className='columns'
+            droppableId='all-topics'
+            direction='horizontal'
+            type='topic'
+          >
+            {(provided) => (
+              <TopicsContainer
+                {...provided.droppableProps}
+                ref={provided.innerRef}
+              >
+                <div className='column topics'>
+                  {props.topics.map((topic, index) => (
+                    <TopicBucket
+                      key={topic.id}
+                      topicId={topic.id}
+                      topic={topic}
+                      cards={topic.cards}
+                      index={index}
+                    />
+                  ))}
+                </div>
+                {provided.placeholder}
+              </TopicsContainer>
+            )}
+          </Droppable>
+        </DragDropContext>
+      </div>
     </div>
   );
 };
