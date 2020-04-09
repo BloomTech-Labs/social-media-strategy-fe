@@ -38,16 +38,16 @@ import { axiosWithAuth } from "../utils/axiosWithAuth";
 // Material UI Styled Components
 
 const Navigation = () => {
-  const ColorButton = withStyles((theme) => ({
+  const ColorButton = withStyles(theme => ({
     root: {
       padding: ".5rem 5rem",
       borderRadius: "2rem",
       color: theme.palette.getContrastText(blue[700]),
       backgroundColor: blue[700],
       "&:hover": {
-        backgroundColor: blue[500],
-      },
-    },
+        backgroundColor: blue[500]
+      }
+    }
   }))(Button);
 
   const [currentuser, setCurrentuser] = useState("");
@@ -206,7 +206,7 @@ const Navigation = () => {
             <NavLink
               className={alert ? "linkActive" : "linkNav"}
               to="/notifications"
-              // onClick={alertHandler}
+              onClick={alertHandler}
             >
               <li className="link">
                 <img
@@ -217,7 +217,7 @@ const Navigation = () => {
                 Notifications
               </li>
             </NavLink>
-            <NavLink
+            {/* <NavLink
               className={menu ? "linkActive" : "linkNav"}
               to="/more"
               onClick={menuHandler}
@@ -230,7 +230,7 @@ const Navigation = () => {
                 />
                 More
               </li>
-            </NavLink>
+            </NavLink> */}
             <NavLink
               className={menu ? "linkActive" : "linkNav"}
               to="/login"

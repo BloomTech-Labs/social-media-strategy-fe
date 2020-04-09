@@ -1,14 +1,14 @@
 @import url("https://fonts.googleapis.com/css?family=Montserrat&display=swap");
 
-.drag-drop-content{
+.drag-drop-content {
   font-family: "Montserrat", sans-serif;
-  background-color: #F5F7F8;
+  background-color: #f5f7f8;
   padding: 1rem;
   // margin: 4.25rem 0 0 1rem;
   overflow-y: auto;
-  height:110vh;
+  height: 110vh;
 
-  .select-a-header{
+  .select-a-header {
     display: flex;
     flex-direction: row;
     justify-content: start;
@@ -16,33 +16,34 @@
     margin: 3.25rem 0 0 1rem;
   }
 
-  .headers{
+  .headers {
     color: black;
-
   }
 
-  .unselected-headers{
+  .unselected-headers {
     color: #848484;
-    padding: .5rem;
+    padding: 0.5rem;
   }
-  
-  #topic-btn{
+
+  #topic-btn {
     border: none;
-    background:none;
+    background: none;
     font-family: "Montserrat", sans-serif;
-    font-size:1rem;
+    font-size: 1rem;
     text-align: left;
     margin: 2.5rem 0 0 1rem;
-    color: #E85556;
-}
-
-  .topics {
-    display:flex;
-    border-radius: .5rem;
-    font-family: "Montserrat", sans-serif;
-    flex-direction: row;
-    height:100%;
-
+    color: #e85556;
   }
 
+  .topics {
+    display: flex;
+    border-radius: 0.5rem;
+    font-family: "Montserrat", sans-serif;
+    flex-direction: row;
+    height: 100%;
+  }
+}
+
+.actionOpener {
+  margin-left: 2.5%;
 }

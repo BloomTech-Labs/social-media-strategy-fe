@@ -10,24 +10,24 @@ import { Box } from "@material-ui/core";
 
 class ActionButton extends React.Component {
   state = {
-    formOpen: false,
+    formOpen: false
   };
   openForm = () => {
     this.setState({
-      formOpen: true,
+      formOpen: true
     });
   };
 
-  closeForm = (e) => {
+  closeForm = e => {
     this.setState({
       formOpen: false,
-      text: "",
+      text: ""
     });
   };
 
-  handleChanges = (e) => {
+  handleChanges = e => {
     this.setState({
-      text: e.target.value,
+      text: e.target.value
     });
   };
   handleAddTopic = () => {
@@ -49,13 +49,13 @@ class ActionButton extends React.Component {
   renderAddButton = () => {
     const buttonText = this.props.topic ? "Add Topic" : "Add Card";
     return (
-      <div className='actionOpener' onClick={this.openForm}>
+      <div className="actionOpener" onClick={this.openForm}>
         <p
           style={{
             color: this.props.buttonColor,
             display: "flex",
             width: "100%",
-            alignItems: "center",
+            alignItems: "center"
           }}
         >
           <AddCircleIcon style={{ color: this.props.buttonColor }} />
@@ -76,7 +76,7 @@ class ActionButton extends React.Component {
           backgroundColor: "white",
           padding: "1rem",
           borderRadius: ".5rem",
-          margin: ".5rem 0rem",
+          margin: ".5rem 0rem"
         }}
       >
         <div>
@@ -90,7 +90,7 @@ class ActionButton extends React.Component {
             minHeight: 80,
             minWidth: 272,
             padding: "6px 8px 2px",
-            margin: ".5rem 0rem",
+            margin: ".5rem 0rem"
           }}
         >
           <TextareaAutosize
@@ -104,22 +104,23 @@ class ActionButton extends React.Component {
               width: "100%",
               outline: "none",
               border: "none",
-              overflow: "hidden",
+              overflow: "hidden"
             }}
           />
         </Card>
         <Box>
           <Button
+            className="actionSubmit"
             onMouseDown={
               this.props.topic ? this.handleAddTopic : this.handleAddCard
             }
-            variant='contained'
+            variant="contained"
             style={{
               color: "white",
               backgroundColor: "#E85556",
               borderRadius: "5rem",
               margin: "1rem 0rem",
-              width: "100%",
+              width: "100%"
             }}
           >
             {buttonTitle}
