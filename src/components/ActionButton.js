@@ -7,7 +7,7 @@ import CloseIcon from "@material-ui/icons/Close";
 import { connect } from "react-redux";
 import { addTopic, addCard } from "../actions";
 import { Box } from "@material-ui/core";
-import TextField from "@material-ui/core/TextField";
+
 class ActionButton extends React.Component {
   state = {
     formOpen: false,
@@ -18,18 +18,14 @@ class ActionButton extends React.Component {
     });
   };
 
-
   closeForm = (e) => {
-
     this.setState({
       formOpen: false,
       text: "",
     });
   };
 
-
   handleChanges = (e) => {
-
     this.setState({
       text: e.target.value,
     });
@@ -53,14 +49,15 @@ class ActionButton extends React.Component {
   renderAddButton = () => {
     const buttonText = this.props.topic ? "Add Topic" : "Add Card";
     return (
-      <div className="actionOpener"
-            onClick={this.openForm}>
-        <p style={{ 
-                color: this.props.buttonColor,
-                display: "flex",
-                width: "100%",
-                alignItems: "center"
-            }}>
+      <div className='actionOpener' onClick={this.openForm}>
+        <p
+          style={{
+            color: this.props.buttonColor,
+            display: "flex",
+            width: "100%",
+            alignItems: "center",
+          }}
+        >
           <AddCircleIcon style={{ color: this.props.buttonColor }} />
           {buttonText}
         </p>
@@ -74,139 +71,59 @@ class ActionButton extends React.Component {
       : "Enter text for this post";
     const buttonTitle = this.props.topic ? "Add Topic" : "Add Card";
     return (
-
       <div
         style={{
           backgroundColor: "white",
           padding: "1rem",
           borderRadius: ".5rem",
-          margin: ".5rem 0rem"
+          margin: ".5rem 0rem",
         }}
       >
-        <div
-          style={{
-            display: "flex",
-            width: "100%",
-            justifyContent: "spaceBetween",
-
-            alignItems: "center",
-          }}
-        >
-          <div>
-            <h2 style={{ color: "black", lineHeight: ".5rem" }}>Add</h2>
-            <CloseIcon style={{ color: "#E85556" }} />
-          </div>
-          <p style={{ color: "#E85556" }}> Draft, Schedule, or Post </p>
-          <Card
-            style={{
-              overflow: "visible",
-              minHeight: 80,
-              minWidth: 272,
-              padding: "6px 8px 2px",
-              margin: ".5rem 0rem",
-            }}
-          >
-            <TextareaAutosize
-              placeholder={placeholder}
-              autoFocus
-              onBlur={this.closeForm}
-              value={this.state.text}
-              onChange={this.handleChanges}
-              style={{
-                resize: "none",
-                width: "100%",
-                outline: "none",
-                border: "none",
-                overflow: "hidden",
-              }}
-            />
-          </Card>
-          <Box>
-            <Button
-              onMouseDown={
-                this.props.topic ? this.handleAddTopic : this.handleAddCard
-              }
-              variant="contained"
-              style={{
-                color: "white",
-                backgroundColor: "#E85556",
-                borderRadius: "5rem",
-                margin: "1rem 0rem",
-                width: "100%",
-              }}
-            >
-              {buttonTitle}
-            </Button>
-          </Box>
-
+        <div>
+          <h2 style={{ color: "black", lineHeight: ".5rem" }}>Add</h2>
+          <CloseIcon style={{ color: "#E85556" }} />
         </div>
-
-        {/* <p style={{ color: "#E85556" }}> Draft, Schedule, or Post </p>
-        <TextField
-          id="datetime-local"
-          label="Schedule"
-          type="datetime-local"
-          defaultValue="2017-05-24T10:30"
-          className="date"
-          InputLabelProps={{
-            shrink: true,
-          }}
-        /> */}
-      
+        {/* {<p style={{ color: "#E85556" }}> Draft, Schedule, or Post </p>} */}
         <Card
-            style={{
+          style={{
             overflow: "visible",
             minHeight: 80,
             minWidth: 272,
             padding: "6px 8px 2px",
             margin: ".5rem 0rem",
-        }}
+          }}
         >
-        <TextareaAutosize
+          <TextareaAutosize
             placeholder={placeholder}
             autoFocus
             onBlur={this.closeForm}
             value={this.state.text}
             onChange={this.handleChanges}
             style={{
-            resize: "none",
-            width: "100%",
-            outline: "none",
-            border: "none",
-            overflow: "hidden",
+              resize: "none",
+              width: "100%",
+              outline: "none",
+              border: "none",
+              overflow: "hidden",
             }}
-        />
+          />
         </Card>
-        
-        <Button
-            className="actionSubmit"
+        <Box>
+          <Button
             onMouseDown={
-                this.props.topic ? this.handleAddTopic : this.handleAddCard
+              this.props.topic ? this.handleAddTopic : this.handleAddCard
             }
-            variant="contained"
+            variant='contained'
             style={{
-                color: "white",
-                backgroundColor: "#E85556",
-                borderRadius: "5rem",
-                margin: "1rem 0rem",
-                width: "100%"
+              color: "white",
+              backgroundColor: "#E85556",
+              borderRadius: "5rem",
+              margin: "1rem 0rem",
+              width: "100%",
             }}
-        >
+          >
             {buttonTitle}
-        </Button>
-        {/* <Button
-            variant="contained"
-            style={{
-                color: "#3282B8",
-                background: "none",
-                borderRadius: "5rem",
-                width: "100%"
-            }}
-        >
-            Save to Drafts
           </Button>
-          */}
-      
         </Box>
       </div>
     );
