@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useForm, Controller } from "react-hook-form";
 import { connect } from "react-redux";
 import { useStyles } from "../sass/StyledRegister_login";
@@ -15,11 +15,13 @@ import LockOutlinedIcon from "@material-ui/icons/LockOutlined";
 import Typography from "@material-ui/core/Typography";
 
 import { login, registerUser } from "../actions";
+import { useHistory } from "react-router";
 
 const Register_Login = (props) => {
   const { register, handleSubmit, control } = useForm();
   const [signup, setsignup] = useState(false);
   const classes = useStyles();
+  const { push } = useHistory();
 
   function Copyright() {
     return (
@@ -36,18 +38,17 @@ const Register_Login = (props) => {
 
   const onSubmit = (data) => {
     if (!signup) {
-      props.login(data);
-      setTimeout(() => {
-        window.location.reload(false);
-      }, 500);
+      props.login(data, push, props.locationCheck);
+
+      console.log(new Date());
     } else {
-      props.registerUser(data);
-      setTimeout(() => {
-        window.location.reload(false);
-      }, 500);
+      props.registerUser(data, push, props.locationCheck);
     }
   };
-  props.locationCheck();
+
+  useEffect(() => {
+    props.locationCheck(false);
+  }, []);
 
   return (
     <Grid container component="main" className={classes.root}>

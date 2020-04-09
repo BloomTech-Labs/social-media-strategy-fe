@@ -18,7 +18,7 @@ export const initialState = {
     followers: 2.6,
   },
   isLoading: false,
-  isLoggedIn: true,
+  isLoggedIn: false,
   error: null,
 };
 

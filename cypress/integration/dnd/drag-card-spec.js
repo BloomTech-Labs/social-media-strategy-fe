@@ -20,7 +20,7 @@ describe("testing drag feature", function() {
     cy.visit("http://localhost:3000/home");
 
     function movePiece(x, y) {
-      cy.get(`.sc-AxjAm.gYYZVf`)
+      cy.get(".sc-AxjAm.pHAFq")
         .first()
         .trigger("mousedown", { button: 0 })
         .wait(1500)
