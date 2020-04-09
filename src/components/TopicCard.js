@@ -7,7 +7,6 @@ import MoreVertIcon from '@material-ui/icons/MoreVert';
 
 const Container = styled.div`
   background-color: white;
-  width: 95%;
   border-radius: 0.5rem;
   padding: 1rem 1rem;
   margin: 0.75rem;

@@ -6,7 +6,7 @@ import ActionButton from "./ActionButton";
 
 
 const Container = styled.div`
-  background-color: #817BAB;
+  background-color: #EBECF0;
   padding: 1rem;
   border-radius: 0.5rem;
   display: flex;
@@ -16,18 +16,22 @@ const Container = styled.div`
   text-align: center;
 `;
 const Title = styled.h4`
-  color: #E85556;
+  color: white;
+  background-color:#E85556;
   font-size: 1.6rem;
+  width: 100%;
+  padding: 1rem 0rem;
+  border-radius: .5rem .5rem 0rem 0rem;
+  margin:0;
 `;
 const CardList = styled.div`
-  padding:1rem;
   display: flex;
   align-items: center;
   flex-direction: column;
-  flex-grow: 1;
+  // flex-grow: 1;
   min-height: 100px;
   background-color: #F5F7F8;
-  width: 18rem;
+  width: 20rem;
   border-radius: .5rem;
 
 `;
@@ -61,9 +65,9 @@ const TopicBucket = (props) => {
                 <>
                   <CardList ref={provided.innerRef} {...provided.droppableProps}>
 
-                    <Header>
+                    
                       <Title>{props.topic.title}</Title>
-                    </Header>
+                    
                     {props.cards.map((card, index) => (
                       <TopicCard
                         key={card.id}

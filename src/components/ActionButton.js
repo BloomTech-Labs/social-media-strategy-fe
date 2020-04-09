@@ -73,7 +73,6 @@ class ActionButton extends React.Component {
       : "Enter text for this post";
     const buttonTitle = this.props.topic ? "Add Topic" : "Add Card";
     return (
-        <>
       <div style={{ backgroundColor: "white", padding: ".5rem" }}>
         <div
           style={{
@@ -197,7 +196,7 @@ class ActionButton extends React.Component {
             </Button>
         </Box>
         </div>
-        </>
+        
     )}
 
     render() {

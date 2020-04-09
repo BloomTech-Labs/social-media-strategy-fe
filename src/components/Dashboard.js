@@ -3,7 +3,7 @@ import React, { useEffect } from "react";
 import { Link } from "react-router-dom";
 
 // Material UI imports
-import { Card, CardContent, Typography, Box, Button } from "@material-ui/core";
+import { Card, Typography, Box } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
 import Popover from "@material-ui/core/Popover";
 
@@ -213,94 +213,3 @@ const Dashboard = () => {
   );
 };
 export default Dashboard;
-
-{
-  /* <div className="dash-app">
-      <div className="title">
-      <h1 className="bold">Dashboard</h1>
-      <div className="dash-title">
-      <h4 className="highlight">Tuesday</h4> <h4 className="highlight"> • </h4><h4> 16 March, 2020</h4>
-      </div>
-      <div className="acct-title">
-      <h2 className="blue-bold">Accounts</h2>
-      <Link className="button" to={{
-        pathname:'/add-acct',
-        state: {modal: true },
-        }}>Add Account</Link>
-      </div>
-        {accountData.map(e => (
-      <div key={data.id} className="acct-card">
-        <img className='icon' src={img} alt='Profile'/>
-        <h3>{e.firstName}{e.lastName}</h3>
-        <h5>{e.twitterHandle}</h5>
-        <div className="location">
-          <img 
-            className="location-img"
-            src={pin}/>
-          <h4>{e.location}</h4>
-        </div>
-                <div className="all-stats">
-                <div className="headers">
-                    <h5>Posts</h5>
-                    <h6>{e.posts}</h6>
-                </div>
-                <div className="headers">
-                    <h5>Following</h5>
-                    <h6>{e.following}</h6>
-                </div>
-                <div className="headers">
-                    <h5>Followers</h5>
-                    <h6>{e.followers}</h6>
-                </div>
-                </div>
-          </div>
-          ))}
-        </div>
-      </div> */
-}
-
-// return (
-//     <div className="columns is-multiline dash-app">
-//     <h1 className="column is-full">Dashboard</h1>
-//     <div className="columns dashboard-title">
-//     <h4 className="column is-narrow highlight">Tuesday</h4> <h4 className="column is-narrow highlight"> ▪ </h4><h4 className="column"> 16 March, 2020</h4>
-//     </div>
-//     <div className="columns is-centered is-vcentered">
-//     <h2 className="column is-half">Accounts</h2>
-//     <Link className="column is-half" to={{
-//       pathname:'/add-acct',
-//       state: {modal: true },
-//     }}>Add Account</Link>
-//     </div>
-//       {accountData.map(e => (
-//     <div key={data.id} className="columns is-multiline is-centered acct-card">
-//       <div className="columns is-multiline is-centered">
-//       <img className='column is-full icon' style={{width:"20%"}} src={img} alt='Profile'/>
-//       <h3 className="column is-full">{e.firstName}{e.lastName}</h3>
-//       <h5 className="column is-full">{e.twitterHandle}</h5>
-//       </div>
-//       <div className="columns is-vcentered is-full is-centered">
-//         <img
-//           className="column is-half"
-//           src={pin}
-//           style={{width:'10%'}}/>
-//         <h4 className="column is-half">{e.location}</h4>
-//       </div>
-//       <div className="columns is-centered is-vcentered is-full">
-//       <div className="columns is-vcentered is-multiline is-centered">
-//           <h5 className="column is-half">Posts</h5>
-//           <h6 className="column is-half">{e.posts}</h6>
-//       </div>
-//       <div className="columns is-vcentered is-multiline is-centered">
-//           <h5 className="column is-half">Following</h5>
-//           <h6 className="column is-half">{e.following}</h6>
-//       </div>
-//       <div className="columns is-vcentered is-multiline is-centered">
-//           <h5 className="column is-half">Followers</h5>
-//           <h6 className="column is-half">{e.followers}</h6>
-//       </div>
-//       </div>
-//         </div>
-//         ))}
-//     </div>
-// );
