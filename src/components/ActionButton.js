@@ -10,22 +10,28 @@ import { Box } from "@material-ui/core";
 import TextField from "@material-ui/core/TextField";
 class ActionButton extends React.Component {
   state = {
-    formOpen: false
+    formOpen: false,
   };
   openForm = () => {
     this.setState({
-      formOpen: true
+      formOpen: true,
     });
   };
-  closeForm = e => {
+
+
+  closeForm = (e) => {
+
     this.setState({
       formOpen: false,
-      text: ""
+      text: "",
     });
   };
-  handleChanges = e => {
+
+
+  handleChanges = (e) => {
+
     this.setState({
-      text: e.target.value
+      text: e.target.value,
     });
   };
   handleAddTopic = () => {
@@ -43,10 +49,12 @@ class ActionButton extends React.Component {
       dispatch(addCard(topicId, text));
     }
   };
+
   renderAddButton = () => {
     const buttonText = this.props.topic ? "Add Topic" : "Add Card";
     return (
       <div className="actionOpener" onClick={this.openForm}>
+
         <p style={{ color: this.props.buttonColor }}>
           <AddCircleIcon style={{ color: this.props.buttonColor }} />
           {buttonText}
@@ -54,12 +62,14 @@ class ActionButton extends React.Component {
       </div>
     );
   };
+
   renderForm = () => {
     const placeholder = this.props.topic
       ? "Enter title for this topic"
       : "Enter text for this post";
     const buttonTitle = this.props.topic ? "Add Topic" : "Add Card";
     return (
+
       <div
         style={{
           backgroundColor: "white",
@@ -73,12 +83,59 @@ class ActionButton extends React.Component {
             display: "flex",
             width: "100%",
             justifyContent: "spaceBetween",
-            alignItems: "center"
+
+            alignItems: "center",
           }}
         >
-          <h2 style={{ color: "black", lineHeight: ".5rem" }}>Add Card</h2>
-          <CloseIcon style={{ color: "#E85556" }} />
+          <div>
+            <h2 style={{ color: "black", lineHeight: ".5rem" }}>Add</h2>
+            <CloseIcon style={{ color: "#E85556" }} />
+          </div>
+          <p style={{ color: "#E85556" }}> Draft, Schedule, or Post </p>
+          <Card
+            style={{
+              overflow: "visible",
+              minHeight: 80,
+              minWidth: 272,
+              padding: "6px 8px 2px",
+              margin: ".5rem 0rem",
+            }}
+          >
+            <TextareaAutosize
+              placeholder={placeholder}
+              autoFocus
+              onBlur={this.closeForm}
+              value={this.state.text}
+              onChange={this.handleChanges}
+              style={{
+                resize: "none",
+                width: "100%",
+                outline: "none",
+                border: "none",
+                overflow: "hidden",
+              }}
+            />
+          </Card>
+          <Box>
+            <Button
+              onMouseDown={
+                this.props.topic ? this.handleAddTopic : this.handleAddCard
+              }
+              variant="contained"
+              style={{
+                color: "white",
+                backgroundColor: "#E85556",
+                borderRadius: "5rem",
+                margin: "1rem 0rem",
+                width: "100%",
+              }}
+            >
+              {buttonTitle}
+            </Button>
+          </Box>
+
         </div>
+
         <p style={{ color: "#E85556" }}> Draft, Schedule, or Post </p>
         <TextField
           id="datetime-local"
@@ -87,7 +144,7 @@ class ActionButton extends React.Component {
           defaultValue="2017-05-24T10:30"
           className="date"
           InputLabelProps={{
-            shrink: true
+            shrink: true,
           }}
         />
         <Card
@@ -96,7 +153,7 @@ class ActionButton extends React.Component {
             minHeight: 80,
             minWidth: 272,
             padding: "6px 8px 2px",
-            margin: ".5rem 0rem"
+            margin: ".5rem 0rem",
           }}
         >
           <TextareaAutosize
@@ -110,7 +167,7 @@ class ActionButton extends React.Component {
               width: "100%",
               outline: "none",
               border: "none",
-              overflow: "hidden"
+              overflow: "hidden",
             }}
           />
         </Card>
@@ -126,7 +183,7 @@ class ActionButton extends React.Component {
               backgroundColor: "#E85556",
               borderRadius: "5rem",
               margin: "1rem 0rem",
-              width: "100%"
+              width: "100%",
             }}
           >
             {buttonTitle}
@@ -137,7 +194,7 @@ class ActionButton extends React.Component {
               color: "#3282B8",
               background: "none",
               borderRadius: "5rem",
-              width: "100%"
+              width: "100%",
             }}
           >
             Save to Drafts
