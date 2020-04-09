@@ -69,12 +69,14 @@ class ActionButton extends React.Component {
     renderForm = () => {
         const placeholder = this.props.topic ? 'Enter title for this topic' : 'Enter text for this post';
         const buttonTitle = this.props.topic ? 'Add Topic' : 'Add Card';
-        return <div style={{"backgroundColor": "white", "padding": ".5rem"}}>
+        return
+            <>
+            <div style={{"backgroundColor": "white", "padding": ".5rem"}}>
             <div style={{"display": "flex", "width":"100%", "justifyContent": "spaceBetween", "alignItems": "center"}}>
             <h2 style={{"color": "black", "lineHeight": ".5rem"}}>Add</h2>
             <CloseIcon  style={{"color": "#E85556"}}/>
             </div>
-            <p style={{"color": "#E85556"}}> Draft, Schedule, or Post </p>
+
             {/* ==Schedule option for RC2==
                 <TextField
                     position="absolute"
@@ -129,76 +131,77 @@ class ActionButton extends React.Component {
         </div>
         <p style={{ color: "#E85556" }}> Draft, Schedule, or Post </p>
         <TextField
-          id="datetime-local"
-          label="Schedule"
-          type="datetime-local"
-          defaultValue="2017-05-24T10:30"
-          className="date"
-          InputLabelProps={{
+            id="datetime-local"
+            label="Schedule"
+            type="datetime-local"
+            defaultValue="2017-05-24T10:30"
+            className="date"
+            InputLabelProps={{
             shrink: true
-          }}
+        }}
         />
 
         <Card
-          style={{
+            style={{
             overflow: "visible",
             minHeight: 80,
             minWidth: 272,
             padding: "6px 8px 2px",
             margin: ".5rem 0rem"
-          }}
+        }}
         >
-          <TextareaAutosize
+        <TextareaAutosize
             placeholder={placeholder}
             autoFocus
             onBlur={this.closeForm}
             value={this.state.text}
             onChange={this.handleChanges}
             style={{
-              resize: "none",
-              width: "100%",
-              outline: "none",
-              border: "none",
-              overflow: "hidden"
+                resize: "none",
+                width: "100%",
+                outline: "none",
+                border: "none",
+                overflow: "hidden"
             }}
-          />
+        />
         </Card>
         <Box>
-          <Button
+        <Button
             className="actionSubmit"
             onMouseDown={
-              this.props.topic ? this.handleAddTopic : this.handleAddCard
+                this.props.topic ? this.handleAddTopic : this.handleAddCard
             }
             variant="contained"
             style={{
-              color: "white",
-              backgroundColor: "#E85556",
-              borderRadius: "5rem",
-              margin: "1rem 0rem",
-              width: "100%"
+                color: "white",
+                backgroundColor: "#E85556",
+                borderRadius: "5rem",
+                margin: "1rem 0rem",
+                width: "100%"
             }}
-          >
+        >
             {buttonTitle}
-          </Button>
-          <Button
+        </Button>
+        <Button
             variant="contained"
             style={{
-              color: "#3282B8",
-              background: "none",
-              borderRadius: "5rem",
-              width: "100%"
+                color: "#3282B8",
+                background: "none",
+                borderRadius: "5rem",
+                width: "100%"
             }}
-          >
+        >
             Save to Drafts
-          </Button>
+            </Button>
         </Box>
-      </div>
-    );
-  };
+        
+        </>
+    
+};
 
-  render() {
-    return this.state.formOpen ? this.renderForm() : this.renderAddButton();
-  }
+    render() {
+        return this.state.formOpen ? this.renderForm() : this.renderAddButton();
+    }
 }
 
 export default connect()(ActionButton);
