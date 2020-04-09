@@ -4,9 +4,8 @@ import TopicCard from "./TopicCard";
 import { Droppable, Draggable } from "react-beautiful-dnd";
 import ActionButton from "./ActionButton";
 
-
 const Container = styled.div`
-  background-color: #817BAB;
+  background-color: #817bab;
   padding: 1rem;
   border-radius: 0.5rem;
   display: flex;
@@ -16,36 +15,34 @@ const Container = styled.div`
   text-align: center;
 `;
 const Title = styled.h4`
-  color: #E85556;
+  color: #e85556;
   font-size: 1.6rem;
 `;
 const CardList = styled.div`
-  padding:1rem;
+  padding: 1rem;
   display: flex;
   align-items: center;
   flex-direction: column;
   flex-grow: 1;
   min-height: 100px;
-  background-color: #F5F7F8;
+  background-color: #f5f7f8;
   width: 18rem;
-  border-radius: .5rem;
-
+  border-radius: 0.5rem;
 `;
 
 // style={{if(props.topic.title) == "Drafts"}}
 
-const TopicBucket = (props) => {
-
+const TopicBucket = props => {
   const Header = styled.div`
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-  align-items: center;
-`;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+  `;
   return (
     <>
       <Draggable draggableId={String(props.topic.id)} index={props.index}>
-        {(provided) => (
+        {provided => (
           <Container
             className={`${props.className}`}
             {...provided.draggableProps}
@@ -54,18 +51,19 @@ const TopicBucket = (props) => {
           >
             <ActionButton topicId={props.topicId} />
 
-
-            <Droppable droppableId={String(props.topic.id)} type='card'>
-
-              {(provided) => (
+            <Droppable droppableId={String(props.topic.id)} type="card">
+              {provided => (
                 <>
-                  <CardList ref={provided.innerRef} {...provided.droppableProps}>
-
+                  <CardList
+                    ref={provided.innerRef}
+                    {...provided.droppableProps}
+                  >
                     <Header>
                       <Title>{props.topic.title}</Title>
                     </Header>
                     {props.cards.map((card, index) => (
                       <TopicCard
+                        className={`${card.id}`}
                         key={card.id}
                         card={card}
                         index={index}
