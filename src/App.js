@@ -13,6 +13,7 @@ import "./sass/index.scss";
 import { Route, Switch } from "react-router";
 import REGISTER_LOGIN from "./components/Register_Login";
 import Callback from "./components/Callback";
+import PrivateRoute from "./utils/PrivateRoute";
 
 //import { BrowserRouter as Router, Route, Link, Switch } from "react-router-dom";
 
@@ -49,8 +50,8 @@ const App = (props) => {
       )
     );
   };
-  let locationCheck = () => {
-    setNavigation(false);
+  let locationCheck = (truthy) => {
+    setNavigation(truthy);
     return window.location.pathname;
   };
 
