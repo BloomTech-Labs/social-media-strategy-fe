@@ -7,7 +7,6 @@ import ActionButton from "./ActionButton";
 
 const Container = styled.div`
   background-color: #EBECF0;
-  padding: 1rem;
   border-radius: 0.5rem;
   display: flex;
   flex-direction: column;
@@ -20,7 +19,7 @@ const Title = styled.h4`
   background-color:#E85556;
   font-size: 1.6rem;
   width: 100%;
-  padding: 1rem 0rem;
+  padding: 1.5rem 0rem;
   border-radius: .5rem .5rem 0rem 0rem;
   margin:0;
 `;
@@ -30,22 +29,15 @@ const CardList = styled.div`
   flex-direction: column;
   // flex-grow: 1;
   min-height: 100px;
-  background-color: #F5F7F8;
+  background-color: #EBECF0;
   width: 20rem;
   border-radius: .5rem;
-
 `;
 
 // style={{if(props.topic.title) == "Drafts"}}
 
 const TopicBucket = (props) => {
 
-  const Header = styled.div`
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-  align-items: center;
-`;
   return (
     <>
       <Draggable draggableId={String(props.topic.id)} index={props.index}>
@@ -56,7 +48,7 @@ const TopicBucket = (props) => {
             ref={provided.innerRef}
             {...provided.dragHandleProps}
           >
-            <ActionButton topicId={props.topicId} />
+            {/* <ActionButton topicId={props.topicId} /> */}
 
 
             <Droppable droppableId={String(props.topic.id)} type='card'>

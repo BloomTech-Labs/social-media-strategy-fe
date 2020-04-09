@@ -9,7 +9,8 @@ const Container = styled.div`
   background-color: white;
   border-radius: 0.5rem;
   padding: 1rem 1rem;
-  margin: 0.75rem;
+  margin: 0.5rem;
+  width:80%;
   text-align: center;
 `;
 

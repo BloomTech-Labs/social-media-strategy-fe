@@ -58,8 +58,14 @@ class ActionButton extends React.Component {
     const buttonText = this.props.topic ? "Add Topic" : "Add Card";
 
     return (
-      <div onClick={this.openForm}>
-        <p style={{ color: this.props.buttonColor }}>
+      <div 
+            onClick={this.openForm}>
+        <p style={{ 
+                color: this.props.buttonColor,
+                display: "flex",
+                width: "100%",
+                alignItems: "center"
+            }}>
           <AddCircleIcon style={{ color: this.props.buttonColor }} />
           {buttonText}
         </p>
@@ -130,7 +136,7 @@ class ActionButton extends React.Component {
           </Box>
         </div>
 
-        <p style={{ color: "#E85556" }}> Draft, Schedule, or Post </p>
+        {/* <p style={{ color: "#E85556" }}> Draft, Schedule, or Post </p>
         <TextField
           id="datetime-local"
           label="Schedule"
@@ -140,7 +146,7 @@ class ActionButton extends React.Component {
           InputLabelProps={{
             shrink: true,
           }}
-        />
+        /> */}
 
         <Card
             style={{
@@ -166,7 +172,7 @@ class ActionButton extends React.Component {
             }}
         />
         </Card>
-        <Box>
+        
         <Button
             className="actionSubmit"
             onMouseDown={
@@ -183,7 +189,7 @@ class ActionButton extends React.Component {
         >
             {buttonTitle}
         </Button>
-        <Button
+        {/* <Button
             variant="contained"
             style={{
                 color: "#3282B8",
@@ -193,8 +199,8 @@ class ActionButton extends React.Component {
             }}
         >
             Save to Drafts
-            </Button>
-        </Box>
+            </Button> */}
+        
         </div>
         
     )}
