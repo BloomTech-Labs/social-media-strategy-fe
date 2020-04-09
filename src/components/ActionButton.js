@@ -11,26 +11,26 @@ import TextField from "@material-ui/core/TextField";
 
 class ActionButton extends React.Component {
   state = {
-    formOpen: false
+    formOpen: false,
   };
 
   openForm = () => {
     this.setState({
-      formOpen: true
+      formOpen: true,
     });
     console.log("opened");
   };
 
-  closeForm = e => {
+  closeForm = (e) => {
     this.setState({
       formOpen: false,
-      text: ""
+      text: "",
     });
   };
 
-  handleChanges = e => {
+  handleChanges = (e) => {
     this.setState({
-      text: e.target.value
+      text: e.target.value,
     });
   };
 
@@ -54,91 +54,92 @@ class ActionButton extends React.Component {
     }
   };
 
-    renderAddButton = () => {
+  renderAddButton = () => {
+    const buttonText = this.props.topic ? "Add Topic" : "Add Card";
 
-        const buttonText = this.props.topic ? 'Add Topic' : 'Add Card'
+    return (
+      <div onClick={this.openForm}>
+        <p style={{ color: this.props.buttonColor }}>
+          <AddCircleIcon style={{ color: this.props.buttonColor }} />
+          {buttonText}
+        </p>
+      </div>
+    );
+  };
 
-        return(
-            <div onClick={this.openForm}>
-                <p style={{"color": this.props.buttonColor}}><AddCircleIcon style={{"color": this.props.buttonColor}} />{buttonText}</p>
-            </div>
-        )
-        
-    }
-
-    renderForm = () => {
-        const placeholder = this.props.topic ? 'Enter title for this topic' : 'Enter text for this post';
-        const buttonTitle = this.props.topic ? 'Add Topic' : 'Add Card';
-        return
-            <>
-            <div style={{"backgroundColor": "white", "padding": ".5rem"}}>
-            <div style={{"display": "flex", "width":"100%", "justifyContent": "spaceBetween", "alignItems": "center"}}>
-            <h2 style={{"color": "black", "lineHeight": ".5rem"}}>Add</h2>
-            <CloseIcon  style={{"color": "#E85556"}}/>
-            </div>
-
-            {/* ==Schedule option for RC2==
-                <TextField
-                    position="absolute"
-                    id="datetime-local"
-                    label="Schedule"
-                    type="datetime-local"
-                    defaultValue="2017-05-24T10:30"
-                    className="date"
-                    InputLabelProps={{
-                    shrink: true,
-                    }}
-                    />
-            ========================== */}
-
-            <Card style={{
-                overflow: 'visible',
-                minHeight: 80,
-                minWidth: 272,
-                padding: '6px 8px 2px',
-                margin: '.5rem 0rem'
-            }}>
-            <TextareaAutosize 
-                placeholder={placeholder} 
-                autoFocus 
-                onBlur={this.closeForm}
-                value={this.state.text}
-                onChange={this.handleChanges}
-                style={{
-                    resize: 'none',
-                    width: '100%',
-                    outline: 'none',
-                    border: 'none',
-                    overflow: 'hidden'
-                }}
+  renderForm = () => {
+    const placeholder = this.props.topic
+      ? "Enter title for this topic"
+      : "Enter text for this post";
+    const buttonTitle = this.props.topic ? "Add Topic" : "Add Card";
+    return (
+      <div style={{ backgroundColor: "white", padding: ".5rem" }}>
+        <div
+          style={{
+            display: "flex",
+            width: "100%",
+            justifyContent: "spaceBetween",
+            alignItems: "center",
+          }}
+        >
+          <div>
+            <h2 style={{ color: "black", lineHeight: ".5rem" }}>Add</h2>
+            <CloseIcon style={{ color: "#E85556" }} />
+          </div>
+          <p style={{ color: "#E85556" }}> Draft, Schedule, or Post </p>
+          <Card
+            style={{
+              overflow: "visible",
+              minHeight: 80,
+              minWidth: 272,
+              padding: "6px 8px 2px",
+              margin: ".5rem 0rem",
+            }}
+          >
+            <TextareaAutosize
+              placeholder={placeholder}
+              autoFocus
+              onBlur={this.closeForm}
+              value={this.state.text}
+              onChange={this.handleChanges}
+              style={{
+                resize: "none",
+                width: "100%",
+                outline: "none",
+                border: "none",
+                overflow: "hidden",
+              }}
             />
-            </Card>
-            <Box>
-                <Button 
-                    onMouseDown={this.props.topic ? this.handleAddTopic : this.handleAddCard}
-                    variant='contained' 
-                    style={{
-                    color: 'white',
-                    backgroundColor: '#E85556',
-                    borderRadius: "5rem",
-                    margin: "1rem 0rem",
-                    width: "100%"
-                }}>
-                    {buttonTitle}
-                </Button>
-            </Box>
-
+          </Card>
+          <Box>
+            <Button
+              onMouseDown={
+                this.props.topic ? this.handleAddTopic : this.handleAddCard
+              }
+              variant="contained"
+              style={{
+                color: "white",
+                backgroundColor: "#E85556",
+                borderRadius: "5rem",
+                margin: "1rem 0rem",
+                width: "100%",
+              }}
+            >
+              {buttonTitle}
+            </Button>
+          </Box>
         </div>
+
         <p style={{ color: "#E85556" }}> Draft, Schedule, or Post </p>
         <TextField
-            id="datetime-local"
-            label="Schedule"
-            type="datetime-local"
-            defaultValue="2017-05-24T10:30"
-            className="date"
-            InputLabelProps={{
-            shrink: true
-        }}
+          id="datetime-local"
+          label="Schedule"
+          type="datetime-local"
+          defaultValue="2017-05-24T10:30"
+          className="date"
+          InputLabelProps={{
+            shrink: true,
+          }}
         />
 
         <Card
@@ -147,7 +148,7 @@ class ActionButton extends React.Component {
             minHeight: 80,
             minWidth: 272,
             padding: "6px 8px 2px",
-            margin: ".5rem 0rem"
+            margin: ".5rem 0rem",
         }}
         >
         <TextareaAutosize
@@ -157,11 +158,11 @@ class ActionButton extends React.Component {
             value={this.state.text}
             onChange={this.handleChanges}
             style={{
-                resize: "none",
-                width: "100%",
-                outline: "none",
-                border: "none",
-                overflow: "hidden"
+            resize: "none",
+            width: "100%",
+            outline: "none",
+            border: "none",
+            overflow: "hidden",
             }}
         />
         </Card>
@@ -194,9 +195,7 @@ class ActionButton extends React.Component {
             Save to Drafts
             </Button>
         </Box>
-        
         </>
-    
 };
 
     render() {
