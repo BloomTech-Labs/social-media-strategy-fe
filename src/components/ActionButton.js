@@ -8,47 +8,43 @@ import { connect } from "react-redux";
 import { addTopic, addCard } from "../actions";
 import { Box } from "@material-ui/core";
 import TextField from "@material-ui/core/TextField";
-
 class ActionButton extends React.Component {
   state = {
     formOpen: false,
   };
-
   openForm = () => {
     this.setState({
       formOpen: true,
     });
-    console.log("opened");
   };
 
+
   closeForm = (e) => {
+
     this.setState({
       formOpen: false,
       text: "",
     });
   };
 
+
   handleChanges = (e) => {
+
     this.setState({
       text: e.target.value,
     });
   };
-
   handleAddTopic = () => {
     const { dispatch } = this.props;
     const { text } = this.state;
-
     if (text) {
       dispatch(addTopic(text));
     }
-
     return;
   };
-
   handleAddCard = () => {
     const { dispatch, topicId } = this.props;
     const { text } = this.state;
-
     if (text) {
       dispatch(addCard(topicId, text));
     }
@@ -56,9 +52,9 @@ class ActionButton extends React.Component {
 
   renderAddButton = () => {
     const buttonText = this.props.topic ? "Add Topic" : "Add Card";
-
     return (
-      <div onClick={this.openForm}>
+      <div className="actionOpener" onClick={this.openForm}>
+
         <p style={{ color: this.props.buttonColor }}>
           <AddCircleIcon style={{ color: this.props.buttonColor }} />
           {buttonText}
@@ -73,12 +69,21 @@ class ActionButton extends React.Component {
       : "Enter text for this post";
     const buttonTitle = this.props.topic ? "Add Topic" : "Add Card";
     return (
-      <div style={{ backgroundColor: "white", padding: ".5rem" }}>
+
+      <div
+        style={{
+          backgroundColor: "white",
+          padding: "1rem",
+          borderRadius: ".5rem",
+          margin: ".5rem 0rem"
+        }}
+      >
         <div
           style={{
             display: "flex",
             width: "100%",
             justifyContent: "spaceBetween",
+
             alignItems: "center",
           }}
         >
@@ -128,6 +133,7 @@ class ActionButton extends React.Component {
               {buttonTitle}
             </Button>
           </Box>
+
         </div>
 
         <p style={{ color: "#E85556" }}> Draft, Schedule, or Post </p>
@@ -141,7 +147,6 @@ class ActionButton extends React.Component {
             shrink: true,
           }}
         />
-
         <Card
           style={{
             overflow: "visible",
@@ -198,10 +203,8 @@ class ActionButton extends React.Component {
       </div>
     );
   };
-
   render() {
     return this.state.formOpen ? this.renderForm() : this.renderAddButton();
   }
 }
-
 export default connect()(ActionButton);
