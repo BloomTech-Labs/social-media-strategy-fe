@@ -6,7 +6,6 @@ import ActionButton from "./ActionButton";
 
 const Container = styled.div`
   background-color: #EBECF0;
-
   border-radius: 0.5rem;
   display: flex;
   flex-direction: column;
@@ -17,7 +16,6 @@ const Container = styled.div`
 const Title = styled.h4`
   color: white;
   background-color:#E85556;
-
   font-size: 1.6rem;
   width: 100%;
   padding: 1.5rem 0rem;
@@ -28,7 +26,6 @@ const CardList = styled.div`
   display: flex;
   align-items: center;
   flex-direction: column;
-  // flex-grow: 1;
   min-height: 100px;
   background-color: #EBECF0;
   width: 20rem;
