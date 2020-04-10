@@ -130,10 +130,6 @@ const Dashboard = () => {
         </div>
         <div className="acct-title">
           <h2 className="blue-bold">Accounts</h2>
-          {/* <Link className="button" to={{
-        pathname:'/add-acct',
-        state: {modal: true },
-        }}>Add Account</Link> */}
           <Link
             aria-describedby={id}
             variant="contained"

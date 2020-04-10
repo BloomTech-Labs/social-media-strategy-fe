@@ -2,14 +2,11 @@
 @import "./navigation.scss";
 @import "./homeNav.scss";
 @import './dashboard.scss';
+@import './actionButton.scss';
 @import "bulma/sass/utilities/_all.sass";
 @import "bulma/sass/grid/columns.sass";
 @import url("https://fonts.googleapis.com/css?family=Montserrat&display=swap");
 
-// .column{
-//     overflow-y: auto;
-//     // height:100vh;
-// }
 
 .topic-0{
     h4{
@@ -17,10 +14,6 @@
         width: 100%;
         // padding: 1rem 8rem;
     }
-
-
-
-    
 }
 
 

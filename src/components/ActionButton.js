@@ -1,12 +1,21 @@
+// LIBRARIES
 import React from "react";
-import AddCircleIcon from "@material-ui/icons/AddCircle";
+import styled from "styled-components";
+import { connect } from "react-redux";
 import TextareaAutosize from "react-textarea-autosize";
+import AddCircleIcon from "@material-ui/icons/AddCircle";
 import Card from "@material-ui/core/Card";
 import Button from "@material-ui/core/Button";
 import CloseIcon from "@material-ui/icons/Close";
-import { connect } from "react-redux";
-import { addTopic, addCard } from "../actions";
 import { Box } from "@material-ui/core";
+
+
+// FILES
+import { addTopic, addCard } from "../actions";
+
+// STYLING
+import '../sass/actionButton.scss';
+
 
 class ActionButton extends React.Component {
   state = {
@@ -51,11 +60,9 @@ class ActionButton extends React.Component {
     return (
       <div className="actionOpener" onClick={this.openForm}>
         <p
+          className="closed-btn"
           style={{
-            color: this.props.buttonColor,
-            display: "flex",
-            width: "100%",
-            alignItems: "center"
+            color: this.props.buttonColor
           }}
         >
           <AddCircleIcon style={{ color: this.props.buttonColor }} />
@@ -66,32 +73,18 @@ class ActionButton extends React.Component {
   };
 
   renderForm = () => {
+
     const placeholder = this.props.topic
       ? "Enter title for this topic"
       : "Enter text for this post";
     const buttonTitle = this.props.topic ? "Add Topic" : "Add Card";
     return (
-      <div
-        style={{
-          backgroundColor: "white",
-          padding: "1rem",
-          borderRadius: ".5rem",
-          margin: ".5rem 0rem"
-        }}
-      >
-        <div>
-          <h2 style={{ color: "black", lineHeight: ".5rem" }}>Add</h2>
-          <CloseIcon style={{ color: "#E85556" }} />
-        </div>
+      <div className="action-btn-cont">
+          <h2 className="add-h2">Add</h2>
+          {/* <CloseIcon style={{ color: "#E85556" }} /> */}
         {/* {<p style={{ color: "#E85556" }}> Draft, Schedule, or Post </p>} */}
         <Card
-          style={{
-            overflow: "visible",
-            minHeight: 80,
-            minWidth: 272,
-            padding: "6px 8px 2px",
-            margin: ".5rem 0rem"
-          }}
+          className="add-card"
         >
           <TextareaAutosize
             placeholder={placeholder}
@@ -99,33 +92,25 @@ class ActionButton extends React.Component {
             onBlur={this.closeForm}
             value={this.state.text}
             onChange={this.handleChanges}
-            style={{
-              resize: "none",
-              width: "100%",
-              outline: "none",
-              border: "none",
-              overflow: "hidden"
-            }}
+            className="add-card-txt-area"
           />
         </Card>
-        <Box>
           <Button
             className="actionSubmit"
+            style={{
+              color: 'white',
+              backgroundColor: '#E85556',
+              borderRadius: '5rem',
+              margin: '1rem 0rem',
+              width: '100%'
+            }}
             onMouseDown={
               this.props.topic ? this.handleAddTopic : this.handleAddCard
             }
             variant="contained"
-            style={{
-              color: "white",
-              backgroundColor: "#E85556",
-              borderRadius: "5rem",
-              margin: "1rem 0rem",
-              width: "100%"
-            }}
           >
             {buttonTitle}
           </Button>
-        </Box>
       </div>
     );
   };
