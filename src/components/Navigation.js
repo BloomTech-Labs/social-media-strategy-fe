@@ -1,20 +1,12 @@
-import React, { useState, useEffect } from "react";
-
+import React, { useState } from "react";
 //component imports
+import TransitionsModal from "./Modal";
 import HomeNav from "./HomeNav";
 import REGISTER_LOGIN from "../components/Register_Login";
-
-// material ui imports
-import { Button, Typography, Box } from "@material-ui/core";
-import { blue } from "@material-ui/core/colors";
-import { withStyles, makeStyles } from "@material-ui/core/styles";
-
 // react router dom imports
 import { NavLink, Route, Switch } from "react-router-dom";
-
 // Styles
 import "../sass/navigation.scss";
-
 // asset imports
 import Home from "../assets/icons8-home-30.svg";
 import HomeAlt from "../assets/icons8-home2-30.svg";
@@ -30,216 +22,181 @@ import Analytics from "../assets/icons8-bar-chart-30.svg";
 import AnalyticsAlt from "../assets/icons8-bar-chart2-30.svg";
 import Alert from "../assets/icons8-doorbell-30.svg";
 import AlertAlt from "../assets/icons8-doorbell2-30.svg";
-import Axios from "axios";
-import { axiosWithAuth } from "../utils/axiosWithAuth";
-
-//import TransitionsModal from "./modal";
-
-// Material UI Styled Components
 
 const Navigation = () => {
-  const ColorButton = withStyles(theme => ({
-    root: {
-      padding: ".5rem 5rem",
-      borderRadius: "2rem",
-      color: theme.palette.getContrastText(blue[700]),
-      backgroundColor: blue[700],
-      "&:hover": {
-        backgroundColor: blue[500]
-      }
-    }
-  }))(Button);
-
   const [currentuser, setCurrentuser] = useState("");
-  const [home, setHome] = useState(true);
-  const [search, setSearch] = useState(false);
-  const [menu, setMenu] = useState(false);
-  const [message, setMessage] = useState(false);
-  const [account, setAccount] = useState(false);
-  const [analytics, setAnalytics] = useState(false);
-  const [alert, setAlert] = useState(false);
+  const [color, setColor] = useState({
+    home: true,
+    search: false,
+    menu: false,
+    message: false,
+    account: false,
+    analytics: false,
+    alert: false
+  });
 
-  const homeHandler = () => {
-    setHome(true);
-    setSearch(false);
-    setMenu(false);
-    setMessage(false);
-    setAccount(false);
-    setAnalytics(false);
-    setAlert(false);
-  };
-  const searchHandler = () => {
-    setHome(false);
-    setSearch(true);
-    setMenu(false);
-    setMessage(false);
-    setAccount(false);
-    setAnalytics(false);
-    setAlert(false);
-  };
-  const menuHandler = () => {
-    setHome(false);
-    setSearch(false);
-    setMenu(true);
-    setMessage(false);
-    setAccount(false);
-    setAnalytics(false);
-    setAlert(false);
-  };
-  const messageHandler = () => {
-    setHome(false);
-    setSearch(false);
-    setMenu(false);
-    setMessage(true);
-    setAccount(false);
-    setAnalytics(false);
-    setAlert(false);
-  };
-  const accountHandler = () => {
-    setHome(false);
-    setSearch(false);
-    setMenu(false);
-    setMessage(false);
-    setAccount(true);
-    setAnalytics(false);
-    setAlert(false);
-  };
-  const analyticsHandler = () => {
-    setHome(false);
-    setSearch(false);
-    setMenu(false);
-    setMessage(false);
-    setAccount(false);
-    setAnalytics(true);
-    setAlert(false);
-  };
-  const alertHandler = () => {
-    setHome(false);
-    setSearch(false);
-    setMenu(false);
-    setMessage(false);
-    setAccount(false);
-    setAnalytics(false);
-    setAlert(true);
-  };
-
+  console.log(color.home);
   return (
     <div>
       <div className="navContainer">
         <div className="navButtonContainer">
-          {/* <TransitionsModal /> */}
-          <ColorButton>Post</ColorButton>
+          <TransitionsModal />
         </div>
         <nav className="navLinks">
           <ul>
             <NavLink
-              className={home ? "linkActive" : "linkNav"}
+              className={color.home ? "linkActive" : "linkNav"}
               to="/home"
-              onClick={homeHandler}
+              onClick={() =>
+                setColor({
+                  home: true,
+                  search: false,
+                  menu: false,
+                  message: false,
+                  account: false,
+                  analytics: false,
+                  alert: false
+                })
+              }
             >
               <li className="link">
                 <img
                   className="navImage"
-                  src={home ? HomeAlt : Home}
+                  src={color.home ? HomeAlt : Home}
                   alt="home icon"
                 />
                 Home
               </li>
             </NavLink>
             <NavLink
-              className={search ? "linkActive" : "linkNav"}
+              className={color.search ? "linkActive" : "linkNav"}
               to="/search"
-              onClick={searchHandler}
+              onClick={() =>
+                setColor({
+                  home: false,
+                  search: true,
+                  menu: false,
+                  message: false,
+                  account: false,
+                  analytics: false,
+                  alert: false
+                })
+              }
             >
               <li className="link">
                 <img
                   className="navImage"
-                  src={search ? SearchAlt : Search}
+                  src={color.search ? SearchAlt : Search}
                   alt="Search icon"
                 />
                 Search
               </li>
             </NavLink>
             <NavLink
-              className={account ? "linkActive" : "linkNav"}
+              className={color.account ? "linkActive" : "linkNav"}
               to="/account"
-              onClick={accountHandler}
+              onClick={() =>
+                setColor({
+                  home: false,
+                  search: false,
+                  menu: false,
+                  message: false,
+                  account: true,
+                  analytics: false,
+                  alert: false
+                })
+              }
             >
               <li className="link">
                 <img
                   className="navImage"
-                  src={account ? AccountAlt : Account}
+                  src={color.account ? AccountAlt : Account}
                   alt="Account icon"
                 />
                 Account
               </li>
             </NavLink>
             <NavLink
-              className={analytics ? "linkActive" : "linkNav"}
+              className={color.analytics ? "linkActive" : "linkNav"}
               to="/analytics"
-              onClick={analyticsHandler}
+              onClick={() =>
+                setColor({
+                  home: false,
+                  search: false,
+                  menu: false,
+                  message: false,
+                  account: false,
+                  analytics: true,
+                  alert: false
+                })
+              }
             >
               <li className="link">
                 <img
                   className="navImage"
-                  src={analytics ? AnalyticsAlt : Analytics}
+                  src={color.analytics ? AnalyticsAlt : Analytics}
                   alt="Analytics icon"
                 />
                 Analytics
               </li>
             </NavLink>
             <NavLink
-              className={message ? "linkActive" : "linkNav"}
+              className={color.message ? "linkActive" : "linkNav"}
               id="1"
               to="/messages"
-              onClick={messageHandler}
+              onClick={() =>
+                setColor({
+                  home: false,
+                  search: false,
+                  menu: false,
+                  message: true,
+                  account: false,
+                  analytics: false,
+                  alert: false
+                })
+              }
             >
               <li className="link">
                 <img
                   className="navImage"
-                  src={message ? MessageAlt : Message}
+                  src={color.message ? MessageAlt : Message}
                   alt="Message icon"
                 />
                 Messages
               </li>
             </NavLink>
             <NavLink
-              className={alert ? "linkActive" : "linkNav"}
+              className={color.alert ? "linkActive" : "linkNav"}
               to="/notifications"
-              onClick={alertHandler}
+              onClick={() =>
+                setColor({
+                  home: false,
+                  search: false,
+                  menu: false,
+                  message: false,
+                  account: false,
+                  analytics: false,
+                  alert: true
+                })
+              }
             >
               <li className="link">
                 <img
                   className="navImage"
-                  src={alert ? AlertAlt : Alert}
+                  src={color.alert ? AlertAlt : Alert}
                   alt="bell icon"
                 />
                 Notifications
               </li>
             </NavLink>
-            {/* <NavLink
-              className={menu ? "linkActive" : "linkNav"}
-              to="/more"
-              onClick={menuHandler}
-            >
-              <li className="link">
-                <img
-                  className="navImage"
-                  src={menu ? MenuAlt : Menu}
-                  alt="Menu icon"
-                />
-                More
-              </li>
-            </NavLink> */}
             <NavLink
-              className={menu ? "linkActive" : "linkNav"}
+              className={color.menu ? "linkActive" : "linkNav"}
               to="/login"
-              onClick={menuHandler}
             >
               <li className="link">
                 <img
                   className="navImage"
-                  src={menu ? MenuAlt : Menu}
+                  src={color.menu ? MenuAlt : Menu}
                   alt="Menu icon"
                 />
                 Login
