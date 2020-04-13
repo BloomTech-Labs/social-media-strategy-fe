@@ -1,14 +1,4 @@
-import {
-  ON_DRAG_END_SUCCESS,
-  ON_DRAG_TOPIC_END_SUCCESS,
-  ON_ADD_TOPIC,
-  ON_ADD_CARD,
-  ON_DRAG_END,
-  TOPIC_API_START,
-  TOPIC_API_SUCCESS,
-  TOPIC_API_FAILURE,
-} from "../actions/topicsActions";
-import { resetServerContext } from "react-beautiful-dnd";
+import CONSTANTS from "../actions/constants";
 
 let topicId = 2;
 let cardId = 5;
@@ -18,42 +8,23 @@ export const initialState = [
     id: `topic-${0}`,
     title: "Drafts",
     cards: [
-      { id: `card-${0}`, content: "This is content from card 1" },
-      { id: `card-${1}`, content: "This is content from card 2" },
-      { id: `card-${2}`, content: "This is content from card 3" },
-      { id: `card-${3}`, content: "This is content from card 4" },
-      { id: `card-${4}`, content: "This is content from card 5" },
+      {
+        id: `card-${0}`,
+        content:
+          "This is an example of a post that you could draft. Feel free to express yourself!",
+      },
     ],
-  },
-  {
-    id: `topic-${1}`,
-    title: "Women of Lambda",
-    cards: [],
   },
 ];
 
 const topicsReducer = (state = initialState, action) => {
   switch (action.type) {
-    case TOPIC_API_START:
+    case CONSTANTS.TOPIC_API_SUCCESS:
       return {
-        ...state,
-        isLoading: true,
-        error: null,
-      };
-    case TOPIC_API_SUCCESS:
-      return {
-        ...state,
-        isLoading: false,
-        error: null,
-      };
-    case TOPIC_API_FAILURE:
-      return {
-        ...state,
-        isLoading: false,
-        error: action.payload,
+        state: action.payload,
       };
 
-    case ON_DRAG_END_SUCCESS:
+    case CONSTANTS.ON_DRAG_END_SUCCESS:
       return {
         ...state,
         topics: {
@@ -61,12 +32,12 @@ const topicsReducer = (state = initialState, action) => {
           [action.payload.id]: action.payload,
         },
       };
-    case ON_DRAG_TOPIC_END_SUCCESS:
+    case CONSTANTS.ON_DRAG_TOPIC_END_SUCCESS:
       return {
         ...state,
         topicOrder: action.payload,
       };
-    case ON_ADD_TOPIC: // temporary - will need to post to back end and get an ID
+    case CONSTANTS.ON_ADD_TOPIC: // temporary - will need to post to back end and get an ID
       const newTopic = {
         title: action.payload,
         cards: [],
@@ -76,7 +47,7 @@ const topicsReducer = (state = initialState, action) => {
       topicId += 1;
 
       return [...state, newTopic];
-    case ON_ADD_CARD: {
+    case CONSTANTS.ON_ADD_CARD: {
       const newCard = {
         content: action.payload.text,
         id: `card-${cardId}`,
@@ -95,7 +66,7 @@ const topicsReducer = (state = initialState, action) => {
       });
       return newState;
     }
-    case ON_DRAG_END: {
+    case CONSTANTS.ON_DRAG_END: {
       const {
         droppableIdStart,
         droppableIdEnd,
@@ -134,6 +105,14 @@ const topicsReducer = (state = initialState, action) => {
         topicEnd.cards.splice(droppableIndexEnd, 0, ...card);
       }
       return newState;
+    }
+    case CONSTANTS.TOPIC_FETCH_SUCCESS: {
+      console.log(action.payload, "NEW STATE");
+      return action.payload;
+    }
+    case CONSTANTS.TOPIC_UPDATE_SUCCESS: {
+      console.log(action.payload, "NEW STATE");
+      return action.payload;
     }
     default:
       return state;

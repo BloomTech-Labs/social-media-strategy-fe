@@ -1,33 +1,30 @@
-export const ON_DRAG_END_SUCCESS = "ON_DRAG_END_SUCCESS ";
-export const ON_DRAG_TOPIC_END_SUCCESS = "ON_DRAG_TOPIC_END_SUCCESS";
-export const ON_ADD_TOPIC = "ON_ADD_TOPIC";
-export const ON_ADD_CARD = "ON_ADD_CARD";
-export const ON_DRAG_END = "ON_DRAG_END;";
-export const TOPIC_API_START = "TOPIC_API_START";
-export const TOPIC_API_SUCCESS = "TOPIC_API_SUCCESS";
-export const TOPIC_API_FAILURE = "TOPIC_API_FAILURE";
+import CONSTANTS from "./constants";
+import { axiosWithAuth } from "../utils/axiosWithAuth";
 
 export const onDragEndSingle = (newTopic) => (dispatch) => {
-  dispatch({ type: ON_DRAG_END_SUCCESS, payload: newTopic });
+  dispatch({ type: CONSTANTS.ON_DRAG_END_SUCCESS, payload: newTopic });
   // post changes to the back end
 };
 
 export const onDragEndDouble = (newStart, newFinish) => (dispatch) => {
-  dispatch({ type: ON_DRAG_END_SUCCESS, payload: newStart });
-  dispatch({ type: ON_DRAG_END_SUCCESS, payload: newFinish });
+  dispatch({ type: CONSTANTS.ON_DRAG_END_SUCCESS, payload: newStart });
+  dispatch({ type: CONSTANTS.ON_DRAG_END_SUCCESS, payload: newFinish });
   // post changes to the back end
 };
 
 export const onDragEndTopic = (newTopicOrder) => (dispatch) => {
-  dispatch({ type: ON_DRAG_TOPIC_END_SUCCESS, payload: newTopicOrder });
+  dispatch({
+    type: CONSTANTS.ON_DRAG_TOPIC_END_SUCCESS,
+    payload: newTopicOrder,
+  });
 };
 
 export const addTopic = (text) => (dispatch) => {
-  dispatch({ type: ON_ADD_TOPIC, payload: text });
+  dispatch({ type: CONSTANTS.ON_ADD_TOPIC, payload: text });
 };
 
 export const addCard = (topicId, text) => (dispatch) => {
-  dispatch({ type: ON_ADD_CARD, payload: { topicId, text } });
+  dispatch({ type: CONSTANTS.ON_ADD_CARD, payload: { topicId, text } });
 };
 
 export const sort = (
@@ -39,7 +36,7 @@ export const sort = (
   type
 ) => (dispatch) => {
   dispatch({
-    type: ON_DRAG_END,
+    type: CONSTANTS.ON_DRAG_END,
     payload: {
       droppableIdStart,
       droppableIdEnd,
@@ -49,4 +46,35 @@ export const sort = (
       type,
     },
   });
+};
+
+export const fetchTopics = (id) => (dispatch) => {
+  dispatch({ type: CONSTANTS.TOPIC_FETCH_START });
+  axiosWithAuth()
+    .get(`/topics/${id}/user`)
+    .then((response) => {
+      console.log(response.data, "FETCH RES");
+      dispatch({ type: CONSTANTS.TOPIC_FETCH_SUCCESS, payload: response.data });
+    })
+    .catch((error) => {
+      console.log(error);
+      dispatch({ type: CONSTANTS.TOPIC_FETCH_FAILURE });
+    });
+};
+
+export const updateTopics = (id, topics) => (dispatch) => {
+  dispatch({ type: CONSTANTS.TOPIC_UPDATE_START });
+  axiosWithAuth()
+    .put(`/topics/${id}`, topics)
+    .then((response) => {
+      console.log(response.data, "SUCCESS");
+      dispatch({
+        type: CONSTANTS.TOPIC_UPDATE_SUCCESS,
+        payload: response.data,
+      });
+    })
+    .catch((error) => {
+      console.log(error, "FAIL");
+      dispatch({ type: CONSTANTS.TOPIC_UPDATE_FAILURE, payload: error.data });
+    });
 };

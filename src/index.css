@@ -1,7 +1,11 @@
 body {
-    overflow: hidden;
+  overflow: hidden;
 }
 
 .redirect {
   display: none;
+}
+#topic-scroll {
+  overflow-y: scroll;
+  height: 50vh;
 }

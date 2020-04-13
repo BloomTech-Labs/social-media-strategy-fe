@@ -10,7 +10,7 @@ const Container = styled.div`
   border-radius: 0.5rem;
   padding: 1rem 1rem;
   margin: 0.5rem;
-  width:80%;
+  width: 80%;
   text-align: center;
 `;
 
@@ -26,10 +26,10 @@ const Icons = styled.div`
   padding: 0.5rem;
 `;
 
-const TopicCard = props => {
+const TopicCard = (props) => {
   return (
     <Draggable draggableId={String(props.id)} index={props.index}>
-      {provided => (
+      {(provided) => (
         <Container
           className={`${props.className}`}
           {...provided.draggableProps}

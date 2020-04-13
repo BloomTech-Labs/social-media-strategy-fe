@@ -1,63 +1,66 @@
-@import url('https://fonts.googleapis.com/css?family=Montserrat&display=swap');
-    .dash-app {
-    font-family: 'Montserrat', sans-serif;
-    overflow-y: auto;
-    height:110vh;
-    }
+@import url("https://fonts.googleapis.com/css?family=Montserrat&display=swap");
+.dash-app {
+  font-family: "Montserrat", sans-serif;
+  overflow-y: auto;
+  height: 110vh;
+}
 
 //     /* DASHBOARD TITLE */
-    .title{
-    flex-direction: column;
-    background-color:#2F414B;
-    padding:2rem;
-    overflow: scroll;
-    }
+.title {
+  flex-direction: column;
+  background-color: #2f414b;
+  padding: 2rem;
+  margin-bottom: 20%;
+  // overflow: scroll;
+}
 
-    .dash-title{
-    display: flex;
-    justify-content: flex-start;
-    flex-direction:row;
-    }
+.dash-title {
+  display: flex;
+  justify-content: flex-start;
+  flex-direction: row;
+}
 
-    .bold{
+.bold {
+  font-weight: 700;
+  font-size: 3rem;
+  text-align: left;
+  color: white;
+  margin-bottom: 0.2rem;
+}
+
+.highlight {
+  color: #e85556;
+  margin-left: 0.1rem;
+  margin-right: 0.5rem;
+}
+
+.date {
+  color: rgb(102, 111, 126);
+}
+
+.acct-title {
+  display: flex;
+  justify-content: space-between;
+  flex-direction: row;
+  width: 100%;
+  align-items: center;
+  margin-bottom: 1rem;
+  .blue-bold {
+    color: white;
     font-weight: 700;
-    font-size:3rem;
-    text-align: left;
-    color:white;
-    margin-bottom: .2rem;
-    }
+  }
+  .button {
+    text-decoration: none;
+    color: rgb(102, 111, 126);
+    padding: 1rem;
+  }
+}
 
-    .highlight{
-    color: #E85556;
-    }
-
-    .date{
-        color: rgb(102, 111, 126);
-    }
-
-    .acct-title{
-    display: flex;
-    justify-content: space-between;
-    flex-direction:row;
-    width: 100%;
-    align-items:center;
-    margin-bottom: 1rem;
-    .blue-bold{
-    color:white;
-    font-weight: 700;
-    } 
-    .button{
-        text-decoration: none;
-        color: rgb(102, 111, 126);
-        padding: 1rem;
-        }
-    }
-
-    .icon{
-    border-radius: 5rem;
-    width:6rem;
-    height: 6rem;
-    margin: 2rem;
-    border: solid .1rem #BBE1FA;
-    padding: .25rem;
-    } 
+.icon {
+  border-radius: 5rem;
+  width: 6rem;
+  height: 6rem;
+  margin: 2rem;
+  border: solid 0.1rem #bbe1fa;
+  padding: 0.25rem;
+}

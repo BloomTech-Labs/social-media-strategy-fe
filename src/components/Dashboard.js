@@ -7,6 +7,9 @@ import { Card, Typography, Box } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
 import Popover from "@material-ui/core/Popover";
 
+//Adding moment for date purposes
+import Moment from "moment";
+
 // import AddAccount from "./AddAccount";
 
 // Styling
@@ -87,28 +90,22 @@ const Dashboard = (props) => {
   }
 
   async function twitter() {
-    if (!localStorage.getItem("token")) {
-      window.alert(
-        "No token, please hit log in button and login/signup, Thank you"
-      );
-    } else {
-      let ax = await (
-        await fetch(
-          ` https://social-media-strategy.herokuapp.com/api/auth/${props.user.currentUser.subject}/oauth`,
-          {
-            method: "GET",
-            redirect: "follow",
-            headers: {
-              accept: "application/json",
-              Authorization: localStorage.getItem("token"),
-            },
-          }
-        )
-      ).json();
+    let ax = await (
+      await fetch(
+        ` https://social-media-strategy.herokuapp.com/api/auth/${props.user.currentUser.subject}/oauth`,
+        {
+          method: "GET",
+          redirect: "follow",
+          headers: {
+            accept: "application/json",
+            Authorization: localStorage.getItem("token"),
+          },
+        }
+      )
+    ).json();
 
-      console.log(ax);
-      let move = await (window.location.href = ax);
-    }
+    console.log(ax);
+    let move = await (window.location.href = ax);
   }
 
   useEffect(() => {
@@ -118,14 +115,18 @@ const Dashboard = (props) => {
   const open = Boolean(anchorEl);
   const id = open ? "simple-popover" : undefined;
 
+  function getDate() {
+    const todaysDate = Moment().format("MMM DD, YYYY");
+    return todaysDate;
+  }
   return (
     <div className="dash-app">
       <div className="title">
         <h1 className="bold">Dashboard</h1>
         <div className="dash-title">
-          <h4 className="highlight">Tuesday</h4>{" "}
+          <h4 className="highlight">{Moment().format("dddd")}</h4>{" "}
           <h4 className="highlight"> • </h4>
-          <h4 className="date"> 16 March, 2020</h4>
+          <h4 className="date">{getDate()}</h4>
         </div>
         <div className="acct-title">
           <h2 className="blue-bold">Accounts</h2>

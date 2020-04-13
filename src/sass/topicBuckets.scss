@@ -4,7 +4,6 @@
   font-family: "Montserrat", sans-serif;
   background-color: #f5f7f8;
   padding: 1rem;
-  // margin: 4.25rem 0 0 1rem;
   overflow-y: auto;
   height: 110vh;
 
@@ -40,7 +39,6 @@
     border-radius: 0.5rem;
     font-family: "Montserrat", sans-serif;
     flex-direction: row;
-    height: 100%;
+    height: 100%; //DONT TOUCH THIS <----
   }
 }
-
