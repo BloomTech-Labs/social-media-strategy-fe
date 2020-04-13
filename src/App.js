@@ -1,5 +1,5 @@
-import React, { useEffect } from "react";
-import { connect, useSelector } from "react-redux";
+import React, { useEffect, useCallback, useState } from "react";
+import { connect } from "react-redux";
 import { DragDropContext, Droppable } from "react-beautiful-dnd";
 import { sort } from "./actions";
 import styled from "styled-components";
@@ -13,21 +13,13 @@ import "./sass/index.scss";
 import { Route, Switch } from "react-router";
 import REGISTER_LOGIN from "./components/Register_Login";
 import Callback from "./components/Callback";
-import PrivateRoute from "./utils/PrivateRoute";
-
-//import { BrowserRouter as Router, Route, Link, Switch } from "react-router-dom";
-
-/*const routes = (
-  <Router>
-    <Switch>
-      <Route path="/add-acct" component={AddAccount} />
-    </Switch>
-  </Router>
-)*/
+// import PrivateRoute from "./utils/PrivateRoute";
+import { axiosWithAuth } from "./utils/axiosWithAuth";
+import { bindActionCreators } from "redux";
 
 const TopicsContainer = styled.div`
   display: flex;
-  justify: space-evenly;
+  justify-content: space-evenly;
 `;
 
 const App = (props) => {
@@ -50,23 +42,42 @@ const App = (props) => {
       )
     );
   };
-  let locationCheck = (truthy) => {
+
+  let locationCheck = useCallback((truthy) => {
     setNavigation(truthy);
     return window.location.pathname;
-  };
+  }, []);
 
+  // let locationCheck = (truthy) => {
+  //   setNavigation(truthy);
+  //   return window.location.pathname;
+  // };
+  const [state, setstate] = useState();
   useEffect(() => {
-    console.log("IHATEU");
+    console.log("Hello");
   }, [locationCheck, navigation]);
+  useEffect(() => {
+    console.log("testing");
+    let card = {
+      cards: [
+        { id: `card-${22}`, content: "This is content from card 1" },
+        { id: `card-${0}`, content: "This is content from card 1" },
+      ],
+    };
+    axiosWithAuth()
+      .put(`http://localhost:5000/api/topics/1`, card)
+      .then((res) => console.log(res))
+      .catch((err) => console.log(err));
+  }, [props.topics]);
 
   return (
     <div className="columns is-gapless">
+      {console.log(state, "STATE")}
       {navigation ? (
         <div className="column is-2">
           <Navigation />
         </div>
       ) : null}
-      {console.log(navigation)}
       <Route exact path="/callback">
         <Callback />
       </Route>
@@ -122,8 +133,15 @@ const App = (props) => {
   );
 };
 
+function mapDispatchToProps(dispatch) {
+  return {
+    dispatch,
+    ...bindActionCreators({}),
+  };
+}
+
 const mapStateToProps = (state) => ({
   topics: state.topics,
 });
 
-export default connect(mapStateToProps)(App);
+export default connect(mapStateToProps, mapDispatchToProps)(App);

@@ -18,6 +18,8 @@ import img from "../assets/headshot.jpg";
 import pin from "../assets/pin.svg";
 import twitterimg from "../imgs/Vector.png";
 import { axiosWithAuth } from "../utils/axiosWithAuth";
+import { connect } from "react-redux";
+import { currentUser } from "../actions";
 
 // Set dummy Acct Data
 const accountData = data.accounts;
@@ -67,11 +69,10 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const Dashboard = () => {
+const Dashboard = (props) => {
   const st = dashStyles();
   const classes = useStyles();
   const [anchorEl, setAnchorEl] = React.useState(null);
-  const [currentuser, setCurrentuser] = React.useState("");
 
   const handleClick = (event) => {
     setAnchorEl(event.currentTarget);
@@ -82,9 +83,7 @@ const Dashboard = () => {
   };
 
   async function twittercheck() {
-    let user = await axiosWithAuth().get(`/users/user`);
-    console.log(user.data.subject);
-    setCurrentuser(user.data.subject);
+    props.currentUser();
   }
 
   async function twitter() {
@@ -95,7 +94,7 @@ const Dashboard = () => {
     } else {
       let ax = await (
         await fetch(
-          ` https://social-media-strategy.herokuapp.com/api/auth/${currentuser}/oauth`,
+          ` https://social-media-strategy.herokuapp.com/api/auth/${props.user.currentUser.subject}/oauth`,
           {
             method: "GET",
             redirect: "follow",
@@ -137,6 +136,7 @@ const Dashboard = () => {
             onClick={handleClick}
             className="button"
           >
+            {console.log(props.user)}
             Add Account
           </Link>
           {/* <Button
@@ -208,4 +208,8 @@ const Dashboard = () => {
     </div>
   );
 };
-export default Dashboard;
+const mapStateToProps = (state) => ({
+  user: state.user,
+});
+
+export default connect(mapStateToProps, { currentUser })(Dashboard);

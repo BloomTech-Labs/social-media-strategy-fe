@@ -4,7 +4,11 @@ import {
   ON_ADD_TOPIC,
   ON_ADD_CARD,
   ON_DRAG_END,
+  TOPIC_API_START,
+  TOPIC_API_SUCCESS,
+  TOPIC_API_FAILURE,
 } from "../actions/topicsActions";
+import { resetServerContext } from "react-beautiful-dnd";
 
 let topicId = 2;
 let cardId = 5;
@@ -30,6 +34,25 @@ export const initialState = [
 
 const topicsReducer = (state = initialState, action) => {
   switch (action.type) {
+    case TOPIC_API_START:
+      return {
+        ...state,
+        isLoading: true,
+        error: null,
+      };
+    case TOPIC_API_SUCCESS:
+      return {
+        ...state,
+        isLoading: false,
+        error: null,
+      };
+    case TOPIC_API_FAILURE:
+      return {
+        ...state,
+        isLoading: false,
+        error: action.payload,
+      };
+
     case ON_DRAG_END_SUCCESS:
       return {
         ...state,
@@ -72,20 +95,26 @@ const topicsReducer = (state = initialState, action) => {
       });
       return newState;
     }
-    case ON_DRAG_END:{
-      const { droppableIdStart, droppableIdEnd, droppableIndexStart, droppableIndexEnd, type } = action.payload;
+    case ON_DRAG_END: {
+      const {
+        droppableIdStart,
+        droppableIdEnd,
+        droppableIndexStart,
+        droppableIndexEnd,
+        type,
+      } = action.payload;
       const newState = [...state];
-      
+
       // dragging topics
-      if(type === 'topic') {
+      if (type === "topic") {
         const topic = newState.splice(droppableIndexStart, 1);
         newState.splice(droppableIndexEnd, 0, ...topic);
         return newState;
       }
 
       // DND in same topic
-      if(droppableIdStart === droppableIdEnd) {
-        const topic = state.find(topic => droppableIdStart === topic.id);
+      if (droppableIdStart === droppableIdEnd) {
+        const topic = state.find((topic) => droppableIdStart === topic.id);
         const card = topic.cards.splice(droppableIndexStart, 1);
         topic.cards.splice(droppableIndexEnd, 0, ...card);
       }
@@ -93,17 +122,16 @@ const topicsReducer = (state = initialState, action) => {
       // DND in another topic
       if (droppableIdStart !== droppableIdEnd) {
         // find the topic where drag started
-        const topicStart = state.find(topic => droppableIdStart === topic.id);
+        const topicStart = state.find((topic) => droppableIdStart === topic.id);
 
         // pull the card from that topic
         const card = topicStart.cards.splice(droppableIndexStart, 1);
 
         // find the topic where drag ended
-        const topicEnd = state.find(topic => droppableIdEnd === topic.id);
+        const topicEnd = state.find((topic) => droppableIdEnd === topic.id);
 
         // put the card into the new list
         topicEnd.cards.splice(droppableIndexEnd, 0, ...card);
-
       }
       return newState;
     }

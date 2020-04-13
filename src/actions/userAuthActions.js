@@ -1,42 +1,38 @@
 import { axiosWithAuth } from "../utils/axiosWithAuth";
-import history from "../utils/history";
 import Axios from "axios";
 
-export const USER_LOGIN_START = "USER_LOGIN_START";
-export const USER_LOGIN_SUCCESS = "USER_LOGIN_SUCCESS";
-export const USER_LOGIN_FAILURE = "USER_LOGIN_FAILURE";
-
-export const USER_REGISTER_START = "USER_REGISTER_START";
-export const USER_REGISTER_SUCCESS = "USER_REGISTER_SUCCESS";
-export const USER_REGISTER_FAILURE = "USER_REGISTER_FAILURE";
+export const USER_APICALL_START = "USER_APICALL_START";
+export const USER_APICALL_SUCCESS = "USER_APICALL_SUCCESS";
+export const USER_APICALL_FAILURE = "USER_APICALL_FAILURE";
 
 export const login = (userData, cb, locationcb) => (dispatch) => {
-  dispatch({ type: USER_LOGIN_START });
+  dispatch({ type: USER_APICALL_START });
 
   Axios.post(
-    "https://social-media-strategy.herokuapp.com/api/auth/login",
+    `${process.env.REACT_APP_API_URL}/auth/login` ||
+      "https://social-media-strategy.herokuapp.com/api/auth/login",
     userData
   )
     .then((response) => {
-      dispatch({ type: USER_LOGIN_SUCCESS, payload: userData.email });
+      dispatch({ type: USER_APICALL_SUCCESS });
       localStorage.setItem("token", response.data.token);
-      // history.push("/");
       cb("/");
       locationcb(true);
     })
     .catch((error) => {
-      dispatch({ type: USER_LOGIN_FAILURE, payload: error.data });
+      dispatch({ type: USER_APICALL_FAILURE, payload: error.data });
     });
 };
 
 export const registerUser = (userData, cb, locationcb) => (dispatch) => {
-  dispatch({ type: USER_REGISTER_START });
+  dispatch({ type: USER_APICALL_START });
   Axios.post(
-    "https://social-media-strategy.herokuapp.com/api/auth/register",
+    `${process.env.API_URL}/auth/register` ||
+      "https://social-media-strategy.herokuapp.com/api/auth/register",
     userData
   )
     .then((response) => {
-      dispatch({ type: USER_REGISTER_SUCCESS, payload: userData.email });
+      dispatch({ type: USER_APICALL_SUCCESS });
       localStorage.setItem("token", response.data.payload);
       cb("/");
       locationcb(true);
@@ -44,7 +40,19 @@ export const registerUser = (userData, cb, locationcb) => (dispatch) => {
       // history.push("/");
     })
     .catch((error) => {
-      dispatch({ type: USER_REGISTER_FAILURE, payload: error.data });
+      dispatch({ type: USER_APICALL_FAILURE, payload: error.data });
       console.log("Error", error);
+    });
+};
+export const currentUser = () => (dispatch) => {
+  dispatch({ type: USER_APICALL_START });
+
+  axiosWithAuth()
+    .get(`/users/user`)
+    .then((response) => {
+      dispatch({ type: USER_APICALL_SUCCESS, currentUser: response.data });
+    })
+    .catch((error) => {
+      dispatch({ type: USER_APICALL_FAILURE, payload: error.data });
     });
 };

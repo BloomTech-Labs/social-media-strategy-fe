@@ -1,10 +1,7 @@
 import {
-  USER_LOGIN_START,
-  USER_LOGIN_SUCCESS,
-  USER_LOGIN_FAILURE,
-  USER_REGISTER_START,
-  USER_REGISTER_SUCCESS,
-  USER_REGISTER_FAILURE,
+  USER_APICALL_START,
+  USER_APICALL_SUCCESS,
+  USER_APICALL_FAILURE,
 } from "../actions";
 
 export const initialState = {
@@ -17,6 +14,7 @@ export const initialState = {
     following: 250,
     followers: 2.6,
   },
+  currentUser: "",
   isLoading: false,
   isLoggedIn: false,
   error: null,
@@ -24,42 +22,22 @@ export const initialState = {
 
 const userAuthReducer = (state = initialState, action) => {
   switch (action.type) {
-    case USER_LOGIN_START:
+    case USER_APICALL_START:
       return {
         ...state,
         isLoading: true,
         isLoggedIn: false,
         error: null,
       };
-    case USER_LOGIN_SUCCESS:
+    case USER_APICALL_SUCCESS:
       return {
         ...state,
         isLoading: false,
         isLoggedIn: true,
         error: null,
+        currentUser: action.currentUser,
       };
-    case USER_LOGIN_FAILURE:
-      return {
-        ...state,
-        isLoading: false,
-        isLoggedIn: false,
-        error: action.payload,
-      };
-    case USER_REGISTER_START:
-      return {
-        ...state,
-        isLoading: true,
-        isLoggedIn: false,
-        error: null,
-      };
-    case USER_REGISTER_SUCCESS:
-      return {
-        ...state,
-        isLoading: false,
-        isLoggedIn: true,
-        error: null,
-      };
-    case USER_REGISTER_FAILURE:
+    case USER_APICALL_FAILURE:
       return {
         ...state,
         isLoading: false,
