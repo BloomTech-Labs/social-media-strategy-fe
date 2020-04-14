@@ -85,9 +85,9 @@ const Dashboard = (props) => {
     setAnchorEl(null);
   };
 
-  async function twittercheck() {
-    props.currentUser();
-  }
+  // async function twittercheck() {
+  //   props.currentUser();
+  // }
 
   async function twitter() {
     let ax = await (
@@ -108,11 +108,11 @@ const Dashboard = (props) => {
     let move = await (window.location.href = ax);
   }
 
-  let userCheck = props?.user?.currentUser === null;
+  // let userCheck = props?.user?.currentUser === null;
 
-  useEffect(() => {
-    twittercheck();
-  }, [userCheck]);
+  // useEffect(() => {
+  //   twittercheck();
+  // }, [userCheck]);
 
   const open = Boolean(anchorEl);
   const id = open ? "simple-popover" : undefined;

@@ -4,7 +4,10 @@ import styled from "styled-components";
 import TopicCard from "./TopicCard";
 import { Droppable, Draggable } from "react-beautiful-dnd";
 import ActionButton from "./ActionButton";
-import { fetchTopics, updateTopics } from "../actions";
+import DeleteIcon from "@material-ui/icons/Delete";
+
+import { fetchTopics, updateTopics, deleteTopics } from "../actions";
+import { axiosWithAuth } from "../utils/axiosWithAuth";
 
 const Container = styled.div`
   background-color: #ebecf0;
@@ -38,7 +41,22 @@ const CardList = styled.div`
 
 const TopicBucket = (props) => {
   let scrollCondition = props?.cards?.length > 4;
-  let hi = document.querySelectorAll("#topic-scroll"); // TESTING PURPOSES
+
+  let testbutton = (e) => {
+    e.preventDefault();
+
+    axiosWithAuth()
+      // Axios
+      // Axios
+      .post(`/topics/${props.user.currentUser}/user`, props.topics)
+
+      // .post(`http://localhost:5000/api/topics/${1}/user`, props.topics)
+      // .put(`http://localhost:5000/api/topics/${props.topics[0].id}`, {
+      //   cards: props.topics[0].cards,
+      // })
+      .then((res) => console.log(res, "???"))
+      .catch((err) => console.log(err) & console.log(props.topics, "TOPICS"));
+  };
 
   // useEffect(() => {
   //   props.fetchTopics(props.user.currentUser);
@@ -61,10 +79,21 @@ const TopicBucket = (props) => {
             <Droppable droppableId={String(props.topic.id)} type="card">
               {(provided) => (
                 <>
-                  {/* {console.log(props.cards.length > 3, "PROVIDED")} */}
                   {scrollCondition ? (
                     <>
-                      <Title>{props.topic.title}</Title>
+                      <Title
+                        style={{
+                          display: "flex",
+                          justifyContent: "space-between",
+                        }}
+                      >
+                        {props.topic.title}
+                        {props.topic.title !== "Drafts" ? (
+                          <DeleteIcon
+                            onClick={() => props.deleteTopics(props.topic.id)}
+                          />
+                        ) : null}
+                      </Title>
                       <CardList
                         id="topic-scroll"
                         ref={provided.innerRef}
@@ -84,7 +113,15 @@ const TopicBucket = (props) => {
                     </>
                   ) : (
                     <>
-                      <Title>{props.topic.title}</Title>
+                      <Title>
+                        {props.topic.title !== "Drafts" ? (
+                          <DeleteIcon
+                            onClick={() => props.deleteTopics(props.topic.id)}
+                          />
+                        ) : null}
+
+                        {props.topic.title}
+                      </Title>
                       <CardList
                         ref={provided.innerRef}
                         {...provided.droppableProps}
@@ -143,6 +180,8 @@ const mapStateToProps = (state) => {
   };
 };
 
-export default connect(mapStateToProps, { fetchTopics, updateTopics })(
-  TopicBucket
-);
+export default connect(mapStateToProps, {
+  deleteTopics,
+  fetchTopics,
+  updateTopics,
+})(TopicBucket);

@@ -24,7 +24,7 @@ export const onDragEndTopic = (newTopicOrder) => (dispatch) => {
   });
 };
 
-export const addTopic = (text, id) => (dispatch) => {
+export const addTopic = (text, id, index) => (dispatch) => {
   dispatch({
     type: CONSTANTS.ON_ADD_TOPIC,
     payload: text,
@@ -63,6 +63,7 @@ export const sort = (
   });
 };
 
+//  GET TOPICS
 export const fetchTopics = (id) => (dispatch) => {
   dispatch({ type: CONSTANTS.USER_APICALL_START });
   axiosWithAuth()
@@ -78,6 +79,7 @@ export const fetchTopics = (id) => (dispatch) => {
       dispatch({ type: CONSTANTS.USER_APICALL_FAILURE, payload: error.data });
     });
 };
+// ADD TOPIC
 export const addTopics = (id, topics) => (dispatch) => {
   dispatch({ type: CONSTANTS.USER_APICALL_START });
   axiosWithAuth()
@@ -85,6 +87,25 @@ export const addTopics = (id, topics) => (dispatch) => {
     .then((response) => {
       console.log(response.data, "SUCCESS");
       dispatch({ type: CONSTANTS.USER_APICALL_SUCCESS });
+
+      // dispatch({
+      //   type: CONSTANTS.TOPIC_UPDATE_SUCCESS,
+      //   payload: response.data,
+      // });
+    })
+    .catch((error) => {
+      console.log(error, "FAIL");
+      dispatch({ type: CONSTANTS.USER_APICALL_FAILURE, payload: error.data });
+    });
+};
+// DELETE TOPIC
+export const deleteTopics = (id) => (dispatch) => {
+  dispatch({ type: CONSTANTS.USER_APICALL_START });
+  axiosWithAuth()
+    .delete(`/topics/${id}`)
+    .then((response) => {
+      console.log(response.data, "SUCCESS");
+      dispatch(fetchTopics(cuser));
 
       // dispatch({
       //   type: CONSTANTS.TOPIC_UPDATE_SUCCESS,

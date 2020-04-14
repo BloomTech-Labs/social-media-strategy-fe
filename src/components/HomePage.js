@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import { connect } from "react-redux";
 import { DragDropContext, Droppable } from "react-beautiful-dnd";
-import { sort, fetchTopics, updateTopics } from "../actions";
+import { sort, fetchTopics, updateTopics, currentUser } from "../actions";
 import styled from "styled-components";
 
 import Dashboard from "./Dashboard";
@@ -47,13 +47,13 @@ const HomePage = (props) => {
       .catch((err) => console.log(err) & console.log(props.topics, "TOPICS"));
   };
 
-  // useEffect(() => {}, [props.user.currentUser]);
-
   let userCheck = props?.user?.currentUser === null;
 
+  let topicLength = props?.topics?.length;
+
   useEffect(() => {
+    props.currentUser();
     props.fetchTopics(props.user.currentUser?.subject);
-    // props.updateTopics(props.user.currentUser?.subject, props.topics);
   }, [userCheck]);
 
   const onDragEnd = (result) => {
@@ -78,8 +78,9 @@ const HomePage = (props) => {
       <div className="column is-2">
         <Navigation />
       </div>
+
       <button onClick={testbutton}>BUTTTTTTTOOOON</button>
-      {/* {console.log(props.topics[0].cards, "TESTING PROPS ID")} */}
+      {console.log(props.topics.length, "TESTING")}
 
       <Route exact path="/callback">
         <Callback />
@@ -154,7 +155,7 @@ const mapStateToProps = (state) => ({
 function mapDispatchToProps(dispatch) {
   return {
     dispatch,
-    ...bindActionCreators({ fetchTopics, updateTopics }, dispatch),
+    ...bindActionCreators({ fetchTopics, updateTopics, currentUser }, dispatch),
   };
 }
 

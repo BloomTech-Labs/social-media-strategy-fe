@@ -19,7 +19,7 @@ const userAuthReducer = (state = initialState, action) => {
         ...state,
         isLoading: false,
         error: null,
-        currentUser: action.currentUser,
+        currentUser: action.currentUser ?? state.currentUser,
       };
     case CONSTANTS.USER_APICALL_FAILURE:
       return {
