@@ -3,7 +3,11 @@ import styled from "styled-components";
 import { Draggable } from "react-beautiful-dnd";
 import "../sass/topicBuckets.scss";
 import CreateIcon from "@material-ui/icons/Create";
+import DeleteIcon from "@material-ui/icons/Delete";
 import MoreVertIcon from "@material-ui/icons/MoreVert";
+import { connect } from "react-redux";
+import { bindActionCreators } from "redux";
+import { deleteCard } from "../actions";
 
 const Container = styled.div`
   background-color: white;
@@ -38,10 +42,12 @@ const TopicCard = (props) => {
         >
           <BtnCont>
             <Icons>
+              <DeleteIcon onClick={() => props.deleteCard(props.card.id)} />
               <CreateIcon />
               <MoreVertIcon />
             </Icons>
           </BtnCont>
+          {console.log(props.card.id, "CARD ID")}
           {props.card.content}
         </Container>
       )}
@@ -49,4 +55,15 @@ const TopicCard = (props) => {
   );
 };
 
-export default TopicCard;
+const mapStateToProps = (state) => ({
+  user: state.user,
+  topics: state.topics,
+});
+function mapDispatchToProps(dispatch) {
+  return {
+    dispatch,
+    ...bindActionCreators({ deleteCard }, dispatch),
+  };
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(TopicCard);

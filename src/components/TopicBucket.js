@@ -37,7 +37,7 @@ const CardList = styled.div`
 // style={{if(props.topic.title) == "Drafts"}}
 
 const TopicBucket = (props) => {
-  let scrollCondition = props.cards.length > 4;
+  let scrollCondition = props?.cards?.length > 4;
   let hi = document.querySelectorAll("#topic-scroll"); // TESTING PURPOSES
 
   useEffect(() => {
@@ -61,7 +61,7 @@ const TopicBucket = (props) => {
             <Droppable droppableId={String(props.topic.id)} type="card">
               {(provided) => (
                 <>
-                  {console.log(props.cards.length > 3, "PROVIDED")}
+                  {/* {console.log(props.cards.length > 3, "PROVIDED")} */}
                   {scrollCondition ? (
                     <>
                       <Title>{props.topic.title}</Title>
@@ -89,7 +89,7 @@ const TopicBucket = (props) => {
                         ref={provided.innerRef}
                         {...provided.droppableProps}
                       >
-                        {props.cards.map((card, index) => (
+                        {props?.cards?.map((card, index) => (
                           <TopicCard
                             className={`${card.id}`}
                             key={card.id}

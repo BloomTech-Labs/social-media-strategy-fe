@@ -3,7 +3,6 @@ import CONSTANTS from "../actions/constants";
 export const initialState = {
   currentUser: null,
   isLoading: false,
-  isLoggedIn: false,
   error: null,
 };
 
@@ -13,14 +12,12 @@ const userAuthReducer = (state = initialState, action) => {
       return {
         ...state,
         isLoading: true,
-        isLoggedIn: false,
         error: null,
       };
     case CONSTANTS.USER_APICALL_SUCCESS:
       return {
         ...state,
         isLoading: false,
-        isLoggedIn: true,
         error: null,
         currentUser: action.currentUser,
       };
@@ -28,7 +25,6 @@ const userAuthReducer = (state = initialState, action) => {
       return {
         ...state,
         isLoading: false,
-        isLoggedIn: false,
         error: action.payload,
       };
     case CONSTANTS.TOPIC_FETCH_START:

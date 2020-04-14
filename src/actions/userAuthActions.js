@@ -48,6 +48,8 @@ export const currentUser = () => (dispatch) => {
   axiosWithAuth()
     .get(`/users/user`)
     .then((response) => {
+      localStorage.setItem("CUSER", response.data.subject);
+
       dispatch({
         type: CONSTANTS.USER_APICALL_SUCCESS,
         currentUser: response.data,

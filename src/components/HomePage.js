@@ -14,6 +14,7 @@ import { Route, Switch } from "react-router";
 import Callback from "./Callback";
 import { axiosWithAuth } from "../utils/axiosWithAuth";
 import { bindActionCreators } from "redux";
+import Axios from "axios";
 
 const TopicsContainer = styled.div`
   display: flex;
@@ -21,23 +22,35 @@ const TopicsContainer = styled.div`
 `;
 
 const HomePage = (props) => {
-  // let card = {
-  //   cards: [
-  //     { id: `card-${22}`, content: "This is content from card 1" },
-  //     { id: `card-${0}`, content: "This is content from card 1" },
-  //   ],
-  // };
+  let card = [
+    {
+      cards: [
+        { id: `card-${22}`, content: "This is content from card 1" },
+        { id: `card-${0}`, content: "This is content from card 1" },
+      ],
+    },
+  ];
 
-  useEffect(() => {
+  let testbutton = (e) => {
+    e.preventDefault();
     axiosWithAuth()
-      .post(`/topics/5/user`, props.topics)
+      // Axios
+      // Axios
+      .post(`/topics/${props.user.currentUser}/user`, props.topics)
+
+      // .post(`http://localhost:5000/api/topics/${1}/user`, props.topics)
+      // .put(`http://localhost:5000/api/topics/${props.topics[0].id}`, {
+      //   cards: props.topics[0].cards,
+      // })
       .then((res) => console.log(res, "???"))
-      .catch((err) => console.log(err));
-  }, [props.user.currentUser]);
+      .catch((err) => console.log(err) & console.log(props.topics, "TOPICS"));
+  };
+
+  useEffect(() => {}, [props.user.currentUser]);
 
   useEffect(() => {
     props.fetchTopics(props.user.currentUser?.subject);
-    props.updateTopics(props.user.currentUser?.subject, props.topics);
+    // props.updateTopics(props.user.currentUser?.subject, props.topics);
   }, [props.user.currentUser]);
 
   const onDragEnd = (result) => {
@@ -62,6 +75,8 @@ const HomePage = (props) => {
       <div className="column is-2">
         <Navigation />
       </div>
+      <button onClick={testbutton}>BUTTTTTTTOOOON</button>
+      {/* {console.log(props.topics[0].cards, "TESTING PROPS ID")} */}
 
       <Route exact path="/callback">
         <Callback />
@@ -91,8 +106,8 @@ const HomePage = (props) => {
                     ref={provided.innerRef}
                   >
                     <div className="column topics">
-                      {console.log(props.topics, "WHAT ARE You")}
-                      {props.topics?.map((topic, index) => (
+                      {/* {console.log(props?.topics, "WHAT ARE You")} */}
+                      {props?.topics?.map((topic, index) => (
                         <TopicBucket
                           className={`${topic.id}`}
                           key={topic.id}

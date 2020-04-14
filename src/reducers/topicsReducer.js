@@ -1,12 +1,14 @@
 import CONSTANTS from "../actions/constants";
+import { v4 as uuidv4 } from "uuid";
 
 let topicId = 2;
 let cardId = 5;
 
 export const initialState = [
   {
-    id: `topic-${0}`,
+    id: `topic-${uuidv4()} topic-0`,
     title: "Drafts",
+    user_id: 1,
     cards: [
       {
         id: `card-${0}`,
@@ -41,7 +43,8 @@ const topicsReducer = (state = initialState, action) => {
       const newTopic = {
         title: action.payload,
         cards: [],
-        id: `topic-${topicId}`,
+        // id: `topic-${uuidv4()}`,
+        id: action.id,
       };
 
       topicId += 1;
@@ -50,7 +53,7 @@ const topicsReducer = (state = initialState, action) => {
     case CONSTANTS.ON_ADD_CARD: {
       const newCard = {
         content: action.payload.text,
-        id: `card-${cardId}`,
+        id: `card-${uuidv4()}`,
       };
       cardId += 1;
 
@@ -114,6 +117,16 @@ const topicsReducer = (state = initialState, action) => {
       console.log(action.payload, "NEW STATE");
       return action.payload;
     }
+    case CONSTANTS.DELETE_CARD: {
+      let newState = state.map((topics) => {
+        return {
+          ...topics,
+          cards: topics.cards.filter((card) => card.id !== action.payload),
+        };
+      });
+      return newState;
+    }
+
     default:
       return state;
   }
