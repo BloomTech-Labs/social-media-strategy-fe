@@ -46,10 +46,6 @@ const Register_Login = (props) => {
     }
   };
 
-  useEffect(() => {
-    props.locationCheck(false);
-  }, []);
-
   return (
     <Grid container component="main" className={classes.root}>
       {!signup ? (
@@ -75,11 +71,29 @@ const Register_Login = (props) => {
           <div>
             {console.log(signup)}
             <Typography
-              style={{ fontWeight: "bolder" }}
+              style={{
+                fontFamily: "Montserrat",
+                fontStyle: "normal",
+                fontWeight: "bold",
+                fontSize: "36px",
+                lineHight: "44px",
+              }}
               component="h1"
               variant="h5"
             >
               {!signup ? "Login to SoMe" : "Sign Up to SoMe"} <br />
+              <span
+                style={{
+                  fontFamily: "Montserrat",
+                  fontStyle: "normal",
+                  fontWeight: "500",
+                  fontSize: "18px",
+                  lineHeight: "22px",
+                  color: "#E85556",
+                }}
+              >
+                {!signup ? "Sign into your account" : "Create Account"} <br />
+              </span>
             </Typography>
             <form
               className={classes.form}

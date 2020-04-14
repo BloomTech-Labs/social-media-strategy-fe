@@ -7,6 +7,9 @@ import { Card, Typography, Box } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
 import Popover from "@material-ui/core/Popover";
 
+//Adding moment for date purposes
+import Moment from "moment";
+
 // import AddAccount from "./AddAccount";
 
 // Styling
@@ -18,6 +21,8 @@ import img from "../assets/headshot.jpg";
 import pin from "../assets/pin.svg";
 import twitterimg from "../imgs/Vector.png";
 import { axiosWithAuth } from "../utils/axiosWithAuth";
+import { connect } from "react-redux";
+import { currentUser } from "../actions";
 
 // Set dummy Acct Data
 const accountData = data.accounts;
@@ -67,11 +72,10 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const Dashboard = () => {
+const Dashboard = (props) => {
   const st = dashStyles();
   const classes = useStyles();
   const [anchorEl, setAnchorEl] = React.useState(null);
-  const [currentuser, setCurrentuser] = React.useState("");
 
   const handleClick = (event) => {
     setAnchorEl(event.currentTarget);
@@ -81,52 +85,50 @@ const Dashboard = () => {
     setAnchorEl(null);
   };
 
-  async function twittercheck() {
-    let user = await axiosWithAuth().get(`/users/user`);
-    console.log(user.data.subject);
-    setCurrentuser(user.data.subject);
-  }
+  // async function twittercheck() {
+  //   props.currentUser();
+  // }
 
   async function twitter() {
-    if (!localStorage.getItem("token")) {
-      window.alert(
-        "No token, please hit log in button and login/signup, Thank you"
-      );
-    } else {
-      let ax = await (
-        await fetch(
-          ` https://social-media-strategy.herokuapp.com/api/auth/${currentuser}/oauth`,
-          {
-            method: "GET",
-            redirect: "follow",
-            headers: {
-              accept: "application/json",
-              Authorization: localStorage.getItem("token"),
-            },
-          }
-        )
-      ).json();
+    let ax = await (
+      await fetch(
+        ` https://social-media-strategy.herokuapp.com/api/auth/${props.user.currentUser.subject}/oauth`,
+        {
+          method: "GET",
+          redirect: "follow",
+          headers: {
+            accept: "application/json",
+            Authorization: localStorage.getItem("token"),
+          },
+        }
+      )
+    ).json();
 
-      console.log(ax);
-      let move = await (window.location.href = ax);
-    }
+    console.log(ax);
+    let move = await (window.location.href = ax);
   }
 
-  useEffect(() => {
-    twittercheck();
-  }, []);
+  // let userCheck = props?.user?.currentUser === null;
+
+  // useEffect(() => {
+  //   twittercheck();
+  // }, [userCheck]);
 
   const open = Boolean(anchorEl);
   const id = open ? "simple-popover" : undefined;
 
+  function getDate() {
+    const todaysDate = Moment().format("MMM DD, YYYY");
+    return todaysDate;
+  }
   return (
     <div className="dash-app">
       <div className="title">
         <h1 className="bold">Dashboard</h1>
         <div className="dash-title">
-          <h4 className="highlight">Tuesday</h4>{" "}
+          <h4 className="highlight">{Moment().format("dddd")}</h4>{" "}
           <h4 className="highlight"> • </h4>
-          <h4 className="date"> 16 March, 2020</h4>
+          <h4 className="date">{getDate()}</h4>
         </div>
         <div className="acct-title">
           <h2 className="blue-bold">Accounts</h2>
@@ -137,6 +139,7 @@ const Dashboard = () => {
             onClick={handleClick}
             className="button"
           >
+            {console.log(props.user)}
             Add Account
           </Link>
           {/* <Button
@@ -208,4 +211,8 @@ const Dashboard = () => {
     </div>
   );
 };
-export default Dashboard;
+const mapStateToProps = (state) => ({
+  user: state.user,
+});
+
+export default connect(mapStateToProps, { currentUser })(Dashboard);

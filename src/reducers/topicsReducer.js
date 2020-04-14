@@ -1,36 +1,32 @@
-import {
-  ON_DRAG_END_SUCCESS,
-  ON_DRAG_TOPIC_END_SUCCESS,
-  ON_ADD_TOPIC,
-  ON_ADD_CARD,
-  ON_DRAG_END,
-} from "../actions/topicsActions";
+import CONSTANTS from "../actions/constants";
+import { v4 as uuidv4 } from "uuid";
 
 let topicId = 2;
 let cardId = 5;
 
 export const initialState = [
   {
-    id: `topic-${0}`,
+    id: `topic-${uuidv4()} topic-0`,
     title: "Drafts",
+    user_id: 1,
     cards: [
-      { id: `card-${0}`, content: "This is content from card 1" },
-      { id: `card-${1}`, content: "This is content from card 2" },
-      { id: `card-${2}`, content: "This is content from card 3" },
-      { id: `card-${3}`, content: "This is content from card 4" },
-      { id: `card-${4}`, content: "This is content from card 5" },
+      {
+        id: `card-${0}`,
+        content:
+          "This is an example of a post that you could draft. Feel free to express yourself!",
+      },
     ],
-  },
-  {
-    id: `topic-${1}`,
-    title: "Women of Lambda",
-    cards: [],
   },
 ];
 
 const topicsReducer = (state = initialState, action) => {
   switch (action.type) {
-    case ON_DRAG_END_SUCCESS:
+    case CONSTANTS.TOPIC_API_SUCCESS:
+      return {
+        state: action.payload,
+      };
+
+    case CONSTANTS.ON_DRAG_END_SUCCESS:
       return {
         ...state,
         topics: {
@@ -38,25 +34,26 @@ const topicsReducer = (state = initialState, action) => {
           [action.payload.id]: action.payload,
         },
       };
-    case ON_DRAG_TOPIC_END_SUCCESS:
+    case CONSTANTS.ON_DRAG_TOPIC_END_SUCCESS:
       return {
         ...state,
         topicOrder: action.payload,
       };
-    case ON_ADD_TOPIC: // temporary - will need to post to back end and get an ID
+    case CONSTANTS.ON_ADD_TOPIC: // temporary - will need to post to back end and get an ID
       const newTopic = {
         title: action.payload,
         cards: [],
-        id: `topic-${topicId}`,
+        // id: `topic-${uuidv4()}`,
+        id: action.id,
       };
 
       topicId += 1;
 
       return [...state, newTopic];
-    case ON_ADD_CARD: {
+    case CONSTANTS.ON_ADD_CARD: {
       const newCard = {
         content: action.payload.text,
-        id: `card-${cardId}`,
+        id: `card-${uuidv4()}`,
       };
       cardId += 1;
 
@@ -72,20 +69,26 @@ const topicsReducer = (state = initialState, action) => {
       });
       return newState;
     }
-    case ON_DRAG_END:{
-      const { droppableIdStart, droppableIdEnd, droppableIndexStart, droppableIndexEnd, type } = action.payload;
+    case CONSTANTS.ON_DRAG_END: {
+      const {
+        droppableIdStart,
+        droppableIdEnd,
+        droppableIndexStart,
+        droppableIndexEnd,
+        type,
+      } = action.payload;
       const newState = [...state];
-      
+
       // dragging topics
-      if(type === 'topic') {
+      if (type === "topic") {
         const topic = newState.splice(droppableIndexStart, 1);
         newState.splice(droppableIndexEnd, 0, ...topic);
         return newState;
       }
 
       // DND in same topic
-      if(droppableIdStart === droppableIdEnd) {
-        const topic = state.find(topic => droppableIdStart === topic.id);
+      if (droppableIdStart === droppableIdEnd) {
+        const topic = state.find((topic) => droppableIdStart === topic.id);
         const card = topic.cards.splice(droppableIndexStart, 1);
         topic.cards.splice(droppableIndexEnd, 0, ...card);
       }
@@ -93,20 +96,37 @@ const topicsReducer = (state = initialState, action) => {
       // DND in another topic
       if (droppableIdStart !== droppableIdEnd) {
         // find the topic where drag started
-        const topicStart = state.find(topic => droppableIdStart === topic.id);
+        const topicStart = state.find((topic) => droppableIdStart === topic.id);
 
         // pull the card from that topic
         const card = topicStart.cards.splice(droppableIndexStart, 1);
 
         // find the topic where drag ended
-        const topicEnd = state.find(topic => droppableIdEnd === topic.id);
+        const topicEnd = state.find((topic) => droppableIdEnd === topic.id);
 
         // put the card into the new list
         topicEnd.cards.splice(droppableIndexEnd, 0, ...card);
-
       }
       return newState;
     }
+    case CONSTANTS.TOPIC_FETCH_SUCCESS: {
+      console.log(action.payload, "NEW STATE");
+      return action.payload;
+    }
+    case CONSTANTS.TOPIC_UPDATE_SUCCESS: {
+      console.log(action.payload, "NEW STATE");
+      return action.payload;
+    }
+    case CONSTANTS.DELETE_CARD: {
+      let newState = state.map((topics) => {
+        return {
+          ...topics,
+          cards: topics.cards.filter((card) => card.id !== action.payload),
+        };
+      });
+      return newState;
+    }
+
     default:
       return state;
   }

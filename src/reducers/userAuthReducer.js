@@ -1,69 +1,48 @@
-import {
-  USER_LOGIN_START,
-  USER_LOGIN_SUCCESS,
-  USER_LOGIN_FAILURE,
-  USER_REGISTER_START,
-  USER_REGISTER_SUCCESS,
-  USER_REGISTER_FAILURE,
-} from "../actions";
+import CONSTANTS from "../actions/constants";
 
 export const initialState = {
-  twitterAccountInformation: {
-    firstName: "Asami",
-    lastName: "Arata",
-    twitterHandle: "@AsamiArata",
-    location: "San Francisco Bay Area",
-    posts: 451,
-    following: 250,
-    followers: 2.6,
-  },
+  currentUser: null,
   isLoading: false,
-  isLoggedIn: false,
   error: null,
 };
 
 const userAuthReducer = (state = initialState, action) => {
   switch (action.type) {
-    case USER_LOGIN_START:
+    case CONSTANTS.USER_APICALL_START:
       return {
         ...state,
         isLoading: true,
-        isLoggedIn: false,
         error: null,
       };
-    case USER_LOGIN_SUCCESS:
+    case CONSTANTS.USER_APICALL_SUCCESS:
       return {
         ...state,
         isLoading: false,
-        isLoggedIn: true,
         error: null,
+        currentUser: action.currentUser ?? state.currentUser,
       };
-    case USER_LOGIN_FAILURE:
+    case CONSTANTS.USER_APICALL_FAILURE:
       return {
         ...state,
         isLoading: false,
-        isLoggedIn: false,
         error: action.payload,
       };
-    case USER_REGISTER_START:
+    case CONSTANTS.TOPIC_FETCH_START:
       return {
         ...state,
         isLoading: true,
-        isLoggedIn: false,
         error: null,
       };
-    case USER_REGISTER_SUCCESS:
+    case CONSTANTS.TOPIC_FETCH_SUCCESS:
       return {
         ...state,
         isLoading: false,
-        isLoggedIn: true,
         error: null,
       };
-    case USER_REGISTER_FAILURE:
+    case CONSTANTS.TOPIC_FETCH_FAILURE:
       return {
         ...state,
         isLoading: false,
-        isLoggedIn: false,
         error: action.payload,
       };
     default:
