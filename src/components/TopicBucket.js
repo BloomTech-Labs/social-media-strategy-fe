@@ -37,8 +37,6 @@ const CardList = styled.div`
   border-radius: 0.5rem;
 `;
 
-// style={{if(props.topic.title) == "Drafts"}}
-
 const TopicBucket = (props) => {
   let scrollCondition = props?.cards?.length > 4;
 
@@ -48,12 +46,12 @@ const TopicBucket = (props) => {
     axiosWithAuth()
       // Axios
       // Axios
-      .post(`/topics/${props.user.currentUser}/user`, props.topics)
+      // .post(`/topics/${props.user.currentUser}/user`, props.topics)
 
       // .post(`http://localhost:5000/api/topics/${1}/user`, props.topics)
-      // .put(`http://localhost:5000/api/topics/${props.topics[0].id}`, {
-      //   cards: props.topics[0].cards,
-      // })
+      .put(`/topics/${props.topic.id}`, {
+        cards: props.topic.cards,
+      })
       .then((res) => console.log(res, "???"))
       .catch((err) => console.log(err) & console.log(props.topics, "TOPICS"));
   };
@@ -139,6 +137,12 @@ const TopicBucket = (props) => {
                       </CardList>
                     </>
                   )}
+                  {console.log(
+                    props.topic.id,
+                    props.topic.cards,
+                    "TESTING PUT CARDS"
+                  )}
+                  <button onClick={testbutton}>HELLOOOO</button>
 
                   {/* <CardList
                     // id={`hi-${props.topic.id}`}
