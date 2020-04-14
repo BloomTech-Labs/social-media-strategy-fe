@@ -23,33 +23,20 @@ const TopicsContainer = styled.div`
 `;
 
 const HomePage = (props) => {
-  let card = [
-    {
-      cards: [
-        { id: `card-${22}`, content: "This is content from card 1" },
-        { id: `card-${0}`, content: "This is content from card 1" },
-      ],
-    },
-  ];
-
-  let testbutton = (e) => {
-    e.preventDefault();
-    axiosWithAuth()
-      // Axios
-      // Axios
-      .post(`/topics/${props.user.currentUser}/user`, props.topics)
-
-      // .post(`http://localhost:5000/api/topics/${1}/user`, props.topics)
-      // .put(`http://localhost:5000/api/topics/${props.topics[0].id}`, {
-      //   cards: props.topics[0].cards,
-      // })
-      .then((res) => console.log(res, "???"))
-      .catch((err) => console.log(err) & console.log(props.topics, "TOPICS"));
-  };
-
   let userCheck = props?.user?.currentUser === null;
 
   let topicLength = props?.topics?.length;
+
+  async function updateAlltopics() {
+    let test = await props?.topics?.forEach(async (e, i) => {
+      console.log(e.id, i, "WHAT FOREACH");
+      await axiosWithAuth()
+        .put(`/topics/${e.id}`, { ...e, index: i })
+        .then((res) => console.log(res, "???"))
+        .catch((err) => console.log(err) & console.log(props.topics, "TOPICS"));
+    });
+    return test;
+  }
 
   useEffect(() => {
     props.currentUser();
@@ -68,7 +55,8 @@ const HomePage = (props) => {
         source.index,
         destination.index,
         draggableId,
-        type
+        type,
+        updateAlltopics
       )
     );
   };
@@ -79,8 +67,10 @@ const HomePage = (props) => {
         <Navigation />
       </div>
 
-      <button onClick={testbutton}>BUTTTTTTTOOOON</button>
-      {console.log(props.topics.length, "TESTING")}
+      {console.log(props.topics.length, props.topics, "TESTING")}
+      {/* <button onClick={() => props.dispatch(updateTopics(updateAlltopics))}>
+        I AM A BUTTON
+      </button> */}
 
       <Route exact path="/callback">
         <Callback />
@@ -110,7 +100,7 @@ const HomePage = (props) => {
                     ref={provided.innerRef}
                   >
                     <div className="column topics">
-                      {/* {console.log(props?.topics, "WHAT ARE You")} */}
+                      {console.log(props?.topics, "WHAT ARE You")}
                       {console.log(props.user.isLoading, "LOADING")}
                       {props.user.isLoading && (
                         <Loader
