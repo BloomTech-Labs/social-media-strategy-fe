@@ -40,9 +40,9 @@ const TopicBucket = (props) => {
   let scrollCondition = props?.cards?.length > 4;
   let hi = document.querySelectorAll("#topic-scroll"); // TESTING PURPOSES
 
-  useEffect(() => {
-    props.fetchTopics(props.user.currentUser);
-  }, [scrollCondition]); // updates state on load
+  // useEffect(() => {
+  //   props.fetchTopics(props.user.currentUser);
+  // }, []); // updates state on load
 
   // useEffect(() => {
   //   props.updateTopics(props.userID, props.topics);

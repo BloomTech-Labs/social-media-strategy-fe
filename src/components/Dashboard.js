@@ -108,9 +108,11 @@ const Dashboard = (props) => {
     let move = await (window.location.href = ax);
   }
 
+  let userCheck = props?.user?.currentUser === null;
+
   useEffect(() => {
     twittercheck();
-  }, []);
+  }, [userCheck]);
 
   const open = Boolean(anchorEl);
   const id = open ? "simple-popover" : undefined;

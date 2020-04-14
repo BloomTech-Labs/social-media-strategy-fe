@@ -15,6 +15,7 @@ import Callback from "./Callback";
 import { axiosWithAuth } from "../utils/axiosWithAuth";
 import { bindActionCreators } from "redux";
 import Axios from "axios";
+import Loader from "react-loader-spinner";
 
 const TopicsContainer = styled.div`
   display: flex;
@@ -46,12 +47,14 @@ const HomePage = (props) => {
       .catch((err) => console.log(err) & console.log(props.topics, "TOPICS"));
   };
 
-  useEffect(() => {}, [props.user.currentUser]);
+  // useEffect(() => {}, [props.user.currentUser]);
+
+  let userCheck = props?.user?.currentUser === null;
 
   useEffect(() => {
     props.fetchTopics(props.user.currentUser?.subject);
     // props.updateTopics(props.user.currentUser?.subject, props.topics);
-  }, [props.user.currentUser]);
+  }, [userCheck]);
 
   const onDragEnd = (result) => {
     const { destination, source, draggableId, type } = result;
@@ -107,16 +110,30 @@ const HomePage = (props) => {
                   >
                     <div className="column topics">
                       {/* {console.log(props?.topics, "WHAT ARE You")} */}
-                      {props?.topics?.map((topic, index) => (
-                        <TopicBucket
-                          className={`${topic.id}`}
-                          key={topic.id}
-                          topicId={topic.id}
-                          topic={topic}
-                          cards={topic.cards}
-                          index={index}
+                      {console.log(props.user.isLoading, "LOADING")}
+                      {props.user.isLoading && (
+                        <Loader
+                          type="BallTriangle"
+                          color="#00BFFF"
+                          height={100}
+                          width={100}
+                          timeout={3000} //3 secs
                         />
-                      ))}
+                      )}
+                      {props.topics && !props.user.isLoading && (
+                        <>
+                          {props?.topics?.map((topic, index) => (
+                            <TopicBucket
+                              className={`${topic.id}`}
+                              key={topic.id}
+                              topicId={topic.id}
+                              topic={topic}
+                              cards={topic.cards}
+                              index={index}
+                            />
+                          ))}
+                        </>
+                      )}
                     </div>
                     {provided.placeholder}
                   </TopicsContainer>

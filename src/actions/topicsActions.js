@@ -30,11 +30,9 @@ export const addTopic = (text, id) => (dispatch) => {
     payload: text,
     id: id,
   });
-  setTimeout(() => {
-    dispatch(
-      addTopics(cuser, { user_id: cuser, title: text, id: id, cards: [] })
-    );
-  }, 100);
+  dispatch(
+    addTopics(cuser, { user_id: cuser, title: text, id: id, cards: [] })
+  );
 };
 
 export const addCard = (topicId, text) => (dispatch) => {
@@ -88,10 +86,10 @@ export const addTopics = (id, topics) => (dispatch) => {
       console.log(response.data, "SUCCESS");
       dispatch({ type: CONSTANTS.USER_APICALL_SUCCESS });
 
-      dispatch({
-        type: CONSTANTS.TOPIC_UPDATE_SUCCESS,
-        payload: response.data,
-      });
+      // dispatch({
+      //   type: CONSTANTS.TOPIC_UPDATE_SUCCESS,
+      //   payload: response.data,
+      // });
     })
     .catch((error) => {
       console.log(error, "FAIL");
