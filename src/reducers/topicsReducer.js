@@ -47,6 +47,7 @@ const topicsReducer = (state = initialState, action) => {
       const newTopic = {
         title: action.payload,
         cards: [],
+        // index: null,
         // id: `topic-${uuidv4()}`,
         id: action.id,
       };
@@ -86,7 +87,7 @@ const topicsReducer = (state = initialState, action) => {
       // dragging topics
       if (type === "topic") {
         const topic = newState.splice(droppableIndexStart, 1);
-        topic.index = droppableIndexEnd;
+        topic[0].index = droppableIndexEnd;
         newState.splice(droppableIndexEnd, 0, ...topic);
         return newState;
       }

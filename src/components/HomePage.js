@@ -27,6 +27,17 @@ const HomePage = (props) => {
 
   let topicLength = props?.topics?.length;
 
+  async function updateAlltopics() {
+    let test = await props?.topics?.forEach(async (e, i) => {
+      console.log(e.id, i, "WHAT FOREACH");
+      await axiosWithAuth()
+        .put(`/topics/${e.id}`, { ...e, index: i })
+        .then((res) => console.log(res, "???"))
+        .catch((err) => console.log(err) & console.log(props.topics, "TOPICS"));
+    });
+    return test;
+  }
+
   useEffect(() => {
     props.currentUser();
     props.fetchTopics(props.user.currentUser?.subject);
@@ -44,7 +55,8 @@ const HomePage = (props) => {
         source.index,
         destination.index,
         draggableId,
-        type
+        type,
+        updateAlltopics
       )
     );
   };
@@ -55,7 +67,10 @@ const HomePage = (props) => {
         <Navigation />
       </div>
 
-      {console.log(props.topics.length, "TESTING")}
+      {console.log(props.topics.length, props.topics, "TESTING")}
+      {/* <button onClick={() => props.dispatch(updateTopics(updateAlltopics))}>
+        I AM A BUTTON
+      </button> */}
 
       <Route exact path="/callback">
         <Callback />
@@ -85,7 +100,7 @@ const HomePage = (props) => {
                     ref={provided.innerRef}
                   >
                     <div className="column topics">
-                      {/* {console.log(props?.topics, "WHAT ARE You")} */}
+                      {console.log(props?.topics, "WHAT ARE You")}
                       {console.log(props.user.isLoading, "LOADING")}
                       {props.user.isLoading && (
                         <Loader

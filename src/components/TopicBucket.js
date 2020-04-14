@@ -49,9 +49,7 @@ const TopicBucket = (props) => {
       // .post(`/topics/${props.user.currentUser}/user`, props.topics)
 
       // .post(`http://localhost:5000/api/topics/${1}/user`, props.topics)
-      .put(`/topics/${props.topic.id}`, {
-        cards: props.topic.cards,
-      })
+      .put(`/topics/${props.topic.id}`, props.topic)
       .then((res) => console.log(res, "???"))
       .catch((err) => console.log(err) & console.log(props.topics, "TOPICS"));
   };
@@ -140,6 +138,7 @@ const TopicBucket = (props) => {
                   {console.log(
                     props.topic.id,
                     props.topic.cards,
+                    props.topic,
                     "TESTING PUT CARDS"
                   )}
                   <button onClick={testbutton}>HELLOOOO</button>
