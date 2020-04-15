@@ -4,6 +4,7 @@ export const initialState = {
   currentUser: null,
   isLoading: false,
   error: null,
+  didUpdate: false,
 };
 
 const userAuthReducer = (state = initialState, action) => {
@@ -13,6 +14,7 @@ const userAuthReducer = (state = initialState, action) => {
         ...state,
         isLoading: true,
         error: null,
+        didUpdate: action.didUpdate ?? state.didUpdate,
       };
     case CONSTANTS.USER_APICALL_SUCCESS:
       return {
@@ -20,6 +22,7 @@ const userAuthReducer = (state = initialState, action) => {
         isLoading: false,
         error: null,
         currentUser: action.currentUser ?? state.currentUser,
+        didUpdate: action.didUpdate ?? state.didUpdate,
       };
     case CONSTANTS.USER_APICALL_FAILURE:
       return {

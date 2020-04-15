@@ -1,6 +1,7 @@
 import { axiosWithAuth } from "../utils/axiosWithAuth";
 import Axios from "axios";
 import CONSTANTS from "./constants";
+import { v4 as uuidv4 } from "uuid";
 
 export const login = (userData, cb) => (dispatch) => {
   dispatch({ type: CONSTANTS.USER_APICALL_START });
@@ -27,10 +28,26 @@ export const registerUser = (userData, cb) => (dispatch) => {
       "https://social-media-strategy.herokuapp.com/api/auth/register",
     userData
   )
-    .then((response) => {
+    .then(async (response) => {
       dispatch({ type: CONSTANTS.USER_APICALL_SUCCESS });
       localStorage.setItem("token", response.data.token);
       cb("/");
+      let res = await axiosWithAuth().get(`/users/user`);
+
+      console.log(res.data.subject);
+      await axiosWithAuth().post(`/topics/${res.data.subject}/user`, {
+        id: `topic-${uuidv4()} topic-0`,
+        title: "Drafts",
+        user_id: res.data.subject,
+        index: 0,
+        cards: [
+          {
+            id: `card-${0}`,
+            content:
+              "This is an example of a post that you could draft. Feel free to express yourself!",
+          },
+        ],
+      });
 
       // history.push("/");
     })

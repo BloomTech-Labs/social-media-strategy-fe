@@ -40,27 +40,15 @@ const CardList = styled.div`
 const TopicBucket = (props) => {
   let scrollCondition = props?.cards?.length > 4;
 
-  let testbutton = (e) => {
-    e.preventDefault();
-
-    axiosWithAuth()
-      // Axios
-      // Axios
-      // .post(`/topics/${props.user.currentUser}/user`, props.topics)
-
-      // .post(`http://localhost:5000/api/topics/${1}/user`, props.topics)
-      .put(`/topics/${props.topic.id}`, props.topic)
-      .then((res) => console.log(res, "???"))
-      .catch((err) => console.log(err) & console.log(props.topics, "TOPICS"));
-  };
-
   // useEffect(() => {
   //   props.fetchTopics(props.user.currentUser);
   // }, []); // updates state on load
 
-  // useEffect(() => {
-  //   props.updateTopics(props.userID, props.topics);
-  // }, []);
+  useEffect(() => {
+    // props.updateTopics(props.userID, props.topics);
+    console.log("hello");
+    // props.updateTopics(updateAlltopics);
+  }, []);
 
   return (
     <>
@@ -77,15 +65,11 @@ const TopicBucket = (props) => {
                 <>
                   {scrollCondition ? (
                     <>
-                      <Title
-                        style={{
-                          display: "flex",
-                          justifyContent: "space-between",
-                        }}
-                      >
+                      <Title>
                         {props.topic.title}
                         {props.topic.title !== "Drafts" ? (
                           <DeleteIcon
+                            style={{ "margin-right": "20" }}
                             onClick={() => props.deleteTopics(props.topic.id)}
                           />
                         ) : null}
@@ -135,13 +119,6 @@ const TopicBucket = (props) => {
                       </CardList>
                     </>
                   )}
-                  {console.log(
-                    props.topic.id,
-                    props.topic.cards,
-                    props.topic,
-                    "TESTING PUT CARDS"
-                  )}
-                  <button onClick={testbutton}>HELLOOOO</button>
 
                   {/* <CardList
                     // id={`hi-${props.topic.id}`}

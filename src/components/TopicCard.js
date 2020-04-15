@@ -47,7 +47,6 @@ const TopicCard = (props) => {
               <MoreVertIcon />
             </Icons>
           </BtnCont>
-          {console.log(props.card.id, "CARD ID")}
           {props.card.content}
         </Container>
       )}

@@ -104,15 +104,8 @@ const Dashboard = (props) => {
       )
     ).json();
 
-    console.log(ax);
     let move = await (window.location.href = ax);
   }
-
-  // let userCheck = props?.user?.currentUser === null;
-
-  // useEffect(() => {
-  //   twittercheck();
-  // }, [userCheck]);
 
   const open = Boolean(anchorEl);
   const id = open ? "simple-popover" : undefined;
@@ -139,7 +132,6 @@ const Dashboard = (props) => {
             onClick={handleClick}
             className="button"
           >
-            {console.log(props.user)}
             Add Account
           </Link>
           {/* <Button

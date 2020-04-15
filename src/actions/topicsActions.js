@@ -37,6 +37,10 @@ export const addTopic = (text, id) => (dispatch) => {
 
 export const addCard = (topicId, text) => (dispatch) => {
   dispatch({ type: CONSTANTS.ON_ADD_CARD, payload: { topicId, text } });
+  dispatch({ type: CONSTANTS.USER_APICALL_START, didUpdate: true });
+  setTimeout(() => {
+    dispatch({ type: CONSTANTS.USER_APICALL_SUCCESS, didUpdate: false });
+  }, 100);
 };
 export const deleteCard = (cardID) => (dispatch) => {
   dispatch({ type: CONSTANTS.DELETE_CARD, payload: cardID });
@@ -62,18 +66,19 @@ export const sort = (
       type,
     },
   });
-  console.log("WHAT ARE !!!!!!");
-  dispatch(updateTopics(cb));
+  dispatch({ type: CONSTANTS.USER_APICALL_START, didUpdate: true });
+  setTimeout(() => {
+    dispatch({ type: CONSTANTS.USER_APICALL_SUCCESS, didUpdate: false });
+  }, 100);
 };
 
 //  GET TOPICS
 export const fetchTopics = (id) => (dispatch) => {
   dispatch({ type: CONSTANTS.USER_APICALL_START });
   axiosWithAuth()
-    .get(`/topics/${id}/user`)
+    .get(`/topics/${id}/user?sortby=index`)
     // Axios.get(`http://localhost:5000/api/topics/${id}/user`)
     .then((response) => {
-      console.log(response.data, "FETCH RES");
       dispatch({ type: CONSTANTS.USER_APICALL_SUCCESS });
       dispatch({ type: CONSTANTS.TOPIC_FETCH_SUCCESS, payload: response.data });
     })
@@ -88,7 +93,6 @@ export const addTopics = (id, topics) => (dispatch) => {
   axiosWithAuth()
     .post(`/topics/${id}/user`, topics)
     .then((response) => {
-      console.log(response.data, "SUCCESS");
       dispatch({ type: CONSTANTS.USER_APICALL_SUCCESS });
 
       // dispatch({
@@ -107,7 +111,6 @@ export const deleteTopics = (id) => (dispatch) => {
   axiosWithAuth()
     .delete(`/topics/${id}`)
     .then((response) => {
-      console.log(response.data, "SUCCESS");
       dispatch(fetchTopics(cuser));
 
       // dispatch({

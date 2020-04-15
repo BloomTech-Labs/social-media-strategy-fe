@@ -39,8 +39,6 @@ const Register_Login = (props) => {
   const onSubmit = (data) => {
     if (!signup) {
       props.login(data, push);
-
-      console.log(new Date());
     } else {
       props.registerUser(data, push);
     }
