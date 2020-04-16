@@ -1,4 +1,4 @@
-import React, { useEffect, useCallback, useState } from "react";
+import React, { useCallback, useState } from "react";
 
 import "./sass/index.scss";
 import { Route, Switch } from "react-router";
@@ -14,7 +14,7 @@ const App = (props) => {
         <Route path="/login">
           <REGISTER_LOGIN />
         </Route>
-        <PrivateRoute component={HomePage} />
+        <PrivateRoute path="/" component={HomePage} />
       </Switch>
     </>
   );

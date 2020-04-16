@@ -1,12 +1,18 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { connect } from "react-redux";
 import styled from "styled-components";
 import TopicCard from "./TopicCard";
 import { Droppable, Draggable } from "react-beautiful-dnd";
 import ActionButton from "./ActionButton";
 import DeleteIcon from "@material-ui/icons/Delete";
+import CreateIcon from "@material-ui/icons/Create";
 
-import { fetchTopics, updateTopics, deleteTopics } from "../actions";
+import {
+  fetchTopics,
+  updateTopics,
+  deleteTopics,
+  editTopicTitle,
+} from "../actions";
 import { axiosWithAuth } from "../utils/axiosWithAuth";
 
 const Container = styled.div`
@@ -36,35 +42,22 @@ const CardList = styled.div`
   width: 20rem;
   border-radius: 0.5rem;
 `;
-
-// style={{if(props.topic.title) == "Drafts"}}
+const Icons = styled.div`
+  display: flex;
+  justify-content: flex-end;
+  padding: 0.5rem;
+`;
 
 const TopicBucket = (props) => {
-  let scrollCondition = props?.cards?.length > 4;
+  const [content, setcontent] = useState({ name: "" });
+  const [editing, setediting] = useState(false);
 
-  let testbutton = (e) => {
+  const handleChange = (e) => {
     e.preventDefault();
-
-    axiosWithAuth()
-      // Axios
-      // Axios
-      .post(`/topics/${props.user.currentUser}/user`, props.topics)
-
-      // .post(`http://localhost:5000/api/topics/${1}/user`, props.topics)
-      // .put(`http://localhost:5000/api/topics/${props.topics[0].id}`, {
-      //   cards: props.topics[0].cards,
-      // })
-      .then((res) => console.log(res, "???"))
-      .catch((err) => console.log(err) & console.log(props.topics, "TOPICS"));
+    setcontent({ ...content, [e.target.name]: e.target.value });
   };
 
-  // useEffect(() => {
-  //   props.fetchTopics(props.user.currentUser);
-  // }, []); // updates state on load
-
-  // useEffect(() => {
-  //   props.updateTopics(props.userID, props.topics);
-  // }, []);
+  let scrollCondition = props?.cards?.length > 4;
 
   return (
     <>
@@ -79,21 +72,58 @@ const TopicBucket = (props) => {
             <Droppable droppableId={String(props.topic.id)} type="card">
               {(provided) => (
                 <>
+                
                   {scrollCondition ? (
                     <>
-                      <Title
-                        style={{
-                          display: "flex",
-                          justifyContent: "space-between",
-                        }}
-                      >
-                        {props.topic.title}
+                      <Title>
                         {props.topic.title !== "Drafts" ? (
-                          <DeleteIcon
-                            onClick={() => props.deleteTopics(props.topic.id)}
-                          />
-                        ) : null}
+                          <span>
+                            <DeleteIcon
+                              style={{ "margin-right": "20" }}
+                              onClick={() => props.deleteTopics(props.topic.id)}
+                            />
+                            <CreateIcon
+                              // onClick={() => props.editCard(props.card.id, content)}
+                              onClick={() => setediting(!editing)}
+                            />
+                            {!editing ? (
+                              props.topic.title
+                            ) : (
+                              <>
+                                <form
+                                  onSubmit={() =>
+                                    props.editTopicTitle(
+                                      props.topic.id,
+                                      content.name
+                                    )
+                                  }
+                                >
+                                  <input
+                                    type="text"
+                                    name="name"
+                                    value={content.name}
+                                    onChange={handleChange}
+                                  />
+                                  &nbsp;{" "}
+                                  <span
+                                    onClick={() => setediting(!editing)}
+                                    style={{
+                                      color: "red",
+                                      fontWeight: "bolder",
+                                      padding: "5px",
+                                    }}
+                                  >
+                                    x
+                                  </span>
+                                </form>
+                              </>
+                            )}
+                          </span>
+                        ) : (
+                          props.topic.title
+                        )}
                       </Title>
+
                       <CardList
                         id="topic-scroll"
                         ref={provided.innerRef}
@@ -115,12 +145,51 @@ const TopicBucket = (props) => {
                     <>
                       <Title>
                         {props.topic.title !== "Drafts" ? (
-                          <DeleteIcon
-                            onClick={() => props.deleteTopics(props.topic.id)}
-                          />
-                        ) : null}
-
-                        {props.topic.title}
+                          <span>
+                            <DeleteIcon
+                              style={{ "margin-right": "20" }}
+                              onClick={() => props.deleteTopics(props.topic.id)}
+                            />
+                            <CreateIcon
+                              // onClick={() => props.editCard(props.card.id, content)}
+                              onClick={() => setediting(!editing)}
+                            />
+                            {!editing ? (
+                              props.topic.title
+                            ) : (
+                              <>
+                                <form
+                                  onSubmit={() =>
+                                    props.editTopicTitle(
+                                      props.topic.id,
+                                      content.name
+                                    )
+                                  }
+                                >
+                                  <input
+                                    type="text"
+                                    name="name"
+                                    value={content.name}
+                                    onChange={handleChange}
+                                  />
+                                  &nbsp;{" "}
+                                  <span
+                                    onClick={() => setediting(!editing)}
+                                    style={{
+                                      color: "red",
+                                      fontWeight: "bolder",
+                                      padding: "5px",
+                                    }}
+                                  >
+                                    x
+                                  </span>
+                                </form>
+                              </>
+                            )}
+                          </span>
+                        ) : (
+                          props.topic.title
+                        )}
                       </Title>
                       <CardList
                         ref={provided.innerRef}
@@ -184,4 +253,5 @@ export default connect(mapStateToProps, {
   deleteTopics,
   fetchTopics,
   updateTopics,
+  editTopicTitle,
 })(TopicBucket);

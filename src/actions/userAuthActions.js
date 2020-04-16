@@ -1,44 +1,60 @@
-import { axiosWithAuth } from "../utils/axiosWithAuth";
-import Axios from "axios";
-import CONSTANTS from "./constants";
+import { axiosWithAuth } from '../utils/axiosWithAuth';
+import Axios from 'axios';
+import CONSTANTS from './constants';
+import { v4 as uuidv4 } from 'uuid';
 
-export const login = (userData, cb, locationcb) => (dispatch) => {
+export const login = (userData, cb) => (dispatch) => {
   dispatch({ type: CONSTANTS.USER_APICALL_START });
 
   Axios.post(
     `${process.env.REACT_APP_API_URL}/auth/login` ||
-      "https://social-media-strategy.herokuapp.com/api/auth/login",
+      'https://social-media-strategy.herokuapp.com/api/auth/login',
     userData
   )
     .then((response) => {
       dispatch({ type: CONSTANTS.USER_APICALL_SUCCESS });
-      localStorage.setItem("token", response.data.token);
-      cb("/");
-      locationcb(true);
+      localStorage.setItem('token', response.data.token);
+      cb('/');
     })
     .catch((error) => {
       dispatch({ type: CONSTANTS.USER_APICALL_FAILURE, payload: error.data });
     });
 };
 
-export const registerUser = (userData, cb, locationcb) => (dispatch) => {
+export const registerUser = (userData, cb) => (dispatch) => {
   dispatch({ type: CONSTANTS.USER_APICALL_START });
   Axios.post(
-    `${process.env.API_URL}/auth/register` ||
-      "https://social-media-strategy.herokuapp.com/api/auth/register",
+    `${process.env.REACT_APP_API_URL}/auth/register` ||
+      'https://social-media-strategy.herokuapp.com/api/auth/register',
+    // 'http://localhost:5000/api/auth/register',
     userData
   )
-    .then((response) => {
+    .then(async (response) => {
       dispatch({ type: CONSTANTS.USER_APICALL_SUCCESS });
-      localStorage.setItem("token", response.data.payload);
-      cb("/");
-      locationcb(true);
+      localStorage.setItem('token', response.data.token);
+      cb('/');
+      let res = await axiosWithAuth().get(`/users/user`);
+
+      console.log(res.data.subject);
+      await axiosWithAuth().post(`/topics/${res.data.subject}/user`, {
+        id: `topic-${uuidv4()} topic-0`,
+        title: 'Drafts',
+        user_id: res.data.subject,
+        index: 0,
+        cards: [
+          {
+            id: `card-${0}`,
+            content:
+              'This is an example of a post that you could draft. Feel free to express yourself!',
+          },
+        ],
+      });
 
       // history.push("/");
     })
     .catch((error) => {
       dispatch({ type: CONSTANTS.USER_APICALL_FAILURE, payload: error.data });
-      console.log("Error", error);
+      console.log('Error', error);
     });
 };
 
@@ -48,7 +64,7 @@ export const currentUser = () => (dispatch) => {
   axiosWithAuth()
     .get(`/users/user`)
     .then((response) => {
-      localStorage.setItem("CUSER", response.data.subject);
+      localStorage.setItem('CUSER', response.data.subject);
 
       dispatch({
         type: CONSTANTS.USER_APICALL_SUCCESS,

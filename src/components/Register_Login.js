@@ -38,11 +38,9 @@ const Register_Login = (props) => {
 
   const onSubmit = (data) => {
     if (!signup) {
-      props.login(data, push, props.locationCheck);
-
-      console.log(new Date());
+      props.login(data, push);
     } else {
-      props.registerUser(data, push, props.locationCheck);
+      props.registerUser(data, push);
     }
   };
 
@@ -154,7 +152,9 @@ const Register_Login = (props) => {
                     onClick={() => setsignup(!signup)}
                     variant="body2"
                   >
-                    {"Don't have an account? Sign Up"}
+                    {!signup
+                      ? "Don't have an account? Sign Up"
+                      : "Have an account? Sign In"}
                   </Link>
                 </Grid>
               </Grid>

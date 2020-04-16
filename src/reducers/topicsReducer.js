@@ -4,18 +4,22 @@ import { v4 as uuidv4 } from "uuid";
 let topicId = 2;
 let cardId = 5;
 
+const setid = localStorage.getItem("CUSER");
+const cuser = JSON.parse(setid);
+
 export const initialState = [
   {
-    id: `topic-${uuidv4()} topic-0`,
-    title: "Drafts",
-    user_id: 1,
-    cards: [
-      {
-        id: `card-${0}`,
-        content:
-          "This is an example of a post that you could draft. Feel free to express yourself!",
-      },
-    ],
+    // id: `topic-${uuidv4()} topic-0`,
+    // title: "Drafts",
+    // user_id: 1 ?? cuser,
+    // index: 0,
+    // cards: [
+    //   {
+    //     id: `card-${0}`,
+    //     content:
+    //       "This is an example of a post that you could draft. Feel free to express yourself!",
+    //   },
+    // ],
   },
 ];
 
@@ -39,10 +43,11 @@ const topicsReducer = (state = initialState, action) => {
         ...state,
         topicOrder: action.payload,
       };
-    case CONSTANTS.ON_ADD_TOPIC: // temporary - will need to post to back end and get an ID
+    case CONSTANTS.ON_ADD_TOPIC:
       const newTopic = {
         title: action.payload,
         cards: [],
+        // index: null,
         // id: `topic-${uuidv4()}`,
         id: action.id,
       };
@@ -82,7 +87,9 @@ const topicsReducer = (state = initialState, action) => {
       // dragging topics
       if (type === "topic") {
         const topic = newState.splice(droppableIndexStart, 1);
+        // topic[0].index = droppableIndexEnd;
         newState.splice(droppableIndexEnd, 0, ...topic);
+
         return newState;
       }
 
@@ -122,6 +129,19 @@ const topicsReducer = (state = initialState, action) => {
         return {
           ...topics,
           cards: topics.cards.filter((card) => card.id !== action.payload),
+        };
+      });
+      return newState;
+    }
+    case CONSTANTS.EDIT_CARD: {
+      let newState = state.map((topics) => {
+        return {
+          ...topics,
+          cards: topics.cards.map((card) =>
+            card.id === action.payload
+              ? { ...card, content: action.edit }
+              : card
+          ),
         };
       });
       return newState;

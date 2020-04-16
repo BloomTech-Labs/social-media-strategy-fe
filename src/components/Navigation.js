@@ -10,7 +10,7 @@ import "../sass/navigation.scss";
 import Menu from "../assets/icons8-menu-vertical-30.svg";
 
 const Navigation = () => {
-  
+
   return (
     <div>
       <div className="navContainer">
@@ -81,9 +81,15 @@ const Navigation = () => {
               </li>
             </NavLink>
             <NavLink
-              className="linkNav"
-              activeClassName= 'linkActive'
-              to="/login"
+              onClick={() =>
+                // localStorage.removeItem("token") &
+                // localStorage.removeItem("CURRENTUSER") &
+                localStorage.clear() &
+                sessionStorage.clear() &
+                window.location.reload(false)
+              }
+              className={color.menu ? "linkActive" : "linkNav"}
+              to="/"
             >
               <li className="link">
                 <img
@@ -91,7 +97,7 @@ const Navigation = () => {
                   src={Menu}
                   alt="Menu icon"
                 />
-                Login
+                Logout{" "}
               </li>
             </NavLink>
           </ul>

@@ -1,8 +1,9 @@
-import React, { useEffect } from "react";
-import { connect } from "react-redux";
-import { DragDropContext, Droppable } from "react-beautiful-dnd";
-import { sort, fetchTopics, updateTopics, currentUser } from "../actions";
-import styled from "styled-components";
+import React, { useEffect } from 'react';
+import { connect } from 'react-redux';
+import { DragDropContext, Droppable } from 'react-beautiful-dnd';
+import { sort, fetchTopics, updateTopics, currentUser } from '../actions';
+import styled from 'styled-components';
+
 
 import Dashboard from "./Dashboard";
 import Navigation from "./Navigation";
@@ -13,6 +14,7 @@ import TopicNav from "./TopicNav";
 import "../sass/index.scss";
 import { Route, Switch } from "react-router";
 import Callback from "./Callback";
+import { axiosWithAuth } from '../utils/axiosWithAuth';
 import { bindActionCreators } from "redux";
 import Loader from "react-loader-spinner";
 
@@ -24,11 +26,28 @@ const TopicsContainer = styled.div`
 const HomePage = (props) => {
   let userCheck = props?.user?.currentUser === null;
 
+  let topicLength = props?.topics?.length;
+
+  async function updateAlltopics() {
+    let test = await props?.topics?.forEach(async (e, i) => {
+      await axiosWithAuth()
+        .put(`/topics/${e.id}`, { ...e, index: i })
+        .then((res) => console.log(res, '???'))
+        .catch((err) => console.log(err) & console.log(props.topics, 'TOPICS'));
+    });
+    return test;
+  }
+
   useEffect(() => {
     props.currentUser();
     props.fetchTopics(props.user.currentUser?.subject);
   }, [userCheck]);
 
+  let updateTrue = props.user.didUpdate === true;
+  useEffect(() => {
+    props.updateTopics(updateAlltopics);
+  }, [updateTrue]);
+  console.log('USERUPDATED', props.user.didUpdate);
   const onDragEnd = (result) => {
     const { destination, source, draggableId, type } = result;
     if (!destination) {
@@ -51,7 +70,9 @@ const HomePage = (props) => {
       <div className='column is-2'>
         <Navigation />
       </div>
-      <Route exact path='/callback'>
+
+      <Route exact path="/callback">
+
         <Callback />
       </Route>
       <Switch>
@@ -74,8 +95,10 @@ const HomePage = (props) => {
                     {...provided.droppableProps}
                     ref={provided.innerRef}
                   >
-                    <div className='column topics'>
-                      {props.user.isLoading ? (
+
+                    <div className="column topics">
+                      {props.user.isLoading && (
+
                         <Loader
                           type='BallTriangle'
                           color='#00BFFF'
