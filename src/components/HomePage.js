@@ -1,21 +1,21 @@
-import React, { useEffect } from "react";
-import { connect } from "react-redux";
-import { DragDropContext, Droppable } from "react-beautiful-dnd";
-import { sort, fetchTopics, updateTopics, currentUser } from "../actions";
-import styled from "styled-components";
+import React, { useEffect } from 'react';
+import { connect } from 'react-redux';
+import { DragDropContext, Droppable } from 'react-beautiful-dnd';
+import { sort, fetchTopics, updateTopics, currentUser } from '../actions';
+import styled from 'styled-components';
 
-import Dashboard from "./Dashboard";
-import Navigation from "./Navigation";
-import TopicBucket from "./TopicBucket";
-import ActionButton from "./ActionButton";
+import Dashboard from './Dashboard';
+import Navigation from './Navigation';
+import TopicBucket from './TopicBucket';
+import ActionButton from './ActionButton';
 
-import "../sass/index.scss";
-import { Route, Switch } from "react-router";
-import Callback from "./Callback";
-import { axiosWithAuth } from "../utils/axiosWithAuth";
-import { bindActionCreators } from "redux";
-import Axios from "axios";
-import Loader from "react-loader-spinner";
+import '../sass/index.scss';
+import { Route, Switch } from 'react-router';
+import Callback from './Callback';
+import { axiosWithAuth } from '../utils/axiosWithAuth';
+import { bindActionCreators } from 'redux';
+import Axios from 'axios';
+import Loader from 'react-loader-spinner';
 
 const TopicsContainer = styled.div`
   display: flex;
@@ -31,8 +31,8 @@ const HomePage = (props) => {
     let test = await props?.topics?.forEach(async (e, i) => {
       await axiosWithAuth()
         .put(`/topics/${e.id}`, { ...e, index: i })
-        .then((res) => console.log(res, "???"))
-        .catch((err) => console.log(err) & console.log(props.topics, "TOPICS"));
+        .then((res) => console.log(res, '???'))
+        .catch((err) => console.log(err) & console.log(props.topics, 'TOPICS'));
     });
     return test;
   }
@@ -46,7 +46,7 @@ const HomePage = (props) => {
   useEffect(() => {
     props.updateTopics(updateAlltopics);
   }, [updateTrue]);
-  console.log("USERUPDATED", props.user.didUpdate);
+  console.log('USERUPDATED', props.user.didUpdate);
   const onDragEnd = (result) => {
     const { destination, source, draggableId, type } = result;
     if (!destination) {

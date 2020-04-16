@@ -157,7 +157,7 @@ const TopicCard = (props) => {
               <form
                 onSubmit={() => props.editCard(props.card.id, content.name)}
               >
-                <input
+                <textarea
                   type="text"
                   name="name"
                   value={content.name}
@@ -170,6 +170,7 @@ const TopicCard = (props) => {
                 >
                   x
                 </span>
+                <input type="submit" />
               </form>
             </>
           )}
