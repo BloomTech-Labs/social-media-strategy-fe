@@ -8,6 +8,7 @@ import Dashboard from './Dashboard';
 import Navigation from './Navigation';
 import TopicBucket from './TopicBucket';
 import ActionButton from './ActionButton';
+import TopicNav from './TopicNav';
 
 import '../sass/index.scss';
 import { Route, Switch } from 'react-router';
@@ -82,11 +83,7 @@ const HomePage = (props) => {
             <Dashboard />
           </div>
           <div className="column drag-drop-content">
-            <div className="column select-a-header">
-              <h1 className="headers">Buckets</h1>
-              <h3 className="unselected-headers">Social Board Queue</h3>
-              <h3 className="unselected-headers">Analytics</h3>
-            </div>
+            <TopicNav />
             <ActionButton className="column is-2 headers" topic />
             <DragDropContext onDragEnd={onDragEnd}>
               <Droppable
@@ -101,16 +98,15 @@ const HomePage = (props) => {
                     ref={provided.innerRef}
                   >
                     <div className="column topics">
-                      {props.user.isLoading && (
+                      {props.user.isLoading ? (
                         <Loader
                           type="BallTriangle"
                           color="#00BFFF"
                           height={100}
                           width={100}
-                          timeout={3000} //3 secs
+                          timeout={3000}
                         />
-                      )}
-                      {props.topics && !props.user.isLoading && (
+                      ) : (
                         <>
                           {props?.topics?.map((topic, index) => (
                             <TopicBucket
@@ -141,6 +137,7 @@ const mapStateToProps = (state) => ({
   user: state.user,
   topics: state.topics,
 });
+
 function mapDispatchToProps(dispatch) {
   return {
     dispatch,
