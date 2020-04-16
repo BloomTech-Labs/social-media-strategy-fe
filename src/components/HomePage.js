@@ -4,18 +4,19 @@ import { DragDropContext, Droppable } from 'react-beautiful-dnd';
 import { sort, fetchTopics, updateTopics, currentUser } from '../actions';
 import styled from 'styled-components';
 
-import Dashboard from './Dashboard';
-import Navigation from './Navigation';
-import TopicBucket from './TopicBucket';
-import ActionButton from './ActionButton';
 
-import '../sass/index.scss';
-import { Route, Switch } from 'react-router';
-import Callback from './Callback';
+import Dashboard from "./Dashboard";
+import Navigation from "./Navigation";
+import TopicBucket from "./TopicBucket";
+import ActionButton from "./ActionButton";
+import TopicNav from "./TopicNav";
+
+import "../sass/index.scss";
+import { Route, Switch } from "react-router";
+import Callback from "./Callback";
 import { axiosWithAuth } from '../utils/axiosWithAuth';
-import { bindActionCreators } from 'redux';
-import Axios from 'axios';
-import Loader from 'react-loader-spinner';
+import { bindActionCreators } from "redux";
+import Loader from "react-loader-spinner";
 
 const TopicsContainer = styled.div`
   display: flex;
@@ -65,49 +66,47 @@ const HomePage = (props) => {
   };
 
   return (
-    <div className="columns is-gapless">
-      <div className="column is-2">
+    <div className='columns is-gapless'>
+      <div className='column is-2'>
         <Navigation />
       </div>
 
       <Route exact path="/callback">
+
         <Callback />
       </Route>
       <Switch>
-        <Route path="/">
-          <div className="column is-3">
+        <Route path='/'>
+          <div className='column is-3'>
             <Dashboard />
           </div>
-          <div className="column drag-drop-content">
-            <div className="column select-a-header">
-              <h1 className="headers">Buckets</h1>
-              <h3 className="unselected-headers">Social Board Queue</h3>
-              <h3 className="unselected-headers">Analytics</h3>
-            </div>
-            <ActionButton className="column is-2 headers" topic />
+          <div className='column drag-drop-content'>
+            <TopicNav />
+            <ActionButton className='column is-2 headers' topic />
             <DragDropContext onDragEnd={onDragEnd}>
               <Droppable
-                className="columns"
-                droppableId="all-topics"
-                direction="horizontal"
-                type="topic"
+                className='columns'
+                droppableId='all-topics'
+                direction='horizontal'
+                type='topic'
               >
                 {(provided) => (
                   <TopicsContainer
                     {...provided.droppableProps}
                     ref={provided.innerRef}
                   >
+
                     <div className="column topics">
                       {props.user.isLoading && (
+
                         <Loader
-                          type="BallTriangle"
-                          color="#00BFFF"
+                          type='BallTriangle'
+                          color='#00BFFF'
                           height={100}
                           width={100}
-                          timeout={3000} //3 secs
+                          timeout={3000}
                         />
-                      )}
-                      {props.topics && !props.user.isLoading && (
+                      ) : (
                         <>
                           {props?.topics?.map((topic, index) => (
                             <TopicBucket
@@ -138,6 +137,7 @@ const mapStateToProps = (state) => ({
   user: state.user,
   topics: state.topics,
 });
+
 function mapDispatchToProps(dispatch) {
   return {
     dispatch,
