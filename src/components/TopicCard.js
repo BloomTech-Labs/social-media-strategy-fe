@@ -1,20 +1,19 @@
-import React, { useState } from "react";
-import styled from "styled-components";
-import { Draggable } from "react-beautiful-dnd";
-import "../sass/topicBuckets.scss";
-import CreateIcon from "@material-ui/icons/Create";
-import DeleteIcon from "@material-ui/icons/Delete";
-import MoreVertIcon from "@material-ui/icons/MoreVert";
-import { connect } from "react-redux";
-import { bindActionCreators } from "redux";
-import { makeStyles } from "@material-ui/core/styles";
-import { deleteCard } from "../actions";
+import React, { useState } from 'react';
+import styled from 'styled-components';
+import { Draggable } from 'react-beautiful-dnd';
+import '../sass/topicBuckets.scss';
+import CreateIcon from '@material-ui/icons/Create';
+import DeleteIcon from '@material-ui/icons/Delete';
+import MoreVertIcon from '@material-ui/icons/MoreVert';
+import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
+import { makeStyles } from '@material-ui/core/styles';
+import { deleteCard, editCard } from '../actions';
 import Modal from '@material-ui/core/Modal';
 import FormControl from '@material-ui/core/FormControl';
 import Select from '@material-ui/core/Select';
 import InputLabel from '@material-ui/core/InputLabel';
 import MenuItem from '@material-ui/core/MenuItem';
-
 
 const Container = styled.div`
   background-color: white;
@@ -37,14 +36,14 @@ const Icons = styled.div`
   padding: 0.5rem;
 `;
 
-function editModalLocation(){
+function editModalLocation() {
   const top = 50;
   const left = 50;
 
   return {
     top: `${top}%`,
-    left: `${left}%`
-  }
+    left: `${left}%`,
+  };
 }
 
 const modalStyles = makeStyles((theme) => ({
@@ -58,12 +57,12 @@ const modalStyles = makeStyles((theme) => ({
     padding: theme.spacing(7),
   },
   mHeader: {
-    fontSize: '1.6rem'
+    fontSize: '1.6rem',
   },
-  mAccent:{
-    lineHeight:'.1rem',
+  mAccent: {
+    lineHeight: '.1rem',
     color: '#e85556',
-    fontWeight: 200
+    fontWeight: 200,
   },
   formControl: {
     margin: theme.spacing(1),
@@ -77,23 +76,25 @@ const modalStyles = makeStyles((theme) => ({
     padding: '1rem',
     margin: '.5rem 1rem',
     width: '40%',
-    fontSize: '1.2rem'
-}
+    fontSize: '1.2rem',
+  },
 }));
-
 
 const TopicCard = (props) => {
   const classes = modalStyles();
   const [modalStyle] = useState(editModalLocation);
   const [open, setOpen] = useState(false);
   const [handle, setHandle] = useState('');
+  const [content, setcontent] = useState({ name: '' });
+  const [editing, setediting] = useState(false);
 
   const handleOpen = () => {
     setOpen(true);
   };
 
   const handleChange = (e) => {
-    setHandle(e.target.value);
+    e.preventDefault();
+    setcontent({ ...content, [e.target.name]: e.target.value });
   };
 
   const handleClose = () => {
@@ -121,7 +122,7 @@ const TopicCard = (props) => {
       <button className={classes.actionSubmit}>Schedule</button>
       <button className={classes.actionSubmit}>Post now</button>
     </div>
-  )
+  );
 
   return (
     <Draggable draggableId={String(props.id)} index={props.index}>
@@ -133,20 +134,45 @@ const TopicCard = (props) => {
           ref={provided.innerRef}
         >
           <BtnCont>
-            <Icons style={{color: "#848484"}}>
-              <DeleteIcon style={{padding: '0rem .25rem'}} onClick={() => props.deleteCard(props.card.id)} />
-              <CreateIcon style={{padding: '0rem .25rem'}} onClick={handleOpen} />
-              <MoreVertIcon />
+            <Icons>
+              {console.log(content.name)}
+              <DeleteIcon onClick={() => props.deleteCard(props.card.id)} />
+              <CreateIcon
+                // onClick={() => props.editCard(props.card.id, content)}
+                onClick={() => setediting(!editing)}
+              />
+              <MoreVertIcon
+                style={{ padding: '0rem .25rem' }}
+                onClick={handleOpen}
+              />
             </Icons>
           </BtnCont>
-          <Modal
-            open={open}
-            onClose={handleClose}
-            >
-              {modalBody}
+          <Modal open={open} onClose={handleClose}>
+            {modalBody}
           </Modal>
-          {console.log(props.card.id, "CARD ID")}
-          {props.card.content}
+          {!editing ? (
+            props.card.content
+          ) : (
+            <>
+              <form
+                onSubmit={() => props.editCard(props.card.id, content.name)}
+              >
+                <input
+                  type="text"
+                  name="name"
+                  value={content.name}
+                  onChange={handleChange}
+                />
+                &nbsp;{' '}
+                <span
+                  onClick={() => setediting(!editing)}
+                  style={{ color: 'red', fontWeight: 'bolder', padding: '5px' }}
+                >
+                  x
+                </span>
+              </form>
+            </>
+          )}
         </Container>
       )}
     </Draggable>
@@ -160,7 +186,7 @@ const mapStateToProps = (state) => ({
 function mapDispatchToProps(dispatch) {
   return {
     dispatch,
-    ...bindActionCreators({ deleteCard }, dispatch),
+    ...bindActionCreators({ deleteCard, editCard }, dispatch),
   };
 }
 

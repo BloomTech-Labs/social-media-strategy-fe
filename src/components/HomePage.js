@@ -29,7 +29,6 @@ const HomePage = (props) => {
 
   async function updateAlltopics() {
     let test = await props?.topics?.forEach(async (e, i) => {
-      console.log(e.id, i, "WHAT FOREACH");
       await axiosWithAuth()
         .put(`/topics/${e.id}`, { ...e, index: i })
         .then((res) => console.log(res, "???"))
@@ -43,6 +42,11 @@ const HomePage = (props) => {
     props.fetchTopics(props.user.currentUser?.subject);
   }, [userCheck]);
 
+  let updateTrue = props.user.didUpdate === true;
+  useEffect(() => {
+    props.updateTopics(updateAlltopics);
+  }, [updateTrue]);
+  console.log("USERUPDATED", props.user.didUpdate);
   const onDragEnd = (result) => {
     const { destination, source, draggableId, type } = result;
     if (!destination) {
@@ -55,8 +59,7 @@ const HomePage = (props) => {
         source.index,
         destination.index,
         draggableId,
-        type,
-        updateAlltopics
+        type
       )
     );
   };
@@ -66,11 +69,6 @@ const HomePage = (props) => {
       <div className="column is-2">
         <Navigation />
       </div>
-
-      {console.log(props.topics.length, props.topics, "TESTING")}
-      {/* <button onClick={() => props.dispatch(updateTopics(updateAlltopics))}>
-        I AM A BUTTON
-      </button> */}
 
       <Route exact path="/callback">
         <Callback />
@@ -100,8 +98,6 @@ const HomePage = (props) => {
                     ref={provided.innerRef}
                   >
                     <div className="column topics">
-                      {console.log(props?.topics, "WHAT ARE You")}
-                      {console.log(props.user.isLoading, "LOADING")}
                       {props.user.isLoading && (
                         <Loader
                           type="BallTriangle"

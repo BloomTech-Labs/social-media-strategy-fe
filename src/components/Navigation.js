@@ -32,7 +32,7 @@ const Navigation = () => {
     message: false,
     account: false,
     analytics: false,
-    alert: false
+    alert: false,
   });
 
   console.log(color.home);
@@ -55,7 +55,7 @@ const Navigation = () => {
                   message: false,
                   account: false,
                   analytics: false,
-                  alert: false
+                  alert: false,
                 })
               }
             >
@@ -79,7 +79,7 @@ const Navigation = () => {
                   message: false,
                   account: false,
                   analytics: false,
-                  alert: false
+                  alert: false,
                 })
               }
             >
@@ -103,7 +103,7 @@ const Navigation = () => {
                   message: false,
                   account: true,
                   analytics: false,
-                  alert: false
+                  alert: false,
                 })
               }
             >
@@ -127,7 +127,7 @@ const Navigation = () => {
                   message: false,
                   account: false,
                   analytics: true,
-                  alert: false
+                  alert: false,
                 })
               }
             >
@@ -152,7 +152,7 @@ const Navigation = () => {
                   message: true,
                   account: false,
                   analytics: false,
-                  alert: false
+                  alert: false,
                 })
               }
             >
@@ -176,7 +176,7 @@ const Navigation = () => {
                   message: false,
                   account: false,
                   analytics: false,
-                  alert: true
+                  alert: true,
                 })
               }
             >
@@ -190,8 +190,15 @@ const Navigation = () => {
               </li>
             </NavLink>
             <NavLink
+              onClick={() =>
+                // localStorage.removeItem("token") &
+                // localStorage.removeItem("CURRENTUSER") &
+                localStorage.clear() &
+                sessionStorage.clear() &
+                window.location.reload(false)
+              }
               className={color.menu ? "linkActive" : "linkNav"}
-              to="/login"
+              to="/"
             >
               <li className="link">
                 <img
@@ -199,7 +206,7 @@ const Navigation = () => {
                   src={color.menu ? MenuAlt : Menu}
                   alt="Menu icon"
                 />
-                Login
+                Logout{" "}
               </li>
             </NavLink>
           </ul>

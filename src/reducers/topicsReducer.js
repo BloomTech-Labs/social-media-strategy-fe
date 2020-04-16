@@ -9,17 +9,17 @@ const cuser = JSON.parse(setid);
 
 export const initialState = [
   {
-    id: `topic-${uuidv4()} topic-0`,
-    title: "Drafts",
-    user_id: 1 ?? cuser,
-    index: 0,
-    cards: [
-      {
-        id: `card-${0}`,
-        content:
-          "This is an example of a post that you could draft. Feel free to express yourself!",
-      },
-    ],
+    // id: `topic-${uuidv4()} topic-0`,
+    // title: "Drafts",
+    // user_id: 1 ?? cuser,
+    // index: 0,
+    // cards: [
+    //   {
+    //     id: `card-${0}`,
+    //     content:
+    //       "This is an example of a post that you could draft. Feel free to express yourself!",
+    //   },
+    // ],
   },
 ];
 
@@ -87,8 +87,9 @@ const topicsReducer = (state = initialState, action) => {
       // dragging topics
       if (type === "topic") {
         const topic = newState.splice(droppableIndexStart, 1);
-        topic[0].index = droppableIndexEnd;
+        // topic[0].index = droppableIndexEnd;
         newState.splice(droppableIndexEnd, 0, ...topic);
+
         return newState;
       }
 
@@ -128,6 +129,19 @@ const topicsReducer = (state = initialState, action) => {
         return {
           ...topics,
           cards: topics.cards.filter((card) => card.id !== action.payload),
+        };
+      });
+      return newState;
+    }
+    case CONSTANTS.EDIT_CARD: {
+      let newState = state.map((topics) => {
+        return {
+          ...topics,
+          cards: topics.cards.map((card) =>
+            card.id === action.payload
+              ? { ...card, content: action.edit }
+              : card
+          ),
         };
       });
       return newState;
