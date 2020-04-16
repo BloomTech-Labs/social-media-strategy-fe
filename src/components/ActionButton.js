@@ -50,9 +50,9 @@ class ActionButton extends React.Component {
   handleAddCard = () => {
     const { dispatch, topicId } = this.props;
     const { text } = this.state;
-    // const id =  `card-${uuidv4()}`
+    const id = `card-${uuidv4()}`;
     if (text) {
-      dispatch(addCard(topicId, text));
+      dispatch(addCard(topicId, text, id));
     }
   };
 

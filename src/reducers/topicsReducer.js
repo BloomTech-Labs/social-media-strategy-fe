@@ -58,7 +58,7 @@ const topicsReducer = (state = initialState, action) => {
     case CONSTANTS.ON_ADD_CARD: {
       const newCard = {
         content: action.payload.text,
-        id: `card-${uuidv4()}`,
+        id: action.id,
       };
       cardId += 1;
 

@@ -150,6 +150,7 @@ const TopicBucket = (props) => {
                               style={{ 'margin-right': '20' }}
                               onClick={() => props.deleteTopics(props.topic.id)}
                             />
+
                             <CreateIcon
                               key={`${props.topic.id}-createTopic`}
                               // onClick={() => props.editCard(props.card.id, content)}

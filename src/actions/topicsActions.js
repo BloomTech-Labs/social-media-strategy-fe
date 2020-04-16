@@ -36,8 +36,8 @@ export const addTopic = (text, id) => (dispatch) => {
   );
 };
 
-export const addCard = (topicId, text) => (dispatch) => {
-  dispatch({ type: CONSTANTS.ON_ADD_CARD, payload: { topicId, text } });
+export const addCard = (topicId, text, id) => (dispatch) => {
+  dispatch({ type: CONSTANTS.ON_ADD_CARD, payload: { topicId, text }, id: id });
   dispatch({ type: CONSTANTS.USER_APICALL_START, didUpdate: true });
   setTimeout(() => {
     dispatch({ type: CONSTANTS.USER_APICALL_SUCCESS, didUpdate: false });
