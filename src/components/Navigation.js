@@ -33,6 +33,7 @@ const Navigation = () => {
                 <img
                   src={Home}
                   alt="home icon"
+                  className='navImage'
                 />
                 Home
               </li>
