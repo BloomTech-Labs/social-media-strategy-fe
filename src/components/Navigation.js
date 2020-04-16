@@ -1,30 +1,30 @@
-import React, { useState } from "react";
+import React, { useState } from 'react';
 //component imports
-import TransitionsModal from "./Modal";
-import HomeNav from "./HomeNav";
-import REGISTER_LOGIN from "../components/Register_Login";
+import TransitionsModal from './Modal';
+import HomeNav from './HomeNav';
+import REGISTER_LOGIN from '../components/Register_Login';
 // react router dom imports
-import { NavLink, Route, Switch } from "react-router-dom";
+import { NavLink, Route, Switch } from 'react-router-dom';
 // Styles
-import "../sass/navigation.scss";
+import '../sass/navigation.scss';
 // asset imports
-import Home from "../assets/icons8-home-30.svg";
-import HomeAlt from "../assets/icons8-home2-30.svg";
-import Search from "../assets/icons8-search-30.svg";
-import SearchAlt from "../assets/icons8-search2-30.svg";
-import Menu from "../assets/icons8-menu-vertical-30.svg";
-import MenuAlt from "../assets/icons8-menu-vertical2-30.svg";
-import Message from "../assets/icons8-chat-30.svg";
-import MessageAlt from "../assets/icons8-chat2-30.svg";
-import Account from "../assets/icons8-male-user-30.svg";
-import AccountAlt from "../assets/icons8-male-user2.svg";
-import Analytics from "../assets/icons8-bar-chart-30.svg";
-import AnalyticsAlt from "../assets/icons8-bar-chart2-30.svg";
-import Alert from "../assets/icons8-doorbell-30.svg";
-import AlertAlt from "../assets/icons8-doorbell2-30.svg";
+import Home from '../assets/icons8-home-30.svg';
+import HomeAlt from '../assets/icons8-home2-30.svg';
+import Search from '../assets/icons8-search-30.svg';
+import SearchAlt from '../assets/icons8-search2-30.svg';
+import Menu from '../assets/icons8-menu-vertical-30.svg';
+import MenuAlt from '../assets/icons8-menu-vertical2-30.svg';
+import Message from '../assets/icons8-chat-30.svg';
+import MessageAlt from '../assets/icons8-chat2-30.svg';
+import Account from '../assets/icons8-male-user-30.svg';
+import AccountAlt from '../assets/icons8-male-user2.svg';
+import Analytics from '../assets/icons8-bar-chart-30.svg';
+import AnalyticsAlt from '../assets/icons8-bar-chart2-30.svg';
+import Alert from '../assets/icons8-doorbell-30.svg';
+import AlertAlt from '../assets/icons8-doorbell2-30.svg';
 
 const Navigation = () => {
-  const [currentuser, setCurrentuser] = useState("");
+  // const [currentuser, setCurrentuser] = useState("");
   const [color, setColor] = useState({
     home: true,
     search: false,
@@ -45,7 +45,7 @@ const Navigation = () => {
         <nav className="navLinks">
           <ul>
             <NavLink
-              className={color.home ? "linkActive" : "linkNav"}
+              className={color.home ? 'linkActive' : 'linkNav'}
               to="/home"
               onClick={() =>
                 setColor({
@@ -69,7 +69,7 @@ const Navigation = () => {
               </li>
             </NavLink>
             <NavLink
-              className={color.search ? "linkActive" : "linkNav"}
+              className={color.search ? 'linkActive' : 'linkNav'}
               to="/search"
               onClick={() =>
                 setColor({
@@ -93,7 +93,7 @@ const Navigation = () => {
               </li>
             </NavLink>
             <NavLink
-              className={color.account ? "linkActive" : "linkNav"}
+              className={color.account ? 'linkActive' : 'linkNav'}
               to="/account"
               onClick={() =>
                 setColor({
@@ -117,7 +117,7 @@ const Navigation = () => {
               </li>
             </NavLink>
             <NavLink
-              className={color.analytics ? "linkActive" : "linkNav"}
+              className={color.analytics ? 'linkActive' : 'linkNav'}
               to="/analytics"
               onClick={() =>
                 setColor({
@@ -141,7 +141,7 @@ const Navigation = () => {
               </li>
             </NavLink>
             <NavLink
-              className={color.message ? "linkActive" : "linkNav"}
+              className={color.message ? 'linkActive' : 'linkNav'}
               id="1"
               to="/messages"
               onClick={() =>
@@ -166,7 +166,7 @@ const Navigation = () => {
               </li>
             </NavLink>
             <NavLink
-              className={color.alert ? "linkActive" : "linkNav"}
+              className={color.alert ? 'linkActive' : 'linkNav'}
               to="/notifications"
               onClick={() =>
                 setColor({
@@ -197,7 +197,7 @@ const Navigation = () => {
                 sessionStorage.clear() &
                 window.location.reload(false)
               }
-              className={color.menu ? "linkActive" : "linkNav"}
+              className={color.menu ? 'linkActive' : 'linkNav'}
               to="/"
             >
               <li className="link">
@@ -206,7 +206,7 @@ const Navigation = () => {
                   src={color.menu ? MenuAlt : Menu}
                   alt="Menu icon"
                 />
-                Logout{" "}
+                Logout{' '}
               </li>
             </NavLink>
           </ul>

@@ -14,7 +14,6 @@ import { Route, Switch } from 'react-router';
 import Callback from './Callback';
 import { axiosWithAuth } from '../utils/axiosWithAuth';
 import { bindActionCreators } from 'redux';
-import Axios from 'axios';
 import Loader from 'react-loader-spinner';
 
 const TopicsContainer = styled.div`
@@ -36,6 +35,10 @@ const HomePage = (props) => {
     });
     return test;
   }
+
+  // useEffect(() => {
+  //   window.location.reload(false);
+  // }, []);
 
   useEffect(() => {
     props.currentUser();
