@@ -1,9 +1,9 @@
-import CONSTANTS from "./constants";
-import { axiosWithAuth } from "../utils/axiosWithAuth";
-import Axios from "axios";
+import CONSTANTS from './constants';
+import { axiosWithAuth } from '../utils/axiosWithAuth';
+import Axios from 'axios';
 
 //Current user
-const setid = localStorage.getItem("CUSER");
+const setid = localStorage.getItem('CUSER');
 const cuser = JSON.parse(setid);
 const timeoutTime = 100;
 
@@ -113,7 +113,7 @@ export const addTopics = (id, topics) => (dispatch) => {
       // });
     })
     .catch((error) => {
-      console.log(error, "FAIL");
+      console.log(error, 'FAIL');
       dispatch({ type: CONSTANTS.USER_APICALL_FAILURE, payload: error.data });
     });
 };
@@ -131,7 +131,7 @@ export const deleteTopics = (id) => (dispatch) => {
       // });
     })
     .catch((error) => {
-      console.log(error, "FAIL");
+      console.log(error, 'FAIL');
       dispatch({ type: CONSTANTS.USER_APICALL_FAILURE, payload: error.data });
     });
 };
@@ -150,7 +150,7 @@ export const editTopicTitle = (id, title) => (dispatch) => {
       // });
     })
     .catch((error) => {
-      console.log(error, "FAIL");
+      console.log(error, 'FAIL');
       dispatch({ type: CONSTANTS.USER_APICALL_FAILURE, payload: error.data });
     });
 };

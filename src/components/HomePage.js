@@ -98,7 +98,7 @@ const HomePage = (props) => {
                     ref={provided.innerRef}
                   >
                     <div className="column topics">
-                      {props.user.isLoading ? (
+                      {props.user.isLoading  && (
                         <Loader
                           type="BallTriangle"
                           color="#00BFFF"

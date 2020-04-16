@@ -1,19 +1,19 @@
-import React, { useEffect, useState } from "react";
-import { connect } from "react-redux";
-import styled from "styled-components";
-import TopicCard from "./TopicCard";
-import { Droppable, Draggable } from "react-beautiful-dnd";
-import ActionButton from "./ActionButton";
-import DeleteIcon from "@material-ui/icons/Delete";
-import CreateIcon from "@material-ui/icons/Create";
+import React, { useEffect, useState } from 'react';
+import { connect } from 'react-redux';
+import styled from 'styled-components';
+import TopicCard from './TopicCard';
+import { Droppable, Draggable } from 'react-beautiful-dnd';
+import ActionButton from './ActionButton';
+import DeleteIcon from '@material-ui/icons/Delete';
+import CreateIcon from '@material-ui/icons/Create';
 
 import {
   fetchTopics,
   updateTopics,
   deleteTopics,
   editTopicTitle,
-} from "../actions";
-import { axiosWithAuth } from "../utils/axiosWithAuth";
+} from '../actions';
+import { axiosWithAuth } from '../utils/axiosWithAuth';
 
 const Container = styled.div`
   background-color: #ebecf0;
@@ -49,7 +49,7 @@ const Icons = styled.div`
 `;
 
 const TopicBucket = (props) => {
-  const [content, setcontent] = useState({ name: "" });
+  const [content, setcontent] = useState({ name: '' });
   const [editing, setediting] = useState(false);
 
   const handleChange = (e) => {
@@ -72,14 +72,13 @@ const TopicBucket = (props) => {
             <Droppable droppableId={String(props.topic.id)} type="card">
               {(provided) => (
                 <>
-                
                   {scrollCondition ? (
                     <>
                       <Title>
-                        {props.topic.title !== "Drafts" ? (
+                        {props.topic.title !== 'Drafts' ? (
                           <span>
                             <DeleteIcon
-                              style={{ "margin-right": "20" }}
+                              style={{ 'margin-right': '20' }}
                               onClick={() => props.deleteTopics(props.topic.id)}
                             />
                             <CreateIcon
@@ -104,13 +103,13 @@ const TopicBucket = (props) => {
                                     value={content.name}
                                     onChange={handleChange}
                                   />
-                                  &nbsp;{" "}
+                                  &nbsp;{' '}
                                   <span
                                     onClick={() => setediting(!editing)}
                                     style={{
-                                      color: "red",
-                                      fontWeight: "bolder",
-                                      padding: "5px",
+                                      color: 'red',
+                                      fontWeight: 'bolder',
+                                      padding: '5px',
                                     }}
                                   >
                                     x
@@ -144,13 +143,15 @@ const TopicBucket = (props) => {
                   ) : (
                     <>
                       <Title>
-                        {props.topic.title !== "Drafts" ? (
+                        {props.topic.title !== 'Drafts' ? (
                           <span>
                             <DeleteIcon
-                              style={{ "margin-right": "20" }}
+                              key={props.topic.id}
+                              style={{ 'margin-right': '20' }}
                               onClick={() => props.deleteTopics(props.topic.id)}
                             />
                             <CreateIcon
+                              key={`${props.topic.id}-createTopic`}
                               // onClick={() => props.editCard(props.card.id, content)}
                               onClick={() => setediting(!editing)}
                             />
@@ -172,13 +173,13 @@ const TopicBucket = (props) => {
                                     value={content.name}
                                     onChange={handleChange}
                                   />
-                                  &nbsp;{" "}
+                                  &nbsp;{' '}
                                   <span
                                     onClick={() => setediting(!editing)}
                                     style={{
-                                      color: "red",
-                                      fontWeight: "bolder",
-                                      padding: "5px",
+                                      color: 'red',
+                                      fontWeight: 'bolder',
+                                      padding: '5px',
                                     }}
                                   >
                                     x
