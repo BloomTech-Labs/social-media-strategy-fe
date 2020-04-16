@@ -5,6 +5,7 @@ import { MemoryRouter } from "react-router-dom";
 import "@testing-library/jest-dom/extend-expect";
 // import of our navigation component
 import Navigation from "../components/Navigation";
+import { fireEvent } from "@testing-library/react";
 
 // testing to check if navigation renders important links
 it("renders the text of navigation links", () => {
