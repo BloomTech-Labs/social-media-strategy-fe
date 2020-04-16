@@ -1,18 +1,13 @@
 import React from "react";
 //component imports
 import TransitionsModal from "./Modal";
+import SvgComponent from './SvgComponent';
 // react router dom imports
 import { NavLink, Route, Switch } from "react-router-dom";
 // Styles
 import "../sass/navigation.scss";
 // asset imports
-import Home from "../assets/icons8-home-30.svg";
-import Search from "../assets/icons8-search-30.svg";
 import Menu from "../assets/icons8-menu-vertical-30.svg";
-import Message from "../assets/icons8-chat-30.svg";
-import Account from "../assets/icons8-male-user-30.svg";
-import Analytics from "../assets/icons8-bar-chart-30.svg";
-import Alert from "../assets/icons8-doorbell-30.svg";
 
 const Navigation = () => {
   
@@ -30,11 +25,7 @@ const Navigation = () => {
               to="/home"
             >
               <li className="link">
-                <img
-                  src={Home}
-                  alt="home icon"
-                  className='navImage'
-                />
+                <SvgComponent iconName='home' />
                 Home
               </li>
             </NavLink>
@@ -44,11 +35,7 @@ const Navigation = () => {
               to="/search"
             >
               <li className="link">
-                <img
-                  className="navImage"
-                  src={Search}
-                  alt="Search icon"
-                />
+              <SvgComponent iconName='search' />
                 Search
               </li>
             </NavLink>
@@ -58,11 +45,7 @@ const Navigation = () => {
               to="/account"
             >
               <li className="link">
-                <img
-                  className="navImage"
-                  src={Account}
-                  alt="Account icon"
-                />
+              <SvgComponent iconName='male-user' />
                 Account
               </li>
             </NavLink>
@@ -72,11 +55,7 @@ const Navigation = () => {
               to="/analytics"
             >
               <li className="link">
-                <img
-                  className="navImage"
-                  src={Analytics}
-                  alt="Analytics icon"
-                />
+              <SvgComponent iconName='bar-chart' />
                 Analytics
               </li>
             </NavLink>
@@ -87,11 +66,7 @@ const Navigation = () => {
               to="/messages"
             >
               <li className="link">
-                <img
-                  className="navImage"
-                  src={Message}
-                  alt="Message icon"
-                />
+              <SvgComponent iconName='chat' />
                 Messages
               </li>
             </NavLink>
@@ -101,11 +76,7 @@ const Navigation = () => {
               to="/notifications"
             >
               <li className="link">
-                <img
-                  className="navImage"
-                  src={Alert}
-                  alt="bell icon"
-                />
+              <SvgComponent iconName='doorbell' />
                 Notifications
               </li>
             </NavLink>
