@@ -5,6 +5,7 @@ import Axios from "axios";
 //Current user
 const setid = localStorage.getItem("CUSER");
 const cuser = JSON.parse(setid);
+const timeoutTime = 100;
 
 export const onDragEndSingle = (newTopic) => (dispatch) => {
   dispatch({ type: CONSTANTS.ON_DRAG_END_SUCCESS, payload: newTopic });
@@ -40,10 +41,21 @@ export const addCard = (topicId, text) => (dispatch) => {
   dispatch({ type: CONSTANTS.USER_APICALL_START, didUpdate: true });
   setTimeout(() => {
     dispatch({ type: CONSTANTS.USER_APICALL_SUCCESS, didUpdate: false });
-  }, 100);
+  }, timeoutTime);
 };
 export const deleteCard = (cardID) => (dispatch) => {
   dispatch({ type: CONSTANTS.DELETE_CARD, payload: cardID });
+  dispatch({ type: CONSTANTS.USER_APICALL_START, didUpdate: true });
+  setTimeout(() => {
+    dispatch({ type: CONSTANTS.USER_APICALL_SUCCESS, didUpdate: false });
+  }, timeoutTime);
+};
+export const editCard = (cardID, content) => (dispatch) => {
+  dispatch({ type: CONSTANTS.EDIT_CARD, payload: cardID, edit: content });
+  dispatch({ type: CONSTANTS.USER_APICALL_START, didUpdate: true });
+  setTimeout(() => {
+    dispatch({ type: CONSTANTS.USER_APICALL_SUCCESS, didUpdate: false });
+  }, timeoutTime);
 };
 
 export const sort = (
@@ -69,7 +81,7 @@ export const sort = (
   dispatch({ type: CONSTANTS.USER_APICALL_START, didUpdate: true });
   setTimeout(() => {
     dispatch({ type: CONSTANTS.USER_APICALL_SUCCESS, didUpdate: false });
-  }, 100);
+  }, timeoutTime);
 };
 
 //  GET TOPICS
@@ -110,6 +122,25 @@ export const deleteTopics = (id) => (dispatch) => {
   dispatch({ type: CONSTANTS.USER_APICALL_START });
   axiosWithAuth()
     .delete(`/topics/${id}`)
+    .then((response) => {
+      dispatch(fetchTopics(cuser));
+
+      // dispatch({
+      //   type: CONSTANTS.TOPIC_UPDATE_SUCCESS,
+      //   payload: response.data,
+      // });
+    })
+    .catch((error) => {
+      console.log(error, "FAIL");
+      dispatch({ type: CONSTANTS.USER_APICALL_FAILURE, payload: error.data });
+    });
+};
+
+// EDIT TOPIC
+export const editTopicTitle = (id, title) => (dispatch) => {
+  dispatch({ type: CONSTANTS.USER_APICALL_START });
+  axiosWithAuth()
+    .put(`/topics/${id}`, { title: title })
     .then((response) => {
       dispatch(fetchTopics(cuser));
 

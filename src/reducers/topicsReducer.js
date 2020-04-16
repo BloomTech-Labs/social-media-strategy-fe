@@ -133,6 +133,19 @@ const topicsReducer = (state = initialState, action) => {
       });
       return newState;
     }
+    case CONSTANTS.EDIT_CARD: {
+      let newState = state.map((topics) => {
+        return {
+          ...topics,
+          cards: topics.cards.map((card) =>
+            card.id === action.payload
+              ? { ...card, content: action.edit }
+              : card
+          ),
+        };
+      });
+      return newState;
+    }
 
     default:
       return state;

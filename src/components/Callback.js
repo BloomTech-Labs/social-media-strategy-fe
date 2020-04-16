@@ -72,8 +72,11 @@ const Callback = () => {
       <p>
         Thank you,{' '}
         <strong>
-          <a style={{color:'orange'}} href={`https://twitter.com/${data.twitter_screenName}`}>
-            @${data.twitter_screenName}
+          <a
+            style={{ color: 'orange' }}
+            href={`https://twitter.com/${data.twitter_screenName}`}
+          >
+            @{data.twitter_screenName}
           </a>
         </strong>
         , for authorizing SoMe an access token. We've successfully received your
@@ -86,7 +89,7 @@ const Callback = () => {
         </li> */}
         <li>
           You have currently have
-          <span className='label label-success'>
+          <span className="label label-success">
             &nbsp;{data.total_followers}
           </span>{' '}
           followers.
@@ -97,9 +100,11 @@ const Callback = () => {
         </li> */}
       </ul>
       <h2>Redirecting you back to your SoMe profile in {time} </h2>
-      <p className='redirect'>
+      <p className="redirect">
         if countdown didn't redirect you to profile page please click{' '}
-        <a style={{color:'orange'}}href='/'>here</a>
+        <a style={{ color: 'orange' }} href="/">
+          here
+        </a>
       </p>
     </div>
   );

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import styled from "styled-components";
 import { Draggable } from "react-beautiful-dnd";
 import "../sass/topicBuckets.scss";
@@ -7,7 +7,7 @@ import DeleteIcon from "@material-ui/icons/Delete";
 import MoreVertIcon from "@material-ui/icons/MoreVert";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
-import { deleteCard } from "../actions";
+import { deleteCard, editCard } from "../actions";
 
 const Container = styled.div`
   background-color: white;
@@ -31,6 +31,13 @@ const Icons = styled.div`
 `;
 
 const TopicCard = (props) => {
+  const [content, setcontent] = useState({ name: "" });
+  const [editing, setediting] = useState(false);
+
+  const handleChange = (e) => {
+    e.preventDefault();
+    setcontent({ ...content, [e.target.name]: e.target.value });
+  };
   return (
     <Draggable draggableId={String(props.id)} index={props.index}>
       {(provided) => (
@@ -42,12 +49,38 @@ const TopicCard = (props) => {
         >
           <BtnCont>
             <Icons>
+              {console.log(content.name)}
               <DeleteIcon onClick={() => props.deleteCard(props.card.id)} />
-              <CreateIcon />
+              <CreateIcon
+                // onClick={() => props.editCard(props.card.id, content)}
+                onClick={() => setediting(!editing)}
+              />
               <MoreVertIcon />
             </Icons>
           </BtnCont>
-          {props.card.content}
+          {!editing ? (
+            props.card.content
+          ) : (
+            <>
+              <form
+                onSubmit={() => props.editCard(props.card.id, content.name)}
+              >
+                <input
+                  type="text"
+                  name="name"
+                  value={content.name}
+                  onChange={handleChange}
+                />
+                &nbsp;{" "}
+                <span
+                  onClick={() => setediting(!editing)}
+                  style={{ color: "red", fontWeight: "bolder", padding: "5px" }}
+                >
+                  x
+                </span>
+              </form>
+            </>
+          )}
         </Container>
       )}
     </Draggable>
@@ -61,7 +94,7 @@ const mapStateToProps = (state) => ({
 function mapDispatchToProps(dispatch) {
   return {
     dispatch,
-    ...bindActionCreators({ deleteCard }, dispatch),
+    ...bindActionCreators({ deleteCard, editCard }, dispatch),
   };
 }
 
