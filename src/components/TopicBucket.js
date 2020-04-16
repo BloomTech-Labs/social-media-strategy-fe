@@ -75,14 +75,10 @@ const TopicBucket = (props) => {
             <Droppable droppableId={String(props.topic.id)} type="card">
               {(provided) => (
                 <>
+                
                   {scrollCondition ? (
                     <>
-                      <Title
-                        style={{
-                          display: "flex",
-                          justifyContent: "space-between",
-                        }}
-                      >
+                      <Title>
                         {props.topic.title}
                         {props.topic.title !== "Drafts" ? (
                           <DeleteIcon
@@ -90,6 +86,7 @@ const TopicBucket = (props) => {
                           />
                         ) : null}
                       </Title>
+
                       <CardList
                         id="topic-scroll"
                         ref={provided.innerRef}
