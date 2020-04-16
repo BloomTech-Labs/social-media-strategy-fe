@@ -112,6 +112,7 @@ const TopicCard = (props) => {
           value={handle}
           onChange={handleChange}
         >
+          {/* Replace this with backend Twitter Handle info */}
           <MenuItem value={1}>@lillighanson</MenuItem>
           <MenuItem value={2}>@msdoodler</MenuItem>
           <MenuItem value={3}>@adventureawaits</MenuItem>
