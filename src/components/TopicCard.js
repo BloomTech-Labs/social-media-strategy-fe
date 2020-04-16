@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import styled from "styled-components";
 import { Draggable } from "react-beautiful-dnd";
 import "../sass/topicBuckets.scss";
@@ -7,7 +7,14 @@ import DeleteIcon from "@material-ui/icons/Delete";
 import MoreVertIcon from "@material-ui/icons/MoreVert";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
+import { makeStyles } from "@material-ui/core/styles";
 import { deleteCard } from "../actions";
+import Modal from '@material-ui/core/Modal';
+import FormControl from '@material-ui/core/FormControl';
+import Select from '@material-ui/core/Select';
+import InputLabel from '@material-ui/core/InputLabel';
+import MenuItem from '@material-ui/core/MenuItem';
+
 
 const Container = styled.div`
   background-color: white;
@@ -30,7 +37,92 @@ const Icons = styled.div`
   padding: 0.5rem;
 `;
 
+function editModalLocation(){
+  const top = 50;
+  const left = 50;
+
+  return {
+    top: `${top}%`,
+    left: `${left}%`
+  }
+}
+
+const modalStyles = makeStyles((theme) => ({
+  paper: {
+    fontFamily: 'Montserrat, sans-serif',
+    position: 'absolute',
+    width: 400,
+    backgroundColor: '#F5F7F8',
+    borderRadius: '6px',
+    boxShadow: theme.shadows[5],
+    padding: theme.spacing(7),
+  },
+  mHeader: {
+    fontSize: '1.6rem'
+  },
+  mAccent:{
+    lineHeight:'.1rem',
+    color: '#e85556',
+    fontWeight: 200
+  },
+  formControl: {
+    margin: theme.spacing(1),
+    minWidth: 200,
+  },
+  actionSubmit: {
+    color: '#fff',
+    backgroundColor: '#E85556',
+    borderRadius: '5rem',
+    border: 'none',
+    padding: '1rem',
+    margin: '.5rem 1rem',
+    width: '40%',
+    fontSize: '1.2rem'
+}
+}));
+
+
 const TopicCard = (props) => {
+  const classes = modalStyles();
+  const [modalStyle] = useState(editModalLocation);
+  const [open, setOpen] = useState(false);
+  const [handle, setHandle] = useState('');
+
+  const handleOpen = () => {
+    setOpen(true);
+  };
+
+  const handleChange = (e) => {
+    setHandle(e.target.value);
+  };
+
+  const handleClose = () => {
+    setOpen(false);
+  };
+
+  const modalBody = (
+    <div style={modalStyle} className={classes.paper}>
+      <h2 className={classes.mHeader}>Edit card</h2>
+      <h3 className={classes.mAccent}>Draft, schedule, and post</h3>
+      <FormControl className={classes.formControl}>
+        <InputLabel id="twitter-handle-select">Social Account</InputLabel>
+        <Select
+          labelId="twitter-handle-select"
+          id="select"
+          value={handle}
+          onChange={handleChange}
+        >
+          {/* Replace this with backend Twitter Handle info */}
+          <MenuItem value={1}>@lillighanson</MenuItem>
+          <MenuItem value={2}>@msdoodler</MenuItem>
+          <MenuItem value={3}>@adventureawaits</MenuItem>
+        </Select>
+      </FormControl>
+      <button className={classes.actionSubmit}>Schedule</button>
+      <button className={classes.actionSubmit}>Post now</button>
+    </div>
+  )
+
   return (
     <Draggable draggableId={String(props.id)} index={props.index}>
       {(provided) => (
@@ -41,12 +133,18 @@ const TopicCard = (props) => {
           ref={provided.innerRef}
         >
           <BtnCont>
-            <Icons>
-              <DeleteIcon onClick={() => props.deleteCard(props.card.id)} />
-              <CreateIcon />
+            <Icons style={{color: "#848484"}}>
+              <DeleteIcon style={{padding: '0rem .25rem'}} onClick={() => props.deleteCard(props.card.id)} />
+              <CreateIcon style={{padding: '0rem .25rem'}} onClick={handleOpen} />
               <MoreVertIcon />
             </Icons>
           </BtnCont>
+          <Modal
+            open={open}
+            onClose={handleClose}
+            >
+              {modalBody}
+          </Modal>
           {console.log(props.card.id, "CARD ID")}
           {props.card.content}
         </Container>
