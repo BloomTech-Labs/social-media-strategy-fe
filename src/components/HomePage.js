@@ -98,7 +98,7 @@ const HomePage = (props) => {
                     ref={provided.innerRef}
                   >
                     <div className="column topics">
-                      {props.user.isLoading  && (
+                      {props.user.isLoading && (
                         <Loader
                           type="BallTriangle"
                           color="#00BFFF"
@@ -106,20 +106,20 @@ const HomePage = (props) => {
                           width={100}
                           timeout={3000}
                         />
-                      ) : (
-                        <>
-                          {props?.topics?.map((topic, index) => (
-                            <TopicBucket
-                              className={`${topic.id}`}
-                              key={topic.id}
-                              topicId={topic.id}
-                              topic={topic}
-                              cards={topic.cards}
-                              index={index}
-                            />
-                          ))}
-                        </>
                       )}
+
+                      <>
+                        {props?.topics?.map((topic, index) => (
+                          <TopicBucket
+                            className={`${topic.id}`}
+                            key={topic.id}
+                            topicId={topic.id}
+                            topic={topic}
+                            cards={topic.cards}
+                            index={index}
+                          />
+                        ))}
+                      </>
                     </div>
                     {provided.placeholder}
                   </TopicsContainer>
