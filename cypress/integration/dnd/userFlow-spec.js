@@ -1,9 +1,9 @@
 
-
+const url = process.env.appUrl || "http://localhost:3000/"
 
 describe("log into an existing account", function() {
   it("visits the site, provides an email and password, then logs in", function() {
-    cy.visit('/');
+    cy.visit(url);
     cy.get("#email")
       .click()
       .type("test@test.com");
