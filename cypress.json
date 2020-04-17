@@ -3,6 +3,6 @@
   "viewportHeight": 960,
   "baseUrl": "http://localhost:3000",
   "env": {
-    "baseUrl": "RUNTIME"
+    "appUrl": "https://so-me.net"
   }
 }
