@@ -1,5 +1,4 @@
-
-const url = process.env.appUrl || "http://localhost:3000/"
+const url = Cypress.env('appUrl');
 
 describe("log into an existing account", function() {
   it("visits the site, provides an email and password, then logs in", function() {
