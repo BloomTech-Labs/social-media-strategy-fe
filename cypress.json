@@ -1,7 +1,7 @@
 {
   "viewportWidth": 2000,
   "viewportHeight": 960,
-  "baseUrl": "http://localhost:3001",
+  "baseUrl": "http://localhost:3000",
   "env": {
     "baseUrl": "RUNTIME"
   }
