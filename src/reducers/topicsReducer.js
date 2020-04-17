@@ -1,10 +1,10 @@
-import CONSTANTS from "../actions/constants";
-import { v4 as uuidv4 } from "uuid";
+import CONSTANTS from '../actions/constants';
+import { v4 as uuidv4 } from 'uuid';
 
 let topicId = 2;
 let cardId = 5;
 
-const setid = localStorage.getItem("CUSER");
+const setid = localStorage.getItem('CUSER');
 const cuser = JSON.parse(setid);
 
 export const initialState = [
@@ -58,7 +58,7 @@ const topicsReducer = (state = initialState, action) => {
     case CONSTANTS.ON_ADD_CARD: {
       const newCard = {
         content: action.payload.text,
-        id: `card-${uuidv4()}`,
+        id: action.id,
       };
       cardId += 1;
 
@@ -85,7 +85,7 @@ const topicsReducer = (state = initialState, action) => {
       const newState = [...state];
 
       // dragging topics
-      if (type === "topic") {
+      if (type === 'topic') {
         const topic = newState.splice(droppableIndexStart, 1);
         // topic[0].index = droppableIndexEnd;
         newState.splice(droppableIndexEnd, 0, ...topic);
@@ -117,11 +117,11 @@ const topicsReducer = (state = initialState, action) => {
       return newState;
     }
     case CONSTANTS.TOPIC_FETCH_SUCCESS: {
-      console.log(action.payload, "NEW STATE");
+      console.log(action.payload, 'NEW STATE');
       return action.payload;
     }
     case CONSTANTS.TOPIC_UPDATE_SUCCESS: {
-      console.log(action.payload, "NEW STATE");
+      console.log(action.payload, 'NEW STATE');
       return action.payload;
     }
     case CONSTANTS.DELETE_CARD: {

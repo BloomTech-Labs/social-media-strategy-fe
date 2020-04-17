@@ -6,6 +6,23 @@ import { Link } from 'react-router-dom';
 import { Card, Typography, Box } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
 import Popover from '@material-ui/core/Popover';
+import AppBar from '@material-ui/core/AppBar';
+import Toolbar from '@material-ui/core/Toolbar';
+import Button from '@material-ui/core/Button';
+import IconButton from '@material-ui/core/IconButton';
+import MenuIcon from '@material-ui/icons/Menu';
+import CropFreeIcon from '@material-ui/icons/CropFree';
+import List from '@material-ui/core/List';
+import Divider from '@material-ui/core/Divider';
+import ListItem from '@material-ui/core/ListItem';
+import ListItemIcon from '@material-ui/core/ListItemIcon';
+import Drawer from '@material-ui/core/Drawer';
+import CssBaseline from '@material-ui/core/CssBaseline';
+
+// Icons
+import DashboardIcon from '@material-ui/icons/Dashboard';
+import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
+import ChevronRightIcon from '@material-ui/icons/ChevronRight';
 
 //Adding moment for date purposes
 import Moment from 'moment';
@@ -26,13 +43,55 @@ import { currentUser } from '../actions';
 
 // Set dummy Acct Data
 const accountData = data.accounts;
+const drawerWidth = 240;
 
 // Material UI Styled Components
-const dashStyles = makeStyles({
+const dashStyles = makeStyles((theme)=> ({
   root: {
     fontFamily: 'Montserrat, sans-serif',
     textAlign: 'center',
     margin: '1rem 0rem',
+  },
+  drawer: {
+    width: drawerWidth,
+    flexShrink: 0,
+  },
+  drawerPaper: {
+    width: drawerWidth,
+  },
+  menuButton: {
+      marginRight: theme.spacing(2),
+  },
+  drawerHeader: {
+    display: 'flex',
+    alignItems: 'center',
+    padding: theme.spacing(0, 1),
+    justifyContent: 'flex-end',
+},
+content: {
+    flexGrow: 1,
+    padding: theme.spacing(3),
+    transition: theme.transitions.create('margin', {
+    easing: theme.transitions.easing.sharp,
+    duration: theme.transitions.duration.leavingScreen,
+    }),
+    marginLeft: -drawerWidth,
+},
+contentShift: {
+    transition: theme.transitions.create('margin', {
+    easing: theme.transitions.easing.easeOut,
+    duration: theme.transitions.duration.enteringScreen,
+    }),
+    marginLeft: 0,
+},
+  menuIcon: {
+      color: "white",
+  },
+  hide: {
+    display: 'none',
+  },
+  grow: {
+    flexGrow: 1,
   },
   name: {
     fontSize: '1.6rem',
@@ -63,8 +122,6 @@ const dashStyles = makeStyles({
     justifyContent: 'center',
     alignItems: 'center',
   },
-});
-const useStyles = makeStyles((theme) => ({
   typography: {
     background: '#EAEAEA',
     padding: theme.spacing(2),
@@ -72,9 +129,9 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
+
 const Dashboard = (props) => {
   const st = dashStyles();
-  const classes = useStyles();
   const [anchorEl, setAnchorEl] = React.useState(null);
 
   const handleClick = (event) => {
@@ -157,7 +214,7 @@ const Dashboard = (props) => {
               horizontal: 'left',
             }}
           >
-            <Typography className={classes.typography}>
+            <Typography className={st.typography}>
               <img
                 onClick={twitter}
                 style={{ cursor: 'pointer' }}

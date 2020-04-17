@@ -1,9 +1,9 @@
-import CONSTANTS from "./constants";
-import { axiosWithAuth } from "../utils/axiosWithAuth";
-import Axios from "axios";
+import CONSTANTS from './constants';
+import { axiosWithAuth } from '../utils/axiosWithAuth';
+import Axios from 'axios';
 
 //Current user
-const setid = localStorage.getItem("CUSER");
+const setid = localStorage.getItem('CUSER');
 const cuser = JSON.parse(setid);
 const timeoutTime = 100;
 
@@ -36,8 +36,19 @@ export const addTopic = (text, id) => (dispatch) => {
   );
 };
 
-export const addCard = (topicId, text) => (dispatch) => {
-  dispatch({ type: CONSTANTS.ON_ADD_CARD, payload: { topicId, text } });
+export const addPost = (text, id) => (dispatch) => {
+  dispatch({
+    type: CONSTANTS.ON_ADD_CARD,
+    payload: text,
+    id: id,
+  });
+  dispatch(
+    addTopics(cuser, { user_id: cuser, title: text, id: id, cards: [] })
+  );
+};
+
+export const addCard = (topicId, text, id) => (dispatch) => {
+  dispatch({ type: CONSTANTS.ON_ADD_CARD, payload: { topicId, text }, id: id });
   dispatch({ type: CONSTANTS.USER_APICALL_START, didUpdate: true });
   setTimeout(() => {
     dispatch({ type: CONSTANTS.USER_APICALL_SUCCESS, didUpdate: false });
@@ -113,7 +124,7 @@ export const addTopics = (id, topics) => (dispatch) => {
       // });
     })
     .catch((error) => {
-      console.log(error, "FAIL");
+      console.log(error, 'FAIL');
       dispatch({ type: CONSTANTS.USER_APICALL_FAILURE, payload: error.data });
     });
 };
@@ -131,7 +142,7 @@ export const deleteTopics = (id) => (dispatch) => {
       // });
     })
     .catch((error) => {
-      console.log(error, "FAIL");
+      console.log(error, 'FAIL');
       dispatch({ type: CONSTANTS.USER_APICALL_FAILURE, payload: error.data });
     });
 };
@@ -150,7 +161,7 @@ export const editTopicTitle = (id, title) => (dispatch) => {
       // });
     })
     .catch((error) => {
-      console.log(error, "FAIL");
+      console.log(error, 'FAIL');
       dispatch({ type: CONSTANTS.USER_APICALL_FAILURE, payload: error.data });
     });
 };

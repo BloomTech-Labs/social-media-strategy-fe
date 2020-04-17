@@ -1,10 +1,11 @@
-import CONSTANTS from "../actions/constants";
+import CONSTANTS from '../actions/constants';
 
 export const initialState = {
   currentUser: null,
   isLoading: false,
   error: null,
   didUpdate: false,
+  drawer: true,
 };
 
 const userAuthReducer = (state = initialState, action) => {
@@ -48,6 +49,14 @@ const userAuthReducer = (state = initialState, action) => {
         isLoading: false,
         error: action.payload,
       };
+    case CONSTANTS.DRAWER_SWITCH:
+      return {
+        ...state,
+        isLoading: true,
+        error: null,
+        didUpdate: action.didUpdate ?? state.didUpdate,
+      };
+
     default:
       return state;
   }
