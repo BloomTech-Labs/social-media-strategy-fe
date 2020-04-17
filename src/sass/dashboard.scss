@@ -1,17 +1,11 @@
-@import url("https://fonts.googleapis.com/css?family=Montserrat&display=swap");
-
-.dash-app {
-  font-family: "Montserrat", sans-serif;
-  overflow-y: auto;
-  height: 110vh;
-}
+@import url('https://fonts.googleapis.com/css?family=Montserrat&display=swap');
 
 //     /* DASHBOARD TITLE */
 .title {
   flex-direction: column;
   background-color: #2f414b;
   padding: 2rem;
-  margin-bottom: 20%;
+  // margin-bottom: 20%;
   // overflow: scroll;
 }
 

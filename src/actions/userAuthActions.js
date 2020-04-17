@@ -75,3 +75,13 @@ export const currentUser = () => (dispatch) => {
       dispatch({ type: CONSTANTS.USER_APICALL_FAILURE, payload: error.data });
     });
 };
+
+export const drawerOpen = (payload) => (dispatch) => {
+  dispatch({ type: CONSTANTS.DRAWER_OPEN, payload: payload });
+  // post changes to the back end
+};
+
+export const drawerswitch = () => (dispatch) => {
+  dispatch({ type: CONSTANTS.DRAWER_SWITCH });
+  // post changes to the back end
+};

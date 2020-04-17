@@ -6,6 +6,7 @@ export const initialState = {
   error: null,
   didUpdate: false,
   drawer: true,
+  drawerContent: '',
 };
 
 const userAuthReducer = (state = initialState, action) => {
@@ -52,9 +53,14 @@ const userAuthReducer = (state = initialState, action) => {
     case CONSTANTS.DRAWER_SWITCH:
       return {
         ...state,
-        isLoading: true,
         error: null,
-        didUpdate: action.didUpdate ?? state.didUpdate,
+        drawer: !state.drawer,
+      };
+    case CONSTANTS.DRAWER_OPEN:
+      return {
+        ...state,
+        error: null,
+        drawerContent: action.payload,
       };
 
     default:

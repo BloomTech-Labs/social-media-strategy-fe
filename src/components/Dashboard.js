@@ -1,6 +1,7 @@
 // React and React-Router-DOM imports
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
+import { useTheme } from '@material-ui/core/styles';
 
 // Material UI imports
 import { Card, Typography, Box } from '@material-ui/core';
@@ -39,14 +40,15 @@ import pin from '../assets/pin.svg';
 import twitterimg from '../imgs/Vector.png';
 import { axiosWithAuth } from '../utils/axiosWithAuth';
 import { connect } from 'react-redux';
-import { currentUser } from '../actions';
+import { bindActionCreators } from 'redux';
+import { drawerOpen, currentUser, drawerswitch } from '../actions';
 
 // Set dummy Acct Data
 const accountData = data.accounts;
-const drawerWidth = 240;
+const drawerWidth = 400;
 
 // Material UI Styled Components
-const dashStyles = makeStyles((theme)=> ({
+const dashStyles = makeStyles((theme) => ({
   root: {
     fontFamily: 'Montserrat, sans-serif',
     textAlign: 'center',
@@ -54,41 +56,53 @@ const dashStyles = makeStyles((theme)=> ({
   },
   drawer: {
     width: drawerWidth,
-    flexShrink: 0,
+    flexShrink: 0.2,
+    fontFamily: 'Montserrat, sans-serif',
+    // overflowY: auto,
   },
   drawerPaper: {
     width: drawerWidth,
+    marginLeft: '12%',
+    [theme.breakpoints.down('lg')]: {
+      marginLeft: '13%',
+      background: 'red',
+    },
+    [theme.breakpoints.down('md')]: {
+      marginLeft: '18%',
+      background: 'red',
+    },
+    [theme.breakpoints.down('sm')]: {
+      marginLeft: '20%',
+      background: 'red',
+    },
   },
   menuButton: {
-      marginRight: theme.spacing(2),
+    marginRight: theme.spacing(2),
   },
   drawerHeader: {
     display: 'flex',
     alignItems: 'center',
     padding: theme.spacing(0, 1),
     justifyContent: 'flex-end',
-},
-content: {
+  },
+  content: {
     flexGrow: 1,
     padding: theme.spacing(3),
     transition: theme.transitions.create('margin', {
-    easing: theme.transitions.easing.sharp,
-    duration: theme.transitions.duration.leavingScreen,
+      easing: theme.transitions.easing.sharp,
+      duration: theme.transitions.duration.leavingScreen,
     }),
     marginLeft: -drawerWidth,
-},
-contentShift: {
+  },
+  contentShift: {
     transition: theme.transitions.create('margin', {
-    easing: theme.transitions.easing.easeOut,
-    duration: theme.transitions.duration.enteringScreen,
+      easing: theme.transitions.easing.easeOut,
+      duration: theme.transitions.duration.enteringScreen,
     }),
     marginLeft: 0,
-},
-  menuIcon: {
-      color: "white",
   },
-  hide: {
-    display: 'none',
+  menuIcon: {
+    color: 'white',
   },
   grow: {
     flexGrow: 1,
@@ -129,10 +143,19 @@ contentShift: {
   },
 }));
 
-
 const Dashboard = (props) => {
   const st = dashStyles();
-  const [anchorEl, setAnchorEl] = React.useState(null);
+  const theme = useTheme();
+  const [anchorEl, setAnchorEl] = useState(null);
+  // const [drawerOpen, setDrawerOpen] = useState(true);
+
+  // const handleDrawerOpen = () => {
+  //   setDrawerOpen(true);
+  // };
+
+  const handleDrawerClose = () => {
+    props.drawerswitch();
+  };
 
   const handleClick = (event) => {
     setAnchorEl(event.currentTarget);
@@ -172,8 +195,25 @@ const Dashboard = (props) => {
     return todaysDate;
   }
   return (
-    <div className="dash-app">
+    <Drawer
+      className={st.drawer}
+      open={props.user.drawer}
+      variant="persistent"
+      anchor="left"
+      classes={{
+        paper: st.drawerPaper,
+      }}
+    >
       <div className="title">
+        <div className={st.drawerHeader}>
+          <IconButton onClick={handleDrawerClose}>
+            {theme.direction === 'ltr' ? (
+              <ChevronLeftIcon />
+            ) : (
+              <ChevronRightIcon />
+            )}
+          </IconButton>
+        </div>
         <h1 className="bold">Dashboard</h1>
         <div className="dash-title">
           <h4 className="highlight">{Moment().format('dddd')}</h4>{' '}
@@ -257,11 +297,18 @@ const Dashboard = (props) => {
           </Card>
         ))}
       </div>
-    </div>
+    </Drawer>
   );
 };
+
 const mapStateToProps = (state) => ({
   user: state.user,
 });
+function mapDispatchToProps(dispatch) {
+  return {
+    dispatch,
+    ...bindActionCreators({ currentUser, drawerswitch, drawerOpen }, dispatch),
+  };
+}
 
-export default connect(mapStateToProps, { currentUser })(Dashboard);
+export default connect(mapStateToProps, mapDispatchToProps)(Dashboard);

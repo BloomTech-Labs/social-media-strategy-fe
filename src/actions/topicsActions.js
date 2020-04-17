@@ -36,18 +36,30 @@ export const addTopic = (text, id) => (dispatch) => {
   );
 };
 
-export const addPost = (text, id) => (dispatch) => {
-  dispatch({
-    type: CONSTANTS.ON_ADD_CARD,
-    payload: text,
+const postCard = (text, id) => {
+  const formattedPost = {
     id: id,
-  });
-  dispatch(
-    addTopics(cuser, { user_id: cuser, title: text, id: id, cards: [] })
-  );
+    user_id: cuser,
+    post_text: text,
+    platform_id: 1,
+  };
+
+  console.log('Formatted post', formattedPost);
+
+  axiosWithAuth()
+    .post(`/posts/${cuser}/user`, formattedPost)
+    .then((res) => {
+      console.log(res);
+    })
+    .catch((error) => {
+      console.log(error, 'FAIL');
+      // dispatch({ type: CONSTANTS.USER_APICALL_FAILURE, payload: error.data });
+    });
 };
 
 export const addCard = (topicId, text, id) => (dispatch) => {
+  postCard(text, id);
+
   dispatch({ type: CONSTANTS.ON_ADD_CARD, payload: { topicId, text }, id: id });
   dispatch({ type: CONSTANTS.USER_APICALL_START, didUpdate: true });
   setTimeout(() => {
