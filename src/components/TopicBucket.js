@@ -1,25 +1,19 @@
-import React, { useEffect, useState } from 'react';
-import { connect } from 'react-redux';
-import styled from 'styled-components';
-import TopicCard from './TopicCard';
-import { Droppable, Draggable } from 'react-beautiful-dnd';
-import ActionButton from './ActionButton';
-import DeleteIcon from '@material-ui/icons/Delete';
-import CreateIcon from '@material-ui/icons/Create';
+import React, { useEffect, useState } from "react";
+import { connect } from "react-redux";
+import styled from "styled-components";
+import TopicCard from "./TopicCard";
+import { Droppable, Draggable } from "react-beautiful-dnd";
+import ActionButton from "./ActionButton";
+import DeleteIcon from "@material-ui/icons/Delete";
+import CreateIcon from "@material-ui/icons/Create";
 
 import {
   fetchTopics,
   updateTopics,
   deleteTopics,
-<<<<<<< HEAD
   editTopicTitle
 } from "../actions";
 import { axiosWithAuth } from "../utils/axiosWithAuth";
-=======
-  editTopicTitle,
-} from '../actions';
-import { axiosWithAuth } from '../utils/axiosWithAuth';
->>>>>>> 795c3191c18ace3231a8b83d429d17ce47a2a09f
 
 const Container = styled.div`
   background-color: #ebecf0;
@@ -54,13 +48,8 @@ const Icons = styled.div`
   padding: 0.5rem;
 `;
 
-<<<<<<< HEAD
 const TopicBucket = props => {
   const [content, setcontent] = useState({ name: "" });
-=======
-const TopicBucket = (props) => {
-  const [content, setcontent] = useState({ name: '' });
->>>>>>> 795c3191c18ace3231a8b83d429d17ce47a2a09f
   const [editing, setediting] = useState(false);
 
   const handleChange = e => {
@@ -86,9 +75,8 @@ const TopicBucket = (props) => {
                   {scrollCondition ? (
                     <>
                       <Title>
-                        {props.topic.title !== 'Drafts' ? (
+                        {props.topic.title !== "Drafts" ? (
                           <span>
-<<<<<<< HEAD
                             <span className={`${props.topic.id}-deleteTopic`}>
                               <DeleteIcon
                                 style={{ "margin-right": "20" }}
@@ -97,12 +85,6 @@ const TopicBucket = (props) => {
                                 }
                               />
                             </span>
-=======
-                            <DeleteIcon
-                              style={{ 'margin-right': '20' }}
-                              onClick={() => props.deleteTopics(props.topic.id)}
-                            />
->>>>>>> 795c3191c18ace3231a8b83d429d17ce47a2a09f
                             <CreateIcon
                               // onClick={() => props.editCard(props.card.id, content)}
                               onClick={() => setediting(!editing)}
@@ -125,19 +107,13 @@ const TopicBucket = (props) => {
                                     value={content.name}
                                     onChange={handleChange}
                                   />
-                                  &nbsp;{' '}
+                                  &nbsp;{" "}
                                   <span
                                     onClick={() => setediting(!editing)}
                                     style={{
-<<<<<<< HEAD
                                       color: "red",
                                       fontWeight: "bolder",
                                       padding: "5px"
-=======
-                                      color: 'red',
-                                      fontWeight: 'bolder',
-                                      padding: '5px',
->>>>>>> 795c3191c18ace3231a8b83d429d17ce47a2a09f
                                     }}
                                   >
                                     x
@@ -171,9 +147,8 @@ const TopicBucket = (props) => {
                   ) : (
                     <>
                       <Title>
-                        {props.topic.title !== 'Drafts' ? (
+                        {props.topic.title !== "Drafts" ? (
                           <span>
-<<<<<<< HEAD
                             <span className={`${props.topic.id}-deleteTopic`}>
                               <DeleteIcon
                                 style={{ "margin-right": "20" }}
@@ -184,15 +159,6 @@ const TopicBucket = (props) => {
                             </span>
                             <CreateIcon
                               className={`${props.topic.id}-createTopic`}
-=======
-                            <DeleteIcon
-                              key={props.topic.id}
-                              style={{ 'margin-right': '20' }}
-                              onClick={() => props.deleteTopics(props.topic.id)}
-                            />
-                            <CreateIcon
-                              key={`${props.topic.id}-createTopic`}
->>>>>>> 795c3191c18ace3231a8b83d429d17ce47a2a09f
                               // onClick={() => props.editCard(props.card.id, content)}
                               onClick={() => setediting(!editing)}
                             />
@@ -214,19 +180,13 @@ const TopicBucket = (props) => {
                                     value={content.name}
                                     onChange={handleChange}
                                   />
-                                  &nbsp;{' '}
+                                  &nbsp;{" "}
                                   <span
                                     onClick={() => setediting(!editing)}
                                     style={{
-<<<<<<< HEAD
                                       color: "red",
                                       fontWeight: "bolder",
                                       padding: "5px"
-=======
-                                      color: 'red',
-                                      fontWeight: 'bolder',
-                                      padding: '5px',
->>>>>>> 795c3191c18ace3231a8b83d429d17ce47a2a09f
                                     }}
                                   >
                                     x
