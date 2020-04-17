@@ -11,7 +11,7 @@ import {
   fetchTopics,
   updateTopics,
   deleteTopics,
-  editTopicTitle,
+  editTopicTitle
 } from "../actions";
 import { axiosWithAuth } from "../utils/axiosWithAuth";
 
@@ -48,11 +48,11 @@ const Icons = styled.div`
   padding: 0.5rem;
 `;
 
-const TopicBucket = (props) => {
+const TopicBucket = props => {
   const [content, setcontent] = useState({ name: "" });
   const [editing, setediting] = useState(false);
 
-  const handleChange = (e) => {
+  const handleChange = e => {
     e.preventDefault();
     setcontent({ ...content, [e.target.name]: e.target.value });
   };
@@ -62,7 +62,7 @@ const TopicBucket = (props) => {
   return (
     <>
       <Draggable draggableId={String(props.topic.id)} index={props.index}>
-        {(provided) => (
+        {provided => (
           <Container
             className={`${props.className} `}
             {...provided.draggableProps}
@@ -70,18 +70,21 @@ const TopicBucket = (props) => {
             {...provided.dragHandleProps}
           >
             <Droppable droppableId={String(props.topic.id)} type="card">
-              {(provided) => (
+              {provided => (
                 <>
-                
                   {scrollCondition ? (
                     <>
                       <Title>
                         {props.topic.title !== "Drafts" ? (
                           <span>
-                            <DeleteIcon
-                              style={{ "margin-right": "20" }}
-                              onClick={() => props.deleteTopics(props.topic.id)}
-                            />
+                            <span className={`${props.topic.id}-deleteTopic`}>
+                              <DeleteIcon
+                                style={{ "margin-right": "20" }}
+                                onClick={() =>
+                                  props.deleteTopics(props.topic.id)
+                                }
+                              />
+                            </span>
                             <CreateIcon
                               // onClick={() => props.editCard(props.card.id, content)}
                               onClick={() => setediting(!editing)}
@@ -110,7 +113,7 @@ const TopicBucket = (props) => {
                                     style={{
                                       color: "red",
                                       fontWeight: "bolder",
-                                      padding: "5px",
+                                      padding: "5px"
                                     }}
                                   >
                                     x
@@ -146,11 +149,16 @@ const TopicBucket = (props) => {
                       <Title>
                         {props.topic.title !== "Drafts" ? (
                           <span>
-                            <DeleteIcon
-                              style={{ "margin-right": "20" }}
-                              onClick={() => props.deleteTopics(props.topic.id)}
-                            />
+                            <span className={`${props.topic.id}-deleteTopic`}>
+                              <DeleteIcon
+                                style={{ "margin-right": "20" }}
+                                onClick={() =>
+                                  props.deleteTopics(props.topic.id)
+                                }
+                              />
+                            </span>
                             <CreateIcon
+                              className={`${props.topic.id}-createTopic`}
                               // onClick={() => props.editCard(props.card.id, content)}
                               onClick={() => setediting(!editing)}
                             />
@@ -178,7 +186,7 @@ const TopicBucket = (props) => {
                                     style={{
                                       color: "red",
                                       fontWeight: "bolder",
-                                      padding: "5px",
+                                      padding: "5px"
                                     }}
                                   >
                                     x
@@ -242,10 +250,10 @@ const TopicBucket = (props) => {
   );
 };
 
-const mapStateToProps = (state) => {
+const mapStateToProps = state => {
   return {
     user: state.user,
-    topics: state.topics,
+    topics: state.topics
   };
 };
 
@@ -253,5 +261,5 @@ export default connect(mapStateToProps, {
   deleteTopics,
   fetchTopics,
   updateTopics,
-  editTopicTitle,
+  editTopicTitle
 })(TopicBucket);

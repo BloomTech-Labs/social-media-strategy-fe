@@ -35,3 +35,11 @@ describe("user adds a card to newly created topic", function() {
       .click();
   });
 });
+
+describe("user edits the card they created", function() {
+  it("edits the cypress card to say /editing with cypress/", function() {
+    cy.get(".MuiSvgIcon-root")
+      .last()
+      .click();
+  });
+});
