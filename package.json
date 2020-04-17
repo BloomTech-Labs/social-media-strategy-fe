@@ -42,7 +42,8 @@
     "test": "react-scripts test",
     "eject": "react-scripts eject",
     "cypress:open": "cypress open",
-    "scss": "node-sass --watch src/sass -o css"
+    "scss": "node-sass --watch src/sass -o css",
+    "coverage": "jest --coverage --detectOpenHandles --forceExit || true"
   },
   "eslintConfig": {
     "extends": "react-app"
