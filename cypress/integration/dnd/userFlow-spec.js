@@ -1,6 +1,6 @@
 const url = Cypress.env('appUrl');
 
-describe("log into an existing account", function() {
+/*describe("log into an existing account", function() {
   it("visits the site, provides an email and password, then logs in", function() {
     cy.visit(url);
     cy.get("#email")
@@ -36,7 +36,7 @@ describe("user adds a card to newly created topic", function() {
       .last()
       .click();
   });
-});
+});*/
 
 // describe("user edits the card they created", function() {
 //   it("edits the cypress card to say /editing with cypress/", function() {
