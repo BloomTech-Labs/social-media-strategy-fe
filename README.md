@@ -66,7 +66,7 @@ React-Beautiful-DnD
 
 - Node.js
 - Express.js
-- SQLite3
+- Postgres
 
 # APIs
 
