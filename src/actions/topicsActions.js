@@ -36,12 +36,13 @@ export const addTopic = (text, id) => (dispatch) => {
   );
 };
 
+// POST CARD
 const postCard = (text, id) => {
   const formattedPost = {
     id: id,
     user_id: cuser,
     post_text: text,
-    platform_id: 1,
+    platform_id: 4,
   };
 
   console.log('Formatted post', formattedPost);
@@ -57,6 +58,18 @@ const postCard = (text, id) => {
     });
 };
 
+// DELETE POSTCARD
+
+export const deletePostCard = (id) => {
+  axiosWithAuth()
+    .delete(`/posts/${id}`)
+    .then((res) => {
+      console.log(res);
+    })
+    .catch((error) => {
+      console.log(error, 'FAIL');
+    });
+};
 export const addCard = (topicId, text, id) => (dispatch) => {
   postCard(text, id);
 

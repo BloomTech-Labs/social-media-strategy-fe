@@ -8,7 +8,7 @@ import MoreVertIcon from '@material-ui/icons/MoreVert';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { makeStyles } from '@material-ui/core/styles';
-import { deleteCard, editCard } from '../actions';
+import { deleteCard, editCard, deletePostCard } from '../actions';
 import Modal from '@material-ui/core/Modal';
 import FormControl from '@material-ui/core/FormControl';
 import Select from '@material-ui/core/Select';
@@ -136,7 +136,12 @@ const TopicCard = (props) => {
           <BtnCont>
             <Icons>
               {console.log(content.name)}
-              <DeleteIcon onClick={() => props.deleteCard(props.card.id)} />
+              <DeleteIcon
+                onClick={() =>
+                  props.deleteCard(props.card.id) &
+                  deletePostCard(props.card.id)
+                }
+              />
               <CreateIcon
                 // onClick={() => props.editCard(props.card.id, content)}
                 onClick={() => setediting(!editing)}
