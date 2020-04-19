@@ -38,12 +38,12 @@ const userAuthReducer = (state = initialState, action) => {
         isLoading: true,
         error: null,
       };
-    case CONSTANTS.TOPIC_FETCH_SUCCESS:
-      return {
-        ...state,
-        isLoading: false,
-        error: null,
-      };
+    // case CONSTANTS.TOPIC_FETCH_SUCCESS:
+    //   return {
+    //     ...state,
+    //     isLoading: false,
+    //     error: null,
+    //   };
     case CONSTANTS.TOPIC_FETCH_FAILURE:
       return {
         ...state,

@@ -24,7 +24,7 @@ export const onDragEndTopic = (newTopicOrder) => (dispatch) => {
     payload: newTopicOrder,
   });
 };
-
+// ADD TOPIC LOCAL
 export const addTopic = (text, id) => (dispatch) => {
   dispatch({
     type: CONSTANTS.ON_ADD_TOPIC,
@@ -40,9 +40,8 @@ export const addTopic = (text, id) => (dispatch) => {
 const postCard = (text, id) => {
   const formattedPost = {
     id: id,
-    user_id: cuser,
+    user_id: Number(cuser),
     post_text: text,
-    platform_id: 4,
   };
 
   console.log('Formatted post', formattedPost);
@@ -53,12 +52,10 @@ const postCard = (text, id) => {
       console.log(res);
     })
     .catch((error) => {
-      console.log(error, 'FAIL');
+      console.log(error.message, 'FAIL');
       // dispatch({ type: CONSTANTS.USER_APICALL_FAILURE, payload: error.data });
     });
 };
-
-// DELETE POSTCARD
 
 export const deletePostCard = (id) => {
   axiosWithAuth()
@@ -135,18 +132,13 @@ export const fetchTopics = (id) => (dispatch) => {
       dispatch({ type: CONSTANTS.USER_APICALL_FAILURE, payload: error.data });
     });
 };
-// ADD TOPIC
+// ADD TOPIC BACKEND
 export const addTopics = (id, topics) => (dispatch) => {
   dispatch({ type: CONSTANTS.USER_APICALL_START });
   axiosWithAuth()
     .post(`/topics/${id}/user`, topics)
     .then((response) => {
       dispatch({ type: CONSTANTS.USER_APICALL_SUCCESS });
-
-      // dispatch({
-      //   type: CONSTANTS.TOPIC_UPDATE_SUCCESS,
-      //   payload: response.data,
-      // });
     })
     .catch((error) => {
       console.log(error, 'FAIL');
@@ -173,22 +165,12 @@ export const deleteTopics = (id) => (dispatch) => {
 };
 
 // EDIT TOPIC
-export const editTopicTitle = (id, title) => (dispatch) => {
-  dispatch({ type: CONSTANTS.USER_APICALL_START });
-  axiosWithAuth()
-    .put(`/topics/${id}`, { title: title })
-    .then((response) => {
-      dispatch(fetchTopics(cuser));
-
-      // dispatch({
-      //   type: CONSTANTS.TOPIC_UPDATE_SUCCESS,
-      //   payload: response.data,
-      // });
-    })
-    .catch((error) => {
-      console.log(error, 'FAIL');
-      dispatch({ type: CONSTANTS.USER_APICALL_FAILURE, payload: error.data });
-    });
+export const editTopic = (topicID, content) => (dispatch) => {
+  dispatch({ type: CONSTANTS.EDIT_TOPIC, payload: topicID, edit: content });
+  dispatch({ type: CONSTANTS.USER_APICALL_START, didUpdate: true });
+  setTimeout(() => {
+    dispatch({ type: CONSTANTS.USER_APICALL_SUCCESS, didUpdate: false });
+  }, timeoutTime);
 };
 
 export const updateTopics = (cb) => async (dispatch) => {

@@ -146,6 +146,15 @@ const topicsReducer = (state = initialState, action) => {
       });
       return newState;
     }
+    case CONSTANTS.EDIT_TOPIC: {
+      let newState = state.map((topics) => {
+        return {
+          ...topics,
+          title: topics.id === action.payload ? action.edit : topics.title,
+        };
+      });
+      return newState;
+    }
 
     default:
       return state;

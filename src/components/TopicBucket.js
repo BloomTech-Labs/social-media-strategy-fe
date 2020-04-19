@@ -1,19 +1,20 @@
-import React, { useEffect, useState } from "react";
-import { connect } from "react-redux";
-import styled from "styled-components";
-import TopicCard from "./TopicCard";
-import { Droppable, Draggable } from "react-beautiful-dnd";
-import ActionButton from "./ActionButton";
-import DeleteIcon from "@material-ui/icons/Delete";
-import CreateIcon from "@material-ui/icons/Create";
+import React, { useEffect, useState } from 'react';
+import { connect } from 'react-redux';
+import styled from 'styled-components';
+import TopicCard from './TopicCard';
+import { Droppable, Draggable } from 'react-beautiful-dnd';
+import ActionButton from './ActionButton';
+import DeleteIcon from '@material-ui/icons/Delete';
+import CreateIcon from '@material-ui/icons/Create';
 
 import {
   fetchTopics,
   updateTopics,
   deleteTopics,
   editTopicTitle,
-} from "../actions";
-import { axiosWithAuth } from "../utils/axiosWithAuth";
+  editTopic,
+} from '../actions';
+import { axiosWithAuth } from '../utils/axiosWithAuth';
 
 const Container = styled.div`
   background-color: #ebecf0;
@@ -49,7 +50,7 @@ const Icons = styled.div`
 `;
 
 const TopicBucket = (props) => {
-  const [content, setcontent] = useState({ name: "" });
+  const [content, setcontent] = useState({ name: '' });
   const [editing, setediting] = useState(false);
 
   const handleChange = (e) => {
@@ -72,14 +73,13 @@ const TopicBucket = (props) => {
             <Droppable droppableId={String(props.topic.id)} type="card">
               {(provided) => (
                 <>
-                
                   {scrollCondition ? (
                     <>
                       <Title>
-                        {props.topic.title !== "Drafts" ? (
+                        {props.topic.title !== 'Drafts' ? (
                           <span>
                             <DeleteIcon
-                              style={{ "margin-right": "20" }}
+                              style={{ 'margin-right': '20' }}
                               onClick={() => props.deleteTopics(props.topic.id)}
                             />
                             <CreateIcon
@@ -91,12 +91,15 @@ const TopicBucket = (props) => {
                             ) : (
                               <>
                                 <form
-                                  onSubmit={() =>
-                                    props.editTopicTitle(
+                                  onSubmit={(e) => {
+                                    e.preventDefault();
+                                    props.editTopic(
                                       props.topic.id,
                                       content.name
-                                    )
-                                  }
+                                    );
+                                    setcontent({ name: '' });
+                                    setediting(!editing);
+                                  }}
                                 >
                                   <input
                                     type="text"
@@ -104,13 +107,13 @@ const TopicBucket = (props) => {
                                     value={content.name}
                                     onChange={handleChange}
                                   />
-                                  &nbsp;{" "}
+                                  &nbsp;{' '}
                                   <span
                                     onClick={() => setediting(!editing)}
                                     style={{
-                                      color: "red",
-                                      fontWeight: "bolder",
-                                      padding: "5px",
+                                      color: 'red',
+                                      fontWeight: 'bolder',
+                                      padding: '5px',
                                     }}
                                   >
                                     x
@@ -144,10 +147,10 @@ const TopicBucket = (props) => {
                   ) : (
                     <>
                       <Title>
-                        {props.topic.title !== "Drafts" ? (
+                        {props.topic.title !== 'Drafts' ? (
                           <span>
                             <DeleteIcon
-                              style={{ "margin-right": "20" }}
+                              style={{ 'margin-right': '20' }}
                               onClick={() => props.deleteTopics(props.topic.id)}
                             />
                             <CreateIcon
@@ -159,12 +162,15 @@ const TopicBucket = (props) => {
                             ) : (
                               <>
                                 <form
-                                  onSubmit={() =>
-                                    props.editTopicTitle(
+                                  onSubmit={(e) => {
+                                    e.preventDefault();
+                                    props.editTopic(
                                       props.topic.id,
                                       content.name
-                                    )
-                                  }
+                                    );
+                                    setcontent({ name: '' });
+                                    setediting(!editing);
+                                  }}
                                 >
                                   <input
                                     type="text"
@@ -172,13 +178,13 @@ const TopicBucket = (props) => {
                                     value={content.name}
                                     onChange={handleChange}
                                   />
-                                  &nbsp;{" "}
+                                  &nbsp;{' '}
                                   <span
                                     onClick={() => setediting(!editing)}
                                     style={{
-                                      color: "red",
-                                      fontWeight: "bolder",
-                                      padding: "5px",
+                                      color: 'red',
+                                      fontWeight: 'bolder',
+                                      padding: '5px',
                                     }}
                                   >
                                     x
@@ -253,5 +259,5 @@ export default connect(mapStateToProps, {
   deleteTopics,
   fetchTopics,
   updateTopics,
-  editTopicTitle,
+  editTopic,
 })(TopicBucket);

@@ -160,7 +160,12 @@ const TopicCard = (props) => {
           ) : (
             <>
               <form
-                onSubmit={() => props.editCard(props.card.id, content.name)}
+                onSubmit={(e) => {
+                  e.preventDefault();
+                  props.editCard(props.card.id, content.name);
+                  setcontent({ name: '' });
+                  setediting(!editing);
+                }}
               >
                 <textarea
                   type="text"
