@@ -17,7 +17,7 @@ import Typography from "@material-ui/core/Typography";
 import { login, registerUser } from "../actions";
 import { useHistory } from "react-router";
 
-const Register_Login = (props) => {
+const Register_Login = props => {
   const { register, handleSubmit, control } = useForm();
   const [signup, setsignup] = useState(false);
   const classes = useStyles();
@@ -36,7 +36,7 @@ const Register_Login = (props) => {
     );
   }
 
-  const onSubmit = (data) => {
+  const onSubmit = data => {
     if (!signup) {
       props.login(data, push);
     } else {
@@ -47,9 +47,23 @@ const Register_Login = (props) => {
   return (
     <Grid container component="main" className={classes.root}>
       {!signup ? (
-        <Grid item xs={false} sm={4} md={7} className={classes.image} />
+        <Grid
+          item
+          xs={false}
+          sm={4}
+          md={7}
+          className={classes.image}
+          data-cy="loginImage"
+        />
       ) : (
-        <Grid item xs={false} sm={4} md={7} className={classes.image2} />
+        <Grid
+          item
+          xs={false}
+          sm={4}
+          md={7}
+          className={classes.image2}
+          data-cy="registerImage"
+        />
       )}
 
       <Grid
@@ -74,7 +88,7 @@ const Register_Login = (props) => {
                 fontStyle: "normal",
                 fontWeight: "bold",
                 fontSize: "36px",
-                lineHight: "44px",
+                lineHight: "44px"
               }}
               component="h1"
               variant="h5"
@@ -87,7 +101,7 @@ const Register_Login = (props) => {
                   fontWeight: "500",
                   fontSize: "18px",
                   lineHeight: "22px",
-                  color: "#E85556",
+                  color: "#E85556"
                 }}
               >
                 {!signup ? "Sign into your account" : "Create Account"} <br />
@@ -99,6 +113,7 @@ const Register_Login = (props) => {
               onSubmit={handleSubmit(onSubmit)}
             >
               <Controller
+                data-cy="email"
                 ref={register}
                 name="email"
                 as={TextField}
@@ -114,6 +129,7 @@ const Register_Login = (props) => {
                 autoFocus
               />
               <Controller
+                data-cy="password"
                 variant="outlined"
                 margin="normal"
                 ref={register}
@@ -132,6 +148,7 @@ const Register_Login = (props) => {
                 label="Remember me"
               />
               <Button
+                data-cy="submit"
                 type="submit"
                 fullWidth
                 variant="contained"
@@ -148,6 +165,8 @@ const Register_Login = (props) => {
                 </Grid>
                 <Grid item>
                   <Link
+                    data-cy="registerButton"
+                    className="registerButton"
                     style={{ cursor: "pointer" }}
                     onClick={() => setsignup(!signup)}
                     variant="body2"
@@ -169,7 +188,7 @@ const Register_Login = (props) => {
   );
 };
 
-const mapStateToProps = (state) => {
+const mapStateToProps = state => {
   return state;
 };
 

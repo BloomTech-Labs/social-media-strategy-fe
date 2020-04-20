@@ -1,19 +1,20 @@
-import React, { useState } from "react";
-import styled from "styled-components";
-import { Draggable } from "react-beautiful-dnd";
-import "../sass/topicBuckets.scss";
-import CreateIcon from "@material-ui/icons/Create";
-import DeleteIcon from "@material-ui/icons/Delete";
-import MoreVertIcon from "@material-ui/icons/MoreVert";
-import { connect } from "react-redux";
-import { bindActionCreators } from "redux";
-import { makeStyles } from "@material-ui/core/styles";
-import { deleteCard, editCard } from "../actions";
-import Modal from "@material-ui/core/Modal";
-import FormControl from "@material-ui/core/FormControl";
-import Select from "@material-ui/core/Select";
-import InputLabel from "@material-ui/core/InputLabel";
-import MenuItem from "@material-ui/core/MenuItem";
+import React, { useState } from 'react';
+import styled from 'styled-components';
+import { Draggable } from 'react-beautiful-dnd';
+import '../sass/topicBuckets.scss';
+import CreateIcon from '@material-ui/icons/Create';
+import DeleteIcon from '@material-ui/icons/Delete';
+import MoreVertIcon from '@material-ui/icons/MoreVert';
+import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
+import { makeStyles } from '@material-ui/core/styles';
+import { deleteCard, editCard, deletePostCard } from '../actions';
+import Modal from '@material-ui/core/Modal';
+import FormControl from '@material-ui/core/FormControl';
+import Select from '@material-ui/core/Select';
+import InputLabel from '@material-ui/core/InputLabel';
+import MenuItem from '@material-ui/core/MenuItem';
+
 
 const Container = styled.div`
   background-color: white;
@@ -84,8 +85,9 @@ const TopicCard = props => {
   const classes = modalStyles();
   const [modalStyle] = useState(editModalLocation);
   const [open, setOpen] = useState(false);
-  const [handle, setHandle] = useState("");
-  const [content, setcontent] = useState({ name: "" });
+  const [handle, setHandle] = useState('');
+  const [content, setcontent] = useState({ name: props.card.content });
+
   const [editing, setediting] = useState(false);
 
   const handleOpen = () => {
@@ -97,13 +99,17 @@ const TopicCard = props => {
     setcontent({ ...content, [e.target.name]: e.target.value });
   };
 
+  const handleHandleChange = (event) => {
+    setHandle(event.target.value);
+  };
+
   const handleClose = () => {
     setOpen(false);
   };
 
   const modalBody = (
     <div style={modalStyle} className={classes.paper}>
-      <h2 className={classes.mHeader}>Edit card</h2>
+      <h2 className={classes.mHeader}>Edit post</h2>
       <h3 className={classes.mAccent}>Draft, schedule, and post</h3>
       <FormControl className={classes.formControl}>
         <InputLabel id="twitter-handle-select">Social Account</InputLabel>
@@ -111,7 +117,7 @@ const TopicCard = props => {
           labelId="twitter-handle-select"
           id="select"
           value={handle}
-          onChange={handleChange}
+          onChange={handleHandleChange}
         >
           {/* Replace this with backend Twitter Handle info */}
           <MenuItem value={1}>@lillighanson</MenuItem>
@@ -137,8 +143,11 @@ const TopicCard = props => {
             <Icons>
               {console.log(content.name)}
               <DeleteIcon
-                className={`${props.card.id}-delete`}
-                onClick={() => props.deleteCard(props.card.id)}
+                className={`delete`}
+                onClick={() =>
+                  props.deleteCard(props.card.id) &
+                  deletePostCard(props.card.id)
+                }
               />
               <CreateIcon
                 className={`${props.card.id}-create`}
@@ -147,7 +156,7 @@ const TopicCard = props => {
                 onClick={() => setediting(!editing)}
               />
               <MoreVertIcon
-                className={`${props.card.id}-editnp`}
+                className={`${props.card.id}-edit`}
                 style={{ padding: "0rem .25rem" }}
                 onClick={handleOpen}
               />
@@ -161,7 +170,12 @@ const TopicCard = props => {
           ) : (
             <>
               <form
-                onSubmit={() => props.editCard(props.card.id, content.name)}
+                onSubmit={(e) => {
+                  e.preventDefault();
+                  props.editCard(props.card.id, content.name);
+                  setcontent({ name: content.name });
+                  setediting(!editing);
+                }}
               >
                 <textarea
                   type="text"

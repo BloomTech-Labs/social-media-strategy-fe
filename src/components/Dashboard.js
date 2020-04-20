@@ -1,11 +1,27 @@
 // React and React-Router-DOM imports
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
+import { useTheme } from '@material-ui/core/styles';
 
 // Material UI imports
 import { Card, Typography, Box } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
 import Popover from '@material-ui/core/Popover';
+import AppBar from '@material-ui/core/AppBar';
+import Toolbar from '@material-ui/core/Toolbar';
+import Button from '@material-ui/core/Button';
+import IconButton from '@material-ui/core/IconButton';
+import MenuIcon from '@material-ui/icons/Menu';
+import CropFreeIcon from '@material-ui/icons/CropFree';
+import List from '@material-ui/core/List';
+import Divider from '@material-ui/core/Divider';
+
+
+
+// Icons
+import DashboardIcon from '@material-ui/icons/Dashboard';
+import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
+import ChevronRightIcon from '@material-ui/icons/ChevronRight';
 
 //Adding moment for date purposes
 import Moment from 'moment';
@@ -22,60 +38,23 @@ import pin from '../assets/pin.svg';
 import twitterimg from '../imgs/Vector.png';
 import { axiosWithAuth } from '../utils/axiosWithAuth';
 import { connect } from 'react-redux';
-import { currentUser } from '../actions';
+import { bindActionCreators } from 'redux';
+import { drawerOpen, currentUser, drawerswitch } from '../actions';
+import { dashStyles } from '../sass/DashStyles';
 
 // Set dummy Acct Data
 const accountData = data.accounts;
-
-// Material UI Styled Components
-const dashStyles = makeStyles({
-  root: {
-    fontFamily: 'Montserrat, sans-serif',
-    textAlign: 'center',
-    margin: '1rem 0rem',
-  },
-  name: {
-    fontSize: '1.6rem',
-    color: '#1B262C',
-    fontFamily: 'Montserrat, sans-serif',
-    padding: '1rem',
-  },
-  handle: {
-    fontSize: '1.2rem',
-    fontFamily: 'Montserrat, sans-serif',
-    padding: '1rem',
-  },
-  locationIcon: {
-    height: '3vh',
-  },
-  secondaryTitle: {
-    fontSize: '1.2rem',
-    color: '#848484',
-    fontFamily: 'Montserrat, sans-serif',
-  },
-  statLabel: {
-    fontSize: '1rem',
-    color: '#848484',
-    fontFamily: 'Montserrat, sans-serif',
-  },
-  boxCtr: {
-    textAlign: 'center',
-    justifyContent: 'center',
-    alignItems: 'center',
-  },
-});
-const useStyles = makeStyles((theme) => ({
-  typography: {
-    background: '#EAEAEA',
-    padding: theme.spacing(2),
-    height: '20px',
-  },
-}));
+const drawerWidth = 400;
 
 const Dashboard = (props) => {
   const st = dashStyles();
-  const classes = useStyles();
-  const [anchorEl, setAnchorEl] = React.useState(null);
+  const theme = useTheme();
+  const [anchorEl, setAnchorEl] = useState(null);
+
+
+  const handleDrawerClose = () => {
+    props.drawerswitch();
+  };
 
   const handleClick = (event) => {
     setAnchorEl(event.currentTarget);
@@ -117,6 +96,15 @@ const Dashboard = (props) => {
   return (
     <div className="dash-app">
       <div className="title">
+        <div className={st.drawerHeader}>
+          <IconButton onClick={handleDrawerClose}>
+            {theme.direction === 'ltr' ? (
+              <ChevronLeftIcon />
+            ) : (
+              <ChevronRightIcon />
+            )}
+          </IconButton>
+        </div>
         <h1 className="bold">Dashboard</h1>
         <div className="dash-title">
           <h4 className="highlight">{Moment().format('dddd')}</h4>{' '}
@@ -134,15 +122,6 @@ const Dashboard = (props) => {
           >
             Add Account
           </Link>
-          {/* <Button
-            aria-describedby={id}
-            variant="contained"
-            color="primary"
-            onClick={handleClick}
-          >
-            Open Popover
-          </Button> */}
-
           <Popover
             id={id}
             open={open}
@@ -157,7 +136,7 @@ const Dashboard = (props) => {
               horizontal: 'left',
             }}
           >
-            <Typography className={classes.typography}>
+            <Typography className={st.typography}>
               <img
                 onClick={twitter}
                 style={{ cursor: 'pointer' }}
@@ -203,8 +182,15 @@ const Dashboard = (props) => {
     </div>
   );
 };
+
 const mapStateToProps = (state) => ({
   user: state.user,
 });
+function mapDispatchToProps(dispatch) {
+  return {
+    dispatch,
+    ...bindActionCreators({ currentUser, drawerswitch, drawerOpen }, dispatch),
+  };
+}
 
-export default connect(mapStateToProps, { currentUser })(Dashboard);
+export default connect(mapStateToProps, mapDispatchToProps)(Dashboard);
