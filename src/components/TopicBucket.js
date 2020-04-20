@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { connect } from "react-redux";
 import styled from "styled-components";
 import TopicCard from "./TopicCard";
@@ -11,9 +11,8 @@ import {
   fetchTopics,
   updateTopics,
   deleteTopics,
-  editTopicTitle
+  editTopicTitle,
 } from "../actions";
-import { axiosWithAuth } from "../utils/axiosWithAuth";
 
 const Container = styled.div`
   background-color: #ebecf0;
@@ -42,17 +41,12 @@ const CardList = styled.div`
   width: 20rem;
   border-radius: 0.5rem;
 `;
-const Icons = styled.div`
-  display: flex;
-  justify-content: flex-end;
-  padding: 0.5rem;
-`;
 
-const TopicBucket = props => {
-  const [content, setcontent] = useState({ name: "" });
+const TopicBucket = (props) => {
+  const [content, setcontent] = useState({ name: props.topic.title });
   const [editing, setediting] = useState(false);
 
-  const handleChange = e => {
+  const handleChange = (e) => {
     e.preventDefault();
     setcontent({ ...content, [e.target.name]: e.target.value });
   };
@@ -62,15 +56,15 @@ const TopicBucket = props => {
   return (
     <>
       <Draggable draggableId={String(props.topic.id)} index={props.index}>
-        {provided => (
+        {(provided) => (
           <Container
             className={`${props.className} `}
             {...provided.draggableProps}
             ref={provided.innerRef}
             {...provided.dragHandleProps}
           >
-            <Droppable droppableId={String(props.topic.id)} type="card">
-              {provided => (
+            <Droppable droppableId={String(props.topic.id)} type='card'>
+              {(provided) => (
                 <>
                   {scrollCondition ? (
                     <>
@@ -85,10 +79,7 @@ const TopicBucket = props => {
                                 }
                               />
                             </span>
-                            <CreateIcon
-                              // onClick={() => props.editCard(props.card.id, content)}
-                              onClick={() => setediting(!editing)}
-                            />
+                            <CreateIcon onClick={() => setediting(!editing)} />
                             {!editing ? (
                               props.topic.title
                             ) : (
@@ -102,10 +93,11 @@ const TopicBucket = props => {
                                   }
                                 >
                                   <input
-                                    type="text"
-                                    name="name"
+                                    type='text'
+                                    name='name'
                                     value={content.name}
                                     onChange={handleChange}
+                                    defaultValue={props.topic.title}
                                   />
                                   &nbsp;{" "}
                                   <span
@@ -113,7 +105,7 @@ const TopicBucket = props => {
                                     style={{
                                       color: "red",
                                       fontWeight: "bolder",
-                                      padding: "5px"
+                                      padding: "5px",
                                     }}
                                   >
                                     x
@@ -128,7 +120,7 @@ const TopicBucket = props => {
                       </Title>
 
                       <CardList
-                        id="topic-scroll"
+                        id='topic-scroll'
                         ref={provided.innerRef}
                         {...provided.droppableProps}
                       >
@@ -159,7 +151,6 @@ const TopicBucket = props => {
                             </span>
                             <CreateIcon
                               className={`${props.topic.id}-createTopic`}
-                              // onClick={() => props.editCard(props.card.id, content)}
                               onClick={() => setediting(!editing)}
                             />
                             {!editing ? (
@@ -175,8 +166,8 @@ const TopicBucket = props => {
                                   }
                                 >
                                   <input
-                                    type="text"
-                                    name="name"
+                                    type='text'
+                                    name='name'
                                     value={content.name}
                                     onChange={handleChange}
                                   />
@@ -186,7 +177,7 @@ const TopicBucket = props => {
                                     style={{
                                       color: "red",
                                       fontWeight: "bolder",
-                                      padding: "5px"
+                                      padding: "5px",
                                     }}
                                   >
                                     x
@@ -216,32 +207,9 @@ const TopicBucket = props => {
                       </CardList>
                     </>
                   )}
-
-                  {/* <CardList
-                    // id={`hi-${props.topic.id}`}
-                    // className="TOPICCONTAINER"
-                    id="hi"
-                    ref={provided.innerRef}
-                    {...provided.droppableProps}
-                  >
-                    <Title>{props.topic.title}</Title>
-
-                    {props.cards.map((card, index) => (
-                      <TopicCard
-                        className={`${card.id}`}
-                        key={card.id}
-                        card={card}
-                        index={index}
-                        id={card.id}
-                      />
-                    ))}
-                    {provided.placeholder}
-                  </CardList> */}
-
                   <ActionButton topicId={props.topicId} />
                 </>
               )}
-              {/* <ActionButton topicId={props.topicId} /> */}
             </Droppable>
           </Container>
         )}
@@ -250,10 +218,10 @@ const TopicBucket = props => {
   );
 };
 
-const mapStateToProps = state => {
+const mapStateToProps = (state) => {
   return {
     user: state.user,
-    topics: state.topics
+    topics: state.topics,
   };
 };
 
@@ -261,5 +229,5 @@ export default connect(mapStateToProps, {
   deleteTopics,
   fetchTopics,
   updateTopics,
-  editTopicTitle
+  editTopicTitle,
 })(TopicBucket);
