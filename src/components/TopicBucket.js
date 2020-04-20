@@ -71,7 +71,7 @@ const TopicBucket = (props) => {
                       <Title>
                         {props.topic.title !== "Drafts" ? (
                           <span>
-                            <span className={`${props.topic.id}-deleteTopic`}>
+                            <span className={`deleteTopic`}>
                               <DeleteIcon
                                 style={{ "margin-right": "20" }}
                                 onClick={() =>
@@ -141,7 +141,7 @@ const TopicBucket = (props) => {
                       <Title>
                         {props.topic.title !== "Drafts" ? (
                           <span>
-                            <span className={`${props.topic.id}-deleteTopic`}>
+                            <span className={`deleteTopic`}>
                               <DeleteIcon
                                 style={{ "margin-right": "20" }}
                                 onClick={() =>
@@ -150,7 +150,7 @@ const TopicBucket = (props) => {
                               />
                             </span>
                             <CreateIcon
-                              className={`${props.topic.id}-createTopic`}
+                              className={`editTopic`}
                               onClick={() => setediting(!editing)}
                             />
                             {!editing ? (

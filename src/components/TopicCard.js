@@ -141,7 +141,7 @@ const TopicCard = props => {
             <Icons>
               {console.log(content.name)}
               <DeleteIcon
-                className={`${props.card.id}-delete`}
+                className={`delete`}
                 onClick={() => props.deleteCard(props.card.id)}
               />
               <CreateIcon
@@ -151,7 +151,7 @@ const TopicCard = props => {
                 onClick={() => setediting(!editing)}
               />
               <MoreVertIcon
-                className={`${props.card.id}-editnp`}
+                className={`${props.card.id}-edit`}
                 style={{ padding: "0rem .25rem" }}
                 onClick={handleOpen}
               />
