@@ -104,44 +104,48 @@ const HomePage = (props) => {
   };
 
   return (
-    <div>
-      <Grid container spacing={0}>
-        <Grid item>
-          <Navigation />
-        </Grid>
+    <div className="columns is-gapless">
+      <div className="column is-2">
+        <Navigation />
+      </div>
 
-        <Route exact path="/callback">
-          <Callback />
-        </Route>
-        <Switch>
-          <Route path="/">
-            {props.user.drawer ? (
-              <Grid item>
-                <Dashboard />
-              </Grid>
-            ) : (
-              <Grid item style={{ display: 'none' }}>
-                <Dashboard />
-              </Grid>
-            )}
-            <CssBaseline />
-            <Grid item className="drag-drop-content">
-              <TopicNav />
-              <ActionButton topic />
-              <DragDropContext onDragEnd={onDragEnd}>
-                <Droppable
-                  className="columns"
-                  droppableId="all-topics"
-                  direction="horizontal"
-                  type="topic"
-                >
-                  {(provided) => (
-                    <TopicsContainer
-                      {...provided.droppableProps}
-                      ref={provided.innerRef}
-                    >
-                      <div className="column topics">
-                        {/* {props.user.isLoading && (
+      <Route exact path="/callback">
+        <Callback />
+      </Route>
+      <Switch>
+        <Route path="/">
+          {props.user.drawer ? (
+            <div className="column is-3">
+              <Dashboard />
+            </div>
+          ) : (
+            <div className="column is-3" style={{ display: 'none' }}>
+              <Dashboard />
+            </div>
+          )}
+          <div className="column drag-drop-content">
+            <TopicNav />
+            <ActionButton className="column is-2 headers" topic />
+            <DragDropContext
+              onDragEnd={onDragEnd}
+              style={{ display: 'block', overflow: 'auto' }}
+            >
+              <Droppable
+                className="columns"
+                droppableId="all-topics"
+                direction="horizontal"
+                type="topic"
+                style={{ display: 'block', overflow: 'auto' }}
+              >
+                {(provided) => (
+                  <TopicsContainer
+                    className="ALL-TOPICS"
+                    style={{ display: 'block', overflow: 'auto' }}
+                    {...provided.droppableProps}
+                    ref={provided.innerRef}
+                  >
+                    <div className="column topics">
+                      {/* {props.user.isLoading && (
                         <Loader
                           type="BallTriangle"
                           color="#00BFFF"
@@ -150,28 +154,27 @@ const HomePage = (props) => {
                           timeout={3000}
                         />
                       )} */}
-                        <>
-                          {props?.topics?.map((topic, index) => (
-                            <TopicBucket
-                              className={`${topic.id}`}
-                              key={topic.id}
-                              topicId={topic.id}
-                              topic={topic}
-                              cards={topic.cards}
-                              index={index}
-                            />
-                          ))}
-                        </>
-                      </div>
-                      {provided.placeholder}
-                    </TopicsContainer>
-                  )}
-                </Droppable>
-              </DragDropContext>
-            </Grid>
-          </Route>
-        </Switch>
-      </Grid>
+                      <>
+                        {props?.topics?.map((topic, index) => (
+                          <TopicBucket
+                            className={`${topic.id}`}
+                            key={topic.id}
+                            topicId={topic.id}
+                            topic={topic}
+                            cards={topic.cards}
+                            index={index}
+                          />
+                        ))}
+                      </>
+                    </div>
+                    {provided.placeholder}
+                  </TopicsContainer>
+                )}
+              </Droppable>
+            </DragDropContext>
+          </div>
+        </Route>
+      </Switch>
     </div>
   );
 };

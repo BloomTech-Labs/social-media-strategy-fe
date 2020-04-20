@@ -109,34 +109,35 @@ const Dashboard = (props) => {
     //     paper: st.drawerPaper,
     //   }}
     // >
-    <div className="title">
-      <div className={st.drawerHeader}>
-        <IconButton onClick={handleDrawerClose}>
-          {theme.direction === 'ltr' ? (
-            <ChevronLeftIcon />
-          ) : (
-            <ChevronRightIcon />
-          )}
-        </IconButton>
-      </div>
-      <h1 className="bold">Dashboard</h1>
-      <div className="dash-title">
-        <h4 className="highlight">{Moment().format('dddd')}</h4>{' '}
-        <h4 className="highlight"> • </h4>
-        <h4 className="date">{getDate()}</h4>
-      </div>
-      <div className="acct-title">
-        <h2 className="blue-bold">Accounts</h2>
-        <Link
-          aria-describedby={id}
-          variant="contained"
-          color="primary"
-          onClick={handleClick}
-          className="button"
-        >
-          Add Account
-        </Link>
-        {/* <Button
+    <div className="dash-app">
+      <div className="title">
+        <div className={st.drawerHeader}>
+          <IconButton onClick={handleDrawerClose}>
+            {theme.direction === 'ltr' ? (
+              <ChevronLeftIcon />
+            ) : (
+              <ChevronRightIcon />
+            )}
+          </IconButton>
+        </div>
+        <h1 className="bold">Dashboard</h1>
+        <div className="dash-title">
+          <h4 className="highlight">{Moment().format('dddd')}</h4>{' '}
+          <h4 className="highlight"> • </h4>
+          <h4 className="date">{getDate()}</h4>
+        </div>
+        <div className="acct-title">
+          <h2 className="blue-bold">Accounts</h2>
+          <Link
+            aria-describedby={id}
+            variant="contained"
+            color="primary"
+            onClick={handleClick}
+            className="button"
+          >
+            Add Account
+          </Link>
+          {/* <Button
             aria-describedby={id}
             variant="contained"
             color="primary"
@@ -145,62 +146,64 @@ const Dashboard = (props) => {
             Open Popover
           </Button> */}
 
-        <Popover
-          id={id}
-          open={open}
-          anchorEl={anchorEl}
-          onClose={handleClose}
-          anchorOrigin={{
-            vertical: 'top',
-            horizontal: 'center',
-          }}
-          transformOrigin={{
-            vertical: 'center',
-            horizontal: 'left',
-          }}
-        >
-          <Typography className={st.typography}>
-            <img
-              onClick={twitter}
-              style={{ cursor: 'pointer' }}
-              src={twitterimg}
-              alt=""
-            />
-          </Typography>
-        </Popover>
+          <Popover
+            id={id}
+            open={open}
+            anchorEl={anchorEl}
+            onClose={handleClose}
+            anchorOrigin={{
+              vertical: 'top',
+              horizontal: 'center',
+            }}
+            transformOrigin={{
+              vertical: 'center',
+              horizontal: 'left',
+            }}
+          >
+            <Typography className={st.typography}>
+              <img
+                onClick={twitter}
+                style={{ cursor: 'pointer' }}
+                src={twitterimg}
+                alt=""
+              />
+            </Typography>
+          </Popover>
+        </div>
+        {accountData.map((e) => (
+          <Card key={data.id} className={st.root}>
+            <img className="icon" src={img} alt="Profile" />
+            <Typography variant="h3" className={st.name}>
+              {e.firstName}
+              {e.lastName}
+            </Typography>
+            <Typography variant="h4" className={st.handle}>
+              {e.twitterHandle}
+            </Typography>
+            <Box display={'flex'} className={st.boxCtr}>
+              <img className={st.locationIcon} src={pin} fontSize="small" />
+              <Typography className={st.secondaryTitle}>
+                {e.location}
+              </Typography>
+            </Box>
+            <Box display={'flex'} className={st.boxCtr}>
+              <Box flex={'auto'} className="headers">
+                <p className={st.secondaryTitle}>Posts</p>
+                <p className={st.statLabel}>{e.posts}</p>
+              </Box>
+              <Box flex={'auto'} className="headers">
+                <p className={st.secondaryTitle}>Following</p>
+                <p className={st.statLabel}>{e.following}</p>
+              </Box>
+              <Box flex={'auto'} className="headers">
+                <p className={st.secondaryTitle}>Followers</p>
+                <p className={st.statLabel}>{e.followers}</p>
+              </Box>
+            </Box>
+          </Card>
+        ))}
       </div>
-      {accountData.map((e) => (
-        <Card key={data.id} className={st.root}>
-          <img className="icon" src={img} alt="Profile" />
-          <Typography variant="h3" className={st.name}>
-            {e.firstName}
-            {e.lastName}
-          </Typography>
-          <Typography variant="h4" className={st.handle}>
-            {e.twitterHandle}
-          </Typography>
-          <Box display={'flex'} className={st.boxCtr}>
-            <img className={st.locationIcon} src={pin} fontSize="small" />
-            <Typography className={st.secondaryTitle}>{e.location}</Typography>
-          </Box>
-          <Box display={'flex'} className={st.boxCtr}>
-            <Box flex={'auto'} className="headers">
-              <p className={st.secondaryTitle}>Posts</p>
-              <p className={st.statLabel}>{e.posts}</p>
-            </Box>
-            <Box flex={'auto'} className="headers">
-              <p className={st.secondaryTitle}>Following</p>
-              <p className={st.statLabel}>{e.following}</p>
-            </Box>
-            <Box flex={'auto'} className="headers">
-              <p className={st.secondaryTitle}>Followers</p>
-              <p className={st.statLabel}>{e.followers}</p>
-            </Box>
-          </Box>
-        </Card>
-      ))}
     </div>
-    //  </Drawer>
   );
 };
 
