@@ -8,9 +8,12 @@ import { NavLink, Route, Switch } from 'react-router-dom';
 import '../sass/navigation.scss';
 // asset imports
 import Menu from '../assets/icons8-menu-vertical-30.svg';
+import { drawerswitch, drawerOpen } from '../actions';
+import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
 import HomeIcon from '@material-ui/icons/Home';
 
-const Navigation = () => {
+const Navigation = (props) => {
   return (
     <div>
       <div className="navContainer">
@@ -20,6 +23,12 @@ const Navigation = () => {
         <nav className="navLinks">
           <ul>
             <NavLink
+              onClick={() => {
+                if (props.user.drawerContent === 'HOME' || !props.user.drawer) {
+                  props.drawerswitch();
+                }
+                props.drawerOpen('HOME');
+              }}
               className="linkNav"
               activeClassName="linkActive"
               to="/home"
@@ -30,6 +39,15 @@ const Navigation = () => {
               </li>
             </NavLink>
             <NavLink
+              onClick={() => {
+                if (
+                  props.user.drawerContent === 'SEARCH' ||
+                  !props.user.drawer
+                ) {
+                  props.drawerswitch();
+                }
+                props.drawerOpen('SEARCH');
+              }}
               className="linkNav"
               activeClassName="linkActive"
               to="/search"
@@ -40,6 +58,15 @@ const Navigation = () => {
               </li>
             </NavLink>
             <NavLink
+              onClick={() => {
+                if (
+                  props.user.drawerContent === 'ACCOUNT' ||
+                  !props.user.drawer
+                ) {
+                  props.drawerswitch();
+                }
+                props.drawerOpen('ACCOUNT');
+              }}
               className="linkNav"
               activeClassName="linkActive"
               to="/account"
@@ -50,6 +77,15 @@ const Navigation = () => {
               </li>
             </NavLink>
             <NavLink
+              onClick={() => {
+                if (
+                  props.user.drawerContent === 'ANALYTICS' ||
+                  !props.user.drawer
+                ) {
+                  props.drawerswitch();
+                }
+                props.drawerOpen('ANALYTICS');
+              }}
               className="linkNav"
               activeClassName="linkActive"
               to="/analytics"
@@ -60,6 +96,15 @@ const Navigation = () => {
               </li>
             </NavLink>
             <NavLink
+              onClick={() => {
+                if (
+                  props.user.drawerContent === 'MESSAGES' ||
+                  !props.user.drawer
+                ) {
+                  props.drawerswitch();
+                }
+                props.drawerOpen('MESSAGES');
+              }}
               className="linkNav"
               activeClassName="linkActive"
               id="1"
@@ -71,6 +116,15 @@ const Navigation = () => {
               </li>
             </NavLink>
             <NavLink
+              onClick={() => {
+                if (
+                  props.user.drawerContent === 'NOTIFICATIONS' ||
+                  !props.user.drawer
+                ) {
+                  props.drawerswitch();
+                }
+                props.drawerOpen('NOTIFICATIONS');
+              }}
               className="linkNav"
               activeClassName="linkActive"
               to="/notifications"
@@ -106,10 +160,20 @@ const Navigation = () => {
         <Route path="/analytics"></Route>
         <Route path="/messages"></Route>
         <Route path="/notifications"></Route>
-        <Route path="/more"></Route>
       </Switch>
     </div>
   );
 };
+const mapStateToProps = (state) => ({
+  user: state.user,
+  topics: state.topics,
+});
 
-export default Navigation;
+function mapDispatchToProps(dispatch) {
+  return {
+    dispatch,
+    ...bindActionCreators({ drawerswitch, drawerOpen }, dispatch),
+  };
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(Navigation);

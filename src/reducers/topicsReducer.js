@@ -58,7 +58,7 @@ const topicsReducer = (state = initialState, action) => {
     case CONSTANTS.ON_ADD_CARD: {
       const newCard = {
         content: action.payload.text,
-        id: `card-${uuidv4()}`,
+        id: action.id,
       };
       cardId += 1;
 
@@ -142,6 +142,15 @@ const topicsReducer = (state = initialState, action) => {
               ? { ...card, content: action.edit }
               : card
           ),
+        };
+      });
+      return newState;
+    }
+    case CONSTANTS.EDIT_TOPIC: {
+      let newState = state.map((topics) => {
+        return {
+          ...topics,
+          title: topics.id === action.payload ? action.edit : topics.title,
         };
       });
       return newState;

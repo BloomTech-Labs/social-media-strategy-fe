@@ -1,3 +1,4 @@
+
 import React, { useState } from "react";
 import { connect } from "react-redux";
 import styled from "styled-components";
@@ -12,7 +13,9 @@ import {
   updateTopics,
   deleteTopics,
   editTopicTitle,
-} from "../actions";
+  editTopic,
+} from '../actions';
+
 
 const Container = styled.div`
   background-color: #ebecf0;
@@ -69,8 +72,9 @@ const TopicBucket = (props) => {
                   {scrollCondition ? (
                     <>
                       <Title>
-                        {props.topic.title !== "Drafts" ? (
+                        {props.topic.title !== 'Drafts' ? (
                           <span>
+
                             <span className={`deleteTopic`}>
                               <DeleteIcon
                                 style={{ "margin-right": "20" }}
@@ -85,12 +89,15 @@ const TopicBucket = (props) => {
                             ) : (
                               <>
                                 <form
-                                  onSubmit={() =>
-                                    props.editTopicTitle(
+                                  onSubmit={(e) => {
+                                    e.preventDefault();
+                                    props.editTopic(
                                       props.topic.id,
                                       content.name
-                                    )
-                                  }
+                                    );
+                                    setcontent({ name: content.name });
+                                    setediting(!editing);
+                                  }}
                                 >
                                   <input
                                     type='text'
@@ -99,13 +106,13 @@ const TopicBucket = (props) => {
                                     onChange={handleChange}
                                     defaultValue={props.topic.title}
                                   />
-                                  &nbsp;{" "}
+                                  &nbsp;{' '}
                                   <span
                                     onClick={() => setediting(!editing)}
                                     style={{
-                                      color: "red",
-                                      fontWeight: "bolder",
-                                      padding: "5px",
+                                      color: 'red',
+                                      fontWeight: 'bolder',
+                                      padding: '5px',
                                     }}
                                   >
                                     x
@@ -139,8 +146,9 @@ const TopicBucket = (props) => {
                   ) : (
                     <>
                       <Title>
-                        {props.topic.title !== "Drafts" ? (
+                        {props.topic.title !== 'Drafts' ? (
                           <span>
+
                             <span className={`deleteTopic`}>
                               <DeleteIcon
                                 style={{ "margin-right": "20" }}
@@ -158,12 +166,15 @@ const TopicBucket = (props) => {
                             ) : (
                               <>
                                 <form
-                                  onSubmit={() =>
-                                    props.editTopicTitle(
+                                  onSubmit={(e) => {
+                                    e.preventDefault();
+                                    props.editTopic(
                                       props.topic.id,
                                       content.name
-                                    )
-                                  }
+                                    );
+                                    setcontent({ name: content.name });
+                                    setediting(!editing);
+                                  }}
                                 >
                                   <input
                                     type='text'
@@ -171,13 +182,13 @@ const TopicBucket = (props) => {
                                     value={content.name}
                                     onChange={handleChange}
                                   />
-                                  &nbsp;{" "}
+                                  &nbsp;{' '}
                                   <span
                                     onClick={() => setediting(!editing)}
                                     style={{
-                                      color: "red",
-                                      fontWeight: "bolder",
-                                      padding: "5px",
+                                      color: 'red',
+                                      fontWeight: 'bolder',
+                                      padding: '5px',
                                     }}
                                   >
                                     x
@@ -229,5 +240,5 @@ export default connect(mapStateToProps, {
   deleteTopics,
   fetchTopics,
   updateTopics,
-  editTopicTitle,
+  editTopic,
 })(TopicBucket);

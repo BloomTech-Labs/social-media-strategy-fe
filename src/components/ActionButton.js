@@ -50,13 +50,15 @@ class ActionButton extends React.Component {
   handleAddCard = () => {
     const { dispatch, topicId } = this.props;
     const { text } = this.state;
-    // const id =  `card-${uuidv4()}`
+    const id = `card-${uuidv4()}`;
+
     if (text) {
-      dispatch(addCard(topicId, text));
+      dispatch(addCard(topicId, text, id));
     }
   };
 
   renderAddButton = () => {
+
     const buttonText = this.props.topic ? 'Add Topic' : '';
     return (
       <div className="actionOpener" onClick={this.openForm}>
@@ -77,6 +79,7 @@ class ActionButton extends React.Component {
     const placeholder = this.props.topic
       ? 'Enter title for this topic'
       : 'Enter text for this post';
+
     const buttonTitle = this.props.topic ? 'Add Topic' : 'Add Post';
     return (
       <div className="action-btn-cont">
