@@ -97,13 +97,17 @@ const TopicCard = props => {
     setcontent({ ...content, [e.target.name]: e.target.value });
   };
 
+  const handleHandleChange = (event) => {
+    setHandle(event.target.value);
+  };
+
   const handleClose = () => {
     setOpen(false);
   };
 
   const modalBody = (
     <div style={modalStyle} className={classes.paper}>
-      <h2 className={classes.mHeader}>Edit card</h2>
+      <h2 className={classes.mHeader}>Edit post</h2>
       <h3 className={classes.mAccent}>Draft, schedule, and post</h3>
       <FormControl className={classes.formControl}>
         <InputLabel id="twitter-handle-select">Social Account</InputLabel>
@@ -111,7 +115,7 @@ const TopicCard = props => {
           labelId="twitter-handle-select"
           id="select"
           value={handle}
-          onChange={handleChange}
+          onChange={handleHandleChange}
         >
           {/* Replace this with backend Twitter Handle info */}
           <MenuItem value={1}>@lillighanson</MenuItem>
