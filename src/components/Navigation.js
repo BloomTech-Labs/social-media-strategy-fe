@@ -8,6 +8,7 @@ import { NavLink, Route, Switch } from 'react-router-dom';
 import '../sass/navigation.scss';
 // asset imports
 import Menu from '../assets/icons8-menu-vertical-30.svg';
+import HomeIcon from '@material-ui/icons/Home';
 
 const Navigation = () => {
   return (
@@ -24,7 +25,7 @@ const Navigation = () => {
               to="/home"
             >
               <li className="link">
-                <SvgComponent iconName="home" />
+                <HomeIcon style={{width: '30px', height: '30px'}}/>
                 Home
               </li>
             </NavLink>
