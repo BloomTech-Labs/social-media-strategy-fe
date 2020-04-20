@@ -16,7 +16,7 @@ import CssBaseline from '@material-ui/core/CssBaseline';
 import Grid from '@material-ui/core/Grid';
 
 import '../sass/index.scss';
-import { Route, Switch } from 'react-router';
+import { Route, Switch, useHistory } from 'react-router';
 import Callback from './Callback';
 import { axiosWithAuth } from '../utils/axiosWithAuth';
 import { bindActionCreators } from 'redux';
@@ -47,12 +47,11 @@ const homeStyles = makeStyles((theme) => ({
 }));
 
 const HomePage = (props) => {
+  const { push } = useHistory();
   const st = homeStyles();
   const theme = useTheme();
   let userCheck = props?.user?.currentUser === null;
-
   let topicLength = props?.topics?.length;
-
   const [drawerOpen, setDrawerOpen] = useState(true);
 
   const handleDrawerOpen = () => {
@@ -78,7 +77,7 @@ const HomePage = (props) => {
   // }, []);
 
   useEffect(() => {
-    props.currentUser();
+    props.currentUser(push);
     props.fetchTopics(props.user.currentUser?.subject);
   }, [userCheck]);
 

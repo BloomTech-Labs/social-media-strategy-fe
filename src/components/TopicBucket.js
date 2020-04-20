@@ -50,7 +50,7 @@ const Icons = styled.div`
 `;
 
 const TopicBucket = (props) => {
-  const [content, setcontent] = useState({ name: '' });
+  const [content, setcontent] = useState({ name: props.topic.title });
   const [editing, setediting] = useState(false);
 
   const handleChange = (e) => {
@@ -97,7 +97,7 @@ const TopicBucket = (props) => {
                                       props.topic.id,
                                       content.name
                                     );
-                                    setcontent({ name: '' });
+                                    setcontent({ name: content.name });
                                     setediting(!editing);
                                   }}
                                 >
@@ -168,7 +168,7 @@ const TopicBucket = (props) => {
                                       props.topic.id,
                                       content.name
                                     );
-                                    setcontent({ name: '' });
+                                    setcontent({ name: content.name });
                                     setediting(!editing);
                                   }}
                                 >
