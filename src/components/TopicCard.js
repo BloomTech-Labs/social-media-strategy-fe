@@ -15,6 +15,7 @@ import Select from '@material-ui/core/Select';
 import InputLabel from '@material-ui/core/InputLabel';
 import MenuItem from '@material-ui/core/MenuItem';
 
+
 const Container = styled.div`
   background-color: white;
   border-radius: 0.5rem;
@@ -42,59 +43,64 @@ function editModalLocation() {
 
   return {
     top: `${top}%`,
-    left: `${left}%`,
+    left: `${left}%`
   };
 }
 
-const modalStyles = makeStyles((theme) => ({
+const modalStyles = makeStyles(theme => ({
   paper: {
-    fontFamily: 'Montserrat, sans-serif',
-    position: 'absolute',
+    fontFamily: "Montserrat, sans-serif",
+    position: "absolute",
     width: 400,
-    backgroundColor: '#F5F7F8',
-    borderRadius: '6px',
+    backgroundColor: "#F5F7F8",
+    borderRadius: "6px",
     boxShadow: theme.shadows[5],
-    padding: theme.spacing(7),
+    padding: theme.spacing(7)
   },
   mHeader: {
-    fontSize: '1.6rem',
+    fontSize: "1.6rem"
   },
   mAccent: {
-    lineHeight: '.1rem',
-    color: '#e85556',
-    fontWeight: 200,
+    lineHeight: ".1rem",
+    color: "#e85556",
+    fontWeight: 200
   },
   formControl: {
     margin: theme.spacing(1),
-    minWidth: 200,
+    minWidth: 200
   },
   actionSubmit: {
-    color: '#fff',
-    backgroundColor: '#E85556',
-    borderRadius: '5rem',
-    border: 'none',
-    padding: '1rem',
-    margin: '.5rem 1rem',
-    width: '40%',
-    fontSize: '1.2rem',
-  },
+    color: "#fff",
+    backgroundColor: "#E85556",
+    borderRadius: "5rem",
+    border: "none",
+    padding: "1rem",
+    margin: ".5rem 1rem",
+    width: "40%",
+    fontSize: "1.2rem"
+  }
 }));
 
-const TopicCard = (props) => {
+const TopicCard = props => {
   const classes = modalStyles();
   const [modalStyle] = useState(editModalLocation);
   const [open, setOpen] = useState(false);
   const [handle, setHandle] = useState('');
   const [content, setcontent] = useState({ name: props.card.content });
+
   const [editing, setediting] = useState(false);
 
   const handleOpen = () => {
     setOpen(true);
   };
 
-  const handleChange = (e) => {
+  const handleChange = e => {
     e.preventDefault();
     setcontent({ ...content, [e.target.name]: e.target.value });
+  };
+
+  const handleHandleChange = (event) => {
+    setHandle(event.target.value);
   };
 
   const handleClose = () => {
@@ -103,7 +109,7 @@ const TopicCard = (props) => {
 
   const modalBody = (
     <div style={modalStyle} className={classes.paper}>
-      <h2 className={classes.mHeader}>Edit card</h2>
+      <h2 className={classes.mHeader}>Edit post</h2>
       <h3 className={classes.mAccent}>Draft, schedule, and post</h3>
       <FormControl className={classes.formControl}>
         <InputLabel id="twitter-handle-select">Social Account</InputLabel>
@@ -111,7 +117,7 @@ const TopicCard = (props) => {
           labelId="twitter-handle-select"
           id="select"
           value={handle}
-          onChange={handleChange}
+          onChange={handleHandleChange}
         >
           {/* Replace this with backend Twitter Handle info */}
           <MenuItem value={1}>@lillighanson</MenuItem>
@@ -126,7 +132,7 @@ const TopicCard = (props) => {
 
   return (
     <Draggable draggableId={String(props.id)} index={props.index}>
-      {(provided) => (
+      {provided => (
         <Container
           className={`${props.className}`}
           {...provided.draggableProps}
@@ -137,17 +143,21 @@ const TopicCard = (props) => {
             <Icons>
               {console.log(content.name)}
               <DeleteIcon
+                className={`delete`}
                 onClick={() =>
                   props.deleteCard(props.card.id) &
                   deletePostCard(props.card.id)
                 }
               />
               <CreateIcon
+                className={`${props.card.id}-create`}
                 // onClick={() => props.editCard(props.card.id, content)}
+                className="edit"
                 onClick={() => setediting(!editing)}
               />
               <MoreVertIcon
-                style={{ padding: '0rem .25rem' }}
+                className={`${props.card.id}-edit`}
+                style={{ padding: "0rem .25rem" }}
                 onClick={handleOpen}
               />
             </Icons>
@@ -173,10 +183,10 @@ const TopicCard = (props) => {
                   value={content.name}
                   onChange={handleChange}
                 />
-                &nbsp;{' '}
+                &nbsp;{" "}
                 <span
                   onClick={() => setediting(!editing)}
-                  style={{ color: 'red', fontWeight: 'bolder', padding: '5px' }}
+                  style={{ color: "red", fontWeight: "bolder", padding: "5px" }}
                 >
                   x
                 </span>
@@ -190,14 +200,14 @@ const TopicCard = (props) => {
   );
 };
 
-const mapStateToProps = (state) => ({
+const mapStateToProps = state => ({
   user: state.user,
-  topics: state.topics,
+  topics: state.topics
 });
 function mapDispatchToProps(dispatch) {
   return {
     dispatch,
-    ...bindActionCreators({ deleteCard, editCard }, dispatch),
+    ...bindActionCreators({ deleteCard, editCard }, dispatch)
   };
 }
 

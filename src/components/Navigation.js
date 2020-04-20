@@ -11,6 +11,7 @@ import Menu from '../assets/icons8-menu-vertical-30.svg';
 import { drawerswitch, drawerOpen } from '../actions';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
+import HomeIcon from '@material-ui/icons/Home';
 
 const Navigation = (props) => {
   return (
@@ -33,7 +34,7 @@ const Navigation = (props) => {
               to="/home"
             >
               <li className="link">
-                <SvgComponent iconName="home" />
+                <HomeIcon style={{width: '30px', height: '30px'}}/>
                 Home
               </li>
             </NavLink>

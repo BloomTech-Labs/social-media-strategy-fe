@@ -145,15 +145,6 @@ const HomePage = (props) => {
                     ref={provided.innerRef}
                   >
                     <div className="column topics">
-                      {/* {props.user.isLoading && (
-                        <Loader
-                          type="BallTriangle"
-                          color="#00BFFF"
-                          height={100}
-                          width={100}
-                          timeout={3000}
-                        />
-                      )} */}
                       <>
                         {props?.topics?.map((topic, index) => (
                           <TopicBucket
