@@ -26,7 +26,6 @@ export const registerUser = (userData, cb) => (dispatch) => {
   Axios.post(
     `${process.env.REACT_APP_API_URL}/auth/register` ||
       'https://social-media-strategy.herokuapp.com/api/auth/register',
-    // 'http://localhost:5000/api/auth/register',
     userData
   )
     .then(async (response) => {
@@ -50,7 +49,6 @@ export const registerUser = (userData, cb) => (dispatch) => {
         ],
       });
 
-      // history.push("/");
     })
     .catch((error) => {
       dispatch({ type: CONSTANTS.USER_APICALL_FAILURE, payload: error.data });
@@ -81,6 +79,18 @@ export const currentUser = (cb) => (dispatch) => {
       }
     });
 };
+
+export const fetchAccounts = () => dispatch => {
+  dispatch({ type: CONSTANTS.ACCOUNTS_FETCH_START })
+  axiosWithAuth()
+    .get('/auth/userinfo')
+    .then(response => {
+      dispatch({ type: CONSTANTS.ACCOUNTS_FETCH_SUCCESS, payload: response.data})
+    })
+    .catch((error) => {
+      dispatch({ type: CONSTANTS.ACCOUNTS_FETCH_FAILURE, payload: error.data });
+    });
+}
 
 export const drawerOpen = (payload) => (dispatch) => {
   dispatch({ type: CONSTANTS.DRAWER_OPEN, payload: payload });
