@@ -39,7 +39,6 @@ import { drawerOpen, currentUser, drawerswitch, fetchAccounts } from "../actions
 import { dashStyles } from "../sass/DashStyles";
 
 // Set dummy Acct Data
-const accountData = data.accounts;
 const drawerWidth = 400;
 
 const Dashboard = props => {
@@ -141,7 +140,7 @@ const Dashboard = props => {
         </div>
 
         {props.user.map(account => (
-          <Card key={data.id} className={st.root}>
+          <Card className={st.root}>
             <img className='icon' src={account.profile_img} alt="Profile" />
             <Typography variant="h3" className={st.name}>
               {account.firstName}
