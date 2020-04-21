@@ -49,7 +49,7 @@ export default function TransitionsModal() {
   return (
     <div>
       <ColorButton id="navButton" type="button" onClick={handleOpen}>
-        Compose
+        Post Now
       </ColorButton>
       <Modal
         aria-labelledby="transition-modal-title"

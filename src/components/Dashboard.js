@@ -15,42 +15,47 @@ import MenuIcon from '@material-ui/icons/Menu';
 import CropFreeIcon from '@material-ui/icons/CropFree';
 import List from '@material-ui/core/List';
 import Divider from '@material-ui/core/Divider';
-
-
+import ListItem from '@material-ui/core/ListItem';
+import ListItemIcon from '@material-ui/core/ListItemIcon';
+import Drawer from '@material-ui/core/Drawer';
+import CssBaseline from '@material-ui/core/CssBaseline';
 
 // Icons
 import DashboardIcon from '@material-ui/icons/Dashboard';
 import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
 import ChevronRightIcon from '@material-ui/icons/ChevronRight';
 
-//Adding moment for date purposes
-import Moment from 'moment';
-
-// import AddAccount from "./AddAccount";
-
 // Styling
 import '../sass/dashboard.scss';
 
 // Assets import
-import data from './accounts.json';
 import img from '../assets/headshot.jpg';
 import pin from '../assets/pin.svg';
 import twitterimg from '../imgs/Vector.png';
 import { axiosWithAuth } from '../utils/axiosWithAuth';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import { drawerOpen, currentUser, drawerswitch } from '../actions';
+import {
+  drawerOpen,
+  currentUser,
+  drawerswitch,
+  fetchAccounts,
+} from '../actions';
 import { dashStyles } from '../sass/DashStyles';
 
 // Set dummy Acct Data
-const accountData = data.accounts;
 const drawerWidth = 400;
 
 const Dashboard = (props) => {
   const st = dashStyles();
-  const theme = useTheme();
+
   const [anchorEl, setAnchorEl] = useState(null);
 
+  useEffect(() => {
+    props.fetchAccounts();
+  }, []);
+
+  const theme = useTheme();
 
   const handleDrawerClose = () => {
     props.drawerswitch();
@@ -63,10 +68,6 @@ const Dashboard = (props) => {
   const handleClose = () => {
     setAnchorEl(null);
   };
-
-  // async function twittercheck() {
-  //   props.currentUser();
-  // }
 
   async function twitter() {
     let ax = await (
@@ -83,16 +84,13 @@ const Dashboard = (props) => {
       )
     ).json();
 
-    let move = await (window.location.href = ax);
+    let move = await (window.location.href = ax); // not currently used anywhere
   }
 
   const open = Boolean(anchorEl);
+
   const id = open ? 'simple-popover' : undefined;
 
-  function getDate() {
-    const todaysDate = Moment().format('MMM DD, YYYY');
-    return todaysDate;
-  }
   return (
     <div className="dash-app">
       <div className="title">
@@ -106,11 +104,7 @@ const Dashboard = (props) => {
           </IconButton>
         </div>
         <h1 className="bold">Dashboard</h1>
-        <div className="dash-title">
-          <h4 className="highlight">{Moment().format('dddd')}</h4>{' '}
-          <h4 className="highlight"> • </h4>
-          <h4 className="date">{getDate()}</h4>
-        </div>
+
         <div className="acct-title">
           <h2 className="blue-bold">Accounts</h2>
           <Link
@@ -146,34 +140,47 @@ const Dashboard = (props) => {
             </Typography>
           </Popover>
         </div>
-        {accountData.map((e) => (
-          <Card key={data.id} className={st.root}>
-            <img className="icon" src={img} alt="Profile" />
+
+        {props.user.map((account) => (
+          <Card className={st.root}>
+            <img className="icon" src={account.profile_img} alt="Profile" />
             <Typography variant="h3" className={st.name}>
-              {e.firstName}
-              {e.lastName}
+              {account.firstName}
+              {account.lastName}
             </Typography>
             <Typography variant="h4" className={st.handle}>
-              {e.twitterHandle}
+              <img
+                className={st.locationIcon}
+                src={twitterimg}
+                alt="Twitter Icon"
+              />{' '}
+              {account.screen_name}
             </Typography>
+
             <Box display={'flex'} className={st.boxCtr}>
-              <img className={st.locationIcon} src={pin} fontSize="small" />
+              <img
+                className={st.locationIcon}
+                src={pin}
+                fontSize="small"
+                alt="map pin"
+              />
+
               <Typography className={st.secondaryTitle}>
-                {e.location}
+                {account.location}
               </Typography>
             </Box>
             <Box display={'flex'} className={st.boxCtr}>
               <Box flex={'auto'} className="headers">
                 <p className={st.secondaryTitle}>Posts</p>
-                <p className={st.statLabel}>{e.posts}</p>
+                <p className={st.statLabel}>{account.total_post}</p>
               </Box>
               <Box flex={'auto'} className="headers">
                 <p className={st.secondaryTitle}>Following</p>
-                <p className={st.statLabel}>{e.following}</p>
+                <p className={st.statLabel}>{account.total_following}</p>
               </Box>
               <Box flex={'auto'} className="headers">
                 <p className={st.secondaryTitle}>Followers</p>
-                <p className={st.statLabel}>{e.followers}</p>
+                <p className={st.statLabel}>{account.total_followers}</p>
               </Box>
             </Box>
           </Card>
@@ -184,7 +191,7 @@ const Dashboard = (props) => {
 };
 
 const mapStateToProps = (state) => ({
-  user: state.user,
+  user: state.user.accounts,
 });
 function mapDispatchToProps(dispatch) {
   return {
@@ -193,4 +200,6 @@ function mapDispatchToProps(dispatch) {
   };
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(Dashboard);
+export default connect(mapStateToProps, { currentUser, fetchAccounts })(
+  Dashboard
+);
