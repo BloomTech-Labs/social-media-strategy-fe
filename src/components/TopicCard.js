@@ -13,7 +13,10 @@ import Modal from '@material-ui/core/Modal';
 import FormControl from '@material-ui/core/FormControl';
 import Select from '@material-ui/core/Select';
 import InputLabel from '@material-ui/core/InputLabel';
+import Menu from '@material-ui/core/Menu';
 import MenuItem from '@material-ui/core/MenuItem';
+import IconButton from '@material-ui/core/IconButton';
+import TextField from '@material-ui/core/TextField';
 
 
 const Container = styled.div`
@@ -87,8 +90,17 @@ const TopicCard = props => {
   const [open, setOpen] = useState(false);
   const [handle, setHandle] = useState('');
   const [content, setcontent] = useState({ name: props.card.content });
-
+  const [anchorEl, setAnchorEl] = useState(null);
+  const openMenu = Boolean(anchorEl);
   const [editing, setediting] = useState(false);
+
+const handleClick = (e) => {
+  setAnchorEl(e.currentTarget);
+};
+
+const handleMenuClose = () => {
+  setAnchorEl(null);
+}
 
   const handleOpen = () => {
     setOpen(true);
@@ -112,8 +124,9 @@ const TopicCard = props => {
       <h2 className={classes.mHeader}>Edit post</h2>
       <h3 className={classes.mAccent}>Draft, schedule, and post</h3>
       <FormControl className={classes.formControl}>
-        <InputLabel id="twitter-handle-select">Social Account</InputLabel>
+        <InputLabel style={{'margin-bottom':'2rem'}} id="twitter-handle-select">Social Account</InputLabel>
         <Select
+          style={{'margin-bottom':'2rem'}}
           labelId="twitter-handle-select"
           id="select"
           value={handle}
@@ -124,6 +137,34 @@ const TopicCard = props => {
           <MenuItem value={2}>@msdoodler</MenuItem>
           <MenuItem value={3}>@adventureawaits</MenuItem>
         </Select>
+        {/* <InputLabel style={{'margin-bottom':'2rem'}} id="content-edit">Edit Post Content</InputLabel> */}
+        <h4>Edit post content</h4>
+          <form
+            noValidate
+            onSubmit={(e) => {
+              e.preventDefault();
+              props.editCard(props.card.id, content.name);
+              setcontent({ name: content.name });
+              setediting(!editing);
+          }}
+          >
+                <TextField
+                  id="standard-basic"
+                  type="text"
+                  name="name"
+                  style={{'margin-bottom':'2rem', width: '90%'}}
+                  value={content.name}
+                  onChange={handleChange}
+                />
+                {/* &nbsp;{" "} */}
+                <span
+                  onClick={() => setediting(!editing)}
+                  style={{ color: "red", fontWeight: "bolder", padding: "5px" }}
+                >
+                  x
+                </span>
+                <input type="submit" />
+              </form>
       </FormControl>
       <button className={classes.actionSubmit}>Schedule</button>
       <button className={classes.actionSubmit}>Post now</button>
@@ -140,9 +181,14 @@ const TopicCard = props => {
           ref={provided.innerRef}
         >
           <BtnCont>
-            <Icons>
-              {console.log(content.name)}
-              <DeleteIcon
+            <IconButton
+              aria-label="more options"
+              aria-controls="menu"
+              aria-haspopup="true"
+              onClick={handleClick}
+            >
+              <MoreVertIcon/>
+              {/* <DeleteIcon
                 className={`delete`}
                 onClick={() =>
                   props.deleteCard(props.card.id) &
@@ -154,13 +200,30 @@ const TopicCard = props => {
                 // onClick={() => props.editCard(props.card.id, content)}
                 className="edit"
                 onClick={() => setediting(!editing)}
-              />
-              <MoreVertIcon
+              /> */}
+              {/* <MoreVertIcon
                 className={`${props.card.id}-edit`}
                 style={{ padding: "0rem .25rem" }}
                 onClick={handleOpen}
-              />
-            </Icons>
+              /> */}
+            </IconButton>
+            <Menu
+              id="post-menu"
+              anchorEl={anchorEl}
+              keepMounted
+              open={openMenu}
+              onClose={handleMenuClose}
+              >
+                <MenuItem onClick={handleOpen} className={`${props.card.id}-edit`}>
+                    Edit
+                </MenuItem>
+                <MenuItem onClick= {() =>
+                  props.deleteCard(props.card.id) &
+                  deletePostCard(props.card.id)
+                } className={`delete`}>
+                    Delete
+                </MenuItem>
+              </Menu>
           </BtnCont>
           <Modal open={open} onClose={handleClose}>
             {modalBody}
