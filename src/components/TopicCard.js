@@ -16,7 +16,7 @@ import InputLabel from '@material-ui/core/InputLabel';
 import Menu from '@material-ui/core/Menu';
 import MenuItem from '@material-ui/core/MenuItem';
 import IconButton from '@material-ui/core/IconButton';
-
+import TextField from '@material-ui/core/TextField';
 
 
 const Container = styled.div`
@@ -124,8 +124,9 @@ const handleMenuClose = () => {
       <h2 className={classes.mHeader}>Edit post</h2>
       <h3 className={classes.mAccent}>Draft, schedule, and post</h3>
       <FormControl className={classes.formControl}>
-        <InputLabel id="twitter-handle-select">Social Account</InputLabel>
+        <InputLabel style={{'margin-bottom':'2rem'}} id="twitter-handle-select">Social Account</InputLabel>
         <Select
+          style={{'margin-bottom':'2rem'}}
           labelId="twitter-handle-select"
           id="select"
           value={handle}
@@ -136,6 +137,34 @@ const handleMenuClose = () => {
           <MenuItem value={2}>@msdoodler</MenuItem>
           <MenuItem value={3}>@adventureawaits</MenuItem>
         </Select>
+        {/* <InputLabel style={{'margin-bottom':'2rem'}} id="content-edit">Edit Post Content</InputLabel> */}
+        <h4>Edit post content</h4>
+          <form
+            noValidate
+            onSubmit={(e) => {
+              e.preventDefault();
+              props.editCard(props.card.id, content.name);
+              setcontent({ name: content.name });
+              setediting(!editing);
+          }}
+          >
+                <TextField
+                  id="standard-basic"
+                  type="text"
+                  name="name"
+                  style={{'margin-bottom':'2rem', width: '90%'}}
+                  value={content.name}
+                  onChange={handleChange}
+                />
+                {/* &nbsp;{" "} */}
+                <span
+                  onClick={() => setediting(!editing)}
+                  style={{ color: "red", fontWeight: "bolder", padding: "5px" }}
+                >
+                  x
+                </span>
+                <input type="submit" />
+              </form>
       </FormControl>
       <button className={classes.actionSubmit}>Schedule</button>
       <button className={classes.actionSubmit}>Post now</button>
