@@ -43,8 +43,10 @@
     "test": "react-scripts test",
     "eject": "react-scripts eject",
     "cypress:open": "cypress open",
+    "cypress:run": "cypress run",
     "scss": "node-sass --watch src/sass -o css",
-    "start:coverage": "react-scripts -r @cypress/instrument-cra start"
+    "start:coverage": "react-scripts -r @cypress/instrument-cra start",
+    "cypress:coverage": "start-server-and-test start:coverage http://localhost:3000 cypress:run"
   },
   "eslintConfig": {
     "extends": "react-app"
@@ -69,6 +71,7 @@
     "cypress": "^4.3.0",
     "istanbul-lib-coverage": "^3.0.0",
     "nyc": "^15.0.1",
+    "start-server-and-test": "^1.11.0",
     "supertest": "^4.0.2"
   },
   "repository": {
