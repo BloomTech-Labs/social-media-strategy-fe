@@ -67,6 +67,28 @@ export const deletePostCard = (id) => {
       console.log(error, 'FAIL');
     });
 };
+
+export const editPostCard = (id, content) => {
+  axiosWithAuth()
+    .put(`/posts/${id}`, { post_text: content })
+    .then((res) => {
+      console.log(res);
+    })
+    .catch((error) => {
+      console.log(error, 'FAIL');
+    });
+};
+export const twitterPost = (id, content) => {
+  axiosWithAuth()
+    .put(`/posts/${id}/twitter`, content)
+    .then((res) => {
+      console.log(res);
+    })
+    .catch((error) => {
+      console.log(error, 'FAIL');
+    });
+};
+
 export const addCard = (topicId, text, id) => (dispatch) => {
   postCard(text, id);
 
@@ -77,6 +99,8 @@ export const addCard = (topicId, text, id) => (dispatch) => {
   }, timeoutTime);
 };
 export const deleteCard = (cardID) => (dispatch) => {
+  deletePostCard(cardID);
+
   dispatch({ type: CONSTANTS.DELETE_CARD, payload: cardID });
   dispatch({ type: CONSTANTS.USER_APICALL_START, didUpdate: true });
   setTimeout(() => {
@@ -84,7 +108,22 @@ export const deleteCard = (cardID) => (dispatch) => {
   }, timeoutTime);
 };
 export const editCard = (cardID, content) => (dispatch) => {
+  editPostCard(cardID, content);
+
   dispatch({ type: CONSTANTS.EDIT_CARD, payload: cardID, edit: content });
+  dispatch({ type: CONSTANTS.USER_APICALL_START, didUpdate: true });
+  setTimeout(() => {
+    dispatch({ type: CONSTANTS.USER_APICALL_SUCCESS, didUpdate: false });
+  }, timeoutTime);
+};
+export const editCardandPost = (cardID, content) => (dispatch) => {
+  twitterPost(cardID, content);
+
+  dispatch({
+    type: CONSTANTS.EDIT_CARD,
+    payload: cardID,
+    edit: content.post_text,
+  });
   dispatch({ type: CONSTANTS.USER_APICALL_START, didUpdate: true });
   setTimeout(() => {
     dispatch({ type: CONSTANTS.USER_APICALL_SUCCESS, didUpdate: false });
