@@ -13,7 +13,10 @@ import Modal from '@material-ui/core/Modal';
 import FormControl from '@material-ui/core/FormControl';
 import Select from '@material-ui/core/Select';
 import InputLabel from '@material-ui/core/InputLabel';
+import Menu from '@material-ui/core/Menu';
 import MenuItem from '@material-ui/core/MenuItem';
+import IconButton from '@material-ui/core/IconButton';
+
 
 
 const Container = styled.div`
@@ -87,8 +90,17 @@ const TopicCard = props => {
   const [open, setOpen] = useState(false);
   const [handle, setHandle] = useState('');
   const [content, setcontent] = useState({ name: props.card.content });
-
+  const [anchorEl, setAnchorEl] = useState(null);
+  const openMenu = Boolean(anchorEl);
   const [editing, setediting] = useState(false);
+
+const handleClick = (e) => {
+  setAnchorEl(e.currentTarget);
+};
+
+const handleMenuClose = () => {
+  setAnchorEl(null);
+}
 
   const handleOpen = () => {
     setOpen(true);
@@ -140,9 +152,14 @@ const TopicCard = props => {
           ref={provided.innerRef}
         >
           <BtnCont>
-            <Icons>
-              {console.log(content.name)}
-              <DeleteIcon
+            <IconButton
+              aria-label="more options"
+              aria-controls="menu"
+              aria-haspopup="true"
+              onClick={handleClick}
+            >
+              <MoreVertIcon/>
+              {/* <DeleteIcon
                 className={`delete`}
                 onClick={() =>
                   props.deleteCard(props.card.id) &
@@ -154,13 +171,30 @@ const TopicCard = props => {
                 // onClick={() => props.editCard(props.card.id, content)}
                 className="edit"
                 onClick={() => setediting(!editing)}
-              />
-              <MoreVertIcon
+              /> */}
+              {/* <MoreVertIcon
                 className={`${props.card.id}-edit`}
                 style={{ padding: "0rem .25rem" }}
                 onClick={handleOpen}
-              />
-            </Icons>
+              /> */}
+            </IconButton>
+            <Menu
+              id="post-menu"
+              anchorEl={anchorEl}
+              keepMounted
+              open={openMenu}
+              onClose={handleMenuClose}
+              >
+                <MenuItem onClick={handleOpen} className={`${props.card.id}-edit`}>
+                    Edit
+                </MenuItem>
+                <MenuItem onClick= {() =>
+                  props.deleteCard(props.card.id) &
+                  deletePostCard(props.card.id)
+                } className={`delete`}>
+                    Delete
+                </MenuItem>
+              </Menu>
           </BtnCont>
           <Modal open={open} onClose={handleClose}>
             {modalBody}
