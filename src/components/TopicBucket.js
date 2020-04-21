@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { connect } from "react-redux";
 import styled from "styled-components";
 import TopicCard from "./TopicCard";
@@ -11,9 +11,9 @@ import {
   fetchTopics,
   updateTopics,
   deleteTopics,
-  editTopicTitle
+  editTopicTitle,
+  editTopic
 } from "../actions";
-import { axiosWithAuth } from "../utils/axiosWithAuth";
 
 const Container = styled.div`
   background-color: #ebecf0;
@@ -42,14 +42,9 @@ const CardList = styled.div`
   width: 20rem;
   border-radius: 0.5rem;
 `;
-const Icons = styled.div`
-  display: flex;
-  justify-content: flex-end;
-  padding: 0.5rem;
-`;
 
 const TopicBucket = props => {
-  const [content, setcontent] = useState({ name: "" });
+  const [content, setcontent] = useState({ name: props.topic.title });
   const [editing, setediting] = useState(false);
 
   const handleChange = e => {
@@ -77,7 +72,7 @@ const TopicBucket = props => {
                       <Title>
                         {props.topic.title !== "Drafts" ? (
                           <span>
-                            <span className={`${props.topic.id}-deleteTopic`}>
+                            <span className={`deleteTopic`}>
                               <DeleteIcon
                                 style={{ "margin-right": "20" }}
                                 onClick={() =>
@@ -85,27 +80,28 @@ const TopicBucket = props => {
                                 }
                               />
                             </span>
-                            <CreateIcon
-                              // onClick={() => props.editCard(props.card.id, content)}
-                              onClick={() => setediting(!editing)}
-                            />
+                            <CreateIcon onClick={() => setediting(!editing)} />
                             {!editing ? (
                               props.topic.title
                             ) : (
                               <>
                                 <form
-                                  onSubmit={() =>
-                                    props.editTopicTitle(
+                                  onSubmit={e => {
+                                    e.preventDefault();
+                                    props.editTopic(
                                       props.topic.id,
                                       content.name
-                                    )
-                                  }
+                                    );
+                                    setcontent({ name: content.name });
+                                    setediting(!editing);
+                                  }}
                                 >
                                   <input
                                     type="text"
                                     name="name"
                                     value={content.name}
                                     onChange={handleChange}
+                                    defaultValue={props.topic.title}
                                   />
                                   &nbsp;{" "}
                                   <span
@@ -148,31 +144,37 @@ const TopicBucket = props => {
                     <>
                       <Title>
                         {props.topic.title !== "Drafts" ? (
-                          <span>
-                            <span className={`${props.topic.id}-deleteTopic`}>
-                              <DeleteIcon
-                                style={{ "margin-right": "20" }}
-                                onClick={() =>
-                                  props.deleteTopics(props.topic.id)
-                                }
+                          <span className="editTopics">
+                            <span className="topicIcons">
+                              <span className={`deleteTopic`}>
+                                <DeleteIcon
+                                  style={{ "margin-right": "20" }}
+                                  onClick={() =>
+                                    props.deleteTopics(props.topic.id)
+                                  }
+                                />
+                              </span>
+                              <CreateIcon
+                                className={`editTopic`}
+                                onClick={() => setediting(!editing)}
                               />
                             </span>
-                            <CreateIcon
-                              className={`${props.topic.id}-createTopic`}
-                              // onClick={() => props.editCard(props.card.id, content)}
-                              onClick={() => setediting(!editing)}
-                            />
                             {!editing ? (
-                              props.topic.title
+                              <span className="topicTitle">
+                                {props.topic.title}
+                              </span>
                             ) : (
                               <>
                                 <form
-                                  onSubmit={() =>
-                                    props.editTopicTitle(
+                                  onSubmit={e => {
+                                    e.preventDefault();
+                                    props.editTopic(
                                       props.topic.id,
                                       content.name
-                                    )
-                                  }
+                                    );
+                                    setcontent({ name: content.name });
+                                    setediting(!editing);
+                                  }}
                                 >
                                   <input
                                     type="text"
@@ -216,32 +218,9 @@ const TopicBucket = props => {
                       </CardList>
                     </>
                   )}
-
-                  {/* <CardList
-                    // id={`hi-${props.topic.id}`}
-                    // className="TOPICCONTAINER"
-                    id="hi"
-                    ref={provided.innerRef}
-                    {...provided.droppableProps}
-                  >
-                    <Title>{props.topic.title}</Title>
-
-                    {props.cards.map((card, index) => (
-                      <TopicCard
-                        className={`${card.id}`}
-                        key={card.id}
-                        card={card}
-                        index={index}
-                        id={card.id}
-                      />
-                    ))}
-                    {provided.placeholder}
-                  </CardList> */}
-
                   <ActionButton topicId={props.topicId} />
                 </>
               )}
-              {/* <ActionButton topicId={props.topicId} /> */}
             </Droppable>
           </Container>
         )}
@@ -261,5 +240,5 @@ export default connect(mapStateToProps, {
   deleteTopics,
   fetchTopics,
   updateTopics,
-  editTopicTitle
+  editTopic
 })(TopicBucket);

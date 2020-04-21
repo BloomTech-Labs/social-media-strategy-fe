@@ -56,7 +56,7 @@ export const registerUser = (userData, cb) => (dispatch) => {
     });
 };
 
-export const currentUser = () => (dispatch) => {
+export const currentUser = (cb) => (dispatch) => {
   dispatch({ type: CONSTANTS.USER_APICALL_START });
 
   axiosWithAuth()
@@ -70,7 +70,13 @@ export const currentUser = () => (dispatch) => {
       });
     })
     .catch((error) => {
+      console.log(error.response.status, 'ERRORSTATUS');
       dispatch({ type: CONSTANTS.USER_APICALL_FAILURE, payload: error.data });
+      if (error.response.status === 401) {
+        localStorage.clear();
+        sessionStorage.clear();
+        cb('/login');
+      }
     });
 };
 
@@ -85,3 +91,13 @@ export const fetchAccounts = () => dispatch => {
       dispatch({ type: CONSTANTS.ACCOUNTS_FETCH_FAILURE, payload: error.data });
     });
 }
+
+export const drawerOpen = (payload) => (dispatch) => {
+  dispatch({ type: CONSTANTS.DRAWER_OPEN, payload: payload });
+  // post changes to the back end
+};
+
+export const drawerswitch = () => (dispatch) => {
+  dispatch({ type: CONSTANTS.DRAWER_SWITCH });
+  // post changes to the back end
+};

@@ -1,4 +1,4 @@
-import CONSTANTS from "../actions/constants";
+import CONSTANTS from '../actions/constants';
 
 export const initialState = {
   currentUser: null,
@@ -12,7 +12,9 @@ export const initialState = {
     total_post: 'TBD',
     profile_img: 'https://pbs.twimg.com/media/C8QsNInXUAAyjZQ.jpg',
     location: ''
-  }]
+  }],
+  drawer: true,
+  drawerContent: '',
 };
 
 const userAuthReducer = (state = initialState, action) => {
@@ -44,17 +46,29 @@ const userAuthReducer = (state = initialState, action) => {
         isLoading: true,
         error: null,
       };
-    case CONSTANTS.TOPIC_FETCH_SUCCESS:
-      return {
-        ...state,
-        isLoading: false,
-        error: null,
-      };
+    // case CONSTANTS.TOPIC_FETCH_SUCCESS:
+    //   return {
+    //     ...state,
+    //     isLoading: false,
+    //     error: null,
+    //   };
     case CONSTANTS.TOPIC_FETCH_FAILURE:
       return {
         ...state,
         isLoading: false,
         error: action.payload,
+      };
+    case CONSTANTS.DRAWER_SWITCH:
+      return {
+        ...state,
+        error: null,
+        drawer: !state.drawer,
+      };
+    case CONSTANTS.DRAWER_OPEN:
+      return {
+        ...state,
+        error: null,
+        drawerContent: action.payload,
       };
     case CONSTANTS.ACCOUNTS_FETCH_START:
       return {

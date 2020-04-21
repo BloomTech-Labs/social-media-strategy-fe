@@ -39,7 +39,25 @@
     border-radius: 0.5rem;
     font-family: "Montserrat", sans-serif;
     flex-direction: row;
-    overflow:auto;
+    overflow: auto;
     height: 100%; //DONT TOUCH THIS <----
+    overflow: auto;
+  }
+}
+
+.editTopics {
+  display: flex;
+  flex-direction: row-reverse;
+
+  .topicIcons {
+    display: flex;
+    flex-direction: row-reverse;
+    justify-content: flex-end;
+  }
+
+  .topicTitle {
+    text-align: center;
+    display: flex;
+    margin-right: 17.5%;
   }
 }
