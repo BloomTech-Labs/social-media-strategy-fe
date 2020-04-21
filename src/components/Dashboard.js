@@ -25,22 +25,17 @@ import DashboardIcon from "@material-ui/icons/Dashboard";
 import ChevronLeftIcon from "@material-ui/icons/ChevronLeft";
 import ChevronRightIcon from "@material-ui/icons/ChevronRight";
 
-//Adding moment for date purposes
-
-// import AddAccount from "./AddAccount";
-
 // Styling
 import "../sass/dashboard.scss";
 
 // Assets import
-import data from "./accounts.json";
 import img from "../assets/headshot.jpg";
 import pin from "../assets/pin.svg";
 import twitterimg from "../imgs/Vector.png";
 import { axiosWithAuth } from "../utils/axiosWithAuth";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
-import { drawerOpen, currentUser, drawerswitch } from "../actions";
+import { drawerOpen, currentUser, drawerswitch, fetchAccounts } from "../actions";
 import { dashStyles } from "../sass/DashStyles";
 
 // Set dummy Acct Data
@@ -49,14 +44,15 @@ const drawerWidth = 400;
 
 const Dashboard = props => {
   const st = dashStyles();
-  const theme = useTheme();
+
   const [anchorEl, setAnchorEl] = useState(null);
-  // const [drawerOpen, setDrawerOpen] = useState(true);
 
-  // const handleDrawerOpen = () => {
-  //   setDrawerOpen(true);
-  // };
+  useEffect(() => {
+    props.fetchAccounts();
+  },[]);
 
+  const theme = useTheme();
+  
   const handleDrawerClose = () => {
     props.drawerswitch();
   };
@@ -68,10 +64,6 @@ const Dashboard = props => {
   const handleClose = () => {
     setAnchorEl(null);
   };
-
-  // async function twittercheck() {
-  //   props.currentUser();
-  // }
 
   async function twitter() {
     let ax = await (
@@ -88,24 +80,18 @@ const Dashboard = props => {
       )
     ).json();
 
-    let move = await (window.location.href = ax);
+    let move = await (window.location.href = ax); // not currently used anywhere
   }
 
   const open = Boolean(anchorEl);
+
   const id = open ? "simple-popover" : undefined;
 
   return (
-    // <Drawer
-    //   className={st.drawer}
-    //   open={props.user.drawer}
-    //   variant="persistent"
-    //   anchor="left"
-    //   classes={{
-    //     paper: st.drawerPaper,
-    //   }}
-    // >
+  
     <div className="dash-app">
       <div className="title">
+
         <div className={st.drawerHeader}>
           <IconButton onClick={handleDrawerClose}>
             {theme.direction === "ltr" ? (
@@ -116,6 +102,7 @@ const Dashboard = props => {
           </IconButton>
         </div>
         <h1 className="bold">Dashboard</h1>
+
 
         <div className="acct-title">
           <h2 className="blue-bold">Accounts</h2>
@@ -128,15 +115,6 @@ const Dashboard = props => {
           >
             Add Account
           </Link>
-          {/* <Button
-            aria-describedby={id}
-            variant="contained"
-            color="primary"
-            onClick={handleClick}
-          >
-            Open Popover
-          </Button> */}
-
           <Popover
             id={id}
             open={open}
@@ -161,34 +139,37 @@ const Dashboard = props => {
             </Typography>
           </Popover>
         </div>
-        {accountData.map(e => (
+
+        {props.user.map(account => (
           <Card key={data.id} className={st.root}>
-            <img className="icon" src={img} alt="Profile" />
+            <img className='icon' src={account.profile_img} alt="Profile" />
             <Typography variant="h3" className={st.name}>
-              {e.firstName}
-              {e.lastName}
+              {account.firstName}
+              {account.lastName}
             </Typography>
             <Typography variant="h4" className={st.handle}>
-              {e.twitterHandle}
+              <img className={st.locationIcon} src={twitterimg} alt='Twitter Icon'/> {account.screen_name}
             </Typography>
-            <Box display={"flex"} className={st.boxCtr}>
-              <img className={st.locationIcon} src={pin} fontSize="small" />
+
+            <Box display={'flex'} className={st.boxCtr}>
+              <img className={st.locationIcon} src={pin} fontSize="small" alt='map pin'/>
+
               <Typography className={st.secondaryTitle}>
-                {e.location}
+                {account.location}
               </Typography>
             </Box>
             <Box display={"flex"} className={st.boxCtr}>
               <Box flex={"auto"} className="headers">
                 <p className={st.secondaryTitle}>Posts</p>
-                <p className={st.statLabel}>{e.posts}</p>
+                <p className={st.statLabel}>{account.total_post}</p>
               </Box>
               <Box flex={"auto"} className="headers">
                 <p className={st.secondaryTitle}>Following</p>
-                <p className={st.statLabel}>{e.following}</p>
+                <p className={st.statLabel}>{account.total_following}</p>
               </Box>
               <Box flex={"auto"} className="headers">
                 <p className={st.secondaryTitle}>Followers</p>
-                <p className={st.statLabel}>{e.followers}</p>
+                <p className={st.statLabel}>{account.total_followers}</p>
               </Box>
             </Box>
           </Card>
@@ -198,8 +179,9 @@ const Dashboard = props => {
   );
 };
 
-const mapStateToProps = state => ({
-  user: state.user
+const mapStateToProps = (state) => ({
+  user: state.user.accounts,
+
 });
 function mapDispatchToProps(dispatch) {
   return {
@@ -208,4 +190,5 @@ function mapDispatchToProps(dispatch) {
   };
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(Dashboard);
+
+export default connect(mapStateToProps, { currentUser, fetchAccounts })(Dashboard);

@@ -88,10 +88,12 @@ const TopicCard = props => {
   const classes = modalStyles();
   const [modalStyle] = useState(editModalLocation);
   const [open, setOpen] = useState(false);
+
   const [handle, setHandle] = useState('');
   const [content, setcontent] = useState({ name: props.card.content });
   const [anchorEl, setAnchorEl] = useState(null);
   const openMenu = Boolean(anchorEl);
+
   const [editing, setediting] = useState(false);
 
 const handleClick = (e) => {
