@@ -85,7 +85,7 @@ const TopicCard = props => {
   const [modalStyle] = useState(editModalLocation);
   const [open, setOpen] = useState(false);
   const [handle, setHandle] = useState("");
-  const [content, setcontent] = useState({ name: "" });
+  const [content, setcontent] = useState({ name: props.card.content });
   const [editing, setediting] = useState(false);
 
   const handleOpen = () => {

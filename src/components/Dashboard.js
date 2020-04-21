@@ -1,5 +1,5 @@
 // React and React-Router-DOM imports
-import React, { useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 
 // Material UI imports
@@ -7,25 +7,15 @@ import { Card, Typography, Box } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
 import Popover from '@material-ui/core/Popover';
 
-//Adding moment for date purposes
-import Moment from 'moment';
-
-// import AddAccount from "./AddAccount";
-
 // Styling
 import '../sass/dashboard.scss';
 
 // Assets import
-import data from './accounts.json';
-import img from '../assets/headshot.jpg';
+import data from './accounts.json'; // dummy import
 import pin from '../assets/pin.svg';
 import twitterimg from '../imgs/Vector.png';
-import { axiosWithAuth } from '../utils/axiosWithAuth';
 import { connect } from 'react-redux';
-import { currentUser } from '../actions';
-
-// Set dummy Acct Data
-const accountData = data.accounts;
+import { currentUser, fetchAccounts } from '../actions';
 
 // Material UI Styled Components
 const dashStyles = makeStyles({
@@ -75,7 +65,11 @@ const useStyles = makeStyles((theme) => ({
 const Dashboard = (props) => {
   const st = dashStyles();
   const classes = useStyles();
-  const [anchorEl, setAnchorEl] = React.useState(null);
+  const [anchorEl, setAnchorEl] = useState(null);
+
+  useEffect(() => {
+    props.fetchAccounts();
+  },[]);
 
   const handleClick = (event) => {
     setAnchorEl(event.currentTarget);
@@ -84,10 +78,6 @@ const Dashboard = (props) => {
   const handleClose = () => {
     setAnchorEl(null);
   };
-
-  // async function twittercheck() {
-  //   props.currentUser();
-  // }
 
   async function twitter() {
     let ax = await (
@@ -104,25 +94,17 @@ const Dashboard = (props) => {
       )
     ).json();
 
-    let move = await (window.location.href = ax);
+    let move = await (window.location.href = ax); // not currently used anywhere
   }
 
   const open = Boolean(anchorEl);
   const id = open ? 'simple-popover' : undefined;
+  console.log(props.user[0].profile_img, "User Accounts")
 
-  function getDate() {
-    const todaysDate = Moment().format('MMM DD, YYYY');
-    return todaysDate;
-  }
   return (
     <div className="dash-app">
       <div className="title">
         <h1 className="bold">Dashboard</h1>
-        <div className="dash-title">
-          <h4 className="highlight">{Moment().format('dddd')}</h4>{' '}
-          <h4 className="highlight"> • </h4>
-          <h4 className="date">{getDate()}</h4>
-        </div>
         <div className="acct-title">
           <h2 className="blue-bold">Accounts</h2>
           <Link
@@ -134,15 +116,6 @@ const Dashboard = (props) => {
           >
             Add Account
           </Link>
-          {/* <Button
-            aria-describedby={id}
-            variant="contained"
-            color="primary"
-            onClick={handleClick}
-          >
-            Open Popover
-          </Button> */}
-
           <Popover
             id={id}
             open={open}
@@ -167,34 +140,34 @@ const Dashboard = (props) => {
             </Typography>
           </Popover>
         </div>
-        {accountData.map((e) => (
+        {props.user.map(account => (
           <Card key={data.id} className={st.root}>
-            <img className="icon" src={img} alt="Profile" />
+            <img className='icon' src={account.profile_img} alt="Profile" />
             <Typography variant="h3" className={st.name}>
-              {e.firstName}
-              {e.lastName}
+              {account.firstName}
+              {account.lastName}
             </Typography>
             <Typography variant="h4" className={st.handle}>
-              {e.twitterHandle}
+              <img className={st.locationIcon} src={twitterimg} alt='Twitter Icon'/> {account.screen_name}
             </Typography>
             <Box display={'flex'} className={st.boxCtr}>
-              <img className={st.locationIcon} src={pin} fontSize="small" />
+              <img className={st.locationIcon} src={pin} fontSize="small" alt='map pin'/>
               <Typography className={st.secondaryTitle}>
-                {e.location}
+                {account.location}
               </Typography>
             </Box>
             <Box display={'flex'} className={st.boxCtr}>
               <Box flex={'auto'} className="headers">
                 <p className={st.secondaryTitle}>Posts</p>
-                <p className={st.statLabel}>{e.posts}</p>
+                <p className={st.statLabel}>{account.total_post}</p>
               </Box>
               <Box flex={'auto'} className="headers">
                 <p className={st.secondaryTitle}>Following</p>
-                <p className={st.statLabel}>{e.following}</p>
+                <p className={st.statLabel}>{account.total_following}</p>
               </Box>
               <Box flex={'auto'} className="headers">
                 <p className={st.secondaryTitle}>Followers</p>
-                <p className={st.statLabel}>{e.followers}</p>
+                <p className={st.statLabel}>{account.total_followers}</p>
               </Box>
             </Box>
           </Card>
@@ -204,7 +177,7 @@ const Dashboard = (props) => {
   );
 };
 const mapStateToProps = (state) => ({
-  user: state.user,
+  user: state.user.accounts,
 });
 
-export default connect(mapStateToProps, { currentUser })(Dashboard);
+export default connect(mapStateToProps, { currentUser, fetchAccounts })(Dashboard);

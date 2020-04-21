@@ -5,6 +5,14 @@ export const initialState = {
   isLoading: false,
   error: null,
   didUpdate: false,
+  accounts: [{
+    screen_name: 'Your Handle Here',
+    total_followers: 'TBD',
+    total_following: 'TBD',
+    total_post: 'TBD',
+    profile_img: 'https://pbs.twimg.com/media/C8QsNInXUAAyjZQ.jpg',
+    location: ''
+  }]
 };
 
 const userAuthReducer = (state = initialState, action) => {
@@ -48,6 +56,26 @@ const userAuthReducer = (state = initialState, action) => {
         isLoading: false,
         error: action.payload,
       };
+    case CONSTANTS.ACCOUNTS_FETCH_START:
+      return {
+        ...state,
+        isLoading: true,
+        error: null,
+      };
+    case CONSTANTS.ACCOUNTS_FETCH_SUCCESS:
+      return {
+        ...state,
+        isLoading: false,
+        accounts: [
+          action.payload
+        ]
+      };
+      case CONSTANTS.ACCOUNTS_FETCH_FAILURE:
+        return {
+          ...state,
+          isLoading: false,
+          error: action.payload,
+        };
     default:
       return state;
   }
