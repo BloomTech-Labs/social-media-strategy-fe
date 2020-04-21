@@ -35,4 +35,4 @@ jobs:
           CC_TEST_REPORTER_ID: ${{ secrets.CodeClimateReporterId }}
         with:
           # Run our `coverage` command from our `package.json`
-          coverageCommand: npm run coverage
+          coverageCommand: npm run cypress:coverage
