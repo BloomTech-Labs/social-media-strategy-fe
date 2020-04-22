@@ -21,7 +21,7 @@ const Navigation = props => {
     <div>
       <div className="navContainer">
         <div className="navButtonContainer">
-          <TransitionsModal />
+          <TransitionsModal name="Post now" />
         </div>
         <nav className="navLinks">
           <ul>

@@ -22,7 +22,7 @@ const useStyles = makeStyles(theme => ({
   }
 }));
 
-export default function TransitionsModal() {
+export default function TransitionsModal(props) {
   const ColorButton = withStyles(theme => ({
     root: {
       color: theme.palette.getContrastText(blue[700]),
@@ -49,7 +49,7 @@ export default function TransitionsModal() {
   return (
     <div>
       <ColorButton id="navButton" type="button" onClick={handleOpen}>
-        Post Now
+        {props.name}
       </ColorButton>
       <Modal
         aria-labelledby="transition-modal-title"

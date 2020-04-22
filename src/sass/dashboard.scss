@@ -61,3 +61,24 @@
   border: solid 0.1rem #bbe1fa;
   padding: 0.25rem;
 }
+
+.dashCenter {
+  display: flex;
+  align-items: center;
+  align-content: center;
+  justify-content: center;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.dashIcon {
+  margin-right: 5px;
+}
+
+#twitter {
+  color: rgb(42, 150, 235);
+}
+
+#location {
+  color: rgb(181, 220, 247);
+}

@@ -21,24 +21,30 @@ import Drawer from '@material-ui/core/Drawer';
 import CssBaseline from '@material-ui/core/CssBaseline';
 
 // Icons
-import DashboardIcon from '@material-ui/icons/Dashboard';
-import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
-import ChevronRightIcon from '@material-ui/icons/ChevronRight';
+import DashboardIcon from "@material-ui/icons/Dashboard";
+import ChevronLeftIcon from "@material-ui/icons/ChevronLeft";
+import ChevronRightIcon from "@material-ui/icons/ChevronRight";
+import TwitterIcon from "@material-ui/icons/Twitter";
+import LocationOnIcon from "@material-ui/icons/LocationOn";
+
 
 // Styling
 import '../sass/dashboard.scss';
 
 // Assets import
-import img from '../assets/headshot.jpg';
-import pin from '../assets/pin.svg';
-import twitterimg from '../imgs/Vector.png';
-import { axiosWithAuth } from '../utils/axiosWithAuth';
-import { connect } from 'react-redux';
-import { bindActionCreators } from 'redux';
+
+import img from "../assets/headshot.jpg";
+import pin from "../assets/pin.svg";
+import twitterimg from "../imgs/Vector.png";
+import { axiosWithAuth } from "../utils/axiosWithAuth";
+import { connect } from "react-redux";
+import { bindActionCreators } from "redux";
+
 import {
   drawerOpen,
   currentUser,
   drawerswitch,
+
   fetchAccounts,
 } from '../actions';
 import { dashStyles } from '../sass/DashStyles';
@@ -148,12 +154,12 @@ const Dashboard = (props) => {
               {account.name}
             </Typography>
             <Typography variant="h4" className={st.handle}>
-              <img
-                className={st.locationIcon}
-                src={twitterimg}
-                alt="Twitter Icon"
-              />{' '}
-              {account.screen_name}
+                  <span className="dashCenter">
+
+                <TwitterIcon className="dashIcon" id="twitter" />
+                <span>{account.screen_name}</span>
+                  </span>
+
             </Typography>
 
             <Box display={'flex'} className={st.boxCtr}>
@@ -163,9 +169,11 @@ const Dashboard = (props) => {
                 fontSize="small"
                 alt="map pin"
               />
-
               <Typography className={st.secondaryTitle}>
-                {account.location}
+                <span className="dashCenter">
+                  <LocationOnIcon className="dashIcon" id="location" />
+                  {account.location}
+                </span>
               </Typography>
             </Box>
             <Box display={'flex'} className={st.boxCtr}>
@@ -188,6 +196,7 @@ const Dashboard = (props) => {
     </div>
   );
 };
+
 
 const mapStateToProps = (state) => ({
   user: state.user,
