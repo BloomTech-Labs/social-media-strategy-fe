@@ -95,13 +95,13 @@ const Dashboard = (props) => {
     <div className="dash-app">
       <div className="title">
         <div className={st.drawerHeader}>
-          <IconButton onClick={handleDrawerClose}>
+          {/* <IconButton onClick={() => props.drawerswitch()}>
             {theme.direction === 'ltr' ? (
               <ChevronLeftIcon />
             ) : (
               <ChevronRightIcon />
             )}
-          </IconButton>
+          </IconButton> */}
         </div>
         <h1 className="bold">Dashboard</h1>
 
@@ -141,12 +141,11 @@ const Dashboard = (props) => {
           </Popover>
         </div>
 
-        {props.user.map((account) => (
+        {props.user?.accounts?.map((account) => (
           <Card className={st.root}>
             <img className="icon" src={account.profile_img} alt="Profile" />
             <Typography variant="h3" className={st.name}>
-              {account.firstName}
-              {account.lastName}
+              {account.name}
             </Typography>
             <Typography variant="h4" className={st.handle}>
               <img
@@ -191,7 +190,7 @@ const Dashboard = (props) => {
 };
 
 const mapStateToProps = (state) => ({
-  user: state.user.accounts,
+  user: state.user,
 });
 function mapDispatchToProps(dispatch) {
   return {

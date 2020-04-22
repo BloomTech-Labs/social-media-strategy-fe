@@ -5,18 +5,30 @@ import '../sass/topicBuckets.scss';
 import CreateIcon from '@material-ui/icons/Create';
 import DeleteIcon from '@material-ui/icons/Delete';
 import MoreVertIcon from '@material-ui/icons/MoreVert';
+import DateFnsUtils from '@date-io/date-fns';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { makeStyles } from '@material-ui/core/styles';
-import { deleteCard, editCard } from '../actions';
+import { deleteCard, editCard, editCardandPost } from '../actions';
 import Modal from '@material-ui/core/Modal';
 import FormControl from '@material-ui/core/FormControl';
 import Select from '@material-ui/core/Select';
 import InputLabel from '@material-ui/core/InputLabel';
 import MenuItem from '@material-ui/core/MenuItem';
 import Backdrop from '@material-ui/core/Backdrop';
-import { Fade } from '@material-ui/core';
+import { Fade, Menu, Tooltip, Fab } from '@material-ui/core';
 import { axiosWithAuth } from '../utils/axiosWithAuth';
+import Grid from '@material-ui/core/Grid';
+import MomentUtils from '@date-io/moment';
+import {
+  MuiPickersUtilsProvider,
+  KeyboardTimePicker,
+  KeyboardDatePicker,
+} from '@material-ui/pickers';
+import 'date-fns';
+import { useHistory, useRouteMatch } from 'react-router';
+import { NavLink } from 'react-router-dom';
+import InfoIcon from '@material-ui/icons/Info';
 
 const Container = styled.div`
   background-color: white;
@@ -46,7 +58,7 @@ export const Inputtextarea = styled.textarea`
   padding: 0;
   resize: none;
   width: 100%;
-  height: 25vh;
+  height: 15vh;
   font-size: 1.8rem;
 
   ::placeholder {
@@ -56,8 +68,8 @@ export const Inputtextarea = styled.textarea`
 `;
 
 function editModalLocation() {
-  const top = 30;
-  const left = 40;
+  const top = 15;
+  const left = 30;
 
   return {
     top: `${top}%`,
@@ -69,11 +81,14 @@ const modalStyles = makeStyles((theme) => ({
   paper: {
     fontFamily: 'Montserrat, sans-serif',
     position: 'absolute',
-    width: 400,
+    width: 600,
     backgroundColor: '#F5F7F8',
     borderRadius: '6px',
     boxShadow: theme.shadows[5],
     padding: theme.spacing(7),
+    display: 'flex',
+    flexDirection: 'column',
+    alignItems: 'inherit',
   },
   mHeader: {
     fontSize: '1.6rem',
@@ -102,26 +117,64 @@ const modalStyles = makeStyles((theme) => ({
     alignItems: 'center',
     justifyContent: 'center',
   },
+  select: {
+    width: '50%',
+  },
 }));
 
 const TopicCard = (props) => {
   const classes = modalStyles();
+  const [rectime, setRecTime] = useState('');
+  const [selectedDate, setSelectedDate] = useState(new Date());
   const [modalStyle] = useState(editModalLocation);
   const [open, setOpen] = useState(false);
   const [handle, setHandle] = useState('');
-  const [content, setcontent] = useState({ post_text: props.card.content });
-  const [screenName, setScreenName] = useState('');
-
+  const [content, setcontent] = useState({
+    post_text: props.card.content,
+    date: '',
+  });
   const [editing, setediting] = useState(false);
-
+  const [postnow, setPostNow] = useState(false);
+  const { push } = useHistory();
+  const [anchorEl, setAnchorEl] = useState(null);
+  const openMenu = Boolean(anchorEl);
   useEffect(() => {
     axiosWithAuth()
       .get(`/posts/${props.card.id}`)
-      .then(
-        (res) => console.log(res, 'POSTS') & setScreenName(res.data.screenName)
-      )
+      .then((res) => {
+        let optimalTime = '';
+        res.data.map((e) => (optimalTime = e.optimal_time));
+        console.log(res, optimalTime, 'POSTS');
+        setRecTime(optimalTime);
+      })
       .catch((err) => console.log(err.message));
   }, []);
+
+  const onsubmitScheduled = (e) => {
+    e.preventDefault();
+    props.editCardandPost(props.card.id, content);
+    setOpen(false);
+  };
+
+  const onsubmitPostNow = (e) => {
+    e.preventDefault();
+    setcontent({ ...content, date: '' });
+    setTimeout(() => {
+      props.editCardandPost(props.card.id, content);
+      setOpen(false);
+    }, 200);
+  };
+
+  const handleClick = (e) => {
+    setAnchorEl(e.currentTarget);
+  };
+  const handleMenuClose = () => {
+    setAnchorEl(null);
+  };
+
+  const handleDateChange = (date) => {
+    setSelectedDate(date);
+  };
 
   const togglemodal = () => {
     setOpen(!open);
@@ -141,18 +194,110 @@ const TopicCard = (props) => {
       <h2 className={classes.mHeader}>Edit post</h2>
       <h3 className={classes.mAccent}>Draft, schedule, and post</h3>
       <FormControl className={classes.formControl}>
-        <InputLabel id="twitter-handle-select">Social Account</InputLabel>
+        <InputLabel
+          shrink
+          // className={classes.select}
+          className="test"
+          id="twitter-handle-select"
+        >
+          Social Account
+        </InputLabel>
         <Select
           labelId="twitter-handle-select"
           id="select"
           value={handle}
           onChange={handleHandleChange}
+          className="test"
+          style={{ width: '40%' }}
         >
-          {/* Replace this with backend Twitter Handle info */}
-          <MenuItem value={1}>@{props.card}</MenuItem>
-          {/* <MenuItem value={2}>@msdoodler</MenuItem>
-          <MenuItem value={3}>@adventureawaits</MenuItem> */}
+          <MenuItem value={1}>
+            @{props.user.accounts.map((e) => e.screen_name)}
+          </MenuItem>
         </Select>
+
+        <MuiPickersUtilsProvider utils={DateFnsUtils}>
+          <nav className="item-sub-nav">
+            <NavLink onClick={() => setPostNow(false)} to={`/schedule`}>
+              Schedule
+            </NavLink>
+            <NavLink onClick={() => setPostNow(true)} to={`/post-now`}>
+              Post Now
+            </NavLink>
+          </nav>
+          <Grid container justify="space-around" alignItems="center">
+            {console.log(selectedDate, 'DATE FORMAT CHECK')}
+            {!postnow ? (
+              <>
+                <div
+                  style={{
+                    display: 'flex',
+                    flexDirection: 'column',
+                    margin: '5%',
+                  }}
+                >
+                  <KeyboardDatePicker
+                    disableToolbar
+                    variant="inline"
+                    format="MM/dd/yyyy"
+                    margin="normal"
+                    id="date-picker-inline"
+                    label="Date"
+                    value={selectedDate}
+                    onChange={handleDateChange}
+                    KeyboardButtonProps={{
+                      'aria-label': 'change date',
+                    }}
+                  />
+                  {/* <KeyboardDatePicker
+                margin="normal"
+                id="date-picker-dialog"
+                label="Date picker dialog"
+                format="MM/dd/yyyy"
+                value={selectedDate}
+                onChange={handleDateChange}
+                KeyboardButtonProps={{
+                  'aria-label': 'change date',
+                }}
+              /> */}
+                  <KeyboardTimePicker
+                    margin="normal"
+                    id="time-picker"
+                    label="Time"
+                    value={selectedDate}
+                    onChange={handleDateChange}
+                    KeyboardButtonProps={{
+                      'aria-label': 'change time',
+                    }}
+                  />
+                </div>
+                <div style={{ display: 'flex', alignItems: 'center' }}>
+                  <button
+                    onClick={() => setSelectedDate(rectime)}
+                    style={{
+                      borderRadius: '6px',
+                      width: '205px',
+                      height: '38px',
+                      background: '#817BAB',
+                      color: '#EBECF0',
+                    }}
+                  >
+                    Suggest a Time
+                  </button>
+                  <Tooltip
+                    title="DS Team Magic"
+                    placement="top-end"
+                    aria-label="InfoIcon"
+                    fontSize="small"
+                    color="action"
+                  >
+                    <InfoIcon />
+                  </Tooltip>
+                </div>
+              </>
+            ) : null}
+          </Grid>
+        </MuiPickersUtilsProvider>
+
         <Inputtextarea
           placeholder="Twitter Post"
           type="text"
@@ -163,8 +308,23 @@ const TopicCard = (props) => {
           onChange={handleChange}
         ></Inputtextarea>
       </FormControl>
-      <button className={classes.actionSubmit}>Schedule</button>
-      <button className={classes.actionSubmit}>Post now</button>
+      {!postnow ? (
+        <button
+          onClick={onsubmitScheduled}
+          style={{ width: '100%' }}
+          className={classes.actionSubmit}
+        >
+          Schedule
+        </button>
+      ) : (
+        <button
+          onClick={onsubmitPostNow}
+          style={{ width: '100%' }}
+          className={classes.actionSubmit}
+        >
+          Post now
+        </button>
+      )}
     </div>
   );
 
@@ -179,7 +339,6 @@ const TopicCard = (props) => {
         >
           <BtnCont>
             <Icons>
-              {console.log(content.name)}
               <DeleteIcon
                 className={`delete`}
                 onClick={() => props.deleteCard(props.card.id)}
@@ -190,12 +349,34 @@ const TopicCard = (props) => {
                 className="edit"
                 onClick={() => setediting(!editing)}
               />
-              <MoreVertIcon
-                className={`${props.card.id}-edit`}
-                style={{ padding: '0rem .25rem' }}
-                onClick={togglemodal}
-              />
+              <NavLink to={`/schedule`}>
+                <MoreVertIcon
+                  className={`${props.card.id}-edit`}
+                  style={{ padding: '0rem .25rem' }}
+                  onClick={togglemodal}
+                />
+              </NavLink>
             </Icons>
+            {/* <Menu
+              id="post-menu"
+              anchorEl={anchorEl}
+              keepMounted
+              open={openMenu}
+              onClose={handleMenuClose}
+            >
+              <MenuItem
+                onClick={togglemodal}
+                className={`${props.card.id}-edit`}
+              >
+                Edit
+              </MenuItem>
+              <MenuItem
+                onClick={() => props.deleteCard(props.card.id)}
+                className={`delete`}
+              >
+                Delete
+              </MenuItem>
+            </Menu> */}
           </BtnCont>
 
           <Modal
@@ -203,7 +384,7 @@ const TopicCard = (props) => {
             aria-describedby="transition-modal-description"
             className={classes.modal}
             open={open}
-            onClose={togglemodal}
+            onClose={() => setOpen(false) & push('/')}
             closeAfterTransition
             BackdropComponent={Backdrop}
             BackdropProps={{
@@ -219,15 +400,16 @@ const TopicCard = (props) => {
               <form
                 onSubmit={(e) => {
                   e.preventDefault();
-                  props.editCard(props.card.id, content.name);
-                  setcontent({ post_text: content.name });
+                  props.editCard(props.card.id, content);
+                  setcontent({ ...content, post_text: content.post_text });
                   setediting(!editing);
                 }}
               >
+                {console.log(props.card.id, content, rectime, 'CARD ID')}
                 <textarea
                   type="text"
-                  name="name"
-                  value={content.name}
+                  name="post_text"
+                  value={content.post_text}
                   onChange={handleChange}
                 />
                 &nbsp;{' '}
@@ -251,10 +433,11 @@ const mapStateToProps = (state) => ({
   user: state.user,
   topics: state.topics,
 });
+
 function mapDispatchToProps(dispatch) {
   return {
     dispatch,
-    ...bindActionCreators({ deleteCard, editCard }, dispatch),
+    ...bindActionCreators({ deleteCard, editCard, editCardandPost }, dispatch),
   };
 }
 

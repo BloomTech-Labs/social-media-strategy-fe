@@ -70,7 +70,7 @@ export const deletePostCard = (id) => {
 
 export const editPostCard = (id, content) => {
   axiosWithAuth()
-    .put(`/posts/${id}`, { post_text: content })
+    .put(`/posts/${id}`, content)
     .then((res) => {
       console.log(res);
     })
@@ -110,7 +110,12 @@ export const deleteCard = (cardID) => (dispatch) => {
 export const editCard = (cardID, content) => (dispatch) => {
   editPostCard(cardID, content);
 
-  dispatch({ type: CONSTANTS.EDIT_CARD, payload: cardID, edit: content });
+  dispatch({
+    type: CONSTANTS.EDIT_CARD,
+    payload: cardID,
+    edit: content.post_text,
+  });
+  console.log(content.post_text, 'POST TEXT');
   dispatch({ type: CONSTANTS.USER_APICALL_START, didUpdate: true });
   setTimeout(() => {
     dispatch({ type: CONSTANTS.USER_APICALL_SUCCESS, didUpdate: false });
