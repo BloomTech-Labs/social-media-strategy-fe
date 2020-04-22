@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import { connect } from "react-redux";
-import styled from "styled-components";
 import TopicCard from "./TopicCard";
 import { Droppable, Draggable } from "react-beautiful-dnd";
 import ActionButton from "./ActionButton";
@@ -11,28 +10,8 @@ import {
   fetchTopics,
   updateTopics,
   deleteTopics,
-  editTopicTitle,
   editTopic
 } from "../actions";
-
-const Title = styled.h4`
-  color: white;
-  background-color: #e85556;
-  font-size: 1.6rem;
-  width: 100%;
-  padding: 1.5rem 0rem;
-  border-radius: 0.5rem 0.5rem 0rem 0rem;
-  margin: 0;
-`;
-const CardList = styled.div`
-  display: flex;
-  align-items: center;
-  flex-direction: column;
-  min-height: 100px;
-  background-color: #ebecf0;
-  width: 20rem;
-  border-radius: 0.5rem;
-`;
 
 const TopicBucket = props => {
   const [content, setcontent] = useState({ name: props.topic.title });
@@ -41,6 +20,13 @@ const TopicBucket = props => {
   const handleChange = e => {
     e.preventDefault();
     setcontent({ ...content, [e.target.name]: e.target.value });
+  };
+
+  const submitForm = (e) => {
+    e.preventDefault();
+    props.editTopic(props.topid.id, content.name)
+    setcontent({ name: content.name })
+    setediting(!editing)
   };
 
   let scrollCondition = props?.cards?.length > 4;
@@ -73,20 +59,11 @@ const TopicBucket = props => {
                             </span>
                             <CreateIcon onClick={() => setediting(!editing)} />
                             {!editing ? (
-                              props.topic.title
+                              props.topic.title // if not editing show this
                             ) : (
+                              // else show this
                               <>
-                                <form
-                                  onSubmit={e => {
-                                    e.preventDefault();
-                                    props.editTopic(
-                                      props.topic.id,
-                                      content.name
-                                    );
-                                    setcontent({ name: content.name });
-                                    setediting(!editing);
-                                  }}
-                                >
+                                <form onSubmit={submitForm}>
                                   <input
                                     type="text"
                                     name="name"
@@ -114,7 +91,7 @@ const TopicBucket = props => {
                         )}
                       </div>
 
-                      <CardList
+                      <div className='cardlist'
                         id="topic-scroll"
                         ref={provided.innerRef}
                         {...provided.droppableProps}
@@ -129,11 +106,11 @@ const TopicBucket = props => {
                           />
                         ))}
                         {provided.placeholder}
-                      </CardList>
+                      </div>
                     </>
                   ) : (
                     <>
-                      <Title>
+                      <h4 className='title'>
                         {props.topic.title !== "Drafts" ? (
                           <span className="editTopics">
                             <span className="topicIcons">
@@ -156,17 +133,7 @@ const TopicBucket = props => {
                               </span>
                             ) : (
                               <>
-                                <form
-                                  onSubmit={e => {
-                                    e.preventDefault();
-                                    props.editTopic(
-                                      props.topic.id,
-                                      content.name
-                                    );
-                                    setcontent({ name: content.name });
-                                    setediting(!editing);
-                                  }}
-                                >
+                                <form onSubmit={submitForm}>
                                   <input
                                     type="text"
                                     name="name"
@@ -191,8 +158,8 @@ const TopicBucket = props => {
                         ) : (
                           props.topic.title
                         )}
-                      </Title>
-                      <CardList
+                      </h4>
+                      <div className='cardlist'
                         ref={provided.innerRef}
                         {...provided.droppableProps}
                       >
@@ -206,7 +173,7 @@ const TopicBucket = props => {
                           />
                         ))}
                         {provided.placeholder}
-                      </CardList>
+                      </div>
                     </>
                   )}
                   <ActionButton topicId={props.topicId} />
