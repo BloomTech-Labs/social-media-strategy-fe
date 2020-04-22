@@ -24,6 +24,8 @@ import CssBaseline from "@material-ui/core/CssBaseline";
 import DashboardIcon from "@material-ui/icons/Dashboard";
 import ChevronLeftIcon from "@material-ui/icons/ChevronLeft";
 import ChevronRightIcon from "@material-ui/icons/ChevronRight";
+import TwitterIcon from "@material-ui/icons/Twitter";
+import LocationOnIcon from "@material-ui/icons/LocationOn";
 
 // Styling
 import "../sass/dashboard.scss";
@@ -35,7 +37,12 @@ import twitterimg from "../imgs/Vector.png";
 import { axiosWithAuth } from "../utils/axiosWithAuth";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
-import { drawerOpen, currentUser, drawerswitch, fetchAccounts } from "../actions";
+import {
+  drawerOpen,
+  currentUser,
+  drawerswitch,
+  fetchAccounts
+} from "../actions";
 import { dashStyles } from "../sass/DashStyles";
 
 // Set dummy Acct Data
@@ -48,10 +55,10 @@ const Dashboard = props => {
 
   useEffect(() => {
     props.fetchAccounts();
-  },[]);
+  }, []);
 
   const theme = useTheme();
-  
+
   const handleDrawerClose = () => {
     props.drawerswitch();
   };
@@ -87,10 +94,8 @@ const Dashboard = props => {
   const id = open ? "simple-popover" : undefined;
 
   return (
-  
     <div className="dash-app">
       <div className="title">
-
         <div className={st.drawerHeader}>
           <IconButton onClick={handleDrawerClose}>
             {theme.direction === "ltr" ? (
@@ -101,7 +106,6 @@ const Dashboard = props => {
           </IconButton>
         </div>
         <h1 className="bold">Dashboard</h1>
-
 
         <div className="acct-title">
           <h2 className="blue-bold">Accounts</h2>
@@ -141,20 +145,25 @@ const Dashboard = props => {
 
         {props.user.map(account => (
           <Card className={st.root}>
-            <img className='icon' src={account.profile_img} alt="Profile" />
+            <img className="icon" src={account.profile_img} alt="Profile" />
             <Typography variant="h3" className={st.name}>
+              {console.log("account", account)}
               {account.firstName}
               {account.lastName}
             </Typography>
             <Typography variant="h4" className={st.handle}>
-              <img className={st.locationIcon} src={twitterimg} alt='Twitter Icon'/> {account.screen_name}
+              <span className="dashCenter">
+                <TwitterIcon className="dashIcon" id="twitter" />
+                <span>{account.screen_name}</span>
+              </span>
             </Typography>
 
-            <Box display={'flex'} className={st.boxCtr}>
-              <img className={st.locationIcon} src={pin} fontSize="small" alt='map pin'/>
-
+            <Box display={"flex"} className={st.boxCtr}>
               <Typography className={st.secondaryTitle}>
-                {account.location}
+                <span className="dashCenter">
+                  <LocationOnIcon className="dashIcon" id="location" />
+                  {account.location}
+                </span>
               </Typography>
             </Box>
             <Box display={"flex"} className={st.boxCtr}>
@@ -178,9 +187,8 @@ const Dashboard = props => {
   );
 };
 
-const mapStateToProps = (state) => ({
-  user: state.user.accounts,
-
+const mapStateToProps = state => ({
+  user: state.user.accounts
 });
 function mapDispatchToProps(dispatch) {
   return {
@@ -189,5 +197,6 @@ function mapDispatchToProps(dispatch) {
   };
 }
 
-
-export default connect(mapStateToProps, { currentUser, fetchAccounts })(Dashboard);
+export default connect(mapStateToProps, { currentUser, fetchAccounts })(
+  Dashboard
+);
