@@ -5,7 +5,3 @@ body {
 .redirect {
   display: none;
 }
-#topic-scroll {
-  overflow-y: scroll;
-  height: 50vh;
-}
