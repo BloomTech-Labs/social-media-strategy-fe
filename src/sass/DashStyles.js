@@ -8,28 +8,6 @@ export const dashStyles = makeStyles((theme) => ({
     textAlign: 'center',
     margin: '1rem 0rem',
   },
-  drawer: {
-    width: drawerWidth,
-    flexShrink: 0.2,
-    fontFamily: 'Montserrat, sans-serif',
-    // overflowY: auto,
-  },
-  drawerPaper: {
-    width: drawerWidth,
-    marginLeft: '12%',
-    [theme.breakpoints.down('lg')]: {
-      marginLeft: '13%',
-      background: 'red',
-    },
-    [theme.breakpoints.down('md')]: {
-      marginLeft: '18%',
-      background: 'red',
-    },
-    [theme.breakpoints.down('sm')]: {
-      marginLeft: '20%',
-      background: 'red',
-    },
-  },
   menuButton: {
     marginRight: theme.spacing(2),
   },
