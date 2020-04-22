@@ -149,7 +149,7 @@ const TopicCard = (props) => {
         setRecTime(optimalTime);
       })
       .catch((err) => console.log(err.message));
-  }, []);
+  }, [props.user.currentUser]);
 
   const onsubmitScheduled = (e) => {
     e.preventDefault();
