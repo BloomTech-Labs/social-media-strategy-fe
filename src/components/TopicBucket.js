@@ -15,15 +15,6 @@ import {
   editTopic
 } from "../actions";
 
-const Container = styled.div`
-  background-color: #ebecf0;
-  border-radius: 0.5rem;
-  display: flex;
-  flex-direction: column;
-  height: 100%;
-  margin: 1rem;
-  text-align: center;
-`;
 const Title = styled.h4`
   color: white;
   background-color: #e85556;
@@ -58,8 +49,8 @@ const TopicBucket = props => {
     <>
       <Draggable draggableId={String(props.topic.id)} index={props.index}>
         {provided => (
-          <Container
-            className={`${props.className} `}
+          <div
+            className={`${props.className} container`}
             {...provided.draggableProps}
             ref={provided.innerRef}
             {...provided.dragHandleProps}
@@ -69,7 +60,7 @@ const TopicBucket = props => {
                 <>
                   {scrollCondition ? (
                     <>
-                      <Title>
+                      <div className='title'>
                         {props.topic.title !== "Drafts" ? (
                           <span>
                             <span className={`deleteTopic`}>
@@ -121,7 +112,7 @@ const TopicBucket = props => {
                         ) : (
                           props.topic.title
                         )}
-                      </Title>
+                      </div>
 
                       <CardList
                         id="topic-scroll"
@@ -222,7 +213,7 @@ const TopicBucket = props => {
                 </>
               )}
             </Droppable>
-          </Container>
+          </div>
         )}
       </Draggable>
     </>
