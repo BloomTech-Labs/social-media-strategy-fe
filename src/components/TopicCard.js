@@ -16,7 +16,7 @@ import Select from '@material-ui/core/Select';
 import InputLabel from '@material-ui/core/InputLabel';
 import MenuItem from '@material-ui/core/MenuItem';
 import Backdrop from '@material-ui/core/Backdrop';
-import { Fade, Menu, Tooltip, Fab } from '@material-ui/core';
+import { Fade, Menu, Tooltip, Fab, IconButton } from '@material-ui/core';
 import { axiosWithAuth } from '../utils/axiosWithAuth';
 import Grid from '@material-ui/core/Grid';
 import MomentUtils from '@date-io/moment';
@@ -29,6 +29,7 @@ import 'date-fns';
 import { useHistory, useRouteMatch } from 'react-router';
 import { NavLink } from 'react-router-dom';
 import InfoIcon from '@material-ui/icons/Info';
+import twitterLogo from '../imgs/Vector.png';
 
 const Container = styled.div`
   background-color: white;
@@ -211,7 +212,8 @@ const TopicCard = (props) => {
           style={{ width: '40%' }}
         >
           <MenuItem value={1}>
-            @{props.user.accounts.map((e) => e.screen_name)}
+            @{props.user.accounts.map((e) => e.screen_name)} &nbsp;{' '}
+            <img src={twitterLogo} alt="" />
           </MenuItem>
         </Select>
 
@@ -338,8 +340,8 @@ const TopicCard = (props) => {
           ref={provided.innerRef}
         >
           <BtnCont>
-            <Icons>
-              <DeleteIcon
+            <IconButton>
+              {/* <DeleteIcon
                 className={`delete`}
                 onClick={() => props.deleteCard(props.card.id)}
               />
@@ -348,35 +350,40 @@ const TopicCard = (props) => {
                 // onClick={() => props.editCard(props.card.id, content)}
                 className="edit"
                 onClick={() => setediting(!editing)}
+              /> */}
+              <MoreVertIcon
+                // className={`${props.card.id}-edit`}
+                // style={{ padding: '0rem .25rem' }}
+                // onClick={togglemodal}
+                onClick={handleClick}
               />
-              <NavLink to={`/schedule`}>
-                <MoreVertIcon
-                  className={`${props.card.id}-edit`}
-                  style={{ padding: '0rem .25rem' }}
-                  onClick={togglemodal}
-                />
-              </NavLink>
-            </Icons>
-            {/* <Menu
+            </IconButton>
+            <Menu
               id="post-menu"
               anchorEl={anchorEl}
               keepMounted
               open={openMenu}
               onClose={handleMenuClose}
             >
-              <MenuItem
-                onClick={togglemodal}
-                className={`${props.card.id}-edit`}
+              <NavLink
+                style={{ textDecoration: 'none', color: 'black  ' }}
+                to={`/schedule`}
               >
-                Edit
-              </MenuItem>
+                <MenuItem
+                  onClick={togglemodal}
+                  className={`${props.card.id}-edit`}
+                >
+                  Edit
+                </MenuItem>
+              </NavLink>
+
               <MenuItem
                 onClick={() => props.deleteCard(props.card.id)}
                 className={`delete`}
               >
                 Delete
               </MenuItem>
-            </Menu> */}
+            </Menu>
           </BtnCont>
 
           <Modal
