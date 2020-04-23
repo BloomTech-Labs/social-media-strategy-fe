@@ -42,3 +42,18 @@
 // .MuiInputBase-root {
 //   width: 40%;
 // }
+
+// TOPIC-CARD ---------------------------------
+
+#cardhover {
+  .showHover {
+    opacity: 0 !important;
+  }
+}
+
+#cardhover:hover {
+  .showHover {
+    opacity: 1 !important;
+  }
+}
+// --------------------------------------------------------

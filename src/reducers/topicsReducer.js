@@ -59,6 +59,9 @@ const topicsReducer = (state = initialState, action) => {
       const newCard = {
         content: action.payload.text,
         id: action.id,
+        date: action.date ?? '',
+        screenName: action.screenName ?? '',
+        media: action.media ?? '',
       };
       cardId += 1;
 
@@ -139,7 +142,13 @@ const topicsReducer = (state = initialState, action) => {
           ...topics,
           cards: topics.cards.map((card) =>
             card.id === action.payload
-              ? { ...card, content: action.edit }
+              ? {
+                  ...card,
+                  content: action.edit,
+                  date: action.date,
+                  screenName: action.screenName,
+                  media: action.media,
+                }
               : card
           ),
         };
