@@ -31,10 +31,6 @@
   margin-right: 0.5rem;
 }
 
-.date {
-  color: rgb(102, 111, 126);
-}
-
 .acct-title {
   display: flex;
   justify-content: space-between;
@@ -42,10 +38,12 @@
   width: 100%;
   align-items: center;
   margin-bottom: 1rem;
+  margin-top: 50px;
   .blue-bold {
     color: white;
     font-weight: 700;
   }
+
   .button {
     text-decoration: none;
     color: rgb(102, 111, 126);
