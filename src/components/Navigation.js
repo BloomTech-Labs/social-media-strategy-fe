@@ -12,9 +12,10 @@ import Menu from "../assets/icons8-menu-vertical-30.svg";
 import { drawerswitch, drawerOpen } from "../actions";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
+import ExitToAppIcon from "@material-ui/icons/ExitToApp";
 import HomeIcon from "@material-ui/icons/Home";
 import AccountCircleIcon from "@material-ui/icons/AccountCircle";
-import AssessmentIcon from "@material-ui/icons/Assessment";
+import RssFeedIcon from "@material-ui/icons/RssFeed";
 
 const Navigation = props => {
   return (
@@ -81,11 +82,11 @@ const Navigation = props => {
               to="/analytics"
             >
               <li className="link">
-                <AssessmentIcon
+                <RssFeedIcon
                   className="navImage"
                   style={{ width: "30px", height: "30px" }}
                 />
-                Analytics
+                Feed
               </li>
             </NavLink>
             <NavLink
@@ -100,7 +101,10 @@ const Navigation = props => {
               to="/"
             >
               <li className="link">
-                <img className="navImage" src={Menu} alt="Menu icon" />
+                <ExitToAppIcon
+                  className="navImage"
+                  style={{ width: "30px", height: "30px" }}
+                />
                 Logout{" "}
               </li>
             </NavLink>
