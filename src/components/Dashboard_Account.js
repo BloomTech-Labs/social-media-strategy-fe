@@ -75,7 +75,7 @@ const Dashboard_Account = (props) => {
   async function twitter() {
     let ax = await (
       await fetch(
-        ` https://social-media-strategy.herokuapp.com/api/auth/${props.user.currentUser.subject}/oauth`,
+        `${process.env.REACT_APP_API_URL}/auth/${props.user.currentUser.subject}/oauth`,
         {
           method: 'GET',
           redirect: 'follow',
