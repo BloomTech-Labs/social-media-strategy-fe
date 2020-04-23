@@ -107,13 +107,15 @@ export const deleteCard = (cardID) => (dispatch) => {
     dispatch({ type: CONSTANTS.USER_APICALL_SUCCESS, didUpdate: false });
   }, timeoutTime);
 };
-export const editCard = (cardID, content) => (dispatch) => {
+export const editCard = (cardID, content, postInfo) => (dispatch) => {
   editPostCard(cardID, content);
 
   dispatch({
     type: CONSTANTS.EDIT_CARD,
     payload: cardID,
     edit: content.post_text,
+    date: content.date,
+    screenName: postInfo.screenname,
   });
   console.log(content.post_text, 'POST TEXT');
   dispatch({ type: CONSTANTS.USER_APICALL_START, didUpdate: true });
@@ -121,13 +123,15 @@ export const editCard = (cardID, content) => (dispatch) => {
     dispatch({ type: CONSTANTS.USER_APICALL_SUCCESS, didUpdate: false });
   }, timeoutTime);
 };
-export const editCardandPost = (cardID, content) => (dispatch) => {
+export const editCardandPost = (cardID, content, postInfo) => (dispatch) => {
   twitterPost(cardID, content);
 
   dispatch({
     type: CONSTANTS.EDIT_CARD,
     payload: cardID,
     edit: content.post_text,
+    date: content.date,
+    screenName: postInfo.screenname,
   });
   dispatch({ type: CONSTANTS.USER_APICALL_START, didUpdate: true });
   setTimeout(() => {

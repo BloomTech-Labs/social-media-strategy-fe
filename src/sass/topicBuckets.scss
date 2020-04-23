@@ -12,11 +12,12 @@
     flex-direction: row;
     justify-content: start;
     align-items: flex-end;
-    margin: 3.25rem 0 0 1rem;
+    margin: 1.75rem 0 0 1rem;
   }
 
   .headers {
     color: black;
+    font-size: 3rem;
   }
 
   .unselected-headers {
@@ -43,6 +44,10 @@
     height: 100%; //DONT TOUCH THIS <----
     overflow: auto;
   }
+}
+#topic-scroll {
+  overflow-y: scroll;
+  height: 50vh;
 }
 
 .editTopics {

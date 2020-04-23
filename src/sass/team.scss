@@ -1,0 +1,190 @@
+@import url("https://fonts.googleapis.com/css?family=Montserrat&display=swap");
+
+
+.team-body{
+    background-image: url('../imgs/landingHero.jpg');
+    background-size:cover;
+    background-repeat: no-repeat;
+    font-family: "Montserrat", sans-serif;
+    display:flex;
+    flex-wrap:wrap;
+    justify-content: space-between;
+    overflow-x:scroll;
+
+    .sticky-footer{
+        display:flex;
+        justify-content:center;
+        align-items:flex-end;
+        width:100%;
+        padding-bottom: 1rem;
+        font-size: .9rem;
+
+        .text-align{
+            line-height: .2rem;
+            display:flex;
+            flex-wrap: wrap;
+            justify-content: center;
+
+            .footer-nav{
+                width:100%;
+                display:flex;
+                justify-content:center;
+
+                .team-link{
+                    text-decoration: none;
+                    color: black;
+                    padding: .1rem 1rem;
+                    font-size: .75rem;
+                }
+            }
+        }
+    }
+}
+
+.landing-navbar{
+    display: flex;
+    flex-direction:row;
+    justify-content: space-between;
+    align-items: center;
+    width:90vw;
+    margin:0 auto;
+    padding-top:1rem;
+    height: 10vh;
+
+    .logo-text{
+        font-weight: 700;
+        text-decoration: none;
+        color:white;
+        width: 5%;
+        font-size:1.6rem;
+    }
+    
+
+    .landing-sign-nav{
+
+        display: flex;
+        flex-direction: row;
+        justify-content:flex-end;
+        width:15%;
+
+        .sign-up-btn{
+            font-weight: 500;
+            text-decoration: none;
+            color: #e85556;
+            font-size:1rem;
+            padding: 0 .5rem;
+        }
+        
+        .sign-in-btn{
+            font-weight: 500;
+            text-decoration: none;
+            color:white;
+            font-size:1rem;
+            padding: 0 .5rem;
+        }
+    }
+}
+
+
+.centered{
+    display:flex;
+    justify-content: center;
+    margin-bottom:10%;
+    margin-top:5%;
+}
+.center-team{
+    display: flex;
+    flex-direction: row;
+    margin: 0 auto;
+    align-items:flex-start;
+    width: 80%;
+    justify-content: flex-start;
+    flex-wrap: wrap;
+
+    .project-info{
+        width:100%;
+        border-radius: .5rem;
+        background-color: white;
+        padding: 1rem;
+        margin: 1rem 0;
+        
+        .social-link{
+            width:1.5vw;
+            padding: .5rem;
+        }
+    }
+
+
+    .team-table{
+        display: flex;
+        flex-direction: row;
+        background-color: #2f414b;;
+        align-items: center;
+        padding: .2rem;
+        border-radius: .5rem;
+        margin: 1rem 1rem 0 0;
+        
+
+        .title-div{
+            display: block;
+            position:relative;
+
+            .team-title{
+                transform: rotate(-90deg);
+                background-color: none;
+                font-size: 1.6rem;
+                color: white;
+                font-weight: 700;
+                margin:0;
+                // position: absolute;
+            }
+        }
+
+
+        .contributor{
+            display:flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items:center;
+            background:white;
+            padding: .5rem;
+            border-radius: .5rem;
+            margin: 1rem;
+
+            .headshot{
+                border-radius:1rem;
+                width:7vw;
+                height: inherit;
+            }
+
+            .social-link{
+                width:1.5vw;
+                padding: .5rem;
+            }
+        }
+    }
+
+
+    .main-text{
+        font-weight: 700;
+        color:white;
+        font-size: 3rem;
+        line-height: 2rem;
+    }
+
+    .secondary-text{
+        font-weight: 400;
+        font-size: 1.6rem;
+        color:white;
+    }
+    .start-here{
+        font-weight: 400;
+        text-decoration: none;
+        color:white;
+        background-color: #e85556;
+        padding: .5rem 4rem;
+        border-radius: .5rem;
+        font-size:.9rem;
+        line-height: 2rem;
+    }
+}
