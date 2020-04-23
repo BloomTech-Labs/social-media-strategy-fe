@@ -66,3 +66,52 @@
     margin-right: 17.5%;
   }
 }
+
+.container {
+  background-color: #ebecf0;
+  border-radius: 0.5rem;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  margin: 1rem;
+  text-align: center;
+}
+
+h4.title {
+  color: white;
+  background-color: #e85556;
+  font-size: 1.6rem;
+  width: 100%;
+  padding: 1.5rem 0rem;
+  border-radius: 0.5rem 0.5rem 0rem 0rem;
+  margin: 0;
+
+
+}
+
+.topic-0 {
+  h4 {
+    background-color: #817bab;
+    width: 100%;
+  }
+}
+
+div.cardlist {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  min-height: 100px;
+  background-color: #ebecf0;
+  width: 20rem;
+  border-radius: 0.5rem;
+}
+
+span.edit-toggle {
+  color: red;
+  font-weight: bolder;
+  padding: 5px;
+}
+
+.drafts {
+  background-color: green;
+}

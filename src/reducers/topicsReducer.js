@@ -9,17 +9,17 @@ const cuser = JSON.parse(setid);
 
 export const initialState = [
   {
-    // id: `topic-${uuidv4()} topic-0`,
-    // title: "Drafts",
-    // user_id: 1 ?? cuser,
-    // index: 0,
-    // cards: [
-    //   {
-    //     id: `card-${0}`,
-    //     content:
-    //       "This is an example of a post that you could draft. Feel free to express yourself!",
-    //   },
-    // ],
+    id: `topic-${uuidv4()} topic-0`,
+    title: "Drafts",
+    user_id: 1 ?? cuser,
+    index: 0,
+    cards: [
+      {
+        id: `card-${0}`,
+        content:
+          "This is an example of a post that you could draft. Feel free to express yourself!",
+      },
+    ],
   },
 ];
 
