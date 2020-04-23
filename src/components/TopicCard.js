@@ -1,29 +1,28 @@
-import React, { useState, useEffect } from "react";
-import styled from "styled-components";
-import { Draggable } from "react-beautiful-dnd";
-import "../sass/topicBuckets.scss";
-import CreateIcon from "@material-ui/icons/Create";
-import DeleteIcon from "@material-ui/icons/Delete";
-import MoreVertIcon from "@material-ui/icons/MoreVert";
-import DateFnsUtils from "@date-io/date-fns";
-import { connect } from "react-redux";
-import { bindActionCreators } from "redux";
-import { makeStyles } from "@material-ui/core/styles";
-import { deleteCard, editCard, editCardandPost } from "../actions";
-import Modal from "@material-ui/core/Modal";
-import FormControl from "@material-ui/core/FormControl";
-import Select from "@material-ui/core/Select";
-import InputLabel from "@material-ui/core/InputLabel";
-import MenuItem from "@material-ui/core/MenuItem";
-import Backdrop from "@material-ui/core/Backdrop";
-import { Fade, Menu, Tooltip, Fab, IconButton } from "@material-ui/core";
-import { axiosWithAuth } from "../utils/axiosWithAuth";
-import Grid from "@material-ui/core/Grid";
-import MomentUtils from "@date-io/moment";
+import React, { useState, useEffect } from 'react';
+import styled from 'styled-components';
+import { Draggable } from 'react-beautiful-dnd';
+import '../sass/topicBuckets.scss';
+import CreateIcon from '@material-ui/icons/Create';
+import DeleteIcon from '@material-ui/icons/Delete';
+import MoreVertIcon from '@material-ui/icons/MoreVert';
+import DateFnsUtils from '@date-io/date-fns';
+import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
+import { makeStyles } from '@material-ui/core/styles';
+import { deleteCard, editCard, editCardandPost } from '../actions';
+import Modal from '@material-ui/core/Modal';
+import FormControl from '@material-ui/core/FormControl';
+import Select from '@material-ui/core/Select';
+import InputLabel from '@material-ui/core/InputLabel';
+import MenuItem from '@material-ui/core/MenuItem';
+import Backdrop from '@material-ui/core/Backdrop';
+import { Fade, Menu, Tooltip, Fab, IconButton } from '@material-ui/core';
+import { axiosWithAuth } from '../utils/axiosWithAuth';
+import Grid from '@material-ui/core/Grid';
+import MomentUtils from '@date-io/moment';
 import {
   MuiPickersUtilsProvider,
   KeyboardTimePicker,
-
   KeyboardDatePicker,
 } from '@material-ui/pickers';
 import 'date-fns';
@@ -76,62 +75,62 @@ function editModalLocation() {
 
   return {
     top: `${top}%`,
-    left: `${left}%`
+    left: `${left}%`,
   };
 }
 
-const modalStyles = makeStyles(theme => ({
+const modalStyles = makeStyles((theme) => ({
   paper: {
-    fontFamily: "Montserrat, sans-serif",
-    position: "absolute",
+    fontFamily: 'Montserrat, sans-serif',
+    position: 'absolute',
     width: 600,
-    backgroundColor: "#F5F7F8",
-    borderRadius: "6px",
+    backgroundColor: '#F5F7F8',
+    borderRadius: '6px',
     boxShadow: theme.shadows[5],
     padding: theme.spacing(7),
-    display: "flex",
-    flexDirection: "column",
-    alignItems: "inherit"
+    display: 'flex',
+    flexDirection: 'column',
+    alignItems: 'inherit',
   },
   mHeader: {
-    fontSize: "1.6rem"
+    fontSize: '1.6rem',
   },
   mAccent: {
-    lineHeight: ".1rem",
-    color: "#e85556",
-    fontWeight: 200
+    lineHeight: '.1rem',
+    color: '#e85556',
+    fontWeight: 200,
   },
   formControl: {
     margin: theme.spacing(1),
-    minWidth: 200
+    minWidth: 200,
   },
   actionSubmit: {
-    color: "#fff",
-    backgroundColor: "#E85556",
-    borderRadius: "5rem",
-    border: "none",
-    padding: "1rem",
-    margin: ".5rem 1rem",
-    width: "40%",
-    fontSize: "1.2rem"
+    color: '#fff',
+    backgroundColor: '#E85556',
+    borderRadius: '5rem',
+    border: 'none',
+    padding: '1rem',
+    margin: '.5rem 1rem',
+    width: '40%',
+    fontSize: '1.2rem',
   },
   modal: {
-    display: "flex",
-    alignItems: "center",
-    justifyContent: "center"
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center',
   },
   select: {
-    width: "50%"
-  }
+    width: '50%',
+  },
 }));
 
-const TopicCard = props => {
+const TopicCard = (props) => {
   const classes = modalStyles();
-  const [rectime, setRecTime] = useState("");
+  const [rectime, setRecTime] = useState('');
   const [selectedDate, setSelectedDate] = useState(new Date());
   const [modalStyle] = useState(editModalLocation);
   const [open, setOpen] = useState(false);
-  const [handle, setHandle] = useState("");
+  const [handle, setHandle] = useState('');
   const [content, setcontent] = useState({
     post_text: props.card.content,
     date: props.card.date,
@@ -151,13 +150,14 @@ const TopicCard = props => {
 
       .then((res) => {
         let optimalTime = '';
+        console.log(res, 'WHAT ARE YOU');
         res.data.map((e) => (optimalTime = e.optimal_time) & setPostContent(e));
         setRecTime(optimalTime);
       })
       .catch((err) => console.log(err.message));
-  }, [updateTrue]);
+  }, [updateTrue, props?.user?.currentUser]);
 
-  const onsubmitScheduled = e => {
+  const onsubmitScheduled = (e) => {
     e.preventDefault();
     // setcontent({ ...content, date: selectedDate });
     setTimeout(() => {
@@ -166,23 +166,23 @@ const TopicCard = props => {
     }, 200);
   };
 
-  const onsubmitPostNow = e => {
+  const onsubmitPostNow = (e) => {
     e.preventDefault();
-    setcontent({ ...content, date: "" });
+    setcontent({ ...content, date: '' });
     setTimeout(() => {
       props.editCardandPost(props.card.id, content, postContent);
       setOpen(false);
     }, 200);
   };
 
-  const handleClick = e => {
+  const handleClick = (e) => {
     setAnchorEl(e.currentTarget);
   };
   const handleMenuClose = () => {
     setAnchorEl(null);
   };
 
-  const handleDateChange = date => {
+  const handleDateChange = (date) => {
     setSelectedDate(date);
     setcontent({ ...content, date: date });
   };
@@ -191,12 +191,12 @@ const TopicCard = props => {
     setOpen(!open);
   };
 
-  const handleChange = e => {
+  const handleChange = (e) => {
     e.preventDefault();
     setcontent({ ...content, [e.target.name]: e.target.value });
   };
 
-  const handleHandleChange = event => {
+  const handleHandleChange = (event) => {
     setHandle(event.target.value);
   };
 
@@ -246,10 +246,9 @@ const TopicCard = props => {
           value={handle}
           onChange={handleHandleChange}
           className="test"
-          style={{ width: "40%" }}
+          style={{ width: '40%' }}
         >
           <MenuItem value={1}>
-
             @{screen_name} &nbsp; <img src={twitterLogo} alt="" />
           </MenuItem>
         </Select>
@@ -269,9 +268,9 @@ const TopicCard = props => {
               <>
                 <div
                   style={{
-                    display: "flex",
-                    flexDirection: "column",
-                    margin: "5%"
+                    display: 'flex',
+                    flexDirection: 'column',
+                    margin: '5%',
                   }}
                 >
                   <KeyboardDatePicker
@@ -284,7 +283,7 @@ const TopicCard = props => {
                     value={selectedDate}
                     onChange={handleDateChange}
                     KeyboardButtonProps={{
-                      "aria-label": "change date"
+                      'aria-label': 'change date',
                     }}
                   />
                   <KeyboardTimePicker
@@ -294,19 +293,19 @@ const TopicCard = props => {
                     value={selectedDate}
                     onChange={handleDateChange}
                     KeyboardButtonProps={{
-                      "aria-label": "change time"
+                      'aria-label': 'change time',
                     }}
                   />
                 </div>
-                <div style={{ display: "flex", alignItems: "center" }}>
+                <div style={{ display: 'flex', alignItems: 'center' }}>
                   <button
                     onClick={() => setSelectedDate(rectime)}
                     style={{
-                      borderRadius: "6px",
-                      width: "205px",
-                      height: "38px",
-                      background: "#817BAB",
-                      color: "#EBECF0"
+                      borderRadius: '6px',
+                      width: '205px',
+                      height: '38px',
+                      background: '#817BAB',
+                      color: '#EBECF0',
                     }}
                   >
                     Suggest a Time
@@ -339,7 +338,7 @@ const TopicCard = props => {
       {!postnow ? (
         <button
           onClick={onsubmitScheduled}
-          style={{ width: "100%" }}
+          style={{ width: '100%' }}
           className={classes.actionSubmit}
         >
           Schedule
@@ -347,7 +346,7 @@ const TopicCard = props => {
       ) : (
         <button
           onClick={onsubmitPostNow}
-          style={{ width: "100%" }}
+          style={{ width: '100%' }}
           className={classes.actionSubmit}
         >
           Post now
@@ -358,7 +357,7 @@ const TopicCard = props => {
 
   return (
     <Draggable draggableId={String(props.id)} index={props.index}>
-      {provided => (
+      {(provided) => (
         <Container
           className={`${props.className}`}
           {...provided.draggableProps}
@@ -386,6 +385,7 @@ const TopicCard = props => {
                     <TwitterIcon fontSize="inherit" />
                   </span>
                 </a>
+                {console.log(postContent, 'DATESTUFF')}
                 <span style={{ color: '#848484', fontSize: '9px' }}>
                   {postContent?.date?.length
                     ? 'Scheduled: ' + dateWithouthSecond
@@ -415,7 +415,7 @@ const TopicCard = props => {
               onClose={handleMenuClose}
             >
               <NavLink
-                style={{ textDecoration: "none", color: "black  " }}
+                style={{ textDecoration: 'none', color: 'black  ' }}
                 to={`/schedule`}
               >
                 <MenuItem
@@ -440,11 +440,11 @@ const TopicCard = props => {
             aria-describedby="transition-modal-description"
             className={classes.modal}
             open={open}
-            onClose={() => setOpen(false) & push("/")}
+            onClose={() => setOpen(false) & push('/')}
             closeAfterTransition
             BackdropComponent={Backdrop}
             BackdropProps={{
-              timeout: 500
+              timeout: 500,
             }}
           >
             <Fade in={open}>{modalBody}</Fade>
@@ -454,7 +454,7 @@ const TopicCard = props => {
           ) : (
             <>
               <form
-                onSubmit={e => {
+                onSubmit={(e) => {
                   e.preventDefault();
                   props.editCard(props.card.id, content, postContent);
                   setcontent({ ...content, post_text: content.post_text });
@@ -467,10 +467,10 @@ const TopicCard = props => {
                   value={content.post_text}
                   onChange={handleChange}
                 />
-                &nbsp;{" "}
+                &nbsp;{' '}
                 <span
                   onClick={() => setediting(!editing)}
-                  style={{ color: "red", fontWeight: "bolder", padding: "5px" }}
+                  style={{ color: 'red', fontWeight: 'bolder', padding: '5px' }}
                 >
                   x
                 </span>
@@ -484,15 +484,15 @@ const TopicCard = props => {
   );
 };
 
-const mapStateToProps = state => ({
+const mapStateToProps = (state) => ({
   user: state.user,
-  topics: state.topics
+  topics: state.topics,
 });
 
 function mapDispatchToProps(dispatch) {
   return {
     dispatch,
-    ...bindActionCreators({ deleteCard, editCard, editCardandPost }, dispatch)
+    ...bindActionCreators({ deleteCard, editCard, editCardandPost }, dispatch),
   };
 }
 
