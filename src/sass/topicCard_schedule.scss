@@ -1,0 +1,26 @@
+.item-sub-nav {
+  display: flex;
+  margin-top: 3%;
+  // border-bottom: 1px solid #848484;
+  justify-content: center;
+}
+.item-sub-nav a {
+  color: #a5a5a5;
+  text-decoration: none;
+  padding: 12px;
+}
+.item-sub-nav a.active {
+  color: #1c5d76;
+  font-weight: bold;
+  border-bottom: 1px solid #3282b8;
+}
+.item-sub-nav a:first-of-type {
+  margin-right: 32px;
+}
+
+.socialAccount {
+  margin-left: 69px;
+}
+.socialAccountInput {
+  margin-left: 53px;
+}
