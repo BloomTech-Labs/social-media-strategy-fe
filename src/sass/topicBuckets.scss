@@ -81,7 +81,7 @@ h4.title {
   border-radius: 0.5rem 0.5rem 0rem 0rem;
   margin: 0;
 
-  
+
 }
 
 .topic-0 {
@@ -99,4 +99,14 @@ div.cardlist {
   background-color: #ebecf0;
   width: 20rem;
   border-radius: 0.5rem;
+}
+
+span.edit-toggle {
+  color: red;
+  font-weight: bolder;
+  padding: 5px;
+}
+
+.drafts {
+  background-color: green;
 }
