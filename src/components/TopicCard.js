@@ -134,6 +134,7 @@ const TopicCard = (props) => {
   const [content, setcontent] = useState({
     post_text: props.card.content,
     date: props.card.date,
+    screenname: '',
   });
   const [editing, setediting] = useState(false);
   const [postnow, setPostNow] = useState(false);
@@ -159,11 +160,8 @@ const TopicCard = (props) => {
 
   const onsubmitScheduled = (e) => {
     e.preventDefault();
-    // setcontent({ ...content, date: selectedDate });
-    setTimeout(() => {
-      props.editCardandPost(props.card.id, content, postContent);
-      setOpen(false);
-    }, 200);
+    props.editCardandPost(props.card.id, content, postContent);
+    setOpen(false);
   };
 
   const onsubmitPostNow = (e) => {
@@ -252,7 +250,13 @@ const TopicCard = (props) => {
             @{screen_name} &nbsp; <img src={twitterLogo} alt="" />
           </MenuItem>
         </Select>
-        {console.log(content, postContent.date, selectedDate, 'CONTENT')}
+        {console.log(
+          screen_name[0],
+          content,
+          postContent,
+          selectedDate,
+          'CONTENT'
+        )}
 
         <MuiPickersUtilsProvider utils={DateFnsUtils}>
           <nav className="item-sub-nav">
@@ -299,7 +303,7 @@ const TopicCard = (props) => {
                 </div>
                 <div style={{ display: 'flex', alignItems: 'center' }}>
                   <button
-                    onClick={() => setSelectedDate(rectime)}
+                    onClick={() => setcontent({ ...content, date: rectime })}
                     style={{
                       borderRadius: '6px',
                       width: '205px',
@@ -377,13 +381,26 @@ const TopicCard = (props) => {
               >
                 <a
                   style={{ color: '#3282B8', textDecoration: 'none' }}
-                  href="google.com"
+                  href={`https://twitter.com/${screen_name[0]}`}
                   alt=""
                 >
-                  @{screen_name}{' '}
-                  <span style={{ fontSize: '10px' }}>
+                  {screen_name[0] === 'Your Handle Here' ? (
+                    'No ScreenName Available'
+                  ) : (
+                    <>
+                      <span>@{screen_name[0]}</span>
+                      <span style={{ fontSize: '10px' }}>
+                        <TwitterIcon fontSize="inherit" />
+                      </span>
+                    </>
+                  )}
+                  {console.log(
+                    screen_name[0] === 'Your Handle Here',
+                    'SCREENNAME'
+                  )}
+                  {/* <span style={{ fontSize: '10px' }}>
                     <TwitterIcon fontSize="inherit" />
-                  </span>
+                  </span> */}
                 </a>
                 {console.log(postContent, 'DATESTUFF')}
                 <span style={{ color: '#848484', fontSize: '9px' }}>
