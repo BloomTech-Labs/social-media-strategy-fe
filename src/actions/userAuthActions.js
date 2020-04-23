@@ -14,7 +14,7 @@ export const login = (userData, cb) => (dispatch) => {
     .then((response) => {
       dispatch({ type: CONSTANTS.USER_APICALL_SUCCESS });
       localStorage.setItem('token', response.data.token);
-      cb('/');
+      cb('/home');
     })
     .catch((error) => {
       dispatch({ type: CONSTANTS.USER_APICALL_FAILURE, payload: error.data });
@@ -31,7 +31,7 @@ export const registerUser = (userData, cb) => (dispatch) => {
     .then(async (response) => {
       dispatch({ type: CONSTANTS.USER_APICALL_SUCCESS });
       localStorage.setItem('token', response.data.token);
-      cb('/');
+      cb('/home');
       let res = await axiosWithAuth().get(`/users/user`);
 
       console.log(res.data.subject);
