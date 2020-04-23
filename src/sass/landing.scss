@@ -1,0 +1,54 @@
+@import url("https://fonts.googleapis.com/css?family=Montserrat&display=swap");
+
+
+.landing-body{
+    background-image: url('../imgs/landingHero.jpg');
+    background-size:100%;
+    font-family: "Montserrat", sans-serif;
+}
+
+.landing-navbar{
+    display: flex;
+    flex-direction:row;
+    justify-content: space-between;
+    align-items: center;
+    width:90vw;
+    margin:0 auto;
+    padding-top:1rem;
+
+    .logo-text{
+        font-weight: 700;
+        text-decoration: none;
+        color:white;
+        width: 5%;
+        font-size:1.6rem;
+    }
+    
+
+    .landing-sign-nav{
+
+        display: flex;
+        flex-direction: row;
+        justify-content:flex-end;
+        width:15%;
+
+        .sign-up-btn{
+            font-weight: 500;
+            text-decoration: none;
+            color: #e85556;
+            font-size:1rem;
+            width:50%;
+        }
+        
+        .sign-in-btn{
+            font-weight: 500;
+            text-decoration: none;
+            color:white;
+            font-size:1rem;
+            width:40%;
+        }
+    }
+}
+
+
+
