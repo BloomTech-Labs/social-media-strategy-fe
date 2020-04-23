@@ -379,11 +379,11 @@ const TopicCard = (props) => {
                   alt=""
                 >
                   @{screen_name}{' '}
-                  <span style={{ fontSize: '11px' }}>
+                  <span style={{ fontSize: '10px' }}>
                     <TwitterIcon fontSize="inherit" />
                   </span>
                 </a>
-                <span style={{ color: '#848484' }}>
+                <span style={{ color: '#848484', fontSize: '9px' }}>
                   {postContent?.date?.length
                     ? 'Scheduled: ' + dateWithouthSecond
                     : 'Post not Scheduled'}
