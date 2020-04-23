@@ -1,12 +1,14 @@
-@import './app.scss';
-@import './navigation.scss';
-@import './homeNav.scss';
-@import './dashboard.scss';
-@import './actionButton.scss';
-@import 'bulma/sass/utilities/_all.sass';
-@import 'bulma/sass/grid/columns.sass';
-@import url('https://fonts.googleapis.com/css?family=Montserrat&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,400;0,500;0,600;0,700;0,800;0,900;1,400;1,500;1,600;1,700;1,800&display=swap');
+@import "./app.scss";
+@import "./navigation.scss";
+@import "./homeNav.scss";
+@import "./dashboard.scss";
+@import "./actionButton.scss";
+@import "bulma/sass/utilities/_all.sass";
+@import "bulma/sass/grid/columns.sass";
+@import url("https://fonts.googleapis.com/css?family=Montserrat&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,400;0,500;0,600;0,700;0,800;0,900;1,400;1,500;1,600;1,700;1,800&display=swap");
+@import "dashboard_feed.scss";
+@import "topicCard_schedule.scss";
 
 .topic-0 {
   h4 {
@@ -14,31 +16,3 @@
     width: 100%;
   }
 }
-
-.item-sub-nav {
-  display: flex;
-  margin-top: 3%;
-
-  // border-bottom: 1px solid #848484;
-
-  justify-content: center;
-}
-
-.item-sub-nav a {
-  color: #a5a5a5;
-  text-decoration: none;
-  padding: 12px;
-}
-
-.item-sub-nav a.active {
-  color: #1c5d76;
-  font-weight: bold;
-  border-bottom: 1px solid #3282b8;
-}
-
-.item-sub-nav a:first-of-type {
-  margin-right: 32px;
-}
-// .MuiInputBase-root {
-//   width: 40%;
-// }
