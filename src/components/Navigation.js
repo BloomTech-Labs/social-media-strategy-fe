@@ -116,6 +116,7 @@ const Navigation = (props) => {
         <Route path="/analytics"></Route>
         <Route path="/messages"></Route>
         <Route path="/notifications"></Route>
+        <Route path="/landing"></Route>
       </Switch>
     </div>
   );
