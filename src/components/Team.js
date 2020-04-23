@@ -64,7 +64,7 @@ const Team = () => {
                     <h4>Ana Rosa Lerma</h4>
                     <img className='headshot' src={ana} />
                     <div className="links">
-                    <a href='https://www.linkedin.com/in/jpeliares/'><img className='social-link' src={linkedin} /></a>
+                    <a href='https://www.linkedin.com/in/ana-rosa-lerma/'><img className='social-link' src={linkedin} /></a>
                     <a href='https://twitter.com/anarosaUX'><img className='social-link' src={twitter} /></a>
                     </div>
                 </div>
