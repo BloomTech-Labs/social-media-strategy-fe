@@ -50,13 +50,23 @@ ul {
   display: flex;
   justify-content: flex-start;
   flex-direction: row;
-  margin-top: 100%;
-  margin-left: 10%;
+  margin-top: 80%;
+  margin-left: 13%;
   font-size: 1.1rem;
+  line-height: 0.8;
 }
 
 .time {
-  font-size: 1.2rem;
-  color: #848484;
+  font-size: 1.3rem;
+  color: #fff;
   text-align: center;
+}
+
+.date {
+  color: #fff;
+  font-size: 1.3rem;
+}
+
+#day {
+  font-size: 1.3rem;
 }

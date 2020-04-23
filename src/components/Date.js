@@ -13,11 +13,14 @@ const Date = () => {
   return (
     <>
       <div className="dash-title">
-        <h4 className="highlight">{Moment().format("dddd")}</h4>{" "}
-        <h4 className="highlight"> • </h4>
-        <h4 className="date">{getDate()}</h4>
+        <span className="organizeDate">
+          <h4 id="day" className="highlight">
+            {Moment().format("dddd")}
+          </h4>{" "}
+          <h4 className="date">{getDate()}</h4>
+          <span className="time">{getTime()}</span>
+        </span>
       </div>
-      <div className="time">{getTime()}</div>
     </>
   );
 };
