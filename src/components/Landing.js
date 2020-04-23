@@ -43,7 +43,7 @@ const Landing = () => {
             <div className='text-align'>
             <p> All rights reserved SoMe ®</p>
             <div className='footer-nav'>
-            <NavLink className='team-link' to='/about-us'>Team</NavLink>
+            <NavLink className='team-link' to='/team'>Team</NavLink>
             <NavLink className='team-link' to='/about-us'>Github</NavLink>
             <NavLink className='team-link' to='/about-us'>Lambda</NavLink>             
             </div>
