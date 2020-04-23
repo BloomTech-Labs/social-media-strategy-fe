@@ -1,8 +1,10 @@
 import React, { useEffect, useState } from 'react';
 import { axiosWithAuth } from '../utils/axiosWithAuth';
 import styled from 'styled-components';
+import twitterLogo from '../imgs/Vector.png';
+import TwitterIcon from '@material-ui/icons/Twitter';
 // import Container from './TopicCard.js';
-
+import { connect } from 'react-redux';
 const TweetContainer = styled.div`
   background-color: white;
   border-radius: 0.5rem;
@@ -12,13 +14,18 @@ const TweetContainer = styled.div`
   text-align: center;
 `;
 
-const handleInfo = styled.div`
+const HandleInfo = styled.div`
   display: flex;
   width: 100%;
 `;
+
 const Dashboard_Tweets = (props) => {
   const [tweets, setTweets] = useState([]);
   const userID = props.currentUser.subject;
+
+  const twitHandle = props.user.accounts[0].screen_name;
+
+  console.log('CUSER', props.user.accounts[0].screen_name);
 
   useEffect(() => {
     axiosWithAuth()
@@ -57,10 +64,20 @@ const Dashboard_Tweets = (props) => {
   return (
     <div>
       {tweets.map((tweet) => (
-        <TweetContainer>{`${tweet.post_text}`}</TweetContainer>
+        <TweetContainer>
+          <HandleInfo>
+            <span>@{`${twitHandle}`}</span>
+            <TwitterIcon></TwitterIcon>
+          </HandleInfo>
+          <div>Scheduled for {`${tweet.date}`}</div>
+          {`${tweet.post_text}`}
+        </TweetContainer>
       ))}
     </div>
   );
 };
+// const mapStateToProps = (state) => ({
+//   user: state.user,
+// });
 
 export default Dashboard_Tweets;

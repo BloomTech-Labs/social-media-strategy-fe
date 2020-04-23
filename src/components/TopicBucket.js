@@ -1,19 +1,19 @@
-import React, { useState } from "react";
-import { connect } from "react-redux";
-import styled from "styled-components";
-import TopicCard from "./TopicCard";
-import { Droppable, Draggable } from "react-beautiful-dnd";
-import ActionButton from "./ActionButton";
-import DeleteIcon from "@material-ui/icons/Delete";
-import CreateIcon from "@material-ui/icons/Create";
+import React, { useState } from 'react';
+import { connect } from 'react-redux';
+import styled from 'styled-components';
+import TopicCard from './TopicCard';
+import { Droppable, Draggable } from 'react-beautiful-dnd';
+import ActionButton from './ActionButton';
+import DeleteIcon from '@material-ui/icons/Delete';
+import CreateIcon from '@material-ui/icons/Create';
 
 import {
   fetchTopics,
   updateTopics,
   deleteTopics,
   editTopicTitle,
-  editTopic
-} from "../actions";
+  editTopic,
+} from '../actions';
 
 const Container = styled.div`
   background-color: #ebecf0;
@@ -43,21 +43,21 @@ const CardList = styled.div`
   border-radius: 0.5rem;
 `;
 
-const TopicBucket = props => {
+const TopicBucket = (props) => {
   const [content, setcontent] = useState({ name: props.topic.title });
   const [editing, setediting] = useState(false);
 
-  const handleChange = e => {
+  const handleChange = (e) => {
     e.preventDefault();
     setcontent({ ...content, [e.target.name]: e.target.value });
   };
 
-  let scrollCondition = props?.cards?.length > 4;
+  let scrollCondition = props?.cards?.length > 3;
 
   return (
     <>
       <Draggable draggableId={String(props.topic.id)} index={props.index}>
-        {provided => (
+        {(provided) => (
           <Container
             className={`${props.className} `}
             {...provided.draggableProps}
@@ -65,16 +65,16 @@ const TopicBucket = props => {
             {...provided.dragHandleProps}
           >
             <Droppable droppableId={String(props.topic.id)} type="card">
-              {provided => (
+              {(provided) => (
                 <>
                   {scrollCondition ? (
                     <>
                       <Title>
-                        {props.topic.title !== "Drafts" ? (
+                        {props.topic.title !== 'Drafts' ? (
                           <span>
                             <span className={`deleteTopic`}>
                               <DeleteIcon
-                                style={{ "margin-right": "20" }}
+                                style={{ 'margin-right': '20' }}
                                 onClick={() =>
                                   props.deleteTopics(props.topic.id)
                                 }
@@ -86,7 +86,7 @@ const TopicBucket = props => {
                             ) : (
                               <>
                                 <form
-                                  onSubmit={e => {
+                                  onSubmit={(e) => {
                                     e.preventDefault();
                                     props.editTopic(
                                       props.topic.id,
@@ -103,13 +103,13 @@ const TopicBucket = props => {
                                     onChange={handleChange}
                                     defaultValue={props.topic.title}
                                   />
-                                  &nbsp;{" "}
+                                  &nbsp;{' '}
                                   <span
                                     onClick={() => setediting(!editing)}
                                     style={{
-                                      color: "red",
-                                      fontWeight: "bolder",
-                                      padding: "5px"
+                                      color: 'red',
+                                      fontWeight: 'bolder',
+                                      padding: '5px',
                                     }}
                                   >
                                     x
@@ -143,12 +143,12 @@ const TopicBucket = props => {
                   ) : (
                     <>
                       <Title>
-                        {props.topic.title !== "Drafts" ? (
+                        {props.topic.title !== 'Drafts' ? (
                           <span className="editTopics">
                             <span className="topicIcons">
                               <span className={`deleteTopic`}>
                                 <DeleteIcon
-                                  style={{ "margin-right": "20" }}
+                                  style={{ 'margin-right': '20' }}
                                   onClick={() =>
                                     props.deleteTopics(props.topic.id)
                                   }
@@ -166,7 +166,7 @@ const TopicBucket = props => {
                             ) : (
                               <>
                                 <form
-                                  onSubmit={e => {
+                                  onSubmit={(e) => {
                                     e.preventDefault();
                                     props.editTopic(
                                       props.topic.id,
@@ -182,13 +182,13 @@ const TopicBucket = props => {
                                     value={content.name}
                                     onChange={handleChange}
                                   />
-                                  &nbsp;{" "}
+                                  &nbsp;{' '}
                                   <span
                                     onClick={() => setediting(!editing)}
                                     style={{
-                                      color: "red",
-                                      fontWeight: "bolder",
-                                      padding: "5px"
+                                      color: 'red',
+                                      fontWeight: 'bolder',
+                                      padding: '5px',
                                     }}
                                   >
                                     x
@@ -229,10 +229,10 @@ const TopicBucket = props => {
   );
 };
 
-const mapStateToProps = state => {
+const mapStateToProps = (state) => {
   return {
     user: state.user,
-    topics: state.topics
+    topics: state.topics,
   };
 };
 
@@ -240,5 +240,5 @@ export default connect(mapStateToProps, {
   deleteTopics,
   fetchTopics,
   updateTopics,
-  editTopic
+  editTopic,
 })(TopicBucket);

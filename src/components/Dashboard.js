@@ -20,7 +20,10 @@ const Dashboard = (props) => {
         </>
       ) : props.user.drawerContent === 'ACCOUNT' ? (
         <>
-          <DASHBOARD_TWEETS currentUser={props.user.currentUser} />
+          <DASHBOARD_TWEETS
+            currentUser={props.user.currentUser}
+            user={props.user}
+          />
         </>
       ) : (
         <DASHBOARD_FEED />

@@ -40,13 +40,14 @@
     font-family: 'Montserrat', sans-serif;
     flex-direction: row;
     overflow: auto;
-    height: 100%; //DONT TOUCH THIS <----
+    height: 100%; //DON'T TOUCH THIS <----
     overflow: auto;
   }
 }
 #topic-scroll {
-  overflow-y: scroll;
+  overflow-y: overlay;
   height: 50vh;
+  padding-right: 1%;
 }
 
 .editTopics {

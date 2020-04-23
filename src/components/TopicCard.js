@@ -16,7 +16,14 @@ import Select from '@material-ui/core/Select';
 import InputLabel from '@material-ui/core/InputLabel';
 import MenuItem from '@material-ui/core/MenuItem';
 import Backdrop from '@material-ui/core/Backdrop';
-import { Fade, Menu, Tooltip, Fab, IconButton } from '@material-ui/core';
+import {
+  Fade,
+  Menu,
+  Tooltip,
+  Fab,
+  IconButton,
+  Typography,
+} from '@material-ui/core';
 import { axiosWithAuth } from '../utils/axiosWithAuth';
 import Grid from '@material-ui/core/Grid';
 import MomentUtils from '@date-io/moment';
@@ -126,7 +133,7 @@ const modalStyles = makeStyles((theme) => ({
 
 const TopicCard = (props) => {
   const classes = modalStyles();
-  const [rectime, setRecTime] = useState('');
+  const [rectime, setRecTime] = useState(new Date());
   const [selectedDate, setSelectedDate] = useState(new Date());
   const [modalStyle] = useState(editModalLocation);
   const [open, setOpen] = useState(false);
@@ -134,7 +141,7 @@ const TopicCard = (props) => {
   const [content, setcontent] = useState({
     post_text: props.card.content,
     date: props.card.date,
-    screenname: '',
+    screenname: props.user.accounts[0].screen_name ?? '',
   });
   const [editing, setediting] = useState(false);
   const [postnow, setPostNow] = useState(false);
@@ -150,13 +157,15 @@ const TopicCard = (props) => {
       .get(`/posts/${props.card.id}`)
 
       .then((res) => {
-        let optimalTime = '';
         console.log(res, 'WHAT ARE YOU');
-        res.data.map((e) => (optimalTime = e.optimal_time) & setPostContent(e));
-        setRecTime(optimalTime);
+        res.data.map((e) => {
+          setPostContent(e);
+          setRecTime(e.optimal_time);
+          console.log(e.optimal_time, 'OPT TIME');
+        });
       })
       .catch((err) => console.log(err.message));
-  }, [updateTrue, props?.user?.currentUser]);
+  }, [updateTrue, props.user.currentUser, props.card.date, props.card.id]);
 
   const onsubmitScheduled = (e) => {
     e.preventDefault();
@@ -166,11 +175,8 @@ const TopicCard = (props) => {
 
   const onsubmitPostNow = (e) => {
     e.preventDefault();
-    setcontent({ ...content, date: '' });
-    setTimeout(() => {
-      props.editCardandPost(props.card.id, content, postContent);
-      setOpen(false);
-    }, 200);
+    props.editCardandPost(props.card.id, content, postContent);
+    setOpen(false);
   };
 
   const handleClick = (e) => {
@@ -209,12 +215,13 @@ const TopicCard = (props) => {
     return mytime;
   }
 
-  var postdates = new Date(props.card.date);
+  var postdates = new Date(props?.card?.date);
 
   var dateWithouthSecond =
     // props?.card?.date?.length > 0
     postContent?.date?.length > 0
       ? postdates.getMonth() +
+        1 +
         '/' +
         postdates.getDate() +
         '/' +
@@ -241,7 +248,8 @@ const TopicCard = (props) => {
         <Select
           labelId="twitter-handle-select"
           id="select"
-          value={handle}
+          value={1}
+          // value={handle}
           onChange={handleHandleChange}
           className="test"
           style={{ width: '40%' }}
@@ -255,15 +263,27 @@ const TopicCard = (props) => {
           content,
           postContent,
           selectedDate,
+          props.user.accounts[0].screen_name,
+          rectime,
           'CONTENT'
         )}
 
         <MuiPickersUtilsProvider utils={DateFnsUtils}>
           <nav className="item-sub-nav">
-            <NavLink onClick={() => setPostNow(false)} to={`/schedule`}>
+            <NavLink
+              onClick={() =>
+                setPostNow(false) & setcontent({ ...content, date: new Date() })
+              }
+              to={`/schedule`}
+            >
               Schedule
             </NavLink>
-            <NavLink onClick={() => setPostNow(true)} to={`/post-now`}>
+            <NavLink
+              onClick={() =>
+                setPostNow(true) & setcontent({ ...content, date: '' })
+              }
+              to={`/post-now`}
+            >
               Post Now
             </NavLink>
           </nav>
@@ -303,7 +323,7 @@ const TopicCard = (props) => {
                 </div>
                 <div style={{ display: 'flex', alignItems: 'center' }}>
                   <button
-                    onClick={() => setcontent({ ...content, date: rectime })}
+                    onClick={() => handleDateChange(rectime)}
                     style={{
                       borderRadius: '6px',
                       width: '205px',
@@ -390,38 +410,48 @@ const TopicCard = (props) => {
                     <>
                       <span>@{screen_name[0]}</span>
                       <span style={{ fontSize: '10px' }}>
+                        &nbsp;
                         <TwitterIcon fontSize="inherit" />
                       </span>
                     </>
                   )}
-                  {console.log(
-                    screen_name[0] === 'Your Handle Here',
-                    'SCREENNAME'
-                  )}
+
                   {/* <span style={{ fontSize: '10px' }}>
                     <TwitterIcon fontSize="inherit" />
                   </span> */}
                 </a>
                 {console.log(postContent, 'DATESTUFF')}
                 <span style={{ color: '#848484', fontSize: '9px' }}>
-                  {postContent?.date?.length
-                    ? 'Scheduled: ' + dateWithouthSecond
+                  {postContent?.date?.length &&
+                  new Date(postContent?.date) < new Date()
+                    ? `Tweet already Posted   ✅`
+                    : postContent?.date?.length
+                    ? 'Scheduled: ' + dateWithouthSecond + ` \u{1F557}`
                     : 'Post not Scheduled'}
                 </span>
               </nav>
             </div>
-            <IconButton>
+            <IconButton
+              style={{
+                display: 'flex',
+                alignItems: 'flex-start',
+                paddingTop: '0',
+                paddingRight: '0',
+              }}
+            >
               <div className="showHover">
                 <CreateIcon
                   className={`${props.card.id}-create`}
                   // className="edit"
                   onClick={() => setediting(!editing)}
+                  fontSize="small"
                 />
               </div>
               <MoreVertIcon
                 className={`${props.card.id}-edit`}
                 style={{ padding: '0rem .25rem' }}
                 onClick={handleClick}
+                fontSize="small"
               />
             </IconButton>
             <Menu
@@ -467,7 +497,9 @@ const TopicCard = (props) => {
             <Fade in={open}>{modalBody}</Fade>
           </Modal>
           {!editing ? (
-            props.card.content
+            <Typography variant="subtitle2" paragraph>
+              {props.card.content}
+            </Typography>
           ) : (
             <>
               <form
