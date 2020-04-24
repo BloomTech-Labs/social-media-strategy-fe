@@ -3,7 +3,7 @@ import { connect } from "react-redux";
 import DeleteIcon from "@material-ui/icons/Delete";
 import CreateIcon from "@material-ui/icons/Create";
 
-import { editTopic } from '../actions';
+import { editTopic, deleteTopics } from '../actions';
 
 const TopicTitle = (props) => {
   const [content, setcontent] = useState({ name: props.topic.title });
@@ -44,10 +44,10 @@ const TopicTitle = (props) => {
       {props.topic.title !== "Drafts" ? (
         <span className='editTopics'>
           <span className='topicIcons'>
-            <span className={`deleteTopic`}>
+            <span className={`deleteTopic`} onClick={() => props.deleteTopics(props.topic.id)}>
               <DeleteIcon
                 style={{ "margin-right": "20" }}
-                onClick={() => props.deleteTopics(props.topic.id)}
+                
               />
             </span>
             <CreateIcon
@@ -72,4 +72,4 @@ const mapStateToProps = state => {
     return state
 }
 
-export default connect(mapStateToProps, { editTopic })(TopicTitle);
+export default connect(mapStateToProps, { editTopic, deleteTopics })(TopicTitle);

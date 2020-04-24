@@ -200,11 +200,6 @@ export const deleteTopics = (id) => (dispatch) => {
     .delete(`/topics/${id}`)
     .then((response) => {
       dispatch(fetchTopics(cuser));
-
-      // dispatch({
-      //   type: CONSTANTS.TOPIC_UPDATE_SUCCESS,
-      //   payload: response.data,
-      // });
     })
     .catch((error) => {
       console.log(error, 'FAIL');
