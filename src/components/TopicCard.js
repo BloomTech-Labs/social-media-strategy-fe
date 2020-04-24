@@ -1,32 +1,35 @@
-import React, { useState, useEffect } from 'react';
-import styled from 'styled-components';
-import { Draggable } from 'react-beautiful-dnd';
-import '../sass/topicBuckets.scss';
-import CreateIcon from '@material-ui/icons/Create';
-import DeleteIcon from '@material-ui/icons/Delete';
-import MoreVertIcon from '@material-ui/icons/MoreVert';
-import DateFnsUtils from '@date-io/date-fns';
-import { connect } from 'react-redux';
-import { bindActionCreators } from 'redux';
-import { makeStyles } from '@material-ui/core/styles';
-import { deleteCard, editCard, editCardandPost } from '../actions';
-import Modal from '@material-ui/core/Modal';
-import FormControl from '@material-ui/core/FormControl';
-import Select from '@material-ui/core/Select';
-import InputLabel from '@material-ui/core/InputLabel';
-import MenuItem from '@material-ui/core/MenuItem';
-import Backdrop from '@material-ui/core/Backdrop';
+import React, { useState, useEffect } from "react";
+import styled from "styled-components";
+import { Draggable } from "react-beautiful-dnd";
+import "../sass/topicBuckets.scss";
+import CreateIcon from "@material-ui/icons/Create";
+import DeleteIcon from "@material-ui/icons/Delete";
+import MoreVertIcon from "@material-ui/icons/MoreVert";
+import DateFnsUtils from "@date-io/date-fns";
+import { connect } from "react-redux";
+import { bindActionCreators } from "redux";
+import { makeStyles } from "@material-ui/core/styles";
+import { deleteCard, editCard, editCardandPost } from "../actions";
+import Modal from "@material-ui/core/Modal";
+import FormControl from "@material-ui/core/FormControl";
+import Select from "@material-ui/core/Select";
+import InputLabel from "@material-ui/core/InputLabel";
+import MenuItem from "@material-ui/core/MenuItem";
+import Backdrop from "@material-ui/core/Backdrop";
+import TwitterIcon from "@material-ui/icons/Twitter";
+import TextareaAutosize from "react-textarea-autosize";
+
 import {
   Fade,
   Menu,
   Tooltip,
   Fab,
   IconButton,
-  Typography,
-} from '@material-ui/core';
-import { axiosWithAuth } from '../utils/axiosWithAuth';
-import Grid from '@material-ui/core/Grid';
-import MomentUtils from '@date-io/moment';
+  Typography
+} from "@material-ui/core";
+import { axiosWithAuth } from "../utils/axiosWithAuth";
+import Grid from "@material-ui/core/Grid";
+import MomentUtils from "@date-io/moment";
 
 import {
   MuiPickersUtilsProvider,
@@ -37,8 +40,6 @@ import "date-fns";
 import { useHistory, useRouteMatch } from "react-router";
 import { NavLink } from "react-router-dom";
 import InfoIcon from "@material-ui/icons/Info";
-import twitterLogo from "../imgs/Vector.png";
-import TwitterIcon from "@material-ui/icons/Twitter";
 
 const Container = styled.div`
   background-color: white;
@@ -143,7 +144,7 @@ const TopicCard = props => {
   const [content, setcontent] = useState({
     post_text: props.card.content,
     date: props.card.date,
-    screenname: props.user.accounts[0].screen_name ?? '',
+    screenname: props.user.accounts[0].screen_name ?? ""
   });
   const [editing, setediting] = useState(false);
   const [postnow, setPostNow] = useState(false);
@@ -157,17 +158,16 @@ const TopicCard = props => {
   useEffect(() => {
     axiosWithAuth()
       .get(`/posts/${props.card.id}`)
-      .then((res) => {
-        console.log(res, 'WHAT ARE YOU');
-        res.data.map((e) => {
+      .then(res => {
+        console.log(res, "WHAT ARE YOU");
+        res.data.map(e => {
           setPostContent(e);
           setRecTime(e.optimal_time);
-          console.log(e.optimal_time, 'OPT TIME');
+          console.log(e.optimal_time, "OPT TIME");
         });
       })
-      .catch((err) => console.log(err.message));
+      .catch(err => console.log(err.message));
   }, [updateTrue, props.user.currentUser, props.card.date, props.card.id]);
-
 
   const onsubmitScheduled = e => {
     e.preventDefault();
@@ -224,8 +224,7 @@ const TopicCard = props => {
     postContent?.date?.length > 0
       ? postdates.getMonth() +
         1 +
-        '/' +
-
+        "/" +
         postdates.getDate() +
         "/" +
         postdates.getFullYear() +
@@ -240,27 +239,32 @@ const TopicCard = props => {
       <h2 className={classes.mHeader}>Twitter Manager</h2>
       <h3 className={classes.mAccent}>Schedule or Post Now</h3>
       <FormControl className={classes.formControl}>
-        <InputLabel
-          shrink
-          // className={classes.select}
-          className="test"
-          id="twitter-handle-select"
-        >
-          Social Account
-        </InputLabel>
-        <Select
-          labelId="twitter-handle-select"
-          id="select"
-          value={1}
-          // value={handle}
-          onChange={handleHandleChange}
-          className="test"
-          style={{ width: '40%' }}
-        >
-          <MenuItem value={1}>
-            @{screen_name} &nbsp; <img src={twitterLogo} alt="" />
-          </MenuItem>
-        </Select>
+        <span className="socialAccountInput">
+          <InputLabel
+            shrink
+            // className={classes.select}
+            className="test"
+            id="twitter-handle-select"
+          >
+            <span className="socialAccount"> Social Account </span>
+          </InputLabel>
+          <Select
+            labelId="twitter-handle-select"
+            id="select"
+            value={1}
+            // value={handle}
+            onChange={handleHandleChange}
+            className="test"
+            style={{ width: "40%" }}
+          >
+            <MenuItem value={1}>
+              <span id="alignTextIcon">
+                @{screen_name} &nbsp;{" "}
+                <TwitterIcon className="twitterIconModal" />
+              </span>
+            </MenuItem>
+          </Select>
+        </span>
         {console.log(
           screen_name[0],
           content,
@@ -268,9 +272,8 @@ const TopicCard = props => {
           selectedDate,
           props.user.accounts[0].screen_name,
           rectime,
-          'CONTENT'
+          "CONTENT"
         )}
-
 
         <MuiPickersUtilsProvider utils={DateFnsUtils}>
           <nav className="item-sub-nav">
@@ -284,7 +287,7 @@ const TopicCard = props => {
             </NavLink>
             <NavLink
               onClick={() =>
-                setPostNow(true) & setcontent({ ...content, date: '' })
+                setPostNow(true) & setcontent({ ...content, date: "" })
               }
               to={`/post-now`}
             >
@@ -339,7 +342,7 @@ const TopicCard = props => {
                     Suggest a Time
                   </button>
                   <Tooltip
-                    title="proprietary optimization algorithm to maximize engagement"
+                    title="Proprietary optimization algorithm to maximize engagement."
                     placement="top-end"
                     aria-label="InfoIcon"
                     fontSize="small"
@@ -404,20 +407,16 @@ const TopicCard = props => {
                 }}
               >
                 <a
-                  style={{ color: '#3282B8', textDecoration: 'none' }}
+                  style={{ color: "#3282B8", textDecoration: "none" }}
                   href={`https://twitter.com/${screen_name[0]}`}
                   alt=""
                 >
-                  {screen_name[0] === 'Your Handle Here' ? (
-                    'No ScreenName Available'
+                  {screen_name[0] === "Your Handle Here" ? (
+                    "No ScreenName Available"
                   ) : (
-                    <>
-                      <span>@{screen_name[0]}</span>
-                      <span style={{ fontSize: '10px' }}>
-                        &nbsp;
-                        <TwitterIcon fontSize="inherit" />
-                      </span>
-                    </>
+                    <span className="centerInput">
+                      <span className="screenName">@{screen_name[0]}</span>
+                    </span>
                   )}
 
                   {/* <span style={{ fontSize: '10px' }}>
@@ -425,40 +424,47 @@ const TopicCard = props => {
                     <TwitterIcon fontSize="inherit" />
                   </span> */}
                 </a>
-                {console.log(postContent, 'DATESTUFF')}
-                <span style={{ color: '#848484', fontSize: '9px' }}>
+                {console.log(postContent, "DATESTUFF")}
+                <span style={{ color: "#848484", fontSize: "9px" }}>
                   {postContent?.date?.length &&
-                  new Date(postContent?.date) < new Date()
-                    ? `Tweet already Posted   ✅`
-                    : postContent?.date?.length
-                    ? 'Scheduled: ' + dateWithouthSecond + ` \u{1F557}`
-                    : 'Post not Scheduled'}
+                  new Date(postContent?.date) < new Date() ? (
+                    <span className="posted">Tweet Posted</span>
+                  ) : postContent?.date?.length ? (
+                    <span className="scheduled">
+                      {" "}
+                      Scheduled: {dateWithouthSecond}{" "}
+                    </span>
+                  ) : (
+                    <span className="notScheduled">Post not Scheduled</span>
+                  )}
                 </span>
               </nav>
             </div>
-            <IconButton
-              style={{
-                display: 'flex',
-                alignItems: 'flex-start',
-                paddingTop: '0',
-                paddingRight: '0',
-              }}
-            >
-              <div className="showHover">
-                <CreateIcon
-                  className={`${props.card.id}-create`}
-                  // className="edit"
-                  onClick={() => setediting(!editing)}
+            <span className="editIcons">
+              <IconButton
+                style={{
+                  // display: "flex",
+                  // alignItems: "flex-start",
+                  paddingTop: "0",
+                  paddingRight: "0"
+                }}
+              >
+                <div className="showHover">
+                  <CreateIcon
+                    className={`${props.card.id}-create`}
+                    // className="edit"
+                    onClick={() => setediting(!editing)}
+                    fontSize="small"
+                  />
+                </div>
+                <MoreVertIcon
+                  className={`${props.card.id}-edit`}
+                  style={{ padding: "0rem .25rem" }}
+                  onClick={handleClick}
                   fontSize="small"
                 />
-              </div>
-              <MoreVertIcon
-                className={`${props.card.id}-edit`}
-                style={{ padding: "0rem .25rem" }}
-                onClick={handleClick}
-                fontSize="small"
-              />
-            </IconButton>
+              </IconButton>
+            </span>
             <Menu
               id="post-menu"
               anchorEl={anchorEl}
@@ -508,6 +514,7 @@ const TopicCard = props => {
           ) : (
             <>
               <form
+                className="edit-card"
                 onSubmit={e => {
                   e.preventDefault();
                   props.editCard(props.card.id, content, postContent);
@@ -515,20 +522,29 @@ const TopicCard = props => {
                   setediting(!editing);
                 }}
               >
-                <textarea
+                <TextareaAutosize
+                  id="textareaAuto"
+                  className="edit-card-txt-area"
                   type="text"
                   name="post_text"
                   value={content.post_text}
                   onChange={handleChange}
                 />
-                &nbsp;{" "}
-                <span
-                  onClick={() => setediting(!editing)}
-                  style={{ color: "red", fontWeight: "bolder", padding: "5px" }}
-                >
-                  x
-                </span>
-                <input type="submit" />
+                {/* &nbsp;{" "} */}
+                <div className="action-cont">
+                  <input className="actionSubmit" type="submit" />
+                  <span
+                    onClick={() => setediting(!editing)}
+                    style={{
+                      color: "red",
+                      fontSize: "1.0rem",
+                      fontWeight: "bolder",
+                      padding: "0 .5rem"
+                    }}
+                  >
+                    X
+                  </span>
+                </div>
               </form>
             </>
           )}
