@@ -24,3 +24,44 @@
 .socialAccountInput {
   margin-left: 53px;
 }
+
+.posted {
+  color: rgb(29, 179, 40);
+  font-weight: bold;
+}
+
+.scheduled {
+  color: #e85556;
+  font-weight: bold;
+}
+
+.notScheduled {
+  font-weight: bold;
+}
+
+.screenName {
+  font-weight: bold;
+  color: rgb(41, 150, 235);
+}
+
+.twitterIconModal {
+  color: rgb(41, 150, 235);
+}
+
+.editIcons {
+  display: flex;
+  align-items: center;
+}
+
+.centerInput {
+  display: flex;
+  align-items: center;
+  align-content: center;
+}
+
+#alignTextIcon {
+  display: flex;
+  align-items: center;
+  flex-direction: row;
+  justify-content: flex-start;
+}

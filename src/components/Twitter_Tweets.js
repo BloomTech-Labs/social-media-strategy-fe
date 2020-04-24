@@ -12,7 +12,7 @@ export const TWITTER_TWEETS = (props) => {
         width: '90%',
         align: 'center',
       }}
-      onLoad={() => console.log('Timeline is loaded!')}
+
     />
   );
 };
@@ -54,6 +54,7 @@ export const TWITTER_MENTIONS = () => {
         options={{
           username: `${search.currentSearch}`,
           height: '100vh',
+
           theme: 'dark',
         }}
       />
