@@ -27,6 +27,7 @@ import {
 import { axiosWithAuth } from '../utils/axiosWithAuth';
 import Grid from '@material-ui/core/Grid';
 import MomentUtils from '@date-io/moment';
+import Button from '@material-ui/core/Button';
 
 import {
   MuiPickersUtilsProvider,
@@ -39,6 +40,11 @@ import { NavLink } from 'react-router-dom';
 import InfoIcon from '@material-ui/icons/Info';
 import twitterLogo from '../imgs/Vector.png';
 import TwitterIcon from '@material-ui/icons/Twitter';
+import Dialog from '@material-ui/core/Dialog';
+import DialogActions from '@material-ui/core/DialogActions';
+import DialogContent from '@material-ui/core/DialogContent';
+import DialogContentText from '@material-ui/core/DialogContentText';
+import DialogTitle from '@material-ui/core/DialogTitle';
 
 const Container = styled.div`
   background-color: white;
@@ -151,18 +157,22 @@ const TopicCard = (props) => {
   const [anchorEl, setAnchorEl] = useState(null);
   const openMenu = Boolean(anchorEl);
   const [postContent, setPostContent] = useState('');
+  const [dialogtoggle, setDialogToggle] = useState(false);
 
   let updateTrue = props.user.didUpdate === true;
+
+  const handledialogtoggle = () => {
+    setDialogToggle(!dialogtoggle);
+  };
 
   useEffect(() => {
     axiosWithAuth()
       .get(`/posts/${props.card.id}`)
       .then((res) => {
-        console.log(res, 'WHAT ARE YOU');
         res.data.map((e) => {
           setPostContent(e);
           setRecTime(e.optimal_time);
-          console.log(e.optimal_time, 'OPT TIME');
+          console.log(e.optimal_time, e.post_text, 'OPT1');
         });
       })
       .catch((err) => console.log(err.message));
@@ -173,6 +183,8 @@ const TopicCard = (props) => {
     props.card.id,
     open,
   ]);
+
+  console.log(rectime, 'OPT2');
 
   const onsubmitTwitter = (e) => {
     e.preventDefault();
@@ -204,6 +216,15 @@ const TopicCard = (props) => {
   const handleHandleChange = (event) => {
     setHandle(event.target.value);
   };
+
+  //  CURRENT PATCH FOR ISSUE -- need to adjust to be dynamic if Optimal time is a few days behind etc
+  async function newRecTime(date) {
+    let optTime = new Date(rectime);
+    optTime.setDate(optTime.getDate(rectime) + 1);
+    console.log(optTime, props.card.content, 'OPT11');
+    setSelectedDate(optTime);
+    setcontent({ ...content, date: optTime });
+  }
 
   function timeformat(date) {
     var h = date.getHours();
@@ -241,22 +262,22 @@ const TopicCard = (props) => {
         <InputLabel
           shrink
           // className={classes.select}
-          className="test"
-          id="twitter-handle-select"
+          className='test'
+          id='twitter-handle-select'
         >
           Social Account
         </InputLabel>
         <Select
-          labelId="twitter-handle-select"
-          id="select"
+          labelId='twitter-handle-select'
+          id='select'
           value={1}
           // value={handle}
           onChange={handleHandleChange}
-          className="test"
+          className='test'
           style={{ width: '40%' }}
         >
           <MenuItem value={1}>
-            @{screen_name} &nbsp; <img src={twitterLogo} alt="" />
+            @{screen_name} &nbsp; <img src={twitterLogo} alt='' />
           </MenuItem>
         </Select>
         {console.log(
@@ -269,11 +290,9 @@ const TopicCard = (props) => {
         )}
 
         <MuiPickersUtilsProvider utils={DateFnsUtils}>
-          <nav className="item-sub-nav">
+          <nav className='item-sub-nav'>
             <NavLink
-              onClick={() =>
-                setPostNow(false) & setcontent({ ...content, date: new Date() })
-              }
+              onClick={() => setPostNow(false) & handleDateChange(new Date())}
               to={`/schedule`}
             >
               Schedule
@@ -287,7 +306,7 @@ const TopicCard = (props) => {
               Post Now
             </NavLink>
           </nav>
-          <Grid container justify="space-around" alignItems="center">
+          <Grid container justify='space-around' alignItems='center'>
             {!postnow ? (
               <>
                 <div
@@ -299,11 +318,11 @@ const TopicCard = (props) => {
                 >
                   <KeyboardDatePicker
                     disableToolbar
-                    variant="inline"
-                    format="MM/dd/yyyy"
-                    margin="normal"
-                    id="date-picker-inline"
-                    label="Date"
+                    variant='inline'
+                    format='MM/dd/yyyy'
+                    margin='normal'
+                    id='date-picker-inline'
+                    label='Date'
                     value={selectedDate}
                     onChange={handleDateChange}
                     KeyboardButtonProps={{
@@ -311,9 +330,9 @@ const TopicCard = (props) => {
                     }}
                   />
                   <KeyboardTimePicker
-                    margin="normal"
-                    id="time-picker"
-                    label="Time"
+                    margin='normal'
+                    id='time-picker'
+                    label='Time'
                     value={selectedDate}
                     onChange={handleDateChange}
                     KeyboardButtonProps={{
@@ -323,7 +342,12 @@ const TopicCard = (props) => {
                 </div>
                 <div style={{ display: 'flex', alignItems: 'center' }}>
                   <button
-                    onClick={() => handleDateChange(rectime)}
+                    onClick={() =>
+                      new Date(rectime) > new Date()
+                        ? handleDateChange(rectime) &
+                          console.log(new Date(rectime), new Date(), 'OPT77')
+                        : newRecTime()
+                    }
                     style={{
                       borderRadius: '6px',
                       width: '205px',
@@ -335,11 +359,11 @@ const TopicCard = (props) => {
                     Suggest a Time
                   </button>
                   <Tooltip
-                    title="proprietary optimization algorithm to maximize engagement"
-                    placement="top-end"
-                    aria-label="InfoIcon"
-                    fontSize="small"
-                    color="action"
+                    title='proprietary optimization algorithm to maximize engagement'
+                    placement='top-end'
+                    aria-label='InfoIcon'
+                    fontSize='small'
+                    color='action'
                   >
                     <InfoIcon />
                   </Tooltip>
@@ -350,11 +374,11 @@ const TopicCard = (props) => {
         </MuiPickersUtilsProvider>
 
         <Inputtextarea
-          placeholder="Customize your Twitter message here"
-          type="text"
-          name="post_text"
-          cols="50"
-          rows="10"
+          placeholder='Customize your Twitter message here'
+          type='text'
+          name='post_text'
+          cols='50'
+          rows='10'
           value={content.post_text}
           onChange={handleChange}
         ></Inputtextarea>
@@ -387,7 +411,7 @@ const TopicCard = (props) => {
           {...provided.draggableProps}
           {...provided.dragHandleProps}
           ref={provided.innerRef}
-          id="cardhover"
+          id='cardhover'
         >
           <BtnCont>
             <div style={{ display: 'flex', width: '100%' }}>
@@ -402,7 +426,7 @@ const TopicCard = (props) => {
                 <a
                   style={{ color: '#3282B8', textDecoration: 'none' }}
                   href={`https://twitter.com/${screen_name[0]}`}
-                  alt=""
+                  alt=''
                 >
                   {screen_name[0] === 'Your Handle Here' ? (
                     'No ScreenName Available'
@@ -411,7 +435,7 @@ const TopicCard = (props) => {
                       <span>@{screen_name[0]}</span>
                       <span style={{ fontSize: '10px' }}>
                         &nbsp;
-                        <TwitterIcon fontSize="inherit" />
+                        <TwitterIcon fontSize='inherit' />
                       </span>
                     </>
                   )}
@@ -433,6 +457,7 @@ const TopicCard = (props) => {
               </nav>
             </div>
             <IconButton
+              disableRipple={true}
               style={{
                 display: 'flex',
                 alignItems: 'flex-start',
@@ -440,52 +465,109 @@ const TopicCard = (props) => {
                 paddingRight: '0',
               }}
             >
-              <div className="showHover">
-                <CreateIcon
-                  className={`${props.card.id}-create`}
-                  // className="edit"
-                  onClick={() => setediting(!editing)}
-                  fontSize="small"
-                />
-              </div>
+              {postContent?.date?.length &&
+              new Date(postContent?.date) < new Date() ? null : postContent
+                  ?.date?.length ? null : (
+                <div className='showHover'>
+                  <CreateIcon
+                    className={`${props.card.id}-create`}
+                    // className="edit"
+                    onClick={() => setediting(!editing)}
+                    fontSize='small'
+                  />
+                </div>
+              )}
+
               <MoreVertIcon
                 className={`${props.card.id}-edit`}
                 style={{ padding: '0rem .25rem' }}
                 onClick={handleClick}
-                fontSize="small"
+                fontSize='small'
               />
             </IconButton>
             <Menu
-              id="post-menu"
+              id='post-menu'
               anchorEl={anchorEl}
               keepMounted
               open={openMenu}
               onClose={handleMenuClose}
             >
-              <NavLink
-                style={{ textDecoration: 'none', color: 'black  ' }}
-                to={`/schedule`}
-              >
-                <MenuItem
-                  onClick={togglemodal}
-                  className={`${props.card.id}-edit`}
+              {postContent?.date?.length &&
+              new Date(postContent?.date) < new Date() ? null : postContent
+                  ?.date?.length ? null : (
+                <NavLink
+                  style={{ textDecoration: 'none', color: 'black  ' }}
+                  to={`/schedule`}
                 >
-                  Post
-                </MenuItem>
-              </NavLink>
+                  <MenuItem
+                    onClick={togglemodal}
+                    className={`${props.card.id}-edit`}
+                  >
+                    Post
+                  </MenuItem>
+                </NavLink>
+              )}
 
               <MenuItem
-                onClick={() => props.deleteCard(props.card.id)}
+                onClick={() => {
+                  if (
+                    postContent?.date?.length &&
+                    new Date(postContent?.date) > new Date()
+                  ) {
+                    return handledialogtoggle();
+                  } else {
+                    return props.deleteCard(props.card.id);
+                  }
+                }}
                 className={`delete`}
               >
                 Delete
               </MenuItem>
             </Menu>
           </BtnCont>
+          {console.log(
+            postContent?.date?.length,
+            new Date(postContent?.date) > new Date(),
+            props.card.content,
+            'OPT3'
+          )}
+
+          <Dialog
+            open={dialogtoggle}
+            // onClose={handledialogtoggle}
+            disableEscapeKeyDown={true}
+            aria-labelledby='alert-dialog-title'
+            aria-describedby='alert-dialog-description'
+          >
+            <DialogTitle id='alert-dialog-title'>
+              {'Delete Scheduled Tweet?'}
+            </DialogTitle>
+            <DialogContent>
+              <DialogContentText id='alert-dialog-description'>
+                Deleting a scheduled Tweet will remove it from your scheduled
+                queue. Are you sure you want to do this? (Cannot be undone.)
+              </DialogContentText>
+            </DialogContent>
+            <DialogActions>
+              <Button onClick={handledialogtoggle} color='primary'>
+                Disagree
+              </Button>
+              <Button
+                onClick={() => {
+                  props.deleteCard(props.card.id);
+                  return handledialogtoggle();
+                }}
+                color='primary'
+                autoFocus
+              >
+                Agree
+              </Button>
+            </DialogActions>
+          </Dialog>
 
           <Modal
-            aria-labelledby="transition-modal-title"
-            aria-describedby="transition-modal-description"
+            aria-labelledby='transition-modal-title'
+            aria-describedby='transition-modal-description'
             className={classes.modal}
             open={open}
             onClose={() => setOpen(false) & push('/')}
@@ -498,7 +580,7 @@ const TopicCard = (props) => {
             <Fade in={open}>{modalBody}</Fade>
           </Modal>
           {!editing ? (
-            <Typography variant="subtitle2" paragraph>
+            <Typography variant='subtitle2' paragraph>
               {props.card.content}
             </Typography>
           ) : (
@@ -512,8 +594,8 @@ const TopicCard = (props) => {
                 }}
               >
                 <textarea
-                  type="text"
-                  name="post_text"
+                  type='text'
+                  name='post_text'
                   value={content.post_text}
                   onChange={handleChange}
                 />
@@ -524,7 +606,7 @@ const TopicCard = (props) => {
                 >
                   x
                 </span>
-                <input type="submit" />
+                <input type='submit' />
               </form>
             </>
           )}
