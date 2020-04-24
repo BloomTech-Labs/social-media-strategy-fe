@@ -17,16 +17,16 @@ const useStyles = makeStyles(theme => ({
 }));
 
 export default function TransitionsModal(props) {
-  const ColorButton = withStyles(theme => ({
+  const ColorButton = withStyles((theme) => ({
     root: {
       color: theme.palette.getContrastText(blue[700]),
-      borderRadius: "2rem",
+      borderRadius: '2rem',
       //  padding: ".5rem 5rem",
       backgroundColor: blue[700],
-      "&:hover": {
-        backgroundColor: blue[500]
-      }
-    }
+      '&:hover': {
+        backgroundColor: blue[500],
+      },
+    },
   }))(Button);
 
   const classes = useStyles();
@@ -42,23 +42,24 @@ export default function TransitionsModal(props) {
 
   return (
     <div>
-      <ColorButton id="navButton" type="button" onClick={handleOpen}>
+      <ColorButton id='navButton' type='button' onClick={handleOpen}>
         {props.name}
       </ColorButton>
       <Modal
-        aria-labelledby="transition-modal-title"
-        aria-describedby="transition-modal-description"
+        aria-labelledby='transition-modal-title'
+        aria-describedby='transition-modal-description'
         className={classes.modal}
         open={open}
         onClose={handleClose}
         closeAfterTransition
         BackdropComponent={Backdrop}
         BackdropProps={{
-          timeout: 500
+          timeout: 500,
         }}
       >
         <Fade in={open}>
           <div className={classes.paper}>
+
             <TweetNow close={handleClose} />
           </div>
         </Fade>

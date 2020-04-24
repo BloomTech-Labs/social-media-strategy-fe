@@ -1,3 +1,4 @@
+
 import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 import { Draggable } from "react-beautiful-dnd";
@@ -79,7 +80,6 @@ export const Inputtextarea = styled.textarea`
   margin: 0 auto;
   height: 15vh;
   font-size: 1.8rem;
-
   ::placeholder {
     font-size: 1rem;
     color: gray;
@@ -137,8 +137,14 @@ const modalStyles = makeStyles(theme => ({
     justifyContent: "center"
   },
   select: {
-    width: "50%"
-  }
+    width: '50%',
+  },
+  button: {
+    '&:hover': {
+      backgroundColor: 'transparent',
+    },
+  },
+
 }));
 
 const TopicCard = props => {
@@ -171,6 +177,7 @@ const TopicCard = props => {
   useEffect(() => {
     axiosWithAuth()
       .get(`/posts/${props.card.id}`)
+
 
       .then(res => {
         res.data.map(e => {
@@ -441,7 +448,6 @@ const TopicCard = props => {
                   )}
 
                   {/* <span style={{ fontSize: '10px' }}>
-
                     <TwitterIcon fontSize="inherit" />
                   </span> */}
                 </a>
@@ -449,6 +455,7 @@ const TopicCard = props => {
                 <span style={{ color: "#848484", fontSize: "9px" }}>
                   {postContent?.date?.length &&
                   new Date(postContent?.date) < new Date() ? (
+
                     <span className="posted">Tweet Posted</span>
                   ) : postContent?.date?.length ? (
                     <span className="scheduled">
@@ -462,23 +469,26 @@ const TopicCard = props => {
               </nav>
             </div>
 
-            <span className="editIcons">
+            <span className='editIcons'>
               <IconButton
                 disableRipple={true}
+                disableFocusRipple={true}
+                className={classes.button}
                 style={{
-                  display: "flex",
-                  alignItems: "flex-start",
-                  paddingTop: "0",
-                  paddingRight: "0"
+                  display: 'flex',
+                  alignItems: 'flex-start',
+                  paddingTop: '0',
+                  paddingRight: '0',
+
                 }}
               >
                 {postContent?.date?.length &&
                 new Date(postContent?.date) < new Date() ? null : postContent
                     ?.date?.length ? null : (
+
                   <div className="showHover">
                     <CreateIcon
                       className={`${props.card.id}-create`}
-                      // className="edit"
                       onClick={() => setediting(!editing)}
                       fontSize="small"
                     />
@@ -486,6 +496,7 @@ const TopicCard = props => {
                 )}
                 <MoreVertIcon
                   className={`${props.card.id}-edit`}
+
                   style={{ padding: "0rem .25rem" }}
                   onClick={handleClick}
                   fontSize="small"
@@ -558,6 +569,7 @@ const TopicCard = props => {
               </DialogContentText>
             </DialogContent>
             <DialogActions>
+
               <Button onClick={handledialogtoggle} color="primary">
                 No
               </Button>
@@ -595,6 +607,7 @@ const TopicCard = props => {
           ) : (
             <>
               <form
+
                 className="edit-card"
                 onSubmit={e => {
                   e.preventDefault();
@@ -604,6 +617,7 @@ const TopicCard = props => {
                 }}
               >
                 <TextareaAutosize
+
                   rowsMin={3}
                   id="textareaAuto"
                   className="edit-card-txt-area"
@@ -613,6 +627,7 @@ const TopicCard = props => {
                   onChange={handleChange}
                 />
                 {/* &nbsp;{" "} */}
+
                 <div className="action-cont">
                   <input className="actionSubmit" type="submit" />
                   <span

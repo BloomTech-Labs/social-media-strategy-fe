@@ -1,3 +1,4 @@
+
 @import "./app.scss";
 @import "./navigation.scss";
 @import "./homeNav.scss";
@@ -45,6 +46,7 @@
 
 #cardhover {
   .showHover {
+    display: inline;
     opacity: 0 !important;
   }
 }

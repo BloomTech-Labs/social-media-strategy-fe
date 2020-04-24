@@ -1,3 +1,4 @@
+
 import React, { useState } from "react";
 import { connect } from "react-redux";
 import DeleteIcon from "@material-ui/icons/Delete";
@@ -26,6 +27,7 @@ const TopicTitle = props => {
   const renderTopicForm = () => {
     return (
       <form onSubmit={submitForm}>
+
         <div className="edit-topic-cont">
           <input
             className="edit-topic-text-area"
@@ -45,6 +47,7 @@ const TopicTitle = props => {
   };
 
   return (
+
     <span>
       <h4 className="title">
         {props.topic.title !== "Drafts" ? (
@@ -75,6 +78,7 @@ const TopicTitle = props => {
     </span>
   );
 };
+
 
 const mapStateToProps = state => {
   return state;

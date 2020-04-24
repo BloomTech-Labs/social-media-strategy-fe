@@ -79,7 +79,21 @@ export const editPostCard = (id, content) => {
     });
 };
 
+// THIS SHOULD BE A PUT -- IT IS USED TO POST TO TWITTER
+
 export const twitterPost = (id, content) => {
+  console.log("id", id);
+  console.log(content, "content");
+  axiosWithAuth()
+    .put(`/posts/${id}`, content)
+    .then(res => {
+      console.log(res);
+    })
+    .catch(error => {
+      console.log(error, "FAIL");
+    });
+};
+export const twitterPostnow = (id, content) => {
   console.log("id", id);
   console.log(content, "content");
   axiosWithAuth()
