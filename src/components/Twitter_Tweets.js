@@ -52,7 +52,6 @@ export const TWITTER_MENTIONS = () => {
         }}
         options={{
           username: `${search.currentSearch}`,
-          // height: '100vh',
           theme: 'dark',
         }}
       />
