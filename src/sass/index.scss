@@ -1,9 +1,12 @@
+
 @import "./app.scss";
 @import "./navigation.scss";
 @import "./homeNav.scss";
 @import "./dashboard.scss";
+@import './callback.scss';
 @import "./actionButton.scss";
-@import './landing.scss';
+@import "./tweetNowBtn.scss";
+@import "./landing.scss";
 @import "bulma/sass/utilities/_all.sass";
 @import "bulma/sass/grid/columns.sass";
 @import url("https://fonts.googleapis.com/css?family=Montserrat&display=swap");
@@ -43,6 +46,7 @@
 
 #cardhover {
   .showHover {
+    display: inline;
     opacity: 0 !important;
   }
 }

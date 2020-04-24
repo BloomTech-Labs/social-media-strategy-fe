@@ -105,10 +105,26 @@ div.cardlist {
   border-radius: 0.5rem;
 }
 
-span.edit-toggle {
-  color: red;
-  font-weight: bolder;
-  padding: 5px;
+.edit-topic-cont {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  align-items: center;
+
+  .edit-topic-text-area {
+    width: 70%;
+    border: none;
+    border-radius: 0.5rem;
+    padding: 1rem;
+    box-shadow: 0 3px 4px -2px #a3a4ac;
+    resize: none;
+  }
+
+  span.edit-toggle {
+    color: black;
+    font-weight: 600;
+    padding: 5px;
+  }
 }
 
 .drafts {
@@ -117,7 +133,6 @@ span.edit-toggle {
 
 .edit-card {
   min-height: 150;
-
   min-width: 272;
   padding: 6px 8px 2px;
   margin: 0.5rem 0 0 0;
@@ -125,15 +140,9 @@ span.edit-toggle {
   .edit-card-txt-area {
     width: 100%;
     font-family: "Montserrat", sans-serif;
-
-    // outline: solid 0.5px #d8d9df;
     border: none;
-
-    resize: none;
-    font-size: 0.8rem;
+    font-size: 1rem;
     border-radius: 0.5rem;
-    // background-color: #f5f7f8;
-    box-shadow: 0 3px 5px 0px #d8d9df;
   }
 }
 
@@ -156,4 +165,9 @@ span.edit-toggle {
     padding: 0.5rem;
     border: none;
   }
+}
+
+#topicContainer {
+  display: flex;
+  align-items: center;
 }

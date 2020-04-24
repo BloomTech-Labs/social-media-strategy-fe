@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
 import { Draggable } from 'react-beautiful-dnd';
@@ -16,22 +17,55 @@ import Select from '@material-ui/core/Select';
 import InputLabel from '@material-ui/core/InputLabel';
 import MenuItem from '@material-ui/core/MenuItem';
 import Backdrop from '@material-ui/core/Backdrop';
+=======
+
+import React, { useState, useEffect } from "react";
+import styled from "styled-components";
+import { Draggable } from "react-beautiful-dnd";
+import "../sass/topicBuckets.scss";
+import CreateIcon from "@material-ui/icons/Create";
+import DeleteIcon from "@material-ui/icons/Delete";
+import MoreVertIcon from "@material-ui/icons/MoreVert";
+import DateFnsUtils from "@date-io/date-fns";
+import { connect } from "react-redux";
+import { bindActionCreators } from "redux";
+import { makeStyles } from "@material-ui/core/styles";
+import { deleteCard, editCard, editCardandPost } from "../actions";
+import Modal from "@material-ui/core/Modal";
+import FormControl from "@material-ui/core/FormControl";
+import Select from "@material-ui/core/Select";
+import InputLabel from "@material-ui/core/InputLabel";
+import MenuItem from "@material-ui/core/MenuItem";
+import Backdrop from "@material-ui/core/Backdrop";
+import TextareaAutosize from "@material-ui/core/TextareaAutosize";
+
+>>>>>>> dba74831746ebebda48a0b4a06b97ba2a117e2e3
 import {
   Fade,
   Menu,
   Tooltip,
   Fab,
   IconButton,
+<<<<<<< HEAD
   Typography,
 } from '@material-ui/core';
 import { axiosWithAuth } from '../utils/axiosWithAuth';
 import Grid from '@material-ui/core/Grid';
 import MomentUtils from '@date-io/moment';
 import Button from '@material-ui/core/Button';
+=======
+  Typography
+} from "@material-ui/core";
+import { axiosWithAuth } from "../utils/axiosWithAuth";
+import Grid from "@material-ui/core/Grid";
+import MomentUtils from "@date-io/moment";
+import Button from "@material-ui/core/Button";
+>>>>>>> dba74831746ebebda48a0b4a06b97ba2a117e2e3
 
 import {
   MuiPickersUtilsProvider,
   KeyboardTimePicker,
+<<<<<<< HEAD
   KeyboardDatePicker,
 } from '@material-ui/pickers';
 import 'date-fns';
@@ -45,6 +79,21 @@ import DialogActions from '@material-ui/core/DialogActions';
 import DialogContent from '@material-ui/core/DialogContent';
 import DialogContentText from '@material-ui/core/DialogContentText';
 import DialogTitle from '@material-ui/core/DialogTitle';
+=======
+  KeyboardDatePicker
+} from "@material-ui/pickers";
+import "date-fns";
+import { useHistory, useRouteMatch } from "react-router";
+import { NavLink } from "react-router-dom";
+import InfoIcon from "@material-ui/icons/Info";
+import twitterLogo from "../imgs/Vector.png";
+import TwitterIcon from "@material-ui/icons/Twitter";
+import Dialog from "@material-ui/core/Dialog";
+import DialogActions from "@material-ui/core/DialogActions";
+import DialogContent from "@material-ui/core/DialogContent";
+import DialogContentText from "@material-ui/core/DialogContentText";
+import DialogTitle from "@material-ui/core/DialogTitle";
+>>>>>>> dba74831746ebebda48a0b4a06b97ba2a117e2e3
 
 const Container = styled.div`
   background-color: white;
@@ -73,10 +122,10 @@ export const Inputtextarea = styled.textarea`
   outline: none;
   padding: 0;
   resize: none;
-  width: 100%;
+  width: 83%;
+  margin: 0 auto;
   height: 15vh;
   font-size: 1.8rem;
-
   ::placeholder {
     font-size: 1rem;
     color: gray;
@@ -89,63 +138,69 @@ function editModalLocation() {
 
   return {
     top: `${top}%`,
-    left: `${left}%`,
+    left: `${left}%`
   };
 }
 
-const modalStyles = makeStyles((theme) => ({
+const modalStyles = makeStyles(theme => ({
   paper: {
-    fontFamily: 'Montserrat, sans-serif',
-    position: 'absolute',
+    fontFamily: "Montserrat, sans-serif",
+    position: "absolute",
     width: 600,
-    backgroundColor: '#F5F7F8',
-    borderRadius: '6px',
+    backgroundColor: "#F5F7F8",
+    borderRadius: "6px",
     boxShadow: theme.shadows[5],
     padding: theme.spacing(7),
-    display: 'flex',
-    flexDirection: 'column',
-    alignItems: 'inherit',
+    display: "flex",
+    flexDirection: "column",
+    alignItems: "inherit"
   },
   mHeader: {
-    fontSize: '1.6rem',
+    fontSize: "1.6rem"
   },
   mAccent: {
-    lineHeight: '.1rem',
-    color: '#e85556',
-    fontWeight: 200,
+    lineHeight: ".1rem",
+    color: "#e85556",
+    fontWeight: 200
   },
   formControl: {
     margin: theme.spacing(1),
-    minWidth: 200,
+    minWidth: 200
   },
   actionSubmit: {
-    color: '#fff',
-    backgroundColor: '#E85556',
-    borderRadius: '5rem',
-    border: 'none',
-    padding: '1rem',
-    margin: '.5rem 1rem',
-    width: '40%',
-    fontSize: '1.2rem',
+    color: "#fff",
+    backgroundColor: "#E85556",
+    borderRadius: "5rem",
+    border: "none",
+    padding: "1rem",
+    margin: ".5rem 1rem",
+    width: "40%",
+    fontSize: "1.2rem"
   },
   modal: {
-    display: 'flex',
-    alignItems: 'center',
-    justifyContent: 'center',
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "center"
   },
   select: {
     width: '50%',
   },
+  button: {
+    '&:hover': {
+      backgroundColor: 'transparent',
+    },
+  },
+
 }));
 
-const TopicCard = (props) => {
+const TopicCard = props => {
   const classes = modalStyles();
   const [rectime, setRecTime] = useState(new Date());
 
   const [selectedDate, setSelectedDate] = useState(new Date());
   const [modalStyle] = useState(editModalLocation);
   const [open, setOpen] = useState(false);
-  const [handle, setHandle] = useState('');
+  const [handle, setHandle] = useState("");
   const [content, setcontent] = useState({
     post_text: props.card.content,
     date: props.card.date,
@@ -156,7 +211,7 @@ const TopicCard = (props) => {
   const { push } = useHistory();
   const [anchorEl, setAnchorEl] = useState(null);
   const openMenu = Boolean(anchorEl);
-  const [postContent, setPostContent] = useState('');
+  const [postContent, setPostContent] = useState("");
   const [dialogtoggle, setDialogToggle] = useState(false);
 
   let updateTrue = props.user.didUpdate === true;
@@ -168,38 +223,40 @@ const TopicCard = (props) => {
   useEffect(() => {
     axiosWithAuth()
       .get(`/posts/${props.card.id}`)
-      .then((res) => {
-        res.data.map((e) => {
+
+
+      .then(res => {
+        res.data.map(e => {
           setPostContent(e);
           setRecTime(e.optimal_time);
-          console.log(e.optimal_time, e.post_text, 'OPT1');
+          console.log(e.optimal_time, e.post_text, "OPT1");
         });
       })
-      .catch((err) => console.log(err.message));
+      .catch(err => console.log(err.message));
   }, [
     updateTrue,
     props.user.currentUser,
     props.card.date,
     props.card.id,
-    open,
+    open
   ]);
 
-  console.log(rectime, 'OPT2');
+  console.log(rectime, "OPT2");
 
-  const onsubmitTwitter = (e) => {
+  const onsubmitTwitter = e => {
     e.preventDefault();
     props.editCardandPost(props.card.id, content, postContent);
     setOpen(false);
   };
 
-  const handleClick = (e) => {
+  const handleClick = e => {
     setAnchorEl(e.currentTarget);
   };
   const handleMenuClose = () => {
     setAnchorEl(null);
   };
 
-  const handleDateChange = (date) => {
+  const handleDateChange = date => {
     setSelectedDate(date);
     setcontent({ ...content, date: date });
   };
@@ -208,12 +265,12 @@ const TopicCard = (props) => {
     setOpen(!open);
   };
 
-  const handleChange = (e) => {
+  const handleChange = e => {
     e.preventDefault();
     setcontent({ ...content, [e.target.name]: e.target.value });
   };
 
-  const handleHandleChange = (event) => {
+  const handleHandleChange = event => {
     setHandle(event.target.value);
   };
 
@@ -221,7 +278,7 @@ const TopicCard = (props) => {
   async function newRecTime(date) {
     let optTime = new Date(rectime);
     optTime.setDate(optTime.getDate(rectime) + 1);
-    console.log(optTime, props.card.content, 'OPT11');
+    console.log(optTime, props.card.content, "OPT11");
     setSelectedDate(optTime);
     setcontent({ ...content, date: optTime });
   }
@@ -229,11 +286,11 @@ const TopicCard = (props) => {
   function timeformat(date) {
     var h = date.getHours();
     var m = date.getMinutes();
-    var x = h >= 12 ? 'pm' : 'am';
+    var x = h >= 12 ? "pm" : "am";
     h = h % 12;
     h = h ? h : 12;
-    m = m < 10 ? '0' + m : m;
-    var mytime = h + ':' + m + ' ' + x;
+    m = m < 10 ? "0" + m : m;
+    var mytime = h + ":" + m + " " + x;
     return mytime;
   }
 
@@ -244,15 +301,15 @@ const TopicCard = (props) => {
     postContent?.date?.length > 0
       ? postdates.getMonth() +
         1 +
-        '/' +
+        "/" +
         postdates.getDate() +
-        '/' +
+        "/" +
         postdates.getFullYear() +
-        ' @ ' +
+        " @ " +
         timeformat(postdates)
       : null;
 
-  let screen_name = props.user.accounts.map((e) => e.screen_name);
+  let screen_name = props.user.accounts.map(e => e.screen_name);
 
   const modalBody = (
     <div style={modalStyle} className={classes.paper}>
@@ -290,7 +347,7 @@ const TopicCard = (props) => {
         )}
 
         <MuiPickersUtilsProvider utils={DateFnsUtils}>
-          <nav className='item-sub-nav'>
+          <nav className="item-sub-nav">
             <NavLink
               onClick={() => setPostNow(false) & handleDateChange(new Date())}
               to={`/schedule`}
@@ -306,79 +363,70 @@ const TopicCard = (props) => {
               Post Now
             </NavLink>
           </nav>
-          <Grid container justify='space-around' alignItems='center'>
+          <Grid container justify="space-around" alignItems="center">
             {!postnow ? (
               <>
                 <div
                   style={{
-                    display: 'flex',
-                    flexDirection: 'column',
-                    margin: '5%',
+                    display: "flex",
+                    flexDirection: "column",
+                    margin: "5%"
                   }}
                 >
                   <KeyboardDatePicker
                     disableToolbar
-                    variant='inline'
-                    format='MM/dd/yyyy'
-                    margin='normal'
-                    id='date-picker-inline'
-                    label='Date'
+                    variant="inline"
+                    format="MM/dd/yyyy"
+                    margin="normal"
+                    id="date-picker-inline"
+                    label="Date"
                     value={selectedDate}
                     onChange={handleDateChange}
                     KeyboardButtonProps={{
-                      'aria-label': 'change date',
+                      "aria-label": "change date"
                     }}
                   />
                   <KeyboardTimePicker
-                    margin='normal'
-                    id='time-picker'
-                    label='Time'
+                    margin="normal"
+                    id="time-picker"
+                    label="Time"
                     value={selectedDate}
                     onChange={handleDateChange}
                     KeyboardButtonProps={{
-                      'aria-label': 'change time',
+                      "aria-label": "change time"
                     }}
                   />
                 </div>
-                <div style={{ display: 'flex', alignItems: 'center' }}>
+                <div style={{ display: "flex", alignItems: "center" }}>
                   <button
                     onClick={() =>
                       new Date(rectime) > new Date()
                         ? handleDateChange(rectime) &
-                          console.log(new Date(rectime), new Date(), 'OPT77')
+                          console.log(new Date(rectime), new Date(), "OPT77")
                         : newRecTime()
                     }
                     style={{
-                      borderRadius: '6px',
-                      width: '205px',
-                      height: '38px',
-                      background: '#817BAB',
-                      color: '#EBECF0',
+                      borderRadius: "6px",
+                      width: "205px",
+                      height: "38px",
+                      background: "#817BAB",
+                      color: "#EBECF0"
                     }}
                   >
                     Suggest a Time
                   </button>
                   <Tooltip
-                    title='proprietary optimization algorithm to maximize engagement'
-                    placement='top-end'
-                    aria-label='InfoIcon'
-                    fontSize='small'
-                    color='action'
-                  >
-                    <InfoIcon />
                   </Tooltip>
                 </div>
               </>
             ) : null}
           </Grid>
-        </MuiPickersUtilsProvider>
-
         <Inputtextarea
-          placeholder='Customize your Twitter message here'
-          type='text'
-          name='post_text'
-          cols='50'
-          rows='10'
+          placeholder="Customize your Twitter message here"
+          type="text"
+          name="post_text"
+          cols="50"
+          rows="10"
           value={content.post_text}
           onChange={handleChange}
         ></Inputtextarea>
@@ -386,7 +434,7 @@ const TopicCard = (props) => {
       {!postnow ? (
         <button
           onClick={onsubmitTwitter}
-          style={{ width: '100%' }}
+          style={{ width: "40%" }}
           className={classes.actionSubmit}
         >
           Schedule
@@ -394,7 +442,7 @@ const TopicCard = (props) => {
       ) : (
         <button
           onClick={onsubmitTwitter}
-          style={{ width: '100%' }}
+          style={{ width: "40%" }}
           className={classes.actionSubmit}
         >
           Post now
@@ -405,78 +453,63 @@ const TopicCard = (props) => {
 
   return (
     <Draggable draggableId={String(props.id)} index={props.index}>
-      {(provided) => (
+      {provided => (
         <Container
           className={`${props.className}`}
           {...provided.draggableProps}
           {...provided.dragHandleProps}
           ref={provided.innerRef}
-          id='cardhover'
+          id="cardhover"
         >
           <BtnCont>
-            <div style={{ display: 'flex', width: '100%' }}>
+            <div style={{ display: "flex", width: "100%" }}>
               <nav
                 style={{
-                  fontSize: '10px',
-                  display: 'flex',
-                  flexDirection: 'column',
-                  alignItems: 'flex-start',
+                  fontSize: "10px",
+                  display: "flex",
+                  flexDirection: "column",
+                  alignItems: "flex-start"
                 }}
               >
                 <a
                   style={{ color: '#3282B8', textDecoration: 'none' }}
                   href={`https://twitter.com/${screen_name[0]}`}
-                  alt=''
+                  alt=""
                 >
                   {screen_name[0] === 'Your Handle Here' ? (
                     'No ScreenName Available'
                   ) : (
                     <>
                       <span>@{screen_name[0]}</span>
-                      <span style={{ fontSize: '10px' }}>
+                      <span style={{ fontSize: "10px" }}>
                         &nbsp;
-                        <TwitterIcon fontSize='inherit' />
+                        <TwitterIcon fontSize="inherit" />
                       </span>
                     </>
                   )}
 
                   {/* <span style={{ fontSize: '10px' }}>
-
                     <TwitterIcon fontSize="inherit" />
                   </span> */}
                 </a>
-                {console.log(postContent, 'DATESTUFF')}
-                <span style={{ color: '#848484', fontSize: '9px' }}>
-                  {postContent?.date?.length &&
-                  new Date(postContent?.date) < new Date()
-                    ? `Tweet already Posted   ✅`
-                    : postContent?.date?.length
-                    ? 'Scheduled: ' + dateWithouthSecond + ` \u{1F557}`
-                    : 'Post not Scheduled'}
-                </span>
-              </nav>
-            </div>
-            <IconButton
-              disableRipple={true}
-              style={{
-                display: 'flex',
-                alignItems: 'flex-start',
-                paddingTop: '0',
-                paddingRight: '0',
-              }}
-            >
-              {postContent?.date?.length &&
-              new Date(postContent?.date) < new Date() ? null : postContent
-                  ?.date?.length ? null : (
-                <div className='showHover'>
-                  <CreateIcon
-                    className={`${props.card.id}-create`}
-                    // className="edit"
-                    onClick={() => setediting(!editing)}
-                    fontSize='small'
-                  />
-                </div>
-              )}
+
+                  <div className="showHover">
+                    <CreateIcon
+                      className={`${props.card.id}-create`}
+                      onClick={() => setediting(!editing)}
+                      fontSize="small"
+                    />
+                  </div>
+                )}
+                <MoreVertIcon
+                  className={`${props.card.id}-edit`}
+
+                  style={{ padding: "0rem .25rem" }}
+                  onClick={handleClick}
+                  fontSize="small"
+                />
+              </IconButton>
+            </span>
 
               <MoreVertIcon
                 className={`${props.card.id}-edit`}
@@ -486,7 +519,7 @@ const TopicCard = (props) => {
               />
             </IconButton>
             <Menu
-              id='post-menu'
+              id="post-menu"
               anchorEl={anchorEl}
               keepMounted
               open={openMenu}
@@ -496,7 +529,7 @@ const TopicCard = (props) => {
               new Date(postContent?.date) < new Date() ? null : postContent
                   ?.date?.length ? null : (
                 <NavLink
-                  style={{ textDecoration: 'none', color: 'black  ' }}
+                  style={{ textDecoration: "none", color: "black  " }}
                   to={`/schedule`}
                 >
                   <MenuItem
@@ -511,7 +544,6 @@ const TopicCard = (props) => {
               <MenuItem
                 onClick={() => {
                   if (
-                    postContent?.date?.length &&
                     new Date(postContent?.date) > new Date()
                   ) {
                     return handledialogtoggle();
@@ -529,35 +561,36 @@ const TopicCard = (props) => {
             postContent?.date?.length,
             new Date(postContent?.date) > new Date(),
             props.card.content,
-            'OPT3'
+            "OPT3"
           )}
 
           <Dialog
             open={dialogtoggle}
             // onClose={handledialogtoggle}
             disableEscapeKeyDown={true}
-            aria-labelledby='alert-dialog-title'
-            aria-describedby='alert-dialog-description'
+            aria-labelledby="alert-dialog-title"
+            aria-describedby="alert-dialog-description"
           >
-            <DialogTitle id='alert-dialog-title'>
-              {'Delete Scheduled Tweet?'}
+            <DialogTitle id="alert-dialog-title">
+              {"Delete Scheduled Tweet?"}
             </DialogTitle>
             <DialogContent>
-              <DialogContentText id='alert-dialog-description'>
+              <DialogContentText id="alert-dialog-description">
                 Deleting a scheduled Tweet will remove it from your scheduled
                 queue. Are you sure you want to do this? (Cannot be undone.)
               </DialogContentText>
             </DialogContent>
             <DialogActions>
-              <Button onClick={handledialogtoggle} color='primary'>
-                Disagree
+
+              <Button onClick={handledialogtoggle} color="primary">
+                No
               </Button>
               <Button
                 onClick={() => {
                   props.deleteCard(props.card.id);
                   return handledialogtoggle();
                 }}
-                color='primary'
+                color="primary"
                 autoFocus
               >
                 Agree
@@ -566,47 +599,61 @@ const TopicCard = (props) => {
           </Dialog>
 
           <Modal
-            aria-labelledby='transition-modal-title'
-            aria-describedby='transition-modal-description'
+            aria-labelledby="transition-modal-title"
+            aria-describedby="transition-modal-description"
             className={classes.modal}
             open={open}
-            onClose={() => setOpen(false) & push('/')}
+            onClose={() => setOpen(false) & push("/")}
             closeAfterTransition
             BackdropComponent={Backdrop}
             BackdropProps={{
-              timeout: 500,
+              timeout: 500
             }}
           >
             <Fade in={open}>{modalBody}</Fade>
           </Modal>
           {!editing ? (
-            <Typography variant='subtitle2' paragraph>
+            <Typography variant="subtitle2" paragraph>
               {props.card.content}
             </Typography>
           ) : (
             <>
               <form
-                onSubmit={(e) => {
+
+                className="edit-card"
+                onSubmit={e => {
                   e.preventDefault();
                   props.editCard(props.card.id, content, postContent);
                   setcontent({ ...content, post_text: content.post_text });
                   setediting(!editing);
                 }}
               >
-                <textarea
-                  type='text'
-                  name='post_text'
+                <TextareaAutosize
+
+                  rowsMin={3}
+                  id="textareaAuto"
+                  className="edit-card-txt-area"
+                  type="text"
+                  name="post_text"
                   value={content.post_text}
                   onChange={handleChange}
                 />
-                &nbsp;{' '}
-                <span
-                  onClick={() => setediting(!editing)}
-                  style={{ color: 'red', fontWeight: 'bolder', padding: '5px' }}
-                >
-                  x
-                </span>
-                <input type='submit' />
+                {/* &nbsp;{" "} */}
+
+                <div className="action-cont">
+                  <input className="actionSubmit" type="submit" />
+                  <span
+                    onClick={() => setediting(!editing)}
+                    style={{
+                      color: "red",
+                      fontSize: "1.0rem",
+                      fontWeight: "bolder",
+                      padding: "0 .5rem"
+                    }}
+                  >
+                    X
+                  </span>
+                </div>
               </form>
             </>
           )}
@@ -616,15 +663,15 @@ const TopicCard = (props) => {
   );
 };
 
-const mapStateToProps = (state) => ({
+const mapStateToProps = state => ({
   user: state.user,
-  topics: state.topics,
+  topics: state.topics
 });
 
 function mapDispatchToProps(dispatch) {
   return {
     dispatch,
-    ...bindActionCreators({ deleteCard, editCard, editCardandPost }, dispatch),
+    ...bindActionCreators({ deleteCard, editCard, editCardandPost }, dispatch)
   };
 }
 

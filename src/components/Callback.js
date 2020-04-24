@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import '../sass/callback.scss';
 import axios from 'axios';
 import { useLocation, useHistory } from 'react-router-dom';
 import { axiosWithAuth } from '../utils/axiosWithAuth';
@@ -64,16 +65,17 @@ const Callback = () => {
   }, []);
 
   return (
-    <div>
-      <h1 style={{ color: 'blue' }}>
-        Testing Social Media {console.log(state, data)}
+    <div className='callback-cont'>
+      <div className='callback-box'>
+      <h1 className='callback-header'>
+        SoMe Connection {console.log(state, data)}
       </h1>
-      <h2>success</h2>
-      <p>
+      <h2 className='success' >Success</h2>
+      <p className='callback-para'>
         Thank you,{' '}
         <strong>
           <a
-            style={{ color: 'orange' }}
+            className='highlight'
             href={`https://twitter.com/${data.twitter_screenName}`}
           >
             @{data.twitter_screenName}
@@ -82,30 +84,30 @@ const Callback = () => {
         , for authorizing SoMe an access token. We've successfully received your
         access token and confirmed it!
       </p>
-      <ul>
+      
         {/* <li>
           You have Tweeted{' '}
           <span className='label label-success'>{'statuses_count'}</span> times.
         </li> */}
-        <li>
+        <p className='callback-bold'>
           You have currently have
           <span className="label label-success">
             &nbsp;{data.total_followers}
           </span>{' '}
           followers.
-        </li>
+        </p>
         {/* <li>
           You follow{' '}
           <span className='label label-success'>{'friends_count'}</span> users.
         </li> */}
-      </ul>
       <h2>Redirecting you back to your SoMe profile in {time} </h2>
       <p className="redirect">
-        if countdown didn't redirect you to profile page please click{' '}
-        <a style={{ color: 'orange' }} href="/">
+        If countdown didn't redirect you to profile page please click {''}
+        <a className='highlight' href="/">
           here
         </a>
       </p>
+      </div>
     </div>
   );
 };
