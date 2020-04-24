@@ -4,7 +4,8 @@ import DeleteIcon from "@material-ui/icons/Delete";
 import CreateIcon from "@material-ui/icons/Create";
 import TextareaAutosize from "@material-ui/core/TextareaAutosize";
 
-import { editTopic } from "../actions";
+
+import { editTopic, deleteTopics } from '../actions';
 
 const TopicTitle = props => {
   const [content, setcontent] = useState({ name: props.topic.title });
@@ -58,6 +59,7 @@ const TopicTitle = props => {
               <CreateIcon
                 className={`editTopic`}
                 onClick={() => setediting(!editing)}
+
               />
             </span>
             {!editing ? (
@@ -78,4 +80,5 @@ const mapStateToProps = state => {
   return state;
 };
 
-export default connect(mapStateToProps, { editTopic })(TopicTitle);
+
+export default connect(mapStateToProps, { editTopic, deleteTopics })(TopicTitle);
