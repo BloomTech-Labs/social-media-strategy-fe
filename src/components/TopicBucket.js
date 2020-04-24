@@ -1,17 +1,16 @@
+import React from 'react';
+import { connect } from 'react-redux';
+import TopicCard from './TopicCard';
+import { Droppable, Draggable } from 'react-beautiful-dnd';
+import ActionButton from './ActionButton';
+import TopicTitle from './TopicTitle';
 
-import React from "react";
-import { connect } from "react-redux";
-import TopicCard from "./TopicCard";
-import { Droppable, Draggable } from "react-beautiful-dnd";
-import ActionButton from "./ActionButton";
-import TopicTitle from "./TopicTitle";
-
-import { fetchTopics, updateTopics, deleteTopics, editTopic } from "../actions";
+import { fetchTopics, updateTopics, deleteTopics, editTopic } from '../actions';
 
 const TopicBucket = (props) => {
-  let scrollId = "";
-  if (props?.cards?.length > 4) {
-    scrollId = "topic-scroll";
+  let scrollId = '';
+  if (props?.cards?.length > 3) {
+    scrollId = 'topic-scroll';
   }
 
   return (
@@ -23,12 +22,12 @@ const TopicBucket = (props) => {
           ref={provided.innerRef}
           {...provided.dragHandleProps}
         >
-          <Droppable droppableId={String(props.topic.id)} type='card'>
+          <Droppable droppableId={String(props.topic.id)} type="card">
             {(provided) => (
               <>
                 <TopicTitle topic={props.topic} />
                 <div
-                  className='cardlist'
+                  className="cardlist"
                   id={scrollId}
                   ref={provided.innerRef}
                   {...provided.droppableProps}
