@@ -1,23 +1,23 @@
-import React, { useState, useEffect } from "react";
-import styled from "styled-components";
-import { Draggable } from "react-beautiful-dnd";
-import "../sass/topicBuckets.scss";
-import CreateIcon from "@material-ui/icons/Create";
-import DeleteIcon from "@material-ui/icons/Delete";
-import MoreVertIcon from "@material-ui/icons/MoreVert";
-import DateFnsUtils from "@date-io/date-fns";
-import { connect } from "react-redux";
-import { bindActionCreators } from "redux";
-import { makeStyles } from "@material-ui/core/styles";
-import { deleteCard, editCard, editCardandPost } from "../actions";
-import Modal from "@material-ui/core/Modal";
-import FormControl from "@material-ui/core/FormControl";
-import Select from "@material-ui/core/Select";
-import InputLabel from "@material-ui/core/InputLabel";
-import MenuItem from "@material-ui/core/MenuItem";
-import Backdrop from "@material-ui/core/Backdrop";
-import TwitterIcon from "@material-ui/icons/Twitter";
-import TextareaAutosize from "react-textarea-autosize";
+import React, { useState, useEffect } from 'react';
+import styled from 'styled-components';
+import { Draggable } from 'react-beautiful-dnd';
+import '../sass/topicBuckets.scss';
+import CreateIcon from '@material-ui/icons/Create';
+import DeleteIcon from '@material-ui/icons/Delete';
+import MoreVertIcon from '@material-ui/icons/MoreVert';
+import DateFnsUtils from '@date-io/date-fns';
+import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
+import { makeStyles } from '@material-ui/core/styles';
+import { deleteCard, editCard, editCardandPost } from '../actions';
+import Modal from '@material-ui/core/Modal';
+import FormControl from '@material-ui/core/FormControl';
+import Select from '@material-ui/core/Select';
+import InputLabel from '@material-ui/core/InputLabel';
+import MenuItem from '@material-ui/core/MenuItem';
+import Backdrop from '@material-ui/core/Backdrop';
+import TwitterIcon from '@material-ui/icons/Twitter';
+import TextareaAutosize from 'react-textarea-autosize';
 
 import {
   Fade,
@@ -25,7 +25,6 @@ import {
   Tooltip,
   Fab,
   IconButton,
-
   Typography,
 } from '@material-ui/core';
 import { axiosWithAuth } from '../utils/axiosWithAuth';
@@ -36,7 +35,6 @@ import Button from '@material-ui/core/Button';
 import {
   MuiPickersUtilsProvider,
   KeyboardTimePicker,
-
   KeyboardDatePicker,
 } from '@material-ui/pickers';
 import 'date-fns';
@@ -44,7 +42,6 @@ import { useHistory, useRouteMatch } from 'react-router';
 import { NavLink } from 'react-router-dom';
 import InfoIcon from '@material-ui/icons/Info';
 import twitterLogo from '../imgs/Vector.png';
-import TwitterIcon from '@material-ui/icons/Twitter';
 import Dialog from '@material-ui/core/Dialog';
 import DialogActions from '@material-ui/core/DialogActions';
 import DialogContent from '@material-ui/core/DialogContent';
@@ -81,7 +78,6 @@ export const Inputtextarea = styled.textarea`
   width: 100%;
   height: 15vh;
   font-size: 1.8rem;
-
   ::placeholder {
     font-size: 1rem;
     color: gray;
@@ -154,7 +150,7 @@ const TopicCard = (props) => {
   const [content, setcontent] = useState({
     post_text: props.card.content,
     date: props.card.date,
-    screenname: props.user.accounts[0].screen_name ?? ""
+    screenname: props.user.accounts[0].screen_name ?? '',
   });
   const [editing, setediting] = useState(false);
   const [postnow, setPostNow] = useState(false);
@@ -250,7 +246,6 @@ const TopicCard = (props) => {
     postContent?.date?.length > 0
       ? postdates.getMonth() +
         1 +
-
         '/' +
         postdates.getDate() +
         '/' +
@@ -266,28 +261,28 @@ const TopicCard = (props) => {
       <h2 className={classes.mHeader}>Twitter Manager</h2>
       <h3 className={classes.mAccent}>Schedule or Post Now</h3>
       <FormControl className={classes.formControl}>
-        <span className="socialAccountInput">
+        <span className='socialAccountInput'>
           <InputLabel
             shrink
             // className={classes.select}
-            className="test"
-            id="twitter-handle-select"
+            className='test'
+            id='twitter-handle-select'
           >
-            <span className="socialAccount"> Social Account </span>
+            <span className='socialAccount'> Social Account </span>
           </InputLabel>
           <Select
-            labelId="twitter-handle-select"
-            id="select"
+            labelId='twitter-handle-select'
+            id='select'
             value={1}
             // value={handle}
             onChange={handleHandleChange}
-            className="test"
-            style={{ width: "40%" }}
+            className='test'
+            style={{ width: '40%' }}
           >
             <MenuItem value={1}>
-              <span id="alignTextIcon">
-                @{screen_name} &nbsp;{" "}
-                <TwitterIcon className="twitterIconModal" />
+              <span id='alignTextIcon'>
+                @{screen_name} &nbsp;{' '}
+                <TwitterIcon className='twitterIconModal' />
               </span>
             </MenuItem>
           </Select>
@@ -303,7 +298,7 @@ const TopicCard = (props) => {
             </NavLink>
             <NavLink
               onClick={() =>
-                setPostNow(true) & setcontent({ ...content, date: "" })
+                setPostNow(true) & setcontent({ ...content, date: '' })
               }
               to={`/post-now`}
             >
@@ -363,7 +358,6 @@ const TopicCard = (props) => {
                     Suggest a Time
                   </button>
                   <Tooltip
-
                     title='proprietary optimization algorithm to maximize engagement'
                     placement='top-end'
                     aria-label='InfoIcon'
@@ -429,14 +423,13 @@ const TopicCard = (props) => {
                 }}
               >
                 <a
-                  style={{ color: "#3282B8", textDecoration: "none" }}
+                  style={{ color: '#3282B8', textDecoration: 'none' }}
                   href={`https://twitter.com/${screen_name[0]}`}
                   alt=''
                 >
-                  {screen_name[0] === "Your Handle Here" ? (
-                    "No ScreenName Available"
+                  {screen_name[0] === 'Your Handle Here' ? (
+                    'No ScreenName Available'
                   ) : (
-
                     <>
                       <span>@{screen_name[0]}</span>
                       <span style={{ fontSize: '10px' }}>
@@ -447,54 +440,53 @@ const TopicCard = (props) => {
                   )}
 
                   {/* <span style={{ fontSize: '10px' }}>
-
                     <TwitterIcon fontSize="inherit" />
                   </span> */}
                 </a>
-                {console.log(postContent, "DATESTUFF")}
-                <span style={{ color: "#848484", fontSize: "9px" }}>
+                {console.log(postContent, 'DATESTUFF')}
+                <span style={{ color: '#848484', fontSize: '9px' }}>
                   {postContent?.date?.length &&
                   new Date(postContent?.date) < new Date() ? (
-                    <span className="posted">Tweet Posted</span>
+                    <span className='posted'>Tweet Posted</span>
                   ) : postContent?.date?.length ? (
-                    <span className="scheduled">
-                      {" "}
-                      Scheduled: {dateWithouthSecond}{" "}
+                    <span className='scheduled'>
+                      {' '}
+                      Scheduled: {dateWithouthSecond}{' '}
                     </span>
                   ) : (
-                    <span className="notScheduled">Post not Scheduled</span>
+                    <span className='notScheduled'>Post not Scheduled</span>
                   )}
                 </span>
               </nav>
             </div>
 
-                              <span className="editIcons">
-
-            <IconButton
-              disableRipple={true}
-              style={{
-                display: 'flex',
-                alignItems: 'flex-start',
-                paddingTop: '0',
-                paddingRight: '0',
-              }}
-            >
-              {postContent?.date?.length &&
-              new Date(postContent?.date) < new Date() ? null : postContent
-                  ?.date?.length ? null : (
-                <div className='showHover'>
-                  <CreateIcon
-                    className={`${props.card.id}-create`}
-                    // className="edit"
-                    onClick={() => setediting(!editing)}
-                    fontSize="small"
-                  />
-                </div>
+            <span className='editIcons'>
+              <IconButton
+                disableRipple={true}
+                style={{
+                  display: 'flex',
+                  alignItems: 'flex-start',
+                  paddingTop: '0',
+                  paddingRight: '0',
+                }}
+              >
+                {postContent?.date?.length &&
+                new Date(postContent?.date) < new Date() ? null : postContent
+                    ?.date?.length ? null : (
+                  <div className='showHover'>
+                    <CreateIcon
+                      className={`${props.card.id}-create`}
+                      // className="edit"
+                      onClick={() => setediting(!editing)}
+                      fontSize='small'
+                    />
+                  </div>
+                )}
                 <MoreVertIcon
                   className={`${props.card.id}-edit`}
-                  style={{ padding: "0rem .25rem" }}
+                  style={{ padding: '0rem .25rem' }}
                   onClick={handleClick}
-                  fontSize="small"
+                  fontSize='small'
                 />
               </IconButton>
             </span>
@@ -601,7 +593,7 @@ const TopicCard = (props) => {
           ) : (
             <>
               <form
-                className="edit-card"
+                className='edit-card'
                 onSubmit={(e) => {
                   e.preventDefault();
                   props.editCard(props.card.id, content, postContent);
@@ -610,29 +602,28 @@ const TopicCard = (props) => {
                 }}
               >
                 <TextareaAutosize
-                  id="textareaAuto"
-                  className="edit-card-txt-area"
-                  type="text"
-                  name="post_text"
+                  id='textareaAuto'
+                  className='edit-card-txt-area'
+                  type='text'
+                  name='post_text'
                   value={content.post_text}
                   onChange={handleChange}
                 />
                 {/* &nbsp;{" "} */}
-                <div className="action-cont">
-                  <input className="actionSubmit" type="submit" />
+                <div className='action-cont'>
+                  <input className='actionSubmit' type='submit' />
                   <span
                     onClick={() => setediting(!editing)}
                     style={{
-                      color: "red",
-                      fontSize: "1.0rem",
-                      fontWeight: "bolder",
-                      padding: "0 .5rem"
+                      color: 'red',
+                      fontSize: '1.0rem',
+                      fontWeight: 'bolder',
+                      padding: '0 .5rem',
                     }}
                   >
                     X
                   </span>
                 </div>
-
               </form>
             </>
           )}
