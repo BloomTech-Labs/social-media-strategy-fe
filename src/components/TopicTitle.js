@@ -1,9 +1,9 @@
-import React, { useState } from "react";
-import { connect } from "react-redux";
-import DeleteIcon from "@material-ui/icons/Delete";
-import CreateIcon from "@material-ui/icons/Create";
+import React, { useState } from 'react';
+import { connect } from 'react-redux';
+import DeleteIcon from '@material-ui/icons/Delete';
+import CreateIcon from '@material-ui/icons/Create';
 
-import { editTopic } from '../actions';
+import { editTopic, deleteTopics } from '../actions';
 
 const TopicTitle = (props) => {
   const [content, setcontent] = useState({ name: props.topic.title });
@@ -31,7 +31,7 @@ const TopicTitle = (props) => {
           onChange={handleChange}
           defaultValue={props.topic.title}
         />
-        &nbsp;{" "}
+        &nbsp;{' '}
         <span onClick={() => setediting(!editing)} className='edit-toggle'>
           x
         </span>
@@ -41,12 +41,12 @@ const TopicTitle = (props) => {
 
   return (
     <h4 className='title'>
-      {props.topic.title !== "Drafts" ? (
+      {props.topic.title !== 'Drafts' ? (
         <span className='editTopics'>
           <span className='topicIcons'>
             <span className={`deleteTopic`}>
               <DeleteIcon
-                style={{ "margin-right": "20" }}
+                style={{ 'margin-right': '20' }}
                 onClick={() => props.deleteTopics(props.topic.id)}
               />
             </span>
@@ -68,8 +68,10 @@ const TopicTitle = (props) => {
   );
 };
 
-const mapStateToProps = state => {
-    return state
-}
+const mapStateToProps = (state) => {
+  return state;
+};
 
-export default connect(mapStateToProps, { editTopic })(TopicTitle);
+export default connect(mapStateToProps, { editTopic, deleteTopics })(
+  TopicTitle
+);

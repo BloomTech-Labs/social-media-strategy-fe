@@ -14,17 +14,17 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import ExitToAppIcon from '@material-ui/icons/ExitToApp';
 import HomeIcon from '@material-ui/icons/Home';
-import AccountCircleIcon from '@material-ui/icons/AccountCircle';
+import ScheduleIcon from '@material-ui/icons/Schedule';
 import RssFeedIcon from '@material-ui/icons/RssFeed';
 
 const Navigation = (props) => {
   return (
     <div>
-      <div className="navContainer">
-        <div className="navButtonContainer">
-          <TransitionsModal name="Post now" />
+      <div className='navContainer'>
+        <div className='navButtonContainer'>
+          <TransitionsModal name='Post now' />
         </div>
-        <nav className="navLinks">
+        <nav className='navLinks'>
           <ul>
             <NavLink
               onClick={() => {
@@ -33,13 +33,13 @@ const Navigation = (props) => {
                 }
                 props.drawerOpen('HOME');
               }}
-              className="linkNav"
-              activeClassName="linkActive"
-              to="/home"
+              className='linkNav'
+              activeClassName='linkActive'
+              to='/home'
             >
-              <li className="link">
+              <li className='link'>
                 <HomeIcon
-                  className="navImage"
+                  className='navImage'
                   style={{ width: '30px', height: '30px' }}
                 />
                 Home
@@ -55,16 +55,16 @@ const Navigation = (props) => {
                 }
                 props.drawerOpen('ACCOUNT');
               }}
-              className="linkNav"
-              activeClassName="linkActive"
-              to="/account"
+              className='linkNav'
+              activeClassName='linkActive'
+              to='/account'
             >
-              <li className="link">
-                <AccountCircleIcon
-                  className="navImage"
+              <li className='link'>
+                <ScheduleIcon
+                  className='navImage'
                   style={{ width: '30px', height: '30px' }}
                 />
-                Account
+                Queue
               </li>
             </NavLink>
             <NavLink
@@ -74,13 +74,13 @@ const Navigation = (props) => {
                 }
                 props.drawerOpen('FEED');
               }}
-              className="linkNav"
-              activeClassName="linkActive"
-              to="/feed/home"
+              className='linkNav'
+              activeClassName='linkActive'
+              to='/feed/home'
             >
-              <li className="link">
+              <li className='link'>
                 <RssFeedIcon
-                  className="navImage"
+                  className='navImage'
                   style={{ width: '30px', height: '30px' }}
                 />
                 Feed
@@ -95,11 +95,11 @@ const Navigation = (props) => {
                 window.location.reload(false)
               }
               className={'linkNav'}
-              to="/"
+              to='/'
             >
-              <li className="link">
+              <li className='link'>
                 <ExitToAppIcon
-                  className="navImage"
+                  className='navImage'
                   style={{ width: '30px', height: '30px' }}
                 />
                 Logout{' '}
@@ -107,16 +107,16 @@ const Navigation = (props) => {
             </NavLink>
           </ul>
         </nav>
-        <Date className="date" />
+        <Date className='date' />
       </div>
       <Switch>
         {/* <Route path='/home'>{HomeNav}</Route> */}
-        <Route path="/search"></Route>
-        <Route path="/account"></Route>
-        <Route path="/analytics"></Route>
-        <Route path="/messages"></Route>
-        <Route path="/notifications"></Route>
-        <Route path="/landing"></Route>
+        <Route path='/search'></Route>
+        <Route path='/account'></Route>
+        <Route path='/analytics'></Route>
+        <Route path='/messages'></Route>
+        <Route path='/notifications'></Route>
+        <Route path='/landing'></Route>
       </Switch>
     </div>
   );

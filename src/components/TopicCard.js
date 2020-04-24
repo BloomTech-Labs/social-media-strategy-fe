@@ -16,6 +16,9 @@ import Select from '@material-ui/core/Select';
 import InputLabel from '@material-ui/core/InputLabel';
 import MenuItem from '@material-ui/core/MenuItem';
 import Backdrop from '@material-ui/core/Backdrop';
+import TwitterIcon from '@material-ui/icons/Twitter';
+import TextareaAutosize from 'react-textarea-autosize';
+
 import {
   Fade,
   Menu,
@@ -39,7 +42,6 @@ import { useHistory, useRouteMatch } from 'react-router';
 import { NavLink } from 'react-router-dom';
 import InfoIcon from '@material-ui/icons/Info';
 import twitterLogo from '../imgs/Vector.png';
-import TwitterIcon from '@material-ui/icons/Twitter';
 import Dialog from '@material-ui/core/Dialog';
 import DialogActions from '@material-ui/core/DialogActions';
 import DialogContent from '@material-ui/core/DialogContent';
@@ -76,7 +78,6 @@ export const Inputtextarea = styled.textarea`
   width: 100%;
   height: 15vh;
   font-size: 1.8rem;
-
   ::placeholder {
     font-size: 1rem;
     color: gray;
@@ -136,6 +137,11 @@ const modalStyles = makeStyles((theme) => ({
   select: {
     width: '50%',
   },
+  button: {
+    '&:hover': {
+      backgroundColor: 'transparent',
+    },
+  },
 }));
 
 const TopicCard = (props) => {
@@ -168,6 +174,7 @@ const TopicCard = (props) => {
   useEffect(() => {
     axiosWithAuth()
       .get(`/posts/${props.card.id}`)
+
       .then((res) => {
         res.data.map((e) => {
           setPostContent(e);
@@ -259,35 +266,32 @@ const TopicCard = (props) => {
       <h2 className={classes.mHeader}>Twitter Manager</h2>
       <h3 className={classes.mAccent}>Schedule or Post Now</h3>
       <FormControl className={classes.formControl}>
-        <InputLabel
-          shrink
-          // className={classes.select}
-          className='test'
-          id='twitter-handle-select'
-        >
-          Social Account
-        </InputLabel>
-        <Select
-          labelId='twitter-handle-select'
-          id='select'
-          value={1}
-          // value={handle}
-          onChange={handleHandleChange}
-          className='test'
-          style={{ width: '40%' }}
-        >
-          <MenuItem value={1}>
-            @{screen_name} &nbsp; <img src={twitterLogo} alt='' />
-          </MenuItem>
-        </Select>
-        {console.log(
-          content,
-          postContent,
-          // selectedDate,
-          // props.user.accounts[0].screen_name,
-          // rectime,
-          'CONTENT'
-        )}
+        <span className='socialAccountInput'>
+          <InputLabel
+            shrink
+            // className={classes.select}
+            className='test'
+            id='twitter-handle-select'
+          >
+            <span className='socialAccount'> Social Account </span>
+          </InputLabel>
+          <Select
+            labelId='twitter-handle-select'
+            id='select'
+            value={1}
+            // value={handle}
+            onChange={handleHandleChange}
+            className='test'
+            style={{ width: '40%' }}
+          >
+            <MenuItem value={1}>
+              <span id='alignTextIcon'>
+                @{screen_name} &nbsp;{' '}
+                <TwitterIcon className='twitterIconModal' />
+              </span>
+            </MenuItem>
+          </Select>
+        </span>
 
         <MuiPickersUtilsProvider utils={DateFnsUtils}>
           <nav className='item-sub-nav'>
@@ -441,50 +445,58 @@ const TopicCard = (props) => {
                   )}
 
                   {/* <span style={{ fontSize: '10px' }}>
-
                     <TwitterIcon fontSize="inherit" />
                   </span> */}
                 </a>
                 {console.log(postContent, 'DATESTUFF')}
                 <span style={{ color: '#848484', fontSize: '9px' }}>
                   {postContent?.date?.length &&
-                  new Date(postContent?.date) < new Date()
-                    ? `Tweet already Posted   ✅`
-                    : postContent?.date?.length
-                    ? 'Scheduled: ' + dateWithouthSecond + ` \u{1F557}`
-                    : 'Post not Scheduled'}
+                  new Date(postContent?.date) < new Date() ? (
+                    <span className='posted'>Tweet Posted</span>
+                  ) : postContent?.date?.length ? (
+                    <span className='scheduled'>
+                      {' '}
+                      Scheduled: {dateWithouthSecond}{' '}
+                    </span>
+                  ) : (
+                    <span className='notScheduled'>Post not Scheduled</span>
+                  )}
                 </span>
               </nav>
             </div>
-            <IconButton
-              disableRipple={true}
-              style={{
-                display: 'flex',
-                alignItems: 'flex-start',
-                paddingTop: '0',
-                paddingRight: '0',
-              }}
-            >
-              {postContent?.date?.length &&
-              new Date(postContent?.date) < new Date() ? null : postContent
-                  ?.date?.length ? null : (
-                <div className='showHover'>
-                  <CreateIcon
-                    className={`${props.card.id}-create`}
-                    // className="edit"
-                    onClick={() => setediting(!editing)}
-                    fontSize='small'
-                  />
-                </div>
-              )}
 
-              <MoreVertIcon
-                className={`${props.card.id}-edit`}
-                style={{ padding: '0rem .25rem' }}
-                onClick={handleClick}
-                fontSize='small'
-              />
-            </IconButton>
+            <span className='editIcons'>
+              <IconButton
+                disableRipple={true}
+                disableFocusRipple={true}
+                className={classes.button}
+                style={{
+                  display: 'flex',
+                  alignItems: 'flex-start',
+                  paddingTop: '0',
+                  paddingRight: '0',
+                }}
+              >
+                {postContent?.date?.length &&
+                new Date(postContent?.date) < new Date() ? null : postContent
+                    ?.date?.length ? null : (
+                  <div className='showHover'>
+                    <CreateIcon
+                      className={`${props.card.id}-create`}
+                      onClick={() => setediting(!editing)}
+                      fontSize='small'
+                    />
+                  </div>
+                )}
+                <MoreVertIcon
+                  className={`${props.card.id}-edit`}
+                  style={{ padding: '0rem .25rem' }}
+                  onClick={handleClick}
+                  fontSize='small'
+                />
+              </IconButton>
+            </span>
+
             <Menu
               id='post-menu'
               anchorEl={anchorEl}
@@ -545,12 +557,13 @@ const TopicCard = (props) => {
             <DialogContent>
               <DialogContentText id='alert-dialog-description'>
                 Deleting a scheduled Tweet will remove it from your scheduled
-                queue. Are you sure you want to do this? (Cannot be undone.)
+                queue. Are you sure you want to do delete post? (Cannot be
+                undone.)
               </DialogContentText>
             </DialogContent>
             <DialogActions>
               <Button onClick={handledialogtoggle} color='primary'>
-                Disagree
+                No
               </Button>
               <Button
                 onClick={() => {
@@ -560,7 +573,7 @@ const TopicCard = (props) => {
                 color='primary'
                 autoFocus
               >
-                Agree
+                Yes
               </Button>
             </DialogActions>
           </Dialog>
@@ -586,6 +599,7 @@ const TopicCard = (props) => {
           ) : (
             <>
               <form
+                className='edit-card'
                 onSubmit={(e) => {
                   e.preventDefault();
                   props.editCard(props.card.id, content, postContent);
@@ -593,20 +607,29 @@ const TopicCard = (props) => {
                   setediting(!editing);
                 }}
               >
-                <textarea
+                <TextareaAutosize
+                  id='textareaAuto'
+                  className='edit-card-txt-area'
                   type='text'
                   name='post_text'
                   value={content.post_text}
                   onChange={handleChange}
                 />
-                &nbsp;{' '}
-                <span
-                  onClick={() => setediting(!editing)}
-                  style={{ color: 'red', fontWeight: 'bolder', padding: '5px' }}
-                >
-                  x
-                </span>
-                <input type='submit' />
+                {/* &nbsp;{" "} */}
+                <div className='action-cont'>
+                  <input className='actionSubmit' type='submit' />
+                  <span
+                    onClick={() => setediting(!editing)}
+                    style={{
+                      color: 'red',
+                      fontSize: '1.0rem',
+                      fontWeight: 'bolder',
+                      padding: '0 .5rem',
+                    }}
+                  >
+                    X
+                  </span>
+                </div>
               </form>
             </>
           )}

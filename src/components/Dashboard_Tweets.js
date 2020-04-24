@@ -9,15 +9,73 @@ const TweetContainer = styled.div`
   background-color: white;
   border-radius: 0.5rem;
   padding: 1rem 1rem;
-  margin: 0.5rem;
+  margin: 0.5rem auto;
   width: 80%;
   text-align: center;
+  border: 2px solid #1ca1f2;
+
+  .scheduled {
+    color: lightgrey;
+    font-size: 0.8rem;
+    padding: 0.6rem 0rem;
+  }
+
+  .postText {
+    padding: 2rem 0rem;
+  }
 `;
 
 const HandleInfo = styled.div`
   display: flex;
   width: 100%;
+  justify-content: center;
 `;
+
+const TopBar = styled.div`
+  display: flex;
+  border-bottom: 1px solid lightgrey;
+
+  a {
+    padding: 0 1rem;
+    display: flex;
+    align-items: center;
+  }
+
+  .proPic {
+    border-radius: 50%;
+    margin-bottom: 0.5rem;
+    width: 40px;
+  }
+`;
+
+const Title = styled.span`
+  color: white;
+  font-weight: bold;
+  font-size: 1.5rem;
+  text-align: center;
+  margin: 1rem 0 1rem 1.5rem;
+`;
+
+const timeformat = (toFormat) => {
+  let date = new Date(toFormat);
+  var h = date.getHours();
+  var m = date.getMinutes();
+  var x = h >= 12 ? 'pm' : 'am';
+  h = h % 12;
+  h = h ? h : 12;
+  m = m < 10 ? '0' + m : m;
+  var mytime = h + ':' + m + ' ' + x;
+  return mytime;
+};
+
+const dateFormat = (dateObj) => {
+  const date = new Date(dateObj);
+
+  let formatted = `${date.getMonth() +
+    1}/${date.getDate()}/${date.getFullYear()} @ ${timeformat(dateObj)}`;
+
+  return formatted;
+};
 
 const Dashboard_Tweets = (props) => {
   const [tweets, setTweets] = useState([]);
@@ -26,6 +84,8 @@ const Dashboard_Tweets = (props) => {
   const twitHandle = props.user.accounts[0].screen_name;
 
   console.log('CUSER', props.user.accounts[0].screen_name);
+
+  let updateTrue = props.user.didUpdate === true;
 
   useEffect(() => {
     axiosWithAuth()
@@ -42,14 +102,22 @@ const Dashboard_Tweets = (props) => {
         setTweets(orderTweets(completedTweets));
       })
       .catch((err) => console.log(err.message));
-  }, [props.currentUser]);
+  }, [updateTrue]);
 
   const orderTweets = (tweetArray) => {
     let original = tweetArray;
 
-    original = original.filter((tweet) => {
-      return tweet.date.length > 0;
-    });
+    original = original
+      .filter((tweet) => {
+        const compare = new Date(tweet.date);
+
+        return tweet.date.length > 0;
+      })
+      .filter((tweet) => {
+        const compare = new Date(tweet.date);
+
+        return compare > new Date();
+      });
 
     console.log('ORIGINAL PRE SORT', original);
     original.sort(function compare(a, b) {
@@ -63,14 +131,40 @@ const Dashboard_Tweets = (props) => {
 
   return (
     <div>
+      <Title>My Scheduled Posts</Title>
       {tweets.map((tweet) => (
         <TweetContainer>
-          <HandleInfo>
-            <span>@{`${twitHandle}`}</span>
-            <TwitterIcon></TwitterIcon>
-          </HandleInfo>
-          <div>Scheduled for {`${tweet.date}`}</div>
-          {`${tweet.post_text}`}
+          <TopBar>
+            <img
+              className='proPic'
+              src={props.user.accounts[0].profile_img}
+              alt=''
+            ></img>
+            <HandleInfo>
+              <a
+                style={{ color: '#3282B8', textDecoration: 'none' }}
+                href={`https://twitter.com/${twitHandle}`}
+                alt=''
+              >
+                <span>@{`${twitHandle}`}</span>
+              </a>
+            </HandleInfo>
+
+            <div
+              style={{
+                color: 'dodgerblue',
+                display: 'flex',
+                alignItems: 'center',
+              }}
+            >
+              <TwitterIcon />
+            </div>
+          </TopBar>
+
+          <div className='scheduled'>
+            Scheduled: {`${dateFormat(tweet.date)}`}
+          </div>
+          <div className='postText'>{`${tweet.post_text}`}</div>
         </TweetContainer>
       ))}
     </div>
