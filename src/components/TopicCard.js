@@ -545,12 +545,13 @@ const TopicCard = (props) => {
             <DialogContent>
               <DialogContentText id='alert-dialog-description'>
                 Deleting a scheduled Tweet will remove it from your scheduled
-                queue. Are you sure you want to do this? (Cannot be undone.)
+                queue. Are you sure you want to do delete post? (Cannot be
+                undone.)
               </DialogContentText>
             </DialogContent>
             <DialogActions>
               <Button onClick={handledialogtoggle} color='primary'>
-                Disagree
+                No
               </Button>
               <Button
                 onClick={() => {
@@ -560,7 +561,7 @@ const TopicCard = (props) => {
                 color='primary'
                 autoFocus
               >
-                Agree
+                Yes
               </Button>
             </DialogActions>
           </Dialog>

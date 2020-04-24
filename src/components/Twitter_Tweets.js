@@ -1,43 +1,44 @@
-import React, { useState } from "react";
-import { Timeline, Follow, Mention, Tweet } from "react-twitter-widgets";
-import { useSelector } from "react-redux";
+import React, { useState } from 'react';
+import { Timeline, Follow, Mention, Tweet } from 'react-twitter-widgets';
+import { useSelector } from 'react-redux';
 
-export const TWITTER_TWEETS = props => {
-  console.log(props, "PROPS");
+export const TWITTER_TWEETS = (props) => {
+  console.log(props, 'PROPS');
   return (
     <Tweet
       tweetId={`${props.twit.id_str}`}
       options={{
-        theme: "dark"
+        theme: 'dark',
+        width: '90%',
+        align: 'center',
       }}
-      onLoad={() => console.log("Timeline is loaded!")}
     />
   );
 };
 
 export const TWITTER_MENTIONS = () => {
-  const current_user = useSelector(state => state.user);
-  const [search, setsearch] = useState({ name: "", currentSearch: null });
+  const current_user = useSelector((state) => state.user);
+  const [search, setsearch] = useState({ name: '', currentSearch: null });
 
-  let screenname = current_user?.accounts?.map(e => e.screen_name);
-  console.log(search, "SEARCH");
+  let screenname = current_user?.accounts?.map((e) => e.screen_name);
+  console.log(search, 'SEARCH');
 
   return (
     <div>
       <form
-        onSubmit={e => {
+        onSubmit={(e) => {
           e.preventDefault();
           setsearch({ ...search, currentSearch: search.name });
         }}
       >
-        <span className="centerSearch">
+        <span className='centerSearch'>
           <input
-            className="searchBar"
-            placeholder="@ username"
-            type="text"
-            name="name"
+            className='searchBar'
+            placeholder='@ username'
+            type='text'
+            name='name'
             value={search.name}
-            onChange={e => {
+            onChange={(e) => {
               e.preventDefault();
               setsearch({ ...search, [e.target.name]: e.target.value });
             }}
@@ -46,12 +47,13 @@ export const TWITTER_MENTIONS = () => {
       </form>
       <Timeline
         dataSource={{
-          sourceType: "profile",
-          screenName: `${search.currentSearch}`
+          sourceType: 'profile',
+          screenName: `${search.currentSearch}`,
         }}
         options={{
           username: `${search.currentSearch}`,
-          height: "100vh"
+          // height: '100vh',
+          theme: 'dark',
         }}
       />
     </div>
@@ -59,21 +61,20 @@ export const TWITTER_MENTIONS = () => {
 };
 
 export const TWITTER_TIMELINE = () => {
-  const current_user = useSelector(state => state.user);
+  const current_user = useSelector((state) => state.user);
 
-  let screenname = current_user?.accounts?.map(e => e.screen_name);
+  let screenname = current_user?.accounts?.map((e) => e.screen_name);
 
   return (
     <>
       <Timeline
         dataSource={{
-          sourceType: "profile",
-          screenName: `${screenname[0]}`
+          sourceType: 'profile',
+          screenName: `${screenname[0]}`,
         }}
         options={{
           username: `${screenname[0]}`,
-          //   height: '100vh',
-          theme: "dark"
+          theme: 'dark',
         }}
       />
     </>
