@@ -31,14 +31,14 @@ import MomentUtils from '@date-io/moment';
 import {
   MuiPickersUtilsProvider,
   KeyboardTimePicker,
-  KeyboardDatePicker
-} from "@material-ui/pickers";
-import "date-fns";
-import { useHistory, useRouteMatch } from "react-router";
-import { NavLink } from "react-router-dom";
-import InfoIcon from "@material-ui/icons/Info";
-import twitterLogo from "../imgs/Vector.png";
-import TwitterIcon from "@material-ui/icons/Twitter";
+  KeyboardDatePicker,
+} from '@material-ui/pickers';
+import 'date-fns';
+import { useHistory, useRouteMatch } from 'react-router';
+import { NavLink } from 'react-router-dom';
+import InfoIcon from '@material-ui/icons/Info';
+import twitterLogo from '../imgs/Vector.png';
+import TwitterIcon from '@material-ui/icons/Twitter';
 
 const Container = styled.div`
   background-color: white;
@@ -83,63 +83,63 @@ function editModalLocation() {
 
   return {
     top: `${top}%`,
-    left: `${left}%`
+    left: `${left}%`,
   };
 }
 
-const modalStyles = makeStyles(theme => ({
+const modalStyles = makeStyles((theme) => ({
   paper: {
-    fontFamily: "Montserrat, sans-serif",
-    position: "absolute",
+    fontFamily: 'Montserrat, sans-serif',
+    position: 'absolute',
     width: 600,
-    backgroundColor: "#F5F7F8",
-    borderRadius: "6px",
+    backgroundColor: '#F5F7F8',
+    borderRadius: '6px',
     boxShadow: theme.shadows[5],
     padding: theme.spacing(7),
-    display: "flex",
-    flexDirection: "column",
-    alignItems: "inherit"
+    display: 'flex',
+    flexDirection: 'column',
+    alignItems: 'inherit',
   },
   mHeader: {
-    fontSize: "1.6rem"
+    fontSize: '1.6rem',
   },
   mAccent: {
-    lineHeight: ".1rem",
-    color: "#e85556",
-    fontWeight: 200
+    lineHeight: '.1rem',
+    color: '#e85556',
+    fontWeight: 200,
   },
   formControl: {
     margin: theme.spacing(1),
-    minWidth: 200
+    minWidth: 200,
   },
   actionSubmit: {
-    color: "#fff",
-    backgroundColor: "#E85556",
-    borderRadius: "5rem",
-    border: "none",
-    padding: "1rem",
-    margin: ".5rem 1rem",
-    width: "40%",
-    fontSize: "1.2rem"
+    color: '#fff',
+    backgroundColor: '#E85556',
+    borderRadius: '5rem',
+    border: 'none',
+    padding: '1rem',
+    margin: '.5rem 1rem',
+    width: '40%',
+    fontSize: '1.2rem',
   },
   modal: {
-    display: "flex",
-    alignItems: "center",
-    justifyContent: "center"
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center',
   },
   select: {
-    width: "50%"
-  }
+    width: '50%',
+  },
 }));
 
-const TopicCard = props => {
+const TopicCard = (props) => {
   const classes = modalStyles();
   const [rectime, setRecTime] = useState(new Date());
 
   const [selectedDate, setSelectedDate] = useState(new Date());
   const [modalStyle] = useState(editModalLocation);
   const [open, setOpen] = useState(false);
-  const [handle, setHandle] = useState("");
+  const [handle, setHandle] = useState('');
   const [content, setcontent] = useState({
     post_text: props.card.content,
     date: props.card.date,
@@ -150,7 +150,7 @@ const TopicCard = props => {
   const { push } = useHistory();
   const [anchorEl, setAnchorEl] = useState(null);
   const openMenu = Boolean(anchorEl);
-  const [postContent, setPostContent] = useState("");
+  const [postContent, setPostContent] = useState('');
 
   let updateTrue = props.user.didUpdate === true;
 
@@ -166,29 +166,28 @@ const TopicCard = props => {
         });
       })
       .catch((err) => console.log(err.message));
-  }, [updateTrue, props.user.currentUser, props.card.date, props.card.id]);
+  }, [
+    updateTrue,
+    props.user.currentUser,
+    props.card.date,
+    props.card.id,
+    open,
+  ]);
 
-
-  const onsubmitScheduled = e => {
+  const onsubmitTwitter = (e) => {
     e.preventDefault();
     props.editCardandPost(props.card.id, content, postContent);
     setOpen(false);
   };
 
-  const onsubmitPostNow = e => {
-    e.preventDefault();
-    props.editCardandPost(props.card.id, content, postContent);
-    setOpen(false);
-  };
-
-  const handleClick = e => {
+  const handleClick = (e) => {
     setAnchorEl(e.currentTarget);
   };
   const handleMenuClose = () => {
     setAnchorEl(null);
   };
 
-  const handleDateChange = date => {
+  const handleDateChange = (date) => {
     setSelectedDate(date);
     setcontent({ ...content, date: date });
   };
@@ -197,23 +196,23 @@ const TopicCard = props => {
     setOpen(!open);
   };
 
-  const handleChange = e => {
+  const handleChange = (e) => {
     e.preventDefault();
     setcontent({ ...content, [e.target.name]: e.target.value });
   };
 
-  const handleHandleChange = event => {
+  const handleHandleChange = (event) => {
     setHandle(event.target.value);
   };
 
   function timeformat(date) {
     var h = date.getHours();
     var m = date.getMinutes();
-    var x = h >= 12 ? "pm" : "am";
+    var x = h >= 12 ? 'pm' : 'am';
     h = h % 12;
     h = h ? h : 12;
-    m = m < 10 ? "0" + m : m;
-    var mytime = h + ":" + m + " " + x;
+    m = m < 10 ? '0' + m : m;
+    var mytime = h + ':' + m + ' ' + x;
     return mytime;
   }
 
@@ -225,15 +224,14 @@ const TopicCard = props => {
       ? postdates.getMonth() +
         1 +
         '/' +
-
         postdates.getDate() +
-        "/" +
+        '/' +
         postdates.getFullYear() +
-        " @ " +
+        ' @ ' +
         timeformat(postdates)
       : null;
 
-  let screen_name = props.user.accounts.map(e => e.screen_name);
+  let screen_name = props.user.accounts.map((e) => e.screen_name);
 
   const modalBody = (
     <div style={modalStyle} className={classes.paper}>
@@ -262,15 +260,13 @@ const TopicCard = props => {
           </MenuItem>
         </Select>
         {console.log(
-          screen_name[0],
           content,
           postContent,
-          selectedDate,
-          props.user.accounts[0].screen_name,
-          rectime,
+          // selectedDate,
+          // props.user.accounts[0].screen_name,
+          // rectime,
           'CONTENT'
         )}
-
 
         <MuiPickersUtilsProvider utils={DateFnsUtils}>
           <nav className="item-sub-nav">
@@ -296,9 +292,9 @@ const TopicCard = props => {
               <>
                 <div
                   style={{
-                    display: "flex",
-                    flexDirection: "column",
-                    margin: "5%"
+                    display: 'flex',
+                    flexDirection: 'column',
+                    margin: '5%',
                   }}
                 >
                   <KeyboardDatePicker
@@ -311,7 +307,7 @@ const TopicCard = props => {
                     value={selectedDate}
                     onChange={handleDateChange}
                     KeyboardButtonProps={{
-                      "aria-label": "change date"
+                      'aria-label': 'change date',
                     }}
                   />
                   <KeyboardTimePicker
@@ -321,19 +317,19 @@ const TopicCard = props => {
                     value={selectedDate}
                     onChange={handleDateChange}
                     KeyboardButtonProps={{
-                      "aria-label": "change time"
+                      'aria-label': 'change time',
                     }}
                   />
                 </div>
-                <div style={{ display: "flex", alignItems: "center" }}>
+                <div style={{ display: 'flex', alignItems: 'center' }}>
                   <button
                     onClick={() => handleDateChange(rectime)}
                     style={{
-                      borderRadius: "6px",
-                      width: "205px",
-                      height: "38px",
-                      background: "#817BAB",
-                      color: "#EBECF0"
+                      borderRadius: '6px',
+                      width: '205px',
+                      height: '38px',
+                      background: '#817BAB',
+                      color: '#EBECF0',
                     }}
                   >
                     Suggest a Time
@@ -365,16 +361,16 @@ const TopicCard = props => {
       </FormControl>
       {!postnow ? (
         <button
-          onClick={onsubmitScheduled}
-          style={{ width: "100%" }}
+          onClick={onsubmitTwitter}
+          style={{ width: '100%' }}
           className={classes.actionSubmit}
         >
           Schedule
         </button>
       ) : (
         <button
-          onClick={onsubmitPostNow}
-          style={{ width: "100%" }}
+          onClick={onsubmitTwitter}
+          style={{ width: '100%' }}
           className={classes.actionSubmit}
         >
           Post now
@@ -385,7 +381,7 @@ const TopicCard = props => {
 
   return (
     <Draggable draggableId={String(props.id)} index={props.index}>
-      {provided => (
+      {(provided) => (
         <Container
           className={`${props.className}`}
           {...provided.draggableProps}
@@ -394,13 +390,13 @@ const TopicCard = props => {
           id="cardhover"
         >
           <BtnCont>
-            <div style={{ display: "flex", width: "100%" }}>
+            <div style={{ display: 'flex', width: '100%' }}>
               <nav
                 style={{
-                  fontSize: "10px",
-                  display: "flex",
-                  flexDirection: "column",
-                  alignItems: "flex-start"
+                  fontSize: '10px',
+                  display: 'flex',
+                  flexDirection: 'column',
+                  alignItems: 'flex-start',
                 }}
               >
                 <a
@@ -454,7 +450,7 @@ const TopicCard = props => {
               </div>
               <MoreVertIcon
                 className={`${props.card.id}-edit`}
-                style={{ padding: "0rem .25rem" }}
+                style={{ padding: '0rem .25rem' }}
                 onClick={handleClick}
                 fontSize="small"
               />
@@ -467,7 +463,7 @@ const TopicCard = props => {
               onClose={handleMenuClose}
             >
               <NavLink
-                style={{ textDecoration: "none", color: "black  " }}
+                style={{ textDecoration: 'none', color: 'black  ' }}
                 to={`/schedule`}
               >
                 <MenuItem
@@ -492,11 +488,11 @@ const TopicCard = props => {
             aria-describedby="transition-modal-description"
             className={classes.modal}
             open={open}
-            onClose={() => setOpen(false) & push("/")}
+            onClose={() => setOpen(false) & push('/')}
             closeAfterTransition
             BackdropComponent={Backdrop}
             BackdropProps={{
-              timeout: 500
+              timeout: 500,
             }}
           >
             <Fade in={open}>{modalBody}</Fade>
@@ -508,7 +504,7 @@ const TopicCard = props => {
           ) : (
             <>
               <form
-                onSubmit={e => {
+                onSubmit={(e) => {
                   e.preventDefault();
                   props.editCard(props.card.id, content, postContent);
                   setcontent({ ...content, post_text: content.post_text });
@@ -521,10 +517,10 @@ const TopicCard = props => {
                   value={content.post_text}
                   onChange={handleChange}
                 />
-                &nbsp;{" "}
+                &nbsp;{' '}
                 <span
                   onClick={() => setediting(!editing)}
-                  style={{ color: "red", fontWeight: "bolder", padding: "5px" }}
+                  style={{ color: 'red', fontWeight: 'bolder', padding: '5px' }}
                 >
                   x
                 </span>
@@ -538,15 +534,15 @@ const TopicCard = props => {
   );
 };
 
-const mapStateToProps = state => ({
+const mapStateToProps = (state) => ({
   user: state.user,
-  topics: state.topics
+  topics: state.topics,
 });
 
 function mapDispatchToProps(dispatch) {
   return {
     dispatch,
-    ...bindActionCreators({ deleteCard, editCard, editCardandPost }, dispatch)
+    ...bindActionCreators({ deleteCard, editCard, editCardandPost }, dispatch),
   };
 }
 
