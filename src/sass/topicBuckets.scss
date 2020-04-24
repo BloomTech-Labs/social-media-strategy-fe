@@ -86,8 +86,6 @@ h4.title {
   padding: 1.5rem 0rem;
   border-radius: 0.5rem 0.5rem 0rem 0rem;
   margin: 0;
-
-
 }
 
 .topic-0 {
@@ -115,4 +113,47 @@ span.edit-toggle {
 
 .drafts {
   background-color: green;
+}
+
+.edit-card {
+  min-height: 150;
+
+  min-width: 272;
+  padding: 6px 8px 2px;
+  margin: 0.5rem 0 0 0;
+
+  .edit-card-txt-area {
+    width: 100%;
+    font-family: "Montserrat", sans-serif;
+
+    // outline: solid 0.5px #d8d9df;
+    border: none;
+
+    resize: none;
+    font-size: 0.8rem;
+    border-radius: 0.5rem;
+    // background-color: #f5f7f8;
+    box-shadow: 0 3px 5px 0px #d8d9df;
+  }
+}
+
+#textareaAuto {
+  height: 30px;
+}
+
+.action-cont {
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  justify-content: center;
+  align-items: center;
+
+  .actionSubmit {
+    color: white;
+    background-color: #e85556;
+    border-radius: 0.5rem;
+    width: 40%;
+    padding: 0.5rem;
+    border: none;
+  }
 }
