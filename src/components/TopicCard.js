@@ -149,6 +149,7 @@ const TopicCard = (props) => {
   const classes = modalStyles();
   const [rectime, setRecTime] = useState(new Date());
 
+  const SN = localStorage.getItem('SNAME');
   const [selectedDate, setSelectedDate] = useState(new Date());
   const [modalStyle] = useState(editModalLocation);
   const [open, setOpen] = useState(false);
@@ -156,7 +157,7 @@ const TopicCard = (props) => {
   const [content, setcontent] = useState({
     post_text: props.card.content,
     date: props.card.date,
-    screenname: props.user.accounts[0].screen_name ?? '',
+    screenname: SN,
   });
   const [editing, setediting] = useState(false);
   const [postnow, setPostNow] = useState(false);
@@ -166,7 +167,8 @@ const TopicCard = (props) => {
   const [postContent, setPostContent] = useState('');
   const [dialogtoggle, setDialogToggle] = useState(false);
 
-  let updateTrue = props.user.didUpdate === true;
+  let updateTrue = props?.user?.didUpdate === true;
+  let screen_name = props.user.accounts.map((e) => e.screen_name);
 
   const handledialogtoggle = () => {
     setDialogToggle(!dialogtoggle);
@@ -180,19 +182,20 @@ const TopicCard = (props) => {
         res.data.map((e) => {
           setPostContent(e);
           setRecTime(e.optimal_time);
-          console.log(e.optimal_time, e.post_text, 'OPT1');
+          // console.log(e.optimal_time, e.post_text, 'OPT1');
         });
       })
       .catch((err) => console.log(err.message));
   }, [
     updateTrue,
     props.user.currentUser,
+    props.user.accounts,
     props.card.date,
     props.card.id,
     open,
   ]);
 
-  console.log(rectime, 'OPT2');
+  // console.log(rectime, 'OPT2');
 
   const onsubmitTwitter = (e) => {
     e.preventDefault();
@@ -214,6 +217,7 @@ const TopicCard = (props) => {
 
   const togglemodal = () => {
     setOpen(!open);
+    setcontent({ ...content, screenname: screen_name[0] });
   };
 
   const handleChange = (e) => {
@@ -229,7 +233,7 @@ const TopicCard = (props) => {
   async function newRecTime(date) {
     let optTime = new Date(rectime);
     optTime.setDate(optTime.getDate(rectime) + 1);
-    console.log(optTime, props.card.content, 'OPT11');
+    // console.log(optTime, props.card.content, 'OPT11');
     setSelectedDate(optTime);
     setcontent({ ...content, date: optTime });
   }
@@ -259,8 +263,6 @@ const TopicCard = (props) => {
         ' @ ' +
         timeformat(postdates)
       : null;
-
-  let screen_name = props.user.accounts.map((e) => e.screen_name);
 
   const modalBody = (
     <div style={modalStyle} className={classes.paper}>
@@ -293,7 +295,7 @@ const TopicCard = (props) => {
             </MenuItem>
           </Select>
         </span>
-
+        {console.log(content, 'SCREEN_NAME CHECK')}
         <MuiPickersUtilsProvider utils={DateFnsUtils}>
           <nav className='item-sub-nav'>
             <NavLink
@@ -349,8 +351,7 @@ const TopicCard = (props) => {
                   <button
                     onClick={() =>
                       new Date(rectime) > new Date()
-                        ? handleDateChange(rectime) &
-                          console.log(new Date(rectime), new Date(), 'OPT77')
+                        ? handleDateChange(rectime)
                         : newRecTime()
                     }
                     style={{
@@ -577,6 +578,7 @@ const TopicCard = (props) => {
               </Button>
             </DialogActions>
           </Dialog>
+          {console.log('ScreenName', props?.user?.accounts[0]?.screen_name)}
 
           <Modal
             aria-labelledby='transition-modal-title'

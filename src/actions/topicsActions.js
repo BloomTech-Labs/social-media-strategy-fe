@@ -3,6 +3,7 @@ import { axiosWithAuth } from '../utils/axiosWithAuth';
 import Axios from 'axios';
 
 //Current user
+const SN = localStorage.getItem('SNAME');
 const setid = localStorage.getItem('CUSER');
 const cuser = JSON.parse(setid);
 const timeoutTime = 100;
@@ -42,6 +43,7 @@ const postCard = (text, id) => {
     id: id,
     user_id: Number(cuser),
     post_text: text,
+    screenname: SN,
   };
 
   console.log('Formatted post', formattedPost);
@@ -80,12 +82,19 @@ export const editPostCard = (id, content) => {
 };
 
 // THIS SHOULD BE A PUT -- IT IS USED TO POST TO TWITTER
-export const twitterPost = (id, content) => {
+export const twitterPost = (id, content) => (dispatch) => {
   axiosWithAuth()
     .put(`/posts/${id}/twitter`, content)
-    .then((res) => console.log(res))
+    .then((res) => {
+      console.log(res);
+
+      dispatch({ type: CONSTANTS.USER_APICALL_START, didUpdate: true });
+      setTimeout(() => {
+        dispatch({ type: CONSTANTS.USER_APICALL_SUCCESS, didUpdate: false });
+      }, timeoutTime);
+    })
     .catch((error) => {
-      console.log(error.response);
+      console.log(error.response, 'FAILL');
     });
 };
 
@@ -137,7 +146,7 @@ export const editCard = (cardID, content, postInfo) => (dispatch) => {
   }, timeoutTime);
 };
 export const editCardandPost = (cardID, content, postInfo) => (dispatch) => {
-  twitterPost(cardID, content);
+  dispatch(twitterPost(cardID, content));
 
   dispatch({
     type: CONSTANTS.EDIT_CARD,

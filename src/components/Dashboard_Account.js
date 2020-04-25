@@ -51,6 +51,7 @@ const drawerWidth = 400;
 
 const Dashboard_Account = (props) => {
   const st = dashStyles();
+  let updateTrue = props.user.didUpdate === true;
 
   const [anchorEl, setAnchorEl] = useState(null);
 

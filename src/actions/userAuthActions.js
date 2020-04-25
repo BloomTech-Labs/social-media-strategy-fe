@@ -84,6 +84,8 @@ export const fetchAccounts = () => (dispatch) => {
   axiosWithAuth()
     .get('/auth/userinfo')
     .then((response) => {
+      localStorage.setItem('SNAME', response.data.screen_name);
+
       dispatch({
         type: CONSTANTS.ACCOUNTS_FETCH_SUCCESS,
         payload: response.data,
