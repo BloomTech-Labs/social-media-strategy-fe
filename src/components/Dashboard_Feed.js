@@ -54,20 +54,20 @@ const Dashboard_Feed = (props) => {
       {feedStatus === 'tweets' ? (
         <>
           {feed?.map((twit) => (
-            <div>
+            <div key={twit.id + 1}>
               {console.log('INFO FOR 1 TWIT', twit)}
 
-              <TWITTER_TWEETS twit={twit} />
+              <TWITTER_TWEETS key={twit.id} twit={twit} />
             </div>
           ))}
         </>
       ) : feedStatus === 'timeline' ? (
         <>
-          <TWITTER_TIMELINE />
+          <TWITTER_TIMELINE key={Date.now() + Math.random()} />
         </>
       ) : (
         <>
-          <TWITTER_MENTIONS />
+          <TWITTER_MENTIONS key={Date.now() + Math.random()} />
         </>
       )}
     </div>

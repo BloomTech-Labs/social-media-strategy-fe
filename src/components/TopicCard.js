@@ -37,6 +37,7 @@ import DialogActions from '@material-ui/core/DialogActions';
 import DialogContent from '@material-ui/core/DialogContent';
 import DialogContentText from '@material-ui/core/DialogContentText';
 import DialogTitle from '@material-ui/core/DialogTitle';
+import { useTweetCount } from './useTweetCount';
 
 const Container = styled.div`
   background-color: white;
@@ -138,6 +139,7 @@ const modalStyles = makeStyles((theme) => ({
 const TopicCard = (props) => {
   const classes = modalStyles();
   const [rectime, setRecTime] = useState(new Date());
+  const [tweetCount, handletweetchange] = useTweetCount(280);
 
   const SN = localStorage.getItem('SNAME');
   const [selectedDate, setSelectedDate] = useState(new Date());
@@ -369,9 +371,22 @@ const TopicCard = (props) => {
           name='post_text'
           cols='50'
           rows='10'
+          maxLength='280'
           value={content.post_text}
-          onChange={handleChange}
-        ></Inputtextarea>
+          onChange={(event) => handletweetchange(event, handleChange(event))}
+        />
+        <span
+          style={
+            tweetCount.chars_left < 80
+              ? { color: 'red' }
+              : tweetCount.chars_left < 180
+              ? { color: 'orange' }
+              : null
+          }
+          className='tweetcountmodal'
+        >
+          {tweetCount.chars_left}
+        </span>
       </FormControl>
       {!postnow ? (
         <button
@@ -613,18 +628,23 @@ const TopicCard = (props) => {
                   setediting(!editing);
                 }}
               >
+                {console.log(content, 'CONTENT')}
                 <TextareaAutosize
                   rowsMin={3}
                   id='textareaAuto'
                   className='edit-card-txt-area'
                   type='text'
                   name='post_text'
+                  maxLength='280'
                   value={content.post_text}
-                  onChange={handleChange}
+                  onChange={(event) =>
+                    handletweetchange(event, handleChange(event))
+                  }
                 />
                 {/* &nbsp;{" "} */}
+                {console.log(tweetCount, 'CONTENTt')}
 
-                <div className='action-cont'>
+                <div className='action-cont editcard-cont'>
                   <input className='actionSubmit' type='submit' />
                   <span
                     onClick={() => setediting(!editing)}
@@ -636,6 +656,18 @@ const TopicCard = (props) => {
                     }}
                   >
                     X
+                  </span>
+                  <span
+                    style={
+                      tweetCount.chars_left < 80
+                        ? { color: 'red' }
+                        : tweetCount.chars_left < 180
+                        ? { color: 'orange' }
+                        : null
+                    }
+                    className='tweetcount'
+                  >
+                    {tweetCount.chars_left}
                   </span>
                 </div>
               </form>

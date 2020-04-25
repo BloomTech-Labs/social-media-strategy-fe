@@ -92,7 +92,6 @@ const Dashboard_Tweets = (props) => {
         const completedTweets = [];
 
         for (let post in res?.data) {
-          console.log('POST', post);
           if (res.data[post].completed) {
             completedTweets.push(res.data[post]);
           }
@@ -131,7 +130,7 @@ const Dashboard_Tweets = (props) => {
     <div>
       <Title>My Scheduled Posts</Title>
       {tweets.map((tweet) => (
-        <TweetContainer>
+        <TweetContainer key={Date.now() + Math.random()}>
           <TopBar>
             <img
               className='proPic'

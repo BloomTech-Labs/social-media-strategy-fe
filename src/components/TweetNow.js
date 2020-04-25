@@ -3,11 +3,15 @@ import { useForm } from 'react-hook-form';
 import { connect } from 'react-redux';
 import Button from '@material-ui/core/Button';
 import TextareaAutosize from '@material-ui/core/TextareaAutosize';
+import { useTweetCount } from './useTweetCount';
+import '../sass/topicBuckets.scss';
 
 import { twitterPostnow } from '../actions';
 
 const TweetNow = (props) => {
   const { handleSubmit, register } = useForm();
+  const [tweetCount, handletweetchange] = useTweetCount(280);
+
   const onSubmit = (values) => {
     values.id = String(Date.now());
     console.log(values);
@@ -25,12 +29,31 @@ const TweetNow = (props) => {
         <span className='postNowInputs'>
           <TextareaAutosize
             className='text-area'
+            maxLength='280'
             rowsMin={3}
             type='text'
             name='post_text'
+            onChange={handletweetchange}
             ref={register}
           />
-          <Button className='actionSubmit' type='submit'>
+          <span
+            style={
+              tweetCount.chars_left < 80
+                ? { color: 'red' }
+                : tweetCount.chars_left < 180
+                ? { color: 'orange' }
+                : null
+            }
+            className='tweetcountmodalPostNoW'
+          >
+            {tweetCount.chars_left}
+          </span>
+
+          <Button
+            style={{ backgroundColor: '#E85556', marginTop: '0' }}
+            className='actionSubmit'
+            type='submit'
+          >
             Post
           </Button>
         </span>
