@@ -92,7 +92,6 @@ const Dashboard_Tweets = (props) => {
         const completedTweets = [];
 
         for (let post in res?.data) {
-          console.log('POST', post);
           if (res.data[post].completed) {
             completedTweets.push(res.data[post]);
           }

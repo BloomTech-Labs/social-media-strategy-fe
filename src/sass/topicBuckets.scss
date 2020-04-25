@@ -140,9 +140,13 @@ div.cardlist {
   .edit-card-txt-area {
     width: 100%;
     font-family: 'Montserrat', sans-serif;
-    border: none;
+    border: 0.5 solid gray;
     font-size: 1rem;
     border-radius: 0.5rem;
+    resize: none;
+  }
+  .tweetcount {
+    margin-left: 10px;
   }
 }
 
@@ -165,6 +169,20 @@ div.cardlist {
     padding: 0.5rem;
     border: none;
   }
+}
+
+.editcard-cont {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.tweetcountmodal {
+  text-align: end;
+}
+.tweetcountmodalPostNoW {
+  width: 85%;
+  text-align: end;
+  margin-top: 1%;
 }
 
 #topicContainer {
