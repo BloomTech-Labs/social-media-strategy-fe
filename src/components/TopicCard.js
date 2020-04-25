@@ -182,7 +182,6 @@ const TopicCard = (props) => {
         res.data.map((e) => {
           setPostContent(e);
           setRecTime(e.optimal_time);
-          // console.log(e.optimal_time, e.post_text, 'OPT1');
         });
       })
       .catch((err) => console.log(err.message));
@@ -295,7 +294,6 @@ const TopicCard = (props) => {
             </MenuItem>
           </Select>
         </span>
-        {console.log(content, 'SCREEN_NAME CHECK')}
         <MuiPickersUtilsProvider utils={DateFnsUtils}>
           <nav className='item-sub-nav'>
             <NavLink
@@ -467,7 +465,7 @@ const TopicCard = (props) => {
             </div>
 
             <span className='editIcons'>
-              <IconButton
+              {/* <IconButton
                 disableRipple={true}
                 disableFocusRipple={true}
                 className={classes.button}
@@ -477,22 +475,44 @@ const TopicCard = (props) => {
                   paddingTop: '0',
                   paddingRight: '0',
                 }}
-              >
-                {postContent?.date?.length &&
-                new Date(postContent?.date) < new Date() ? null : postContent
-                    ?.date?.length ? null : (
-                  <div className='showHover'>
+              > */}
+              {postContent?.date?.length &&
+              new Date(postContent?.date) < new Date() ? null : postContent
+                  ?.date?.length ? null : (
+                <span className='showHover'>
+                  <IconButton
+                    disableRipple={true}
+                    disableFocusRipple={true}
+                    className={classes.button}
+                    onClick={() => setediting(!editing)}
+                    style={{
+                      padding: '0',
+                      paddingBottom: '12px',
+                    }}
+                  >
                     <CreateIcon
                       className={`${props.card.id}-create`}
-                      onClick={() => setediting(!editing)}
+                      // onClick={() => setediting(!editing)}
                       fontSize='small'
                     />
-                  </div>
-                )}
+                  </IconButton>
+                </span>
+              )}
+              {/* </IconButton> */}
+              <IconButton
+                disableRipple={true}
+                disableFocusRipple={true}
+                className={classes.button}
+                onClick={handleClick}
+                style={{
+                  padding: '0',
+                  paddingBottom: '12px',
+                }}
+              >
                 <MoreVertIcon
                   className={`${props.card.id}-edit`}
                   style={{ padding: '0rem .25rem' }}
-                  onClick={handleClick}
+                  // onClick={handleClick}
                   fontSize='small'
                 />
               </IconButton>
@@ -538,12 +558,6 @@ const TopicCard = (props) => {
               </MenuItem>
             </Menu>
           </BtnCont>
-          {console.log(
-            postContent?.date?.length,
-            new Date(postContent?.date) > new Date(),
-            props.card.content,
-            'OPT3'
-          )}
 
           <Dialog
             open={dialogtoggle}
@@ -578,7 +592,6 @@ const TopicCard = (props) => {
               </Button>
             </DialogActions>
           </Dialog>
-          {console.log('ScreenName', props?.user?.accounts[0]?.screen_name)}
 
           <Modal
             aria-labelledby='transition-modal-title'

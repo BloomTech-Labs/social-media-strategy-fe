@@ -1,23 +1,21 @@
-
-import React, { useState } from "react";
-import { connect } from "react-redux";
-import DeleteIcon from "@material-ui/icons/Delete";
-import CreateIcon from "@material-ui/icons/Create";
-import TextareaAutosize from "@material-ui/core/TextareaAutosize";
-
+import React, { useState } from 'react';
+import { connect } from 'react-redux';
+import DeleteIcon from '@material-ui/icons/Delete';
+import CreateIcon from '@material-ui/icons/Create';
+import TextareaAutosize from '@material-ui/core/TextareaAutosize';
 
 import { editTopic, deleteTopics } from '../actions';
 
-const TopicTitle = props => {
+const TopicTitle = (props) => {
   const [content, setcontent] = useState({ name: props.topic.title });
   const [editing, setediting] = useState(false);
 
-  const handleChange = e => {
+  const handleChange = (e) => {
     e.preventDefault();
     setcontent({ ...content, [e.target.name]: e.target.value });
   };
 
-  const submitForm = e => {
+  const submitForm = (e) => {
     e.preventDefault();
     props.editTopic(props.topic.id, content.name);
     setcontent({ name: content.name });
@@ -27,18 +25,16 @@ const TopicTitle = props => {
   const renderTopicForm = () => {
     return (
       <form onSubmit={submitForm}>
-
-        <div className="edit-topic-cont">
+        <div className='edit-topic-cont'>
           <input
-            className="edit-topic-text-area"
-            type="text"
-            name="name"
+            className='edit-topic-text-area'
+            type='text'
+            name='name'
             value={content.name}
             onChange={handleChange}
-            defaultValue={props.topic.title}
           />
-          &nbsp;{" "}
-          <span onClick={() => setediting(!editing)} className="edit-toggle">
+          &nbsp;{' '}
+          <span onClick={() => setediting(!editing)} className='edit-toggle'>
             x
           </span>
         </div>
@@ -47,26 +43,24 @@ const TopicTitle = props => {
   };
 
   return (
-
     <span>
-      <h4 className="title">
-        {props.topic.title !== "Drafts" ? (
-          <span id="topicContainer" className="editTopics">
-            <span className="topicIcons">
+      <h4 className='title'>
+        {props.topic.title !== 'Drafts' ? (
+          <span id='topicContainer' className='editTopics'>
+            <span className='topicIcons'>
               <span className={`deleteTopic`}>
                 <DeleteIcon
-                  style={{ "margin-right": "20" }}
+                  style={{ marginRight: '20' }}
                   onClick={() => props.deleteTopics(props.topic.id)}
                 />
               </span>
               <CreateIcon
                 className={`editTopic`}
                 onClick={() => setediting(!editing)}
-
               />
             </span>
             {!editing ? (
-              <span className="topicTitle">{props.topic.title}</span>
+              <span className='topicTitle'>{props.topic.title}</span>
             ) : (
               renderTopicForm()
             )}
@@ -79,10 +73,10 @@ const TopicTitle = props => {
   );
 };
 
-
-const mapStateToProps = state => {
+const mapStateToProps = (state) => {
   return state;
 };
 
-
-export default connect(mapStateToProps, { editTopic, deleteTopics })(TopicTitle);
+export default connect(mapStateToProps, { editTopic, deleteTopics })(
+  TopicTitle
+);

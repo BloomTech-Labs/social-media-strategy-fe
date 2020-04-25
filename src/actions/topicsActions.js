@@ -4,8 +4,8 @@ import Axios from 'axios';
 
 //Current user
 const SN = localStorage.getItem('SNAME');
-const setid = localStorage.getItem('CUSER');
-const cuser = JSON.parse(setid);
+// const setid = localStorage.getItem('CUSER');
+const cuser = localStorage.getItem('CUSER');
 const timeoutTime = 100;
 
 export const onDragEndSingle = (newTopic) => (dispatch) => {

@@ -4,25 +4,9 @@ import { useTheme } from '@material-ui/core/styles';
 
 // Material UI imports
 import { Card, Typography, Box } from '@material-ui/core';
-import { makeStyles } from '@material-ui/core/styles';
 import Popover from '@material-ui/core/Popover';
-import AppBar from '@material-ui/core/AppBar';
-import Toolbar from '@material-ui/core/Toolbar';
-import Button from '@material-ui/core/Button';
-import IconButton from '@material-ui/core/IconButton';
-import MenuIcon from '@material-ui/icons/Menu';
-import CropFreeIcon from '@material-ui/icons/CropFree';
-import List from '@material-ui/core/List';
-import Divider from '@material-ui/core/Divider';
-import ListItem from '@material-ui/core/ListItem';
-import ListItemIcon from '@material-ui/core/ListItemIcon';
-import Drawer from '@material-ui/core/Drawer';
-import CssBaseline from '@material-ui/core/CssBaseline';
-
 // Icons
-import DashboardIcon from '@material-ui/icons/Dashboard';
-import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
-import ChevronRightIcon from '@material-ui/icons/ChevronRight';
+
 import TwitterIcon from '@material-ui/icons/Twitter';
 import LocationOnIcon from '@material-ui/icons/LocationOn';
 
@@ -102,8 +86,8 @@ const Dashboard_Account = (props) => {
         <h1 className='bold'>Dashboard</h1>{' '}
         <div className='acct-title'>
           <h2 className='blue-bold'>Accounts</h2>{' '}
-          <Link
-            style={{ color: '#E85556' }}
+          <span
+            style={{ color: '#E85556', cursor: 'pointer' }}
             aria-describedby={id}
             variant='contained'
             color='primary'
@@ -111,7 +95,7 @@ const Dashboard_Account = (props) => {
             className='button'
           >
             <span className='linkAccount'>Link Account</span>
-          </Link>
+          </span>
           <Popover
             id={id}
             open={open}
