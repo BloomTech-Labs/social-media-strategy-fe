@@ -7,7 +7,7 @@ import TextareaAutosize from '@material-ui/core/TextareaAutosize';
 import { twitterPostnow } from '../actions';
 
 const TweetNow = (props) => {
-  const { handleSubmit, register, errors } = useForm();
+  const { handleSubmit, register } = useForm();
   const onSubmit = (values) => {
     values.id = String(Date.now());
     console.log(values);

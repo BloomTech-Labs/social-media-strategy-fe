@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Timeline, Follow, Mention, Tweet } from 'react-twitter-widgets';
+import { Timeline, Tweet } from 'react-twitter-widgets';
 import { useSelector } from 'react-redux';
 
 export const TWITTER_TWEETS = (props) => {
@@ -12,16 +12,13 @@ export const TWITTER_TWEETS = (props) => {
         width: '90%',
         align: 'center',
       }}
-
     />
   );
 };
 
 export const TWITTER_MENTIONS = () => {
-  const current_user = useSelector((state) => state.user);
   const [search, setsearch] = useState({ name: '', currentSearch: null });
 
-  let screenname = current_user?.accounts?.map((e) => e.screen_name);
   console.log(search, 'SEARCH');
 
   return (

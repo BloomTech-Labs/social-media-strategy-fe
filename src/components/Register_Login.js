@@ -1,23 +1,23 @@
-import React, { useState, useEffect } from "react";
-import { useForm, Controller } from "react-hook-form";
-import { connect } from "react-redux";
-import { useStyles } from "../sass/StyledRegister_login";
-import Avatar from "@material-ui/core/Avatar";
-import Button from "@material-ui/core/Button";
-import TextField from "@material-ui/core/TextField";
-import FormControlLabel from "@material-ui/core/FormControlLabel";
-import Checkbox from "@material-ui/core/Checkbox";
-import Link from "@material-ui/core/Link";
-import Paper from "@material-ui/core/Paper";
-import Box from "@material-ui/core/Box";
-import Grid from "@material-ui/core/Grid";
-import LockOutlinedIcon from "@material-ui/icons/LockOutlined";
-import Typography from "@material-ui/core/Typography";
+import React, { useState } from 'react';
+import { useForm, Controller } from 'react-hook-form';
+import { connect } from 'react-redux';
+import { useStyles } from '../sass/StyledRegister_login';
+import Avatar from '@material-ui/core/Avatar';
+import Button from '@material-ui/core/Button';
+import TextField from '@material-ui/core/TextField';
+import FormControlLabel from '@material-ui/core/FormControlLabel';
+import Checkbox from '@material-ui/core/Checkbox';
+import Link from '@material-ui/core/Link';
+import Paper from '@material-ui/core/Paper';
+import Box from '@material-ui/core/Box';
+import Grid from '@material-ui/core/Grid';
+import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
+import Typography from '@material-ui/core/Typography';
 
-import { login, registerUser } from "../actions";
-import { useHistory } from "react-router";
+import { login, registerUser } from '../actions';
+import { useHistory } from 'react-router';
 
-const Register_Login = props => {
+const Register_Login = (props) => {
   const { register, handleSubmit, control } = useForm();
   const [signup, setsignup] = useState(false);
   const classes = useStyles();
@@ -25,18 +25,18 @@ const Register_Login = props => {
 
   function Copyright() {
     return (
-      <Typography variant="body2" color="textSecondary" align="center">
-        {"Copyright © "}
-        <Link color="inherit" href="https://material-ui.com/">
-          SoMe{" "}
-        </Link>{" "}
+      <Typography variant='body2' color='textSecondary' align='center'>
+        {'Copyright © '}
+        <Link color='inherit' href='https://material-ui.com/'>
+          SoMe{' '}
+        </Link>{' '}
         {new Date().getFullYear()}
-        {"."}
+        {'.'}
       </Typography>
     );
   }
 
-  const onSubmit = data => {
+  const onSubmit = (data) => {
     if (!signup) {
       props.login(data, push);
     } else {
@@ -45,7 +45,7 @@ const Register_Login = props => {
   };
 
   return (
-    <Grid container component="main" className={classes.root}>
+    <Grid container component='main' className={classes.root}>
       {!signup ? (
         <Grid
           item
@@ -53,7 +53,7 @@ const Register_Login = props => {
           sm={4}
           md={7}
           className={classes.image}
-          data-cy="loginImage"
+          data-cy='loginImage'
         />
       ) : (
         <Grid
@@ -62,7 +62,7 @@ const Register_Login = props => {
           sm={4}
           md={7}
           className={classes.image2}
-          data-cy="registerImage"
+          data-cy='registerImage'
         />
       )}
 
@@ -84,27 +84,27 @@ const Register_Login = props => {
             {console.log(signup)}
             <Typography
               style={{
-                fontFamily: "Montserrat",
-                fontStyle: "normal",
-                fontWeight: "bold",
-                fontSize: "36px",
-                lineHight: "44px"
+                fontFamily: 'Montserrat',
+                fontStyle: 'normal',
+                fontWeight: 'bold',
+                fontSize: '36px',
+                lineHight: '44px',
               }}
-              component="h1"
-              variant="h5"
+              component='h1'
+              variant='h5'
             >
-              {!signup ? "Login to SoMe" : "Sign Up to SoMe"} <br />
+              {!signup ? 'Login to SoMe' : 'Sign Up to SoMe'} <br />
               <span
                 style={{
-                  fontFamily: "Montserrat",
-                  fontStyle: "normal",
-                  fontWeight: "500",
-                  fontSize: "18px",
-                  lineHeight: "22px",
-                  color: "#E85556"
+                  fontFamily: 'Montserrat',
+                  fontStyle: 'normal',
+                  fontWeight: '500',
+                  fontSize: '18px',
+                  lineHeight: '22px',
+                  color: '#E85556',
                 }}
               >
-                {!signup ? "Sign into your account" : "Create Account"} <br />
+                {!signup ? 'Sign into your account' : 'Create Account'} <br />
               </span>
             </Typography>
             <form
@@ -113,73 +113,73 @@ const Register_Login = props => {
               onSubmit={handleSubmit(onSubmit)}
             >
               <Controller
-                data-cy="email"
+                data-cy='email'
                 ref={register}
-                name="email"
+                name='email'
                 as={TextField}
                 control={control}
-                variant="outlined"
-                margin="normal"
+                variant='outlined'
+                margin='normal'
                 required
                 fullWidth
-                id="email"
-                label="Email Address"
-                autoComplete="email"
-                type="text"
+                id='email'
+                label='Email Address'
+                autoComplete='email'
+                type='text'
                 autoFocus
               />
               <Controller
-                data-cy="password"
-                variant="outlined"
-                margin="normal"
+                data-cy='password'
+                variant='outlined'
+                margin='normal'
                 ref={register}
                 as={TextField}
                 control={control}
                 required
                 fullWidth
-                name="password"
-                label="Password"
-                type="password"
-                id="password"
-                autoComplete="current-password"
+                name='password'
+                label='Password'
+                type='password'
+                id='password'
+                autoComplete='current-password'
               />
               <FormControlLabel
-                control={<Checkbox value="remember" color="primary" />}
-                label="Remember me"
+                control={<Checkbox value='remember' color='primary' />}
+                label='Remember me'
               />
               <Button
-                data-cy="submit"
-                type="submit"
+                data-cy='submit'
+                type='submit'
                 fullWidth
-                variant="contained"
-                color="inherit"
+                variant='contained'
+                color='inherit'
                 className={classes.submit}
               >
-                {!signup ? "Sign In" : "Create Account"}
+                {!signup ? 'Sign In' : 'Create Account'}
               </Button>
               <Grid container>
                 <Grid item xs>
-                  <Link href="#" variant="body2">
+                  <Link href='#' variant='body2'>
                     Forgot password?
                   </Link>
                 </Grid>
                 <Grid item>
                   <Link
-                    data-cy="registerButton"
-                    className="registerButton"
-                    style={{ cursor: "pointer" }}
+                    data-cy='registerButton'
+                    className='registerButton'
+                    style={{ cursor: 'pointer' }}
                     onClick={() => setsignup(!signup)}
-                    variant="body2"
+                    variant='body2'
                   >
                     {!signup
                       ? "Don't have an account? Sign Up"
-                      : "Have an account? Sign In"}
+                      : 'Have an account? Sign In'}
                   </Link>
                 </Grid>
               </Grid>
               <Box mt={5}>
                 <Copyright />
-              </Box>{" "}
+              </Box>{' '}
             </form>
           </div>
         </div>
@@ -188,7 +188,7 @@ const Register_Login = props => {
   );
 };
 
-const mapStateToProps = state => {
+const mapStateToProps = (state) => {
   return state;
 };
 

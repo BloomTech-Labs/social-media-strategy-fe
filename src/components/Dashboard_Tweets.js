@@ -1,10 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import { axiosWithAuth } from '../utils/axiosWithAuth';
 import styled from 'styled-components';
-import twitterLogo from '../imgs/Vector.png';
 import TwitterIcon from '@material-ui/icons/Twitter';
 // import Container from './TopicCard.js';
-import { connect } from 'react-redux';
 const TweetContainer = styled.div`
   background-color: white;
   border-radius: 0.5rem;
@@ -109,7 +107,7 @@ const Dashboard_Tweets = (props) => {
 
     original = original
       .filter((tweet) => {
-        const compare = new Date(tweet.date);
+        // const compare = new Date(tweet.date);
 
         return tweet.date.length > 0;
       })

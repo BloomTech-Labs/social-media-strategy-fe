@@ -1,6 +1,5 @@
 import CONSTANTS from './constants';
 import { axiosWithAuth } from '../utils/axiosWithAuth';
-import Axios from 'axios';
 
 //Current user
 const SN = localStorage.getItem('SNAME');

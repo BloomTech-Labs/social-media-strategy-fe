@@ -2,7 +2,6 @@ import React, { useState } from 'react';
 import { connect } from 'react-redux';
 import DeleteIcon from '@material-ui/icons/Delete';
 import CreateIcon from '@material-ui/icons/Create';
-import TextareaAutosize from '@material-ui/core/TextareaAutosize';
 
 import { editTopic, deleteTopics } from '../actions';
 

@@ -1,6 +1,4 @@
 import React, { useEffect, useState } from 'react';
-import { Link } from 'react-router-dom';
-import { useTheme } from '@material-ui/core/styles';
 
 // Material UI imports
 import { Card, Typography, Box } from '@material-ui/core';
@@ -15,39 +13,23 @@ import '../sass/dashboard.scss';
 
 // Assets import
 
-import img from '../assets/headshot.jpg';
-import pin from '../assets/pin.svg';
 import twitterimg from '../imgs/Vector.png';
-import { axiosWithAuth } from '../utils/axiosWithAuth';
 import { connect } from 'react-redux';
-import { bindActionCreators } from 'redux';
+// import { bindActionCreators } from 'redux';
 
-import {
-  drawerOpen,
-  currentUser,
-  drawerswitch,
-  fetchAccounts,
-} from '../actions';
+import { currentUser, fetchAccounts } from '../actions';
 import { dashStyles } from '../sass/DashStyles';
 
 // Set dummy Acct Data
-const drawerWidth = 400;
 
 const Dashboard_Account = (props) => {
   const st = dashStyles();
-  let updateTrue = props.user.didUpdate === true;
 
   const [anchorEl, setAnchorEl] = useState(null);
 
   useEffect(() => {
     props.fetchAccounts();
   }, []);
-
-  const theme = useTheme();
-
-  const handleDrawerClose = () => {
-    props.drawerswitch();
-  };
 
   const handleClick = (event) => {
     setAnchorEl(event.currentTarget);
@@ -72,7 +54,7 @@ const Dashboard_Account = (props) => {
       )
     ).json();
 
-    let move = await (window.location.href = ax); // not currently used anywhere
+    await (window.location.href = ax);
   }
 
   const open = Boolean(anchorEl);
@@ -121,7 +103,7 @@ const Dashboard_Account = (props) => {
           </Popover>
         </div>
         {props.user?.accounts?.map((account) => (
-          <Card className={st.root}>
+          <Card key={account.screen_name} className={st.root}>
             {/* DONT TOUCH REPLACE, MAKES PIC HIGH RES  */}
             <img
               className='icon'
@@ -170,12 +152,12 @@ const Dashboard_Account = (props) => {
 const mapStateToProps = (state) => ({
   user: state.user,
 });
-function mapDispatchToProps(dispatch) {
-  return {
-    dispatch,
-    ...bindActionCreators({ currentUser, drawerswitch, drawerOpen }, dispatch),
-  };
-}
+// function mapDispatchToProps(dispatch) {
+//   return {
+//     dispatch,
+//     ...bindActionCreators({ currentUser, drawerswitch, drawerOpen }, dispatch),
+//   };
+// }
 
 export default connect(mapStateToProps, { currentUser, fetchAccounts })(
   Dashboard_Account

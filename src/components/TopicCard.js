@@ -3,7 +3,6 @@ import styled from 'styled-components';
 import { Draggable } from 'react-beautiful-dnd';
 import '../sass/topicBuckets.scss';
 import CreateIcon from '@material-ui/icons/Create';
-import DeleteIcon from '@material-ui/icons/Delete';
 import MoreVertIcon from '@material-ui/icons/MoreVert';
 import DateFnsUtils from '@date-io/date-fns';
 import { connect } from 'react-redux';
@@ -18,17 +17,9 @@ import MenuItem from '@material-ui/core/MenuItem';
 import Backdrop from '@material-ui/core/Backdrop';
 import TextareaAutosize from '@material-ui/core/TextareaAutosize';
 
-import {
-  Fade,
-  Menu,
-  Tooltip,
-  Fab,
-  IconButton,
-  Typography,
-} from '@material-ui/core';
+import { Fade, Menu, Tooltip, IconButton, Typography } from '@material-ui/core';
 import { axiosWithAuth } from '../utils/axiosWithAuth';
 import Grid from '@material-ui/core/Grid';
-import MomentUtils from '@date-io/moment';
 import Button from '@material-ui/core/Button';
 
 import {
@@ -37,10 +28,9 @@ import {
   KeyboardDatePicker,
 } from '@material-ui/pickers';
 import 'date-fns';
-import { useHistory, useRouteMatch } from 'react-router';
+import { useHistory } from 'react-router';
 import { NavLink } from 'react-router-dom';
 import InfoIcon from '@material-ui/icons/Info';
-import twitterLogo from '../imgs/Vector.png';
 import TwitterIcon from '@material-ui/icons/Twitter';
 import Dialog from '@material-ui/core/Dialog';
 import DialogActions from '@material-ui/core/DialogActions';
@@ -63,11 +53,11 @@ const BtnCont = styled.div`
   width: 100%;
 `;
 
-const Icons = styled.div`
-  display: flex;
-  justify-content: flex-end;
-  padding: 0.5rem;
-`;
+// const Icons = styled.div`
+//   display: flex;
+//   justify-content: flex-end;
+//   padding: 0.5rem;
+// `;
 export const Inputtextarea = styled.textarea`
   display: flex;
   line-height: 1.44em;
@@ -153,7 +143,7 @@ const TopicCard = (props) => {
   const [selectedDate, setSelectedDate] = useState(new Date());
   const [modalStyle] = useState(editModalLocation);
   const [open, setOpen] = useState(false);
-  const [handle, setHandle] = useState('');
+  const [handle, setHandle] = useState(1);
   const [content, setcontent] = useState({
     post_text: props.card.content,
     date: props.card.date,
@@ -179,10 +169,7 @@ const TopicCard = (props) => {
       .get(`/posts/${props.card.id}`)
 
       .then((res) => {
-        res.data.map((e) => {
-          setPostContent(e);
-          setRecTime(e.optimal_time);
-        });
+        res.data.map((e) => setPostContent(e) & setRecTime(e.optimal_time));
       })
       .catch((err) => console.log(err.message));
   }, [
@@ -280,13 +267,13 @@ const TopicCard = (props) => {
           <Select
             labelId='twitter-handle-select'
             id='select'
-            value={1}
-            // value={handle}
+            value={handle}
+            // defaultValue={1}
             onChange={handleHandleChange}
             className='test'
             style={{ width: '40%' }}
           >
-            <MenuItem value={1}>
+            <MenuItem defaultValue value={1}>
               <span id='alignTextIcon'>
                 @{screen_name} &nbsp;{' '}
                 <TwitterIcon className='twitterIconModal' />
@@ -608,7 +595,11 @@ const TopicCard = (props) => {
             <Fade in={open}>{modalBody}</Fade>
           </Modal>
           {!editing ? (
-            <Typography variant='subtitle2' paragraph>
+            <Typography
+              style={{ overflowWrap: 'anywhere', textAlign: 'initial' }}
+              variant='subtitle2'
+              paragraph
+            >
               {props.card.content}
             </Typography>
           ) : (

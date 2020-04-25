@@ -1,49 +1,49 @@
-import { makeStyles } from "@material-ui/core/styles";
-import imgz from "../imgs/Rectangle.png";
-import img2 from "../imgs/holdingwhitephone.png";
+import { makeStyles } from '@material-ui/core/styles';
+import imgz from '../imgs/Rectangle.png';
+import img2 from '../imgs/holdingwhitephone.png';
 
 export const useStyles = makeStyles((theme) => ({
   root: {
-    height: "100vh",
+    height: '100vh',
   },
   test: {
-    display: "flex",
-    alignItems: "center",
+    display: 'flex',
+    alignItems: 'center',
   },
   image: {
     backgroundImage: `url(${imgz})`,
-    backgroundRepeat: "no-repeat",
+    backgroundRepeat: 'no-repeat',
     backgroundColor:
-      theme.palette.type === "light"
+      theme.palette.type === 'light'
         ? theme.palette.grey[50]
         : theme.palette.grey[900],
-    backgroundSize: "cover",
-    backgroundPosition: "center",
+    backgroundSize: 'cover',
+    backgroundPosition: 'center',
   },
   image2: {
     backgroundImage: `url(${img2})`,
-    backgroundRepeat: "no-repeat",
+    backgroundRepeat: 'no-repeat',
     backgroundColor:
-      theme.palette.type === "light"
+      theme.palette.type === 'light'
         ? theme.palette.grey[50]
         : theme.palette.grey[900],
-    backgroundSize: "cover",
-    backgroundPosition: "center",
+    backgroundSize: 'cover',
+    backgroundPosition: 'center',
   },
   paper: {
     margin: theme.spacing(8, 4),
-    display: "flex",
-    flexDirection: "column",
-    alignItems: "center",
-    margin: "0 auto",
-    padding: "40px",
+    display: 'flex',
+    flexDirection: 'column',
+    alignItems: 'center',
+    // margin: '0 auto',
+    padding: '40px',
   },
   avatar: {
     margin: theme.spacing(1),
     backgroundColor: theme.palette.secondary.main,
   },
   form: {
-    width: "100%",
+    width: '100%',
     marginTop: theme.spacing(1),
   },
   submit: {

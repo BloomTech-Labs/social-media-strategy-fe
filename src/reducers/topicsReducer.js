@@ -1,26 +1,22 @@
 import CONSTANTS from '../actions/constants';
-import { v4 as uuidv4 } from 'uuid';
 
-let topicId = 2;
-let cardId = 5;
-
-const setid = localStorage.getItem('CUSER');
-const cuser = JSON.parse(setid);
+// let topicId = 2;
+// let cardId = 5;
 
 export const initialState = [
-  {
-    id: `topic-${uuidv4()} topic-0`,
-    title: "Drafts",
-    user_id: 1 ?? cuser,
-    index: 0,
-    cards: [
-      {
-        id: `card-${0}`,
-        content:
-          "This is an example of a post that you could draft. Feel free to express yourself!",
-      },
-    ],
-  },
+  // {
+  //   id: `topic-${uuidv4()} topic-0`,
+  //   title: "Drafts",
+  //   user_id: 1 ?? cuser,
+  //   index: 0,
+  //   cards: [
+  //     {
+  //       id: `card-${0}`,
+  //       content:
+  //         "This is an example of a post that you could draft. Feel free to express yourself!",
+  //     },
+  //   ],
+  // },
 ];
 
 const topicsReducer = (state = initialState, action) => {
@@ -52,7 +48,7 @@ const topicsReducer = (state = initialState, action) => {
         id: action.id,
       };
 
-      topicId += 1;
+      // topicId += 1;
 
       return [...state, newTopic];
     case CONSTANTS.ON_ADD_CARD: {
@@ -63,7 +59,7 @@ const topicsReducer = (state = initialState, action) => {
         screenName: action.screenName ?? '',
         media: action.media ?? '',
       };
-      cardId += 1;
+      // cardId += 1;
 
       const newState = state.map((topic) => {
         if (topic.id === action.payload.topicId) {

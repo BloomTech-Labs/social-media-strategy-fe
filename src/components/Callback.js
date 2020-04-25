@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import '../sass/callback.scss';
-import axios from 'axios';
-import { useLocation, useHistory } from 'react-router-dom';
+import { useLocation } from 'react-router-dom';
 import { axiosWithAuth } from '../utils/axiosWithAuth';
 const queryString = require('query-string');
 
@@ -34,7 +33,7 @@ const Callback = () => {
       console.log(check, 'promise check');
       setData(post.data);
 
-      let move = setTimeout(() => {
+      setTimeout(() => {
         window.location.replace('/');
       }, 4000);
       let countdown = setInterval(timer, 1000);

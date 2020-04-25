@@ -1,19 +1,14 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import { connect } from 'react-redux';
-import { bindActionCreators } from 'redux';
+// import { bindActionCreators } from 'redux';
 import DASHBOARD_ACCOUNT from './Dashboard_Account';
 import DASHBOARD_FEED from './Dashboard_Feed';
 import DASHBOARD_TWEETS from './Dashboard_Tweets.js';
-import {
-  drawerOpen,
-  currentUser,
-  drawerswitch,
-  fetchAccounts,
-} from '../actions';
+import { currentUser, fetchAccounts } from '../actions';
 
 const Dashboard = (props) => {
   return (
-    <div className="dash-app">
+    <div className='dash-app'>
       {props.user.drawerContent === 'HOME' ? (
         <>
           <DASHBOARD_ACCOUNT currentUser={props.user.currentUser} />
@@ -35,12 +30,12 @@ const Dashboard = (props) => {
 const mapStateToProps = (state) => ({
   user: state.user,
 });
-function mapDispatchToProps(dispatch) {
-  return {
-    dispatch,
-    ...bindActionCreators({ currentUser, drawerswitch, drawerOpen }, dispatch),
-  };
-}
+// function mapDispatchToProps(dispatch) {
+//   return {
+//     dispatch,
+//     ...bindActionCreators({ currentUser, drawerswitch, drawerOpen }, dispatch),
+//   };
+// }
 
 export default connect(mapStateToProps, { currentUser, fetchAccounts })(
   Dashboard
