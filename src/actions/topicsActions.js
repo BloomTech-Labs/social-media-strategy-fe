@@ -83,11 +83,9 @@ export const editPostCard = (id, content) => {
 export const twitterPost = (id, content) => {
   axiosWithAuth()
     .put(`/posts/${id}/twitter`, content)
-    .then((res) => {
-      console.log(res);
-    })
+    .then((res) => console.log(res))
     .catch((error) => {
-      console.log(error, 'FAIL');
+      console.log(error.response);
     });
 };
 
