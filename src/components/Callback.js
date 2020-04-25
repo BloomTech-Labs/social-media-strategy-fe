@@ -23,7 +23,7 @@ const Callback = () => {
       setstate(user.data.subject);
 
       let post = await axiosWithAuth().post(
-        `https://social-media-strategy.herokuapp.com/api/auth/${user.data.subject}/callback`,
+        `${process.env.REACT_APP_API_URL}/auth/${user.data.subject}/callback`,
 
         { parse: parse, location: location }
       );
@@ -67,31 +67,31 @@ const Callback = () => {
   return (
     <div className='callback-cont'>
       <div className='callback-box'>
-      <h1 className='callback-header'>
-        SoMe Connection {console.log(state, data)}
-      </h1>
-      <h2 className='success' >Success</h2>
-      <p className='callback-para'>
-        Thank you,{' '}
-        <strong>
-          <a
-            className='highlight'
-            href={`https://twitter.com/${data.twitter_screenName}`}
-          >
-            @{data.twitter_screenName}
-          </a>
-        </strong>
-        , for authorizing SoMe an access token. We've successfully received your
-        access token and confirmed it!
-      </p>
-      
+        <h1 className='callback-header'>
+          SoMe Connection {console.log(state, data)}
+        </h1>
+        <h2 className='success'>Success</h2>
+        <p className='callback-para'>
+          Thank you,{' '}
+          <strong>
+            <a
+              className='highlight'
+              href={`https://twitter.com/${data.twitter_screenName}`}
+            >
+              @{data.twitter_screenName}
+            </a>
+          </strong>
+          , for authorizing SoMe an access token. We've successfully received
+          your access token and confirmed it!
+        </p>
+
         {/* <li>
           You have Tweeted{' '}
           <span className='label label-success'>{'statuses_count'}</span> times.
         </li> */}
         <p className='callback-bold'>
           You have currently have
-          <span className="label label-success">
+          <span className='label label-success'>
             &nbsp;{data.total_followers}
           </span>{' '}
           followers.
@@ -100,13 +100,13 @@ const Callback = () => {
           You follow{' '}
           <span className='label label-success'>{'friends_count'}</span> users.
         </li> */}
-      <h2>Redirecting you back to your SoMe profile in {time} </h2>
-      <p className="redirect">
-        If countdown didn't redirect you to profile page please click {''}
-        <a className='highlight' href="/">
-          here
-        </a>
-      </p>
+        <h2>Redirecting you back to your SoMe profile in {time} </h2>
+        <p className='redirect'>
+          If countdown didn't redirect you to profile page please click {''}
+          <a className='highlight' href='/'>
+            here
+          </a>
+        </p>
       </div>
     </div>
   );
