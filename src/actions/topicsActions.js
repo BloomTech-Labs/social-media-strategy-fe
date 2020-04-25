@@ -85,7 +85,7 @@ export const twitterPost = (id, content) => {
   console.log("id", id);
   console.log(content, "content");
   axiosWithAuth()
-    .put(`/posts/${id}`, content)
+    .put(`/posts/${id}/twitter`, content)
     .then(res => {
       console.log(res);
     })
