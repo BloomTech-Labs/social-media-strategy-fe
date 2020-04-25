@@ -131,7 +131,7 @@ const Dashboard_Tweets = (props) => {
     <div>
       <Title>My Scheduled Posts</Title>
       {tweets.map((tweet) => (
-        <TweetContainer>
+        <TweetContainer key={Date.now() + Math.random()}>
           <TopBar>
             <img
               className='proPic'
