@@ -14,6 +14,17 @@ import { reducer } from './reducers';
 
 const store = createStore(reducer, applyMiddleware(thunk, logger));
 
+//  TO MAKE LOGGER ONLY SHOW UP IN DEV----------------------
+// const middlewares = [];
+
+// if (process.env.NODE_ENV === `development`) {
+//   const { logger } = require(`redux-logger`);
+
+//   middlewares.push(logger);
+// }
+
+// const store = compose(applyMiddleware(...middlewares))(createStore)(reducer);
+
 ReactDOM.render(
   <Provider store={store}>
     <Router>

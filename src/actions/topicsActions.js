@@ -2,9 +2,9 @@ import CONSTANTS from './constants';
 import { axiosWithAuth } from '../utils/axiosWithAuth';
 
 //Current user
-const SN = localStorage.getItem('SNAME');
+const SN = localStorage?.getItem('SNAME');
 // const setid = localStorage.getItem('CUSER');
-const cuser = localStorage.getItem('CUSER');
+const cuser = localStorage?.getItem('CUSER');
 const timeoutTime = 100;
 
 export const onDragEndSingle = (newTopic) => (dispatch) => {
