@@ -56,10 +56,6 @@ const HomePage = (props) => {
     return test;
   }
 
-  // useEffect(() => {
-  //   window.location.reload(false);
-  // }, []);
-
   useEffect(() => {
     props.currentUser(push);
     props.fetchTopics(props.user.currentUser?.subject);

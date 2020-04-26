@@ -81,8 +81,6 @@ const Dashboard_Tweets = (props) => {
 
   const twitHandle = props.user.accounts[0].screen_name;
 
-  console.log('CUSER', props.user.accounts[0].screen_name);
-
   let updateTrue = props.user.didUpdate === true;
 
   useEffect(() => {

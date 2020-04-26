@@ -7,7 +7,7 @@ export const initialState = [
   // {
   //   id: `topic-${uuidv4()} topic-0`,
   //   title: "Drafts",
-  //   user_id: 1 ?? cuser,
+  //   user_id: 1,
   //   index: 0,
   //   cards: [
   //     {

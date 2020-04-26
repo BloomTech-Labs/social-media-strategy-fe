@@ -50,7 +50,12 @@ const TopicTitle = (props) => {
               <span className={`deleteTopic`}>
                 <DeleteIcon
                   style={{ marginRight: '20' }}
-                  onClick={() => props.deleteTopics(props.topic.id)}
+                  onClick={() =>
+                    props.deleteTopics(
+                      props.topic.id,
+                      props.user.currentUser.subject
+                    )
+                  }
                 />
               </span>
               <CreateIcon
@@ -72,9 +77,9 @@ const TopicTitle = (props) => {
   );
 };
 
-const mapStateToProps = (state) => {
-  return state;
-};
+const mapStateToProps = (state) => ({
+  user: state.user,
+});
 
 export default connect(mapStateToProps, { editTopic, deleteTopics })(
   TopicTitle
