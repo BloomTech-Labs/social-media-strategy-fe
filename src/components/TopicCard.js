@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import styled from 'styled-components';
 import { Draggable } from 'react-beautiful-dnd';
 import '../sass/topicBuckets.scss';
@@ -161,6 +161,16 @@ const TopicCard = (props) => {
 
   let updateTrue = props?.user?.didUpdate === true;
   let screen_name = props.user.accounts.map((e) => e.screen_name);
+
+  const inputfocus = useRef(null);
+
+  useEffect(() => {
+    if (editing || open) {
+      setTimeout(() => {
+        inputfocus.current.focus();
+      }, 0);
+    }
+  }, [editing, open]);
 
   const handledialogtoggle = () => {
     setDialogToggle(!dialogtoggle);
@@ -372,6 +382,8 @@ const TopicCard = (props) => {
           cols='50'
           rows='10'
           maxLength='280'
+          ref={inputfocus}
+          onFocus={handletweetchange}
           value={content.post_text}
           onChange={(event) => handletweetchange(event, handleChange(event))}
         />
@@ -486,7 +498,7 @@ const TopicCard = (props) => {
                     disableRipple={true}
                     disableFocusRipple={true}
                     className={classes.button}
-                    onClick={() => setediting(!editing)}
+                    onClick={(event) => setediting(!editing)}
                     style={{
                       padding: '0',
                       paddingBottom: '12px',
@@ -636,6 +648,9 @@ const TopicCard = (props) => {
                   type='text'
                   name='post_text'
                   maxLength='280'
+                  ref={inputfocus}
+                  onFocus={handletweetchange}
+                  // onClick={handletweetchange}
                   value={content.post_text}
                   onChange={(event) =>
                     handletweetchange(event, handleChange(event))

@@ -18,6 +18,7 @@ class ActionButton extends React.Component {
   state = {
     formOpen: false,
   };
+
   openForm = () => {
     this.setState({
       formOpen: true,
@@ -40,17 +41,21 @@ class ActionButton extends React.Component {
     const { dispatch } = this.props;
     const { text } = this.state;
     const id = `topic-${uuidv4()}`;
+    const cuser = this.props.user.currentUser.subject;
     if (text) {
-      dispatch(addTopic(text, id));
+      dispatch(addTopic(text, id, cuser));
     }
     return;
   };
   handleAddCard = () => {
     const { dispatch, topicId } = this.props;
     const { text } = this.state;
+    const cuser = this.props.user;
+    console.log(this.props.user.accounts[0].screen_name, 'PROPS');
+
     const id = `card-${uuidv4()}`;
     if (text) {
-      dispatch(addCard(topicId, text, id));
+      dispatch(addCard(topicId, text, id, cuser));
     }
   };
 
@@ -118,4 +123,9 @@ class ActionButton extends React.Component {
     return this.state.formOpen ? this.renderForm() : this.renderAddButton();
   }
 }
-export default connect()(ActionButton);
+
+const mapStateToProps = (state) => ({
+  user: state.user,
+  topics: state.topics,
+});
+export default connect(mapStateToProps)(ActionButton);

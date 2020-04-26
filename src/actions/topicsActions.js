@@ -1,10 +1,6 @@
 import CONSTANTS from './constants';
 import { axiosWithAuth } from '../utils/axiosWithAuth';
 
-//Current user
-const SN = localStorage?.getItem('SNAME');
-// const setid = localStorage.getItem('CUSER');
-const cuser = localStorage?.getItem('CUSER');
 const timeoutTime = 100;
 
 export const onDragEndSingle = (newTopic) => (dispatch) => {
@@ -25,7 +21,7 @@ export const onDragEndTopic = (newTopicOrder) => (dispatch) => {
   });
 };
 // ADD TOPIC LOCAL
-export const addTopic = (text, id) => (dispatch) => {
+export const addTopic = (text, id, cuser) => (dispatch) => {
   dispatch({
     type: CONSTANTS.ON_ADD_TOPIC,
     payload: text,
@@ -37,18 +33,18 @@ export const addTopic = (text, id) => (dispatch) => {
 };
 
 // POST CARD
-const postCard = (text, id) => {
+const postCard = (text, id, cuser) => {
   const formattedPost = {
     id: id,
-    user_id: Number(cuser),
+    user_id: Number(cuser.currentUser.subject),
     post_text: text,
-    screenname: SN,
+    screenname: cuser.accounts[0].screen_name,
   };
 
   console.log('Formatted post', formattedPost);
 
   axiosWithAuth()
-    .post(`/posts/${cuser}/user`, formattedPost)
+    .post(`/posts/${cuser.currentUser.subject}/user`, formattedPost)
     .then((res) => {
       console.log(res);
     })
@@ -110,8 +106,8 @@ export const twitterPostnow = (id, content) => {
     });
 };
 
-export const addCard = (topicId, text, id) => (dispatch) => {
-  postCard(text, id);
+export const addCard = (topicId, text, id, cuser) => (dispatch) => {
+  postCard(text, id, cuser);
 
   dispatch({ type: CONSTANTS.ON_ADD_CARD, payload: { topicId, text }, id: id });
   dispatch({ type: CONSTANTS.USER_APICALL_START, didUpdate: true });
@@ -215,7 +211,7 @@ export const addTopics = (id, topics) => (dispatch) => {
     });
 };
 // DELETE TOPIC
-export const deleteTopics = (id) => (dispatch) => {
+export const deleteTopics = (id, cuser) => (dispatch) => {
   dispatch({ type: CONSTANTS.USER_APICALL_START });
   axiosWithAuth()
     .delete(`/topics/${id}`)
