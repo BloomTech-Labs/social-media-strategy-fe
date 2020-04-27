@@ -118,7 +118,7 @@ const Dashboard_Tweets = (props) => {
     original.sort(function compare(a, b) {
       var dateA = new Date(a.date);
       var dateB = new Date(b.date);
-      return dateB - dateA;
+      return dateA - dateB;
     });
 
     return original;
