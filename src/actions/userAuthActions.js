@@ -14,10 +14,13 @@ export const login = (userData, cb) => (dispatch) => {
     .then((response) => {
       dispatch({ type: CONSTANTS.USER_APICALL_SUCCESS });
       localStorage.setItem('token', response.data.token);
-      cb('/home');
+      cb('/home/accounts');
     })
     .catch((error) => {
-      dispatch({ type: CONSTANTS.USER_APICALL_FAILURE, payload: 'Invalid email password combination' });
+      dispatch({
+        type: CONSTANTS.USER_APICALL_FAILURE,
+        payload: 'Invalid email password combination',
+      });
     });
 };
 
@@ -31,7 +34,7 @@ export const registerUser = (userData, cb) => (dispatch) => {
     .then(async (response) => {
       dispatch({ type: CONSTANTS.USER_APICALL_SUCCESS });
       localStorage.setItem('token', response.data.token);
-      cb('/home');
+      cb('/home/accounts');
       let res = await axiosWithAuth().get(`/users/user`);
 
       console.log(res.data.subject);
@@ -50,9 +53,11 @@ export const registerUser = (userData, cb) => (dispatch) => {
       });
     })
     .catch((error) => {
-      dispatch({ type: CONSTANTS.USER_APICALL_FAILURE, payload: 'This user is already registered' });
+      dispatch({
+        type: CONSTANTS.USER_APICALL_FAILURE,
+        payload: 'This user is already registered',
+      });
       console.log('Error', error);
-
     });
 };
 

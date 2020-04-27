@@ -34,7 +34,7 @@ const Navigation = (props) => {
               }}
               className='linkNav'
               activeClassName='linkActive'
-              to='/home'
+              to='/home/accounts'
             >
               <li className='link'>
                 <HomeIcon
@@ -56,7 +56,7 @@ const Navigation = (props) => {
               }}
               className='linkNav'
               activeClassName='linkActive'
-              to='/queue'
+              to='/home/queue'
             >
               <li className='link'>
                 <ScheduleIcon
@@ -75,7 +75,7 @@ const Navigation = (props) => {
               }}
               className='linkNav'
               activeClassName='linkActive'
-              to='/feed/home'
+              to='/home/feed/home'
             >
               <li className='link'>
                 <RssFeedIcon
@@ -94,7 +94,7 @@ const Navigation = (props) => {
                 window.location.reload(false)
               }
               className={'linkNav'}
-              to='/'
+              to='/login'
             >
               <li className='link'>
                 <ExitToAppIcon
@@ -110,12 +110,12 @@ const Navigation = (props) => {
       </div>
       <Switch>
         {/* <Route path='/home'>{HomeNav}</Route> */}
-        <Route path='/search'></Route>
+        {/* <Route path='/search'></Route>
         <Route path='/account'></Route>
         <Route path='/analytics'></Route>
         <Route path='/messages'></Route>
         <Route path='/notifications'></Route>
-        <Route path='/landing'></Route>
+        <Route path='/landing'></Route> */}
       </Switch>
     </div>
   );

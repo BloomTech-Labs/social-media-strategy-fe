@@ -7,7 +7,7 @@ import Button from '@material-ui/core/Button';
 import TextField from '@material-ui/core/TextField';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import Checkbox from '@material-ui/core/Checkbox';
-import Link from '@material-ui/core/Link';
+import { Link } from 'react-router-dom';
 import Paper from '@material-ui/core/Paper';
 import Box from '@material-ui/core/Box';
 import Grid from '@material-ui/core/Grid';
@@ -26,7 +26,7 @@ const Registration = (props) => {
     return (
       <Typography variant='body2' color='textSecondary' align='center'>
         {'Copyright © '}
-        <Link color='inherit' href='https://so-me.net/'>
+        <Link color='inherit' to='/team'>
           SoMe{' '}
         </Link>{' '}
         {new Date().getFullYear()}
@@ -36,19 +36,19 @@ const Registration = (props) => {
   }
 
   const onSubmit = (data) => {
-      props.registerUser(data, push);
+    props.registerUser(data, push);
   };
 
   return (
     <Grid container component='main' className={classes.root}>
-        <Grid
-          item
-          xs={false}
-          sm={4}
-          md={7}
-          className={classes.image2}
-          data-cy='registerImage'
-        />
+      <Grid
+        item
+        xs={false}
+        sm={4}
+        md={7}
+        className={classes.image2}
+        data-cy='registerImage'
+      />
       <Grid
         className={classes.test}
         item
@@ -75,7 +75,8 @@ const Registration = (props) => {
               component='h1'
               variant='h5'
             >
-              Sign Up to SoMe<br />
+              Sign Up to SoMe
+              <br />
               <span
                 style={{
                   fontFamily: 'Montserrat',
@@ -86,7 +87,8 @@ const Registration = (props) => {
                   color: '#E85556',
                 }}
               >
-                Create Account<br />
+                Create Account
+                <br />
               </span>
             </Typography>
             <form
@@ -151,7 +153,7 @@ const Registration = (props) => {
                     className='registerButton'
                     style={{ cursor: 'pointer' }}
                     variant='body2'
-                    href='https://so-me.net/login'
+                    to='/login'
                   >
                     Already have an account? Sign In here.
                   </Link>
@@ -172,6 +174,4 @@ const mapStateToProps = (state) => {
   return state;
 };
 
-export default connect(mapStateToProps, { registerUser })(
-  Registration
-);
+export default connect(mapStateToProps, { registerUser })(Registration);
