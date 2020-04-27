@@ -24,8 +24,8 @@ import Button from '@material-ui/core/Button';
 
 import {
   MuiPickersUtilsProvider,
-  KeyboardTimePicker,
-  KeyboardDatePicker,
+  TimePicker,
+  DatePicker,
 } from '@material-ui/pickers';
 import 'date-fns';
 import { useHistory } from 'react-router';
@@ -209,8 +209,14 @@ const TopicCard = (props) => {
   };
 
   const handleDateChange = (date) => {
-    setSelectedDate(date);
-    setcontent({ ...content, date: date });
+    console.log(date, 'NEWDATE', new Date(), 'SELECTED DATE');
+    if (date >= new Date()) {
+      console.log(new Date(), 'SELECTED');
+      setSelectedDate(date);
+      setcontent({ ...content, date: date });
+    } else {
+      return null;
+    }
   };
 
   const togglemodal = () => {
@@ -230,9 +236,10 @@ const TopicCard = (props) => {
   //  CURRENT PATCH FOR ISSUE -- need to adjust to be dynamic if Optimal time is a few days behind etc
   async function newRecTime(date) {
     let optTime = new Date(rectime);
-    optTime.setDate(optTime.getDate(rectime) + 1);
+    let today = new Date();
+    optTime.setDate(today.getDate() + 1);
     // console.log(optTime, props.card.content, 'OPT11');
-    setSelectedDate(optTime);
+    handleDateChange(optTime);
     setcontent({ ...content, date: optTime });
   }
 
@@ -320,28 +327,23 @@ const TopicCard = (props) => {
                     margin: '5%',
                   }}
                 >
-                  <KeyboardDatePicker
+                  <DatePicker
                     disableToolbar
                     variant='inline'
                     format='MM/dd/yyyy'
                     margin='normal'
                     id='date-picker-inline'
+                    disablePast={true}
                     label='Date'
                     value={selectedDate}
                     onChange={handleDateChange}
-                    KeyboardButtonProps={{
-                      'aria-label': 'change date',
-                    }}
                   />
-                  <KeyboardTimePicker
+                  <TimePicker
                     margin='normal'
                     id='time-picker'
                     label='Time'
                     value={selectedDate}
                     onChange={handleDateChange}
-                    KeyboardButtonProps={{
-                      'aria-label': 'change time',
-                    }}
                   />
                 </div>
                 <div style={{ display: 'flex', alignItems: 'center' }}>
@@ -541,9 +543,7 @@ const TopicCard = (props) => {
               open={openMenu}
               onClose={handleMenuClose}
             >
-              {postContent?.date?.length &&
-              new Date(postContent?.date) < new Date() ? null : postContent
-                  ?.date?.length ? null : (
+              {postContent?.date === null ? (
                 <NavLink
                   style={{ textDecoration: 'none', color: 'black  ' }}
                   to={`/schedule`}
@@ -555,7 +555,7 @@ const TopicCard = (props) => {
                     Post
                   </MenuItem>
                 </NavLink>
-              )}
+              ) : null}
 
               <MenuItem
                 onClick={() => {
@@ -608,6 +608,7 @@ const TopicCard = (props) => {
               </Button>
             </DialogActions>
           </Dialog>
+          {console.log(content, selectedDate, 'CONTENT')}
 
           <Modal
             aria-labelledby='transition-modal-title'
@@ -642,7 +643,6 @@ const TopicCard = (props) => {
                   setediting(!editing);
                 }}
               >
-                {console.log(content, 'CONTENT')}
                 <TextareaAutosize
                   rowsMin={3}
                   id='textareaAuto'
@@ -659,7 +659,7 @@ const TopicCard = (props) => {
                   }
                 />
                 {/* &nbsp;{" "} */}
-                {console.log(tweetCount, 'CONTENTt')}
+                {console.log(tweetCount, 'CONTENT')}
 
                 <div className='action-cont editcard-cont'>
                   <input className='actionSubmit' type='submit' />

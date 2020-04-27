@@ -94,6 +94,7 @@ class ActionButton extends React.Component {
           <TextareaAutosize
             placeholder={placeholder}
             autoFocus
+            maxLength='280'
             onBlur={this.closeForm}
             value={this.state.text}
             onChange={this.handleChanges}
