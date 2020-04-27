@@ -2,24 +2,24 @@ import React from 'react';
 
 import './sass/index.scss';
 import { Route, Switch } from 'react-router';
-import REGISTER_LOGIN from './components/Register_Login';
+import Login from './components/Login';
 import PrivateRoute from './utils/PrivateRoute';
 import Landing from './components/Landing';
 import Team from './components/Team';
 import HomePage from './components/HomePage';
 import Callback from './components/Callback';
+import Registration from './components/Registration';
 
 const App = (props) => {
   return (
     <>
       <Switch>
         <PrivateRoute path='/callback' component={Callback} />
-        <Route path='/landing' component={Landing} />
+        <PrivateRoute path='/home' component  ={HomePage} />
         <Route path='/team' component={Team} />
-        <Route path='/login'>
-          <REGISTER_LOGIN />
-        </Route>
-        <PrivateRoute path='/' component={HomePage} />
+        <Route exact path='/login' component={Login} />
+        <Route exact path='/register' component={Registration} />
+        <Route exact path='/' component={Landing} />
       </Switch>
     </>
   );

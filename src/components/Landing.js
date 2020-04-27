@@ -7,13 +7,14 @@ const Landing = () => {
   return (
     <div className="landing-body" style={{ height: '100vh', width: '100vw' }}>
       {/* ^ REMOVE INLINE ^ */}
-      <div className="landing-navbar">
-        <h3 className="logo-text">SoMe</h3>
-        <div className="landing-sign-nav">
-          <NavLink to="/" className="sign-up-btn">
+      <div className='landing-navbar'>
+        <h3 className='logo-text'>SoMe</h3>
+        <div className='landing-sign-nav'>
+          <NavLink to='/register' className='sign-up-btn'>
             Sign Up
           </NavLink>
-          <NavLink className="sign-in-btn" to="/">
+          <NavLink className='sign-in-btn' to='/login'>
+
             Sign In
           </NavLink>
         </div>
@@ -25,7 +26,8 @@ const Landing = () => {
             Discover how to develop your brand and manage your digital marketing
             strategy
           </h4>
-          <NavLink className="start-here" to="/">
+          <NavLink className='start-here' to='/register'>
+
             Start here
           </NavLink>
         </div>

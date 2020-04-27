@@ -17,7 +17,7 @@ export const login = (userData, cb) => (dispatch) => {
       cb('/home');
     })
     .catch((error) => {
-      dispatch({ type: CONSTANTS.USER_APICALL_FAILURE, payload: error.data });
+      dispatch({ type: CONSTANTS.USER_APICALL_FAILURE, payload: 'Invalid email password combination' });
     });
 };
 
@@ -50,8 +50,9 @@ export const registerUser = (userData, cb) => (dispatch) => {
       });
     })
     .catch((error) => {
-      console.log('Error', error.message);
-      dispatch({ type: CONSTANTS.USER_APICALL_FAILURE, payload: error.data });
+      dispatch({ type: CONSTANTS.USER_APICALL_FAILURE, payload: 'This user is already registered' });
+      console.log('Error', error);
+
     });
 };
 

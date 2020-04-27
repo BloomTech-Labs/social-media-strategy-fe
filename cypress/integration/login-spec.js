@@ -1,4 +1,4 @@
-import { cyan } from "color-name";
+/*import { cyan } from "color-name";
 
 describe("tests login page", function() {
   beforeEach(() => {
@@ -34,3 +34,4 @@ describe("tests login page", function() {
   //     cy.get("[data-cy=registerImage]");
   //   });
 });
+*/
