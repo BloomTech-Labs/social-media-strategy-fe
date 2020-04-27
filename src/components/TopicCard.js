@@ -153,7 +153,7 @@ const TopicCard = (props) => {
   });
   const [editing, setediting] = useState(false);
   const [postnow, setPostNow] = useState(false);
-  const { push } = useHistory();
+  const { goBack } = useHistory();
   const [anchorEl, setAnchorEl] = useState(null);
   const openMenu = Boolean(anchorEl);
   const [postContent, setPostContent] = useState('');
@@ -193,8 +193,6 @@ const TopicCard = (props) => {
     open,
   ]);
 
-  // console.log(rectime, 'OPT2');
-
   const onsubmitTwitter = (e) => {
     e.preventDefault();
     props.editCardandPost(props.card.id, content, postContent);
@@ -209,9 +207,7 @@ const TopicCard = (props) => {
   };
 
   const handleDateChange = (date) => {
-    console.log(date, 'NEWDATE', new Date(), 'SELECTED DATE');
     if (date >= new Date()) {
-      console.log(new Date(), 'SELECTED');
       setSelectedDate(date);
       setcontent({ ...content, date: date });
     } else {
@@ -221,6 +217,8 @@ const TopicCard = (props) => {
 
   const togglemodal = () => {
     setOpen(!open);
+    setAnchorEl(null);
+
     setcontent({ ...content, screenname: screen_name[0] });
   };
 
@@ -238,7 +236,6 @@ const TopicCard = (props) => {
     let optTime = new Date(rectime);
     let today = new Date();
     optTime.setDate(today.getDate() + 1);
-    // console.log(optTime, props.card.content, 'OPT11');
     handleDateChange(optTime);
     setcontent({ ...content, date: optTime });
   }
@@ -303,7 +300,10 @@ const TopicCard = (props) => {
         <MuiPickersUtilsProvider utils={DateFnsUtils}>
           <nav className='item-sub-nav'>
             <NavLink
-              onClick={() => setPostNow(false) & handleDateChange(new Date())}
+              onClick={() => {
+                setPostNow(false);
+                handleDateChange(new Date());
+              }}
               to={`/schedule`}
             >
               Schedule
@@ -608,14 +608,13 @@ const TopicCard = (props) => {
               </Button>
             </DialogActions>
           </Dialog>
-          {console.log(content, selectedDate, 'CONTENT')}
 
           <Modal
             aria-labelledby='transition-modal-title'
             aria-describedby='transition-modal-description'
             className={classes.modal}
             open={open}
-            onClose={() => setOpen(false) & push('/')}
+            onClose={() => setOpen(false) & goBack()}
             closeAfterTransition
             BackdropComponent={Backdrop}
             BackdropProps={{
@@ -659,7 +658,6 @@ const TopicCard = (props) => {
                   }
                 />
                 {/* &nbsp;{" "} */}
-                {console.log(tweetCount, 'CONTENT')}
 
                 <div className='action-cont editcard-cont'>
                   <input className='actionSubmit' type='submit' />
