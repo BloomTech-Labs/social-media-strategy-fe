@@ -22,12 +22,12 @@ const TopicBucket = (props) => {
           ref={provided.innerRef}
           {...provided.dragHandleProps}
         >
-          <Droppable droppableId={String(props.topic.id)} type="card">
+          <Droppable droppableId={String(props.topic.id)} type='card'>
             {(provided) => (
               <>
                 <TopicTitle topic={props.topic} />
                 <div
-                  className="cardlist"
+                  className='cardlist'
                   id={scrollId}
                   ref={provided.innerRef}
                   {...provided.droppableProps}
