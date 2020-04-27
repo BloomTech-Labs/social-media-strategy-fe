@@ -471,8 +471,10 @@ const TopicCard = (props) => {
                       {' '}
                       Scheduled: {dateWithouthSecond}{' '}
                     </span>
-                  ) : (
+                  ) : postContent?.date === null ? (
                     <span className='notScheduled'>Post not Scheduled</span>
+                  ) : (
+                    <span className='posted'>Tweet Posted</span>
                   )}
                 </span>
               </nav>
