@@ -17,6 +17,7 @@ export const login = (userData, cb) => (dispatch) => {
       cb('/home');
     })
     .catch((error) => {
+      console.log('Login error',error)
       dispatch({ type: CONSTANTS.USER_APICALL_FAILURE, payload: error.data });
     });
 };

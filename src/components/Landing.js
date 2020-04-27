@@ -9,10 +9,10 @@ const Landing = () => {
       <div className='landing-navbar'>
         <h3 className='logo-text'>SoMe</h3>
         <div className='landing-sign-nav'>
-          <NavLink to='/' className='sign-up-btn'>
+          <NavLink to='/register' className='sign-up-btn'>
             Sign Up
           </NavLink>
-          <NavLink className='sign-in-btn' to='/'>
+          <NavLink className='sign-in-btn' to='/login'>
             Sign In
           </NavLink>
         </div>
@@ -24,7 +24,7 @@ const Landing = () => {
             Discover how to develop your brand and manage your digital marketing
             strategy
           </h4>
-          <NavLink className='start-here' to='/'>
+          <NavLink className='start-here' to='/register'>
             Start here
           </NavLink>
         </div>

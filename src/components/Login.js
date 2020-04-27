@@ -1,6 +1,7 @@
-import React, { useState } from 'react';
-import { useForm, Controller } from 'react-hook-form';
+import React from 'react';
+import { useForm, Controller, ErrorMessage } from 'react-hook-form';
 import { connect } from 'react-redux';
+import * as yup from 'yup';
 import { useStyles } from '../sass/StyledRegister_login';
 import Avatar from '@material-ui/core/Avatar';
 import Button from '@material-ui/core/Button';
@@ -14,20 +15,28 @@ import Grid from '@material-ui/core/Grid';
 import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
 import Typography from '@material-ui/core/Typography';
 
-import { login, registerUser } from '../actions';
+import { login } from '../actions';
 import { useHistory } from 'react-router';
 
-const Register_Login = (props) => {
-  const { register, handleSubmit, control } = useForm();
-  const [signup, setsignup] = useState(false);
+const Login = (props) => {
+  const LoginSchema = yup.object().shape({
+    email: yup.string().required(),
+    password: yup.string().required().min(4)
+  })
+
+  const { register, handleSubmit, control, errors } = useForm({
+    validationSchema: LoginSchema
+  });
+
   const classes = useStyles();
   const { push } = useHistory();
+
 
   function Copyright() {
     return (
       <Typography variant='body2' color='textSecondary' align='center'>
         {'Copyright © '}
-        <Link color='inherit' href='https://material-ui.com/'>
+        <Link color='inherit' href='https://so-me.net/'>
           SoMe{' '}
         </Link>{' '}
         {new Date().getFullYear()}
@@ -37,16 +46,11 @@ const Register_Login = (props) => {
   }
 
   const onSubmit = (data) => {
-    if (!signup) {
       props.login(data, push);
-    } else {
-      props.registerUser(data, push);
-    }
   };
 
   return (
     <Grid container component='main' className={classes.root}>
-      {!signup ? (
         <Grid
           item
           xs={false}
@@ -55,17 +59,6 @@ const Register_Login = (props) => {
           className={classes.image}
           data-cy='loginImage'
         />
-      ) : (
-        <Grid
-          item
-          xs={false}
-          sm={4}
-          md={7}
-          className={classes.image2}
-          data-cy='registerImage'
-        />
-      )}
-
       <Grid
         className={classes.test}
         item
@@ -81,7 +74,6 @@ const Register_Login = (props) => {
             <LockOutlinedIcon />
           </Avatar>
           <div>
-            {console.log(signup)}
             <Typography
               style={{
                 fontFamily: 'Montserrat',
@@ -93,7 +85,7 @@ const Register_Login = (props) => {
               component='h1'
               variant='h5'
             >
-              {!signup ? 'Login to SoMe' : 'Sign Up to SoMe'} <br />
+              Login to SoMe<br />
               <span
                 style={{
                   fontFamily: 'Montserrat',
@@ -104,16 +96,15 @@ const Register_Login = (props) => {
                   color: '#E85556',
                 }}
               >
-                {!signup ? 'Sign into your account' : 'Create Account'} <br />
+                Sign into your account<br />
               </span>
             </Typography>
             <form
               className={classes.form}
-              noValidate
+              
               onSubmit={handleSubmit(onSubmit)}
             >
               <Controller
-                data-cy='email'
                 ref={register}
                 name='email'
                 as={TextField}
@@ -125,11 +116,12 @@ const Register_Login = (props) => {
                 id='email'
                 label='Email Address'
                 autoComplete='email'
-                type='text'
+                type='email'
                 autoFocus
               />
+              {errors.email && <p>{errors.email.message}</p>}
+              <ErrorMessage errors={errors} name='email' />
               <Controller
-                data-cy='password'
                 variant='outlined'
                 margin='normal'
                 ref={register}
@@ -143,6 +135,8 @@ const Register_Login = (props) => {
                 id='password'
                 autoComplete='current-password'
               />
+              {errors.password && <p>{errors.password.message}</p>}
+              {props.user.error && <p>{props.user.error}</p>}
               <FormControlLabel
                 control={<Checkbox value='remember' color='primary' />}
                 label='Remember me'
@@ -155,7 +149,7 @@ const Register_Login = (props) => {
                 color='inherit'
                 className={classes.submit}
               >
-                {!signup ? 'Sign In' : 'Create Account'}
+                Sign In
               </Button>
               <Grid container>
                 <Grid item xs>
@@ -168,12 +162,10 @@ const Register_Login = (props) => {
                     data-cy='registerButton'
                     className='registerButton'
                     style={{ cursor: 'pointer' }}
-                    onClick={() => setsignup(!signup)}
                     variant='body2'
+                    href='https://so-me.net/register'
                   >
-                    {!signup
-                      ? "Don't have an account? Sign Up"
-                      : 'Have an account? Sign In'}
+                    Don't have an account? Sign Up
                   </Link>
                 </Grid>
               </Grid>
@@ -189,9 +181,11 @@ const Register_Login = (props) => {
 };
 
 const mapStateToProps = (state) => {
-  return state;
+  return {
+    user: state.user
+  }
 };
 
-export default connect(mapStateToProps, { login, registerUser })(
-  Register_Login
+export default connect(mapStateToProps, { login })(
+  Login
 );
