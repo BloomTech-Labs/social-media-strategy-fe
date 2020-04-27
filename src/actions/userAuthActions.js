@@ -50,8 +50,8 @@ export const registerUser = (userData, cb) => (dispatch) => {
       });
     })
     .catch((error) => {
+      console.log('Error', error.message);
       dispatch({ type: CONSTANTS.USER_APICALL_FAILURE, payload: error.data });
-      console.log('Error', error);
     });
 };
 
