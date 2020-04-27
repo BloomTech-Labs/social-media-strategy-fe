@@ -13,7 +13,7 @@ const Dashboard = (props) => {
         <>
           <DASHBOARD_ACCOUNT currentUser={props.user.currentUser} />
         </>
-      ) : props.user.drawerContent === 'ACCOUNT' ? (
+      ) : props.user.drawerContent === 'QUEUE' ? (
         <>
           <DASHBOARD_TWEETS
             currentUser={props.user.currentUser}
