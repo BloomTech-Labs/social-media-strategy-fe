@@ -75,7 +75,7 @@ const Registration = (props) => {
               component='h1'
               variant='h5'
             >
-              Login to SoMe<br />
+              Sign Up to SoMe<br />
               <span
                 style={{
                   fontFamily: 'Montserrat',
