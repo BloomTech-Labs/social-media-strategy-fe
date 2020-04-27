@@ -304,7 +304,7 @@ const TopicCard = (props) => {
                 setPostNow(false);
                 handleDateChange(new Date());
               }}
-              to={`/schedule`}
+              to={`/home/schedule`}
             >
               Schedule
             </NavLink>
@@ -312,7 +312,7 @@ const TopicCard = (props) => {
               onClick={() =>
                 setPostNow(true) & setcontent({ ...content, date: '' })
               }
-              to={`/post-now`}
+              to={`/home/post-now`}
             >
               Post Now
             </NavLink>
@@ -546,7 +546,7 @@ const TopicCard = (props) => {
               {postContent?.date === null ? (
                 <NavLink
                   style={{ textDecoration: 'none', color: 'black  ' }}
-                  to={`/schedule`}
+                  to={`/home/schedule`}
                 >
                   <MenuItem
                     onClick={togglemodal}

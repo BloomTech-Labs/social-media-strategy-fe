@@ -29,12 +29,11 @@ const Callback = () => {
 
       let promise = [user, post];
 
-      let check = await Promise.allSettled(promise);
-      console.log(check, 'promise check');
+      await Promise.allSettled(promise);
       setData(post.data);
 
       setTimeout(() => {
-        window.location.replace('/');
+        window.location.replace('/home');
       }, 4000);
       let countdown = setInterval(timer, 1000);
       function timer() {
@@ -102,7 +101,7 @@ const Callback = () => {
         <h2>Redirecting you back to your SoMe profile in {time} </h2>
         <p className='redirect'>
           If countdown didn't redirect you to profile page please click {''}
-          <a className='highlight' href='/'>
+          <a className='highlight' href='/home'>
             here
           </a>
         </p>

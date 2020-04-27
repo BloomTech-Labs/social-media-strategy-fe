@@ -29,7 +29,7 @@ const Dashboard_Feed = (props) => {
           className='feed'
           activeClassName='feedActive'
           onClick={() => SetFeedStatus('tweets')}
-          to='/feed/home'
+          to='/home/feed/home'
         >
           Home
         </NavLink>
@@ -37,7 +37,7 @@ const Dashboard_Feed = (props) => {
           className='feed'
           activeClassName='feedActive'
           onClick={() => SetFeedStatus('timeline')}
-          to='/feed/profile'
+          to='/home/feed/profile'
         >
           Profile
         </NavLink>
@@ -45,7 +45,7 @@ const Dashboard_Feed = (props) => {
           className='feed'
           activeClassName='feedActive'
           onClick={() => SetFeedStatus('mentions')}
-          to='/feed/search'
+          to='/home/feed/search'
         >
           Search
         </NavLink>

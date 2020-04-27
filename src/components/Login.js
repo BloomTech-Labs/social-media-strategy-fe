@@ -8,7 +8,6 @@ import Button from '@material-ui/core/Button';
 import TextField from '@material-ui/core/TextField';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import Checkbox from '@material-ui/core/Checkbox';
-import Link from '@material-ui/core/Link';
 import Paper from '@material-ui/core/Paper';
 import Box from '@material-ui/core/Box';
 import Grid from '@material-ui/core/Grid';
@@ -17,26 +16,29 @@ import Typography from '@material-ui/core/Typography';
 
 import { login } from '../actions';
 import { useHistory } from 'react-router';
+import { Link } from 'react-router-dom';
 
 const Login = (props) => {
   const LoginSchema = yup.object().shape({
     email: yup.string().required(),
-    password: yup.string().required().min(4)
-  })
+    password: yup
+      .string()
+      .required()
+      .min(4),
+  });
 
   const { register, handleSubmit, control, errors } = useForm({
-    validationSchema: LoginSchema
+    validationSchema: LoginSchema,
   });
 
   const classes = useStyles();
   const { push } = useHistory();
 
-
   function Copyright() {
     return (
       <Typography variant='body2' color='textSecondary' align='center'>
         {'Copyright © '}
-        <Link color='inherit' href='https://so-me.net/'>
+        <Link color='inherit' to='/team'>
           SoMe{' '}
         </Link>{' '}
         {new Date().getFullYear()}
@@ -46,19 +48,19 @@ const Login = (props) => {
   }
 
   const onSubmit = (data) => {
-      props.login(data, push);
+    props.login(data, push);
   };
 
   return (
     <Grid container component='main' className={classes.root}>
-        <Grid
-          item
-          xs={false}
-          sm={4}
-          md={7}
-          className={classes.image}
-          data-cy='loginImage'
-        />
+      <Grid
+        item
+        xs={false}
+        sm={4}
+        md={7}
+        className={classes.image}
+        data-cy='loginImage'
+      />
       <Grid
         className={classes.test}
         item
@@ -85,7 +87,8 @@ const Login = (props) => {
               component='h1'
               variant='h5'
             >
-              Login to SoMe<br />
+              Login to SoMe
+              <br />
               <span
                 style={{
                   fontFamily: 'Montserrat',
@@ -96,14 +99,11 @@ const Login = (props) => {
                   color: '#E85556',
                 }}
               >
-                Sign into your account<br />
+                Sign into your account
+                <br />
               </span>
             </Typography>
-            <form
-              className={classes.form}
-              
-              onSubmit={handleSubmit(onSubmit)}
-            >
+            <form className={classes.form} onSubmit={handleSubmit(onSubmit)}>
               <Controller
                 ref={register}
                 name='email'
@@ -163,7 +163,7 @@ const Login = (props) => {
                     className='registerButton'
                     style={{ cursor: 'pointer' }}
                     variant='body2'
-                    href='https://so-me.net/register'
+                    to='/register'
                   >
                     Don't have an account? Sign Up
                   </Link>
@@ -182,10 +182,8 @@ const Login = (props) => {
 
 const mapStateToProps = (state) => {
   return {
-    user: state.user
-  }
+    user: state.user,
+  };
 };
 
-export default connect(mapStateToProps, { login })(
-  Login
-);
+export default connect(mapStateToProps, { login })(Login);

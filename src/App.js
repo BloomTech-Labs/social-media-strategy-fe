@@ -15,7 +15,7 @@ const App = (props) => {
     <>
       <Switch>
         <PrivateRoute path='/callback' component={Callback} />
-        <PrivateRoute path='/home' component  ={HomePage} />
+        <PrivateRoute path='/home' component={HomePage} />
         <Route path='/team' component={Team} />
         <Route exact path='/login' component={Login} />
         <Route exact path='/register' component={Registration} />
