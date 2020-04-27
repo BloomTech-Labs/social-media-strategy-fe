@@ -52,6 +52,7 @@ export const registerUser = (userData, cb) => (dispatch) => {
     .catch((error) => {
       dispatch({ type: CONSTANTS.USER_APICALL_FAILURE, payload: 'This user is already registered' });
       console.log('Error', error);
+
     });
 };
 
