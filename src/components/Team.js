@@ -1,5 +1,6 @@
 import React from 'react';
-import { NavLink } from 'react-router-dom';
+import { NavLink, Route, Switch } from 'react-router-dom';
+import Button from '@material-ui/core/Button';
 import '../sass/team.scss';
 import jp from '../imgs/jp.jpg';
 import jason from '../imgs/jason-long.jpg';
@@ -18,25 +19,25 @@ import figma from '../imgs/figma-black.png';
 
 const Team = () => {
   return (
-    <div className='team-body' style={{ height: '100vh', width: '100vw' }}>
+    <div className="team-body" style={{ height: '100vh', width: '100vw' }}>
       {/* ^ REMOVE INLINE ^ */}
-      <div className='landing-navbar'>
-        <NavLink to='/landing' className='logo-text'>
+      <div className="landing-navbar">
+        <NavLink to="/landing" className="logo-text">
           SoMe
         </NavLink>
-        <div className='landing-sign-nav'>
-          <NavLink to='/' className='sign-up-btn'>
+        <div className="landing-sign-nav">
+          <NavLink to="/" className="sign-up-btn">
             Sign Up
           </NavLink>
-          <NavLink className='sign-in-btn' to='/'>
+          <NavLink className="sign-in-btn" to="/">
             Sign In
           </NavLink>
         </div>
       </div>
-      <div className='centered'>
-        <div className='center-team'>
-          <div className='project-info'>
-            <h2>SoMe Strategy</h2>
+      <div className="centered">
+        <div className="center-team">
+          <div className="project-info">
+            <h2 style={{ marginBottom: '3rem' }}>SoMe Strategy</h2>
             <p>
               SoMe Strategy is a single page application created by a team of
               user-interface, web development, and data science students from
@@ -65,169 +66,182 @@ const Team = () => {
               and build their brand and businesses through strategic social
               media management.{' '}
             </p>
-            <div className='links'>
-              <a href='https://github.com/Lambda-School-Labs/social-media-strategy-fe'>
-                <img alt='' className='social-link' src={github} />
+            <div className="links">
+              <a href="https://github.com/Lambda-School-Labs/social-media-strategy-fe">
+                <img alt="" className="social-link" src={github} />
               </a>
-              <a href='https://www.figma.com/file/ssdhBZL2Yr9GYaRyZtO8Cu/Social-Media-Strategy%2C-JP?node-id=179%3A0'>
-                <img alt='' className='social-link' src={figma} />
+              <a href="https://www.figma.com/file/ssdhBZL2Yr9GYaRyZtO8Cu/Social-Media-Strategy%2C-JP?node-id=179%3A0">
+                <img alt="" className="social-link" src={figma} />
               </a>
-              <a href='https://twitter.com/some_strategy'>
-                <img alt='' className='social-link' src={twitter} />
+              <a href="https://twitter.com/some_strategy">
+                <img alt="" className="social-link" src={twitter} />
               </a>
             </div>
           </div>
-          <div className='team-table'>
-            <div className='title-div'>
-              <p className='team-title'>Team Lead</p>
+          <div className="team-table">
+            <div className="title-div">
+              <p className="team-title">Team Lead</p>
             </div>
-            <div className='contributor'>
+            <div className="contributor">
               <h4>Ana Rosa Lerma</h4>
-              <img alt='' className='headshot' src={ana} />
-              <div className='links'>
-                <a href='https://www.linkedin.com/in/ana-rosa-lerma/'>
-                  <img alt='' className='social-link' src={linkedin} />
+              <img alt="" className="headshot" src={ana} alt="" />
+              <div className="links">
+                <a href="https://www.linkedin.com/in/ana-rosa-lerma/">
+                  <img alt="" className="social-link" src={linkedin} />
                 </a>
-                <a href='https://twitter.com/anarosaUX'>
-                  <img alt='' className='social-link' src={twitter} />
+                <a href="https://twitter.com/anarosaUX">
+                  <img alt="" className="social-link" src={twitter} />
                 </a>
               </div>
             </div>
           </div>
-          <div className='team-table'>
-            <div className='title-div'>
-              <p className='team-title'>UX</p>
+          <div className="team-table">
+            <div className="title-div">
+              <p className="team-title">UX</p>
             </div>
-            <div className='contributor'>
+            <div className="contributor">
               <h4>JP Eliares</h4>
-              <img alt='' className='headshot' src={jp} />
-              <div className='links'>
-                <a href='https://www.linkedin.com/in/jpeliares/'>
-                  <img alt='' className='social-link' src={linkedin} />
+              <img alt="" className="headshot" src={jp} />
+              <div className="links">
+                <a href="https://www.linkedin.com/in/jpeliares/">
+                  <img alt="" className="social-link" src={linkedin} />
                 </a>
               </div>
             </div>
           </div>
-          <div className='team-table'>
-            <div className='title-div'>
-              <p className='team-title'>Web Devs</p>
+          <div className="team-table">
+            <div className="title-div">
+              <p className="team-title">Web Devs</p>
             </div>
-            <div className='contributor'>
+            <div className="contributor">
               <h4>Jason Long</h4>
-              <img alt='' className='headshot' src={jason} />
-              <div className='links'>
-                <a href='https://github.com/jlong5795'>
-                  <img alt='' className='social-link' src={github} />
+              <img alt="" className="headshot" src={jason} />
+              <div className="links">
+                <a href="https://github.com/jlong5795">
+                  <img alt="" className="social-link" src={github} />
+                </a>
+                <a href="https://www.linkedin.com/in/jasonlong1231/">
+                  <img alt="" className="social-link" src={linkedin} />
+                </a>
+                <a href="https://twitter.com/Jrive204">
+                  <img alt="" className="social-link" src={twitter} />
+                  <img alt="" className="social-link" src={github} />
+                </a>
+                <a href="https://www.linkedin.com/in/jasonlong1231/">
+                  <img alt="" className="social-link" src={linkedin} />
+                </a>
+                <a href="https://twitter.com/Jrive204">
+                  <img alt="" className="social-link" src={twitter} />
                 </a>
               </div>
             </div>
-            <div className='contributor'>
+            <div className="contributor">
               <h4>Matthew Bedard</h4>
-              <img alt='' className='headshot' src={matthew} />
-              <div className='links'>
-                <a href='https://github.com/Matt-GitHub'>
-                  <img alt='' className='social-link' src={github} />
+              <img alt="" className="headshot" src={matthew} />
+              <div className="links">
+                <a href="https://github.com/Matt-GitHub">
+                  <img alt="" className="social-link" src={github} />
                 </a>
-                <a href='https://www.linkedin.com/in/matthew-bedard-dev/'>
-                  <img alt='' className='social-link' src={linkedin} />
+                <a href="https://www.linkedin.com/in/matthew-bedard-dev/">
+                  <img alt="" className="social-link" src={linkedin} />
                 </a>
               </div>
             </div>
-            <div className='contributor'>
+            <div className="contributor">
               <h4>Tyler Gilchrist</h4>
-              <img alt='' className='headshot' src={tyler} />
-              <div className='links'>
-                <a href='https://github.com/Tyler668'>
-                  <img alt='' className='social-link' src={github} />
+              <img alt="" className="headshot" src={tyler} />
+              <div className="links">
+                <a href="https://github.com/Tyler668">
+                  <img alt="" className="social-link" src={github} />
                 </a>
-                <a href='https://www.linkedin.com/in/tyler-gilchrist-a5a426191/'>
-                  <img alt='' className='social-link' src={linkedin} />
+                <a href="https://www.linkedin.com/in/tyler-gilchrist-a5a426191/">
+                  <img alt="" className="social-link" src={linkedin} />
                 </a>
               </div>
             </div>
-            <div className='contributor'>
+            <div className="contributor">
               <h4>Jose Rivera</h4>
-              <img alt='' className='headshot' src={jose} />
-              <div className='links'>
-                <a href='https://github.com/Jrive204'>
-                  <img alt='' className='social-link' src={github} />
+              <img alt="" className="headshot" src={jose} />
+              <div className="links">
+                <a href="https://github.com/Jrive204">
+                  <img alt="" className="social-link" src={github} />
                 </a>
-                <a href='https://twitter.com/Jrive204'>
-                  <img alt='' className='social-link' src={twitter} />
+                <a href="https://twitter.com/Jrive204">
+                  <img alt="" className="social-link" src={twitter} />
                 </a>
               </div>
             </div>
-            <div className='contributor'>
+            <div className="contributor">
               <h4>Jessica Wolff</h4>
-              <img alt='' className='headshot' src={jessica} />
-              <div className='links'>
-                <a href='https://github.com/jleahwolff'>
-                  <img alt='' className='social-link' src={github} />
+              <img alt="" className="headshot" src={jessica} />
+              <div className="links">
+                <a href="https://github.com/jleahwolff">
+                  <img alt="" className="social-link" src={github} />
                 </a>
-                <a href='https://www.linkedin.com/in/jwolff2/'>
-                  <img alt='' className='social-link' src={linkedin} />
+                <a href="https://www.linkedin.com/in/jwolff2/">
+                  <img alt="" className="social-link" src={linkedin} />
                 </a>
-                <a href='https://twitter.com/jleahwolff'>
-                  <img alt='' className='social-link' src={twitter} />
+                <a href="https://twitter.com/jleahwolff">
+                  <img alt="" className="social-link" src={twitter} />
                 </a>
               </div>
             </div>
           </div>
 
-          <div className='team-table'>
-            <div className='title-div'>
-              <p className='team-title'>Data Science</p>
+          <div className="team-table">
+            <div className="title-div">
+              <p className="team-title">Data Science</p>
             </div>
-            <div className='contributor'>
+            <div className="contributor">
               <h4>Andrew Lowe</h4>
-              <img alt='' className='headshot' src={andrew} />
-              <div className='links'>
-                <a href='https://github.com/AndrewSLowe'>
-                  <img alt='' className='social-link' src={github} />
+              <img alt="" className="headshot" src={andrew} />
+              <div className="links">
+                <a href="https://github.com/AndrewSLowe">
+                  <img alt="" className="social-link" src={github} />
                 </a>
-                <a href='https://www.linkedin.com/in/andrew-lowe-5b581714a/'>
-                  <img alt='' className='social-link' src={linkedin} />
+                <a href="https://www.linkedin.com/in/andrew-lowe-5b581714a/">
+                  <img alt="" className="social-link" src={linkedin} />
                 </a>
-                <a href='https://twitter.com/andrewloweGR'>
-                  <img alt='' className='social-link' src={twitter} />
+                <a href="https://twitter.com/andrewloweGR">
+                  <img alt="" className="social-link" src={twitter} />
                 </a>
               </div>
             </div>
-            <div className='contributor'>
+            <div className="contributor">
               <h4>Sarah Xu</h4>
-              <img alt='' className='headshot' src={sarah} />
-              <div className='links'>
-                <a href='https://github.com/sarahxu087'>
-                  <img alt='' className='social-link' src={github} />
+              <img alt="" className="headshot" src={sarah} />
+              <div className="links">
+                <a href="https://github.com/sarahxu087">
+                  <img alt="" className="social-link" src={github} />
                 </a>
               </div>
             </div>
-            <div className='contributor'>
+            <div className="contributor">
               <h4>Jud Taylor</h4>
-              <img alt='' className='headshot' src={jud} />
-              <div className='links'>
-                <a href='https://github.com/gptix'>
-                  <img alt='' className='social-link' src={github} />
+              <img alt="" className="headshot" src={jud} />
+              <div className="links">
+                <a href="https://github.com/gptix">
+                  <img alt="" className="social-link" src={github} />
                 </a>
               </div>
             </div>
           </div>
         </div>
       </div>
-      <footer className='sticky-footer'>
-        <div className='text-align'>
+      <footer className="sticky-footer">
+        <div className="text-align">
           <p> All rights reserved SoMe ®</p>
-          <div className='footer-nav'>
-            <NavLink className='team-link' to='/team'>
+          <div className="footer-nav">
+            <NavLink className="team-link" to="/team">
               Contact us
             </NavLink>
             <a
-              href='https://github.com/Lambda-School-Labs/social-media-strategy-fe'
-              className='team-link'
+              href="https://github.com/Lambda-School-Labs/social-media-strategy-fe"
+              className="team-link"
             >
               Github
             </a>
-            <a href='https://lambdaschool.com/' className='team-link'>
+            <a href="https://lambdaschool.com/" className="team-link">
               Lambda School
             </a>
           </div>
