@@ -24,8 +24,8 @@ import Button from '@material-ui/core/Button';
 
 import {
   MuiPickersUtilsProvider,
-  KeyboardTimePicker,
-  KeyboardDatePicker,
+  TimePicker,
+  DatePicker,
 } from '@material-ui/pickers';
 import 'date-fns';
 import { useHistory } from 'react-router';
@@ -153,7 +153,7 @@ const TopicCard = (props) => {
   });
   const [editing, setediting] = useState(false);
   const [postnow, setPostNow] = useState(false);
-  const { push } = useHistory();
+  const { goBack } = useHistory();
   const [anchorEl, setAnchorEl] = useState(null);
   const openMenu = Boolean(anchorEl);
   const [postContent, setPostContent] = useState('');
@@ -193,8 +193,6 @@ const TopicCard = (props) => {
     open,
   ]);
 
-  // console.log(rectime, 'OPT2');
-
   const onsubmitTwitter = (e) => {
     e.preventDefault();
     props.editCardandPost(props.card.id, content, postContent);
@@ -209,12 +207,18 @@ const TopicCard = (props) => {
   };
 
   const handleDateChange = (date) => {
-    setSelectedDate(date);
-    setcontent({ ...content, date: date });
+    if (date >= new Date()) {
+      setSelectedDate(date);
+      setcontent({ ...content, date: date });
+    } else {
+      return null;
+    }
   };
 
   const togglemodal = () => {
     setOpen(!open);
+    setAnchorEl(null);
+
     setcontent({ ...content, screenname: screen_name[0] });
   };
 
@@ -230,9 +234,9 @@ const TopicCard = (props) => {
   //  CURRENT PATCH FOR ISSUE -- need to adjust to be dynamic if Optimal time is a few days behind etc
   async function newRecTime(date) {
     let optTime = new Date(rectime);
-    optTime.setDate(optTime.getDate(rectime) + 1);
-    // console.log(optTime, props.card.content, 'OPT11');
-    setSelectedDate(optTime);
+    let today = new Date();
+    optTime.setDate(today.getDate() + 1);
+    handleDateChange(optTime);
     setcontent({ ...content, date: optTime });
   }
 
@@ -296,7 +300,10 @@ const TopicCard = (props) => {
         <MuiPickersUtilsProvider utils={DateFnsUtils}>
           <nav className='item-sub-nav'>
             <NavLink
-              onClick={() => setPostNow(false) & handleDateChange(new Date())}
+              onClick={() => {
+                setPostNow(false);
+                handleDateChange(new Date());
+              }}
               to={`/schedule`}
             >
               Schedule
@@ -320,28 +327,23 @@ const TopicCard = (props) => {
                     margin: '5%',
                   }}
                 >
-                  <KeyboardDatePicker
+                  <DatePicker
                     disableToolbar
                     variant='inline'
                     format='MM/dd/yyyy'
                     margin='normal'
                     id='date-picker-inline'
+                    disablePast={true}
                     label='Date'
                     value={selectedDate}
                     onChange={handleDateChange}
-                    KeyboardButtonProps={{
-                      'aria-label': 'change date',
-                    }}
                   />
-                  <KeyboardTimePicker
+                  <TimePicker
                     margin='normal'
                     id='time-picker'
                     label='Time'
                     value={selectedDate}
                     onChange={handleDateChange}
-                    KeyboardButtonProps={{
-                      'aria-label': 'change time',
-                    }}
                   />
                 </div>
                 <div style={{ display: 'flex', alignItems: 'center' }}>
@@ -541,9 +543,7 @@ const TopicCard = (props) => {
               open={openMenu}
               onClose={handleMenuClose}
             >
-              {postContent?.date?.length &&
-              new Date(postContent?.date) < new Date() ? null : postContent
-                  ?.date?.length ? null : (
+              {postContent?.date === null ? (
                 <NavLink
                   style={{ textDecoration: 'none', color: 'black  ' }}
                   to={`/schedule`}
@@ -555,7 +555,7 @@ const TopicCard = (props) => {
                     Post
                   </MenuItem>
                 </NavLink>
-              )}
+              ) : null}
 
               <MenuItem
                 onClick={() => {
@@ -614,7 +614,7 @@ const TopicCard = (props) => {
             aria-describedby='transition-modal-description'
             className={classes.modal}
             open={open}
-            onClose={() => setOpen(false) & push('/')}
+            onClose={() => setOpen(false) & goBack()}
             closeAfterTransition
             BackdropComponent={Backdrop}
             BackdropProps={{
@@ -642,7 +642,6 @@ const TopicCard = (props) => {
                   setediting(!editing);
                 }}
               >
-                {console.log(content, 'CONTENT')}
                 <TextareaAutosize
                   rowsMin={3}
                   id='textareaAuto'
@@ -659,7 +658,6 @@ const TopicCard = (props) => {
                   }
                 />
                 {/* &nbsp;{" "} */}
-                {console.log(tweetCount, 'CONTENTt')}
 
                 <div className='action-cont editcard-cont'>
                   <input className='actionSubmit' type='submit' />

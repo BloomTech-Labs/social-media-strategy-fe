@@ -47,16 +47,16 @@ const Navigation = (props) => {
             <NavLink
               onClick={() => {
                 if (
-                  props.user.drawerContent === 'ACCOUNT' ||
+                  props.user.drawerContent === 'QUEUE' ||
                   !props.user.drawer
                 ) {
                   props.drawerswitch();
                 }
-                props.drawerOpen('ACCOUNT');
+                props.drawerOpen('QUEUE');
               }}
               className='linkNav'
               activeClassName='linkActive'
-              to='/account'
+              to='/queue'
             >
               <li className='link'>
                 <ScheduleIcon
