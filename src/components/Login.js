@@ -111,6 +111,7 @@ const Login = (props) => {
                 control={control}
                 variant='outlined'
                 margin='normal'
+                inputProps={{ minLength: '4', required: true }}
                 required
                 fullWidth
                 id='email'
@@ -119,7 +120,7 @@ const Login = (props) => {
                 type='email'
                 autoFocus
               />
-              {errors.email && <p>{errors.email.message}</p>}
+              {/* {errors.email && <p>{errors.email.message}</p>} */}
               <ErrorMessage errors={errors} name='email' />
               <Controller
                 variant='outlined'
@@ -127,7 +128,7 @@ const Login = (props) => {
                 ref={register}
                 as={TextField}
                 control={control}
-                required
+                inputProps={{ minLength: '4', required: true }}
                 fullWidth
                 name='password'
                 label='Password'
@@ -135,8 +136,8 @@ const Login = (props) => {
                 id='password'
                 autoComplete='current-password'
               />
-              {errors.password && <p>{errors.password.message}</p>}
-              {props.user.error && <p>{props.user.error}</p>}
+              {/* {errors.password && <span>{errors.password.message}</span>}
+              {props.user.error && <span>{props.user.error}</span>} */}
               <FormControlLabel
                 control={<Checkbox value='remember' color='primary' />}
                 label='Remember me'
