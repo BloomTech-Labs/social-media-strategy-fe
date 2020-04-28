@@ -17,6 +17,9 @@ export const login = (userData, cb) => (dispatch) => {
       cb('/home/accounts');
     })
     .catch((error) => {
+      console.log('HELLO', error.response);
+      alert('Email or Password invalid');
+
       dispatch({
         type: CONSTANTS.USER_APICALL_FAILURE,
         payload: 'Invalid email password combination',
@@ -53,11 +56,15 @@ export const registerUser = (userData, cb) => (dispatch) => {
       });
     })
     .catch((error) => {
+      console.log('HELLO', error.response.data.error);
+      alert(
+        error.response.data.error ||
+          'Check email format, something went wrong'
+      );
       dispatch({
         type: CONSTANTS.USER_APICALL_FAILURE,
         payload: 'This user is already registered',
       });
-      console.log('Error', error);
     });
 };
 

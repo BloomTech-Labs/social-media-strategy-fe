@@ -1,7 +1,8 @@
 import React from 'react';
-import { useForm, Controller } from 'react-hook-form';
+import { useForm, Controller, ErrorMessage } from 'react-hook-form';
 import { connect } from 'react-redux';
 import { useStyles } from '../sass/StyledRegister_login';
+import * as yup from 'yup';
 import Avatar from '@material-ui/core/Avatar';
 import Button from '@material-ui/core/Button';
 import TextField from '@material-ui/core/TextField';
@@ -18,7 +19,16 @@ import { registerUser } from '../actions';
 import { useHistory } from 'react-router';
 
 const Registration = (props) => {
-  const { register, handleSubmit, control } = useForm();
+  const LoginSchema = yup.object().shape({
+    email: yup.string().required(),
+    password: yup
+      .string()
+      .required()
+      .min(4),
+  });
+  const { register, handleSubmit, control, errors } = useForm({
+    validationSchema: LoginSchema,
+  });
   const classes = useStyles();
   const { push } = useHistory();
 
@@ -91,11 +101,7 @@ const Registration = (props) => {
                 <br />
               </span>
             </Typography>
-            <form
-              className={classes.form}
-              noValidate
-              onSubmit={handleSubmit(onSubmit)}
-            >
+            <form className={classes.form} onSubmit={handleSubmit(onSubmit)}>
               <Controller
                 data-cy='email'
                 ref={register}
@@ -105,17 +111,20 @@ const Registration = (props) => {
                 variant='outlined'
                 margin='normal'
                 required
+                inputProps={{ minLength: '4', required: true }}
                 fullWidth
                 id='email'
                 label='Email Address'
                 autoComplete='email'
-                type='text'
+                type='email'
                 autoFocus
               />
+              <ErrorMessage errors={errors} name='email' />
               <Controller
                 data-cy='password'
                 variant='outlined'
                 margin='normal'
+                inputProps={{ minLength: '4', required: true }}
                 ref={register}
                 as={TextField}
                 control={control}
