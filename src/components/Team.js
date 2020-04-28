@@ -22,7 +22,7 @@ const Team = () => {
     <div className='team-body' style={{ height: '100vh', width: '100vw' }}>
       {/* ^ REMOVE INLINE ^ */}
       <div className='landing-navbar'>
-        <NavLink to='/landing' className='logo-text'>
+        <NavLink to='/login' className='logo-text'>
           SoMe
         </NavLink>
         <div className='landing-sign-nav'>
