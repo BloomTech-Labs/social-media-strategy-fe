@@ -56,7 +56,6 @@ const CardModal = (props) => {
   const [selectedDate, setSelectedDate] = useState(new Date());
   const [tweetCount, handletweetchange] = useTweetCount(280);
   const [postContent, setPostContent] = useState("");
-  const [open, setOpen] = useState(false);
 
   let screen_name = props.user.accounts.map((e) => e.screen_name);
   const inputfocus = useRef(null);
@@ -76,8 +75,16 @@ const CardModal = (props) => {
     props.user.accounts,
     props.card.date,
     props.card.id,
-    open,
+    props.open,
   ]);
+
+   useEffect(() => {
+    if (props.editing || props.open) {
+      setTimeout(() => {
+        inputfocus.current.focus();
+      }, 0);
+    }
+  }, [props.editing, props.open]);
 
   const handleChange = (e) => {
     e.preventDefault();
@@ -89,7 +96,7 @@ const CardModal = (props) => {
   };
 
   const handleDateChange = (date) => {
-    if (date >= new Date()) {
+    if (new Date(date) > new Date()) {
       setSelectedDate(date);
       setcontent({ ...content, date: date });
     } else {
