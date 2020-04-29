@@ -27,14 +27,14 @@ const Team = () => {
             <NavLink to='/landing' className='logo-text'>SoMe</NavLink>
             <div className="landing-sign-nav">
                 <NavLink
-                        to='/'
+                        to='/register'
                         className='sign-up-btn'
                         >
                             Sign Up
                     </NavLink>
                 <NavLink
                     className='sign-in-btn'
-                    to='/'
+                    to='/login'
                     >
                         Sign In
                 </NavLink>
