@@ -15,9 +15,9 @@ import Select from "@material-ui/core/Select";
 import InputLabel from "@material-ui/core/InputLabel";
 import MenuItem from "@material-ui/core/MenuItem";
 import Backdrop from "@material-ui/core/Backdrop";
-import TextareaAutosize from "@material-ui/core/TextareaAutosize";
 
 import CardModal from "./CardModal";
+import EditTopicForm from './EditTopicForm';
 
 import { Fade, Menu, Tooltip, IconButton, Typography } from "@material-ui/core";
 import { axiosWithAuth } from "../utils/axiosWithAuth";
@@ -39,7 +39,6 @@ import DialogActions from "@material-ui/core/DialogActions";
 import DialogContent from "@material-ui/core/DialogContent";
 import DialogContentText from "@material-ui/core/DialogContentText";
 import DialogTitle from "@material-ui/core/DialogTitle";
-import { useTweetCount } from "./useTweetCount";
 
 const Container = styled.div`
   background-color: white;
@@ -136,7 +135,6 @@ const modalStyles = makeStyles((theme) => ({
 const TopicCard = (props) => {
   const classes = modalStyles();
   const [rectime, setRecTime] = useState(new Date());
-  const [tweetCount, handletweetchange] = useTweetCount(280);
 
   const SN = localStorage.getItem("SNAME");
   const [selectedDate, setSelectedDate] = useState(new Date());
@@ -157,16 +155,6 @@ const TopicCard = (props) => {
 
   let updateTrue = props?.user?.didUpdate === true;
   let screen_name = props.user.accounts.map((e) => e.screen_name);
-
-  const inputfocus = useRef(null);
-
-  useEffect(() => {
-    if (editing || open) {
-      setTimeout(() => {
-        inputfocus.current.focus();
-      }, 0);
-    }
-  }, [editing, open]);
 
   const handledialogtoggle = () => {
     setDialogToggle(!dialogtoggle);
@@ -218,11 +206,6 @@ const TopicCard = (props) => {
     setcontent({ ...content, screenname: screen_name[0] });
   };
 
-  const handleChange = (e) => {
-    e.preventDefault();
-    setcontent({ ...content, [e.target.name]: e.target.value });
-  };
-
   const handleHandleChange = (event) => {
     setHandle(event.target.value);
   };
@@ -261,162 +244,6 @@ const TopicCard = (props) => {
         " @ " +
         timeformat(postdates)
       : null;
-
-  // const modalBody = (
-  //   <div style={modalStyle} className={classes.paper}>
-  //     <h2 className={classes.mHeader}>Twitter Manager</h2>
-  //     <h3 className={classes.mAccent}>Schedule or Post Now</h3>
-  //     <FormControl className={classes.formControl}>
-  //       <span className='socialAccountInput'>
-  //         <InputLabel
-  //           shrink
-  //           // className={classes.select}
-  //           className='test'
-  //           id='twitter-handle-select'
-  //         >
-  //           <span className='socialAccount'> Social Account </span>
-  //         </InputLabel>
-  //         <Select
-  //           labelId='twitter-handle-select'
-  //           id='select'
-  //           value={handle}
-  //           // defaultValue={1}
-  //           onChange={handleHandleChange}
-  //           className='test'
-  //           style={{ width: '40%' }}
-  //         >
-  //           <MenuItem defaultValue value={1}>
-  //             <span id='alignTextIcon'>
-  //               @{screen_name} &nbsp;{' '}
-  //               <TwitterIcon className='twitterIconModal' />
-  //             </span>
-  //           </MenuItem>
-  //         </Select>
-  //       </span>
-  //       <MuiPickersUtilsProvider utils={DateFnsUtils}>
-  //         <nav className='item-sub-nav'>
-  //           <NavLink
-  //             onClick={() => {
-  //               setPostNow(false);
-  //               handleDateChange(new Date());
-  //             }}
-  //             to={`/schedule`}
-  //           >
-  //             Schedule
-  //           </NavLink>
-  //           <NavLink
-  //             onClick={() =>
-  //               setPostNow(true) & setcontent({ ...content, date: '' })
-  //             }
-  //             to={`/post-now`}
-  //           >
-  //             Post Now
-  //           </NavLink>
-  //         </nav>
-  //         <Grid container justify='space-around' alignItems='center'>
-  //           {!postnow ? (
-  //             <>
-  //               <div
-  //                 style={{
-  //                   display: 'flex',
-  //                   flexDirection: 'column',
-  //                   margin: '5%',
-  //                 }}
-  //               >
-  //                 <DatePicker
-  //                   disableToolbar
-  //                   variant='inline'
-  //                   format='MM/dd/yyyy'
-  //                   margin='normal'
-  //                   id='date-picker-inline'
-  //                   disablePast={true}
-  //                   label='Date'
-  //                   value={selectedDate}
-  //                   onChange={handleDateChange}
-  //                 />
-  //                 <TimePicker
-  //                   margin='normal'
-  //                   id='time-picker'
-  //                   label='Time'
-  //                   value={selectedDate}
-  //                   onChange={handleDateChange}
-  //                 />
-  //               </div>
-  //               <div style={{ display: 'flex', alignItems: 'center' }}>
-  //                 <button
-  //                   onClick={() =>
-  //                     new Date(rectime) > new Date()
-  //                       ? handleDateChange(rectime)
-  //                       : newRecTime()
-  //                   }
-  //                   style={{
-  //                     borderRadius: '6px',
-  //                     width: '205px',
-  //                     height: '38px',
-  //                     background: '#817BAB',
-  //                     color: '#EBECF0',
-  //                   }}
-  //                 >
-  //                   Suggest a Time
-  //                 </button>
-  //                 <Tooltip
-  //                   title='proprietary optimization algorithm to maximize engagement'
-  //                   placement='top-end'
-  //                   aria-label='InfoIcon'
-  //                   fontSize='small'
-  //                   color='action'
-  //                 >
-  //                   <InfoIcon />
-  //                 </Tooltip>
-  //               </div>
-  //             </>
-  //           ) : null}
-  //         </Grid>
-  //       </MuiPickersUtilsProvider>
-  //       <Inputtextarea
-  //         placeholder='Customize your Twitter message here'
-  //         type='text'
-  //         name='post_text'
-  //         cols='50'
-  //         rows='10'
-  //         maxLength='280'
-  //         ref={inputfocus}
-  //         onFocus={handletweetchange}
-  //         value={content.post_text}
-  //         onChange={(event) => handletweetchange(event, handleChange(event))}
-  //       />
-  //       <span
-  //         style={
-  //           tweetCount.chars_left < 80
-  //             ? { color: 'red' }
-  //             : tweetCount.chars_left < 180
-  //             ? { color: 'orange' }
-  //             : null
-  //         }
-  //         className='tweetcountmodal'
-  //       >
-  //         {tweetCount.chars_left}
-  //       </span>
-  //     </FormControl>
-  //     {!postnow ? (
-  //       <button
-  //         onClick={onsubmitTwitter}
-  //         style={{ width: '40%' }}
-  //         className={classes.actionSubmit}
-  //       >
-  //         Schedule
-  //       </button>
-  //     ) : (
-  //       <button
-  //         onClick={onsubmitTwitter}
-  //         style={{ width: '40%' }}
-  //         className={classes.actionSubmit}
-  //       >
-  //         Post now
-  //       </button>
-  //     )}
-  //   </div>
-  //);
 
   return (
     <Draggable draggableId={String(props.id)} index={props.index}>
@@ -621,58 +448,13 @@ const TopicCard = (props) => {
               {props.card.content}
             </Typography>
           ) : (
-            <>
-              <form
-                className='edit-card'
-                onSubmit={(e) => {
-                  e.preventDefault();
-                  props.editCard(props.card.id, content, postContent);
-                  setcontent({ ...content, post_text: content.post_text });
-                  setediting(!editing);
-                }}
-              >
-                <TextareaAutosize
-                  rowsMin={3}
-                  id='textareaAuto'
-                  className='edit-card-txt-area'
-                  type='text'
-                  name='post_text'
-                  maxLength='280'
-                  ref={inputfocus}
-                  onFocus={handletweetchange}
-                  value={content.post_text}
-                  onChange={(event) =>
-                    handletweetchange(event, handleChange(event))
-                  }
-                />
-                <div className='action-cont editcard-cont'>
-                  <input className='actionSubmit' type='submit' />
-                  <span
-                    onClick={() => setediting(!editing)}
-                    style={{
-                      color: "red",
-                      fontSize: "1.0rem",
-                      fontWeight: "bolder",
-                      padding: "0 .5rem",
-                    }}
-                  >
-                    X
-                  </span>
-                  <span
-                    style={
-                      tweetCount.chars_left < 80
-                        ? { color: "red" }
-                        : tweetCount.chars_left < 180
-                        ? { color: "orange" }
-                        : null
-                    }
-                    className='tweetcount'
-                  >
-                    {tweetCount.chars_left}
-                  </span>
-                </div>
-              </form>
-            </>
+            <EditTopicForm 
+              content={content} 
+              setcontent={setcontent}
+              postContent={postContent}
+              editing={editing}
+              setediting={setediting}
+            />
           )}
         </Container>
       )}
