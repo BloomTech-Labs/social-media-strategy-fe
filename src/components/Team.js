@@ -19,26 +19,20 @@ import figma from '../imgs/figma-black.png';
 
 
 const Team = () => {
-
-    return (
-        <div className="team-body" style={{height: '100vh', width: '100vw'}}>
-            {/* ^ REMOVE INLINE ^ */}
-        <div className='landing-navbar'>
-            <NavLink to='/landing' className='logo-text'>SoMe</NavLink>
-            <div className="landing-sign-nav">
-                <NavLink
-                        to='/register'
-                        className='sign-up-btn'
-                        >
-                            Sign Up
-                    </NavLink>
-                <NavLink
-                    className='sign-in-btn'
-                    to='/login'
-                    >
-                        Sign In
-                </NavLink>
-            </div>
+  return (
+    // REMOVE INLINE
+    <div className='team-body' style={{ height: '100vh', width: '100vw' }}>
+      <div className='landing-navbar'>
+        <NavLink to='/login' className='logo-text'>
+          SoMe
+        </NavLink>
+        <div className='landing-sign-nav'>
+          <NavLink to='/register' className='sign-up-btn'>
+            Sign Up
+          </NavLink>
+          <NavLink className='sign-in-btn' to='/login'>
+            Sign In
+          </NavLink>
         </div>
         <div className="centered">
         <div className='center-team'>
