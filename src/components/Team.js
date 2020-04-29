@@ -19,8 +19,8 @@ import figma from '../imgs/figma-black.png';
 
 const Team = () => {
   return (
+    // REMOVE INLINE
     <div className='team-body' style={{ height: '100vh', width: '100vw' }}>
-      {/* ^ REMOVE INLINE ^ */}
       <div className='landing-navbar'>
         <NavLink to='/login' className='logo-text'>
           SoMe
