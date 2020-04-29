@@ -123,10 +123,6 @@ const Team = () => {
                 <a href='https://www.linkedin.com/in/jasonlong1231/'>
                   <img alt='' className='social-link' src={linkedin} />
                 </a>
-
-                <a href='https://www.linkedin.com/in/jasonlong1231/'>
-                  <img alt='' className='social-link' src={linkedin} />
-                </a>
               </div>
             </div>
             <div className='contributor'>

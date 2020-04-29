@@ -207,7 +207,7 @@ const TopicCard = (props) => {
   };
 
   const handleDateChange = (date) => {
-    if (date >= new Date()) {
+    if (new Date(date) >= new Date()) {
       setSelectedDate(date);
       setcontent({ ...content, date: date });
     } else {
