@@ -90,6 +90,11 @@ const userAuthReducer = (state = initialState, action) => {
         isLoading: false,
         error: action.payload,
       };
+    case CONSTANTS.TOGGLEUPDATE:
+      return {
+        ...state,
+        didUpdate: action.payload || !state.didUpdate,
+      };
     default:
       return state;
   }
