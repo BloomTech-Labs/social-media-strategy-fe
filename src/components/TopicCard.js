@@ -136,6 +136,14 @@ const modalStyles = makeStyles((theme) => ({
   },
 }));
 
+// MODAL ON CLOSE UPDATE TO
+//  onClose={() =>
+//               setOpen(false) &
+//               goBack() &
+//               setSelectedDate(new Date()) &
+//               setcontent({ ...content, date: '' })
+//             }
+
 const TopicCard = (props) => {
   const classes = modalStyles();
   const [rectime, setRecTime] = useState(new Date());
@@ -207,7 +215,10 @@ const TopicCard = (props) => {
   };
 
   const handleDateChange = (date) => {
+    console.log('WHAT ARE YOU!!!', date, 'WHAT ARE YOUU');
     if (new Date(date) >= new Date()) {
+      console.log('WHAT ARE YOU!!!', 'I MADE IT', 'WHAT ARE YOUU');
+
       setSelectedDate(date);
       setcontent({ ...content, date: date });
     } else {
@@ -265,6 +276,7 @@ const TopicCard = (props) => {
         ' @ ' +
         timeformat(postdates)
       : null;
+  console.log(content, 'WHAT ARE YOU');
 
   const modalBody = (
     <div style={modalStyle} className={classes.paper}>
@@ -614,7 +626,12 @@ const TopicCard = (props) => {
             aria-describedby='transition-modal-description'
             className={classes.modal}
             open={open}
-            onClose={() => setOpen(false) & goBack()}
+            onClose={() =>
+              setOpen(false) &
+              goBack() &
+              setSelectedDate(new Date()) &
+              setcontent({ ...content, date: '' })
+            }
             closeAfterTransition
             BackdropComponent={Backdrop}
             BackdropProps={{
