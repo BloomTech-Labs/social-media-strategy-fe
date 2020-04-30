@@ -1,7 +1,7 @@
 @import url("https://fonts.googleapis.com/css?family=Montserrat&display=swap");
 
 
-.team-body{
+.landing-body{
     background-image: url('../imgs/landingHero.jpg');
     background-size:cover;
     background-repeat: no-repeat;
@@ -9,7 +9,6 @@
     display:flex;
     flex-wrap:wrap;
     justify-content: space-between;
-    overflow-x:scroll;
 
     .sticky-footer{
         display:flex;
@@ -85,85 +84,13 @@
     }
 }
 
-
-.centered{
-    display:flex;
-    justify-content: center;
-    margin-bottom:10%;
-    margin-top:5%;
-}
-.center-team{
+.center-message{
     display: flex;
-    flex-direction: row;
+    flex-direction: column;
     margin: 0 auto;
-    align-items:flex-start;
-    width: 80%;
-    justify-content: flex-start;
-    flex-wrap: wrap;
-
-    .project-info{
-        width:100%;
-        border-radius: .5rem;
-        background-color: white;
-        padding: 1rem;
-        margin: 1rem 0;
-        
-        .social-link{
-            width:1.5vw;
-            padding: .5rem;
-        }
-    }
-
-
-    .team-table{
-        display: flex;
-        flex-direction: row;
-        background-color: #2f414b;;
-        align-items: center;
-        padding: .2rem;
-        border-radius: .5rem;
-        margin: 1rem 1rem 0 0;
-        
-
-        .title-div{
-            display: block;
-            position:relative;
-
-            .team-title{
-                transform: rotate(-90deg);
-                background-color: none;
-                font-size: 1.6rem;
-                color: white;
-                font-weight: 700;
-                margin:0;
-                // position: absolute;
-            }
-        }
-
-
-        .contributor{
-            display:flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items:center;
-            background:white;
-            padding: .5rem;
-            border-radius: .5rem;
-            margin: .5rem;
-
-            .headshot{
-                border-radius:1rem;
-                width:7vw;
-                height: inherit;
-            }
-
-            .social-link{
-                width:1.5vw;
-                padding: .5rem;
-            }
-        }
-    }
-
+    align-items:center;
+    width: 100%;
+    justify-content: center;
 
     .main-text{
         font-weight: 700;
@@ -188,3 +115,6 @@
         line-height: 2rem;
     }
 }
+
+
+

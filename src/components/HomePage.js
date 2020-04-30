@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useRef } from 'react';
 import { connect } from 'react-redux';
 import { DragDropContext, Droppable } from 'react-beautiful-dnd';
 import { sort, fetchTopics, updateTopics, currentUser } from '../actions';
@@ -16,6 +16,7 @@ import { Route, Switch, useHistory } from 'react-router';
 import Callback from './Callback';
 import { axiosWithAuth } from '../utils/axiosWithAuth';
 import { bindActionCreators } from 'redux';
+import CONSTANTS from '../actions/constants';
 
 // const drawerWidth = 400;
 
@@ -24,29 +25,22 @@ const TopicsContainer = styled.div`
   justify-content: space-evenly;
 `;
 
-// const homeStyles = makeStyles((theme) => ({
-//   bucket: {
-//     transition: theme.transitions.create(['margin', 'width'], {
-//       easing: theme.transitions.easing.sharp,
-//       duration: theme.transitions.duration.leavingScreen,
-//     }),
-//   },
-//   bucketShift: {
-//     width: `calc(100% - ${drawerWidth}px)`,
-//     marginLeft: drawerWidth,
-//     transition: theme.transitions.create(['margin', 'width'], {
-//       easing: theme.transitions.easing.easeOut,
-//       duration: theme.transitions.duration.enteringScreen,
-//     }),
-//   },
-// }));
-
 const HomePage = (props) => {
   const { push } = useHistory();
 
   let userCheck = props?.user?.currentUser === null;
 
+  const refTime = useRef(0);
+
   async function updateAlltopics() {
+    if (refTime.current === 0) {
+      refTime.current = 1;
+      setTimeout(() => {
+        refTime.current = 0;
+        console.log(refTime, 'INTERVALL');
+      }, 5000);
+    }
+
     let test = await props?.topics?.forEach(async (e, i) => {
       await axiosWithAuth()
         .put(`/topics/${e.id}`, { ...e, index: i })
@@ -56,12 +50,40 @@ const HomePage = (props) => {
     return test;
   }
 
+  let updateTrue = props.user.didUpdate === true;
+
+  async function continousUpdate() {
+    let countdown = setInterval(timer, 5000);
+    function timer() {
+      if (!updateTrue) {
+        props.dispatch({ type: CONSTANTS.TOGGLEUPDATE, payload: true });
+        setTimeout(() => {
+          props.dispatch({ type: CONSTANTS.TOGGLEUPDATE, payload: false });
+        }, 300);
+        console.log(refTime, 'Interval Cleared', new Date());
+        clearInterval(countdown);
+      } else {
+        props.dispatch({ type: CONSTANTS.TOGGLEUPDATE, payload: false });
+
+        clearInterval(countdown);
+      }
+    }
+  }
+  console.log(props.user.didUpdate, refTime, 'INTERVAL');
+  // continousUpdate();
+  useEffect(() => {
+    setInterval(() => {
+      if (refTime.current === 0) {
+        continousUpdate();
+      }
+    }, 25000);
+  }, []);
+
   useEffect(() => {
     props.currentUser(push);
     props.fetchTopics(props.user.currentUser?.subject);
   }, [userCheck]);
 
-  let updateTrue = props.user.didUpdate === true;
   useEffect(() => {
     props.updateTopics(updateAlltopics);
   }, [updateTrue]);

@@ -94,6 +94,14 @@ const modalStyles = makeStyles((theme) => ({
   },
 }));
 
+// MODAL ON CLOSE UPDATE TO
+//  onClose={() =>
+//               setOpen(false) &
+//               goBack() &
+//               setSelectedDate(new Date()) &
+//               setcontent({ ...content, date: '' })
+//             }
+
 const TopicCard = (props) => {
   const classes = modalStyles();
   const [rectime, setRecTime] = useState(new Date());
@@ -175,6 +183,7 @@ const TopicCard = (props) => {
         " @ " +
         timeformat(postdates)
       : null;
+  console.log(content, 'WHAT ARE YOU');
 
   return (
     <Draggable draggableId={String(props.id)} index={props.index}>
@@ -353,7 +362,7 @@ const TopicCard = (props) => {
               setOpen(false) &
               goBack() &
               setSelectedDate(new Date()) &
-              setcontent({ ...content, date: "" })
+              setcontent({ ...content, date: '' })
             }
             closeAfterTransition
             BackdropComponent={Backdrop}

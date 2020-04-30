@@ -19,10 +19,10 @@ import figma from '../imgs/figma-black.png';
 
 const Team = () => {
   return (
+    // REMOVE INLINE
     <div className='team-body' style={{ height: '100vh', width: '100vw' }}>
-      {/* ^ REMOVE INLINE ^ */}
       <div className='landing-navbar'>
-        <NavLink to='/landing' className='logo-text'>
+        <NavLink to='/login' className='logo-text'>
           SoMe
         </NavLink>
         <div className='landing-sign-nav'>
@@ -122,16 +122,6 @@ const Team = () => {
                 </a>
                 <a href='https://www.linkedin.com/in/jasonlong1231/'>
                   <img alt='' className='social-link' src={linkedin} />
-                </a>
-                <a href='https://twitter.com/Jrive204'>
-                  <img alt='' className='social-link' src={twitter} />
-                  <img alt='' className='social-link' src={github} />
-                </a>
-                <a href='https://www.linkedin.com/in/jasonlong1231/'>
-                  <img alt='' className='social-link' src={linkedin} />
-                </a>
-                <a href='https://twitter.com/Jrive204'>
-                  <img alt='' className='social-link' src={twitter} />
                 </a>
               </div>
             </div>
