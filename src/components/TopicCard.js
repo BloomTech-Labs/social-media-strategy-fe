@@ -1,38 +1,27 @@
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 import { Draggable } from "react-beautiful-dnd";
 import "../sass/topicBuckets.scss";
 import CreateIcon from "@material-ui/icons/Create";
 import MoreVertIcon from "@material-ui/icons/MoreVert";
-import DateFnsUtils from "@date-io/date-fns";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import { makeStyles } from "@material-ui/core/styles";
-import { deleteCard, editCard, editCardandPost } from "../actions";
+import { deleteCard, editCardandPost } from "../actions";
 import Modal from "@material-ui/core/Modal";
-import FormControl from "@material-ui/core/FormControl";
-import Select from "@material-ui/core/Select";
-import InputLabel from "@material-ui/core/InputLabel";
 import MenuItem from "@material-ui/core/MenuItem";
 import Backdrop from "@material-ui/core/Backdrop";
 
 import CardModal from "./CardModal";
 import EditTopicForm from './EditTopicForm';
 
-import { Fade, Menu, Tooltip, IconButton, Typography } from "@material-ui/core";
+import { Fade, Menu, IconButton, Typography } from "@material-ui/core";
 import { axiosWithAuth } from "../utils/axiosWithAuth";
-import Grid from "@material-ui/core/Grid";
 import Button from "@material-ui/core/Button";
 
-import {
-  MuiPickersUtilsProvider,
-  TimePicker,
-  DatePicker,
-} from "@material-ui/pickers";
 import "date-fns";
 import { useHistory } from "react-router";
 import { NavLink } from "react-router-dom";
-import InfoIcon from "@material-ui/icons/Info";
 import TwitterIcon from "@material-ui/icons/Twitter";
 import Dialog from "@material-ui/core/Dialog";
 import DialogActions from "@material-ui/core/DialogActions";
@@ -54,33 +43,6 @@ const BtnCont = styled.div`
   justify-content: flex-end;
   width: 100%;
 `;
-
-const Inputtextarea = styled.textarea`
-  display: flex;
-  line-height: 1.44em;
-  /* border: 0; */
-  outline: none;
-  padding: 0;
-  resize: none;
-  width: 83%;
-  margin: 0 auto;
-  height: 15vh;
-  font-size: 1.8rem;
-  ::placeholder {
-    font-size: 1rem;
-    color: gray;
-  }
-`;
-
-function editModalLocation() {
-  const top = 15;
-  const left = 30;
-
-  return {
-    top: `${top}%`,
-    left: `${left}%`,
-  };
-}
 
 const modalStyles = makeStyles((theme) => ({
   paper: {
@@ -138,9 +100,7 @@ const TopicCard = (props) => {
 
   const SN = localStorage.getItem("SNAME");
   const [selectedDate, setSelectedDate] = useState(new Date());
-  const [modalStyle] = useState(editModalLocation);
   const [open, setOpen] = useState(false);
-  const [handle, setHandle] = useState(1);
   const [content, setcontent] = useState({
     post_text: props.card.content,
     date: props.card.date,
@@ -177,26 +137,11 @@ const TopicCard = (props) => {
     open,
   ]);
 
-  const onsubmitTwitter = (e) => {
-    e.preventDefault();
-    props.editCardandPost(props.card.id, content, postContent);
-    setOpen(false);
-  };
-
   const handleClick = (e) => {
     setAnchorEl(e.currentTarget);
   };
   const handleMenuClose = () => {
     setAnchorEl(null);
-  };
-
-  const handleDateChange = (date) => {
-    if (date >= new Date()) {
-      setSelectedDate(date);
-      setcontent({ ...content, date: date });
-    } else {
-      return null;
-    }
   };
 
   const togglemodal = () => {
@@ -205,19 +150,6 @@ const TopicCard = (props) => {
 
     setcontent({ ...content, screenname: screen_name[0] });
   };
-
-  const handleHandleChange = (event) => {
-    setHandle(event.target.value);
-  };
-
-  //  CURRENT PATCH FOR ISSUE -- need to adjust to be dynamic if Optimal time is a few days behind etc
-  async function newRecTime(date) {
-    let optTime = new Date(rectime);
-    let today = new Date();
-    optTime.setDate(today.getDate() + 1);
-    handleDateChange(optTime);
-    setcontent({ ...content, date: optTime });
-  }
 
   function timeformat(date) {
     var h = date.getHours();
@@ -233,7 +165,6 @@ const TopicCard = (props) => {
   var postdates = new Date(props?.card?.date);
 
   var dateWithouthSecond =
-    // props?.card?.date?.length > 0
     postContent?.date?.length > 0
       ? postdates.getMonth() +
         1 +
@@ -436,6 +367,10 @@ const TopicCard = (props) => {
                 open={open}
                 setOpen={setOpen}
                 editing={editing}
+                selectedDate={selectedDate}
+                setSelectedDate={setSelectedDate}
+                rectime={rectime}
+                setRecTime={setRecTime}
               />
             </Fade>
           </Modal>
@@ -448,7 +383,8 @@ const TopicCard = (props) => {
               {props.card.content}
             </Typography>
           ) : (
-            <EditTopicForm 
+            <EditTopicForm
+              card={props.card} 
               content={content} 
               setcontent={setcontent}
               postContent={postContent}
@@ -470,7 +406,7 @@ const mapStateToProps = (state) => ({
 function mapDispatchToProps(dispatch) {
   return {
     dispatch,
-    ...bindActionCreators({ deleteCard, editCard, editCardandPost }, dispatch),
+    ...bindActionCreators({ deleteCard, editCardandPost }, dispatch),
   };
 }
 

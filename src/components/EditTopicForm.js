@@ -1,7 +1,10 @@
 import React, { useEffect, useRef } from 'react';
+import { connect } from 'react-redux';
 
 import { useTweetCount } from "./useTweetCount";
 import TextareaAutosize from "@material-ui/core/TextareaAutosize";
+
+import { editCard } from '../actions';
 
 const EditTopicForm = (props) => {
     const [tweetCount, handletweetchange] = useTweetCount(280);
@@ -77,4 +80,8 @@ const EditTopicForm = (props) => {
     )
 };
 
-export default EditTopicForm;
+const mapStateToProps = state => {
+    return state;
+}
+
+export default connect(mapStateToProps, { editCard })(EditTopicForm);

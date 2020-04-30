@@ -27,7 +27,6 @@ import { useTweetCount } from "./useTweetCount";
 const Inputtextarea = styled.textarea`
   display: flex;
   line-height: 1.44em;
-  /* border: 0; */
   outline: none;
   padding: 0;
   resize: none;
@@ -52,8 +51,6 @@ const CardModal = (props) => {
     date: props.card.date,
     screenname: SN,
   });
-  const [rectime, setRecTime] = useState(new Date());
-  const [selectedDate, setSelectedDate] = useState(new Date());
   const [tweetCount, handletweetchange] = useTweetCount(280);
   const [postContent, setPostContent] = useState("");
 
@@ -66,17 +63,11 @@ const CardModal = (props) => {
       .get(`/posts/${props.card.id}`)
 
       .then((res) => {
-        res.data.map((e) => setPostContent(e) & setRecTime(e.optimal_time));
+        console.log('I still work!!!')
+        res.data.map((e) => setPostContent(e) & props.setRecTime(e.optimal_time));
       })
       .catch((err) => console.log(err.message));
-  }, [
-    updateTrue,
-    props.user.currentUser,
-    props.user.accounts,
-    props.card.date,
-    props.card.id,
-    props.open,
-  ]);
+  }, [props]);
 
    useEffect(() => {
     if (props.editing || props.open) {
@@ -97,7 +88,7 @@ const CardModal = (props) => {
 
   const handleDateChange = (date) => {
     if (new Date(date) > new Date()) {
-      setSelectedDate(date);
+      props.setSelectedDate(date);
       setcontent({ ...content, date: date });
     } else {
       return null;
@@ -112,7 +103,7 @@ const CardModal = (props) => {
 
   //  CURRENT PATCH FOR ISSUE -- need to adjust to be dynamic if Optimal time is a few days behind etc
   async function newRecTime(date) {
-    let optTime = new Date(rectime);
+    let optTime = new Date(props.rectime);
     let today = new Date();
     optTime.setDate(today.getDate() + 1);
     handleDateChange(optTime);
@@ -186,22 +177,22 @@ const CardModal = (props) => {
                     id='date-picker-inline'
                     disablePast={true}
                     label='Date'
-                    value={selectedDate}
+                    value={props.selectedDate}
                     onChange={handleDateChange}
                   />
                   <TimePicker
                     margin='normal'
                     id='time-picker'
                     label='Time'
-                    value={selectedDate}
+                    value={props.selectedDate}
                     onChange={handleDateChange}
                   />
                 </div>
                 <div style={{ display: "flex", alignItems: "center" }}>
                   <button
                     onClick={() =>
-                      new Date(rectime) > new Date()
-                        ? handleDateChange(rectime)
+                      new Date(props.rectime) > new Date()
+                        ? handleDateChange(props.rectime)
                         : newRecTime()
                     }
                     style={{
