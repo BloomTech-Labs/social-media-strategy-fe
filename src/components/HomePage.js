@@ -70,7 +70,6 @@ const HomePage = (props) => {
     }
   }
   console.log(props.user.didUpdate, refTime, 'INTERVAL');
-  // continousUpdate();
   useEffect(() => {
     setInterval(() => {
       if (refTime.current === 0) {
@@ -83,6 +82,7 @@ const HomePage = (props) => {
     props.currentUser(push);
     props.fetchTopics(props.user.currentUser?.subject);
   }, [userCheck]);
+  console.log(props.user.currentUser?.subject, 'WHAT ARE YOU');
 
   useEffect(() => {
     props.updateTopics(updateAlltopics);
