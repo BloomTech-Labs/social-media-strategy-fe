@@ -82,7 +82,6 @@ const HomePage = (props) => {
     props.currentUser(push);
     props.fetchTopics(props.user.currentUser?.subject);
   }, [userCheck]);
-  console.log(props.user.currentUser?.subject, 'WHAT ARE YOU');
 
   useEffect(() => {
     props.updateTopics(updateAlltopics);

@@ -94,8 +94,6 @@ export const twitterPost = (id, content) => (dispatch) => {
 };
 
 export const twitterPostnow = (id, content) => {
-  console.log('id', id);
-  console.log(content, 'content');
   axiosWithAuth()
     .post(`/posts/${id}/postnow`, content)
     .then((res) => {

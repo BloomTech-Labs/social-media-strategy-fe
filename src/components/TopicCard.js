@@ -1,33 +1,33 @@
-import React, { useState, useEffect } from "react";
-import styled from "styled-components";
-import { Draggable } from "react-beautiful-dnd";
-import "../sass/topicBuckets.scss";
-import CreateIcon from "@material-ui/icons/Create";
-import MoreVertIcon from "@material-ui/icons/MoreVert";
-import { connect } from "react-redux";
-import { bindActionCreators } from "redux";
-import { makeStyles } from "@material-ui/core/styles";
-import { deleteCard, editCardandPost } from "../actions";
-import Modal from "@material-ui/core/Modal";
-import MenuItem from "@material-ui/core/MenuItem";
-import Backdrop from "@material-ui/core/Backdrop";
+import React, { useState, useEffect } from 'react';
+import styled from 'styled-components';
+import { Draggable } from 'react-beautiful-dnd';
+import '../sass/topicBuckets.scss';
+import CreateIcon from '@material-ui/icons/Create';
+import MoreVertIcon from '@material-ui/icons/MoreVert';
+import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
+import { makeStyles } from '@material-ui/core/styles';
+import { deleteCard, editCardandPost } from '../actions';
+import Modal from '@material-ui/core/Modal';
+import MenuItem from '@material-ui/core/MenuItem';
+import Backdrop from '@material-ui/core/Backdrop';
 
-import CardModal from "./CardModal";
+import CardModal from './CardModal';
 import EditTopicForm from './EditTopicForm';
 
-import { Fade, Menu, IconButton, Typography } from "@material-ui/core";
-import { axiosWithAuth } from "../utils/axiosWithAuth";
-import Button from "@material-ui/core/Button";
+import { Fade, Menu, IconButton, Typography } from '@material-ui/core';
+import { axiosWithAuth } from '../utils/axiosWithAuth';
+import Button from '@material-ui/core/Button';
 
-import "date-fns";
-import { useHistory } from "react-router";
-import { NavLink } from "react-router-dom";
-import TwitterIcon from "@material-ui/icons/Twitter";
-import Dialog from "@material-ui/core/Dialog";
-import DialogActions from "@material-ui/core/DialogActions";
-import DialogContent from "@material-ui/core/DialogContent";
-import DialogContentText from "@material-ui/core/DialogContentText";
-import DialogTitle from "@material-ui/core/DialogTitle";
+import 'date-fns';
+import { useHistory } from 'react-router';
+import { NavLink } from 'react-router-dom';
+import TwitterIcon from '@material-ui/icons/Twitter';
+import Dialog from '@material-ui/core/Dialog';
+import DialogActions from '@material-ui/core/DialogActions';
+import DialogContent from '@material-ui/core/DialogContent';
+import DialogContentText from '@material-ui/core/DialogContentText';
+import DialogTitle from '@material-ui/core/DialogTitle';
 
 const Container = styled.div`
   background-color: white;
@@ -46,23 +46,23 @@ const BtnCont = styled.div`
 
 const modalStyles = makeStyles((theme) => ({
   paper: {
-    fontFamily: "Montserrat, sans-serif",
-    position: "absolute",
+    fontFamily: 'Montserrat, sans-serif',
+    position: 'absolute',
     width: 600,
-    backgroundColor: "#F5F7F8",
-    borderRadius: "6px",
+    backgroundColor: '#F5F7F8',
+    borderRadius: '6px',
     boxShadow: theme.shadows[5],
     padding: theme.spacing(7),
-    display: "flex",
-    flexDirection: "column",
-    alignItems: "inherit",
+    display: 'flex',
+    flexDirection: 'column',
+    alignItems: 'inherit',
   },
   mHeader: {
-    fontSize: "1.6rem",
+    fontSize: '1.6rem',
   },
   mAccent: {
-    lineHeight: ".1rem",
-    color: "#e85556",
+    lineHeight: '.1rem',
+    color: '#e85556',
     fontWeight: 200,
   },
   formControl: {
@@ -70,26 +70,26 @@ const modalStyles = makeStyles((theme) => ({
     minWidth: 200,
   },
   actionSubmit: {
-    color: "#fff",
-    backgroundColor: "#E85556",
-    borderRadius: "5rem",
-    border: "none",
-    padding: "1rem",
-    margin: ".5rem 1rem",
-    width: "40%",
-    fontSize: "1.2rem",
+    color: '#fff',
+    backgroundColor: '#E85556',
+    borderRadius: '5rem',
+    border: 'none',
+    padding: '1rem',
+    margin: '.5rem 1rem',
+    width: '40%',
+    fontSize: '1.2rem',
   },
   modal: {
-    display: "flex",
-    alignItems: "center",
-    justifyContent: "center",
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center',
   },
   select: {
-    width: "50%",
+    width: '50%',
   },
   button: {
-    "&:hover": {
-      backgroundColor: "transparent",
+    '&:hover': {
+      backgroundColor: 'transparent',
     },
   },
 }));
@@ -106,7 +106,7 @@ const TopicCard = (props) => {
   const classes = modalStyles();
   const [rectime, setRecTime] = useState(new Date());
 
-  const SN = localStorage.getItem("SNAME");
+  const SN = localStorage.getItem('SNAME');
   const [selectedDate, setSelectedDate] = useState(new Date());
   const [open, setOpen] = useState(false);
   const [content, setcontent] = useState({
@@ -118,7 +118,7 @@ const TopicCard = (props) => {
   const { goBack } = useHistory();
   const [anchorEl, setAnchorEl] = useState(null);
   const openMenu = Boolean(anchorEl);
-  const [postContent, setPostContent] = useState("");
+  const [postContent, setPostContent] = useState('');
   const [dialogtoggle, setDialogToggle] = useState(false);
 
   let updateTrue = props?.user?.didUpdate === true;
@@ -162,11 +162,11 @@ const TopicCard = (props) => {
   function timeformat(date) {
     var h = date.getHours();
     var m = date.getMinutes();
-    var x = h >= 12 ? "pm" : "am";
+    var x = h >= 12 ? 'pm' : 'am';
     h = h % 12;
     h = h ? h : 12;
-    m = m < 10 ? "0" + m : m;
-    var mytime = h + ":" + m + " " + x;
+    m = m < 10 ? '0' + m : m;
+    var mytime = h + ':' + m + ' ' + x;
     return mytime;
   }
 
@@ -176,14 +176,13 @@ const TopicCard = (props) => {
     postContent?.date?.length > 0
       ? postdates.getMonth() +
         1 +
-        "/" +
+        '/' +
         postdates.getDate() +
-        "/" +
+        '/' +
         postdates.getFullYear() +
-        " @ " +
+        ' @ ' +
         timeformat(postdates)
       : null;
-  console.log(content, 'WHAT ARE YOU');
 
   return (
     <Draggable draggableId={String(props.id)} index={props.index}>
@@ -196,26 +195,26 @@ const TopicCard = (props) => {
           id='cardhover'
         >
           <BtnCont>
-            <div style={{ display: "flex", width: "100%" }}>
+            <div style={{ display: 'flex', width: '100%' }}>
               <nav
                 style={{
-                  fontSize: "10px",
-                  display: "flex",
-                  flexDirection: "column",
-                  alignItems: "flex-start",
+                  fontSize: '10px',
+                  display: 'flex',
+                  flexDirection: 'column',
+                  alignItems: 'flex-start',
                 }}
               >
                 <a
-                  style={{ color: "#3282B8", textDecoration: "none" }}
+                  style={{ color: '#3282B8', textDecoration: 'none' }}
                   href={`https://twitter.com/${screen_name[0]}`}
                   alt=''
                 >
-                  {screen_name[0] === "Your Handle Here" ? (
-                    "No ScreenName Available"
+                  {screen_name[0] === 'Your Handle Here' ? (
+                    'No ScreenName Available'
                   ) : (
                     <>
                       <span>@{screen_name[0]}</span>
-                      <span style={{ fontSize: "10px" }}>
+                      <span style={{ fontSize: '10px' }}>
                         &nbsp;
                         <TwitterIcon fontSize='inherit' />
                       </span>
@@ -223,14 +222,14 @@ const TopicCard = (props) => {
                   )}
                 </a>
 
-                <span style={{ color: "#848484", fontSize: "9px" }}>
+                <span style={{ color: '#848484', fontSize: '9px' }}>
                   {postContent?.date?.length &&
                   new Date(postContent?.date) < new Date() ? (
                     <span className='posted'>Tweet Posted</span>
                   ) : postContent?.date?.length ? (
                     <span className='scheduled'>
-                      {" "}
-                      Scheduled: {dateWithouthSecond}{" "}
+                      {' '}
+                      Scheduled: {dateWithouthSecond}{' '}
                     </span>
                   ) : postContent?.date === null ? (
                     <span className='notScheduled'>Post not Scheduled</span>
@@ -242,9 +241,7 @@ const TopicCard = (props) => {
             </div>
 
             <span className='editIcons'>
-              {postContent?.date?.length &&
-              new Date(postContent?.date) < new Date() ? null : postContent
-                  ?.date?.length ? null : (
+              {postContent?.date === null ? (
                 <span className='showHover'>
                   <IconButton
                     disableRipple={true}
@@ -252,8 +249,8 @@ const TopicCard = (props) => {
                     className={classes.button}
                     onClick={(event) => setediting(!editing)}
                     style={{
-                      padding: "0",
-                      paddingBottom: "12px",
+                      padding: '0',
+                      paddingBottom: '12px',
                     }}
                   >
                     <CreateIcon
@@ -262,20 +259,20 @@ const TopicCard = (props) => {
                     />
                   </IconButton>
                 </span>
-              )}
+              ) : null}
               <IconButton
                 disableRipple={true}
                 disableFocusRipple={true}
                 className={classes.button}
                 onClick={handleClick}
                 style={{
-                  padding: "0",
-                  paddingBottom: "12px",
+                  padding: '0',
+                  paddingBottom: '12px',
                 }}
               >
                 <MoreVertIcon
                   className={`${props.card.id}-edit`}
-                  style={{ padding: "0rem .25rem" }}
+                  style={{ padding: '0rem .25rem' }}
                   fontSize='small'
                 />
               </IconButton>
@@ -290,7 +287,7 @@ const TopicCard = (props) => {
             >
               {postContent?.date === null ? (
                 <NavLink
-                  style={{ textDecoration: "none", color: "black  " }}
+                  style={{ textDecoration: 'none', color: 'black  ' }}
                   to={`/home/schedule`}
                 >
                   <MenuItem
@@ -327,7 +324,7 @@ const TopicCard = (props) => {
             aria-describedby='alert-dialog-description'
           >
             <DialogTitle id='alert-dialog-title'>
-              {"Delete Scheduled Tweet?"}
+              {'Delete Scheduled Tweet?'}
             </DialogTitle>
             <DialogContent>
               <DialogContentText id='alert-dialog-description'>
@@ -380,12 +377,14 @@ const TopicCard = (props) => {
                 setSelectedDate={setSelectedDate}
                 rectime={rectime}
                 setRecTime={setRecTime}
+                content={content}
+                setcontent={setcontent}
               />
             </Fade>
           </Modal>
           {!editing ? (
             <Typography
-              style={{ overflowWrap: "anywhere", textAlign: "initial" }}
+              style={{ overflowWrap: 'anywhere', textAlign: 'initial' }}
               variant='subtitle2'
               paragraph
             >
@@ -393,8 +392,8 @@ const TopicCard = (props) => {
             </Typography>
           ) : (
             <EditTopicForm
-              card={props.card} 
-              content={content} 
+              card={props.card}
+              content={content}
               setcontent={setcontent}
               postContent={postContent}
               editing={editing}
