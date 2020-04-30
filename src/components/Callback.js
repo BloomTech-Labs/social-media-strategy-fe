@@ -41,7 +41,7 @@ const Callback = () => {
           console.log('Interval Cleared');
           clearInterval(countdown);
         } else {
-          setTime((time) => time - 1);
+          setTime(time => time - 1);
           console.log(window.location.pathname, 'TIME');
         }
       }
@@ -50,7 +50,7 @@ const Callback = () => {
         message: error.message,
         error: error.stack,
         name: error.name,
-        code: error.code,
+        code: error.code
       });
     }
   }
@@ -63,17 +63,17 @@ const Callback = () => {
   }, []);
 
   return (
-    <div className='callback-cont'>
-      <div className='callback-box'>
-        <h1 className='callback-header'>
+    <div className="callback-cont">
+      <div className="callback-box">
+        <h1 className="callback-header">
           SoMe Connection {console.log(state, data)}
         </h1>
-        <h2 className='success'>Success</h2>
-        <p className='callback-para'>
+        <h2 className="success">Success</h2>
+        <p className="callback-para">
           Thank you,{' '}
           <strong>
             <a
-              className='highlight'
+              className="highlight"
               href={`https://twitter.com/${data.twitter_screenName}`}
             >
               @{data.twitter_screenName}
@@ -87,9 +87,9 @@ const Callback = () => {
           You have Tweeted{' '}
           <span className='label label-success'>{'statuses_count'}</span> times.
         </li> */}
-        <p className='callback-bold'>
-          You have currently have
-          <span className='label label-success'>
+        <p className="callback-bold">
+          You currently have
+          <span className="label label-success">
             &nbsp;{data.total_followers}
           </span>{' '}
           followers.
@@ -99,9 +99,9 @@ const Callback = () => {
           <span className='label label-success'>{'friends_count'}</span> users.
         </li> */}
         <h2>Redirecting you back to your SoMe profile in {time} </h2>
-        <p className='redirect'>
+        <p className="redirect">
           If countdown didn't redirect you to profile page please click {''}
-          <a className='highlight' href='/home'>
+          <a className="highlight" href="/home">
             here
           </a>
         </p>

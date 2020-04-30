@@ -16,14 +16,14 @@ import HomeIcon from '@material-ui/icons/Home';
 import ScheduleIcon from '@material-ui/icons/Schedule';
 import RssFeedIcon from '@material-ui/icons/RssFeed';
 
-const Navigation = (props) => {
+const Navigation = props => {
   return (
     <div>
-      <div className='navContainer'>
-        <div className='navButtonContainer'>
-          <TransitionsModal name='Post now' />
+      <div className="navContainer">
+        <div className="navButtonContainer">
+          <TransitionsModal name="Post now" />
         </div>
-        <nav className='navLinks'>
+        <nav className="navLinks">
           <ul>
             <NavLink
               onClick={() => {
@@ -32,13 +32,14 @@ const Navigation = (props) => {
                 }
                 props.drawerOpen('HOME');
               }}
-              className='linkNav'
-              activeClassName='linkActive'
-              to='/home/accounts'
+              className="linkNav"
+              activeClassName="linkActive"
+              data-cy="nav-home-active"
+              to="/home/accounts"
             >
-              <li className='link'>
+              <li data-cy="nav-home" className="link">
                 <HomeIcon
-                  className='navImage'
+                  className="navImage"
                   style={{ width: '30px', height: '30px' }}
                 />
                 Home
@@ -54,13 +55,14 @@ const Navigation = (props) => {
                 }
                 props.drawerOpen('QUEUE');
               }}
-              className='linkNav'
-              activeClassName='linkActive'
-              to='/home/queue'
+              className="linkNav"
+              data-cy="nav-queue-active"
+              activeClassName="linkActive"
+              to="/home/queue"
             >
-              <li className='link'>
+              <li data-cy="nav-queue" className="link">
                 <ScheduleIcon
-                  className='navImage'
+                  className="navImage"
                   style={{ width: '30px', height: '30px' }}
                 />
                 Queue
@@ -73,13 +75,13 @@ const Navigation = (props) => {
                 }
                 props.drawerOpen('FEED');
               }}
-              className='linkNav'
-              activeClassName='linkActive'
-              to='/home/feed/home'
+              className="linkNav"
+              activeClassName="linkActive"
+              to="/home/feed/home"
             >
-              <li className='link'>
+              <li className="link">
                 <RssFeedIcon
-                  className='navImage'
+                  className="navImage"
                   style={{ width: '30px', height: '30px' }}
                 />
                 Feed
@@ -94,11 +96,11 @@ const Navigation = (props) => {
                 window.location.reload(false)
               }
               className={'linkNav'}
-              to='/login'
+              to="/login"
             >
-              <li className='link'>
+              <li className="link">
                 <ExitToAppIcon
-                  className='navImage'
+                  className="navImage"
                   style={{ width: '30px', height: '30px' }}
                 />
                 Logout{' '}
@@ -106,7 +108,7 @@ const Navigation = (props) => {
             </NavLink>
           </ul>
         </nav>
-        <Date className='date' />
+        <Date className="date" />
       </div>
       <Switch>
         {/* <Route path='/home'>{HomeNav}</Route> */}
@@ -120,15 +122,15 @@ const Navigation = (props) => {
     </div>
   );
 };
-const mapStateToProps = (state) => ({
+const mapStateToProps = state => ({
   user: state.user,
-  topics: state.topics,
+  topics: state.topics
 });
 
 function mapDispatchToProps(dispatch) {
   return {
     dispatch,
-    ...bindActionCreators({ drawerswitch, drawerOpen }, dispatch),
+    ...bindActionCreators({ drawerswitch, drawerOpen }, dispatch)
   };
 }
 

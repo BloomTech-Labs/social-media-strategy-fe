@@ -18,17 +18,17 @@ import { login } from '../actions';
 import { useHistory } from 'react-router';
 import { Link } from 'react-router-dom';
 
-const Login = (props) => {
+const Login = props => {
   const LoginSchema = yup.object().shape({
     email: yup.string().required(),
     password: yup
       .string()
       .required()
-      .min(4),
+      .min(4)
   });
 
   const { register, handleSubmit, control, errors } = useForm({
-    validationSchema: LoginSchema,
+    validationSchema: LoginSchema
   });
 
   const classes = useStyles();
@@ -36,9 +36,9 @@ const Login = (props) => {
 
   function Copyright() {
     return (
-      <Typography variant='body2' color='textSecondary' align='center'>
+      <Typography variant="body2" color="textSecondary" align="center">
         {'Copyright © '}
-        <Link color='inherit' to='/team'>
+        <Link data-cy="login-copyright" color="inherit" to="/team">
           SoMe{' '}
         </Link>{' '}
         {new Date().getFullYear()}
@@ -47,19 +47,19 @@ const Login = (props) => {
     );
   }
 
-  const onSubmit = (data) => {
+  const onSubmit = data => {
     props.login(data, push);
   };
 
   return (
-    <Grid container component='main' className={classes.root}>
+    <Grid container component="main" className={classes.root}>
       <Grid
         item
         xs={false}
         sm={4}
         md={7}
         className={classes.image}
-        data-cy='loginImage'
+        data-cy="loginImage"
       />
       <Grid
         className={classes.test}
@@ -72,7 +72,7 @@ const Login = (props) => {
         square
       >
         <div className={classes.paper}>
-          <Avatar className={classes.avatar}>
+          <Avatar data-cy="lock-icon" className={classes.avatar}>
             <LockOutlinedIcon />
           </Avatar>
           <div>
@@ -82,10 +82,10 @@ const Login = (props) => {
                 fontStyle: 'normal',
                 fontWeight: 'bold',
                 fontSize: '36px',
-                lineHight: '44px',
+                lineHight: '44px'
               }}
-              component='h1'
-              variant='h5'
+              component="h1"
+              variant="h5"
             >
               Login to SoMe
               <br />
@@ -96,7 +96,7 @@ const Login = (props) => {
                   fontWeight: '500',
                   fontSize: '18px',
                   lineHeight: '22px',
-                  color: '#E85556',
+                  color: '#E85556'
                 }}
               >
                 Sign into your account
@@ -106,65 +106,67 @@ const Login = (props) => {
             <form className={classes.form} onSubmit={handleSubmit(onSubmit)}>
               <Controller
                 ref={register}
-                name='email'
+                name="email"
+                data-cy="email"
                 as={TextField}
                 control={control}
-                variant='outlined'
-                margin='normal'
+                variant="outlined"
+                margin="normal"
                 inputProps={{ minLength: '4', required: true }}
                 required
                 fullWidth
-                id='email'
-                label='Email Address'
-                autoComplete='email'
-                type='email'
+                id="email"
+                label="Email Address"
+                autoComplete="email"
+                type="email"
                 autoFocus
               />
               {/* {errors.email && <p>{errors.email.message}</p>} */}
-              <ErrorMessage errors={errors} name='email' />
+              <ErrorMessage errors={errors} name="email" />
               <Controller
-                variant='outlined'
-                margin='normal'
+                variant="outlined"
+                margin="normal"
                 ref={register}
                 as={TextField}
                 control={control}
                 inputProps={{ minLength: '4', required: true }}
                 fullWidth
-                name='password'
-                label='Password'
-                type='password'
-                id='password'
-                autoComplete='current-password'
+                name="password"
+                data-cy="password"
+                label="Password"
+                type="password"
+                id="password"
+                autoComplete="current-password"
               />
               {/* {errors.password && <span>{errors.password.message}</span>}
               {props.user.error && <span>{props.user.error}</span>} */}
               <FormControlLabel
-                control={<Checkbox value='remember' color='primary' />}
-                label='Remember me'
+                control={<Checkbox value="remember" color="primary" />}
+                label="Remember me"
               />
               <Button
-                data-cy='submit'
-                type='submit'
+                data-cy="submit"
+                type="submit"
                 fullWidth
-                variant='contained'
-                color='inherit'
+                variant="contained"
+                color="inherit"
                 className={classes.submit}
               >
                 Sign In
               </Button>
               <Grid container>
                 <Grid item xs>
-                  <Link href='#' variant='body2'>
+                  <Link href="#" variant="body2">
                     Forgot password?
                   </Link>
                 </Grid>
                 <Grid item>
                   <Link
-                    data-cy='registerButton'
-                    className='registerButton'
+                    data-cy="registerButton"
+                    className="registerButton"
                     style={{ cursor: 'pointer' }}
-                    variant='body2'
-                    to='/register'
+                    variant="body2"
+                    to="/register"
                   >
                     Don't have an account? Sign Up
                   </Link>
@@ -181,9 +183,9 @@ const Login = (props) => {
   );
 };
 
-const mapStateToProps = (state) => {
+const mapStateToProps = state => {
   return {
-    user: state.user,
+    user: state.user
   };
 };
 

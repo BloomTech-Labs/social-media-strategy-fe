@@ -5,45 +5,62 @@ import '../sass/landing.scss';
 
 const Landing = () => {
   return (
-    <div className='landing-body' style={{ height: '100vh', width: '100vw' }}>
+    <div className="landing-body" style={{ height: '100vh', width: '100vw' }}>
       {/* ^ REMOVE INLINE ^ */}
-      <div className='landing-navbar'>
-        <h3 className='logo-text'>SoMe</h3>
-        <div className='landing-sign-nav'>
-          <NavLink to='/register' className='sign-up-btn'>
+      <div className="landing-navbar">
+        <h3 data-cy="landing-logo" className="logo-text">
+          SoMe
+        </h3>
+        <div className="landing-sign-nav">
+          <NavLink
+            data-cy="register-nav"
+            to="/register"
+            className="sign-up-btn"
+          >
             Sign Up
           </NavLink>
-          <NavLink className='sign-in-btn' to='/login'>
+          <NavLink data-cy="login-nav" className="sign-in-btn" to="/login">
             Sign In
           </NavLink>
         </div>
       </div>
-      <div className='center-message'>
-        <div className='text-align-left'>
-          <h1 className='main-text'>A fresh take on social media management</h1>
-          <h4 className='secondary-text'>
+      <div className="center-message">
+        <div className="text-align-left">
+          <h1 data-cy="main-text" className="main-text">
+            A fresh take on social media management
+          </h1>
+          <h4 data-cy="secondary-text" className="secondary-text">
             Discover how to develop your brand and manage your digital marketing
             strategy
           </h4>
-          <NavLink className='start-here' to='/register'>
+          <NavLink
+            data-cy="call-to-action-button"
+            className="start-here"
+            to="/register"
+          >
             Start here
           </NavLink>
         </div>
       </div>
-      <footer className='sticky-footer'>
-        <div className='text-align'>
-          <p> All rights reserved SoMe ®</p>
-          <div className='footer-nav'>
-            <Link className='team-link' to='/team'>
+      <footer className="sticky-footer">
+        <div className="text-align">
+          <p data-cy="copyright"> All rights reserved SoMe ®</p>
+          <div className="footer-nav">
+            <Link data-cy="team" className="team-link" to="/team">
               Team
             </Link>
             <a
-              href='https://github.com/Lambda-School-Labs/social-media-strategy-fe'
-              className='team-link'
+              data-cy="github"
+              href="https://github.com/Lambda-School-Labs/social-media-strategy-fe"
+              className="team-link"
             >
               Github
             </a>
-            <a href='https://lambdaschool.com/' className='team-link'>
+            <a
+              data-cy="lambda-school"
+              href="https://lambdaschool.com/"
+              className="team-link"
+            >
               Lambda School
             </a>
           </div>
