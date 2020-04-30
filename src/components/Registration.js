@@ -18,25 +18,25 @@ import Typography from '@material-ui/core/Typography';
 import { registerUser } from '../actions';
 import { useHistory } from 'react-router';
 
-const Registration = (props) => {
+const Registration = props => {
   const LoginSchema = yup.object().shape({
     email: yup.string().required(),
     password: yup
       .string()
       .required()
-      .min(4),
+      .min(4)
   });
   const { register, handleSubmit, control, errors } = useForm({
-    validationSchema: LoginSchema,
+    validationSchema: LoginSchema
   });
   const classes = useStyles();
   const { push } = useHistory();
 
   function Copyright() {
     return (
-      <Typography variant='body2' color='textSecondary' align='center'>
+      <Typography variant="body2" color="textSecondary" align="center">
         {'Copyright © '}
-        <Link color='inherit' to='/team'>
+        <Link data-cy="register-copyright" color="inherit" to="/team">
           SoMe{' '}
         </Link>{' '}
         {new Date().getFullYear()}
@@ -45,19 +45,19 @@ const Registration = (props) => {
     );
   }
 
-  const onSubmit = (data) => {
+  const onSubmit = data => {
     props.registerUser(data, push);
   };
 
   return (
-    <Grid container component='main' className={classes.root}>
+    <Grid container component="main" className={classes.root}>
       <Grid
         item
         xs={false}
         sm={4}
         md={7}
         className={classes.image2}
-        data-cy='registerImage'
+        data-cy="registerImage"
       />
       <Grid
         className={classes.test}
@@ -70,7 +70,7 @@ const Registration = (props) => {
         square
       >
         <div className={classes.paper}>
-          <Avatar className={classes.avatar}>
+          <Avatar data-cy="register-logo" className={classes.avatar}>
             <LockOutlinedIcon />
           </Avatar>
           <div>
@@ -80,10 +80,10 @@ const Registration = (props) => {
                 fontStyle: 'normal',
                 fontWeight: 'bold',
                 fontSize: '36px',
-                lineHight: '44px',
+                lineHight: '44px'
               }}
-              component='h1'
-              variant='h5'
+              component="h1"
+              variant="h5"
             >
               Sign Up to SoMe
               <br />
@@ -94,7 +94,7 @@ const Registration = (props) => {
                   fontWeight: '500',
                   fontSize: '18px',
                   lineHeight: '22px',
-                  color: '#E85556',
+                  color: '#E85556'
                 }}
               >
                 Create Account
@@ -103,66 +103,66 @@ const Registration = (props) => {
             </Typography>
             <form className={classes.form} onSubmit={handleSubmit(onSubmit)}>
               <Controller
-                data-cy='email'
+                data-cy="email"
                 ref={register}
-                name='email'
+                name="email"
                 as={TextField}
                 control={control}
-                variant='outlined'
-                margin='normal'
+                variant="outlined"
+                margin="normal"
                 required
                 inputProps={{ minLength: '4', required: true }}
                 fullWidth
-                id='email'
-                label='Email Address'
-                autoComplete='email'
-                type='email'
+                id="email"
+                label="Email Address"
+                autoComplete="email"
+                type="email"
                 autoFocus
               />
-              <ErrorMessage errors={errors} name='email' />
+              <ErrorMessage errors={errors} name="email" />
               <Controller
-                data-cy='password'
-                variant='outlined'
-                margin='normal'
+                data-cy="password"
+                variant="outlined"
+                margin="normal"
                 inputProps={{ minLength: '4', required: true }}
                 ref={register}
                 as={TextField}
                 control={control}
                 required
                 fullWidth
-                name='password'
-                label='Password'
-                type='password'
-                id='password'
-                autoComplete='current-password'
+                name="password"
+                label="Password"
+                type="password"
+                id="password"
+                autoComplete="current-password"
               />
               <FormControlLabel
-                control={<Checkbox value='remember' color='primary' />}
-                label='Remember me'
+                control={<Checkbox value="remember" color="primary" />}
+                label="Remember me"
               />
               <Button
-                data-cy='submit'
-                type='submit'
+                data-cy="submit"
+                type="submit"
                 fullWidth
-                variant='contained'
-                color='inherit'
+                variant="contained"
+                color="inherit"
                 className={classes.submit}
               >
                 Create Account
               </Button>
               <Grid container>
                 <Grid item xs>
-                  <Link href='#' variant='body2'>
+                  <Link href="#" variant="body2">
                     Forgot password?
                   </Link>
                 </Grid>
                 <Grid item>
                   <Link
-                    data-cy='registerButton'
-                    className='registerButton'
+                    data-cy="register-to-login"
+                    className="registerButton"
                     style={{ cursor: 'pointer' }}
-                    variant='body2'
-                    to='/login'
+                    variant="body2"
+                    to="/login"
                   >
                     Already have an account? Sign In here.
                   </Link>
@@ -179,7 +179,7 @@ const Registration = (props) => {
   );
 };
 
-const mapStateToProps = (state) => {
+const mapStateToProps = state => {
   return state;
 };
 
