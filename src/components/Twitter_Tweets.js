@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useMemo } from 'react';
 import { Timeline, Tweet } from 'react-twitter-widgets';
 import { useSelector } from 'react-redux';
 
@@ -64,15 +64,35 @@ export const TWITTER_TIMELINE = () => {
 
   let screenname = current_user?.accounts?.map((e) => e.screen_name);
 
+  const SNAME = useMemo(() => screenname[0], [screenname]);
+
+  // MIGHT USE CALLBACK LATER
+  // const NewTimeline = useCallback(
+  //   () => (
+  //     <Timeline
+  //       dataSource={{
+  //         sourceType: 'profile',
+  //         screenName: `${SNAME}`,
+  //       }}
+  //       options={{
+  //         screenName: `${SNAME}`,
+  //         theme: 'dark',
+  //       }}
+  //     />
+  //   ),
+  //   [SNAME]
+  // );
+
+  console.log(SNAME, 'TWEET');
   return (
     <>
       <Timeline
         dataSource={{
           sourceType: 'profile',
-          screenName: `${screenname[0]}`,
+          screenName: `${SNAME}`,
         }}
         options={{
-          username: `${screenname[0]}`,
+          screenName: `${SNAME}`,
           theme: 'dark',
         }}
       />

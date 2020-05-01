@@ -56,10 +56,8 @@ export const registerUser = (userData, cb) => (dispatch) => {
       });
     })
     .catch((error) => {
-      console.log('HELLO', error.response.data.error);
       alert(
-        error.response.data.error ||
-          'Check email format, something went wrong'
+        error.response.data.error || 'Check email format, something went wrong'
       );
       dispatch({
         type: CONSTANTS.USER_APICALL_FAILURE,
@@ -98,6 +96,12 @@ export const fetchAccounts = () => (dispatch) => {
     .get('/auth/userinfo')
     .then((response) => {
       localStorage.setItem('SNAME', response.data.screen_name);
+
+      console.log(
+        'TESTING',
+        localStorage.getItem('SNAME') === response.data.screen_name,
+        'TWEETS'
+      );
 
       dispatch({
         type: CONSTANTS.ACCOUNTS_FETCH_SUCCESS,

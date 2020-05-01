@@ -63,11 +63,11 @@ const Dashboard_Feed = (props) => {
         </>
       ) : feedStatus === 'timeline' ? (
         <>
-          <TWITTER_TIMELINE key={Date.now() + Math.random()} />
+          <TWITTER_TIMELINE />
         </>
       ) : (
         <>
-          <TWITTER_MENTIONS key={Date.now() + Math.random()} />
+          <TWITTER_MENTIONS />
         </>
       )}
     </div>

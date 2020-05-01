@@ -40,7 +40,6 @@ const HomePage = (props) => {
         console.log(refTime, 'INTERVALL');
       }, 5000);
     }
-
     let test = await props?.topics?.forEach(async (e, i) => {
       await axiosWithAuth()
         .put(`/topics/${e.id}`, { ...e, index: i })
@@ -86,7 +85,6 @@ const HomePage = (props) => {
   useEffect(() => {
     props.updateTopics(updateAlltopics);
   }, [updateTrue]);
-  console.log('USERUPDATED', props.user.didUpdate);
   const onDragEnd = (result) => {
     const { destination, source, draggableId, type } = result;
     if (!destination) {
