@@ -1,9 +1,9 @@
-import React, { useState } from 'react';
-import { connect } from 'react-redux';
-import DeleteIcon from '@material-ui/icons/Delete';
-import CreateIcon from '@material-ui/icons/Create';
+import React, { useState } from "react";
+import { connect } from "react-redux";
+import DeleteIcon from "@material-ui/icons/Delete";
+import CreateIcon from "@material-ui/icons/Create";
 
-import { editTopic, deleteTopics } from '../actions';
+import { editTopic, deleteTopics } from "../../actions";
 
 const TopicTitle = (props) => {
   const [content, setcontent] = useState({ name: props.topic.title });
@@ -24,16 +24,16 @@ const TopicTitle = (props) => {
   const renderTopicForm = () => {
     return (
       <form onSubmit={submitForm}>
-        <div className='edit-topic-cont'>
+        <div className="edit-topic-cont">
           <input
-            className='edit-topic-text-area'
-            type='text'
-            name='name'
+            className="edit-topic-text-area"
+            type="text"
+            name="name"
             value={content.name}
             onChange={handleChange}
           />
-          &nbsp;{' '}
-          <span onClick={() => setediting(!editing)} className='edit-toggle'>
+          &nbsp;{" "}
+          <span onClick={() => setediting(!editing)} className="edit-toggle">
             x
           </span>
         </div>
@@ -43,13 +43,13 @@ const TopicTitle = (props) => {
 
   return (
     <span>
-      <h4 className='title'>
-        {props.topic.title !== 'Drafts' ? (
-          <span id='topicContainer' className='editTopics'>
-            <span className='topicIcons'>
+      <h4 className="title">
+        {props.topic.title !== "Drafts" ? (
+          <span id="topicContainer" className="editTopics">
+            <span className="topicIcons">
               <span className={`deleteTopic`}>
                 <DeleteIcon
-                  style={{ marginRight: '20' }}
+                  style={{ marginRight: "20" }}
                   onClick={() =>
                     props.deleteTopics(
                       props.topic.id,
@@ -64,7 +64,7 @@ const TopicTitle = (props) => {
               />
             </span>
             {!editing ? (
-              <span className='topicTitle'>{props.topic.title}</span>
+              <span className="topicTitle">{props.topic.title}</span>
             ) : (
               renderTopicForm()
             )}

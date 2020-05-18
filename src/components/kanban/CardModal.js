@@ -1,28 +1,28 @@
-import React, { useState, useEffect, useRef } from 'react';
-import { connect } from 'react-redux';
-import { bindActionCreators } from 'redux';
+import React, { useState, useEffect, useRef } from "react";
+import { connect } from "react-redux";
+import { bindActionCreators } from "redux";
 
-import { deleteCard, editCard, editCardandPost } from '../actions';
-import { axiosWithAuth } from '../utils/axiosWithAuth';
+import { deleteCard, editCard, editCardandPost } from "../../actions";
+import { axiosWithAuth } from "../../utils/axiosWithAuth";
 
-import styled from 'styled-components';
-import FormControl from '@material-ui/core/FormControl';
-import Select from '@material-ui/core/Select';
-import InputLabel from '@material-ui/core/InputLabel';
-import MenuItem from '@material-ui/core/MenuItem';
-import TwitterIcon from '@material-ui/icons/Twitter';
-import { makeStyles } from '@material-ui/core/styles';
+import styled from "styled-components";
+import FormControl from "@material-ui/core/FormControl";
+import Select from "@material-ui/core/Select";
+import InputLabel from "@material-ui/core/InputLabel";
+import MenuItem from "@material-ui/core/MenuItem";
+import TwitterIcon from "@material-ui/icons/Twitter";
+import { makeStyles } from "@material-ui/core/styles";
 import {
   MuiPickersUtilsProvider,
   TimePicker,
   DatePicker,
-} from '@material-ui/pickers';
-import Grid from '@material-ui/core/Grid';
-import { Tooltip } from '@material-ui/core';
-import InfoIcon from '@material-ui/icons/Info';
-import { NavLink } from 'react-router-dom';
-import DateFnsUtils from '@date-io/date-fns';
-import { useTweetCount } from './useTweetCount';
+} from "@material-ui/pickers";
+import Grid from "@material-ui/core/Grid";
+import { Tooltip } from "@material-ui/core";
+import InfoIcon from "@material-ui/icons/Info";
+import { NavLink } from "react-router-dom";
+import DateFnsUtils from "@date-io/date-fns";
+import { useTweetCount } from "../../hooks/useTweetCount";
 
 const Inputtextarea = styled.textarea`
   display: flex;
@@ -54,7 +54,7 @@ const CardModal = (props) => {
   //   screenname: SN,
   // });
   const [tweetCount, handletweetchange] = useTweetCount(280);
-  const [postContent, setPostContent] = useState('');
+  const [postContent, setPostContent] = useState("");
 
   let screen_name = props.user.accounts.map((e) => e.screen_name);
   const inputfocus = useRef(null);
@@ -65,7 +65,7 @@ const CardModal = (props) => {
       .get(`/posts/${props.card.id}`)
 
       .then((res) => {
-        console.log('I still work!!!');
+        console.log("I still work!!!");
         res.data.map(
           (e) => setPostContent(e) & props.setRecTime(e.optimal_time)
         );
@@ -81,7 +81,7 @@ const CardModal = (props) => {
     }
   }, [props.editing, props.open]);
 
-  console.log(content, 'WHAT ARE YOU');
+  console.log(content, "WHAT ARE YOU");
 
   const handleChange = (e) => {
     e.preventDefault();
@@ -121,28 +121,28 @@ const CardModal = (props) => {
       <h2 className={classes.mHeader}>Twitter Manager</h2>
       <h3 className={classes.mAccent}>Schedule or Post Now</h3>
       <FormControl className={classes.formControl}>
-        <span className='socialAccountInput'>
-          <InputLabel shrink className='test' id='twitter-handle-select'>
-            <span className='socialAccount'> Social Account </span>
+        <span className="socialAccountInput">
+          <InputLabel shrink className="test" id="twitter-handle-select">
+            <span className="socialAccount"> Social Account </span>
           </InputLabel>
           <Select
-            labelId='twitter-handle-select'
-            id='select'
+            labelId="twitter-handle-select"
+            id="select"
             value={handle}
             onChange={handleHandleChange}
-            className='test'
-            style={{ width: '40%' }}
+            className="test"
+            style={{ width: "40%" }}
           >
             <MenuItem defaultValue value={1}>
-              <span id='alignTextIcon'>
-                @{screen_name} &nbsp;{' '}
-                <TwitterIcon className='twitterIconModal' />
+              <span id="alignTextIcon">
+                @{screen_name} &nbsp;{" "}
+                <TwitterIcon className="twitterIconModal" />
               </span>
             </MenuItem>
           </Select>
         </span>
         <MuiPickersUtilsProvider utils={DateFnsUtils}>
-          <nav className='item-sub-nav'>
+          <nav className="item-sub-nav">
             <NavLink
               onClick={() => {
                 setPostNow(false);
@@ -154,43 +154,43 @@ const CardModal = (props) => {
             </NavLink>
             <NavLink
               onClick={() =>
-                setPostNow(true) & setcontent({ ...content, date: '' })
+                setPostNow(true) & setcontent({ ...content, date: "" })
               }
               to={`/home/post-now`}
             >
               Post Now
             </NavLink>
           </nav>
-          <Grid container justify='space-around' alignItems='center'>
+          <Grid container justify="space-around" alignItems="center">
             {!postnow ? (
               <>
                 <div
                   style={{
-                    display: 'flex',
-                    flexDirection: 'column',
-                    margin: '5%',
+                    display: "flex",
+                    flexDirection: "column",
+                    margin: "5%",
                   }}
                 >
                   <DatePicker
                     disableToolbar
-                    variant='inline'
-                    format='MM/dd/yyyy'
-                    margin='normal'
-                    id='date-picker-inline'
+                    variant="inline"
+                    format="MM/dd/yyyy"
+                    margin="normal"
+                    id="date-picker-inline"
                     disablePast={true}
-                    label='Date'
+                    label="Date"
                     value={props.selectedDate}
                     onChange={handleDateChange}
                   />
                   <TimePicker
-                    margin='normal'
-                    id='time-picker'
-                    label='Time'
+                    margin="normal"
+                    id="time-picker"
+                    label="Time"
                     value={props.selectedDate}
                     onChange={handleDateChange}
                   />
                 </div>
-                <div style={{ display: 'flex', alignItems: 'center' }}>
+                <div style={{ display: "flex", alignItems: "center" }}>
                   <button
                     onClick={() =>
                       new Date(props.rectime) > new Date()
@@ -198,21 +198,21 @@ const CardModal = (props) => {
                         : newRecTime()
                     }
                     style={{
-                      borderRadius: '6px',
-                      width: '205px',
-                      height: '38px',
-                      background: '#817BAB',
-                      color: '#EBECF0',
+                      borderRadius: "6px",
+                      width: "205px",
+                      height: "38px",
+                      background: "#817BAB",
+                      color: "#EBECF0",
                     }}
                   >
                     Suggest a Time
                   </button>
                   <Tooltip
-                    title='proprietary optimization algorithm to maximize engagement'
-                    placement='top-end'
-                    aria-label='InfoIcon'
-                    fontSize='small'
-                    color='action'
+                    title="proprietary optimization algorithm to maximize engagement"
+                    placement="top-end"
+                    aria-label="InfoIcon"
+                    fontSize="small"
+                    color="action"
                   >
                     <InfoIcon />
                   </Tooltip>
@@ -221,14 +221,14 @@ const CardModal = (props) => {
             ) : null}
           </Grid>
         </MuiPickersUtilsProvider>
-        {console.log(content, 'WHAT ARE YOU 2')}
+        {console.log(content, "WHAT ARE YOU 2")}
         <Inputtextarea
-          placeholder='Customize your Twitter message here'
-          type='text'
-          name='post_text'
-          cols='50'
-          rows='10'
-          maxLength='280'
+          placeholder="Customize your Twitter message here"
+          type="text"
+          name="post_text"
+          cols="50"
+          rows="10"
+          maxLength="280"
           ref={inputfocus}
           onFocus={handletweetchange}
           value={content.post_text}
@@ -237,12 +237,12 @@ const CardModal = (props) => {
         <span
           style={
             tweetCount.chars_left < 80
-              ? { color: 'red' }
+              ? { color: "red" }
               : tweetCount.chars_left < 180
-              ? { color: 'orange' }
+              ? { color: "orange" }
               : null
           }
-          className='tweetcountmodal'
+          className="tweetcountmodal"
         >
           {tweetCount.chars_left}
         </span>
@@ -250,7 +250,7 @@ const CardModal = (props) => {
       {!postnow ? (
         <button
           onClick={onsubmitTwitter}
-          style={{ width: '40%' }}
+          style={{ width: "40%" }}
           className={classes.actionSubmit}
         >
           Schedule
@@ -258,7 +258,7 @@ const CardModal = (props) => {
       ) : (
         <button
           onClick={onsubmitTwitter}
-          style={{ width: '40%' }}
+          style={{ width: "40%" }}
           className={classes.actionSubmit}
         >
           Post Now
@@ -294,23 +294,23 @@ function editModalLocation() {
 
 const modalStyles = makeStyles((theme) => ({
   paper: {
-    fontFamily: 'Montserrat, sans-serif',
-    position: 'absolute',
+    fontFamily: "Montserrat, sans-serif",
+    position: "absolute",
     width: 600,
-    backgroundColor: '#F5F7F8',
-    borderRadius: '6px',
+    backgroundColor: "#F5F7F8",
+    borderRadius: "6px",
     boxShadow: theme.shadows[5],
     padding: theme.spacing(7),
-    display: 'flex',
-    flexDirection: 'column',
-    alignItems: 'inherit',
+    display: "flex",
+    flexDirection: "column",
+    alignItems: "inherit",
   },
   mHeader: {
-    fontSize: '1.6rem',
+    fontSize: "1.6rem",
   },
   mAccent: {
-    lineHeight: '.1rem',
-    color: '#e85556',
+    lineHeight: ".1rem",
+    color: "#e85556",
     fontWeight: 200,
   },
   formControl: {
@@ -318,26 +318,26 @@ const modalStyles = makeStyles((theme) => ({
     minWidth: 200,
   },
   actionSubmit: {
-    color: '#fff',
-    backgroundColor: '#E85556',
-    borderRadius: '5rem',
-    border: 'none',
-    padding: '1rem',
-    margin: '.5rem 1rem',
-    width: '40%',
-    fontSize: '1.2rem',
+    color: "#fff",
+    backgroundColor: "#E85556",
+    borderRadius: "5rem",
+    border: "none",
+    padding: "1rem",
+    margin: ".5rem 1rem",
+    width: "40%",
+    fontSize: "1.2rem",
   },
   modal: {
-    display: 'flex',
-    alignItems: 'center',
-    justifyContent: 'center',
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "center",
   },
   select: {
-    width: '50%',
+    width: "50%",
   },
   button: {
-    '&:hover': {
-      backgroundColor: 'transparent',
+    "&:hover": {
+      backgroundColor: "transparent",
     },
   },
 }));

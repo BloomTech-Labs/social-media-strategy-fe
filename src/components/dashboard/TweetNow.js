@@ -3,10 +3,10 @@ import { useForm } from 'react-hook-form';
 import { connect } from 'react-redux';
 import Button from '@material-ui/core/Button';
 import TextareaAutosize from '@material-ui/core/TextareaAutosize';
-import { useTweetCount } from './useTweetCount';
-import '../sass/topicBuckets.scss';
+import { useTweetCount } from '../../hooks/useTweetCount';
+import '../../sass/topicBuckets.scss';
 
-import { twitterPostnow } from '../actions';
+import { twitterPostnow } from '../../actions';
 
 const TweetNow = (props) => {
   const { handleSubmit, register } = useForm();
