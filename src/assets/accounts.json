@@ -1,0 +1,31 @@
+{
+    "accounts": [
+        {
+        "firstName": "Lillian",
+        "lastName": " Hanson",
+        "twitterHandle": "@lillighanson",
+        "location":"Duluth, MN",
+        "posts": "432",
+        "following":"249",
+        "followers":"55k"
+        },
+        {
+            "firstName": "Ms. Doodle",
+            "lastName": "Girl",
+            "twitterHandle": "@MsDoodler",
+            "location":"USA",
+            "posts": "1567",
+            "following":"23",
+            "followers":"1.5m"
+        },
+        {
+            "firstName": "Adventure",
+            "lastName": "Awaits",
+            "twitterHandle": "@AdventureUSA",
+            "location":"Minnesota",
+            "posts": "40",
+            "following":"4,567",
+            "followers":"3,006"
+        }
+    ]
+    }
