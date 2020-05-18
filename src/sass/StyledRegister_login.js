@@ -1,6 +1,6 @@
 import { makeStyles } from '@material-ui/core/styles';
-import imgz from '../imgs/Rectangle.png';
-import img2 from '../imgs/holdingwhitephone.png';
+import imgz from '../assets/imgs/Rectangle.png';
+import img2 from '../assets/imgs/holdingwhitephone.png';
 
 export const useStyles = makeStyles((theme) => ({
   root: {

@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { axiosWithAuth } from '../utils/axiosWithAuth';
+import { axiosWithAuth } from '../../utils/axiosWithAuth';
 import styled from 'styled-components';
 import TwitterIcon from '@material-ui/icons/Twitter';
 import Card from '@material-ui/core/Card';

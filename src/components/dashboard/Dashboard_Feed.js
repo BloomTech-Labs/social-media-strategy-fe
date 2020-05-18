@@ -1,11 +1,11 @@
 import React, { useEffect, useState } from 'react';
-import { axiosWithAuth } from '../utils/axiosWithAuth';
+import { axiosWithAuth } from '../../utils/axiosWithAuth';
 import { NavLink } from 'react-router-dom';
 import {
   TWITTER_TWEETS,
   TWITTER_TIMELINE,
   TWITTER_MENTIONS,
-} from './Twitter_Tweets';
+} from '../Twitter_Tweets';
 
 const Dashboard_Feed = (props) => {
   const [feed, setFeed] = useState([]);

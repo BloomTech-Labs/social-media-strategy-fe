@@ -9,16 +9,16 @@ import TwitterIcon from '@material-ui/icons/Twitter';
 import LocationOnIcon from '@material-ui/icons/LocationOn';
 
 // Styling
-import '../sass/dashboard.scss';
+import '../../sass/dashboard.scss';
 
 // Assets import
 
-import twitterimg from '../imgs/Vector.png';
+import twitterimg from '../../assets/imgs/Vector.png';
 import { connect } from 'react-redux';
 // import { bindActionCreators } from 'redux';
 
-import { currentUser, fetchAccounts } from '../actions';
-import { dashStyles } from '../sass/DashStyles';
+import { currentUser, fetchAccounts } from '../../actions';
+import { dashStyles } from '../../sass/DashStyles';
 
 // Set dummy Acct Data
 

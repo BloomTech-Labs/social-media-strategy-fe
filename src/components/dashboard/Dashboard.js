@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import DASHBOARD_ACCOUNT from './Dashboard_Account';
 import DASHBOARD_FEED from './Dashboard_Feed';
 import DASHBOARD_TWEETS from './Dashboard_Tweets.js';
-import { currentUser, fetchAccounts } from '../actions';
+import { currentUser, fetchAccounts } from '../../actions/index.js';
 
 const Dashboard = (props) => {
   return (

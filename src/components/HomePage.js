@@ -5,7 +5,7 @@ import { sort, fetchTopics, updateTopics, currentUser } from '../actions';
 import styled from 'styled-components';
 // import { makeStyles } from '@material-ui/core/styles';
 
-import Dashboard from './Dashboard';
+import Dashboard from './dashboard/Dashboard';
 import Navigation from './Navigation';
 import TopicBucket from './TopicBucket';
 import ActionButton from './ActionButton';
