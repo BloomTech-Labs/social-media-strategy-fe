@@ -15,52 +15,55 @@ const Callback = () => {
 
     s.style['display'] = 'block';
   }
-  async function fetchdata() {
-    const parse = queryString.parse(location.search);
-    try {
-      let user = await axiosWithAuth().get(`/users/user`);
-      setstate(user.data.subject);
-
-      let post = await axiosWithAuth().post(
-        `${process.env.REACT_APP_API_URL}/auth/${user.data.subject}/callback`,
-
-        { parse: parse, location: location }
-      );
-
-      let promise = [user, post];
-
-      await Promise.allSettled(promise);
-      setData(post.data);
-
-      setTimeout(() => {
-        window.location.replace('/home');
-      }, 4000);
-      let countdown = setInterval(timer, 1000);
-      function timer() {
-        if (window.location.pathname !== '/callback') {
-          console.log('Interval Cleared');
-          clearInterval(countdown);
-        } else {
-          setTime(time => time - 1);
-          console.log(window.location.pathname, 'TIME');
-        }
-      }
-    } catch (error) {
-      console.log({
-        message: error.message,
-        error: error.stack,
-        name: error.name,
-        code: error.code
-      });
-    }
-  }
 
   useEffect(() => {
+    async function fetchdata() {
+      const parse = queryString.parse(location.search);
+      try {
+        let user = await axiosWithAuth().get(`/users/user`);
+        setstate(user.data.subject);
+
+        let post = await axiosWithAuth().post(
+          `${process.env.REACT_APP_API_URL}/auth/${user.data.subject}/callback`,
+
+          { parse: parse, location: location }
+        );
+
+        let promise = [user, post];
+
+        await Promise.allSettled(promise);
+        setData(post.data);
+
+        setTimeout(() => {
+          window.location.replace('/home');
+        }, 4000);
+        let countdown = setInterval(timer, 1000);
+
+        function timer() {
+          if (window.location.pathname !== '/callback') {
+            console.log('Interval Cleared');
+            clearInterval(countdown);
+          }
+          else {
+            setTime(time => time - 1);
+            console.log(window.location.pathname, 'TIME');
+          }
+        }
+      }
+      catch (error) {
+        console.log({
+          message: error.message,
+          error: error.stack,
+          name: error.name,
+          code: error.code
+        });
+      }
+    }
     fetchdata();
     setTimeout(() => {
       displayiferror();
     }, 4500);
-  }, []);
+  }, [location]);
 
   return (
     <div className="callback-cont">

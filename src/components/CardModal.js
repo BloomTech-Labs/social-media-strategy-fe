@@ -18,7 +18,7 @@ import {
   DatePicker,
 } from '@material-ui/pickers';
 import Grid from '@material-ui/core/Grid';
-import { Fade, Menu, Tooltip, IconButton, Typography } from '@material-ui/core';
+import { Tooltip } from '@material-ui/core';
 import InfoIcon from '@material-ui/icons/Info';
 import { NavLink } from 'react-router-dom';
 import DateFnsUtils from '@date-io/date-fns';
@@ -44,7 +44,7 @@ const CardModal = (props) => {
   const { content, setcontent } = props;
 
   const classes = modalStyles();
-  const SN = localStorage.getItem('SNAME');
+  //const SN = localStorage.getItem('SNAME');
   const [modalStyle] = useState(editModalLocation);
   const [handle, setHandle] = useState(1);
   const [postnow, setPostNow] = useState(false);
@@ -58,7 +58,7 @@ const CardModal = (props) => {
 
   let screen_name = props.user.accounts.map((e) => e.screen_name);
   const inputfocus = useRef(null);
-  let updateTrue = props?.user?.didUpdate === true;
+  //let updateTrue = props?.user?.didUpdate === true;
 
   useEffect(() => {
     axiosWithAuth()

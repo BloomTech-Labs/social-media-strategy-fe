@@ -1,6 +1,5 @@
 import React from 'react';
-import { NavLink, Route, Switch } from 'react-router-dom';
-import Button from '@material-ui/core/Button';
+import { NavLink } from 'react-router-dom';
 import '../sass/team.scss';
 import jp from '../assets/imgs/jp.jpg';
 import jason from '../assets/imgs/jason-long.jpg';

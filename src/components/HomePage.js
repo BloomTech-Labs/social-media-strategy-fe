@@ -1,3 +1,4 @@
+/* eslint-disable */
 import React, { useEffect, useRef } from 'react';
 import { connect } from 'react-redux';
 import { DragDropContext, Droppable } from 'react-beautiful-dnd';
@@ -20,7 +21,7 @@ import CONSTANTS from '../actions/constants';
 
 // const drawerWidth = 400;
 
-const TopicsContainer = styled.div`
+const TopicsContainer = styled.div `
   display: flex;
   justify-content: space-evenly;
 `;
@@ -40,7 +41,7 @@ const HomePage = (props) => {
         console.log(refTime, 'INTERVALL');
       }, 5000);
     }
-    let test = await props?.topics?.forEach(async (e, i) => {
+    let test = await props?.topics?.forEach(async(e, i) => {
       await axiosWithAuth()
         .put(`/topics/${e.id}`, { ...e, index: i })
         .then((res) => console.log(res, '???'))
@@ -53,6 +54,7 @@ const HomePage = (props) => {
 
   async function continousUpdate() {
     let countdown = setInterval(timer, 5000);
+
     function timer() {
       if (!updateTrue) {
         props.dispatch({ type: CONSTANTS.TOGGLEUPDATE, payload: true });
@@ -61,7 +63,8 @@ const HomePage = (props) => {
         }, 300);
         console.log(refTime, 'Interval Cleared', new Date());
         clearInterval(countdown);
-      } else {
+      }
+      else {
         props.dispatch({ type: CONSTANTS.TOGGLEUPDATE, payload: false });
 
         clearInterval(countdown);
@@ -69,22 +72,18 @@ const HomePage = (props) => {
     }
   }
   console.log(props.user.didUpdate, refTime, 'INTERVAL');
+  
   useEffect(() => {
     setInterval(() => {
       if (refTime.current === 0) {
         continousUpdate();
       }
     }, 25000);
-  }, []);
-
-  useEffect(() => {
     props.currentUser(push);
     props.fetchTopics(props.user.currentUser?.subject);
-  }, [userCheck]);
-
-  useEffect(() => {
     props.updateTopics(updateAlltopics);
-  }, [updateTrue]);
+  }, [userCheck, updateTrue]);
+
   const onDragEnd = (result) => {
     const { destination, source, draggableId, type } = result;
     if (!destination) {

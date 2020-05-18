@@ -3,7 +3,7 @@ import React from 'react';
 import TransitionsModal from './Modal';
 import Date from './Date';
 // react router dom imports
-import { NavLink, Route, Switch } from 'react-router-dom';
+import { NavLink, Switch } from 'react-router-dom';
 // Styles
 import '../sass/navigation.scss';
 // asset imports
