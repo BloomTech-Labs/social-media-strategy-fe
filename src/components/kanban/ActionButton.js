@@ -9,10 +9,10 @@ import Button from '@material-ui/core/Button';
 import { v4 as uuidv4 } from 'uuid';
 
 // FILES
-import { addTopic, addCard } from '../actions';
+import { addTopic, addCard } from '../../actions';
 
 // STYLING
-import '../sass/actionButton.scss';
+import '../../sass/actionButton.scss';
 
 class ActionButton extends React.Component {
   state = {

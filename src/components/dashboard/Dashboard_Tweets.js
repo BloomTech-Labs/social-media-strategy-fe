@@ -1,21 +1,12 @@
 import React, { useEffect, useState } from 'react';
-import { axiosWithAuth } from '../utils/axiosWithAuth';
+import { axiosWithAuth } from '../../utils/axiosWithAuth';
 import styled from 'styled-components';
 import TwitterIcon from '@material-ui/icons/Twitter';
 import Card from '@material-ui/core/Card';
 import CardHeader from '@material-ui/core/CardHeader';
 import CardContent from '@material-ui/core/CardContent';
 import Avatar from '@material-ui/core/Avatar';
-import Typography from '@material-ui/core/Typography';
-import Icon from '@material-ui/core/Icon';
 import { makeStyles } from '@material-ui/core/styles';
-
-// import Container from './TopicCard.js';
-const TweetContainer = styled.div`
-  .postText {
-    padding: 2rem 0rem;
-  }
-`;
 
 const useStyles = makeStyles(theme => ({
   tweetCont: {
@@ -93,7 +84,7 @@ const Dashboard_Tweets = props => {
         setTweets(orderTweets(completedTweets));
       })
       .catch(err => console.log(err.message));
-  }, [updateTrue]);
+  }, [updateTrue, userID]);
 
   const orderTweets = tweetArray => {
     let original = tweetArray;

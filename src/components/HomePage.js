@@ -1,22 +1,23 @@
-import React, { useEffect, useRef } from 'react';
-import { connect } from 'react-redux';
-import { DragDropContext, Droppable } from 'react-beautiful-dnd';
-import { sort, fetchTopics, updateTopics, currentUser } from '../actions';
-import styled from 'styled-components';
+/* eslint-disable */
+import React, { useEffect, useRef } from "react";
+import { connect } from "react-redux";
+import { DragDropContext, Droppable } from "react-beautiful-dnd";
+import { sort, fetchTopics, updateTopics, currentUser } from "../actions";
+import styled from "styled-components";
 // import { makeStyles } from '@material-ui/core/styles';
 
-import Dashboard from './Dashboard';
-import Navigation from './Navigation';
-import TopicBucket from './TopicBucket';
-import ActionButton from './ActionButton';
-import TopicNav from './TopicNav';
+import Dashboard from "./dashboard/Dashboard";
+import Navigation from "./dashboard/Navigation";
+import TopicBucket from "./kanban/TopicBucket";
+import ActionButton from "./kanban/ActionButton";
+import TopicNav from "./kanban/TopicNav";
 
-import '../sass/index.scss';
-import { Route, Switch, useHistory } from 'react-router';
-import Callback from './Callback';
-import { axiosWithAuth } from '../utils/axiosWithAuth';
-import { bindActionCreators } from 'redux';
-import CONSTANTS from '../actions/constants';
+import "../sass/index.scss";
+import { Route, Switch, useHistory } from "react-router";
+import Callback from "./Callback";
+import { axiosWithAuth } from "../utils/axiosWithAuth";
+import { bindActionCreators } from "redux";
+import CONSTANTS from "../actions/constants";
 
 // const drawerWidth = 400;
 
@@ -37,14 +38,14 @@ const HomePage = (props) => {
       refTime.current = 1;
       setTimeout(() => {
         refTime.current = 0;
-        console.log(refTime, 'INTERVALL');
+        console.log(refTime, "INTERVALL");
       }, 5000);
     }
     let test = await props?.topics?.forEach(async (e, i) => {
       await axiosWithAuth()
         .put(`/topics/${e.id}`, { ...e, index: i })
-        .then((res) => console.log(res, '???'))
-        .catch((err) => console.log(err) & console.log(props.topics, 'TOPICS'));
+        .then((res) => console.log(res, "???"))
+        .catch((err) => console.log(err) & console.log(props.topics, "TOPICS"));
     });
     return test;
   }
@@ -53,13 +54,14 @@ const HomePage = (props) => {
 
   async function continousUpdate() {
     let countdown = setInterval(timer, 5000);
+
     function timer() {
       if (!updateTrue) {
         props.dispatch({ type: CONSTANTS.TOGGLEUPDATE, payload: true });
         setTimeout(() => {
           props.dispatch({ type: CONSTANTS.TOGGLEUPDATE, payload: false });
         }, 300);
-        console.log(refTime, 'Interval Cleared', new Date());
+        console.log(refTime, "Interval Cleared", new Date());
         clearInterval(countdown);
       } else {
         props.dispatch({ type: CONSTANTS.TOGGLEUPDATE, payload: false });
@@ -68,23 +70,19 @@ const HomePage = (props) => {
       }
     }
   }
-  console.log(props.user.didUpdate, refTime, 'INTERVAL');
+  console.log(props.user.didUpdate, refTime, "INTERVAL");
+
   useEffect(() => {
     setInterval(() => {
       if (refTime.current === 0) {
         continousUpdate();
       }
     }, 25000);
-  }, []);
-
-  useEffect(() => {
     props.currentUser(push);
     props.fetchTopics(props.user.currentUser?.subject);
-  }, [userCheck]);
-
-  useEffect(() => {
     props.updateTopics(updateAlltopics);
-  }, [updateTrue]);
+  }, [userCheck, updateTrue]);
+
   const onDragEnd = (result) => {
     const { destination, source, draggableId, type } = result;
     if (!destination) {
@@ -103,47 +101,47 @@ const HomePage = (props) => {
   };
 
   return (
-    <div className='columns is-gapless'>
-      <div className='column is-2'>
+    <div className="columns is-gapless">
+      <div className="column is-2">
         <Navigation />
       </div>
 
-      <Route exact path='/callback'>
+      <Route exact path="/callback">
         <Callback />
       </Route>
       <Switch>
-        <Route path='/'>
+        <Route path="/">
           {props.user.drawer ? (
-            <div className='column is-3'>
+            <div className="column is-3">
               <Dashboard />
             </div>
           ) : (
-            <div className='column is-3' style={{ display: 'none' }}>
+            <div className="column is-3" style={{ display: "none" }}>
               <Dashboard />
             </div>
           )}
-          <div className='column drag-drop-content'>
+          <div className="column drag-drop-content">
             <TopicNav />
-            <ActionButton className='column is-2 headers' topic />
+            <ActionButton className="column is-2 headers" topic />
             <DragDropContext
               onDragEnd={onDragEnd}
-              style={{ display: 'block', overflow: 'auto' }}
+              style={{ display: "block", overflow: "auto" }}
             >
               <Droppable
-                className='columns'
-                droppableId='all-topics'
-                direction='horizontal'
-                type='topic'
-                style={{ display: 'block', overflow: 'auto' }}
+                className="columns"
+                droppableId="all-topics"
+                direction="horizontal"
+                type="topic"
+                style={{ display: "block", overflow: "auto" }}
               >
                 {(provided) => (
                   <TopicsContainer
-                    className='ALL-TOPICS'
-                    style={{ display: 'block', overflow: 'auto' }}
+                    className="ALL-TOPICS"
+                    style={{ display: "block", overflow: "auto" }}
                     {...provided.droppableProps}
                     ref={provided.innerRef}
                   >
-                    <div className='column topics'>
+                    <div className="column topics">
                       <>
                         {props?.topics?.map((topic, index) => (
                           <TopicBucket

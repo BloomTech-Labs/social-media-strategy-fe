@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState } from "react";
 
 export function useTweetCount(max_chars) {
   const [state, setState] = useState({ chars_left: max_chars });

@@ -1,21 +1,20 @@
 import React from 'react';
-import { NavLink, Route, Switch } from 'react-router-dom';
-import Button from '@material-ui/core/Button';
+import { NavLink } from 'react-router-dom';
 import '../sass/team.scss';
-import jp from '../imgs/jp.jpg';
-import jason from '../imgs/jason-long.jpg';
-import matthew from '../imgs/matthew-bedard.jpg';
-import jessica from '../imgs/jessica-wolff.jpg';
-import jose from '../imgs/jose-rivera.png';
-import tyler from '../imgs/tyler-gilchrist.jpg';
-import andrew from '../imgs/andrew-lowe.jpg';
-import sarah from '../imgs/sarah-xu.jpg';
-import jud from '../imgs/jud-taylor.jpg';
-import ana from '../imgs/ana-rosa-lerma.jpg';
-import github from '../imgs/github.png';
-import linkedin from '../imgs/linkedin.jpg';
-import twitter from '../imgs/twitter-black.png';
-import figma from '../imgs/figma-black.png';
+import jp from '../assets/imgs/jp.jpg';
+import jason from '../assets/imgs/jason-long.jpg';
+import matthew from '../assets/imgs/matthew-bedard.jpg';
+import jessica from '../assets/imgs/jessica-wolff.jpg';
+import jose from '../assets/imgs/jose-rivera.png';
+import tyler from '../assets/imgs/tyler-gilchrist.jpg';
+import andrew from '../assets/imgs/andrew-lowe.jpg';
+import sarah from '../assets/imgs/sarah-xu.jpg';
+import jud from '../assets/imgs/jud-taylor.jpg';
+import ana from '../assets/imgs/ana-rosa-lerma.jpg';
+import github from '../assets/imgs/github.png';
+import linkedin from '../assets/imgs/linkedin.jpg';
+import twitter from '../assets/imgs/twitter-black.png';
+import figma from '../assets/imgs/figma-black.png';
 
 const Team = () => {
   return (

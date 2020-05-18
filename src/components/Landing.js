@@ -1,6 +1,5 @@
 import React from 'react';
-import { NavLink, Route, Switch, Link } from 'react-router-dom';
-import Button from '@material-ui/core/Button';
+import { NavLink, Link } from 'react-router-dom';
 import '../sass/landing.scss';
 
 const Landing = () => {
