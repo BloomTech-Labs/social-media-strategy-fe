@@ -13,6 +13,10 @@ const Dashboardv2 = () => {
         })();
     }, [authService]);
 
+    const logout = async () => {
+        authService.logout('/');
+    }
+
     return (
         <>
             { user &&
@@ -22,6 +26,7 @@ const Dashboardv2 = () => {
                     {JSON.stringify(user, null, 2)}
                 </pre>
                 <hr />
+                <button onClick={logout}>Logout</button>
             </div> }
         </>
     );
