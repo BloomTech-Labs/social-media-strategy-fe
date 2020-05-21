@@ -12,14 +12,13 @@ import Landing from "./components/Landing";
 // new stuff
 import { Security, SecureRoute, LoginCallback } from '@okta/okta-react';
 import LoginOkta from './components/auth/LoginOkta';
-import Dashboard from './components/dashboard/Dashboardv2';
+import Home from './components/Home';
 
 const config = {
   issuer: `${process.env.REACT_APP_OKTA_DOMAIN}/oauth2/default`,
   clientId: process.env.REACT_APP_OKTA_CLIENT_ID,
   redirectUri: window.location.origin + '/implicit/callback',
-  // redirectUri: process.env.REACT_APP_API_URL + '/auth/okta-callback'
-  // scopes: ['openid', 'profile', 'email'] 
+  scopes: ['openid', 'profile', 'email'] 
 };
 
 const App = (props) => {
@@ -37,7 +36,7 @@ const App = (props) => {
         <Route exact path="/login">
           <LoginOkta baseUrl={process.env.REACT_APP_OKTA_DOMAIN} />
         </Route>
-        <SecureRoute exact path="/dashboard" component={Dashboard} />
+        <SecureRoute exact path="/home" component={Home} />
         <Route path="/implicit/callback" component={LoginCallback} />
       </Switch>
     </Security>

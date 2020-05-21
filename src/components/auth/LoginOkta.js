@@ -7,20 +7,24 @@ const LoginOkta = ({ baseUrl }) => {
     const { authService, authState } = useOktaAuth();
 
     const onSuccess = async res => {
-        authService.login('/dashboard');
+        authService.login('/home');
         authService.redirect({
             sessionToken: res.session.token
         });
     };
 
-    return (authState && authState.isAuthenticated ? 
-        <Redirect to='/dashboard' />
+    if(authState.isPending) { 
+        return <div>Loading...</div>;
+    }
+    
+    return ( authState.isAuthenticated ?
+        <Redirect to='/home' />
         :
         <div style={{display: 'flex'}}>
             <img src={require("../../assets/imgs/login.png")} alt="Login" style={{width: '50%', height:'100%', objectFit: 'cover', objectPosition: 'center'}}/>
             
             <SignInWidget baseUrl={baseUrl} onSuccess={onSuccess} />
-        </div>
+        </div> 
     );
 };
 
