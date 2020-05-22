@@ -10,13 +10,8 @@ const useStyles = makeStyles((theme) => ({
         '&:hover': {
           backgroundColor: fade(theme.palette.common.white, 0.25),
         },
-        marginLeft: 0,
-        width: '100%',
         marginLeft: theme.spacing(1),
-        width: 'auto',
-        [theme.breakpoints.down('xs')]: {
-          // display: 'none'
-        },
+        width: 'auto'
       },
       searchIcon: {
         padding: theme.spacing(0, 2),
