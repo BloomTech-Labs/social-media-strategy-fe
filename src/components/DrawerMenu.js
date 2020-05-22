@@ -2,7 +2,6 @@ import React from 'react';
 import { useHistory } from 'react-router';
 import { useOktaAuth } from '@okta/okta-react';
 import { 
-    makeStyles,
     Drawer,
     List,
     ListItem,
