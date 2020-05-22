@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useOktaAuth } from '@okta/okta-react';
 
-const Dashboardv2 = () => {
+const MediaManager = () => {
     const { authService, authState } = useOktaAuth();
     const [user, setUser] = useState();
     console.log('authState', authState);
@@ -32,4 +32,4 @@ const Dashboardv2 = () => {
     );
 };
 
-export default Dashboardv2;
+export default MediaManager;

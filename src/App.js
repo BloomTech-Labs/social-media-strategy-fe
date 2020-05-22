@@ -13,7 +13,6 @@ import Landing from "./components/Landing";
 import { Security, SecureRoute, LoginCallback } from '@okta/okta-react';
 import LoginOkta from './components/auth/LoginOkta';
 import Home from './components/Home';
-import LinkAccounts from './components/LinkAccounts';
 import CssBaseline from "@material-ui/core/CssBaseline";
 
 const config = {
@@ -39,8 +38,7 @@ const App = (props) => {
         <Route exact path="/login">
           <LoginOkta baseUrl={process.env.REACT_APP_OKTA_DOMAIN} />
         </Route>
-        <SecureRoute exact path="/home" component={Home} />
-        <SecureRoute exact path="/link-accounts" component={LinkAccounts} />
+        <SecureRoute path="/app" component={Home} />
         <Route path="/implicit/callback" component={LoginCallback} />
       </Switch>
     </Security>

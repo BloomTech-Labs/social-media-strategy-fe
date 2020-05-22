@@ -2,15 +2,11 @@ import React from 'react';
 import { makeStyles, fade } from '@material-ui/core/styles';
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
-import Typography from '@material-ui/core/Typography';
 import Button from '@material-ui/core/Button';
 import IconButton from '@material-ui/core/IconButton';
 import { Search, AccountCircle } from '@material-ui/icons';
 import InputBase from '@material-ui/core/InputBase';
 
-import Switch from '@material-ui/core/Switch';
-import FormControlLabel from '@material-ui/core/FormControlLabel';
-import FormGroup from '@material-ui/core/FormGroup';
 import MenuItem from '@material-ui/core/MenuItem';
 import Menu from '@material-ui/core/Menu';
 import MenuIcon from '@material-ui/icons/Menu';
@@ -21,9 +17,12 @@ const useStyles = makeStyles((theme) => ({
     flexGrow: 1,
     display: 'grid',
     zIndex: '1100',
-    height: theme.navbar.height.normal, 
+    [theme.breakpoints.up('xs')]: {
+      height: theme.navbar.height.normal
+    },
     [theme.breakpoints.down('xs')]: {
-      height: theme.navbar.height.small
+      height: theme.navbar.height.small,
+      minHeight: theme.navbar.height.small
     }
   },
   menuButton: {
@@ -75,13 +74,8 @@ const useStyles = makeStyles((theme) => ({
 
 const Nav = ({ toggleMenu }) => {
     const classes = useStyles();
-    const [auth, setAuth] = React.useState(true);
     const [anchorEl, setAnchorEl] = React.useState(null);
     const open = Boolean(anchorEl);
-
-      const handleChange = (event) => {
-        setAuth(event.target.checked);
-    };
 
     const handleMenu = (event) => {
         setAnchorEl(event.currentTarget);
@@ -100,7 +94,7 @@ const Nav = ({ toggleMenu }) => {
                     <MenuIcon />
                 </IconButton>
                 <Button>
-                  <img src={require('../assets/imgs/logo.png')} alt=""/>
+                  <img src={logo} alt="SoMe logo"/>
                 </Button>
                 <div className={classes.search}>
                     <div className={classes.searchIcon}>

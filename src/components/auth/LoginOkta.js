@@ -7,7 +7,7 @@ const LoginOkta = ({ baseUrl }) => {
     const { authService, authState } = useOktaAuth();
 
     const onSuccess = async res => {
-        authService.login('/home');
+        authService.login('/app');
         authService.redirect({
             sessionToken: res.session.token
         });
@@ -18,7 +18,7 @@ const LoginOkta = ({ baseUrl }) => {
     }
     
     return ( authState.isAuthenticated ?
-        <Redirect to='/home' />
+        <Redirect to='/app' />
         :
         <div style={{display: 'flex'}}>
             <img src={require("../../assets/imgs/login.png")} alt="Login" style={{width: '50%', height:'100%', objectFit: 'cover', objectPosition: 'center'}}/>

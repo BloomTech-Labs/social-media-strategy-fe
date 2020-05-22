@@ -1,4 +1,5 @@
 import React from 'react';
+import { useHistory } from 'react-router';
 import { useOktaAuth } from '@okta/okta-react';
 import { 
     makeStyles,
@@ -13,33 +14,19 @@ import ExitToAppIcon from '@material-ui/icons/ExitToApp';
 import ListAltIcon from '@material-ui/icons/ListAlt';
 import DashboardIcon from '@material-ui/icons/Dashboard';
 
-const useStyle = makeStyles(theme => ({
-    '@global': {
-        '.MuiDrawer-paper': {
-            top: theme.navbar.height.normal,
-            [theme.breakpoints.down('xs')]: {
-                top: theme.navbar.height.small
-            }
-        },
-        '.MuiDrawer-modal': {
-            zIndex: '1000 !important'
-        }
-    }
-}));
-
 const DrawerMenu = ({ open, toggleMenu }) => {
     const { authService } = useOktaAuth();
-    const classes = useStyle();
+    const { push } = useHistory();
 
     const logout = async () => {
         authService.logout('/');
     }
 
     return (
-        <Drawer style={classes} open={open} onClose={toggleMenu} anchor='left' variant='temporary' >
+        <Drawer open={open} onClose={toggleMenu} anchor='left' variant='temporary' >
             <div style={{flexGrow:'1'}}>
                 <List>
-                    <ListItem button>
+                    <ListItem button onClick={() => push('/app/media-manager')}>
                         <ListItemIcon>
                             <DashboardIcon />
                         </ListItemIcon>
