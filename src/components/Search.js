@@ -12,9 +12,10 @@ const useStyles = makeStyles((theme) => ({
         },
         marginLeft: 0,
         width: '100%',
-        [theme.breakpoints.up('sm')]: {
-          marginLeft: theme.spacing(1),
-          width: 'auto',
+        marginLeft: theme.spacing(1),
+        width: 'auto',
+        [theme.breakpoints.down('xs')]: {
+          // display: 'none'
         },
       },
       searchIcon: {

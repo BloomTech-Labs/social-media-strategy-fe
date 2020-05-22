@@ -28,8 +28,11 @@ const useStyles = makeStyles((theme) => ({
       minHeight: theme.navbar.height.small
     }
   },
-  menuButton: {
-    marginRight: theme.spacing(2),
+  logo: {
+    height: '30px',
+    [theme.breakpoints.down('xs')]: {
+      height: '20px'
+    }
   }
 }));
 
@@ -40,11 +43,11 @@ const Nav = ({ toggleMenu }) => {
     <div className={classes.root}>
         <AppBar position="static">
           <Toolbar>
-            <IconButton onClick={() => toggleMenu()} edge="start" className={classes.menuButton} color="inherit" aria-label="menu">
+            <IconButton onClick={() => toggleMenu()} edge="start" color="inherit" aria-label="menu">
                 <MenuIcon />
             </IconButton>
             <Button>
-              <img src={logo} alt="SoMe logo"/>
+              <img className={classes.logo} src={logo} alt="SoMe logo"/>
             </Button>
             <Search />
             <ProfileMenu />
