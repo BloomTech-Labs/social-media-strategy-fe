@@ -14,6 +14,7 @@ import { Security, SecureRoute, LoginCallback } from '@okta/okta-react';
 import LoginOkta from './components/auth/LoginOkta';
 import Home from './components/Home';
 import LinkAccounts from './components/LinkAccounts';
+import CssBaseline from "@material-ui/core/CssBaseline";
 
 const config = {
   issuer: `${process.env.REACT_APP_OKTA_DOMAIN}/oauth2/default`,
@@ -27,6 +28,7 @@ const App = (props) => {
   
   return (
     <Security {...config} onAuthRequired={() => push('/login')}>
+      <CssBaseline />
       <Switch>
         {/* <PrivateRoute path="/callback" component={Callback} /> */}
         {/* <PrivateRoute path="/home" component={HomePage} /> */}
