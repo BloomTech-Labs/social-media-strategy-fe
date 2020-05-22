@@ -11,6 +11,12 @@ const theme = createMuiTheme({
        background: {
          default: "#FFFFFF"
        }
+    },
+    navbar: {
+       height: {
+          small: '45px',
+          normal: '64px'
+       }
     }
  });
 
