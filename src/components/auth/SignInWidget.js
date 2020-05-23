@@ -1,28 +1,23 @@
-import React, { Component } from 'react';
-import ReactDOM from 'react-dom';
+import React, { useEffect } from 'react';
 import OktaSignIn from '@okta/okta-signin-widget';
-import '@okta/okta-signin-widget/dist/css/okta-sign-in.min.css';
+// import '@okta/okta-signin-widget/dist/css/okta-sign-in.min.css';
+import './SignInWidget.css'
 
-class SignInWidget extends Component {
-    componentDidMount() {
-      const el = ReactDOM.findDOMNode(this);
-      this.widget = new OktaSignIn({
-        baseUrl: this.props.baseUrl,
-        logo: '../../assets/imgs/logo.png' 
-      });
-      this.widget.renderEl({ 
-        el,
-        features: { registration:true }
-      }, this.props.onSuccess);
-    }
-  
-    componentWillUnmount() {
-      this.widget.remove();
-    }
-  
-    render() {
-      return <div id='okta-widget' />;
-    }
-  }
-  
-  export default SignInWidget;
+const OktaSigninWidget = ({baseUrl, onSuccess}) => {
+    useEffect(() => {
+        const widget = new OktaSignIn({
+            baseUrl
+        });
+
+        widget.renderEl({ el: '#sign-in-widget' }, onSuccess);
+    }, []);
+    
+
+    return (
+        <div className='widget-container'>
+            <div id='sign-in-widget' />
+        </div>
+    );
+}
+
+export default OktaSigninWidget;
