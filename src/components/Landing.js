@@ -1,4 +1,5 @@
 import React from "react";
+import { useHistory } from "react-router";
 import AppBar from "@material-ui/core/AppBar";
 import Button from "@material-ui/core/Button";
 import CssBaseline from "@material-ui/core/CssBaseline";
@@ -106,6 +107,7 @@ const useStyles = makeStyles((theme) => ({
 
 export default function Landing() {
  const classes = useStyles();
+ const { push } = useHistory();
 
  return (
   <React.Fragment>
@@ -116,7 +118,7 @@ export default function Landing() {
       SoMe
      </Typography>
      <nav>
-      <Link variant="button" href="/register" className={classes.link}>
+      <Link variant="button" href="/login" className={classes.link}>
        SIGN UP
       </Link>
       <Link variant="button" href="/login" className={classes.link}>
@@ -150,7 +152,7 @@ export default function Landing() {
     component="main"
     className={classes.butttonContainer}
    >
-    <Button component="button" className={classes.button}>
+    <Button component="button" className={classes.button} onClick={() => push('/login')}>
      Get Started
     </Button>
    </Container>
