@@ -25,6 +25,10 @@ const OktaSigninWidget = ({baseUrl, onSuccess}) => {
         });
 
         widget.renderEl({ el: '#sign-in-widget' }, onSuccess);
+
+        return () => {
+          widget.remove();
+        }
     }, []);
     
 
