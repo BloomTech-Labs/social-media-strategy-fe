@@ -5,16 +5,15 @@ function TwitterConnect(props) {
   console.log(oktaToken);
 
   async function authorizeTwitter() {
-    let ax = await fetch(
-      `${process.env.REACT_APP_API_URL}/auth/twitter/authorize`,
-      {
+    let ax = await (
+      await fetch(`${process.env.REACT_APP_API_URL}/auth/twitter/authorize`, {
         method: "GET",
         redirect: "follow",
         headers: {
           accept: "application/json",
           Authorization: `Bearer ${oktaToken.accessToken.accessToken}`,
         },
-      }
+      })
     ).json();
 
     await (window.location.href = ax);

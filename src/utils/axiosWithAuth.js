@@ -1,13 +1,14 @@
-import axios from 'axios';
-require('dotenv').config();
+import axios from "axios";
+require("dotenv").config();
 
-const url = process.env.REACT_APP_API_URL || 'https://api.so-me.net/api/';
+const url = process.env.REACT_APP_API_URL || "https://api.so-me.net/api/";
 
 export const axiosWithAuth = () => {
+  const oktaToken = JSON.parse(localStorage.getItem("okta-token-storage"));
   return axios.create({
     baseURL: url,
     headers: {
-      Authorization: localStorage.getItem('token'),
+      Authorization: `Bearer ${oktaToken.accessToken.accessToken}`,
     },
   });
 };
