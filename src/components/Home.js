@@ -6,9 +6,10 @@ import MediaManager from "./dashboard/MediaManager";
 import Nav from "./Nav";
 import DrawerMenu from "./DrawerMenu";
 
-
+// Just to view what they will look like
 import ActionButton from "./kanban/ActionButton";
 import TopicNav from "./kanban/TopicNav";
+import TopicBucket2 from "./kanban2/TopicBucket2";
 
 const Home = () => {
   const { authService, authState } = useOktaAuth();
@@ -29,8 +30,10 @@ const Home = () => {
     <>
       <Nav toggleMenu={toggleMenu} />
       <DrawerMenu open={menuOpen} toggleMenu={toggleMenu} />
+   
       <TopicNav />
-      <ActionButton/>
+      <TopicBucket2/>
+
 
       <main>
         <Route exact path="/app/media-manager" component={MediaManager} />
