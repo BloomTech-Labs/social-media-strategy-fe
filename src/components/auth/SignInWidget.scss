@@ -1,0 +1,344 @@
+@import url("https://use.fontawesome.com/releases/v5.13.0/css/all.css");
+$primary-color: #2196F3;
+
+p, h2 {
+    color: #2C2C2C;
+}
+
+#sign-in-widget {
+    display: flex;
+    justify-content: center;
+
+    #okta-sign-in {
+        width: 290px;
+        max-width: 90%;
+        margin: 0;
+    }  
+
+    /* Header */
+    .okta-sign-in-header.auth-header {
+        display: none;
+    }
+
+    /* Title */
+    h2.okta-form-title.o-form-head {
+        margin: 0;
+        padding-bottom: 14px;
+        font-family: "Roboto Condensed";
+    }
+
+    /* Form */
+    .o-form-fieldset-container {
+        /* Inputs */
+        input[type=text], input[type=password] {
+            /* Material UI slyle */
+            font: inherit;
+            font-size: 1rem;
+            color: currentColor;
+            width: 100%;
+            border: 0;
+            margin: 0;
+            display: block;
+            padding: 6px 6px 7px;
+            min-width: 0;
+            background: none;
+            box-sizing: content-box;
+            /* animation-name: mui-auto-fill-cancel; */
+            letter-spacing: inherit;
+            -webkit-tap-highlight-color: transparent;
+        
+            /* margin-bottom: 7px; */
+            max-width: 100%;
+            height: 33px !important;
+            box-sizing: inherit;
+        
+            border-radius: 3px;
+            border-style: solid;
+            border-width: 1.2px;
+            border-color: #2C2C2C;
+        }
+
+        /* Change label position */
+        .o-form-fieldset {
+            position: relative;
+            margin-top: 12px;
+            
+            &.o-form-label-top.margin-btm-5, &.o-form-label-top.margin-btm-30 {
+                margin-top: 20px;
+            }
+
+            .okta-form-label.o-form-label label {
+                position: absolute;
+                top: -9px;
+                background-color: white;
+                margin: 0 5px;
+                border-left: 3px solid white;
+                border-right: 1px solid white;
+                font-size: .8rem;
+                z-index: 10;
+            }
+        }
+
+        input:focus {
+            outline: none !important;
+            border: 1px solid $primary-color !important;
+            // border:0.12em solid rgba(33, 149, 243, 0.603) !important;
+        }
+
+        .required-fields-label {
+            font-size: .8rem;
+        }
+
+        .o-form-input-name-password {
+            display: flex;
+            position: relative;
+
+            .icon.input-icon.remote-lock-16 {
+                position: absolute;
+                bottom: 8px;
+                right: 12px;
+
+                &:before {
+                    font-family: "Font Awesome 5 Free"; 
+                    font-weight: 900;
+                    content: "\f023";
+                    color: #5e5e5e;
+                }
+            }
+        }  
+    }
+
+    /* Button */
+    .button.button-primary {
+        width: 100%;
+
+        /* Material UI style */
+        color: #FFF;
+        background-color: $primary-color;
+        padding: 4px 16px;
+        font-size: 0.875rem;
+        min-width: 64px;
+        box-sizing: border-box;
+        transition: background-color 250ms cubic-bezier(0.4, 0, 0.2, 1) 0ms,box-shadow 250ms cubic-bezier(0.4, 0, 0.2, 1) 0ms,border 250ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;
+        font-family: "Roboto", "Helvetica", "Arial", sans-serif;
+        font-weight: bold;
+        line-height: 1.75;
+        border-radius: 4px;
+        letter-spacing: 0.02857em;
+        box-shadow: none;
+
+        border: 0;
+        cursor: pointer;
+        margin: 0;
+        margin-top: 8px;
+        display: inline-flex;
+        outline: 0;
+        position: relative;
+        align-items: center;
+        user-select: none;
+        vertical-align: middle;
+        justify-content: center;
+        text-decoration: none;
+        -webkit-appearance: none;
+        -webkit-tap-highlight-color: transparent;
+
+        text-indent: 0px;
+        text-shadow: none;
+
+        &:hover {
+            background: darken($primary-color, 7%);
+        }
+    }
+
+    .icon {
+        width: auto;
+        height: auto;
+        margin: 0;
+        border: none;
+        padding: 0;
+    }
+
+
+    .okta-form-infobox-error.infobox.infobox-error {
+        margin-bottom: 8px;
+        display: flex;
+
+        .icon.error-16 {
+            height: auto;
+            width: auto;
+            padding: 0;
+        }
+
+        p {
+            margin: 0;
+            line-height: 1.2;
+            display: flex;
+            align-items: center;
+            color: #E10050;
+            font-size: .8rem;
+        }
+    }
+
+    p[role=alert] {
+        margin-top: 0;
+        margin-bottom: 12px;
+        color: #E10050;
+        font-size: .8rem;
+    }
+
+    .icon.error-16, .icon.icon-16.error-16-small, .error-16:before, .error-16-small:before {
+        font-family: "Font Awesome 5 Free"; 
+        font-weight: 900;
+        content: "\f06a";
+        color: #E10050;
+        border: none;
+        margin: 0;
+        margin-right: 6px;
+    }
+
+    .subschema-satisfied {
+        display: none;
+    }
+
+    .subschema-error {
+        color: #E10050;
+        margin-bottom: 12px;
+
+        p {
+            margin-top: 0;
+            margin-bottom: 4px;
+            font-size: .8rem;
+        }
+    }  
+
+    .default-schema {
+        display: none;
+    }
+
+
+    /* Checkbox */
+    .custom-checkbox {
+        margin: 5px 0;
+
+        input {
+            margin-left: 0;
+        }
+    }
+
+    /* Base for label styling */
+    [type="checkbox"]:not(:checked),
+    [type="checkbox"]:checked {
+        position: absolute;
+        left: -9999px;
+    }
+    [type="checkbox"]:not(:checked) + label,
+    [type="checkbox"]:checked + label {
+        position: relative;
+        padding-left: 1.95em;
+        cursor: pointer;
+    }
+
+    /* checkbox aspect */
+    [type="checkbox"]:not(:checked) + label:before,
+    [type="checkbox"]:checked + label:before {
+        content: '';
+        position: absolute;
+        left: 0; top: 0;
+        width: 1.25em; height: 1.25em;
+        border: 2px solid #ccc;
+        background: #fff;
+        border-radius: 4px;
+        box-shadow: inset 0 1px 3px rgba(0,0,0,.1);
+    }
+    /* checked mark aspect */
+    [type="checkbox"]:not(:checked) + label:after,
+    [type="checkbox"]:checked + label:after {
+        content: '\2713\0020';
+        position: absolute;
+        top: .15em; left: .22em;
+        font-size: 1.3em;
+        line-height: 0.8;
+        color: #09ad7e;
+        transition: all .2s;
+        font-family: 'Lucida Sans Unicode', 'Arial Unicode MS', Arial;
+    }
+    /* checked mark aspect changes */
+    [type="checkbox"]:not(:checked) + label:after {
+        opacity: 0;
+        transform: scale(0);
+    }
+    [type="checkbox"]:checked + label:after {
+        opacity: 1;
+        transform: scale(1);
+    }
+    /* disabled checkbox */
+    [type="checkbox"]:disabled:not(:checked) + label:before,
+    [type="checkbox"]:disabled:checked + label:before {
+        box-shadow: none;
+        border-color: #bbb;
+        background-color: #ddd;
+    }
+    [type="checkbox"]:disabled:checked + label:after {
+        color: #999;
+    }
+    [type="checkbox"]:disabled + label {
+        color: #aaa;
+    }
+    /* accessibility */
+    [type="checkbox"]:checked:focus + label:before,
+    [type="checkbox"]:not(:checked):focus + label:before {
+        border: 0.15em solid $primary-color;
+    }
+
+    /* Links */
+    /* Help signing in */
+    .auth-footer {
+        margin-top: 8px;
+
+        #help-links-container {
+            padding: 0;
+            margin: 0;
+
+            li {
+                list-style: none;
+
+                a {
+                    margin: 8px 0 !important;
+                    font-size: .8rem !important;   
+                }
+            }
+        }
+    }
+
+    a {
+        margin: 8px 0 !important;
+        font-size: .8rem;
+        text-decoration: none; 
+        color: $primary-color;
+
+        &:hover {
+            color: darken($primary-color, 7%);
+        }
+
+        &.registration-link {
+            font-size: 1rem;
+        }
+    }
+
+    /* Registration */    
+    .registration-container {
+        text-align: center;
+        margin-top: 20px;
+        border-top: solid 1px #ccc;
+        padding-top: 20px;
+
+        .required-fields-label {
+            color: #333;
+            margin-bottom: 8px;
+        }
+        
+        .o-form-input-name-email input {
+            margin-top: 20px;
+        }
+    }
+}
