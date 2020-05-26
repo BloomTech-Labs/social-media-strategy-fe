@@ -30,11 +30,6 @@ const App = (props) => {
     <Security {...config} onAuthRequired={() => push("/login")}>
       <CssBaseline />
       <Switch>
-        {/* <PrivateRoute path="/callback" component={Callback} /> */}
-        {/* <PrivateRoute path="/home" component={HomePage} /> */}
-        {/* <Route path="/team" component={Team} /> */}
-        {/* <Route exact path="/login" component={Login} /> */}
-        {/* <Route exact path="/register" component={Registration} /> */}
         <Route exact path="/" component={Landing} />
         <Route exact path="/login">
           <LoginOkta baseUrl={process.env.REACT_APP_OKTA_DOMAIN} />
