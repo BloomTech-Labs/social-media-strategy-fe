@@ -1,20 +1,18 @@
 import React, { useState, useEffect } from 'react';
 import { useOktaAuth } from '@okta/okta-react';
+import { Redirect } from 'react-router';
 
-const MediaManager = () => {
-    const { authService, authState } = useOktaAuth();
-    const [user, setUser] = useState();
-    console.log('authState', authState);
-
-    useEffect(() => {
-        (async () => {
-            const res = await authService.getUser();
-            setUser(res);
-        })();
-    }, [authService]);
+const MediaManager = ({ user }) => {
+    const { authService } = useOktaAuth();
 
     const logout = async () => {
         authService.logout('/');
+    }
+    
+    const hasLinkedAccounts = () => user.twitter_screenName;
+
+    if(!hasLinkedAccounts()) {
+        return <Redirect to='/app/link-accounts'/>
     }
 
     return (
