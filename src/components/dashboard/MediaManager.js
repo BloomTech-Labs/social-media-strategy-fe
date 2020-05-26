@@ -12,7 +12,7 @@ const MediaManager = ({ user }) => {
     const hasLinkedAccounts = () => user.twitter_screenName;
 
     if(!hasLinkedAccounts()) {
-        return <Redirect to='/app/link-accounts'/>
+        return <Redirect to='/app/connect'/>
     }
 
     return (
