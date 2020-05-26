@@ -1,20 +1,16 @@
 import React from "react";
 import { makeStyles } from "@material-ui/core/styles";
-import clsx from "clsx";
+
 import Card from "@material-ui/core/Card";
 import CardHeader from "@material-ui/core/CardHeader";
 import CardMedia from "@material-ui/core/CardMedia";
 import CardContent from "@material-ui/core/CardContent";
 import CardActions from "@material-ui/core/CardActions";
-import Collapse from "@material-ui/core/Collapse";
-import Avatar from "@material-ui/core/Avatar";
+import MoreVertIcon from '@material-ui/icons/MoreVert';
+
 import IconButton from "@material-ui/core/IconButton";
 import Typography from "@material-ui/core/Typography";
-import { red } from "@material-ui/core/colors";
-import FavoriteIcon from "@material-ui/icons/Favorite";
-import ShareIcon from "@material-ui/icons/Share";
-import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
-import MoreVertIcon from "@material-ui/icons/MoreVert";
+
 
 import Button from "@material-ui/core/Button";
 import ActionButton2 from "./ActionButton2";
@@ -23,11 +19,12 @@ import TwitterIcon from "@material-ui/icons/Twitter";
 const useStyles = makeStyles((theme) => ({
   root: {
     maxWidth: 345,
-    padding: 0,
   },
   media: {
     height: 0,
     paddingTop: "56.25%", // 16:9
+    marginLeft: "17px!important",
+    marginRight: "17px!important",
   },
   expand: {
     transform: "rotate(0deg)",
@@ -63,12 +60,15 @@ export default function TopicCard2() {
     <Card className={classes.root} style={{ margin: "2%" }}>
       <CardHeader
 
-        title="This is a Topic Card"
-        subheader="Tweets In the Queue"
+        action={
+          <IconButton aria-label="settings">
+            <MoreVertIcon />
+          </IconButton>
+        }
+        title="Topic"
       />
 
-      <CardContent>
-        <div></div>
+      <CardContent style={{padding:"0!important"}}>
         <div
           style={{
             display: "flex",
@@ -77,11 +77,6 @@ export default function TopicCard2() {
           }}
         >
           <TwitterIcon         
-          avatar={
-          <Avatar aria-label="recipe" className={classes.avatar}>
-            T
-          </Avatar>
-        }
           style={{ width: "20px", color: "#2196F3" }} />
           <Typography style={{ color: "#2196F3", width: "auto" }}>
             @user-name
