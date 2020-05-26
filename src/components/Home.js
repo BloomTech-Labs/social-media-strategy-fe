@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Redirect, Route } from "react-router-dom";
+import { Route } from "react-router-dom";
 import { useOktaAuth } from "@okta/okta-react";
 // Pages
 import MediaManager from "./dashboard/MediaManager";
@@ -9,7 +9,7 @@ import Nav from "./Nav";
 import DrawerMenu from "./DrawerMenu";
 
 const Home = () => {
-  const { authService, authState } = useOktaAuth();
+  const { authService } = useOktaAuth();
   const [menuOpen, setMenuOpen] = useState(false);
   
   // TODO: update user info in redux store
