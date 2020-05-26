@@ -1,8 +1,0 @@
-{
-  "viewportWidth": 2000,
-  "viewportHeight": 960,
-  "baseUrl": "http://localhost:3000",
-  "env": {
-    "appUrl": "https://so-me.net"
-  }
-}
