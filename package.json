@@ -47,11 +47,8 @@
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
-    "cypress:open": "cypress open",
-    "cypress:run": "cypress run",
     "scss": "node-sass --watch src/sass -o css",
-    "start:coverage": "react-scripts -r @cypress/instrument-cra start",
-    "cypress:coverage": "start-server-and-test start:coverage http://localhost:3000 cypress:run"
+    "coverage": "CI=true react-scripts test --coverage --watchAll=false || true"
   },
   "eslintConfig": {
     "extends": "react-app"
@@ -76,5 +73,13 @@
   "repository": {
     "type": "git",
     "url": "git+https://github.com/Lambda-School-Labs/social-media-strategy-fe.git"
+  },
+  "jest": {
+    "collectCoverageFrom": [
+      "**/*.{js,jsx}",
+      "!**/node_modules/**",
+      "!**/vendor/**",
+      "!**/coverage/**"
+    ]
   }
 }
