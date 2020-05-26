@@ -23,6 +23,7 @@ import TwitterIcon from "@material-ui/icons/Twitter";
 const useStyles = makeStyles((theme) => ({
   root: {
     maxWidth: 345,
+    padding: 0,
   },
   media: {
     height: 0,
@@ -45,9 +46,9 @@ const useStyles = makeStyles((theme) => ({
     color: "#2196F3",
   },
   trendingTopics: {
-    color: 'rgb(134,134,134)',
-    fontSize: '.9rem'
-  }
+    color: "rgb(134,134,134)",
+    fontSize: ".9rem",
+  },
 }));
 
 export default function TopicCard2() {
@@ -61,18 +62,35 @@ export default function TopicCard2() {
   return (
     <Card className={classes.root} style={{ margin: "2%" }}>
       <CardHeader
-        avatar={
+
+        title="This is a Topic Card"
+        subheader="Tweets In the Queue"
+      />
+
+      <CardContent>
+        <div></div>
+        <div
+          style={{
+            display: "flex",
+            justifyContent: "flex-start",
+            flexWrap: "wrap",
+          }}
+        >
+          <TwitterIcon         
+          avatar={
           <Avatar aria-label="recipe" className={classes.avatar}>
             T
           </Avatar>
         }
-        action={
-          <IconButton aria-label="settings">
-            <MoreVertIcon />
-          </IconButton>
-        }
-        title="This is a Topic Card"
-      />
+          style={{ width: "20px", color: "#2196F3" }} />
+          <Typography style={{ color: "#2196F3", width: "auto" }}>
+            @user-name
+          </Typography>
+        </div>
+        <Typography variant="body2" color="textSecondary" component="p">
+          This is a draft of a potential tweet.
+        </Typography>
+      </CardContent>
 
       <CardMedia
         className={classes.media}
@@ -80,19 +98,9 @@ export default function TopicCard2() {
         title="Twitter Pic"
       />
       <CardContent>
-        <div>
-
-        </div>
-        <div style={{display: 'flex', justifyContent:'flex-start', flexWrap: 'wrap'}}>
-          <TwitterIcon style={{width: '20px', color: '#2196F3'}}/>
-          <Typography style={{ color: "#2196F3", width: 'auto'}}>@user-name</Typography>
-        </div>
-        <Typography variant="body2" color="textSecondary" component="p">
-          This is a draft of a potential tweet.
-        </Typography>
-        <div style={{display: 'flex', justifyContent: 'space-between'}}>
-        <Button className={classes.button}>Schedule</Button>
-        <Button className={classes.button}>Post Now</Button>
+        <div style={{ display: "flex", justifyContent: "space-between" }}>
+          <Button className={classes.button}>Schedule</Button>
+          <Button className={classes.button}>Post Now</Button>
         </div>
       </CardContent>
       <CardContent>
@@ -108,10 +116,10 @@ export default function TopicCard2() {
         >
           Trending in Topic:
         </Typography>
-        <div style={{display: 'flex', justifyContent:'space-around'}}>
-        <Typography className={classes.trendingTopics}>#hashtag</Typography>
-        <Typography className={classes.trendingTopics}>@handle</Typography>
-        <Typography className={classes.trendingTopics}>keyword</Typography>
+        <div style={{ display: "flex", justifyContent: "space-around" }}>
+          <Typography className={classes.trendingTopics}>#hashtag</Typography>
+          <Typography className={classes.trendingTopics}>@handle</Typography>
+          <Typography className={classes.trendingTopics}>keyword</Typography>
         </div>
       </CardContent>
       <CardActions disableSpacing>
