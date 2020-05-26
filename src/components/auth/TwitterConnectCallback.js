@@ -4,6 +4,7 @@ import { axiosWithAuth } from "../../utils/axiosWithAuth";
 const queryString = require("query-string");
 
 const Callback = () => {
+  const [message, setMessage] = useState("");
   const location = useLocation();
   useEffect(() => {
     const { oauth_token, oauth_verifier } = queryString.parse(location.search);
@@ -12,7 +13,7 @@ const Callback = () => {
         oauth_token,
         oauth_verifier,
       })
-      .then((res) => console.log(res))
+      .then(({ data }) => setMessage(data.message))
       .catch((err) => {
         console.error({
           message: err.message,
@@ -23,7 +24,12 @@ const Callback = () => {
       });
   }, [location]);
 
-  return <h1>TwitterConnectCallback</h1>;
+  return (
+    <div>
+      <h1>TwitterConnectCallback</h1>
+      {message && <span>{message}</span>}
+    </div>
+  );
 };
 
 export default Callback;
