@@ -1,6 +1,5 @@
 import React from 'react';
 import { useOktaAuth } from '@okta/okta-react';
-import { Redirect } from 'react-router';
 
 const MediaManager = ({ user }) => {
     const { authService } = useOktaAuth();
