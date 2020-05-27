@@ -72,7 +72,7 @@ const LoginOkta = ({ baseUrl }) => {
         :
         <Grid container wrap='wrap' className={classes.root}>
             <Hidden mdUp>
-                <Grid xs={12}>
+                <Grid item xs={12}>
                     <AppBar className={classes.navbar} position='static'>
                         <Toolbar>
                             <Button onClick={handleLogoClick}>

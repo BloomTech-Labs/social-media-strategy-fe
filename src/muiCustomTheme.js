@@ -43,6 +43,12 @@ const theme = createMuiTheme({
          modal: {
             zIndex: '1000 !important'
          }
+      },
+      MuiButton: {
+         root: {
+            textTransform: 'none',
+            fontWeight: '600'
+         }
       }
     }
  });

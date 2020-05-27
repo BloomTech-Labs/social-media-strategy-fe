@@ -18,6 +18,7 @@ import logo from '../assets/imgs/logo.png';
 const useStyles = makeStyles((theme) => ({
   root: {
     flexGrow: 1,
+    width: '100%',
     display: 'grid',
     zIndex: '1100',
     [theme.breakpoints.up('xs')]: {
