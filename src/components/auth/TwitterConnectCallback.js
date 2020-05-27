@@ -1,7 +1,17 @@
 import React, { useEffect, useState } from "react";
 import { useLocation, useHistory } from "react-router-dom";
 import { axiosWithAuth } from "../../utils/axiosWithAuth";
+import { CircularProgress, Typography } from "@material-ui/core";
 const queryString = require("query-string");
+
+const container = {
+  height: '100vh',
+  width: '100%',
+  display: 'flex',
+  justifyContent: 'center',
+  alignItems: 'center',
+  flexDirection: 'column'
+}
 
 const Callback = () => {
   const [message, setMessage] = useState("");
@@ -15,21 +25,19 @@ const Callback = () => {
         oauth_token,
         oauth_verifier,
       })
-      .then(({ data }) => push('/app'))
+      .then((res) => {
+        push('/app')
+      })
       .catch((err) => {
-        console.error({
-          message: err.message,
-          error: err.stack,
-          name: err.name,
-          code: err.code,
-        });
+        push('/connect/twitter')
       });
   }, [location]);
 
   return (
-    <div>
-      <h1>TwitterConnectCallback</h1>
-      {message && <span>{message}</span>}
+    <div style={container}>
+      <Typography variant='h6'>Redirecting you back to SoMe</Typography>
+      <br/>
+      <CircularProgress />
     </div>
   );
 };
