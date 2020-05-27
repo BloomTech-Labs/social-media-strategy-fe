@@ -67,7 +67,7 @@ function TwitterConnect(props) {
         </Typography>
         <img src={twitterLogo} alt="Twitter logo" />
         <Button variant="contained" color="primary" className={classes.button} disableElevation onClick={authorizeTwitter}>
-          Authorize Twitter
+          Connect to Twitter
         </Button>
       </Grid>
     </Grid>
