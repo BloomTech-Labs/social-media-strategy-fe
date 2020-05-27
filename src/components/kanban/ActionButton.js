@@ -69,7 +69,7 @@ class ActionButton extends React.Component {
             color: this.props.buttonColor,
           }}
         >
-          <AddCircleIcon style={{ color: this.props.buttonColor }} />
+          <AddCircleIcon style={{ color: '#E10050' }} />
           {buttonText}
         </p>
       </div>
@@ -79,7 +79,7 @@ class ActionButton extends React.Component {
   renderForm = () => {
     const placeholder = this.props.topic
       ? 'Enter title for this topic'
-      : 'Enter text for this post';
+      : 'What would you like to share...';
 
     const buttonTitle = this.props.topic ? 'Add Topic' : 'Add Post';
     return (
@@ -87,7 +87,7 @@ class ActionButton extends React.Component {
         className='action-btn-cont'
         id={this.props.topic ? 'addTopicButton' : null}
       >
-        <h2 className='add-h2'>Add</h2>
+        <h2 className='add-h2'>Add Post</h2>
         {/* <CloseIcon style={{ color: "#E85556" }} /> */}
         {/* {<p style={{ color: "#E85556" }}> Draft, Schedule, or Post </p>} */}
         <Card className='add-card'>
@@ -105,10 +105,12 @@ class ActionButton extends React.Component {
           className='actionSubmit'
           style={{
             color: 'white',
-            backgroundColor: '#E85556',
-            borderRadius: '5rem',
+            fontWeight: 'bold',
+            backgroundColor: '#E10050',
+            borderRadius: '4px',
             margin: '1rem 0rem',
-            width: '100%',
+            width: '20%',
+            font: 'Roboto'
           }}
           onMouseDown={
             this.props.topic ? this.handleAddTopic : this.handleAddCard

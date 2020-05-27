@@ -51,12 +51,12 @@ const theme = createMuiTheme({
          }
       },
       MuiTypography: {
-         h1: { fontWeight: '600' },
-         h2: { fontWeight: '600' },
-         h3: { fontWeight: '600' },
-         h4: { fontWeight: '600' },
-         h5: { fontWeight: '600' },
-         h6: { fontWeight: '600' }
+         h1: { fontWeight: '600', fontFamily: 'Roboto Condensed' },
+         h2: { fontWeight: '600', fontFamily: 'Roboto Condensed' },
+         h3: { fontWeight: '600', fontFamily: 'Roboto Condensed' },
+         h4: { fontWeight: '600', fontFamily: 'Roboto Condensed' },
+         h5: { fontWeight: '600', fontFamily: 'Roboto Condensed' },
+         h6: { fontWeight: '600', fontFamily: 'Roboto Condensed' }
       }
     }
  });

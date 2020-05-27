@@ -41,15 +41,11 @@ const Home = () => {
       <>
         <Nav toggleMenu={toggleMenu} />
         <DrawerMenu open={menuOpen} toggleMenu={toggleMenu} />
-
-        <main>
-          <Route exact path={["/app", "/app/media-manager"]}>
-            <MediaManager user={user} />
-          </Route>
-        </main>
-      </>
-    )
-  );
+      <main>
+        <Route exact path={["/app", "/app/media-manager"]} component={MediaManager} />
+      </main>
+    </>
+  ));
 };
 
 export default React.memo(Home);
