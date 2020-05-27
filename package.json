@@ -44,6 +44,7 @@
   },
   "scripts": {
     "start": "react-scripts start",
+    "start:c9": "export PORT=3000 && export REACT_APP_API_URL=https://$C9_HOSTNAME:5000/api && react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
