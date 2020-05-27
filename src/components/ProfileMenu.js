@@ -12,9 +12,11 @@ import {
 import AccountBoxIcon from '@material-ui/icons/AccountBox';
 import { AccountCircle } from '@material-ui/icons';
 import ExitToAppIcon from '@material-ui/icons/ExitToApp';
+import { useHistory } from 'react-router';
 
 const ProfileMenu = () => {
     const { authService } = useOktaAuth();
+    const { push } = useHistory();
     const [anchorEl, setAnchorEl] = useState(null);
     const isOpen = Boolean(anchorEl);
 
@@ -57,11 +59,11 @@ const ProfileMenu = () => {
                 open={isOpen}
                 onClose={handleClose}
             >
-                <MenuItem onClick={handleClose}>
+                <MenuItem onClick={() => push('/connect/twitter')}>
                     <ListItemIcon>
                     <AccountBoxIcon fontSize="small" />
                     </ListItemIcon>
-                    <ListItemText primary="Profile" />
+                    <ListItemText primary="Accounts" />
                 </MenuItem>
                 <MenuItem onClick={logout}>
                     <ListItemIcon>

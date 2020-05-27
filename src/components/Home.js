@@ -1,35 +1,54 @@
-import React, { useState } from "react";
-import { Redirect, Route } from "react-router-dom";
+import React, { useState, useEffect } from "react";
+import { Route, useHistory } from "react-router-dom";
 import { useOktaAuth } from "@okta/okta-react";
-// Components
+// Pages
 import MediaManager from "./dashboard/MediaManager";
+// Components
 import Nav from "./Nav";
 import DrawerMenu from "./DrawerMenu";
 
 const Home = () => {
-  const { authService, authState } = useOktaAuth();
+  const { authService } = useOktaAuth();
   const [menuOpen, setMenuOpen] = useState(false);
-  // update user info in redux store
-  // if user hasn't linked any social media account redirect to /link-accounts
-  // else render dashboard (or another) component
+
+  // TODO: update user info in redux store
+  // TODO: Using component state now. Change to react-redux useSelector
+  const [user, setUser] = useState({});
+  const history = useHistory();
+
+  useEffect(() => {
+    if (!user.email) {
+      // load user info
+      (async () => {
+        const oktaUser = await authService.getUser();
+        setUser(oktaUser);
+      })();
+    } else {
+      // Check if user has linked twitter account
+      if (!user.twitter_screenName) {
+        // Redirect user if there is no linked accounts
+        history.push("/connect/twitter");
+      }
+    }
+  }, [authService, user]);
 
   const toggleMenu = () => {
     setMenuOpen(!menuOpen);
   };
 
-  // if(hasn't linked any social media account) {
-  //     return <Redirect to='/app/link-accounts'/>
-  // }
-
   return (
-    <>
-      <Nav toggleMenu={toggleMenu} />
-      <DrawerMenu open={menuOpen} toggleMenu={toggleMenu} />
+    user.email && (
+      <>
+        <Nav toggleMenu={toggleMenu} />
+        <DrawerMenu open={menuOpen} toggleMenu={toggleMenu} />
 
-      <main>
-        <Route exact path="/app/media-manager" component={MediaManager} />
-      </main>
-    </>
+        <main>
+          <Route exact path={["/app", "/app/media-manager"]}>
+            <MediaManager user={user} />
+          </Route>
+        </main>
+      </>
+    )
   );
 };
 
