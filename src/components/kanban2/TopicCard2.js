@@ -11,6 +11,7 @@ import MoreVertIcon from "@material-ui/icons/MoreVert";
 import IconButton from "@material-ui/core/IconButton";
 import Typography from "@material-ui/core/Typography";
 import Popover from '@material-ui/core/Popover';
+import ScheduleTweet from './ScheduleTweet';
 
 import Button from "@material-ui/core/Button";
 import CreateTweet from './CreateTweet';
@@ -139,7 +140,7 @@ export default function TopicCard2(props) {
 
       <CardContent>
         <div style={{ display: "flex", justifyContent: "space-between" }}>
-          <Button className={classes.button}>Schedule</Button>
+          <ScheduleTweet/>
           <Button className={classes.button}>Post Now</Button>
         </div>
       </CardContent>
