@@ -5,13 +5,13 @@ import { CircularProgress, Typography } from "@material-ui/core";
 const queryString = require("query-string");
 
 const container = {
-  height: '100vh',
-  width: '100%',
-  display: 'flex',
-  justifyContent: 'center',
-  alignItems: 'center',
-  flexDirection: 'column'
-}
+  height: "100vh",
+  width: "100%",
+  display: "flex",
+  justifyContent: "center",
+  alignItems: "center",
+  flexDirection: "column",
+};
 
 const Callback = () => {
   const [message, setMessage] = useState("");
@@ -21,22 +21,21 @@ const Callback = () => {
   useEffect(() => {
     const { oauth_token, oauth_verifier } = queryString.parse(location.search);
     axiosWithAuth()
-      .post(`${process.env.REACT_APP_API_URL}/auth/twitter/callback`, {
+      .post("/auth/twitter/callback", {
         oauth_token,
         oauth_verifier,
       })
-      .then((res) => {
-        push('/app')
-      })
+      .then((res) => push("/app"))
       .catch((err) => {
-        push('/connect/twitter')
+        console.error(err);
+        push("/connect/twitter");
       });
   }, [location]);
 
   return (
     <div style={container}>
-      <Typography variant='h6'>Redirecting you back to SoMe</Typography>
-      <br/>
+      <Typography variant="h6">Redirecting you back to SoMe</Typography>
+      <br />
       <CircularProgress />
     </div>
   );
