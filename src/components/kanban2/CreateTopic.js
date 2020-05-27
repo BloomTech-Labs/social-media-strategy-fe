@@ -34,7 +34,7 @@ export default function CreateTopic() {
             fullWidth
           />
         </DialogContent>
-        <DialogActions>
+        <DialogActions style={{display: 'flex', justifyContent:'space-between'}}>
           <Button onClick={handleClose} color="primary">
             Cancel
           </Button>
