@@ -43,13 +43,17 @@ const Nav = ({ toggleMenu }) => {
     <div className={classes.root}>
         <AppBar position="static">
           <Toolbar>
-            <IconButton onClick={() => toggleMenu()} edge="start" color="inherit" aria-label="menu">
-                <MenuIcon />
-            </IconButton>
+            { toggleMenu && 
+              <IconButton onClick={() => toggleMenu()} edge="start" color="inherit" aria-label="menu">
+                  <MenuIcon />
+              </IconButton>
+            }
             <Button>
               <img className={classes.logo} src={logo} alt="SoMe logo"/>
             </Button>
-            <Search />
+            { toggleMenu && 
+              <Search />
+            }
             <ProfileMenu />
           </Toolbar>
         </AppBar>

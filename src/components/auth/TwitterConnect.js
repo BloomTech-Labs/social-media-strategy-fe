@@ -1,4 +1,5 @@
 import React from "react";
+import Nav from "../Nav";
 
 function TwitterConnect(props) {
   const oktaToken = JSON.parse(localStorage.getItem("okta-token-storage"));
@@ -21,6 +22,7 @@ function TwitterConnect(props) {
 
   return (
     <div>
+      <Nav />
       <h1>TwitterConnect</h1>
       <button onClick={authorizeTwitter}>Authorize Twitter</button>
     </div>

@@ -9,12 +9,6 @@ const MediaManager = ({ user }) => {
         authService.logout('/');
     }
     
-    const hasLinkedAccounts = () => user.twitter_screenName;
-
-    if(!hasLinkedAccounts()) {
-        return <Redirect to='/app/connect'/>
-    }
-
     return (
         <>
             { user &&

@@ -22,10 +22,13 @@ const Home = () => {
       (async () => {
         const oktaUser = await authService.getUser();
         setUser(oktaUser);
-        if (!user.twitter_screenName) {
-          history.push("/connect/twitter");
-        }
       })();
+    } else {
+      // Check if user has linked twitter account
+      if (!user.twitter_screenName) {
+        // Redirect user if there is no linked accounts
+        history.push("/connect/twitter");
+      }
     }
   }, [authService, user]);
 
@@ -34,7 +37,7 @@ const Home = () => {
   };
 
   return (
-    user && (
+    user.email && (
       <>
         <Nav toggleMenu={toggleMenu} />
         <DrawerMenu open={menuOpen} toggleMenu={toggleMenu} />
