@@ -68,6 +68,7 @@ export default function TopicCard2() {
         title="Topic"
       />
 
+
       <CardContent style={{padding:"0!important"}}>
         <div
           style={{
@@ -82,6 +83,7 @@ export default function TopicCard2() {
             @user-name
           </Typography>
         </div>
+        
         <Typography variant="body2" color="textSecondary" component="p">
           This is a draft of a potential tweet.
         </Typography>
@@ -98,25 +100,7 @@ export default function TopicCard2() {
           <Button className={classes.button}>Post Now</Button>
         </div>
       </CardContent>
-      <CardContent>
-        <Typography
-          variant="body2"
-          color="textSecondary"
-          component="p"
-          style={{
-            fontSize: ".7rem",
-            display: "flex",
-            justifyContent: "center",
-          }}
-        >
-          Trending in Topic:
-        </Typography>
-        <div style={{ display: "flex", justifyContent: "space-around" }}>
-          <Typography className={classes.trendingTopics}>#hashtag</Typography>
-          <Typography className={classes.trendingTopics}>@handle</Typography>
-          <Typography className={classes.trendingTopics}>keyword</Typography>
-        </div>
-      </CardContent>
+      
       <CardActions disableSpacing>
         <IconButton aria-label="add to favorites">
           <ActionButton2 />
