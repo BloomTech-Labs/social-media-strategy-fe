@@ -7,9 +7,10 @@ import Nav from "./Nav";
 import DrawerMenu from "./DrawerMenu";
 
 // Just to view what they will look like
-import ActionButton from "./kanban/ActionButton";
 import TopicNav from "./kanban/TopicNav";
 import TopicBucket2 from "./kanban2/TopicBucket2";
+import CreateTopic from "./kanban2/CreateTopic.js";
+
 
 const Home = () => {
   const { authService, authState } = useOktaAuth();
@@ -30,9 +31,20 @@ const Home = () => {
     <>
       <Nav toggleMenu={toggleMenu} />
       <DrawerMenu open={menuOpen} toggleMenu={toggleMenu} />
-   
+
       <TopicNav />
-      <TopicBucket2/>
+      <CreateTopic/>
+      <div
+        style={{
+          display: 'flex',
+          justifyContent: 'space-around',
+          height: "100%",
+          overflowY: "scroll",
+          height: "calc(100vh - 127px)",
+        }}
+      >
+        <TopicBucket2 />
+      </div>
 
 
       <main>
