@@ -14,7 +14,6 @@ import CreateTopic from "./kanban2/CreateTopic.js";
 
 import HomePage from "./HomePage";
 
-
 const Home = () => {
   const { authService } = useOktaAuth();
   const [menuOpen, setMenuOpen] = useState(false);
@@ -45,14 +44,14 @@ const Home = () => {
   };
 
   return (
-    user.email && (
+    user?.email && (
       <>
         <Nav toggleMenu={toggleMenu} />
         <DrawerMenu open={menuOpen} toggleMenu={toggleMenu} />
 
         <main>
           <Route exact path={["/app", "/app/media-manager"]}>
-            <HomePage />
+            <MediaManager />
           </Route>
         </main>
       </>
