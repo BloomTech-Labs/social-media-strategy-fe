@@ -1,22 +1,82 @@
 import CONSTANTS from '../actions/constants';
+import { v4 as uuidv4 } from 'uuid';
 
 // let topicId = 2;
 // let cardId = 5;
 
 export const initialState = [
-  // {
-  //   id: `topic-${uuidv4()} topic-0`,
-  //   title: "Drafts",
-  //   user_id: 1,
-  //   index: 0,
-  //   cards: [
-  //     {
-  //       id: `card-${0}`,
-  //       content:
-  //         "This is an example of a post that you could draft. Feel free to express yourself!",
-  //     },
-  //   ],
-  // },
+  {
+    id: `topic-${uuidv4()} topic-0`,
+    title: "Topic",
+    user_id: 1,
+    index: 0,
+    cards: [
+      {
+        id: `card-${0}`,
+        content:
+          "This is an example of a post that you could draft. Feel free to express yourself!",
+      },
+      {
+        id: `card-${1}`,
+        content:
+          "Another draft of a potential tweet"
+      }
+    ],
+  },
+  {
+    id: `topic-${uuidv4()} topic-0`,
+    title: "Topic",
+    user_id: 1,
+    index: 1,
+    cards: [
+      {
+        id: `card-${2}`,
+        content:
+          "This is an example of a post that you could draft. Feel free to express yourself!",
+      },
+      {
+        id: `card-${3}`,
+        content:
+          "Another draft of a potential tweet"
+      }
+    ],
+  },
+  {
+    id: `topic-${uuidv4()} topic-0`,
+    title: "Topic",
+    user_id: 1,
+    index: 2,
+    cards: [
+      {
+        id: `card-${4}`,
+        content:
+          "This is an example of a post that you could draft. Feel free to express yourself!",
+      },
+      {
+        id: `card-${5}`,
+        content:
+          "Another draft of a potential tweet"
+      }
+    ],
+  },
+  {
+    id: `topic-${uuidv4()} topic-0`,
+    title: "Topic",
+    user_id: 1,
+    index: 3,
+    cards: [
+      {
+        id: `card-${6}`,
+        content:
+          "This is an example of a post that you could draft. Feel free to express yourself!",
+      },
+      {
+        id: `card-${7}`,
+        content:
+          "Another draft of a potential tweet"
+      }
+    ],
+  },
 ];
 
 const topicsReducer = (state = initialState, action) => {

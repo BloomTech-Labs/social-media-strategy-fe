@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from "react";
 import styled from "styled-components";
+
+
 import { Draggable } from "react-beautiful-dnd";
 import "../../sass/topicBuckets.scss";
 import CreateIcon from "@material-ui/icons/Create";
@@ -31,11 +33,11 @@ import DialogTitle from "@material-ui/core/DialogTitle";
 
 const Container = styled.div`
   background-color: white;
-  border-radius: 0.5rem;
+  border-radius: 0.1rem;
   padding: 1rem 1rem;
   margin: 0.5rem;
-  width: 80%;
   text-align: center;
+  width: 93%;
 `;
 
 const BtnCont = styled.div`
@@ -205,7 +207,7 @@ const TopicCard = (props) => {
                 }}
               >
                 <a
-                  style={{ color: "#3282B8", textDecoration: "none" }}
+                  style={{ color: "rgb(45,170,225)", textDecoration: "none" }}
                   href={`https://twitter.com/${screen_name[0]}`}
                   alt=""
                 >

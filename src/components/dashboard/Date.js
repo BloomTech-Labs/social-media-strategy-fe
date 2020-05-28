@@ -11,8 +11,8 @@ const Date = () => {
     return currentTime;
   }
   return (
-    <>
-      <div className="dash-title">
+    < >
+      <div className="dash-title" style={{marginTop:"0!important", padding:"0!important"}}>
         <span className="organizeDate">
           <h4 data-cy="day" id="day" className="highlight">
             {Moment().format("dddd")}

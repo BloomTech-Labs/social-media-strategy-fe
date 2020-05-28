@@ -7,6 +7,14 @@ import MediaManager from "./dashboard/MediaManager";
 import Nav from "./Nav";
 import DrawerMenu from "./DrawerMenu";
 
+// Just to view what they will look like
+import TopicNav from "./kanban/TopicNav";
+import TopicBucket2 from "./kanban2/TopicBucket2";
+import CreateTopic from "./kanban2/CreateTopic.js";
+
+import HomePage from "./HomePage";
+
+
 const Home = () => {
   const { authService } = useOktaAuth();
   const [menuOpen, setMenuOpen] = useState(false);
@@ -44,7 +52,7 @@ const Home = () => {
 
         <main>
           <Route exact path={["/app", "/app/media-manager"]}>
-            <MediaManager user={user} />
+            <HomePage />
           </Route>
         </main>
       </>
