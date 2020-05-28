@@ -40,17 +40,14 @@
     justify-content: space-evenly;
     border-radius: 0;
     font-family: 'Montserrat', sans-serif;
-    flex-wrap: wrap;
     overflow: auto;
     height: 100%; //DON'T TOUCH THIS <----
-    width: 100vw;
 
   }
 }
 #topic-scroll {
   height: 100%;
-  overflow-Y: scroll;
-  height: calc(100vh - 127px);
+  overflow-X: scroll;
 }
 
 .editTopics {
