@@ -1,8 +1,9 @@
 import React, { useState, useEffect } from "react";
 import { Route, useHistory } from "react-router-dom";
+import { useSelector } from "react-redux";
 import { useOktaAuth } from "@okta/okta-react";
 // Pages
-import MediaManager from "./dashboard/MediaManager";
+// import MediaManager from "./dashboard/MediaManager";
 // Components
 import Nav from "./Nav";
 import DrawerMenu from "./DrawerMenu";
@@ -11,16 +12,19 @@ import DrawerMenu from "./DrawerMenu";
 import TopicNav from "./kanban/TopicNav";
 import TopicBucket2 from "./kanban2/TopicBucket2";
 import CreateTopic from "./kanban2/CreateTopic.js";
+import MediaManager from "./dashboard/MediaManager.js";
 
 import HomePage from "./HomePage";
 
 const Home = () => {
   const { authService } = useOktaAuth();
   const [menuOpen, setMenuOpen] = useState(false);
+  const user = useSelector((state) => state.user);
+  console.log(user);
 
   // TODO: update user info in redux store
   // TODO: Using component state now. Change to react-redux useSelector
-  const [user, setUser] = useState({});
+  // const [user, setUser] = useState({});
   const history = useHistory();
 
   useEffect(() => {
@@ -28,7 +32,7 @@ const Home = () => {
       // load user info
       (async () => {
         const oktaUser = await authService.getUser();
-        setUser(oktaUser);
+        // setUser(oktaUser);
       })();
     } else {
       // Check if user has linked twitter account
@@ -44,18 +48,16 @@ const Home = () => {
   };
 
   return (
-    user?.email && (
-      <>
-        <Nav toggleMenu={toggleMenu} />
-        <DrawerMenu open={menuOpen} toggleMenu={toggleMenu} />
+    <>
+      <Nav toggleMenu={toggleMenu} />
+      <DrawerMenu open={menuOpen} toggleMenu={toggleMenu} />
 
-        <main>
-          <Route exact path={["/app", "/app/media-manager"]}>
-            <MediaManager />
-          </Route>
-        </main>
-      </>
-    )
+      <main>
+        <Route exact path={["/app", "/app/media-manager"]}>
+          <MediaManager />
+        </Route>
+      </main>
+    </>
   );
 };
 
