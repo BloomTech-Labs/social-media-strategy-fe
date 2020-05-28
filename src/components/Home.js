@@ -11,6 +11,8 @@ import TopicNav from "./kanban/TopicNav";
 import TopicBucket2 from "./kanban2/TopicBucket2";
 import CreateTopic from "./kanban2/CreateTopic.js";
 
+import HomePage from "./HomePage";
+
 
 const Home = () => {
   const { authService, authState } = useOktaAuth();
@@ -31,8 +33,9 @@ const Home = () => {
     <>
       <Nav toggleMenu={toggleMenu} />
       <DrawerMenu open={menuOpen} toggleMenu={toggleMenu} />
+      <HomePage/>
 
-      <TopicNav />
+      {/* <TopicNav />
       <CreateTopic/>
       <div
         style={{
@@ -49,7 +52,7 @@ const Home = () => {
 
       <main>
         <Route exact path="/app/media-manager" component={MediaManager} />
-      </main>
+      </main> */}
     </>
   );
 };
