@@ -1,22 +1,13 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import { useOktaAuth } from '@okta/okta-react';
 
-const MediaManager = () => {
-    const { authService, authState } = useOktaAuth();
-    const [user, setUser] = useState();
-    console.log('authState', authState);
-
-    useEffect(() => {
-        (async () => {
-            const res = await authService.getUser();
-            setUser(res);
-        })();
-    }, [authService]);
+const MediaManager = ({ user }) => {
+    const { authService } = useOktaAuth();
 
     const logout = async () => {
         authService.logout('/');
     }
-
+    
     return (
         <>
             { user &&

@@ -18,6 +18,7 @@ import logo from '../assets/imgs/logo.png';
 const useStyles = makeStyles((theme) => ({
   root: {
     flexGrow: 1,
+    width: '100%',
     display: 'grid',
     zIndex: '1100',
     [theme.breakpoints.up('xs')]: {
@@ -43,13 +44,17 @@ const Nav = ({ toggleMenu }) => {
     <div className={classes.root}>
         <AppBar position="static">
           <Toolbar>
-            <IconButton onClick={() => toggleMenu()} edge="start" color="inherit" aria-label="menu">
-                <MenuIcon />
-            </IconButton>
+            { toggleMenu && 
+              <IconButton onClick={() => toggleMenu()} edge="start" color="inherit" aria-label="menu">
+                  <MenuIcon />
+              </IconButton>
+            }
             <Button>
               <img className={classes.logo} src={logo} alt="SoMe logo"/>
             </Button>
-            <Search />
+            { toggleMenu && 
+              <Search />
+            }
             <ProfileMenu />
           </Toolbar>
         </AppBar>
