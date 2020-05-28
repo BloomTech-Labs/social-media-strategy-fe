@@ -2,6 +2,8 @@ import React, { useState, useEffect } from "react";
 import { Route, useHistory } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { useOktaAuth } from "@okta/okta-react";
+
+import { axiosWithAuth } from "../utils/axiosWithAuth";
 // Pages
 // import MediaManager from "./dashboard/MediaManager";
 // Components
@@ -32,7 +34,11 @@ const Home = () => {
       // load user info
       (async () => {
         const oktaUser = await authService.getUser();
+        console.log("OK");
+
         // setUser(oktaUser);
+
+        await axiosWithAuth().put(`users`, oktaUser);
       })();
     } else {
       // Check if user has linked twitter account
@@ -40,6 +46,9 @@ const Home = () => {
         // Redirect user if there is no linked accounts
         history.push("/connect/twitter");
       }
+
+      // PUT Request to BE to user's table
+      //axiosWithAuth().put(`api/users/`, user);
     }
   }, [authService, user]);
 
