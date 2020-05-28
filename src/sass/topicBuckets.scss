@@ -37,18 +37,20 @@
 
   .topics {
     display: flex;
+    justify-content: space-evenly;
     border-radius: 0;
     font-family: 'Montserrat', sans-serif;
-    flex-direction: row;
+    flex-wrap: wrap;
     overflow: auto;
     height: 100%; //DON'T TOUCH THIS <----
-    overflow: auto;
+    width: 100vw;
+
   }
 }
 #topic-scroll {
-  overflow-y: auto;
-  height: 44vh;
-  padding-right: 1%;
+  height: 100%;
+  overflow-Y: scroll;
+  height: calc(100vh - 127px);
 }
 
 .editTopics {
