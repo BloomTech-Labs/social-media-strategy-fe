@@ -124,7 +124,7 @@ const HomePage = (props) => {
           )} */}
           <div className="column drag-drop-content">
             <TopicNav />
-            {/* <ActionButton className="column is-2 headers" topic /> */}
+            {/* <ActionButton className="column is-2 headers" {...props.topic} /> */}
             <DragDropContext
               onDragEnd={onDragEnd}
               style={{ display: "block", overflow: "auto" }}
