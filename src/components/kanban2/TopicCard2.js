@@ -7,16 +7,16 @@ import CardMedia from "@material-ui/core/CardMedia";
 import CardContent from "@material-ui/core/CardContent";
 import CardActions from "@material-ui/core/CardActions";
 import MoreVertIcon from "@material-ui/icons/MoreVert";
-
 import IconButton from "@material-ui/core/IconButton";
 import Typography from "@material-ui/core/Typography";
 import Popover from '@material-ui/core/Popover';
-import ScheduleTweet from './ScheduleTweet';
-
-import Button from "@material-ui/core/Button";
-import CreateTweet from './CreateTweet';
 import TwitterIcon from "@material-ui/icons/Twitter";
+import Button from "@material-ui/core/Button";
+
+import ScheduleTweet from './ScheduleTweet';
+import CreateTweet from './CreateTweet';
 import Tweet from "./Tweet.js";
+
 import { Droppable, Draggable } from "react-beautiful-dnd";
 
 const useStyles = makeStyles((theme) => ({
