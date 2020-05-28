@@ -1,8 +1,6 @@
 import { combineReducers } from "redux";
-import topicsReducer from './topicsReducer';
-import userAuthReducer from './userAuthReducer';
+import userReducer from "./userReducer";
 
 export const reducer = combineReducers({
-  topics: topicsReducer,
-  user: userAuthReducer
+  user: userReducer,
 });
