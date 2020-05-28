@@ -52,7 +52,7 @@ const Home = () => {
 
         <main>
           <Route exact path={["/app", "/app/media-manager"]}>
-            <MediaManager user={user} />
+            <HomePage />
           </Route>
         </main>
       </>
