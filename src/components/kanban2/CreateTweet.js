@@ -52,6 +52,7 @@ export default function CreateTopic() {
             <AddAPhotoIcon />
           </label>
         </DialogContent>
+        
         <DialogContent>
           <Recommendations />
         </DialogContent>

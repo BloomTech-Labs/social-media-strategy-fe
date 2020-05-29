@@ -14,10 +14,11 @@ import TopicNav from "./kanban/TopicNav";
 
 import "../sass/index.scss";
 import { Route, Switch, useHistory } from "react-router";
-import Callback from "./Callback";
+
 import { axiosWithAuth } from "../utils/axiosWithAuth";
 import { bindActionCreators } from "redux";
 import CONSTANTS from "../actions/constants";
+
 
 // const drawerWidth = 400;
 
@@ -102,16 +103,17 @@ const HomePage = (props) => {
 
   return (
     <div className="columns is-gapless">
-      <div className="column is-2">
+      {/* <div className="column is-2">
         <Navigation />
-      </div>
+      </div> */}
 
-      <Route exact path="/callback">
-        <Callback />
+      <Route exact path="/">
+
       </Route>
+
       <Switch>
         <Route path="/">
-          {props.user.drawer ? (
+          {/* {props.user.drawer ? (
             <div className="column is-3">
               <Dashboard />
             </div>
@@ -119,10 +121,10 @@ const HomePage = (props) => {
             <div className="column is-3" style={{ display: "none" }}>
               <Dashboard />
             </div>
-          )}
+          )} */}
           <div className="column drag-drop-content">
             <TopicNav />
-            <ActionButton className="column is-2 headers" topic />
+            {/* <ActionButton className="column is-2 headers" {...props.topic} /> */}
             <DragDropContext
               onDragEnd={onDragEnd}
               style={{ display: "block", overflow: "auto" }}
@@ -160,9 +162,11 @@ const HomePage = (props) => {
                 )}
               </Droppable>
             </DragDropContext>
+
           </div>
         </Route>
       </Switch>
+
     </div>
   );
 };
