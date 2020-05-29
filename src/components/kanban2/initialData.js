@@ -1,40 +1,52 @@
 const topics = {
     // key = topic id
     ['topicId0']: {
+        id: 'topicId0',
         name: 'Drafts',
+        index: 0,
         items: [
             {
                 id: '1',
                 content: 'This is the content of a tweet in the Tech topic',
+                index: 0,
                 image_url: null,
             },
             {
                 id: '2',
                 content: 'This is another example of a tweet in the Tech topic',
+                index: 1,
                 image_url: null
             },
             {
                 id: '4',
                 content: 'This is once again a tweet in the Tech topic',
+                index: 2,
                 image_url: null
             },
             {
                 id: '3',
                 content: 'This is the content of a tweet in the business topic',
+                index: 3,
                 image_url: null
             }
         ]
     },
     ['topicId1']: {
+        id: 'topicId1',
         name: 'Business',
+        index: 1,
         items: []
     },
     ['topicId2']: {
+        id: 'topicId2',
         name: 'Tech',
+        index: 2,
         items: []
     },
     ['topicId3']: {
+        id: 'topicId3',
         name: 'Motivation',
+        index: 3,
         items: []
     }   
 }
