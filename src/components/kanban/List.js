@@ -7,7 +7,7 @@ import Post from './Post';
 
 const useStyles = makeStyles((theme) => ({
 	listContainer: {
-		backgroundColor: theme.palette.background.default,
+		backgroundColor: 'transparent',
 		height: 'fit-content',
 		marginLeft: theme.spacing(2),
 		marginRight: theme.spacing(2),
@@ -15,11 +15,16 @@ const useStyles = makeStyles((theme) => ({
 	},
 	header: {
 		padding: theme.spacing(2),
+		backgroundColor: '#FFF'
+	},
+	postsContainer: {
+		overflow: 'auto',
+		height: 'calc(100vh - 250px)'
 	}
 }));
 
 const List = ({ listId, list }) => {
-	const { listContainer, header } = useStyles();
+	const { listContainer, header, postsContainer } = useStyles();
 	return (
 		<Draggable key={list.id} draggableId={list.id} index={list.index}>
 			{(provided, snapshot) => (
@@ -38,7 +43,8 @@ const List = ({ listId, list }) => {
 							<div
 								{...provided.droppableProps}
 								ref={provided.innerRef}
-								style={{ background: snapshot.isDraggingOver ? 'lightblue' : '#FFF', height: '100%' }}
+								className={postsContainer}
+								style={{ background: snapshot.isDraggingOver ? 'lightblue' : 'transparent' }}
 							>
 								{/* <Scrollbars style={{height: '100%'}}> */}
 									{list.posts?.map((post) => (
