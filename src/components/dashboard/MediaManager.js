@@ -4,6 +4,7 @@ import { makeStyles, Typography } from "@material-ui/core";
 
 import Kanban from "../kanban/Kanban";
 import CreateTopic from "../kanban2/CreateTopic.js";
+import Scrollbars from "react-custom-scrollbars";
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -12,7 +13,6 @@ const useStyles = makeStyles(theme => ({
     [theme.breakpoints.down('xs')]: {
       height: `calc(100vh - ${theme.navbar.height.small})`,
       maxHeight: `calc(100vh - ${theme.navbar.height.small})`
-
     },
     [theme.breakpoints.up('xs')]: {
       height: `calc(100vh - ${theme.navbar.height.normal})`,
@@ -20,20 +20,40 @@ const useStyles = makeStyles(theme => ({
     },
     overflow: 'hidden'
   },
+  topContainer: {
+    height: theme.kanban.topContainer.height,
+    display: 'flex',
+
+  },
   header: {
     color: theme.palette.text.secondary,
-    margin: theme.spacing(2)
+    margin: theme.spacing(2),
+    width: '100%',
+    textAlign: 'center'
+  },
+  scrollbar: {
+    [theme.breakpoints.down('xs')]: {
+      height: `calc(100vh - ${theme.navbar.height.small} - ${theme.kanban.topContainer.height}) !important`
+    },
+    [theme.breakpoints.up('xs')]: {
+      height: `calc(100vh - ${theme.navbar.height.normal} - ${theme.kanban.topContainer.height}) !important`
+    },
+    
   }
 }));
 
 const MediaManager = ({ user }) => {
-  const { root, header } = useStyles();
+  const { root, header, scrollbar, topContainer } = useStyles();
 
   return (
     <div className={root}>
-      <Typography variant='h4' className={header}>Media Manager</Typography>
-      <CreateTopic />
-      <Kanban />
+      <div className={topContainer}>
+        <Typography variant='h4' className={header}>Media Manager</Typography>
+        <CreateTopic />
+      </div>
+      <Scrollbars className={scrollbar}>
+        <Kanban />
+      </Scrollbars>
     </div>
   );
 };

@@ -28,6 +28,16 @@ const theme = createMuiTheme({
           normal: Navbar.height.normal
        }
     },
+    kanban: {
+      topContainer: {
+         height: '75px'
+      },
+      list: {
+         header: {
+            height: '62px'
+         }
+      }
+    },
     overrides: {
        MuiToolbar: {
          regular: {

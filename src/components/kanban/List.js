@@ -11,15 +11,17 @@ const useStyles = makeStyles((theme) => ({
 		height: 'fit-content',
 		marginLeft: theme.spacing(2),
 		marginRight: theme.spacing(2),
-		width: '300px'
+		width: '300px',
+		minWidth: '300px'
 	},
 	header: {
 		padding: theme.spacing(2),
-		backgroundColor: '#FFF'
+		backgroundColor: '#FFF',
+		height: theme.kanban.list.header.height
 	},
 	postsContainer: {
 		overflow: 'hidden',
-		height: 'calc(100vh - 250px)'
+		height: `calc(100vh - ${theme.navbar.height.normal} - ${theme.kanban.topContainer.height} - ${theme.kanban.list.header.height} - ${theme.spacing(2)}px) !important`
 	}
 }));
 

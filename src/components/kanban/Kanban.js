@@ -1,6 +1,7 @@
 import React from 'react';
 import { useSelector, useDispatch, useStore } from 'react-redux';
 import { DragDropContext, Droppable } from 'react-beautiful-dnd';
+import { Scrollbars } from 'react-custom-scrollbars';
 import { makeStyles } from '@material-ui/core';
 
 import List from './List';
@@ -13,9 +14,8 @@ import {
 
 const useStyles = makeStyles(theme => ({
 	kanban: {
-		// height: 'calc(100% - 2px)',
 		display: 'flex',
-		// maxHeight: '100%',
+		height: 'calc(100vh - 170px)'
 	}
 }))
 
@@ -60,9 +60,9 @@ const Kanban = () => {
 						ref={provided.innerRef}
 						className={kanban}
 					>
-						{Object.entries(lists).sort((a,b) => a.index - b.index).map(([listId, list]) => (
-							<List key={list.id} listId={listId} list={list} />
-						))}
+							{Object.entries(lists).sort((a,b) => a.index - b.index).map(([listId, list]) => (
+								<List key={list.id} listId={listId} list={list} />
+							))}
 						{provided.placeholder}
 					</div>
 				)}
