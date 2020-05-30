@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { Draggable } from 'react-beautiful-dnd';
 import TwitterIcon from "@material-ui/icons/Twitter";
 import { Typography, makeStyles, Button } from '@material-ui/core';
+import ScheduleTweet from '../kanban2/ScheduleTweet';
 
 const useStyles = makeStyles(theme => ({
     container: {
@@ -67,7 +68,7 @@ const Post = ({ post, index }) => {
                     </div>
                     {post.imageUrl && <img className={image}  src={post.imageUrl} alt="Post"/>}
                     <div className={actionsContainer}>
-                        <Button color='primary'>Schedule</Button>
+                        <ScheduleTweet />
                         <Button color='primary'>Post Now</Button>
                     </div>
                 </div>
