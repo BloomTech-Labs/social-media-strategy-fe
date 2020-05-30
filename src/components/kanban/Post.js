@@ -34,6 +34,7 @@ const useStyles = makeStyles(theme => ({
         display: 'flex',
         justifyContent: 'space-between',
         margin: theme.spacing(1),
+        marginRight: theme.spacing(2),
         marginBottom: 0
     }
 }));
