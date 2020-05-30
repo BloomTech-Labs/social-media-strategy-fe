@@ -10,7 +10,7 @@ import {
 	dragPostToDifferentList,
 	dragPostToSameList,
 	dragList
-} from '../../actions/posts';
+} from '../../actions';
 
 const useStyles = makeStyles(theme => ({
 	kanban: {
@@ -20,7 +20,7 @@ const useStyles = makeStyles(theme => ({
 }))
 
 const Kanban = () => {
-	const { lists } = useSelector(state => state.posts);
+	const { lists } = useSelector(state => state.kanban);
 	const { kanban } = useStyles();
 	const dispatch = useDispatch();
 

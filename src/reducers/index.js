@@ -1,8 +1,8 @@
 import { combineReducers } from "redux";
 import userReducer from "./userReducer";
-import postsReducer from './posts';
+import kanbanReducer from './kanban';
 
 export const reducer = combineReducers({
   user: userReducer,
-  posts: postsReducer
+  kanban: kanbanReducer
 });

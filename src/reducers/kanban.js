@@ -6,7 +6,7 @@ const initialState = {
     lists
 };
 
-const postsReducer = (state=initialState, action) => {
+const kanbanReducer = (state=initialState, action) => {
     const { type, payload } = action;
     
     switch (type) {
@@ -20,4 +20,4 @@ const postsReducer = (state=initialState, action) => {
     }
 }
 
-export default postsReducer;
+export default kanbanReducer;
