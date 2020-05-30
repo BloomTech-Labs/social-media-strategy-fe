@@ -4,6 +4,7 @@ import { Typography, makeStyles } from '@material-ui/core';
 import { Scrollbars } from 'react-custom-scrollbars';
 
 import Post from './Post';
+import CreateTweet from './CreateTweet';
 
 const useStyles = makeStyles((theme) => ({
 	listContainer: {
@@ -16,9 +17,11 @@ const useStyles = makeStyles((theme) => ({
 	},
 	header: {
 		paddingLeft: theme.spacing(2),
+		paddingRight: theme.spacing(2),
 		backgroundColor: '#FFF',
 		height: theme.kanban.list.header.height,
 		display: 'flex',
+		justifyContent: 'space-between',
 		alignItems: 'center'
 	},
 	postsContainer: {
@@ -41,6 +44,7 @@ const List = ({ listId, list }) => {
 						<Typography variant='h6' component='h3'>
 							{list.name}
 						</Typography>
+						<CreateTweet />
 					</div>
 					<Droppable direction='vertical' droppableId={list.id} type='post'>
 						{(provided, snapshot) => (
