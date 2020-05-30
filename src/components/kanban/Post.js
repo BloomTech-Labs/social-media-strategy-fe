@@ -5,7 +5,8 @@ import { Typography, makeStyles, Button } from '@material-ui/core';
 
 const useStyles = makeStyles(theme => ({
     container: {
-        paddingBottom: theme.spacing(3)
+        paddingBottom: theme.spacing(3),
+        backgroundColor: '#FFF',
     },
     contentContainer: {
         userSelect: 'none',
@@ -54,10 +55,7 @@ const Post = ({ post, index }) => {
                 {...provided.draggableProps}
                 {...provided.dragHandleProps}
                 className={container}
-                style={{
-                    backgroundColor: snapshot.isDragging ? '#456C86' : '#FFF',
-                    ...provided.draggableProps.style
-                }}
+                style={{ ...provided.draggableProps.style }}
                 >
                     <div className={contentContainer}>
                         <div className={header}>
