@@ -15,9 +15,11 @@ const useStyles = makeStyles((theme) => ({
 		minWidth: '300px'
 	},
 	header: {
-		padding: theme.spacing(2),
+		paddingLeft: theme.spacing(2),
 		backgroundColor: '#FFF',
-		height: theme.kanban.list.header.height
+		height: theme.kanban.list.header.height,
+		display: 'flex',
+		alignItems: 'center'
 	},
 	postsContainer: {
 		overflow: 'hidden',

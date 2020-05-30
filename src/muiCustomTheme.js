@@ -34,7 +34,7 @@ const theme = createMuiTheme({
       },
       list: {
          header: {
-            height: '62px'
+            height: '50px'
          }
       }
     },
