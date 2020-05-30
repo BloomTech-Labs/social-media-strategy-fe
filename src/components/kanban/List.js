@@ -18,7 +18,7 @@ const useStyles = makeStyles((theme) => ({
 		backgroundColor: '#FFF'
 	},
 	postsContainer: {
-		overflow: 'auto',
+		overflow: 'hidden',
 		height: 'calc(100vh - 250px)'
 	}
 }));
@@ -46,11 +46,11 @@ const List = ({ listId, list }) => {
 								className={postsContainer}
 								style={{ background: snapshot.isDraggingOver ? 'lightblue' : 'transparent' }}
 							>
-								{/* <Scrollbars style={{height: '100%'}}> */}
+								<Scrollbars>
 									{list.posts?.map((post) => (
 										<Post key={post.id} post={post} index={post.index} />
 									))}
-								{/* </Scrollbars> */}
+								</Scrollbars>
 								{provided.placeholder}
 							</div>
 						)}

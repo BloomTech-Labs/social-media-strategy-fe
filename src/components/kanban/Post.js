@@ -32,7 +32,8 @@ const useStyles = makeStyles(theme => ({
     actionsContainer: {
         display: 'flex',
         justifyContent: 'space-between',
-        marginTop: theme.spacing(1)
+        margin: theme.spacing(1),
+        marginBottom: 0
     }
 }));
 
