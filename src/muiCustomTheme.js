@@ -53,6 +53,9 @@ const theme = createMuiTheme({
          },
          modal: {
             zIndex: '1000 !important'
+         },
+         paperAnchorLeft: {
+            height: 'auto'
          }
       },
       MuiButton: {
