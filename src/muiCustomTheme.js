@@ -18,7 +18,8 @@ const theme = createMuiTheme({
          main: '#E10050'
        },
        background: {
-         default: "#FFFFFF"
+         default: '#FFFFFF',
+         secondary: '#F6F6F6'
        }
     },
     navbar: {

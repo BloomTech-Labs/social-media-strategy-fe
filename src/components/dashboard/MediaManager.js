@@ -1,25 +1,39 @@
 import React from "react";
-import { useOktaAuth } from "@okta/okta-react";
+// material-ui
+import { makeStyles, Typography } from "@material-ui/core";
 
-import TopicNav from "../kanban/TopicNav";
-import TopicBucket2 from "../kanban2/TopicBucket2";
+import Kanban from "../kanban/Kanban";
 import CreateTopic from "../kanban2/CreateTopic.js";
 
+const useStyles = makeStyles(theme => ({
+  root: {
+    backgroundColor: theme.palette.background.secondary,
+    position: 'relative',
+    [theme.breakpoints.down('xs')]: {
+      height: `calc(100vh - ${theme.navbar.height.small})`,
+      maxHeight: `calc(100vh - ${theme.navbar.height.small})`
+
+    },
+    [theme.breakpoints.up('xs')]: {
+      height: `calc(100vh - ${theme.navbar.height.normal})`,
+      maxHeight: `calc(100vh - ${theme.navbar.height.normal})`
+    },
+    overflow: 'hidden'
+  },
+  header: {
+    color: theme.palette.text.secondary,
+    margin: theme.spacing(2)
+  }
+}));
+
 const MediaManager = ({ user }) => {
+  const { root, header } = useStyles();
+
   return (
-    <div>
-      <TopicNav />
+    <div className={root}>
+      <Typography variant='h4' className={header}>Media Manager</Typography>
       <CreateTopic />
-      <div
-        style={{
-          display: "flex",
-          justifyContent: "space-around",
-          height: "100%",
-          overflow: "scroll",
-        }}
-      >
-        <TopicBucket2 />
-      </div>
+      <Kanban />
     </div>
   );
 };
