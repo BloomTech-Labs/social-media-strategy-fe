@@ -1,9 +1,10 @@
 import React, { useState, useEffect } from "react";
 import { Route, useHistory } from "react-router-dom";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { useOktaAuth } from "@okta/okta-react";
 
 import { axiosWithAuth } from "../utils/axiosWithAuth";
+import { initializeUser } from "../actions/userActions";
 
 // Components
 import Nav from "./Nav";
@@ -13,26 +14,19 @@ import MediaManager from "./dashboard/MediaManager.js";
 
 const Home = () => {
   const { authService } = useOktaAuth();
-  const [menuOpen, setMenuOpen] = useState(false);
-  const user = useSelector((state) => state.user);
-  console.log(user);
-
-  // TODO: update user info in redux store
-  // TODO: Using component state now. Change to react-redux useSelector
-  // const [user, setUser] = useState({});
+  const dispatch = useDispatch();
   const history = useHistory();
+  const user = useSelector((state) => state.user);
+  const [menuOpen, setMenuOpen] = useState(false);
 
   useEffect(() => {
-    if (!user.email) {
-      axiosWithAuth().put(`users`);
-    } else {
-      // Check if user has linked twitter account
-      if (!user.twitter_screenName) {
-        // Redirect user if there is no linked accounts
-        history.push("/connect/twitter");
-      }
+    console.log("Home.js useEffect fired", Date.now());
+    if (!user.initialized) {
+      dispatch(initializeUser(authService));
+    } else if (!user.twitter_handle) {
+      history.push("/connect/twitter");
     }
-  }, [authService, user]);
+  }, [user]);
 
   const toggleMenu = () => {
     setMenuOpen(!menuOpen);
