@@ -53,19 +53,16 @@ function TwitterConnect(props) {
   const [loading, setLoading] = useState(true);
   const [isConnected, setIsConnected] = useState(false);
 
-  const oktaToken = JSON.parse(localStorage.getItem("okta-token-storage"));
-  console.log(oktaToken);
-
   useEffect(() => {
     (async () => {
       const oktaUser = await authService.getUser();
-      setIsConnected(oktaUser.twitter_screenName);
+      setIsConnected(oktaUser.twitter_handle);
       setLoading(false);
     })();
   }, [authService]);
 
   function authorizeTwitter() {
-    axiosWithAuth()
+    axiosWithAuth(authService)
       .get("/auth/twitter/authorize")
       .then(({ data }) => (window.location.href = data))
       .catch((err) => console.error(err));
@@ -74,7 +71,7 @@ function TwitterConnect(props) {
   function disconnectTwitter() {
     setLoading(true);
 
-    axiosWithAuth()
+    axiosWithAuth(authService)
       .get("/auth/twitter/disconnect")
       .then(({ data }) => {
         setIsConnected(false);

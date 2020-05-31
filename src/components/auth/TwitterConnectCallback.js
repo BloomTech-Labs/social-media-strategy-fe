@@ -1,4 +1,5 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
+import { useOktaAuth } from "@okta/okta-react";
 import { useLocation, useHistory } from "react-router-dom";
 import { axiosWithAuth } from "../../utils/axiosWithAuth";
 import { CircularProgress, Typography } from "@material-ui/core";
@@ -14,18 +15,18 @@ const container = {
 };
 
 const Callback = () => {
-  const [message, setMessage] = useState("");
+  const { authService } = useOktaAuth();
   const location = useLocation();
   const { push } = useHistory();
 
   useEffect(() => {
     const { oauth_token, oauth_verifier } = queryString.parse(location.search);
-    axiosWithAuth()
+    axiosWithAuth(authService)
       .post("/auth/twitter/callback", {
         oauth_token,
         oauth_verifier,
       })
-      .then((res) => push("/app"))
+      .then((res) => push("/home"))
       .catch((err) => {
         console.error(err);
         push("/connect/twitter");
