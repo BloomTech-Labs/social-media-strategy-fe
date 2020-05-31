@@ -3,7 +3,6 @@ import { Route, useHistory } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { useOktaAuth } from "@okta/okta-react";
 
-import { axiosWithAuth } from "../utils/axiosWithAuth";
 import { initializeUser } from "../actions/userActions";
 
 // Components
