@@ -57,7 +57,7 @@ const LoginOkta = ({ baseUrl }) => {
   const classes = useStyles();
 
   const onSuccess = async (res) => {
-    authService.login("/app");
+    authService.login("/home");
     authService.redirect({
       sessionToken: res.session.token,
     });
@@ -76,7 +76,7 @@ const LoginOkta = ({ baseUrl }) => {
   }
 
   return authState.isAuthenticated ? (
-    <Redirect to="/app" />
+    <Redirect to="/home" />
   ) : (
     <Grid container wrap="wrap" className={classes.root}>
       <Hidden mdUp>

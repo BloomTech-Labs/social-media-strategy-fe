@@ -62,7 +62,7 @@ const Home = () => {
       <DrawerMenu open={menuOpen} toggleMenu={toggleMenu} />
 
       <main>
-        <Route exact path={["/app", "/app/media-manager"]}>
+        <Route exact path={["/home", "/home/media-manager"]}>
           <MediaManager />
         </Route>
       </main>

@@ -34,7 +34,7 @@ const App = (props) => {
         <Route exact path="/login">
           <LoginOkta baseUrl={process.env.REACT_APP_OKTA_DOMAIN} />
         </Route>
-        <SecureRoute path="/app" component={Home} />
+        <SecureRoute path="/home" component={Home} />
         <SecureRoute path="/connect" component={ConnectAccounts} />
         <Route path="/implicit/callback" component={LoginCallback} />
       </Switch>
