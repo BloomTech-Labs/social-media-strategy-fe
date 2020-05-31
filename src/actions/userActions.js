@@ -1,6 +1,10 @@
 import { axiosWithAuth } from "../utils/axiosWithAuth";
 
-import { INITIALIZE_USER, AUTHORIZE_TWITTER } from "./userActionTypes";
+import {
+  INITIALIZE_USER,
+  AUTHORIZE_TWITTER,
+  DEAUTHORIZE_TWITTER,
+} from "./userActionTypes";
 
 export const initializeUser = (authService) => async (dispatch) => {
   axiosWithAuth(authService).put(`users`);
