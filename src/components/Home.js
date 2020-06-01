@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, Fragment } from "react";
 
 import Nav from "./Nav";
 import DrawerMenu from "./DrawerMenu";
@@ -12,16 +12,14 @@ const Home = () => {
   };
 
   return (
-    <>
+    <Fragment>
       <Nav toggleMenu={toggleMenu} />
       <DrawerMenu open={menuOpen} toggleMenu={toggleMenu} />
 
       <main>
-        {/* <Route exact path={["/home", "/home/media-manager"]}>
-          <MediaManager />
-        </Route> */}
+        <MediaManager />
       </main>
-    </>
+    </Fragment>
   );
 };
 
