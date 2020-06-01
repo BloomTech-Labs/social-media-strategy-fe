@@ -1,7 +1,6 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { useSelector, useDispatch, useStore } from 'react-redux';
 import { DragDropContext, Droppable } from 'react-beautiful-dnd';
-import { Scrollbars } from 'react-custom-scrollbars';
 import { makeStyles } from '@material-ui/core';
 
 import List from './List';
@@ -9,7 +8,8 @@ import List from './List';
 import { 
 	dragPostToDifferentList,
 	dragPostToSameList,
-	dragList
+	dragList,
+	loadListsFromDb
 } from '../../actions';
 
 const useStyles = makeStyles(theme => ({
@@ -21,8 +21,22 @@ const useStyles = makeStyles(theme => ({
 
 const Kanban = () => {
 	const { lists } = useSelector(state => state.kanban);
+	const user = useSelector(state => state.user);
+
 	const { kanban } = useStyles();
 	const dispatch = useDispatch();
+
+	useEffect(() => {
+		if (user.okta_uid) {
+			if (!lists) {
+				console.log('loading lists');
+				(async () => {
+					dispatch(await loadListsFromDb(user.okta_uid));
+				})();
+				
+			}
+		}
+	}, [user]);
 
 	const onDragEnd = (result) => {
 		const { source, destination, dragabbleId, type } = result;

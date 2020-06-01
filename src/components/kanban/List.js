@@ -42,7 +42,7 @@ const List = ({ listId, list }) => {
 				>
 					<div className={header} {...provided.dragHandleProps}>
 						<Typography variant='h6' component='h3'>
-							{list.name}
+							{list.title}
 						</Typography>
 						<CreateTweet />
 					</div>

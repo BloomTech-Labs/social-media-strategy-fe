@@ -2,7 +2,8 @@ import { UPDATE_LISTS } from './types';
 import { axiosWithAuth } from '../utils/axiosWithAuth';
 
 const convertArrayToObject = (array, key) => {
-	const initialValue = {};
+    const initialValue = {};
+    console.log('array', array);
 	return array.reduce((obj, item) => {
 		return {
 			...obj,
@@ -80,20 +81,44 @@ export const dragPostToSameList = (lists, source, destination) => dispatch => {
     });
 }
 
-export const dragList = (lists, source, destination) => dispatch => {
+export const dragList = (lists, source, destination) => async dispatch => {
     const listsArray = Object.values(lists).sort((a, b) => a.index - b.index);
     const [column] = listsArray.splice(source.index, 1);
     listsArray.splice(destination.index, 0, column);
 
-    const updatedListsIndexes = listsArray.map((list) => ({
-        ...list,
-        index: listsArray.findIndex((el) => el.id === list.id),
-    }));
+    const listsToBeUpdated = [];
+    // update indexes
+    const updateIndexesPromises = listsArray.map((list) => {
+        const newIndex = listsArray.findIndex((el) => el.id === list.id);
+        // check if index has changed and need to be updated
+        if (
+            (source.index < destination.index && newIndex <= destination.index && newIndex >= source.index) || 
+            (source.index > destination.index && newIndex >= destination.index && newIndex <= source.index)
+        ) {
+            // save lists id to update DB
+            listsToBeUpdated.push({ id: list.id, index: newIndex });
+            
+            return {
+                ...list,
+                index: newIndex,
+            }
+        } else {
+            return list;
+        }
+    });
 
-    const updatedLists = convertArrayToObject(updatedListsIndexes, 'id');
+    const updatedIndexes = await Promise.all(updateIndexesPromises);
 
+    const updatedLists = convertArrayToObject(updatedIndexes, 'id');
+
+    // Update state first to avoid component rerender in wrong order
     dispatch({
         type: UPDATE_LISTS,
         payload: updatedLists
+    });
+
+     // update indexes in the DB
+     listsToBeUpdated.forEach(async ({ id, index }) => {
+        await axiosWithAuth().patch(`/lists/${id}`, { index });
     });
 }

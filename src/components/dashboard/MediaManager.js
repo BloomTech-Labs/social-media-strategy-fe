@@ -3,7 +3,7 @@ import React from "react";
 import { makeStyles, Typography } from "@material-ui/core";
 
 import Kanban from "../kanban/Kanban";
-import CreateTopic from "../kanban2/CreateTopic.js";
+import CreateList from "../kanban/CreateList.js";
 import Scrollbars from "react-custom-scrollbars";
 
 const useStyles = makeStyles(theme => ({
@@ -49,7 +49,7 @@ const MediaManager = ({ user }) => {
     <div className={root}>
       <div className={topContainer}>
         <Typography variant='h4' className={header}>Media Manager</Typography>
-        <CreateTopic />
+        <CreateList />
       </div>
       <Scrollbars className={scrollbar}>
         <Kanban />
