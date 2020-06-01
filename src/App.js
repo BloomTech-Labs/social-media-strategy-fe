@@ -27,7 +27,7 @@ function App(props) {
       return;
     }
     // eslint-disable-next-line
-  }, [user, location]);
+  }, [user]);
 
   return (
     <Switch>
