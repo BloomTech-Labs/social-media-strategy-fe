@@ -6,10 +6,11 @@ import {
   DEAUTHORIZE_TWITTER,
 } from "./userActionTypes";
 
-export const initializeUser = (authService) => async (dispatch) => {
+export const initializeUser = (authService, history) => async (dispatch) => {
   const user = await authService.getUser();
   if (!authService.getAuthState().isAuthenticated) return;
   const { sub, email, twitter_handle } = user;
+  if (!twitter_handle) return history.push("/connect/twitter");
   axiosWithAuth(authService).put(`users`);
 
   dispatch({

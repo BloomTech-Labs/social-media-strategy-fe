@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, memo } from "react";
 import { useOktaAuth } from "@okta/okta-react";
 import { useLocation, useHistory } from "react-router-dom";
 import { axiosWithAuth } from "../../utils/axiosWithAuth";
@@ -20,6 +20,7 @@ const Callback = () => {
   const { push } = useHistory();
 
   useEffect(() => {
+    console.log("TwitterConnectCallback useEffect fired", Date.now());
     const { oauth_token, oauth_verifier } = queryString.parse(location.search);
     axiosWithAuth(authService)
       .post("/auth/twitter/callback", {
@@ -31,7 +32,7 @@ const Callback = () => {
         console.error(err);
         push("/connect/twitter");
       });
-  }, [location]);
+  }, []);
 
   return (
     <div style={container}>
@@ -42,4 +43,4 @@ const Callback = () => {
   );
 };
 
-export default Callback;
+export default memo(Callback);
