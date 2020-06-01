@@ -11,7 +11,7 @@ export const initializeUser = (authService, history) => async (dispatch) => {
   if (!authService.getAuthState().isAuthenticated) return;
   const { sub, email, twitter_handle } = user;
   if (!twitter_handle) history.push("/connect/twitter");
-  axiosWithAuth().put(`/users`, user);
+  axiosWithAuth().put(`/users/${sub}`, user);
 
   dispatch({
     type: INITIALIZE_USER,
