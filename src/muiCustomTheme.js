@@ -18,7 +18,8 @@ const theme = createMuiTheme({
          main: '#E10050'
        },
        background: {
-         default: "#FFFFFF"
+         default: '#FFFFFF',
+         secondary: '#F6F6F6'
        }
     },
     navbar: {
@@ -26,6 +27,16 @@ const theme = createMuiTheme({
           small: Navbar.height.small,
           normal: Navbar.height.normal
        }
+    },
+    kanban: {
+      topContainer: {
+         height: '75px'
+      },
+      list: {
+         header: {
+            height: '50px'
+         }
+      }
     },
     overrides: {
        MuiToolbar: {
@@ -42,6 +53,9 @@ const theme = createMuiTheme({
          },
          modal: {
             zIndex: '1000 !important'
+         },
+         paperAnchorLeft: {
+            height: 'auto'
          }
       },
       MuiButton: {
@@ -51,12 +65,12 @@ const theme = createMuiTheme({
          }
       },
       MuiTypography: {
-         h1: { fontWeight: '600' },
-         h2: { fontWeight: '600' },
-         h3: { fontWeight: '600' },
-         h4: { fontWeight: '600' },
-         h5: { fontWeight: '600' },
-         h6: { fontWeight: '600' }
+         h1: { fontWeight: '600', fontFamily: 'Roboto Condensed' },
+         h2: { fontWeight: '600', fontFamily: 'Roboto Condensed' },
+         h3: { fontWeight: '600', fontFamily: 'Roboto Condensed' },
+         h4: { fontWeight: '600', fontFamily: 'Roboto Condensed' },
+         h5: { fontWeight: '600', fontFamily: 'Roboto Condensed' },
+         h6: { fontWeight: '600', fontFamily: 'Roboto Condensed' }
       }
     }
  });

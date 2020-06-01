@@ -1,11 +1,16 @@
-import React from 'react';
-import Button from '@material-ui/core/Button';
-import TextField from '@material-ui/core/TextField';
-import Dialog from '@material-ui/core/Dialog';
-import DialogActions from '@material-ui/core/DialogActions';
-import DialogContent from '@material-ui/core/DialogContent';
-import DialogTitle from '@material-ui/core/DialogTitle';
+import React, { useState } from 'react';
+import { useDispatch } from 'react-redux';
+// material-ui
+import {
+  Button,
+  TextField,
+  Dialog,
+  DialogActions,
+  DialogContent,
+  DialogTitle
+} from '@material-ui/core';
 import { makeStyles } from '@material-ui/core';
+import { addList } from '../../actions';
 
 const useStyles = makeStyles(theme => ({
   container: {
@@ -17,9 +22,11 @@ const useStyles = makeStyles(theme => ({
   }
 }));
 
-export default function CreateTopic() {
+export default function CreateList() {
+  const dispatch = useDispatch();
   const { container } = useStyles();
-  const [open, setOpen] = React.useState(false);
+  const [open, setOpen] = useState(false);
+  const [title, setTitle] = useState('');
 
   const handleClickOpen = () => {
     setOpen(true);
@@ -28,6 +35,17 @@ export default function CreateTopic() {
   const handleClose = () => {
     setOpen(false);
   };
+
+  const handleAddButton = e => {
+    e.preventDefault();
+    
+    dispatch(addList(title));
+    handleClose();
+  }
+
+  const handleTextInput = e => {
+    setTitle(e.currentTarget.value);
+  }
 
   return (
     <div class={container}>
@@ -44,13 +62,14 @@ export default function CreateTopic() {
             label="Topic Title"
             type="Topic"
             fullWidth
+            onChange={handleTextInput}
           />
         </DialogContent>
         <DialogActions style={{display: 'flex', justifyContent:'space-between'}}>
           <Button onClick={handleClose} color="primary">
             Cancel
           </Button>
-          <Button onClick={handleClose} color="primary">
+          <Button onClick={handleAddButton} color="primary">
             Add
           </Button>
         </DialogActions>

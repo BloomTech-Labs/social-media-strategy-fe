@@ -1,25 +1,59 @@
 import React from "react";
-import { useOktaAuth } from "@okta/okta-react";
+// material-ui
+import { makeStyles, Typography } from "@material-ui/core";
 
-import TopicNav from "../kanban/TopicNav";
-import TopicBucket2 from "../kanban2/TopicBucket2";
-import CreateTopic from "../kanban2/CreateTopic.js";
+import Kanban from "../kanban/Kanban";
+import CreateList from "../kanban/CreateList.js";
+import Scrollbars from "react-custom-scrollbars";
 
-const MediaManager = ({ user }) => {
+const useStyles = makeStyles(theme => ({
+  root: {
+    backgroundColor: theme.palette.background.secondary,
+    position: 'relative',
+    [theme.breakpoints.down('xs')]: {
+      height: `calc(100vh - ${theme.navbar.height.small})`,
+      maxHeight: `calc(100vh - ${theme.navbar.height.small})`
+    },
+    [theme.breakpoints.up('xs')]: {
+      height: `calc(100vh - ${theme.navbar.height.normal})`,
+      maxHeight: `calc(100vh - ${theme.navbar.height.normal})`
+    },
+    overflow: 'hidden'
+  },
+  topContainer: {
+    height: theme.kanban.topContainer.height,
+    display: 'flex',
+
+  },
+  header: {
+    color: theme.palette.text.secondary,
+    margin: theme.spacing(2),
+    width: '100%',
+    textAlign: 'center'
+  },
+  scrollbar: {
+    [theme.breakpoints.down('xs')]: {
+      height: `calc(100vh - ${theme.navbar.height.small} - ${theme.kanban.topContainer.height}) !important`
+    },
+    [theme.breakpoints.up('xs')]: {
+      height: `calc(100vh - ${theme.navbar.height.normal} - ${theme.kanban.topContainer.height}) !important`
+    },
+    
+  }
+}));
+
+const MediaManager = () => {
+  const { root, header, scrollbar, topContainer } = useStyles();
+
   return (
-    <div>
-      <TopicNav />
-      <CreateTopic />
-      <div
-        style={{
-          display: "flex",
-          justifyContent: "space-around",
-          height: "100%",
-          overflow: "scroll",
-        }}
-      >
-        <TopicBucket2 />
+    <div className={root}>
+      <div className={topContainer}>
+        <Typography variant='h4' className={header}>Media Manager</Typography>
+        <CreateList />
       </div>
+      <Scrollbars className={scrollbar}>
+        <Kanban />
+      </Scrollbars>
     </div>
   );
 };
