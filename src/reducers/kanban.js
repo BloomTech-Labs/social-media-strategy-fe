@@ -1,5 +1,4 @@
 import { v4 as uuid } from 'uuid';
-import lists from './dummyListsPosts';
 import {
     UPDATE_LISTS,
     ADD_LIST,
