@@ -32,13 +32,7 @@ function App(props) {
   return (
     <Switch>
       <Route exact path="/" component={Landing} />
-      <Route
-        exact
-        path="/login"
-        render={(props) => (
-          <LoginOkta {...props} baseUrl={process.env.REACT_APP_OKTA_DOMAIN} />
-        )}
-      />
+      <Route exact path="/login" component={LoginOkta} />
       <SecureRoute path="/home" component={Home} />
       <SecureRoute path="/connect" component={ConnectAccounts} />
       <Route path="/implicit/callback" component={LoginCallback} />

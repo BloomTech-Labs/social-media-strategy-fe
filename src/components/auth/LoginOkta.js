@@ -99,7 +99,10 @@ const LoginOkta = ({ baseUrl }) => {
             <img className={classes.logo} src={logoDark} alt="SoMe logo" />
           </Button>
         </Hidden>
-        <SignInWidget baseUrl={baseUrl} onSuccess={onSuccess} />
+        <SignInWidget
+          baseUrl={process.env.REACT_APP_OKTA_DOMAIN}
+          onSuccess={onSuccess}
+        />
       </Grid>
       <Hidden xsDown>
         <Grid item xs={5} className={classes.imageContainer}>
