@@ -7,8 +7,10 @@ import {
 } from "./userActionTypes";
 
 export const initializeUser = (authService) => async (dispatch) => {
+  const user = await authService.getUser();
+  if (!authService.getAuthState().isAuthenticated) return;
+  const { sub, email, twitter_handle } = user;
   axiosWithAuth(authService).put(`users`);
-  const { sub, email, twitter_handle } = await authService.getUser();
 
   dispatch({
     type: INITIALIZE_USER,

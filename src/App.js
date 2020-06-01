@@ -1,6 +1,10 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { SecureRoute, LoginCallback } from "@okta/okta-react";
-import { Route, Switch } from "react-router";
+import { Route, Switch, useHistory } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import { useOktaAuth } from "@okta/okta-react";
+
+import { initializeUser } from "./actions/userActions";
 
 import Landing from "./components/Landing";
 import LoginOkta from "./components/auth/LoginOkta";
@@ -9,7 +13,21 @@ import Home from "./components/Home";
 
 import "./sass/index.scss";
 
-const App = (props) => {
+function App(props) {
+  const { authService } = useOktaAuth();
+  const dispatch = useDispatch();
+  const history = useHistory();
+  const user = useSelector((state) => state.user);
+
+  useEffect(() => {
+    console.log("App.js useEffect fired", Date.now());
+    if (!user.initialized) {
+      dispatch(initializeUser(authService));
+    } else if (!user.twitter_handle) {
+      history.push("/connect/twitter");
+    }
+  }, [user]);
+
   return (
     <Switch>
       <Route exact path="/" component={Landing} />
@@ -25,6 +43,6 @@ const App = (props) => {
       <Route path="/implicit/callback" component={LoginCallback} />
     </Switch>
   );
-};
+}
 
 export default App;
