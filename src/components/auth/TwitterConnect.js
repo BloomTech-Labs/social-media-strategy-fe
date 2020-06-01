@@ -1,8 +1,12 @@
-import React, { useState, useEffect } from "react";
+import React, { Fragment, useState, useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { useOktaAuth } from "@okta/okta-react";
+
 import Nav from "../Nav";
 import twitterLogo from "../../assets/imgs/twitter-logo.svg";
-import { useOktaAuth } from "@okta/okta-react/dist/OktaContext";
 import { axiosWithAuth } from "../../utils/axiosWithAuth";
+
+import { authorizeTwitter } from "../../actions/userActions";
 
 // Material-UI
 import {
@@ -50,22 +54,15 @@ const useStyles = makeStyles((theme) => ({
 function TwitterConnect(props) {
   const classes = useStyles();
   const { authService } = useOktaAuth();
-  const [loading, setLoading] = useState(true);
-  const [isConnected, setIsConnected] = useState(false);
+  const { user } = useSelector((state) => state);
+  const dispatch = useDispatch();
+  const [isConnected, setIsConnected] = useState(!!user.twitter_handle);
+  const [loading, setLoading] = useState(false);
+  console.log(user);
 
-  useEffect(() => {
-    (async () => {
-      const oktaUser = await authService.getUser();
-      setIsConnected(oktaUser.twitter_handle);
-      setLoading(false);
-    })();
-  }, [authService]);
-
-  function authorizeTwitter() {
-    axiosWithAuth(authService)
-      .get("/auth/twitter/authorize")
-      .then(({ data }) => (window.location.href = data))
-      .catch((err) => console.error(err));
+  function startAuthorize() {
+    setLoading(true);
+    dispatch(authorizeTwitter(authService));
   }
 
   function disconnectTwitter() {
@@ -87,7 +84,7 @@ function TwitterConnect(props) {
         {loading ? (
           <CircularProgress />
         ) : (
-          <>
+          <Fragment>
             <Typography variant="h4" component="h1" className={classes.header}>
               {isConnected
                 ? "Your twitter account is connected."
@@ -99,11 +96,11 @@ function TwitterConnect(props) {
               color="primary"
               className={classes.button}
               disableElevation
-              onClick={isConnected ? disconnectTwitter : authorizeTwitter}
+              onClick={isConnected ? disconnectTwitter : startAuthorize}
             >
               {isConnected ? "Disconnect Twitter" : "Connect to Twitter"}
             </Button>
-          </>
+          </Fragment>
         )}
       </Grid>
     </Grid>

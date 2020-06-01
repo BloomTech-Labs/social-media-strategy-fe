@@ -1,8 +1,13 @@
 import React, { useEffect, memo } from "react";
 import { useOktaAuth } from "@okta/okta-react";
 import { useLocation, useHistory } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+
 import { axiosWithAuth } from "../../utils/axiosWithAuth";
 import { CircularProgress, Typography } from "@material-ui/core";
+
+import { authorizeTwitterCallback } from "../../actions/userActions";
+
 const queryString = require("query-string");
 
 const container = {
@@ -16,22 +21,21 @@ const container = {
 
 const Callback = () => {
   const { authService } = useOktaAuth();
+  const dispatch = useDispatch();
   const location = useLocation();
-  const { push } = useHistory();
+  const history = useHistory();
 
   useEffect(() => {
     console.log("TwitterConnectCallback useEffect fired", Date.now());
     const { oauth_token, oauth_verifier } = queryString.parse(location.search);
-    axiosWithAuth(authService)
-      .post("/auth/twitter/callback", {
+    dispatch(
+      authorizeTwitterCallback(
+        authService,
+        history,
         oauth_token,
-        oauth_verifier,
-      })
-      .then((res) => push("/home"))
-      .catch((err) => {
-        console.error(err);
-        push("/connect/twitter");
-      });
+        oauth_verifier
+      )
+    );
   }, []);
 
   return (

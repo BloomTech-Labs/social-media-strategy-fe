@@ -16,9 +16,7 @@ const Home = () => {
       <Nav toggleMenu={toggleMenu} />
       <DrawerMenu open={menuOpen} toggleMenu={toggleMenu} />
 
-      <main>
-        <MediaManager />
-      </main>
+      <main>{/*<MediaManager />*/}</main>
     </Fragment>
   );
 };
