@@ -2,7 +2,8 @@ import { v4 as uuid } from 'uuid';
 import lists from './dummyListsPosts';
 import {
     UPDATE_LISTS,
-    ADD_LIST
+    ADD_LIST,
+    ADD_POST
 } from '../actions/types';
 
 const initialState = {
@@ -25,6 +26,20 @@ const kanbanReducer = (state=initialState, action) => {
                 lists: {
                     ...state.lists,
                     [payload.id]: payload
+                }
+            };
+        case ADD_POST: 
+            return {
+                ...state,
+                lists: {
+                    ...state.lists,
+                    [payload.list_id]: {
+                        ...state.lists[payload.list_id],
+                        posts: [
+                            ...state.lists[payload.list_id].posts,
+                            payload
+                        ]
+                    }
                 }
             }
         default:

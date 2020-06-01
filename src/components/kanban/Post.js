@@ -64,7 +64,7 @@ const Post = ({ post, index }) => {
                             <TwitterIcon className={twitterIcon} />
                             <Typography variant='caption'>@username</Typography>
                         </div>
-                        {post.content}
+                        {post.post_text}
                     </div>
                     {post.imageUrl && <img className={image}  src={post.imageUrl} alt="Post"/>}
                     <div className={actionsContainer}>

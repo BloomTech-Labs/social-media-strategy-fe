@@ -44,7 +44,7 @@ const List = ({ listId, list }) => {
 						<Typography variant='h6' component='h3'>
 							{list.title}
 						</Typography>
-						<CreateTweet />
+						<CreateTweet listId={list.id} />
 					</div>
 					<Droppable direction='vertical' droppableId={list.id} type='post'>
 						{(provided, snapshot) => (

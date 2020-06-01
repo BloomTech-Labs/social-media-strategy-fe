@@ -1,5 +1,9 @@
-import { UPDATE_LISTS, ADD_LIST } from './types';
 import { axiosWithAuth } from '../utils/axiosWithAuth';
+import { 
+    UPDATE_LISTS,
+    ADD_LIST,
+    ADD_POST
+} from './types';
 
 const convertArrayToObject = (array, key) => {
 	const initialValue = {};
@@ -16,8 +20,6 @@ export const loadListsFromDb = (userId) => async dispatch => {
 
     // sort lists by index
     const sortedLists = data.sort((a, b) => a.index - b.index);
-
-    console.log('sortedLists', sortedLists);
 
     // load each list's posts
     const listsPromises = sortedLists.map(async list => {
@@ -46,9 +48,17 @@ export const addList = (title) => async dispatch => {
 
     dispatch({
         type: ADD_LIST,
-        payload: {
-            ...data,
-            id: data.id.toString()
-        }
+        payload: data
+    });
+}
+
+export const addPost = (post) => async dispatch => {
+    let { data } = await axiosWithAuth().post(`/posts`, post);
+
+    console.log('new post', data);
+
+    dispatch({
+        type: ADD_POST,
+        payload: data
     });
 }

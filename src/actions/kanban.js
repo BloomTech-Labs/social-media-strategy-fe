@@ -12,6 +12,23 @@ const convertArrayToObject = (array, key) => {
 	}, initialValue);
 };
 
+const needsToUpdateIndex = (source, destination, itemIndex, droppableId) => {
+    // same column / droppable
+    if(source.droppableId === destination.droppableId) {
+        return (
+            (source.index < destination.index && itemIndex <= destination.index && itemIndex >= source.index) || 
+            (source.index > destination.index && itemIndex >= destination.index && itemIndex <= source.index)
+        );
+    } else { // different column/droppable
+        // source droppable
+        if (source.droppableId === droppableId) {
+            return itemIndex >= source.index;
+        } else { // destination droppable
+            return itemIndex >= destination.index;
+        }
+    }
+}
+
 export const dragPostToDifferentList = (lists, source, destination) => dispatch => {
     const sourceList = lists[source.droppableId];
     const destList = lists[destination.droppableId];
@@ -20,39 +37,75 @@ export const dragPostToDifferentList = (lists, source, destination) => dispatch 
     const destPosts = [...destList.posts];
 
     // remove post from source list
-    const [post] = sourcePosts.splice(source.index, 1);
+    const [item] = sourcePosts.splice(source.index, 1);
     // add post to destination list
     destPosts.splice(destination.index, 0, {
-        ...post,
+        ...item,
         // Update listId
-        listId: destination.droppableId,
+        list_id: destination.droppableId,
     });
+
+    const postsToBeUpdated = [];
 
     const updatedLists = {
         ...lists,
         // Update posts/posts of the source column/list
         [source.droppableId]: {
             ...sourceList,
-            posts: sourcePosts.map((element) => ({
-                ...element,
-                // update each post's index
-                index: sourcePosts.findIndex((el) => el.id === element.id),
-            })),
+            posts: sourcePosts.map((post) => {
+                const newIndex = sourcePosts.findIndex((el) => el.id === post.id);
+                if (needsToUpdateIndex(source, destination, newIndex, source.droppableId)) {
+                    // save posts id and data that need to be updated in DB
+                    postsToBeUpdated.push({ 
+                        id: post.id,
+                        updates: {
+                            index: newIndex
+                        }
+                    });
+                    return {
+                        ...post,
+                        // update each post's index
+                        index: newIndex,
+                    }
+                } else {
+                    return post;
+                }
+            }),
         },
         // Update posts/posts of the destination column/list
         [destination.droppableId]: {
             ...destList,
-            posts: destPosts.map((element) => ({
-                ...element,
-                // update each post's index
-                index: destPosts.findIndex((el) => el.id === element.id),
-            })),
+            posts: destPosts.map((post) => {
+                const newIndex = destPosts.findIndex((el) => el.id === post.id);
+                if (needsToUpdateIndex(source, destination, newIndex, destination.droppableId)) {
+                    postsToBeUpdated.push({ 
+                        id: post.id,
+                        updates: {
+                            index: newIndex,
+                            // make sure to send list_id to update list_id of the dragged post
+                            list_id: destination.droppableId
+                        }
+                    });
+                    return {
+                        ...post,
+                        // update each post's index
+                        index: newIndex,
+                    }
+                } else {
+                    return post;
+                }
+            }),
         },
     }
 
     dispatch({
         type: UPDATE_LISTS,
         payload: updatedLists
+    });
+
+    // update indexes in the DB
+    postsToBeUpdated.forEach(async ({ id, updates }) => {
+        await axiosWithAuth().patch(`/posts/${id}`, updates);
     });
 }
 
@@ -64,20 +117,37 @@ export const dragPostToSameList = (lists, source, destination) => dispatch => {
     // add item to new index
     posts.splice(destination.index, 0, item);
 
+    const postsToBeUpdated = [];
+
     const updatedLists = {
         ...lists,
         [source.droppableId]: {
             ...list,
-            posts: posts.map(post => ({
-                ...post,
-                index: posts.findIndex((el) => el.id === post.id),
-            })),
+            // update posts indexes
+            posts: posts.map(post => {
+                const newIndex = posts.findIndex((el) => el.id === post.id);
+                if (needsToUpdateIndex(source, destination, newIndex, source.droppableId)) {
+                    // save posts id to update DB
+                    postsToBeUpdated.push({ id: post.id, index: newIndex });
+                    return {
+                        ...post,
+                        index: newIndex,
+                    }
+                } else {
+                    return post;
+                }
+            }),
         }
     }
     
     dispatch({
         type: UPDATE_LISTS,
         payload: updatedLists
+    });
+
+    // update indexes in the DB
+    postsToBeUpdated.forEach(async ({ id, index }) => {
+        await axiosWithAuth().patch(`/posts/${id}`, { index });
     });
 }
 
@@ -91,10 +161,7 @@ export const dragList = (lists, source, destination) => async dispatch => {
     const updateIndexesPromises = listsArray.map((list) => {
         const newIndex = listsArray.findIndex((el) => el.id === list.id);
         // check if index has changed and need to be updated
-        if (
-            (source.index < destination.index && newIndex <= destination.index && newIndex >= source.index) || 
-            (source.index > destination.index && newIndex >= destination.index && newIndex <= source.index)
-        ) {
+        if (needsToUpdateIndex(source, destination, newIndex, source.droppableId)) {
             // save lists id to update DB
             listsToBeUpdated.push({ id: list.id, index: newIndex });
             

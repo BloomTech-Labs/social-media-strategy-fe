@@ -40,6 +40,7 @@ export default function CreateList() {
     e.preventDefault();
     
     dispatch(addList(title));
+    handleClose();
   }
 
   const handleTextInput = e => {
