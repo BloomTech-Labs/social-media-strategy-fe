@@ -26,6 +26,7 @@ function App(props) {
     } else if (!user.twitter_handle) {
       history.push("/connect/twitter");
     }
+    // eslint-disable-next-line
   }, [user]);
 
   return (
