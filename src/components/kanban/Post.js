@@ -1,9 +1,9 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
+import { useSelector } from 'react-redux';
 import { Draggable } from 'react-beautiful-dnd';
 import TwitterIcon from "@material-ui/icons/Twitter";
 import { Typography, makeStyles, Button } from '@material-ui/core';
 import ScheduleTweet from '../kanban2/ScheduleTweet';
-import { useSelector } from 'react-redux';
 
 const useStyles = makeStyles(theme => ({
     container: {
