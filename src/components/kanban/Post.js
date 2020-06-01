@@ -3,6 +3,7 @@ import { Draggable } from 'react-beautiful-dnd';
 import TwitterIcon from "@material-ui/icons/Twitter";
 import { Typography, makeStyles, Button } from '@material-ui/core';
 import ScheduleTweet from '../kanban2/ScheduleTweet';
+import { useSelector } from 'react-redux';
 
 const useStyles = makeStyles(theme => ({
     container: {
@@ -41,6 +42,7 @@ const useStyles = makeStyles(theme => ({
 }));
 
 const Post = ({ post, index }) => {
+    const { user } = useSelector(state => state);
     const { 
         container,
         contentContainer,
@@ -62,7 +64,7 @@ const Post = ({ post, index }) => {
                     <div className={contentContainer}>
                         <div className={header}>
                             <TwitterIcon className={twitterIcon} />
-                            <Typography variant='caption'>@username</Typography>
+                            <Typography variant='caption'>{`@${user.twitter_handle}`}</Typography>
                         </div>
                         {post.post_text}
                     </div>
