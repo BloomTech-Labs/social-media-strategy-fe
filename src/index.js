@@ -1,18 +1,17 @@
 import React from "react";
 import ReactDOM from "react-dom";
-import { Security } from "@okta/okta-react";
 import { createStore, applyMiddleware, compose } from "redux";
-import { BrowserRouter as Router } from "react-router-dom";
 import { Provider } from "react-redux";
 import thunk from "redux-thunk";
 import logger from "redux-logger";
 
-import App from "./App";
-
 // imports for redux setup
 import { reducer } from "./reducers";
 
+import AppRouter from "./AppRouter";
+
 import { ThemeProvider } from "@material-ui/core/styles";
+import CssBaseline from "@material-ui/core/CssBaseline";
 import theme from "./muiCustomTheme";
 import "./index.css";
 
@@ -22,25 +21,12 @@ const store = createStore(
   composeEnhancers(applyMiddleware(thunk, logger))
 );
 
-const oktaConfig = {
-  issuer: `${process.env.REACT_APP_OKTA_DOMAIN}/oauth2/default`,
-  clientId: process.env.REACT_APP_OKTA_CLIENT_ID,
-  redirectUri: window.location.origin + "/implicit/callback",
-  scopes: ["openid", "profile", "email"],
-};
-
 ReactDOM.render(
-  <Security
-    {...oktaConfig}
-    onAuthRequired={() => (window.location.href = "/login")}
-  >
+  <ThemeProvider theme={theme}>
+    <CssBaseline />
     <Provider store={store}>
-      <Router>
-        <ThemeProvider theme={theme}>
-          <App />
-        </ThemeProvider>
-      </Router>
+      <AppRouter />
     </Provider>
-  </Security>,
+  </ThemeProvider>,
   document.getElementById("root")
 );
