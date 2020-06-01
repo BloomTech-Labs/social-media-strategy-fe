@@ -1,4 +1,4 @@
-import { UPDATE_LISTS } from './types';
+import { UPDATE_LISTS } from './kanbanActionTypes';
 import { axiosWithAuth } from '../utils/axiosWithAuth';
 
 const convertArrayToObject = (array, key) => {

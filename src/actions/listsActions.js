@@ -3,7 +3,7 @@ import {
     UPDATE_LISTS,
     ADD_LIST,
     ADD_POST
-} from './types';
+} from './kanbanActionTypes';
 
 const convertArrayToObject = (array, key) => {
 	const initialValue = {};

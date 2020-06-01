@@ -4,13 +4,12 @@ import { DragDropContext, Droppable } from 'react-beautiful-dnd';
 import { makeStyles } from '@material-ui/core';
 
 import List from './List';
-
+import { loadListsFromDb } from "../../actions/listsActions";
 import { 
 	dragPostToDifferentList,
 	dragPostToSameList,
-	dragList,
-	loadListsFromDb
-} from '../../actions';
+	dragList
+} from '../../actions/kanbanActions';
 
 const useStyles = makeStyles(theme => ({
 	kanban: {

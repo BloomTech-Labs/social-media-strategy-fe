@@ -42,7 +42,7 @@ const useStyles = makeStyles(theme => ({
   }
 }));
 
-const MediaManager = ({ user }) => {
+const MediaManager = () => {
   const { root, header, scrollbar, topContainer } = useStyles();
 
   return (
