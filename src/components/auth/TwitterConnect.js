@@ -1,9 +1,11 @@
 import React, { useState, useEffect } from "react";
-import Nav from "../nav/Nav";
-import twitterLogo from "../../assets/imgs/twitter-logo.svg";
 import { useOktaAuth } from "@okta/okta-react/dist/OktaContext";
 import { axiosWithAuth } from "../../utils/axiosWithAuth";
-
+// Components
+import Nav from "../nav/Nav";
+import DrawerMenu from "../nav/DrawerMenu";
+// Image
+import twitterLogo from "../../assets/imgs/twitter-logo.svg";
 // Material-UI
 import {
   Grid,
@@ -52,7 +54,8 @@ function TwitterConnect(props) {
   const { authService } = useOktaAuth();
   const [loading, setLoading] = useState(true);
   const [isConnected, setIsConnected] = useState(false);
-
+  const [menuOpen, setMenuOpen] = useState(false);
+  
   useEffect(() => {
     (async () => {
       const oktaUser = await authService.getUser();
@@ -80,9 +83,16 @@ function TwitterConnect(props) {
       .catch((err) => console.error(err));
   }
 
+  const toggleMenu = () => {
+    setMenuOpen(!menuOpen);
+  };
+
   return (
     <Grid container className={classes.root}>
-      <Nav />
+      <Nav toggleMenu={isConnected ? toggleMenu : null} />
+      { isConnected && 
+        <DrawerMenu open={menuOpen} toggleMenu={toggleMenu} />
+      }
       <Grid item className={classes.content}>
         {loading ? (
           <CircularProgress />

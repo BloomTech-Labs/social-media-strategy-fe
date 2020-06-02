@@ -1,10 +1,17 @@
-import React, { useState } from "react";
-import { useSelector } from "react-redux";
-import { Draggable } from "react-beautiful-dnd";
+import React, { useState } from 'react';
+import { useSelector } from 'react-redux';
+import { Draggable } from 'react-beautiful-dnd';
 import TwitterIcon from "@material-ui/icons/Twitter";
-import { Typography, makeStyles, Button } from "@material-ui/core";
-import ScheduleTweet from "./ScheduleTweet";
-import { axiosWithAuth } from "../../utils/axiosWithAuth";
+import { axiosWithAuth } from '../../utils/axiosWithAuth';
+// Components
+import ScheduleTweet from './ScheduleTweet';
+import PostMenu from './PostMenu';
+// Material-UI
+import {
+    Typography,
+    makeStyles,
+    Button
+} from '@material-ui/core';
 
 const useStyles = makeStyles((theme) => ({
   container: {
@@ -20,9 +27,14 @@ const useStyles = makeStyles((theme) => ({
     minHeight: "50px",
   },
   header: {
-    display: "flex",
-    alignItems: "center",
-    marginBottom: theme.spacing(1),
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'space-between',
+    marginBottom: theme.spacing(1)
+  },
+  twitterHandleContainer: {
+      display: 'flex',
+      alignItems: 'center',
   },
   twitterIcon: {
     color: "#2196F3",
@@ -48,6 +60,7 @@ const Post = ({ post, index }) => {
     container,
     contentContainer,
     header,
+    twitterHandleContainer,
     twitterIcon,
     image,
     actionsContainer,
@@ -73,8 +86,13 @@ const Post = ({ post, index }) => {
         >
           <div className={contentContainer}>
             <div className={header}>
-              <TwitterIcon className={twitterIcon} />
-              <Typography variant="caption">{`@${user.twitter_handle}`}</Typography>
+              <div className={twitterHandleContainer}>
+                  <TwitterIcon className={twitterIcon} />
+                  <Typography variant='caption'>{`@${user.twitter_handle}`}</Typography>
+              </div>
+              <div>
+                  <PostMenu post={post} />
+              </div>
             </div>
             {post.post_text}
           </div>

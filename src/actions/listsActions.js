@@ -2,7 +2,8 @@ import { axiosWithAuth } from '../utils/axiosWithAuth';
 import { 
     UPDATE_LISTS,
     ADD_LIST,
-    ADD_POST
+    ADD_POST,
+    DELETE_POST
 } from './kanbanActionTypes';
 
 const convertArrayToObject = (array, key) => {
@@ -60,5 +61,14 @@ export const addPost = (post) => async dispatch => {
     dispatch({
         type: ADD_POST,
         payload: data
+    });
+}
+
+export const deletePost = (post) => async dispatch => {
+    await axiosWithAuth().delete(`/posts/${post.id}`);
+
+    dispatch({
+        type: DELETE_POST,
+        payload: post
     });
 }

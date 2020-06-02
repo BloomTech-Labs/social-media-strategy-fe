@@ -1,4 +1,5 @@
 import React from "react";
+import { useHistory } from "react-router-dom";
 // Material-UI
 import { makeStyles } from "@material-ui/core/styles";
 import { AppBar, Toolbar, Button, IconButton } from "@material-ui/core";
@@ -8,7 +9,7 @@ import MenuIcon from "@material-ui/icons/Menu";
 import Search from "./Search";
 import ProfileMenu from "./ProfileMenu";
 // Img
-import logo from "../../assets/imgs/logo.png";
+import logo from "../../assets/imgs/somelogo.svg";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -34,6 +35,7 @@ const useStyles = makeStyles((theme) => ({
 
 const Nav = ({ toggleMenu }) => {
   const classes = useStyles();
+  const history = useHistory();
 
   return (
     <div className={classes.root}>
@@ -49,7 +51,7 @@ const Nav = ({ toggleMenu }) => {
               <MenuIcon />
             </IconButton>
           )}
-          <Button>
+          <Button onClick={() => history.push("/home")}>
             <img className={classes.logo} src={logo} alt="SoMe logo" />
           </Button>
           {toggleMenu && <Search />}
