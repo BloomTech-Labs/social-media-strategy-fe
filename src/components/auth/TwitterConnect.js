@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import Nav from "../Nav";
+import Nav from "../nav/Nav";
 import twitterLogo from "../../assets/imgs/twitter-logo.svg";
 import { useOktaAuth } from "@okta/okta-react/dist/OktaContext";
 import { axiosWithAuth } from "../../utils/axiosWithAuth";

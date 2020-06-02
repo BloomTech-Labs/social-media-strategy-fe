@@ -3,7 +3,7 @@ import { useSelector } from "react-redux";
 import { Draggable } from "react-beautiful-dnd";
 import TwitterIcon from "@material-ui/icons/Twitter";
 import { Typography, makeStyles, Button } from "@material-ui/core";
-import ScheduleTweet from "../kanban2/ScheduleTweet";
+import ScheduleTweet from "./ScheduleTweet";
 import { axiosWithAuth } from "../../utils/axiosWithAuth";
 
 const useStyles = makeStyles((theme) => ({

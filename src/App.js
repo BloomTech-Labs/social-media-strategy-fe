@@ -6,10 +6,10 @@ import { useOktaAuth } from "@okta/okta-react";
 
 import { initializeUser } from "./actions/userActions";
 
-import Landing from "./components/Landing";
+import Landing from "./components/pages/Landing";
 import LoginOkta from "./components/auth/LoginOkta";
 import ConnectAccounts from "./components/auth/ConnectAccounts";
-import Home from "./components/Home";
+import Home from "./components/pages/Home";
 
 import "./sass/index.scss";
 
