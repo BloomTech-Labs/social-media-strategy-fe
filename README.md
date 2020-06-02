@@ -7,11 +7,21 @@ You can find the deployed project at [Social Media Strategy](https://so-me.net/)
 
 ## Contributors
 
+### Labs 22
+
 |                                                             [Jason Long](https://github.com/jlong5795)                                                             |                                                             [Jess Wolff](https://github.com/jleahwolff)                                                             |                                                            [Jose Rivera](https://github.com/Jrive204)                                                             |                                                           [Matthew Bedard](https://github.com/Matt-GitHub)                                                           |                                                          [Tyler Gilchrist](https://github.com/Tyler668)                                                           |
 | :----------------------------------------------------------------------------------------------------------------------------------------------------------------: | :-----------------------------------------------------------------------------------------------------------------------------------------------------------------: | :---------------------------------------------------------------------------------------------------------------------------------------------------------------: | :------------------------------------------------------------------------------------------------------------------------------------------------------------------: | :---------------------------------------------------------------------------------------------------------------------------------------------------------------: |
 | [<img src="https://avatars3.githubusercontent.com/u/57104675?s=460&u=e7620554469deb924ac378097155cd45590cbdf9&v=4" width = "200" />](https://github.com/jlong5795) | [<img src="https://avatars1.githubusercontent.com/u/54365640?s=460&u=7b8b4d3f947e41d99d2e8bf9aa2782a71702d028&v=4" width = "200" />](https://github.com/jleahwolff) | [<img src="https://avatars3.githubusercontent.com/u/56930065?s=460&u=49e87593a294177fe8d2f4afeda8b915f24580d2&v=4" width = "200" />](https://github.com/Jrive204) | [<img src="https://avatars1.githubusercontent.com/u/35118316?s=460&u=0cde4614da30d79704b3cdadf2aed924199e85f9&v=4" width = "200" />](https://github.com/Matt-GitHub) | [<img src="https://avatars1.githubusercontent.com/u/52633530?s=460&u=097133dc28171488710ff03f6e5bfef9bdd7db2e&v=4" width = "200" />](https://github.com/Tyler668) |
-|                                           [<img src="https://github.com/favicon.ico" width="15"> ](https://github.com/jlong5795)                                            |                                       [<img src="https://github.com/favicon.ico" width="15"> ](https://github.com/jleahwolff)                                        |                                     [<img src="https://github.com/favicon.ico" width="15"> ](https://github.com/Jrive204)                                      |                                      [<img src="https://github.com/favicon.ico" width="15"> ](https://github.com/Matt-GitHub)                                      |                                      [<img src="https://github.com/favicon.ico" width="15"> ](https://github.com/Tyler668)                                       |
-|                           [ <img src="https://static.licdn.com/sc/h/al2o9zrvru7aqj8e1x2rzsrca" width="15"> ](https://www.linkedin.com/in/jasonlong1231/)                            |                            [ <img src="https://static.licdn.com/sc/h/al2o9zrvru7aqj8e1x2rzsrca" width="15"> ](https://www.linkedin.com/in/jwolff2/)                            |                           [ <img src="https://static.licdn.com/sc/h/al2o9zrvru7aqj8e1x2rzsrca" width="15"> ](www.linkedin.com/in/jrive204)                           |                            [ <img src="https://static.licdn.com/sc/h/al2o9zrvru7aqj8e1x2rzsrca" width="15"> ](https://www.linkedin.com/in/matthew-bedard-dev/)                             |                           [ <img src="https://static.licdn.com/sc/h/al2o9zrvru7aqj8e1x2rzsrca" width="15"> ](https://www.linkedin.com/in/tyler-gilchrist-a5a426191/)                           |
+|                                       [<img src="https://github.com/favicon.ico" width="15"> ](https://github.com/jlong5795)                                       |                                       [<img src="https://github.com/favicon.ico" width="15"> ](https://github.com/jleahwolff)                                       |                                       [<img src="https://github.com/favicon.ico" width="15"> ](https://github.com/Jrive204)                                       |                                       [<img src="https://github.com/favicon.ico" width="15"> ](https://github.com/Matt-GitHub)                                       |                                       [<img src="https://github.com/favicon.ico" width="15"> ](https://github.com/Tyler668)                                       |
+|                   [ <img src="https://static.licdn.com/sc/h/al2o9zrvru7aqj8e1x2rzsrca" width="15"> ](https://www.linkedin.com/in/jasonlong1231/)                   |                      [ <img src="https://static.licdn.com/sc/h/al2o9zrvru7aqj8e1x2rzsrca" width="15"> ](https://www.linkedin.com/in/jwolff2/)                       |                         [ <img src="https://static.licdn.com/sc/h/al2o9zrvru7aqj8e1x2rzsrca" width="15"> ](www.linkedin.com/in/jrive204)                          |                 [ <img src="https://static.licdn.com/sc/h/al2o9zrvru7aqj8e1x2rzsrca" width="15"> ](https://www.linkedin.com/in/matthew-bedard-dev/)                  |            [ <img src="https://static.licdn.com/sc/h/al2o9zrvru7aqj8e1x2rzsrca" width="15"> ](https://www.linkedin.com/in/tyler-gilchrist-a5a426191/)             |
+
+### Labs 24
+
+|                                         [Aja Blanco](https://github.com/ajablanco)                                         |                                     [Eddie Madrigal](https://github.com/eddiemadrigal)                                      |                                           [Fabricio Bezerra](https://github.com/fbzr)                                            |                                        [M Groesbeck](https://github.com/mmgroesbeck)                                         |                                         [Tim Shaker](https://github.com/tmshkr)                                         |
+| :------------------------------------------------------------------------------------------------------------------------: | :-------------------------------------------------------------------------------------------------------------------------: | :------------------------------------------------------------------------------------------------------------------------------: | :--------------------------------------------------------------------------------------------------------------------------: | :---------------------------------------------------------------------------------------------------------------------: |
+|                [<img src="./src/assets/imgs/aja-blanco.png" width = "200" />](https://github.com/ajablanco)                |            [<img src="./src/assets/imgs/eddie-madrigal.jpeg" width = "200" />](https://github.com/eddiemadrigal)            |                  [<img src="./src/assets/imgs/fabricio-bezerra.jpeg" width = "200" />](https://github.com/fbzr)                  |               [<img src="./src/assets/imgs/m-groesbeck.jpeg" width = "200" />](https://github.com/mmgroesbeck)               |                [<img src="./src/assets/imgs/tim-shaker.png" width = "200" />](https://github.com/tmshkr)                |
+|                   [<img src="https://github.com/favicon.ico" width="15"> ](https://github.com/ajablanco)                   |                 [<img src="https://github.com/favicon.ico" width="15"> ](https://github.com/eddiemadrigal)                  |                        [<img src="https://github.com/favicon.ico" width="15"> ](https://github.com/fbzr)                         |                   [<img src="https://github.com/favicon.ico" width="15"> ](https://github.com/mmgroesbeck)                   |                   [<img src="https://github.com/favicon.ico" width="15"> ](https://github.com/tmshkr)                   |
+| [ <img src="https://static.licdn.com/sc/h/al2o9zrvru7aqj8e1x2rzsrca" width="15"> ](https://www.linkedin.com/in/ajablanco/) | [ <img src="https://static.licdn.com/sc/h/al2o9zrvru7aqj8e1x2rzsrca" width="15"> ](https://www.linkedin.com/in/edmadrigal/) | [ <img src="https://static.licdn.com/sc/h/al2o9zrvru7aqj8e1x2rzsrca" width="15"> ](https://www.linkedin.com/in/fabricio-bezerra) | [ <img src="https://static.licdn.com/sc/h/al2o9zrvru7aqj8e1x2rzsrca" width="15"> ](https://www.linkedin.com/in/m-groesbeck/) | [ <img src="https://static.licdn.com/sc/h/al2o9zrvru7aqj8e1x2rzsrca" width="15"> ](https://www.linkedin.com/in/tmshkr/) |
 
 <br>
 <br>
@@ -22,19 +32,21 @@ You can find the deployed project at [Social Media Strategy](https://so-me.net/)
 
 ## Project Overview
 
-[Trello Board](https://trello.com/b/tn4nvK97/labs-22-social-media-strategy)
+[Trello Board](https://trello.com/b/ckiGAMRc/labs-24-social-media-strategy)
 
 [Product Canvas](https://www.notion.so/Social-Media-Strategy-9d1840703db34c5cb44d0f4a0cc45543)
 
 [UX Design files](https://www.figma.com/file/ssdhBZL2Yr9GYaRyZtO8Cu/Social-Media-Strategy%2C-JP)
 
-Social media managers / Small Business owners don't know how to most effectively engage with their audience. 
+[UX Design files v2](https://www.figma.com/file/xUEu5t398Z4vRXxHNs3jX9/Draft-5?node-id=0%3A1)
 
-Our mission is to create the most efficient way to create social posts that get the attention of your followers. To making planning, drafting, and creating social content an easy and enjoyable task.
+Small business owners, social media managers and tech professionals aren't sure when and what content will optimize their engagement across various social media platforms
 
+SoMe helps users streamline and optimize their social media presence.
 
 ### Key Features
 
+- Improve users' post contents for increased engagement based on their followers' historical engagement habits/data.
 - Clean and modern drag-and-drop interface
 - Suggestive scheduling
 
@@ -43,21 +55,26 @@ Our mission is to create the most efficient way to create social posts that get 
 ### Front end built using:
 
 React
+
 - Supports reusable components
 - Ease of deployment and maintenance
 
 Redux
+
 - Integrates well with React
 - State management capabilities match that of application
 
 Material-UI
+
 - Ease of component styling
 
 Styled Components
+
 - Ease of component styling
 - Provides easier interaction with React-Beautiful DnD
 
 React-Beautiful-DnD
+
 - Controls and styles drag-and-drop functionality
 
 #### Front end deployed to `AWS Amplify`
@@ -71,6 +88,7 @@ React-Beautiful-DnD
 # APIs
 
 ## Authentication API here
+
 Provided by our backend to handle account creation and social media network authorizations.
 
 <!--## 2️⃣ Payment API here
@@ -101,7 +119,10 @@ Volunteering your time; it pays you and your whole community fantastic dividends
 
 In order for the app to function correctly, the user must set up their own environment variables. There should be a .env file containing the following:
 
-    *  REACT_APP_API_URL - this variable points to the back end
+    *  REACT_APP_API_URL - URL to back end server
+    *  REACT_APP_OKTA_DOMAIN - SoMe account Okta domain (available on Okta
+    dashboard)
+    *  REACT_APP_CLIENT_ID - SoMe client ID (available on Okta dashboard)
 
 <!-- # 5️⃣ Content Licenses
 
@@ -110,16 +131,16 @@ In order for the app to function correctly, the user must set up their own envir
 | Image Filename | Source / Creator | License                                                                      |
 | -------------- | ---------------- | ---------------------------------------------------------------------------- |
 | doodles.png    | Nicole Bennett   | [Creative Commons](https://www.toptal.com/designers/subtlepatterns/doodles/) |
-| rings.svg      | Sam Herbert      | [MIT](https://github.com/SamHerbert/SVG-Loaders)                           |-->  
+| rings.svg      | Sam Herbert      | [MIT](https://github.com/SamHerbert/SVG-Loaders)                           |-->
 
-# 4️⃣ Testing
+# Testing
 
 🚫Document what you used for testing and why
 
 # Installation Instructions
 
 - Fork and Clone Repository
-- run NPM install to download dependencies
+- Run NPM install to download dependencies
 
 ## Other Scripts
 
