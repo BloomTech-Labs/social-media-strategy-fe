@@ -27,7 +27,7 @@ const TweetNow = (props) => {
       </span>
       <form onSubmit={handleSubmit(onSubmit)}>
         <span className='postNowInputs'>
-          <TextareaAutosize
+          {/* <TextareaAutosize
             className='text-area'
             maxLength='280'
             rowsMin={3}
@@ -35,7 +35,7 @@ const TweetNow = (props) => {
             name='post_text'
             onChange={handletweetchange}
             ref={register}
-          />
+          /> */}
           <span
             style={
               tweetCount.chars_left < 80
