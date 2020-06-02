@@ -32,18 +32,21 @@ You can find the deployed project at [Social Media Strategy](https://so-me.net/)
 
 ## Project Overview
 
-[Trello Board](https://trello.com/b/tn4nvK97/labs-22-social-media-strategy)
+[Trello Board](https://trello.com/b/ckiGAMRc/labs-24-social-media-strategy)
 
 [Product Canvas](https://www.notion.so/Social-Media-Strategy-9d1840703db34c5cb44d0f4a0cc45543)
 
 [UX Design files](https://www.figma.com/file/ssdhBZL2Yr9GYaRyZtO8Cu/Social-Media-Strategy%2C-JP)
 
-Social media managers / Small Business owners don't know how to most effectively engage with their audience.
+[UX Design files v2](https://www.figma.com/file/xUEu5t398Z4vRXxHNs3jX9/Draft-5?node-id=0%3A1)
 
-Our mission is to create the most efficient way to create social posts that get the attention of your followers. To making planning, drafting, and creating social content an easy and enjoyable task.
+Small business owners, social media managers and tech professionals aren't sure when and what content will optimize their engagement across various social media platforms
+
+SoMe helps users streamline and optimize their social media presence.
 
 ### Key Features
 
+- Improve users' post contents for increased engagement based on their followers' historical engagement habits/data.
 - Clean and modern drag-and-drop interface
 - Suggestive scheduling
 
@@ -116,7 +119,10 @@ Volunteering your time; it pays you and your whole community fantastic dividends
 
 In order for the app to function correctly, the user must set up their own environment variables. There should be a .env file containing the following:
 
-    *  REACT_APP_API_URL - this variable points to the back end
+    *  REACT_APP_API_URL - URL to back end server
+    *  REACT_APP_OKTA_DOMAIN - SoMe account Okta domain (available on Okta
+    dashboard)
+    *  REACT_APP_CLIENT_ID - SoMe client ID (available on Okta dashboard)
 
 <!-- # 5️⃣ Content Licenses
 
@@ -127,14 +133,14 @@ In order for the app to function correctly, the user must set up their own envir
 | doodles.png    | Nicole Bennett   | [Creative Commons](https://www.toptal.com/designers/subtlepatterns/doodles/) |
 | rings.svg      | Sam Herbert      | [MIT](https://github.com/SamHerbert/SVG-Loaders)                           |-->
 
-# 4️⃣ Testing
+# Testing
 
 🚫Document what you used for testing and why
 
 # Installation Instructions
 
 - Fork and Clone Repository
-- run NPM install to download dependencies
+- Run NPM install to download dependencies
 
 ## Other Scripts
 
