@@ -52,7 +52,7 @@ export default function CreateTopic() {
             <AddAPhotoIcon />
           </label>
         </DialogContent>
-        
+
         <DialogContent>
           <Recommendations />
         </DialogContent>
@@ -63,7 +63,7 @@ export default function CreateTopic() {
             Cancel
           </Button>
           <Button onClick={handleClose} color="primary">
-            Schedule
+            Add To List
           </Button>
         </DialogActions>
       </Dialog>
