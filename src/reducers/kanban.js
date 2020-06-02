@@ -1,4 +1,3 @@
-import { v4 as uuid } from "uuid";
 import { UPDATE_LISTS, ADD_LIST, ADD_POST } from "../actions/types";
 
 const initialState = {
@@ -19,7 +18,10 @@ const kanbanReducer = (state = initialState, action) => {
         ...state,
         lists: {
           ...state.lists,
-          [payload.id]: payload,
+          [payload.id]: {
+            ...payload,
+            posts: [],
+          },
         },
       };
     case ADD_POST:
