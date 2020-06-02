@@ -32,6 +32,7 @@ const Callback = () => {
         console.error(err);
         push("/connect/twitter");
       });
+    // eslint-disable-next-line
   }, []);
 
   return (
