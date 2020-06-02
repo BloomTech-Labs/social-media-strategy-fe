@@ -6,40 +6,38 @@ import Kanban from "../kanban/Kanban";
 import CreateList from "../kanban/CreateList.js";
 import Scrollbars from "react-custom-scrollbars";
 
-const useStyles = makeStyles(theme => ({
+const useStyles = makeStyles((theme) => ({
   root: {
     backgroundColor: theme.palette.background.secondary,
-    position: 'relative',
-    [theme.breakpoints.down('xs')]: {
+    position: "relative",
+    [theme.breakpoints.down("xs")]: {
       height: `calc(100vh - ${theme.navbar.height.small})`,
-      maxHeight: `calc(100vh - ${theme.navbar.height.small})`
+      maxHeight: `calc(100vh - ${theme.navbar.height.small})`,
     },
-    [theme.breakpoints.up('xs')]: {
+    [theme.breakpoints.up("xs")]: {
       height: `calc(100vh - ${theme.navbar.height.normal})`,
-      maxHeight: `calc(100vh - ${theme.navbar.height.normal})`
+      maxHeight: `calc(100vh - ${theme.navbar.height.normal})`,
     },
-    overflow: 'hidden'
+    overflow: "hidden",
   },
   topContainer: {
     height: theme.kanban.topContainer.height,
-    display: 'flex',
-
+    display: "flex",
   },
   header: {
     color: theme.palette.text.secondary,
     margin: theme.spacing(2),
-    width: '100%',
-    textAlign: 'center'
+    width: "100%",
+    textAlign: "center",
   },
   scrollbar: {
-    [theme.breakpoints.down('xs')]: {
-      height: `calc(100vh - ${theme.navbar.height.small} - ${theme.kanban.topContainer.height}) !important`
+    [theme.breakpoints.down("xs")]: {
+      height: `calc(100vh - ${theme.navbar.height.small} - ${theme.kanban.topContainer.height}) !important`,
     },
-    [theme.breakpoints.up('xs')]: {
-      height: `calc(100vh - ${theme.navbar.height.normal} - ${theme.kanban.topContainer.height}) !important`
+    [theme.breakpoints.up("xs")]: {
+      height: `calc(100vh - ${theme.navbar.height.normal} - ${theme.kanban.topContainer.height}) !important`,
     },
-    
-  }
+  },
 }));
 
 const MediaManager = () => {
@@ -48,7 +46,9 @@ const MediaManager = () => {
   return (
     <div className={root}>
       <div className={topContainer}>
-        <Typography variant='h4' className={header}>Media Manager</Typography>
+        <Typography variant="h4" className={header}>
+          Media Manager
+        </Typography>
         <CreateList />
       </div>
       <Scrollbars className={scrollbar}>

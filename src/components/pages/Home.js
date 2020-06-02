@@ -1,9 +1,9 @@
 import React, { useState, Fragment } from "react";
 
-import Nav from "./Nav";
-import DrawerMenu from "./DrawerMenu";
+import Nav from "../nav/Nav";
+import DrawerMenu from "../nav/DrawerMenu";
 
-import MediaManager from "./dashboard/MediaManager.js";
+import MediaManager from "../dashboard/MediaManager.js";
 
 const Home = () => {
   const [menuOpen, setMenuOpen] = useState(false);
