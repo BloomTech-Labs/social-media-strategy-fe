@@ -90,11 +90,9 @@ const Post = ({ post, index }) => {
                   <TwitterIcon className={twitterIcon} />
                   <Typography variant='caption'>{`@${user.twitter_handle}`}</Typography>
               </div>
-              { !post.posted && 
-                <div>
-                    <PostMenu post={post} />
-                </div>
-              }
+              <div>
+                  <PostMenu post={post} />
+              </div>
             </div>
             {post.post_text}
           </div>

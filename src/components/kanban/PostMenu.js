@@ -65,12 +65,14 @@ const PostMenu = ({ post }) => {
                 open={isOpen}
                 onClose={handleClose}
             >
-                <MenuItem onClick={handleEdit}>
-                    <ListItemIcon>
-                        <EditIcon fontSize="small" />
-                    </ListItemIcon>
-                    <ListItemText primary="Edit" />
-                </MenuItem>
+                { !post.posted && 
+                    <MenuItem onClick={handleEdit}>
+                        <ListItemIcon>
+                            <EditIcon fontSize="small" />
+                        </ListItemIcon>
+                        <ListItemText primary="Edit" />
+                    </MenuItem> 
+                }
                 <MenuItem onClick={handleDelete}>
                     <ListItemIcon>
                         <DeleteIcon fontSize="small" />
