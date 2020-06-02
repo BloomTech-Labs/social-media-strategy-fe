@@ -46,7 +46,7 @@ export default function CreatePost({ listId }) {
 
   return (
     <div style={{ display: "flex", justifyContent: "center" }}>
-      <AddCircleIcon color="secondary" onClick={handleClickOpen} />
+      <AddCircleIcon style={{ cursor: 'pointer' }} color="secondary" onClick={handleClickOpen} />
       <Dialog
         open={open}
         onClose={handleClose}
