@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 import { SecureRoute, LoginCallback } from "@okta/okta-react";
-import { Route, Switch, useHistory } from "react-router-dom";
+import { Route, Switch, useHistory, useLocation } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { useOktaAuth } from "@okta/okta-react";
 
@@ -17,16 +17,19 @@ function App(props) {
   const { authService } = useOktaAuth();
   const dispatch = useDispatch();
   const history = useHistory();
+  const location = useLocation();
   const user = useSelector((state) => state.user);
 
   useEffect(() => {
     console.log("App.js useEffect fired", Date.now());
+    console.log(location);
+    if (location.pathname === "/connect/twitter/callback") return;
     if (!user.initialized) {
       dispatch(initializeUser(authService, history));
       return;
     }
     // eslint-disable-next-line
-  }, [user]);
+  }, [user, location]);
 
   return (
     <Switch>
