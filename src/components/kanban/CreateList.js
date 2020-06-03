@@ -7,19 +7,19 @@ import {
   Dialog,
   DialogActions,
   DialogContent,
-  DialogTitle,
+  DialogTitle
 } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core";
 import { addList } from "../../actions";
 
-const useStyles = makeStyles((theme) => ({
+const useStyles = makeStyles(theme => ({
   container: {
     position: "absolute",
     top: theme.spacing(2),
     left: theme.spacing(2),
     display: "flex",
-    justifyContent: "center",
-  },
+    justifyContent: "center"
+  }
 }));
 
 export default function CreateList() {
@@ -36,15 +36,22 @@ export default function CreateList() {
     setOpen(false);
   };
 
-  const handleAddButton = (e) => {
+  const handleAddButton = e => {
     e.preventDefault();
 
     dispatch(addList(title));
     handleClose();
   };
 
-  const handleTextInput = (e) => {
+  const handleTextInput = e => {
     setTitle(e.currentTarget.value);
+  };
+
+  const handleEnterInput = e => {
+    if (e.keyCode === 13) {
+      dispatch(addList(title));
+      handleClose();
+    }
   };
 
   return (
@@ -56,6 +63,7 @@ export default function CreateList() {
         open={open}
         onClose={handleClose}
         aria-labelledby="form-dialog-title"
+        onKeyUp={handleEnterInput}
       >
         <DialogTitle id="form-dialog-title">Add a Topic</DialogTitle>
         <DialogContent>
