@@ -3,7 +3,7 @@ import { axiosWithAuth } from "../utils/axiosWithAuth";
 import {
   INITIALIZE_USER,
   // AUTHORIZE_TWITTER,
-  // DEAUTHORIZE_TWITTER,
+  // DISCONNECT_TWITTER,
 } from "./userActionTypes";
 
 export const initializeUser = (authService, history) => async (dispatch) => {
