@@ -20,7 +20,6 @@ const Callback = () => {
   const { push } = useHistory();
 
   useEffect(() => {
-    console.log("TwitterConnectCallback useEffect fired", Date.now());
     const { oauth_token, oauth_verifier } = queryString.parse(location.search);
     axiosWithAuth(authService)
       .post("/auth/twitter/callback", {
