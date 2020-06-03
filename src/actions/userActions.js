@@ -9,7 +9,6 @@ import {
 export const initializeUser = (authService, history) => async (dispatch) => {
   const user = await authService.getUser();
   if (!authService.getAuthState().isAuthenticated) return;
-  console.log("user", user);
   const { sub, email, twitter_handle } = user;
   await axiosWithAuth().put(`/users/${sub}`, user);
   if (!twitter_handle) history.push("/connect/twitter");
