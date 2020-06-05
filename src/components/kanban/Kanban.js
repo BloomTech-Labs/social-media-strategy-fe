@@ -13,7 +13,8 @@ import {
 
 const useStyles = makeStyles((theme) => ({
   kanban: {
-    display: "flex",
+    display: 'flex',
+    width: '100%',
     height: `calc(100vh - ${theme.kanban.topContainer.height})`,
   },
   loading: {
@@ -88,7 +89,7 @@ const Kanban = () => {
                 .map(([listId, list]) => (
                   <List key={list.id} listId={listId} list={list} />
                 ))}
-              {provided.placeholder}
+              {/* {provided.placeholder} */}
             </div>
           )}
         </Droppable>
