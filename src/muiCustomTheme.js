@@ -1,9 +1,9 @@
 import { createMuiTheme } from "@material-ui/core";
 
 const Navbar = {
-   height: {
-      small: '45px',
-      normal: '64px'
+   width: {
+      open: '225px',
+      close: '60px'
    }
 }
 
@@ -12,7 +12,9 @@ const defaultTheme = createMuiTheme();
 const theme = createMuiTheme({
     palette: {
        primary: {
-          main: '#2196F3'
+          main: '#2196F3',
+          light: '#a4caea',
+          dark: '#0e64aa'
        },
        secondary: {
          main: '#E10050'
@@ -23,9 +25,14 @@ const theme = createMuiTheme({
        }
     },
     navbar: {
-       height: {
-          small: Navbar.height.small,
-          normal: Navbar.height.normal
+       width: {
+          open: Navbar.width.open,
+          close: Navbar.width.close
+       },
+       icons: {
+          color: {
+
+          }
        }
     },
     kanban: {
@@ -39,25 +46,7 @@ const theme = createMuiTheme({
       }
     },
     overrides: {
-       MuiToolbar: {
-         regular: {
-            minHeight: '0'
-         }
-      },
-      MuiDrawer: {
-         paper: {
-            top: Navbar.height.normal,
-            [defaultTheme.breakpoints.down('xs')]: {
-               top: Navbar.height.small
-            }
-         },
-         modal: {
-            zIndex: '1000 !important'
-         },
-         paperAnchorLeft: {
-            height: 'auto'
-         }
-      },
+       
       MuiButton: {
          root: {
             textTransform: 'none',

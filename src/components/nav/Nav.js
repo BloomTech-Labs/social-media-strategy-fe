@@ -33,7 +33,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const Nav = ({ toggleMenu }) => {
+const Nav = () => {
   const classes = useStyles();
   const history = useHistory();
 
@@ -41,21 +41,9 @@ const Nav = ({ toggleMenu }) => {
     <div className={classes.root}>
       <AppBar position="static">
         <Toolbar>
-          {toggleMenu && (
-            <IconButton
-              onClick={() => toggleMenu()}
-              edge="start"
-              color="inherit"
-              aria-label="menu"
-            >
-              <MenuIcon />
-            </IconButton>
-          )}
           <Button onClick={() => history.push("/home")}>
             <img className={classes.logo} src={logo} alt="SoMe logo" />
           </Button>
-          {toggleMenu && <Search />}
-          <ProfileMenu />
         </Toolbar>
       </AppBar>
     </div>
