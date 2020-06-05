@@ -89,7 +89,7 @@ const Kanban = () => {
                 .map(([listId, list]) => (
                   <List key={list.id} listId={listId} list={list} />
                 ))}
-              {/* {provided.placeholder} */}
+              {provided.placeholder}
             </div>
           )}
         </Droppable>

@@ -11,7 +11,8 @@ const useStyles = makeStyles((theme) => ({
     backgroundColor: theme.palette.background.secondary,
     position: "relative",
     overflow: "hidden",
-    height: "100vh"
+    height: "100vh",
+    width: "100%"
   },
   topContainer: {
     height: theme.kanban.topContainer.height,
