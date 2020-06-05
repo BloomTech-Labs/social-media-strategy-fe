@@ -1,4 +1,4 @@
-import React, { useState, Fragment } from "react";
+import React from "react";
 import { makeStyles } from "@material-ui/core";
 
 import SideNav from "../nav/SideNav";
@@ -14,11 +14,6 @@ const useStyles = makeStyles(theme => ({
 
 const Home = () => {
   const { pageContainer } = useStyles();
-  const [menuOpen, setMenuOpen] = useState(false);
-
-  const toggleMenu = () => {
-    setMenuOpen(!menuOpen);
-  };
 
   return (
     <div style={{display: 'flex'}}>

@@ -7,7 +7,6 @@ import {
   ListItem,
   ListItemText,
   ListItemIcon,
-  Divider,
   makeStyles,
 } from "@material-ui/core";
 import clsx from 'clsx';
@@ -16,8 +15,6 @@ import AccountBoxIcon from "@material-ui/icons/AccountBox";
 import ExitToAppIcon from "@material-ui/icons/ExitToApp";
 import TrendingUpIcon from '@material-ui/icons/TrendingUp';
 import DashboardIcon from "@material-ui/icons/Dashboard";
-
-const drawerWidth = 240;
 
 const useStyles = makeStyles(theme => ({
   drawer: {

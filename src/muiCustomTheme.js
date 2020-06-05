@@ -7,8 +7,6 @@ const Navbar = {
    }
 }
 
-const defaultTheme = createMuiTheme();
-
 const theme = createMuiTheme({
     palette: {
        primary: {

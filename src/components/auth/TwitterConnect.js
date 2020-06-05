@@ -50,7 +50,6 @@ function TwitterConnect(props) {
   const { authService } = useOktaAuth();
   const [loading, setLoading] = useState(true);
   const [isConnected, setIsConnected] = useState(false);
-  const [menuOpen, setMenuOpen] = useState(false);
 
   useEffect(() => {
     (async () => {
@@ -82,8 +81,6 @@ function TwitterConnect(props) {
   return (
     <Grid container className={classes.root}>
       <SideNav />
-      {/* <Nav toggleMenu={isConnected ? toggleMenu : null} />
-      {isConnected && <DrawerMenu open={menuOpen} toggleMenu={toggleMenu} />} */}
       <Grid item className={classes.content}>
         {loading ? (
           <CircularProgress />
