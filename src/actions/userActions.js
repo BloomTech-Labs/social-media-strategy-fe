@@ -1,4 +1,4 @@
-import { axiosWithAuth } from "../utils/axiosWithAuth";
+// import { axiosWithAuth } from "../utils/axiosWithAuth";
 
 import {
   INITIALIZE_USER,
@@ -10,7 +10,6 @@ export const initializeUser = (authService, history) => async (dispatch) => {
   const user = await authService.getUser();
   if (!authService.getAuthState().isAuthenticated) return;
   const { sub, email, twitter_handle } = user;
-  await axiosWithAuth().put(`/users/${sub}`, user);
   if (!twitter_handle) history.push("/connect/twitter");
 
   dispatch({

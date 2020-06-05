@@ -1,74 +1,74 @@
-import { axiosWithAuth } from '../utils/axiosWithAuth';
-import { 
-    UPDATE_LISTS,
-    ADD_LIST,
-    ADD_POST,
-    DELETE_POST
-} from './kanbanActionTypes';
+import { axiosWithAuth } from "../utils/axiosWithAuth";
+import {
+  UPDATE_LISTS,
+  ADD_LIST,
+  ADD_POST,
+  DELETE_POST,
+} from "./kanbanActionTypes";
 
 const convertArrayToObject = (array, key) => {
-	const initialValue = {};
-	return array.reduce((obj, item) => {
-		return {
-			...obj,
-			[item[key]]: item,
-		};
-	}, initialValue);
+  const initialValue = {};
+  return array.reduce((obj, item) => {
+    return {
+      ...obj,
+      [item[key]]: item,
+    };
+  }, initialValue);
 };
 
-export const loadListsFromDb = (userId) => async dispatch => {
-    const { data } = await axiosWithAuth().get(`/users/${userId}/lists`);
+export const loadListsFromDb = (userId) => async (dispatch) => {
+  const { data } = await axiosWithAuth().get(`/lists`);
 
-    // sort lists by index
-    const sortedLists = data.sort((a, b) => a.index - b.index);
+  // sort lists by index
+  const sortedLists = data.sort((a, b) => a.index - b.index);
 
-    // load each list's posts
-    const listsPromises = sortedLists.map(async list => {
-        const res = await axiosWithAuth().get(`/lists/${list.id}/posts`);
-        
-        return {
-            ...list,
-            posts: res.data
-        }
-    });
+  // load each list's posts
+  const listsPromises = sortedLists.map(async (list) => {
+    const res = await axiosWithAuth().get(`/lists/${list.id}/posts`);
 
-    const lists = await Promise.all(listsPromises);
+    return {
+      ...list,
+      posts: res.data,
+    };
+  });
 
-    const listsObj = convertArrayToObject(lists, 'id');
-    
-    dispatch({
-        type: UPDATE_LISTS,
-        payload: listsObj
-    });
-}
+  const lists = await Promise.all(listsPromises);
 
-export const addList = (title) => async dispatch => {
-    let { data } = await axiosWithAuth().post(`/lists`, {
-        title
-    });
+  const listsObj = convertArrayToObject(lists, "id");
 
-    dispatch({
-        type: ADD_LIST,
-        payload: data
-    });
-}
+  dispatch({
+    type: UPDATE_LISTS,
+    payload: listsObj,
+  });
+};
 
-export const addPost = (post) => async dispatch => {
-    let { data } = await axiosWithAuth().post(`/posts`, post);
+export const addList = (title) => async (dispatch) => {
+  let { data } = await axiosWithAuth().post(`/lists`, {
+    title,
+  });
 
-    console.log('new post', data);
+  dispatch({
+    type: ADD_LIST,
+    payload: data,
+  });
+};
 
-    dispatch({
-        type: ADD_POST,
-        payload: data
-    });
-}
+export const addPost = (post) => async (dispatch) => {
+  let { data } = await axiosWithAuth().post(`/posts`, post);
 
-export const deletePost = (post) => async dispatch => {
-    await axiosWithAuth().delete(`/posts/${post.id}`);
+  console.log("new post", data);
 
-    dispatch({
-        type: DELETE_POST,
-        payload: post
-    });
-}
+  dispatch({
+    type: ADD_POST,
+    payload: data,
+  });
+};
+
+export const deletePost = (post) => async (dispatch) => {
+  await axiosWithAuth().delete(`/posts/${post.id}`);
+
+  dispatch({
+    type: DELETE_POST,
+    payload: post,
+  });
+};
