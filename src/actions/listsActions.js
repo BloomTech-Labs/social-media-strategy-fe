@@ -54,7 +54,8 @@ export const addList = (title) => async (dispatch) => {
 };
 
 export const addPost = (post) => async (dispatch) => {
-  let { data } = await axiosWithAuth().post(`/posts`, post);
+  const { list_id } = post;
+  let { data } = await axiosWithAuth().post(`/lists/${list_id}/posts`, post);
 
   console.log("new post", data);
 
