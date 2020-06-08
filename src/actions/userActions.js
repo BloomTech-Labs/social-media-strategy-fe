@@ -5,8 +5,12 @@ import {
 } from "./userActionTypes";
 
 export const initializeUser = (authService, history) => async (dispatch) => {
+  try {
+    var user = await authService.getUser();
+  } catch (err) {
+    console.log(err);
+  }
   if (!authService.getAuthState().isAuthenticated) return;
-  const user = await authService.getUser();
   const { sub, email, twitter_handle } = user;
   if (!twitter_handle) history.push("/connect/twitter");
 
