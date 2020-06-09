@@ -78,7 +78,7 @@ const MenuList = () => {
                 </ListItem>
                 <ListItem button onClick={() => push("/analytics")}>
                     <ListItemIcon>
-                        <TrendingUpIcon className={classes.icon} />
+                        <TrendingUpIcon className={currentPath.includes('/analytics') ? classes.selectedIcon : classes.icon} />
                     </ListItemIcon>
                     <ListItemText primary="Analytics" />
                 </ListItem>
