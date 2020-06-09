@@ -76,7 +76,7 @@ const MenuList = () => {
                     </ListItemIcon>
                     <ListItemText primary="Media Manager" />
                 </ListItem>
-                <ListItem button>
+                <ListItem button onClick={() => push("/analytics")}>
                     <ListItemIcon>
                         <TrendingUpIcon className={classes.icon} />
                     </ListItemIcon>
