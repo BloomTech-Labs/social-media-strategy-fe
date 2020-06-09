@@ -14,30 +14,30 @@ const useStyles = makeStyles(theme => ({
       flexDirection: "column"
     }
   },
-  contentContainer: {
+  content: {
     width: '100%',
+    [theme.breakpoints.up("xs")]: {
+      paddingLeft: theme.navbar.width.close,
+      height: '100vh'
+    },
     [theme.breakpoints.down("xs")]: {
       paddingLeft: '0',
       height: `calc(100vh - ${theme.navbar.height})`
     },
-    [theme.breakpoints.up("xs")]: {
-      paddingLeft: theme.navbar.width.close,
-      height: '100vh'
-    }
   }
 }));
 
 const Home = () => {
   const {
     pageContainer,
-    contentContainer
+    content
   } = useStyles();
 
   return (
     <div className={pageContainer}>
       <NavMenu />
       
-      <main className={contentContainer}>
+      <main className={content}>
         <MediaManager />
       </main>
     </div>
