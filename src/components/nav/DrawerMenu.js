@@ -12,6 +12,7 @@ import {
 import ExitToAppIcon from "@material-ui/icons/ExitToApp";
 import ListAltIcon from "@material-ui/icons/ListAlt";
 import DashboardIcon from "@material-ui/icons/Dashboard";
+import TimelineIcon from '@material-ui/icons/Timeline';
 
 const DrawerMenu = ({ open, toggleMenu }) => {
   const { authService } = useOktaAuth();
@@ -30,6 +31,12 @@ const DrawerMenu = ({ open, toggleMenu }) => {
               <DashboardIcon />
             </ListItemIcon>
             <ListItemText primary="Media Manager" />
+          </ListItem>
+          <ListItem button button onClick={() => push("/analytics")}>
+            <ListItemIcon>
+              <TimelineIcon />
+            </ListItemIcon>
+            <ListItemText primary="Analytics" />
           </ListItem>
           <ListItem button>
             <ListItemIcon>
