@@ -8,7 +8,7 @@ const Analytics = () => {
       <NavMenu />
 
       <main>
-        <h1 style={{fontFamily:"Roboto Condensed", color: "#4E4E4E", marginLeft:"10%", fontSize:"30pt"}}>Analytics</h1>
+        
         <Stats/>
       </main>
     </Fragment>
