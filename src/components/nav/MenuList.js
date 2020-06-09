@@ -6,13 +6,17 @@ import {
     List,
     ListItem,
     ListItemIcon,
-    ListItemText
+    ListItemText,
+    Button,
+    Hidden
 } from '@material-ui/core';
 // Icons
 import DashboardIcon from "@material-ui/icons/Dashboard";
 import AccountBoxIcon from "@material-ui/icons/AccountBox";
 import ExitToAppIcon from "@material-ui/icons/ExitToApp";
 import TrendingUpIcon from '@material-ui/icons/TrendingUp';
+// Img
+import logo from "../../assets/imgs/Logo-dark.svg";
 
 const useStyles = makeStyles(theme => ({
     icon: {
@@ -23,6 +27,16 @@ const useStyles = makeStyles(theme => ({
     },
     logoutIcon: {
       color: theme.palette.primary.main
+    },
+    logoButton: {
+        paddingTop: theme.spacing(2),
+        paddingBottom: theme.spacing(2),
+        display: 'flex',
+        justifyContent: 'center',
+        maxWidth: '100%'
+    },
+    logo: {
+        maxWidth: '50px'
     }
 }));
 
@@ -44,6 +58,11 @@ const MenuList = () => {
 
     return (
         <>
+            <Hidden xsDown>
+                <Button className={classes.logoButton} onClick={() => push("/home")}>
+                    <img className={classes.logo} src={logo} alt="SoMe logo" />
+                </Button>
+            </Hidden>
             <List aria-label="Menu">
                 <ListItem button onClick={() => push("/home")}>
                     <ListItemIcon>

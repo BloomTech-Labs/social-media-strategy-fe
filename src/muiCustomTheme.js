@@ -63,7 +63,8 @@ const theme = createMuiTheme({
       MuiButton: {
          root: {
             textTransform: 'none',
-            fontWeight: '600'
+            fontWeight: '600',
+            minWidth: Navbar.width.close
          }
       },
       MuiTypography: {
