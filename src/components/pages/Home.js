@@ -1,26 +1,46 @@
-import React, { useState, Fragment } from "react";
+import React from "react";
+import { makeStyles } from "@material-ui/core";
 
-import Nav from "../nav/Nav";
-import DrawerMenu from "../nav/DrawerMenu";
-
+import NavMenu from "../nav/NavMenu";
 import MediaManager from "../dashboard/MediaManager.js";
 
+const useStyles = makeStyles(theme => ({
+  pageContainer: {
+    display: "flex",
+    [theme.breakpoints.down("xs")]: {
+      flexDirection: "row"
+    },
+    [theme.breakpoints.up("xs")]: {
+      flexDirection: "column"
+    }
+  },
+  content: {
+    width: '100%',
+    [theme.breakpoints.up("xs")]: {
+      paddingLeft: theme.navbar.width.close,
+      height: '100vh'
+    },
+    [theme.breakpoints.down("xs")]: {
+      paddingLeft: '0',
+      height: `calc(100vh - ${theme.navbar.height})`
+    },
+  }
+}));
 
 const Home = () => {
-  const [menuOpen, setMenuOpen] = useState(false);
-  const toggleMenu = () => {
-    setMenuOpen(!menuOpen);
-  };
+  const {
+    pageContainer,
+    content
+  } = useStyles();
 
   return (
-    <Fragment>
-      <Nav toggleMenu={toggleMenu} />
-      <DrawerMenu open={menuOpen} toggleMenu={toggleMenu} />
-
-      <main>
+    <div className={pageContainer}>
+      <NavMenu />
+      
+      <main className={content}>
         <MediaManager />
       </main>
-    </Fragment>
+    </div>
   );
 };
 

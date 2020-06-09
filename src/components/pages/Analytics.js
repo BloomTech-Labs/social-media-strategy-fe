@@ -1,18 +1,11 @@
-import React, { useState, Fragment } from "react";
+import React, { Fragment } from "react";
 
-import Nav from "../nav/Nav";
-import DrawerMenu from "../nav/DrawerMenu";
+import NavMenu from "../nav/NavMenu";
 
 const Analytics = () => {
-  const [menuOpen, setMenuOpen] = useState(false);
-  const toggleMenu = () => {
-    setMenuOpen(!menuOpen);
-  };
-
   return (
     <Fragment>
-      <Nav toggleMenu={toggleMenu} />
-      <DrawerMenu open={menuOpen} toggleMenu={toggleMenu} />
+      <NavMenu />
 
       <main>
         <h1>Analytics</h1>
