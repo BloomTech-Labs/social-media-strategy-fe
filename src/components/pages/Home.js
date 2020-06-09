@@ -1,25 +1,43 @@
 import React from "react";
-import { makeStyles } from "@material-ui/core";
+import { makeStyles, Hidden } from "@material-ui/core";
 
-import SideNav from "../nav/SideNav";
+import NavMenu from "../nav/NavMenu";
 import MediaManager from "../dashboard/MediaManager.js";
 
 const useStyles = makeStyles(theme => ({
   pageContainer: {
+    display: "flex",
+    [theme.breakpoints.down("xs")]: {
+      flexDirection: "row"
+    },
+    [theme.breakpoints.up("xs")]: {
+      flexDirection: "column"
+    }
+  },
+  contentContainer: {
     width: '100%',
-    height: '100vh',
-    paddingLeft: theme.navbar.width.close
+    [theme.breakpoints.down("xs")]: {
+      paddingLeft: '0',
+      height: `calc(100vh - ${theme.navbar.height})`
+    },
+    [theme.breakpoints.up("xs")]: {
+      paddingLeft: theme.navbar.width.close,
+      height: '100vh'
+    }
   }
 }));
 
 const Home = () => {
-  const { pageContainer } = useStyles();
+  const {
+    pageContainer,
+    contentContainer
+  } = useStyles();
 
   return (
-    <div style={{display: 'flex'}}>
-      <SideNav />
-
-      <main className={pageContainer}>
+    <div className={pageContainer}>
+      <NavMenu />
+      
+      <main className={contentContainer}>
         <MediaManager />
       </main>
     </div>

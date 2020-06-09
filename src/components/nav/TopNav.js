@@ -9,7 +9,7 @@ import MenuIcon from "@material-ui/icons/Menu";
 import Search from "./Search";
 import ProfileMenu from "./ProfileMenu";
 // Img
-import logo from "../../assets/imgs/somelogo.svg";
+import logo from "../../assets/imgs/Logo-dark.svg";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -17,30 +17,28 @@ const useStyles = makeStyles((theme) => ({
     width: "100%",
     display: "grid",
     zIndex: "1100",
-    [theme.breakpoints.up("xs")]: {
-      height: theme.navbar.height.normal,
-    },
-    [theme.breakpoints.down("xs")]: {
-      height: theme.navbar.height.small,
-      minHeight: theme.navbar.height.small,
-    },
+    height: theme.navbar.height
   },
   logo: {
-    height: "30px",
-    [theme.breakpoints.down("xs")]: {
-      height: "20px",
-    },
-  },
+    height: "20px"
+  }
 }));
 
-const Nav = () => {
+const TopNav = ({ toggleMenu }) => {
   const classes = useStyles();
   const history = useHistory();
 
   return (
     <div className={classes.root}>
-      <AppBar position="static">
+      <AppBar position="static" color="#FFF">
         <Toolbar>
+          <IconButton
+            onClick={() => toggleMenu()}
+            edge="start"
+            aria-label="menu"
+          >
+            <MenuIcon />
+          </IconButton>
           <Button onClick={() => history.push("/home")}>
             <img className={classes.logo} src={logo} alt="SoMe logo" />
           </Button>
@@ -50,4 +48,4 @@ const Nav = () => {
   );
 };
 
-export default Nav;
+export default TopNav;

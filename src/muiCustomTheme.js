@@ -4,8 +4,12 @@ const Navbar = {
    width: {
       open: '225px',
       close: '60px'
-   }
+   },
+   // for small screens
+   height: '55px'
 }
+
+const defaultTheme = createMuiTheme();
 
 const theme = createMuiTheme({
     palette: {
@@ -27,11 +31,7 @@ const theme = createMuiTheme({
           open: Navbar.width.open,
           close: Navbar.width.close
        },
-       icons: {
-          color: {
-
-          }
-       }
+       height: Navbar.height
     },
     kanban: {
       topContainer: {
@@ -44,7 +44,22 @@ const theme = createMuiTheme({
       }
     },
     overrides: {
-       
+      MuiDrawer: {
+         paper: {
+            top: 0,
+            [defaultTheme.breakpoints.down('xs')]: {
+               top: Navbar.height
+            }
+         },
+         modal: {
+            zIndex: '1000 !important'
+         },
+      },
+      MuiAppBar: {
+         root: {
+            boxShadow: '0px 0px 1px -1px rgba(0,0,0,0.2), 0px 0px 1px 0px rgba(0,0,0,0.14), 0px 1px 10px 0px rgba(0,0,0,0.12) !important'
+         }
+      },
       MuiButton: {
          root: {
             textTransform: 'none',

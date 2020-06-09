@@ -4,7 +4,7 @@ import { axiosWithAuth } from "../../utils/axiosWithAuth";
 // Components
 // import Nav from "../nav/Nav";
 // import DrawerMenu from "../nav/DrawerMenu";
-import SideNav from "../nav/SideNav";
+import NavMenu from "../nav/NavMenu";
 // Image
 import twitterLogo from "../../assets/imgs/twitter-logo.svg";
 // Material-UI
@@ -80,7 +80,7 @@ function TwitterConnect(props) {
 
   return (
     <Grid container className={classes.root}>
-      <SideNav />
+      <NavMenu />
       <Grid item className={classes.content}>
         {loading ? (
           <CircularProgress />
