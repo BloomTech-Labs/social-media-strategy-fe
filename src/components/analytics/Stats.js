@@ -49,7 +49,7 @@ export default function Stats() {
         <div style={{display: "flex", justifyContent:"space-evenly" }}>
         <Card className={classes.root}>
             <CardContent className={classes.card}>
-                <PersonAddIcon style={{color: "green", width: "100%"}}/>
+                <PersonAddIcon style={{color: "limegreen", width: "100%"}}/>
                 <Typography className={classes.number}>1.5K</Typography>
                 <Typography className={classes.stat}>Followers</Typography>
                 <div className={classes.change}>
@@ -60,7 +60,7 @@ export default function Stats() {
         </Card>
         <Card className={classes.root}>
             <CardContent className={classes.card}>
-                <RepeatIcon style={{color: "magenta", width: "100%"}}/>
+                <RepeatIcon style={{color: "deeppink", width: "100%"}}/>
                 <Typography className={classes.number}>1.8K</Typography>
                 <Typography className={classes.stat}>Retweets</Typography>
                 <div className={classes.change}>
@@ -71,7 +71,7 @@ export default function Stats() {
         </Card>
         <Card className={classes.root}>
             <CardContent className={classes.card}>
-                <ReplyIcon style={{color: "blue", width: "100%"}}/>
+                <ReplyIcon style={{color: "royalblue", width: "100%"}}/>
                 <Typography className={classes.number}>3.6K</Typography>
                 <Typography className={classes.stat}>Replies</Typography>
                 <div className={classes.change}>
@@ -83,7 +83,7 @@ export default function Stats() {
         <Card className={classes.root}>
             <CardContent className={classes.card}>
                 
-                    <ThumbsUpDownIcon style={{color:"red", width: "100%"}}/>
+                    <ThumbsUpDownIcon style={{color:"blueviolet", width: "100%"}}/>
 
                 <Typography className={classes.number}>20K</Typography>
                 <Typography className={classes.stat}>Engagement</Typography>
