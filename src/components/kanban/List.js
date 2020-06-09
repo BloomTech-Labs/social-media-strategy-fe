@@ -12,8 +12,8 @@ const useStyles = makeStyles((theme) => ({
     height: "fit-content",
     marginLeft: theme.spacing(2),
     marginRight: theme.spacing(2),
-    width: "300px",
-    minWidth: "300px",
+    width: "290px",
+    minWidth: "290px",
   },
   header: {
     paddingLeft: theme.spacing(2),
@@ -26,9 +26,7 @@ const useStyles = makeStyles((theme) => ({
   },
   postsContainer: {
     overflow: "hidden",
-    height: `calc(100vh - ${theme.navbar.height.normal} - ${
-      theme.kanban.topContainer.height
-    } - ${theme.kanban.list.header.height} - ${theme.spacing(2)}px) !important`,
+    height: `calc(100vh - ${theme.kanban.topContainer.height} - ${theme.kanban.list.header.height} - ${theme.spacing(2)}px) !important`,
   },
 }));
 
