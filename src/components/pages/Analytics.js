@@ -16,7 +16,7 @@ const Analytics = () => {
       <DrawerMenu open={menuOpen} toggleMenu={toggleMenu} />
 
       <main>
-        <h1 style={{fontFamily:"Roboto-Condensed", color: "#4E4E4E", marginLeft:"7%"}}>Analytics</h1>
+        <h1 style={{fontFamily:"Roboto Condensed", color: "#4E4E4E", marginLeft:"6%", fontSize:"30pt"}}>Analytics</h1>
         <Stats/>
       </main>
     </Fragment>

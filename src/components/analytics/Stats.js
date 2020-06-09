@@ -8,6 +8,8 @@ import PersonAddIcon from '@material-ui/icons/PersonAdd';
 import RepeatIcon from '@material-ui/icons/Repeat';
 import TouchAppIcon from '@material-ui/icons/TouchApp';
 import ThumbsUpDownIcon from '@material-ui/icons/ThumbsUpDown';
+import ArrowDropUpIcon from '@material-ui/icons/ArrowDropUp';
+import ArrowDropDownIcon from '@material-ui/icons/ArrowDropDown';
 
 const useStyles = makeStyles({
     root: {
@@ -22,11 +24,22 @@ const useStyles = makeStyles({
         flexWrap: "wrap",
     },
     number: {
-        fontSize:"50pt", 
+        fontSize:"55pt", 
         fontWeight: "bold",
-        color: "#4E4E4E",
+        color: "#rgb(50,50,50)",
         width: "100%",
         textAlign: "center",
+    },
+    stat: {
+        width: "100%",
+        textAlign: "center",
+        fontSize: "14pt",
+        fontWeight: "bold",
+        color: "#4E4E4E",
+    },
+    change: {
+        display: "flex",
+        justifyContent: "center",
     }
   });
 
@@ -38,21 +51,33 @@ export default function Stats() {
             <CardContent className={classes.card}>
                 <PersonAddIcon style={{color: "green", width: "100%"}}/>
                 <Typography className={classes.number}>1.5K</Typography>
-                <Typography>Followers</Typography>
+                <Typography className={classes.stat}>Followers</Typography>
+                <div className={classes.change}>
+                    <ArrowDropUpIcon style={{color:"green"}}/>
+                    <Typography style={{fontSize:"14pt", color:'green'}}>14.1%</Typography>
+                </div>
             </CardContent>
         </Card>
         <Card className={classes.root}>
             <CardContent className={classes.card}>
                 <RepeatIcon style={{color: "magenta", width: "100%"}}/>
                 <Typography className={classes.number}>1.8K</Typography>
-                <Typography>Retweets</Typography>
+                <Typography className={classes.stat}>Retweets</Typography>
+                <div className={classes.change}>
+                    <ArrowDropDownIcon style={{color:"red"}}/>
+                    <Typography style={{fontSize:"14pt", color:'red'}}>1.1%</Typography>
+                </div>
             </CardContent>
         </Card>
         <Card className={classes.root}>
             <CardContent className={classes.card}>
                 <TouchAppIcon style={{color: "blue", width: "100%"}}/>
                 <Typography className={classes.number}>3.6K</Typography>
-                <Typography>Impressions</Typography>
+                <Typography className={classes.stat}>Impressions</Typography>
+                <div className={classes.change}>
+                    <ArrowDropUpIcon style={{color:"green"}}/>
+                    <Typography style={{fontSize:"14pt", color:'green'}}>4.4%</Typography>
+                </div>
             </CardContent>
         </Card>
         <Card className={classes.root}>
@@ -61,7 +86,11 @@ export default function Stats() {
                     <ThumbsUpDownIcon style={{color:"red", width: "100%"}}/>
 
                 <Typography className={classes.number}>20K</Typography>
-                <Typography>Engagement</Typography>
+                <Typography className={classes.stat}>Engagement</Typography>
+                <div className={classes.change}>
+                    <ArrowDropUpIcon style={{color:"green"}}/>
+                    <Typography style={{fontSize:"14pt", color:'green'}}>6.8%</Typography>
+                </div>
             </CardContent>
         </Card>
         </div>
