@@ -2,6 +2,7 @@ import React, { useState, Fragment } from "react";
 
 import Nav from "../nav/Nav";
 import DrawerMenu from "../nav/DrawerMenu";
+import Stats from "../analytics/Stats";
 
 const Analytics = () => {
   const [menuOpen, setMenuOpen] = useState(false);
@@ -15,7 +16,8 @@ const Analytics = () => {
       <DrawerMenu open={menuOpen} toggleMenu={toggleMenu} />
 
       <main>
-        <h1>Analytics</h1>
+        <h1 style={{fontFamily:"Roboto-Condensed", color: "#4E4E4E", marginLeft:"4%"}}>Analytics</h1>
+        <Stats/>
       </main>
     </Fragment>
   );
