@@ -6,10 +6,8 @@ import Typography from '@material-ui/core/Typography';
 
 import PersonAddIcon from '@material-ui/icons/PersonAdd';
 import RepeatIcon from '@material-ui/icons/Repeat';
-import ReplyIcon from '@material-ui/icons/Reply';
 import ThumbsUpDownIcon from '@material-ui/icons/ThumbsUpDown';
-import ArrowDropUpIcon from '@material-ui/icons/ArrowDropUp';
-import ArrowDropDownIcon from '@material-ui/icons/ArrowDropDown';
+import FavoriteIcon from '@material-ui/icons/Favorite';
 
 const useStyles = makeStyles({
     root: {
@@ -63,9 +61,9 @@ export default function Stats() {
         </Card>
         <Card className={classes.root}>
             <CardContent className={classes.card}>
-                <ReplyIcon style={{color: "royalblue", width: "100%"}}/>
+                <FavoriteIcon style={{color: "red", width: "100%"}}/>
                 <Typography className={classes.number}>3.6K</Typography>
-                <Typography className={classes.stat}>Replies</Typography>
+                <Typography className={classes.stat}>Favorites</Typography>
             </CardContent>
         </Card>
         <Card className={classes.root}>
