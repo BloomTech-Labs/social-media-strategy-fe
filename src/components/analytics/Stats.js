@@ -54,7 +54,7 @@ export default function Stats() {
         </Card>
         <Card className={classes.root}>
             <CardContent className={classes.card}>
-                <RepeatIcon style={{color: "deeppink", width: "100%"}}/>
+                <RepeatIcon style={{color: "royalblue", width: "100%"}}/>
                 <Typography className={classes.number}>1.8K</Typography>
                 <Typography className={classes.stat}>Retweets</Typography>
             </CardContent>
