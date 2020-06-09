@@ -10,6 +10,7 @@ import Landing from "./components/pages/Landing";
 import LoginOkta from "./components/auth/LoginOkta";
 import ConnectAccounts from "./components/auth/ConnectAccounts";
 import Home from "./components/pages/Home";
+import Analytics from "./components/pages/Analytics";
 
 import "./sass/index.scss";
 
@@ -36,6 +37,7 @@ function App(props) {
       <Route exact path="/" component={Landing} />
       <Route exact path="/login" component={LoginOkta} />
       <SecureRoute path="/home" component={Home} />
+      <SecureRoute path="/analytics" component={Analytics} />
       <SecureRoute path="/connect" component={ConnectAccounts} />
       <Route path="/implicit/callback" component={LoginCallback} />
     </Switch>

@@ -3,10 +3,7 @@ import React, { useState, Fragment } from "react";
 import Nav from "../nav/Nav";
 import DrawerMenu from "../nav/DrawerMenu";
 
-import MediaManager from "../dashboard/MediaManager.js";
-
-
-const Home = () => {
+const Analytics = () => {
   const [menuOpen, setMenuOpen] = useState(false);
   const toggleMenu = () => {
     setMenuOpen(!menuOpen);
@@ -18,10 +15,10 @@ const Home = () => {
       <DrawerMenu open={menuOpen} toggleMenu={toggleMenu} />
 
       <main>
-        <MediaManager />
+        <h1>Analytics</h1>
       </main>
     </Fragment>
   );
 };
 
-export default React.memo(Home);
+export default React.memo(Analytics);
