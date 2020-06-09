@@ -52,10 +52,6 @@ export default function Stats() {
                 <PersonAddIcon style={{color: "limegreen", width: "100%"}}/>
                 <Typography className={classes.number}>1.5K</Typography>
                 <Typography className={classes.stat}>Followers</Typography>
-                <div className={classes.change}>
-                    <ArrowDropUpIcon style={{color:"green"}}/>
-                    <Typography style={{fontSize:"14pt", color:'green'}}>14.1%</Typography>
-                </div>
             </CardContent>
         </Card>
         <Card className={classes.root}>
@@ -63,10 +59,6 @@ export default function Stats() {
                 <RepeatIcon style={{color: "deeppink", width: "100%"}}/>
                 <Typography className={classes.number}>1.8K</Typography>
                 <Typography className={classes.stat}>Retweets</Typography>
-                <div className={classes.change}>
-                    <ArrowDropDownIcon style={{color:"red"}}/>
-                    <Typography style={{fontSize:"14pt", color:'red'}}>1.1%</Typography>
-                </div>
             </CardContent>
         </Card>
         <Card className={classes.root}>
@@ -74,10 +66,6 @@ export default function Stats() {
                 <ReplyIcon style={{color: "royalblue", width: "100%"}}/>
                 <Typography className={classes.number}>3.6K</Typography>
                 <Typography className={classes.stat}>Replies</Typography>
-                <div className={classes.change}>
-                    <ArrowDropUpIcon style={{color:"green"}}/>
-                    <Typography style={{fontSize:"14pt", color:'green'}}>4.4%</Typography>
-                </div>
             </CardContent>
         </Card>
         <Card className={classes.root}>
@@ -87,10 +75,6 @@ export default function Stats() {
 
                 <Typography className={classes.number}>20K</Typography>
                 <Typography className={classes.stat}>Engagement</Typography>
-                <div className={classes.change}>
-                    <ArrowDropUpIcon style={{color:"green"}}/>
-                    <Typography style={{fontSize:"14pt", color:'green'}}>6.8%</Typography>
-                </div>
             </CardContent>
         </Card>
         </div>
