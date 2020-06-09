@@ -10,15 +10,9 @@ const useStyles = makeStyles((theme) => ({
   root: {
     backgroundColor: theme.palette.background.secondary,
     position: "relative",
-    [theme.breakpoints.down("xs")]: {
-      height: `calc(100vh - ${theme.navbar.height.small})`,
-      maxHeight: `calc(100vh - ${theme.navbar.height.small})`,
-    },
-    [theme.breakpoints.up("xs")]: {
-      height: `calc(100vh - ${theme.navbar.height.normal})`,
-      maxHeight: `calc(100vh - ${theme.navbar.height.normal})`,
-    },
     overflow: "hidden",
+    height: "100vh",
+    width: "100%"
   },
   topContainer: {
     height: theme.kanban.topContainer.height,
@@ -30,18 +24,13 @@ const useStyles = makeStyles((theme) => ({
     width: "100%",
     textAlign: "center",
   },
-  scrollbar: {
-    [theme.breakpoints.down("xs")]: {
-      height: `calc(100vh - ${theme.navbar.height.small} - ${theme.kanban.topContainer.height}) !important`,
-    },
-    [theme.breakpoints.up("xs")]: {
-      height: `calc(100vh - ${theme.navbar.height.normal} - ${theme.kanban.topContainer.height}) !important`,
-    },
+  scrollbarContainer: {
+    height: `calc(100vh - ${theme.kanban.topContainer.height})`
   },
 }));
 
 const MediaManager = () => {
-  const { root, header, scrollbar, topContainer } = useStyles();
+  const { root, header, scrollbarContainer, topContainer } = useStyles();
 
   return (
     <div className={root}>
@@ -51,9 +40,11 @@ const MediaManager = () => {
         </Typography>
         <CreateList />
       </div>
-      <Scrollbars className={scrollbar}>
-        <Kanban />
-      </Scrollbars>
+      <div className={scrollbarContainer}>
+        <Scrollbars>
+          <Kanban />
+        </Scrollbars>
+      </div>
     </div>
   );
 };

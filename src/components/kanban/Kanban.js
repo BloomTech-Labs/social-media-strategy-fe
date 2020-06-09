@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { DragDropContext, Droppable } from "react-beautiful-dnd";
-import { makeStyles } from "@material-ui/core";
+import { makeStyles, CircularProgress } from "@material-ui/core";
 
 import List from "./List";
 import { loadListsFromDb } from "../../actions/listsActions";
@@ -13,16 +13,24 @@ import {
 
 const useStyles = makeStyles((theme) => ({
   kanban: {
-    display: "flex",
-    height: "calc(100vh - 170px)",
+    display: 'flex',
+    width: '100%',
+    height: `calc(100vh - ${theme.kanban.topContainer.height})`,
   },
+  loading: {
+    width: '100%',
+    height: '100%',
+    display: 'flex',
+    justifyContent: 'center',
+    alignItems: 'center'
+  }
 }));
 
 const Kanban = () => {
   const { lists } = useSelector((state) => state.kanban);
   const user = useSelector((state) => state.user);
 
-  const { kanban } = useStyles();
+  const { kanban, loading } = useStyles();
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -63,7 +71,7 @@ const Kanban = () => {
   };
 
   return (
-    lists && (
+    lists ? (
       <DragDropContext onDragEnd={onDragEnd}>
         <Droppable
           direction="horizontal"
@@ -87,6 +95,10 @@ const Kanban = () => {
         </Droppable>
       </DragDropContext>
     )
+  :
+    <div className={loading}>
+      <CircularProgress />
+    </div>
   );
 };
 export default Kanban;
