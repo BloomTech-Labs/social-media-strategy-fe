@@ -73,7 +73,7 @@ export default function Stats() {
                 
                     <ThumbsUpDownIcon style={{color:"blueviolet", width: "100%"}}/>
 
-                <Typography className={classes.number}>20K</Typography>
+                <Typography className={classes.number}>65%</Typography>
                 <Typography className={classes.stat}>Engagement</Typography>
             </CardContent>
         </Card>
