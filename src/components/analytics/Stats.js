@@ -11,7 +11,7 @@ import FavoriteIcon from '@material-ui/icons/Favorite';
 
 const useStyles = makeStyles({
     root: {
-      width: 250,
+      width: 200,
     },
     title: {
       fontSize: 14,
@@ -22,7 +22,7 @@ const useStyles = makeStyles({
         flexWrap: "wrap",
     },
     number: {
-        fontSize:"55pt", 
+        fontSize:"35pt", 
         fontWeight: "bold",
         color: "#rgb(50,50,50)",
         width: "100%",
