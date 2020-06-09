@@ -1,11 +1,8 @@
-import React, { useState, useEffect } from "react";
-import { useHistory, useLocation } from "react-router";
-import { useOktaAuth } from "@okta/okta-react";
+import React, { useState } from "react";
 import TopNav from "./TopNav";
 import MenuList from "./MenuList";
 import {
   Drawer,
-  ListItemIcon,
   makeStyles,
   Hidden
 } from "@material-ui/core";

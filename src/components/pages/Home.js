@@ -1,5 +1,5 @@
 import React from "react";
-import { makeStyles, Hidden } from "@material-ui/core";
+import { makeStyles } from "@material-ui/core";
 
 import NavMenu from "../nav/NavMenu";
 import MediaManager from "../dashboard/MediaManager.js";

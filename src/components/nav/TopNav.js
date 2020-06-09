@@ -16,6 +16,9 @@ const useStyles = makeStyles((theme) => ({
     zIndex: "1100",
     height: theme.navbar.height
   },
+  navbar: {
+    backgroundColor: '#FFF'
+  },
   logo: {
     height: "20px"
   }
@@ -27,7 +30,7 @@ const TopNav = ({ toggleMenu }) => {
 
   return (
     <div className={classes.root}>
-      <AppBar position="static" color="#FFF">
+      <AppBar position="static" className={classes.navbar}>
         <Toolbar>
           <IconButton
             onClick={() => toggleMenu()}

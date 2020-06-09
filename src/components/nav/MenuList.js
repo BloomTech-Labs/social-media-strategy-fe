@@ -15,6 +15,7 @@ import DashboardIcon from "@material-ui/icons/Dashboard";
 import AccountBoxIcon from "@material-ui/icons/AccountBox";
 import ExitToAppIcon from "@material-ui/icons/ExitToApp";
 import TrendingUpIcon from '@material-ui/icons/TrendingUp';
+import AddCircleIcon from '@material-ui/icons/AddCircle';
 // Img
 import logo from "../../assets/imgs/Logo-dark.svg";
 
@@ -24,9 +25,6 @@ const useStyles = makeStyles(theme => ({
     },
     selectedIcon: {
       color: theme.palette.primary.dark
-    },
-    logoutIcon: {
-      color: theme.palette.primary.main
     },
     logoButton: {
         paddingTop: theme.spacing(2),
@@ -63,6 +61,14 @@ const MenuList = () => {
                     <img className={classes.logo} src={logo} alt="SoMe logo" />
                 </Button>
             </Hidden>
+            <List>
+                <ListItem button onClick={() => console.log('render create post modal')}>
+                    <ListItemIcon>
+                        <AddCircleIcon color="primary" />
+                    </ListItemIcon>
+                    <ListItemText primary="Add post" />
+                </ListItem>
+            </List>
             <List aria-label="Menu">
                 <ListItem button onClick={() => push("/home")}>
                     <ListItemIcon>
@@ -86,7 +92,7 @@ const MenuList = () => {
             <List>
                 <ListItem button onClick={logout}>
                     <ListItemIcon>
-                        <ExitToAppIcon className={classes.logoutIcon} />
+                        <ExitToAppIcon color="primary" />
                     </ListItemIcon>
                     <ListItemText primary="Logout" />
                 </ListItem>
