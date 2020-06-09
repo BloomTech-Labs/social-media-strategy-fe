@@ -6,7 +6,7 @@ import Typography from '@material-ui/core/Typography';
 
 import PersonAddIcon from '@material-ui/icons/PersonAdd';
 import RepeatIcon from '@material-ui/icons/Repeat';
-import TouchAppIcon from '@material-ui/icons/TouchApp';
+import ReplyIcon from '@material-ui/icons/Reply';
 import ThumbsUpDownIcon from '@material-ui/icons/ThumbsUpDown';
 import ArrowDropUpIcon from '@material-ui/icons/ArrowDropUp';
 import ArrowDropDownIcon from '@material-ui/icons/ArrowDropDown';
@@ -71,9 +71,9 @@ export default function Stats() {
         </Card>
         <Card className={classes.root}>
             <CardContent className={classes.card}>
-                <TouchAppIcon style={{color: "blue", width: "100%"}}/>
+                <ReplyIcon style={{color: "blue", width: "100%"}}/>
                 <Typography className={classes.number}>3.6K</Typography>
-                <Typography className={classes.stat}>Impressions</Typography>
+                <Typography className={classes.stat}>Replies</Typography>
                 <div className={classes.change}>
                     <ArrowDropUpIcon style={{color:"green"}}/>
                     <Typography style={{fontSize:"14pt", color:'green'}}>4.4%</Typography>
