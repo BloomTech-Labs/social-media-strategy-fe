@@ -82,7 +82,7 @@ const NavMenu = () => {
           onMouseEnter={() => setOpen(true)}
           onMouseLeave={closeDrawer}
         >
-          <MenuList closeDrawer={closeDrawer} /> 
+          <MenuList /> 
         </Drawer>
       </Hidden>
     </>

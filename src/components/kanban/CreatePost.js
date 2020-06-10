@@ -1,6 +1,6 @@
-import React, { useState } from "react";
-import { useDispatch } from "react-redux";
-import { addPost } from "../../actions";
+import React, { useState, useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { addPost, addList } from "../../actions";
 // Material-UI
 import {
   makeStyles,
@@ -14,6 +14,10 @@ import {
   ListItem,
   ListItemIcon,
   ListItemText,
+  InputLabel,
+  Select,
+  MenuItem,
+  FormControl
 } from "@material-ui/core";
 import AddCircleIcon from "@material-ui/icons/AddCircle";
 import AddAPhotoIcon from "@material-ui/icons/AddAPhoto";
@@ -22,20 +26,42 @@ const useStyles = makeStyles(theme => ({
   content: {
     width: '400px',
     maxWidth: '100%'
+  },
+  formControl: {
+    minWidth: 160
   }
 }));
 
-export default function CreatePost({ closeDrawer }) {
-  const { root, content } = useStyles();
+export default function CreatePost() {
+  const { lists } = useSelector(state => state.kanban);
+  const { formControl, content } = useStyles();
   const dispatch = useDispatch();
+  
   const [isOpen, setIsOpen] = useState(false);
   const [post, setPost] = useState({
     list_id: "",
     post_text: ""
   });
 
+  useEffect(() => {
+    if (lists) {
+      const drafts = Object.values(lists).find(list => list.title === 'Drafts');
+
+      if (!drafts) {
+        // create Drafts list
+        console.log('create drafts list');
+        dispatch(addList('Drafts'));
+      } else {
+        // set Drafts as default list
+        setPost(prevPost => ({
+          ...prevPost,
+          list_id: drafts.id
+        }));
+      }
+    }
+  }, [lists]);
+
   const handleClickOpen = () => {
-    closeDrawer();
     setIsOpen(true);
   };
 
@@ -50,6 +76,15 @@ export default function CreatePost({ closeDrawer }) {
       [target.id]: target.value
     }));
   };
+
+  const handleListChange = e => {
+    const target = e.target;
+
+    setPost(prevPost => ({
+      ...prevPost,
+      list_id: target.value
+    }));
+  }
 
   const handleAddButton = e => {
     e.preventDefault();
@@ -75,25 +110,42 @@ export default function CreatePost({ closeDrawer }) {
         </ListItem>
       </List>
       <Dialog
-        className={root}
         open={isOpen}
         onClose={handleClose}
         aria-labelledby="form-dialog-title"
         onKeyUp={handleEnterInput}
       >
-        <DialogTitle id="form-dialog-title">Add a Tweet</DialogTitle>
+        <DialogTitle id="form-dialog-title">Add a Post</DialogTitle>
         <DialogContent className={content}>
+          {/* Post text */}
           <TextField
             autoFocus
             margin="dense"
             id="post_text"
-            label="Tweet"
+            label="Post text"
             fullWidth
             multiline
             rows={4}
             variant="outlined"
             onChange={handleTextInput}
           />
+
+        {/* List Select */}
+        <FormControl className={formControl}>
+          <InputLabel id="list_label">Category</InputLabel>
+          <Select
+            labelId="list_label"
+            id="list_select"
+            value={post.list_id}
+            onChange={handleListChange}
+          >
+            {lists && Object.values(lists).map(list => {
+              return (
+                <MenuItem key={list.id} value={list.id}>{list.title}</MenuItem>
+              )
+            })}
+          </Select>
+        </FormControl>
 
           {/* Image upload */}
           <input

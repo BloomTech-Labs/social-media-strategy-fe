@@ -40,7 +40,7 @@ const useStyles = makeStyles(theme => ({
     }
 }));
 
-const MenuList = ({ closeDrawer }) => {
+const MenuList = () => {
     const classes = useStyles();
     const location = useLocation();
     const { push } = useHistory();
@@ -57,7 +57,7 @@ const MenuList = ({ closeDrawer }) => {
                     <img className={classes.logo} src={logo} alt="SoMe logo" />
                 </Button>
             </Hidden>
-            <CreatePost closeDrawer={closeDrawer} />
+            <CreatePost />
             <List aria-label="Menu">
                 <ListItem button onClick={() => push("/home")}>
                     <ListItemIcon>
