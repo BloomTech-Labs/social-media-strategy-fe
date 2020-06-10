@@ -3,6 +3,7 @@ import { useDispatch } from "react-redux";
 import { addPost } from "../../actions";
 // Material-UI
 import {
+  makeStyles,
   Button,
   TextField,
   Dialog,
@@ -17,7 +18,15 @@ import {
 import AddCircleIcon from "@material-ui/icons/AddCircle";
 import AddAPhotoIcon from "@material-ui/icons/AddAPhoto";
 
+const useStyles = makeStyles(theme => ({
+  content: {
+    width: '400px',
+    maxWidth: '100%'
+  }
+}));
+
 export default function CreatePost({ closeDrawer }) {
+  const { root, content } = useStyles();
   const dispatch = useDispatch();
   const [isOpen, setIsOpen] = useState(false);
   const [post, setPost] = useState({
@@ -66,13 +75,14 @@ export default function CreatePost({ closeDrawer }) {
         </ListItem>
       </List>
       <Dialog
+        className={root}
         open={isOpen}
         onClose={handleClose}
         aria-labelledby="form-dialog-title"
         onKeyUp={handleEnterInput}
       >
         <DialogTitle id="form-dialog-title">Add a Tweet</DialogTitle>
-        <DialogContent>
+        <DialogContent className={content}>
           <TextField
             autoFocus
             margin="dense"
@@ -84,9 +94,8 @@ export default function CreatePost({ closeDrawer }) {
             variant="outlined"
             onChange={handleTextInput}
           />
-        </DialogContent>
 
-        <DialogContent>
+          {/* Image upload */}
           <input
             accept="image/*"
             style={{ display: "none" }}
