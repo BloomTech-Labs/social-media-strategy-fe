@@ -2,6 +2,7 @@ import React, { Fragment } from "react";
 import Stats from "../analytics/Stats";
 import PopularWords from "../analytics/PopularWords";
 
+
 const Analytics = () => {
   return (
     <Fragment>
@@ -9,7 +10,7 @@ const Analytics = () => {
         style={{
           fontFamily: "Roboto Condensed",
           color: "#4E4E4E",
-          marginLeft: "6%",
+          marginLeft: "15%",
           fontSize: "30pt",
         }}
       >
