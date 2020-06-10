@@ -1,16 +1,20 @@
 import React, { Fragment } from "react";
-import NavMenu from "../nav/NavMenu";
 import Stats from "../analytics/Stats";
 
 const Analytics = () => {
   return (
     <Fragment>
-      <NavMenu />
-
-      <main>
-        
-        <Stats/>
-      </main>
+      <h1
+        style={{
+          fontFamily: "Roboto Condensed",
+          color: "#4E4E4E",
+          marginLeft: "6%",
+          fontSize: "30pt",
+        }}
+      >
+        Analytics
+      </h1>
+      <Stats />
     </Fragment>
   );
 };

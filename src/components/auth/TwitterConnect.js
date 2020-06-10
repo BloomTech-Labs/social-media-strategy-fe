@@ -1,11 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useOktaAuth } from "@okta/okta-react/dist/OktaContext";
 import { axiosWithAuth } from "../../utils/axiosWithAuth";
-// Components
-// import Nav from "../nav/Nav";
-// import DrawerMenu from "../nav/DrawerMenu";
-import NavMenu from "../nav/NavMenu";
-// Image
+
 import twitterLogo from "../../assets/imgs/twitter-logo.svg";
 // Material-UI
 import {
@@ -80,7 +76,6 @@ function TwitterConnect(props) {
 
   return (
     <Grid container className={classes.root}>
-      <NavMenu />
       <Grid item className={classes.content}>
         {loading ? (
           <CircularProgress />
