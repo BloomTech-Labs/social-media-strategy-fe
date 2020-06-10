@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { useDispatch } from "react-redux";
 import { addPost } from "../../actions";
-import Recommendations from "./Recommendations";
+
 // Material-UI
 import {
   Button,
@@ -9,7 +9,7 @@ import {
   Dialog,
   DialogActions,
   DialogContent,
-  DialogTitle
+  DialogTitle,
 } from "@material-ui/core";
 import AddCircleIcon from "@material-ui/icons/AddCircle";
 import AddAPhotoIcon from "@material-ui/icons/AddAPhoto";
@@ -19,7 +19,7 @@ export default function CreatePost({ listId }) {
   const [open, setOpen] = useState(false);
   const [post, setPost] = useState({
     list_id: listId,
-    post_text: ""
+    post_text: "",
   });
 
   const handleClickOpen = () => {
@@ -30,21 +30,21 @@ export default function CreatePost({ listId }) {
     setOpen(false);
   };
 
-  const handleTextInput = e => {
+  const handleTextInput = (e) => {
     const target = e.currentTarget;
-    setPost(prevPost => ({
+    setPost((prevPost) => ({
       ...prevPost,
-      [target.id]: target.value
+      [target.id]: target.value,
     }));
   };
 
-  const handleAddButton = e => {
+  const handleAddButton = (e) => {
     e.preventDefault();
     dispatch(addPost(post));
     handleClose();
   };
 
-  const handleEnterInput = e => {
+  const handleEnterInput = (e) => {
     if (e.keyCode === 13) {
       dispatch(addPost(post));
       handleClose();
@@ -89,9 +89,6 @@ export default function CreatePost({ listId }) {
           </label>
         </DialogContent>
 
-        <DialogContent>
-          <Recommendations />
-        </DialogContent>
         <DialogActions
           style={{ display: "flex", justifyContent: "space-between" }}
         >

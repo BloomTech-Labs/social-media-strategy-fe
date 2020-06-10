@@ -1,27 +1,52 @@
-import React, { useState, Fragment } from "react";
+import React from "react";
+// material-ui
+import { makeStyles, Typography } from "@material-ui/core";
 
-import Nav from "../nav/Nav";
-import DrawerMenu from "../nav/DrawerMenu";
+import Kanban from "../kanban/Kanban";
+import CreateList from "../kanban/CreateList.js";
+import Scrollbars from "react-custom-scrollbars";
 
-import MediaManager from "../dashboard/MediaManager.js";
-
+const useStyles = makeStyles((theme) => ({
+  root: {
+    backgroundColor: theme.palette.background.secondary,
+    position: "relative",
+    overflow: "hidden",
+    height: "100vh",
+    width: "100%",
+  },
+  topContainer: {
+    height: theme.kanban.topContainer.height,
+    display: "flex",
+  },
+  header: {
+    color: theme.palette.text.secondary,
+    margin: theme.spacing(2),
+    width: "100%",
+    textAlign: "center",
+  },
+  scrollbarContainer: {
+    height: `calc(100vh - ${theme.kanban.topContainer.height})`,
+  },
+}));
 
 const Home = () => {
-  const [menuOpen, setMenuOpen] = useState(false);
-  const toggleMenu = () => {
-    setMenuOpen(!menuOpen);
-  };
+  const { root, header, scrollbarContainer, topContainer } = useStyles();
 
   return (
-    <Fragment>
-      <Nav toggleMenu={toggleMenu} />
-      <DrawerMenu open={menuOpen} toggleMenu={toggleMenu} />
-
-      <main>
-        <MediaManager />
-      </main>
-    </Fragment>
+    <div className={root}>
+      <div className={topContainer}>
+        <Typography variant="h4" className={header}>
+          Media Manager
+        </Typography>
+        <CreateList />
+      </div>
+      <div className={scrollbarContainer}>
+        <Scrollbars>
+          <Kanban />
+        </Scrollbars>
+      </div>
+    </div>
   );
 };
 
-export default React.memo(Home);
+export default Home;

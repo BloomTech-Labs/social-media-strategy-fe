@@ -26,7 +26,7 @@ const useStyles = makeStyles((theme) => ({
     height: "100vh",
   },
   navbar: {
-    height: theme.navbar.height.small,
+    height: theme.navbar.width.close,
     display: "flex",
     justifyContent: "center",
   },

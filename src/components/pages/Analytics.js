@@ -1,22 +1,20 @@
-import React, { useState, Fragment } from "react";
-
-import Nav from "../nav/Nav";
-import DrawerMenu from "../nav/DrawerMenu";
+import React, { Fragment } from "react";
+import Stats from "../analytics/Stats";
 
 const Analytics = () => {
-  const [menuOpen, setMenuOpen] = useState(false);
-  const toggleMenu = () => {
-    setMenuOpen(!menuOpen);
-  };
-
   return (
     <Fragment>
-      <Nav toggleMenu={toggleMenu} />
-      <DrawerMenu open={menuOpen} toggleMenu={toggleMenu} />
-
-      <main>
-        <h1>Analytics</h1>
-      </main>
+      <h1
+        style={{
+          fontFamily: "Roboto Condensed",
+          color: "#4E4E4E",
+          marginLeft: "6%",
+          fontSize: "30pt",
+        }}
+      >
+        Analytics
+      </h1>
+      <Stats />
     </Fragment>
   );
 };

@@ -11,8 +11,7 @@ import LoginOkta from "./components/auth/LoginOkta";
 import ConnectAccounts from "./components/auth/ConnectAccounts";
 import Home from "./components/pages/Home";
 import Analytics from "./components/pages/Analytics";
-
-import "./sass/index.scss";
+import NavMenuTemplate from "./components/templates/NavMenuTemplate";
 
 function App(props) {
   const { authService } = useOktaAuth();
@@ -36,10 +35,14 @@ function App(props) {
     <Switch>
       <Route exact path="/" component={Landing} />
       <Route exact path="/login" component={LoginOkta} />
-      <SecureRoute path="/home" component={Home} />
-      <SecureRoute path="/analytics" component={Analytics} />
-      <SecureRoute path="/connect" component={ConnectAccounts} />
       <Route path="/implicit/callback" component={LoginCallback} />
+      <Route>
+        <NavMenuTemplate>
+          <SecureRoute path="/home" component={Home} />
+          <SecureRoute path="/analytics" component={Analytics} />
+          <SecureRoute path="/connect" component={ConnectAccounts} />
+        </NavMenuTemplate>
+      </Route>
     </Switch>
   );
 }
