@@ -40,6 +40,10 @@ const NavMenu = () => {
   
   const classes = useStyles();
 
+  const closeDrawer = () => {
+    setOpen(false);
+  }
+
   return (
     <>
       <Hidden smUp>
@@ -47,7 +51,7 @@ const NavMenu = () => {
         <Drawer
           variant={ "temporary"}
           open={open}
-          onClose={() => setOpen(false)}
+          onClose={closeDrawer}
           className={clsx(classes.drawer, {
             [classes.drawerOpen]: true,
             [classes.drawerClose]: false,
@@ -59,7 +63,7 @@ const NavMenu = () => {
             }),
           }}
         >
-          <MenuList /> 
+          <MenuList closeDrawer={closeDrawer} /> 
         </Drawer>
       </Hidden>
       <Hidden xsDown>
@@ -76,9 +80,9 @@ const NavMenu = () => {
             }),
           }}
           onMouseEnter={() => setOpen(true)}
-          onMouseLeave={() => setOpen(false)}
+          onMouseLeave={closeDrawer}
         >
-          <MenuList /> 
+          <MenuList closeDrawer={closeDrawer} /> 
         </Drawer>
       </Hidden>
     </>

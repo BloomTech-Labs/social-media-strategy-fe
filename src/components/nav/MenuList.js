@@ -10,6 +10,8 @@ import {
     Button,
     Hidden
 } from '@material-ui/core';
+// Componets
+import CreatePost from '../kanban/CreatePost';
 // Icons
 import DashboardIcon from "@material-ui/icons/Dashboard";
 import AccountBoxIcon from "@material-ui/icons/AccountBox";
@@ -38,20 +40,14 @@ const useStyles = makeStyles(theme => ({
     }
 }));
 
-const MenuList = () => {
+const MenuList = ({ closeDrawer }) => {
     const classes = useStyles();
     const location = useLocation();
     const { push } = useHistory();
     const { authService } = useOktaAuth();
-    
-    const [currentPath, setCurrentPath] = useState('');
-    
-    useEffect(() => {
-        setCurrentPath(location.pathname);
-    }, [location]);
 
     const logout = async () => {
-        authService.logout("/");
+        await authService.logout("/");
     };
 
     return (
@@ -61,30 +57,23 @@ const MenuList = () => {
                     <img className={classes.logo} src={logo} alt="SoMe logo" />
                 </Button>
             </Hidden>
-            <List>
-                <ListItem button onClick={() => console.log('render create post modal')}>
-                    <ListItemIcon>
-                        <AddCircleIcon color="primary" />
-                    </ListItemIcon>
-                    <ListItemText primary="Add post" />
-                </ListItem>
-            </List>
+            <CreatePost closeDrawer={closeDrawer} />
             <List aria-label="Menu">
                 <ListItem button onClick={() => push("/home")}>
                     <ListItemIcon>
-                        <DashboardIcon className={currentPath.includes('/home') ? classes.selectedIcon : classes.icon} />
+                        <DashboardIcon className={location.pathname.includes('/home') ? classes.selectedIcon : classes.icon} />
                     </ListItemIcon>
                     <ListItemText primary="Media Manager" />
                 </ListItem>
                 <ListItem button onClick={() => push("/analytics")}>
                     <ListItemIcon>
-                        <TrendingUpIcon className={currentPath.includes('/analytics') ? classes.selectedIcon : classes.icon} />
+                        <TrendingUpIcon className={location.pathname.includes('/analytics') ? classes.selectedIcon : classes.icon} />
                     </ListItemIcon>
                     <ListItemText primary="Analytics" />
                 </ListItem>
                 <ListItem button onClick={() => push('/connect/twitter')}>
                     <ListItemIcon>
-                        <AccountBoxIcon className={currentPath.includes('/connect') ? classes.selectedIcon : classes.icon} />
+                        <AccountBoxIcon className={location.pathname.includes('/connect') ? classes.selectedIcon : classes.icon} />
                     </ListItemIcon>
                     <ListItemText primary="Accounts" />
                 </ListItem>
