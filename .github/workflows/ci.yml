@@ -3,15 +3,13 @@ name: build
 
 # What conditions trigger the workflow
 #  In this case, all pushes and pull requests
-on: # [push, pull_request]
-  # temporarily disable PR checks
+on:  
   push:
-    branches-ignore:
-      - '**'
+    branches:
+      - master
   pull_request:
-    branches-ignore:
-      - '**'
-
+    branches:
+      - master
 
 # The jobs that will be run, usually in parallel
 jobs:
