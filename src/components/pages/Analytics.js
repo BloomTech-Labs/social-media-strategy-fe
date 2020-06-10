@@ -1,5 +1,6 @@
 import React, { Fragment } from "react";
 import Stats from "../analytics/Stats";
+import PopularWords from "../analytics/PopularWords";
 
 const Analytics = () => {
   return (
@@ -15,6 +16,7 @@ const Analytics = () => {
         Analytics
       </h1>
       <Stats />
+      <PopularWords/>
     </Fragment>
   );
 };

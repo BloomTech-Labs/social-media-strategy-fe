@@ -47,17 +47,6 @@ export default function Stats() {
   const classes = useStyles();
   return (
     <div>
-      <h1
-        style={{
-          fontFamily: "Roboto Condensed",
-          color: "#4E4E4E",
-          marginLeft: "20%",
-          marginTop: "5%",
-          fontSize: "20pt",
-        }}
-      >
-        Analytics
-      </h1>
       <div style={{ display: "flex", justifyContent: "center" }}>
         <Card className={classes.root}>
           <CardContent className={classes.card}>
