@@ -1,44 +1,52 @@
 import React from "react";
-import { makeStyles } from "@material-ui/core";
+// material-ui
+import { makeStyles, Typography } from "@material-ui/core";
 
-import NavMenu from "../nav/NavMenu";
-import MediaManager from "./MediaManager.js";
+import Kanban from "../kanban/Kanban";
+import CreateList from "../kanban/CreateList.js";
+import Scrollbars from "react-custom-scrollbars";
 
 const useStyles = makeStyles((theme) => ({
-  pageContainer: {
-    display: "flex",
-    [theme.breakpoints.down("xs")]: {
-      flexDirection: "row",
-    },
-    [theme.breakpoints.up("xs")]: {
-      flexDirection: "column",
-    },
-  },
-  content: {
+  root: {
+    backgroundColor: theme.palette.background.secondary,
+    position: "relative",
+    overflow: "hidden",
+    height: "100vh",
     width: "100%",
-    [theme.breakpoints.up("xs")]: {
-      paddingLeft: theme.navbar.width.close,
-      height: "100vh",
-    },
-    [theme.breakpoints.down("xs")]: {
-      paddingLeft: "0",
-      height: `calc(100vh - ${theme.navbar.height})`,
-    },
+  },
+  topContainer: {
+    height: theme.kanban.topContainer.height,
+    display: "flex",
+  },
+  header: {
+    color: theme.palette.text.secondary,
+    margin: theme.spacing(2),
+    width: "100%",
+    textAlign: "center",
+  },
+  scrollbarContainer: {
+    height: `calc(100vh - ${theme.kanban.topContainer.height})`,
   },
 }));
 
 const Home = () => {
-  const { pageContainer, content } = useStyles();
+  const { root, header, scrollbarContainer, topContainer } = useStyles();
 
   return (
-    <div className={pageContainer}>
-      <NavMenu />
-
-      <main className={content}>
-        <MediaManager />
-      </main>
+    <div className={root}>
+      <div className={topContainer}>
+        <Typography variant="h4" className={header}>
+          Media Manager
+        </Typography>
+        <CreateList />
+      </div>
+      <div className={scrollbarContainer}>
+        <Scrollbars>
+          <Kanban />
+        </Scrollbars>
+      </div>
     </div>
   );
 };
 
-export default React.memo(Home);
+export default Home;
