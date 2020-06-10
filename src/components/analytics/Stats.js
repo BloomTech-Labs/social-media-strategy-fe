@@ -24,7 +24,7 @@ const useStyles = makeStyles({
     flexWrap: "wrap",
   },
   number: {
-    fontSize: "35pt",
+    fontSize: "30pt",
     fontWeight: "bold",
     color: "#rgb(50,50,50)",
     width: "100%",
