@@ -1,4 +1,5 @@
-import React from "react";
+import React, { useState } from "react";
+import axios from "axios";
 import { Card } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
 import CardContent from "@material-ui/core/CardContent";
@@ -45,13 +46,22 @@ const useStyles = makeStyles({
 
 export default function Stats() {
   const classes = useStyles();
+  const body = { twitter_handle: "dutchbros" };
+  axios
+    .post(
+      "http://so-me-fastapi.eba-ghirpj73.us-east-1.elasticbeanstalk.com/engagement",
+      body
+    )
+    .then(res => console.log(res))
+    .catch(err => console.log(err));
+
   return (
     <div>
       <div style={{ display: "flex", justifyContent: "center" }}>
         <Card className={classes.root}>
           <CardContent className={classes.card}>
             <PersonAddIcon style={{ color: "limegreen", width: "100%" }} />
-            <Typography className={classes.number}>1.5K</Typography>
+            <Typography className={classes.number}>1.7K</Typography>
             <Typography className={classes.stat}>Followers</Typography>
           </CardContent>
         </Card>
@@ -66,7 +76,7 @@ export default function Stats() {
           <CardContent className={classes.card}>
             <FavoriteIcon style={{ color: "red", width: "100%" }} />
             <Typography className={classes.number}>3.6K</Typography>
-            <Typography className={classes.stat}>Favorites</Typography>
+            <Typography className={classes.stat}>Likes</Typography>
           </CardContent>
         </Card>
         <Card className={classes.root}>
