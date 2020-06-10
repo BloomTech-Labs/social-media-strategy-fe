@@ -12,8 +12,6 @@ import ConnectAccounts from "./components/auth/ConnectAccounts";
 import Home from "./components/pages/Home";
 import Analytics from "./components/pages/Analytics";
 
-import "./sass/index.scss";
-
 function App(props) {
   const { authService } = useOktaAuth();
   const dispatch = useDispatch();

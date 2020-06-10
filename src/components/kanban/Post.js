@@ -1,17 +1,13 @@
-import React, { useState } from 'react';
-import { useSelector } from 'react-redux';
-import { Draggable } from 'react-beautiful-dnd';
+import React, { useState } from "react";
+import { useSelector } from "react-redux";
+import { Draggable } from "react-beautiful-dnd";
 import TwitterIcon from "@material-ui/icons/Twitter";
-import { axiosWithAuth } from '../../utils/axiosWithAuth';
+import { axiosWithAuth } from "../../utils/axiosWithAuth";
 // Components
-import ScheduleTweet from './ScheduleTweet';
-import PostMenu from './PostMenu';
+
+import PostMenu from "./PostMenu";
 // Material-UI
-import {
-    Typography,
-    makeStyles,
-    Button
-} from '@material-ui/core';
+import { Typography, makeStyles, Button } from "@material-ui/core";
 
 const useStyles = makeStyles((theme) => ({
   container: {
@@ -27,14 +23,14 @@ const useStyles = makeStyles((theme) => ({
     minHeight: "50px",
   },
   header: {
-    display: 'flex',
-    alignItems: 'center',
-    justifyContent: 'space-between',
-    marginBottom: theme.spacing(1)
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "space-between",
+    marginBottom: theme.spacing(1),
   },
   twitterHandleContainer: {
-      display: 'flex',
-      alignItems: 'center',
+    display: "flex",
+    alignItems: "center",
   },
   twitterIcon: {
     color: "#2196F3",
@@ -87,11 +83,11 @@ const Post = ({ post, index }) => {
           <div className={contentContainer}>
             <div className={header}>
               <div className={twitterHandleContainer}>
-                  <TwitterIcon className={twitterIcon} />
-                  <Typography variant='caption'>{`@${user.twitter_handle}`}</Typography>
+                <TwitterIcon className={twitterIcon} />
+                <Typography variant="caption">{`@${user.twitter_handle}`}</Typography>
               </div>
               <div>
-                  <PostMenu post={post} />
+                <PostMenu post={post} />
               </div>
             </div>
             {post.post_text}
@@ -101,7 +97,6 @@ const Post = ({ post, index }) => {
           )}
 
           <div className={actionsContainer}>
-            {!isPosted && <ScheduleTweet />}
             <Button disabled={isPosted} onClick={postToTwitter} color="primary">
               {isPosted ? "Posted" : "Post Now"}
             </Button>
