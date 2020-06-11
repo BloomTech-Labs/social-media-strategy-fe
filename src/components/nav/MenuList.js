@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import { useOktaAuth } from '@okta/okta-react/dist/OktaContext';
 import { useLocation, useHistory } from 'react-router';
 import {
@@ -17,7 +17,6 @@ import DashboardIcon from "@material-ui/icons/Dashboard";
 import AccountBoxIcon from "@material-ui/icons/AccountBox";
 import ExitToAppIcon from "@material-ui/icons/ExitToApp";
 import TrendingUpIcon from '@material-ui/icons/TrendingUp';
-import AddCircleIcon from '@material-ui/icons/AddCircle';
 // Img
 import logo from "../../assets/imgs/Logo-dark.svg";
 

@@ -10,6 +10,7 @@ import {
   dragPostToSameList,
   dragList,
 } from "../../actions/kanbanActions";
+import CreateList from "./CreateList";
 
 const useStyles = makeStyles((theme) => ({
   kanban: {
@@ -88,8 +89,9 @@ const Kanban = () => {
                 .sort((a, b) => a.index - b.index)
                 .map(([listId, list]) => (
                   <List key={list.id} listId={listId} list={list} />
-                ))}
+              ))}
               {provided.placeholder}
+              <CreateList />
             </div>
           )}
         </Droppable>

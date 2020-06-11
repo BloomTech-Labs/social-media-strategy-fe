@@ -3,7 +3,6 @@ import React from "react";
 import { makeStyles, Typography } from "@material-ui/core";
 
 import Kanban from "../kanban/Kanban";
-import CreateList from "../kanban/CreateList.js";
 import Scrollbars from "react-custom-scrollbars";
 
 const useStyles = makeStyles((theme) => ({
@@ -19,10 +18,9 @@ const useStyles = makeStyles((theme) => ({
     display: "flex",
   },
   header: {
-    color: theme.palette.text.secondary,
     margin: theme.spacing(2),
     width: "100%",
-    textAlign: "center",
+    textAlign: "left",
   },
   scrollbarContainer: {
     height: `calc(100vh - ${theme.kanban.topContainer.height})`,
@@ -38,7 +36,6 @@ const Home = () => {
         <Typography variant="h4" className={header}>
           Media Manager
         </Typography>
-        <CreateList />
       </div>
       <div className={scrollbarContainer}>
         <Scrollbars>

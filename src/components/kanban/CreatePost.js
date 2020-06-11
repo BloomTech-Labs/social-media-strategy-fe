@@ -32,7 +32,7 @@ const useStyles = makeStyles(theme => ({
   }
 }));
 
-export default function CreatePost() {
+export default function CreatePost({ listId }) {
   const { lists } = useSelector(state => state.kanban);
   const { formControl, content } = useStyles();
   const dispatch = useDispatch();
@@ -52,14 +52,14 @@ export default function CreatePost() {
         console.log('create drafts list');
         dispatch(addList('Drafts'));
       } else {
-        // set Drafts as default list
+        // set Drafts or listId from param as default list
         setPost(prevPost => ({
           ...prevPost,
-          list_id: drafts.id
+          list_id: listId ? listId : drafts.id
         }));
       }
     }
-  }, [lists]);
+  }, [lists, listId]);
 
   const handleClickOpen = () => {
     setIsOpen(true);
@@ -93,7 +93,7 @@ export default function CreatePost() {
   };
 
   const handleEnterInput = e => {
-    if (e.keyCode === 13) {
+    if (post.post_text && e.keyCode === 13) {
       dispatch(addPost(post));
       handleClose();
     }
@@ -148,7 +148,7 @@ export default function CreatePost() {
         </FormControl>
 
           {/* Image upload */}
-          <input
+          {/* <input
             accept="image/*"
             style={{ display: "none" }}
             id="create-tweet"
@@ -157,7 +157,7 @@ export default function CreatePost() {
           />
           <label htmlFor="create-tweet">
             <AddAPhotoIcon />
-          </label>
+          </label> */}
         </DialogContent>
 
         <DialogActions

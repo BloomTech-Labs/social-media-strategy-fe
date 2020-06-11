@@ -4,7 +4,6 @@ import { Typography, makeStyles } from "@material-ui/core";
 import { Scrollbars } from "react-custom-scrollbars";
 
 import Post from "./Post";
-import CreateTweet from "./CreateTweet";
 
 const useStyles = makeStyles((theme) => ({
   listContainer: {
@@ -44,7 +43,6 @@ const List = ({ listId, list }) => {
             <Typography variant="h6" component="h3">
               {list.title}
             </Typography>
-            <CreateTweet listId={list.id} />
           </div>
           <Droppable
             direction="vertical"
