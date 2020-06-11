@@ -88,7 +88,7 @@ const Kanban = () => {
               {Object.entries(lists)
                 .sort((a, b) => a.index - b.index)
                 .map(([listId, list]) => (
-                  <List key={list.id} listId={listId} list={list} />
+                  <List key={list.id} list={list} />
               ))}
               {provided.placeholder}
               <CreateList />

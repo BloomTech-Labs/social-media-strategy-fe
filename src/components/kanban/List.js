@@ -55,7 +55,7 @@ const useStyles = makeStyles((theme) => ({
   }
 }));
 
-const List = ({ listId, list }) => {
+const List = ({ list }) => {
   const dispatch = useDispatch();
   const [isEditing, setIsEditing] = useState(false);
   const [listTitle, setListTitle] = useState(list?.title || "");
@@ -68,7 +68,9 @@ const List = ({ listId, list }) => {
   } = useStyles();
 
   useEffect(() => {
-    setListTitle(list.title);
+    if (listTitle !== list.title) {
+      setListTitle(list.title);
+    }
   }, [list])
 
   const handleInputText = e => {
