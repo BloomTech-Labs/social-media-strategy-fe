@@ -66,7 +66,7 @@ export default function Stats() {
           <CardContent className={classes.card}>
             <FavoriteIcon style={{ color: "red", width: "100%" }} />
             <Typography className={classes.number}>3.6K</Typography>
-            <Typography className={classes.stat}>Favorites</Typography>
+            <Typography className={classes.stat}>Likes</Typography>
           </CardContent>
         </Card>
         <Card className={classes.root}>
