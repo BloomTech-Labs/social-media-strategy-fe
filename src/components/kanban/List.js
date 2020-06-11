@@ -78,7 +78,9 @@ const List = ({ listId, list }) => {
   const submit = e => {
     e.preventDefault();
 
-    if (listTitle && listTitle !== list.title) {
+    if (!listTitle) {
+      setListTitle(list.title)
+    } else if (listTitle !== list.title) {
       dispatch(updateList(list.id, { title: listTitle }));
     }
     
@@ -101,7 +103,7 @@ const List = ({ listId, list }) => {
                   onBlur={submit}
                   onChange={handleInputText}
                   id="standard-error-helper-text"
-                  defaultValue={list.title}
+                  defaultValue={listTitle}
                   fullWidth
                   inputProps={{
                     'aria-label': 'edit tile',
@@ -113,7 +115,7 @@ const List = ({ listId, list }) => {
               </form>
               :
               <Typography onClick={() => setIsEditing(true)} variant="h6" component="h3">
-                {list.title}
+                {listTitle}
               </Typography>
             }
           </div>
