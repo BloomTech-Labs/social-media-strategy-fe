@@ -1,4 +1,6 @@
-import React from "react";
+import React, { useEffect } from "react";
+import { useSelector, useDispatch } from "react-redux";
+import { getData } from "../../actions/statsActions";
 import { Card } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
 import CardContent from "@material-ui/core/CardContent";
@@ -43,41 +45,59 @@ const useStyles = makeStyles({
   },
 });
 
-export default function Stats() {
+const Stats = props => {
   const classes = useStyles();
-  return (
-    <div>
-      <div style={{ display: "flex", justifyContent: "center" }}>
-        <Card className={classes.root}>
-          <CardContent className={classes.card}>
-            <PersonAddIcon style={{ color: "limegreen", width: "100%" }} />
-            <Typography className={classes.number}>1.5K</Typography>
-            <Typography className={classes.stat}>Followers</Typography>
-          </CardContent>
-        </Card>
-        <Card className={classes.root}>
-          <CardContent className={classes.card}>
-            <RepeatIcon style={{ color: "royalblue", width: "100%" }} />
-            <Typography className={classes.number}>1.8K</Typography>
-            <Typography className={classes.stat}>Retweets</Typography>
-          </CardContent>
-        </Card>
-        <Card className={classes.root}>
-          <CardContent className={classes.card}>
-            <FavoriteIcon style={{ color: "red", width: "100%" }} />
-            <Typography className={classes.number}>3.6K</Typography>
-            <Typography className={classes.stat}>Likes</Typography>
-          </CardContent>
-        </Card>
-        <Card className={classes.root}>
-          <CardContent className={classes.card}>
-            <ThumbsUpDownIcon style={{ color: "blueviolet", width: "100%" }} />
+  const stats = useSelector(state => state.stats);
+  const dispatch = useDispatch();
 
-            <Typography className={classes.number}>360%</Typography>
-            <Typography className={classes.stat}>Engagement</Typography>
-          </CardContent>
-        </Card>
-      </div>
-    </div>
+  useEffect(() => {
+    if (!stats.num_followers) {
+      console.log("loading stats");
+      (() => {
+        dispatch(getData());
+      })();
+    }
+  }, [stats]);
+
+  return (
+    <>
+        <div style={{ display: "flex", justifyContent: "center" }}>
+          <Card className={classes.root}>
+            <CardContent className={classes.card}>
+              <PersonAddIcon style={{ color: "limegreen", width: "100%" }} />
+      <Typography className={classes.number}>{stats.num_followers}</Typography>
+              <Typography className={classes.stat}>Followers</Typography>
+            </CardContent>
+          </Card>
+          <Card className={classes.root}>
+            <CardContent className={classes.card}>
+              <RepeatIcon style={{ color: "royalblue", width: "100%" }} />
+              <Typography className={classes.number}>{stats.num_retweets}</Typography>
+              <Typography className={classes.stat}>Retweets</Typography>
+            </CardContent>
+          </Card>
+          <Card className={classes.root}>
+            <CardContent className={classes.card}>
+              <FavoriteIcon style={{ color: "red", width: "100%" }} />
+              <Typography className={classes.number}>{stats.num_favorites}</Typography>
+              <Typography className={classes.stat}>Likes</Typography>
+            </CardContent>
+          </Card>
+          <Card className={classes.root}>
+            <CardContent className={classes.card}>
+              <ThumbsUpDownIcon
+                style={{ color: "blueviolet", width: "100%" }}
+              />
+
+              <Typography className={classes.number}>{stats.engagement_ratio}</Typography>
+              <Typography className={classes.stat}>Engagement</Typography>
+            </CardContent>
+          </Card>
+        </div>
+    </>
   );
-}
+};
+
+
+
+export default Stats;
