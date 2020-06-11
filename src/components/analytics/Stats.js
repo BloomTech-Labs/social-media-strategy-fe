@@ -11,6 +11,8 @@ import RepeatIcon from "@material-ui/icons/Repeat";
 import ThumbsUpDownIcon from "@material-ui/icons/ThumbsUpDown";
 import FavoriteIcon from "@material-ui/icons/Favorite";
 
+
+
 const useStyles = makeStyles({
   root: {
     width: 200,
@@ -49,6 +51,7 @@ const Stats = props => {
   const classes = useStyles();
   const stats = useSelector(state => state.stats);
   const dispatch = useDispatch();
+  var numeral = require('numeral');
 
   useEffect(() => {
     if (!stats.num_followers) {
@@ -65,21 +68,21 @@ const Stats = props => {
           <Card className={classes.root}>
             <CardContent className={classes.card}>
               <PersonAddIcon style={{ color: "limegreen", width: "100%" }} />
-      <Typography className={classes.number}>{stats.num_followers}</Typography>
+      <Typography className={classes.number}>{numeral(stats.num_followers).format('0 a')}</Typography>
               <Typography className={classes.stat}>Followers</Typography>
             </CardContent>
           </Card>
           <Card className={classes.root}>
             <CardContent className={classes.card}>
               <RepeatIcon style={{ color: "royalblue", width: "100%" }} />
-              <Typography className={classes.number}>{stats.num_retweets}</Typography>
+              <Typography className={classes.number}>{numeral(stats.num_retweets).format('0 a')}</Typography>
               <Typography className={classes.stat}>Retweets</Typography>
             </CardContent>
           </Card>
           <Card className={classes.root}>
             <CardContent className={classes.card}>
               <FavoriteIcon style={{ color: "red", width: "100%" }} />
-              <Typography className={classes.number}>{stats.num_favorites}</Typography>
+              <Typography className={classes.number}>{numeral(stats.num_favorites).format('0 a')}</Typography>
               <Typography className={classes.stat}>Likes</Typography>
             </CardContent>
           </Card>
@@ -88,8 +91,7 @@ const Stats = props => {
               <ThumbsUpDownIcon
                 style={{ color: "blueviolet", width: "100%" }}
               />
-
-              <Typography className={classes.number}>{stats.engagement_ratio}</Typography>
+              <Typography className={classes.number}>{numeral(stats.engagement_ratio).format('0%')}</Typography>
               <Typography className={classes.stat}>Engagement</Typography>
             </CardContent>
           </Card>
