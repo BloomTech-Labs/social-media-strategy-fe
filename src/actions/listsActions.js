@@ -2,6 +2,7 @@ import { axiosWithAuth } from "../utils/axiosWithAuth";
 import {
   UPDATE_LISTS,
   ADD_LIST,
+  EDIT_LIST,
   ADD_POST,
   DELETE_POST,
 } from "./kanbanActionTypes";
@@ -49,6 +50,15 @@ export const addList = (title) => async (dispatch) => {
 
   dispatch({
     type: ADD_LIST,
+    payload: data,
+  });
+};
+
+export const updateList = (listId, changes) => async (dispatch) => {
+  let { data } = await axiosWithAuth().patch(`/lists/${listId}`, changes);
+
+  dispatch({
+    type: EDIT_LIST,
     payload: data,
   });
 };

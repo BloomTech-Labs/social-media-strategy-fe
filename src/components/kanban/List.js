@@ -1,7 +1,20 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { Droppable, Draggable } from "react-beautiful-dnd";
-import { Typography, makeStyles } from "@material-ui/core";
+// Material-UI
+import {
+  Typography,
+  makeStyles,
+  TextField,
+  Input,
+  InputBase,
+  IconButton
+} from "@material-ui/core";
+// Icons
+import EditIcon from '@material-ui/icons/Edit';
+
 import { Scrollbars } from "react-custom-scrollbars";
+import { updateList } from "../../actions/listsActions";
+
 
 import Post from "./Post";
 
@@ -27,10 +40,50 @@ const useStyles = makeStyles((theme) => ({
     overflow: "hidden",
     height: `calc(100vh - ${theme.kanban.topContainer.height} - ${theme.kanban.list.header.height} - ${theme.spacing(2)}px) !important`,
   },
+  form: {
+    padding: '2px 0',
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'space-between',
+    borderRadius: theme.shape.borderRadius,
+    width: '100%',
+    height: 'max-content',
+    backgroundColor: '#fff',
+  },
+  iconButton: {
+    padding: 10,
+  }
 }));
 
 const List = ({ listId, list }) => {
-  const { listContainer, header, postsContainer } = useStyles();
+  const [isEditing, setIsEditing] = useState(false);
+  const [listTitle, setListTitle] = useState(list?.title || "");
+  const {
+    listContainer,
+    header,
+    postsContainer,
+    form,
+    iconButton
+  } = useStyles();
+
+  useEffect(() => {
+    setListTitle(list.title);
+  }, [list])
+
+  const handleInputText = e => {
+    setListTitle(e.currentTarget.value);
+  }
+
+  const submit = e => {
+    e.preventDefault();
+
+    if (listTitle) {
+      // 
+    }
+    
+    setIsEditing(false);
+  }
+
   return (
     <Draggable key={list.id} draggableId={String(list.id)} index={list.index}>
       {(provided, snapshot) => (
@@ -40,9 +93,28 @@ const List = ({ listId, list }) => {
           {...provided.draggableProps}
         >
           <div className={header} {...provided.dragHandleProps}>
-            <Typography variant="h6" component="h3">
-              {list.title}
-            </Typography>
+            { isEditing ? 
+              <form onSubmit={submit} className={form} style={{width: '100%'}}>
+                <InputBase
+                  autoFocus
+                  onBlur={submit}
+                  onChange={handleInputText}
+                  id="standard-error-helper-text"
+                  defaultValue={list.title}
+                  fullWidth
+                  inputProps={{
+                    'aria-label': 'edit tile',
+                  }}
+                />
+                <IconButton type="submit" className={iconButton} aria-label="confirm edit">
+                  <EditIcon />
+                </IconButton>
+              </form>
+              :
+              <Typography onClick={() => setIsEditing(true)} variant="h6" component="h3">
+                {list.title}
+              </Typography>
+            }
           </div>
           <Droppable
             direction="vertical"
@@ -75,4 +147,4 @@ const List = ({ listId, list }) => {
   );
 };
 
-export default List;
+export default React.memo(List);

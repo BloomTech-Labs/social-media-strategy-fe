@@ -49,7 +49,6 @@ export default function CreatePost({ listId }) {
 
       if (!drafts) {
         // create Drafts list
-        console.log('create drafts list');
         dispatch(addList('Drafts'));
       } else {
         // set Drafts or listId from param as default list
