@@ -35,7 +35,10 @@ const kanbanReducer = (state = initialState, action) => {
         ...state,
         lists: {
           ...state.lists,
-          [payload.id]: payload,
+          [payload.id]: {
+            ...state.lists[payload.id],
+            ...payload
+          }
         },
       };
     case ADD_POST:

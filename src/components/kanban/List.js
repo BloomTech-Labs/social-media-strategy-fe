@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { useDispatch } from "react-redux";
 import { Droppable, Draggable } from "react-beautiful-dnd";
 // Material-UI
 import {
@@ -14,9 +15,8 @@ import EditIcon from '@material-ui/icons/Edit';
 
 import { Scrollbars } from "react-custom-scrollbars";
 import { updateList } from "../../actions/listsActions";
-
-
 import Post from "./Post";
+
 
 const useStyles = makeStyles((theme) => ({
   listContainer: {
@@ -56,6 +56,7 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 const List = ({ listId, list }) => {
+  const dispatch = useDispatch();
   const [isEditing, setIsEditing] = useState(false);
   const [listTitle, setListTitle] = useState(list?.title || "");
   const {
@@ -77,8 +78,8 @@ const List = ({ listId, list }) => {
   const submit = e => {
     e.preventDefault();
 
-    if (listTitle) {
-      // 
+    if (listTitle && listTitle !== list.title) {
+      dispatch(updateList(list.id, { title: listTitle }));
     }
     
     setIsEditing(false);
