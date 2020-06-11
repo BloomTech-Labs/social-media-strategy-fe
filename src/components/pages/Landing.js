@@ -10,24 +10,24 @@ import { makeStyles } from "@material-ui/core/styles";
 import Container from "@material-ui/core/Container";
 import BackgroundImage from "../../assets/imgs/bgDesktopLandscape.jpg";
 
-const useStyles = makeStyles((theme) => ({
+const useStyles = makeStyles(theme => ({
   "@global": {
     body: {
-      backgroundImage: `url(${BackgroundImage})`,
-    },
+      backgroundImage: `url(${BackgroundImage})`
+    }
   },
   appBar: {
     borderBottom: `1px solid ${theme.palette.divider}`,
-    backgroundColor: "#2196F3",
+    backgroundColor: "#2196F3"
   },
   toolbar: {
-    flexWrap: "wrap",
+    flexWrap: "wrap"
   },
   toolbarTitle: {
     flexGrow: 1,
     fontFamily: "sansita",
     color: "#fff",
-    fontSize: "36px",
+    fontSize: "36px"
   },
   link: {
     margin: theme.spacing(1, 1.5),
@@ -37,24 +37,24 @@ const useStyles = makeStyles((theme) => ({
     fontWeight: 500,
     fontSize: "14px",
     lineHeight: "11px",
-    letterSpacing: "0.25px",
+    letterSpacing: "0.25px"
   },
   mainContent: {
     padding: theme.spacing(8, 0, 6),
     maxWidth: 800,
     "@media (max-width: 960px)": {
-      maxWidth: 600,
+      maxWidth: 600
     },
     "@media (orientation: portrait)": {
-      marginTop: -10,
-    },
+      marginTop: -10
+    }
   },
   subContent: {
     "@media (max-width: 600px)": {
-      maxWidth: 400,
+      maxWidth: 400
     },
     marginTop: -30,
-    marginBottom: 50,
+    marginBottom: 50
   },
   mainHeading: {
     textAlign: "center",
@@ -67,13 +67,13 @@ const useStyles = makeStyles((theme) => ({
     "@media (max-width: 960px)": {
       fontSize: 32,
       marginTop: -40,
-      marginBottom: 0,
+      marginBottom: 0
     },
     "@media (max-width: 600px)": {
       fontSize: 32,
       marginTop: 60,
-      marginBottom: 50,
-    },
+      marginBottom: 50
+    }
   },
   subHeading: {
     textAlign: "center",
@@ -81,8 +81,8 @@ const useStyles = makeStyles((theme) => ({
     margin: "0 auto",
     fontWeight: "bold",
     "@media (min-width: 960px)": {
-      maxWidth: 400,
-    },
+      maxWidth: 400
+    }
   },
   button: {
     backgroundColor: "#2196F3",
@@ -94,15 +94,15 @@ const useStyles = makeStyles((theme) => ({
     color: "#fff",
     padding: "15px",
     "@media (max-width: 960px)": {
-      marginTop: -20,
+      marginTop: -20
     },
     "@media (max-width: 600px)": {
-      marginTop: 10,
-    },
+      marginTop: 10
+    }
   },
   butttonContainer: {
-    textAlign: "center",
-  },
+    textAlign: "center"
+  }
 }));
 
 export default function Landing() {
