@@ -5,13 +5,13 @@ import { Droppable, Draggable } from "react-beautiful-dnd";
 import {
   Typography,
   makeStyles,
-  TextField,
-  Input,
   InputBase,
   IconButton
 } from "@material-ui/core";
 // Icons
 import EditIcon from '@material-ui/icons/Edit';
+import TwitterIcon from "@material-ui/icons/Twitter";
+import DeleteIcon from '@material-ui/icons/Delete';
 
 import { Scrollbars } from "react-custom-scrollbars";
 import { updateList } from "../../actions/listsActions";
@@ -33,8 +33,8 @@ const useStyles = makeStyles((theme) => ({
     backgroundColor: "#FFF",
     height: theme.kanban.list.header.height,
     display: "flex",
-    justifyContent: "space-between",
-    alignItems: "center",
+    flexDirection: "column",
+    justifyContent: "center",
   },
   postsContainer: {
     overflow: "hidden",
@@ -52,10 +52,18 @@ const useStyles = makeStyles((theme) => ({
   },
   iconButton: {
     padding: 10,
-  }
+  },
+  twitterHandleContainer: {
+    display: "flex",
+    alignItems: "center",
+  },
+  twitterIcon: {
+    color: "#2196F3",
+    width: "20px",
+  },
 }));
 
-const List = ({ list }) => {
+const List = ({ list, user }) => {
   const dispatch = useDispatch();
   const [isEditing, setIsEditing] = useState(false);
   const [listTitle, setListTitle] = useState(list?.title || "");
@@ -64,14 +72,16 @@ const List = ({ list }) => {
     header,
     postsContainer,
     form,
-    iconButton
+    iconButton,
+    twitterHandleContainer,
+    twitterIcon
   } = useStyles();
 
   useEffect(() => {
     if (listTitle !== list.title) {
       setListTitle(list.title);
     }
-  }, [list])
+  }, [list]);
 
   const handleInputText = e => {
     setListTitle(e.currentTarget.value);
@@ -90,7 +100,7 @@ const List = ({ list }) => {
   }
 
   return (
-    <Draggable key={list.id} draggableId={String(list.id)} index={list.index}>
+    <Draggable key={list.id} draggableId={list.id} index={list.index}>
       {(provided, snapshot) => (
         <div
           className={listContainer}
@@ -114,12 +124,19 @@ const List = ({ list }) => {
                 <IconButton type="submit" className={iconButton} aria-label="confirm edit">
                   <EditIcon />
                 </IconButton>
+                <IconButton className={iconButton} aria-label="delete list">
+                  <DeleteIcon />
+                </IconButton>
               </form>
               :
-              <Typography onClick={() => setIsEditing(true)} variant="h6" component="h3">
+              <Typography style={{cursor: 'pointer'}} onClick={() => setIsEditing(true)} variant="h6" component="h3">
                 {listTitle}
               </Typography>
             }
+            <div className={twitterHandleContainer}>
+              <TwitterIcon className={twitterIcon} />
+              <Typography variant="caption">{`@${user.twitter_handle}`}</Typography>
+            </div>
           </div>
           <Droppable
             direction="vertical"

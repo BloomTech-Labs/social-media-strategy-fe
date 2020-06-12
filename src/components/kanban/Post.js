@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import { useSelector } from "react-redux";
 import { Draggable } from "react-beautiful-dnd";
-import TwitterIcon from "@material-ui/icons/Twitter";
 import { axiosWithAuth } from "../../utils/axiosWithAuth";
 // Components
 
@@ -28,14 +27,7 @@ const useStyles = makeStyles((theme) => ({
     justifyContent: "space-between",
     marginBottom: theme.spacing(1),
   },
-  twitterHandleContainer: {
-    display: "flex",
-    alignItems: "center",
-  },
-  twitterIcon: {
-    color: "#2196F3",
-    width: "20px",
-  },
+  
   image: {
     width: "100%",
     maxHeight: "140px",
@@ -51,7 +43,6 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 const Post = ({ post, index }) => {
-  const { user } = useSelector((state) => state);
   const {
     container,
     contentContainer,
@@ -82,10 +73,6 @@ const Post = ({ post, index }) => {
         >
           <div className={contentContainer}>
             <div className={header}>
-              <div className={twitterHandleContainer}>
-                <TwitterIcon className={twitterIcon} />
-                <Typography variant="caption">{`@${user.twitter_handle}`}</Typography>
-              </div>
               <div>
                 <PostMenu post={post} />
               </div>
@@ -107,4 +94,4 @@ const Post = ({ post, index }) => {
   );
 };
 
-export default Post;
+export default React.memo(Post);
