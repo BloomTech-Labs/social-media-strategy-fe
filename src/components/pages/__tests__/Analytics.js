@@ -69,3 +69,4 @@ it("renders without crashing", () => {
     expect(startAnalysis).toBeInTheDocument();
     expect(learnMore).toBeInTheDocument();
   });
+
