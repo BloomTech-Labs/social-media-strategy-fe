@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import { useSelector } from "react-redux";
 import { Draggable } from "react-beautiful-dnd";
 import { axiosWithAuth } from "../../utils/axiosWithAuth";
 // Components
@@ -20,14 +19,9 @@ const useStyles = makeStyles((theme) => ({
     marginRight: theme.spacing(1),
     borderLeft: "solid 3px gray",
     minHeight: "50px",
+    display: 'flex',
+    alignItems: 'flex-start'
   },
-  header: {
-    display: "flex",
-    alignItems: "center",
-    justifyContent: "space-between",
-    marginBottom: theme.spacing(1),
-  },
-  
   image: {
     width: "100%",
     maxHeight: "140px",
@@ -46,9 +40,6 @@ const Post = ({ post, index }) => {
   const {
     container,
     contentContainer,
-    header,
-    twitterHandleContainer,
-    twitterIcon,
     image,
     actionsContainer,
   } = useStyles();
@@ -72,12 +63,10 @@ const Post = ({ post, index }) => {
           style={{ ...provided.draggableProps.style }}
         >
           <div className={contentContainer}>
-            <div className={header}>
-              <div>
-                <PostMenu post={post} />
-              </div>
+            <Typography style={{flexGrow: '1'}}>{post.post_text} </Typography>
+            <div>
+              <PostMenu post={post} />
             </div>
-            {post.post_text}
           </div>
           {post.imageUrl && (
             <img className={image} src={post.imageUrl} alt="Post" />

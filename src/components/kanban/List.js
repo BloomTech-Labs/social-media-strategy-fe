@@ -5,8 +5,6 @@ import { Droppable, Draggable } from "react-beautiful-dnd";
 import {
   Typography,
   makeStyles,
-  InputBase,
-  IconButton
 } from "@material-ui/core";
 // Icons
 import TwitterIcon from "@material-ui/icons/Twitter";
@@ -23,14 +21,14 @@ const useStyles = makeStyles((theme) => ({
     height: "fit-content",
     marginLeft: theme.spacing(2),
     marginRight: theme.spacing(2),
-    width: "290px",
-    minWidth: "290px",
+    width: 275,
+    minWidth: 275,
   },
   header: {
     paddingLeft: theme.spacing(2),
-    paddingRight: theme.spacing(2),
+    paddingRight: theme.spacing(1),
     backgroundColor: "#FFF",
-    height: theme.kanban.list.header.height,
+    minHeight: theme.kanban.list.header.height,
     display: "flex",
     flexDirection: "column",
     justifyContent: "center",
@@ -57,8 +55,6 @@ const List = ({ list, user }) => {
     listContainer,
     header,
     postsContainer,
-    form,
-    iconButton,
     twitterHandleContainer,
     twitterIcon
   } = useStyles();
@@ -67,7 +63,7 @@ const List = ({ list, user }) => {
     if (listTitle !== list.title) {
       setListTitle(list.title);
     }
-  }, [list]);
+  }, [list]); // it does not work if listTitle is added to depencencies array
 
   const handleInputText = e => {
     setListTitle(e.currentTarget.value);
