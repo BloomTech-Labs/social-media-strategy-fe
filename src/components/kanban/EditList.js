@@ -3,16 +3,11 @@ import {
     InputBase,
     IconButton,
     makeStyles,
-    Divider,
-    Dialog,
-    DialogTitle,
-    DialogContent,
-    DialogContentText,
-    DialogActions,
-    Button
+    Divider
 } from '@material-ui/core';
 import CheckIcon from '@material-ui/icons/Check';
 import DeleteIcon from '@material-ui/icons/Delete';
+import ModalAlert from '../templates/ModalAlert';
 
 const useStyles = makeStyles(theme => ({
     form: {
@@ -82,29 +77,13 @@ const EditList = props => {
                 </IconButton>
             </form>
 
-            <Dialog
-                open={modalOpen}
-                onClose={() => setModalOpen(false)}
-                aria-labelledby='dialog-title'
-            >
-                <DialogTitle id='dialog-title'>
-                    {`Would you like to delete the ${listTitle} list?`}
-                </DialogTitle>
-                <DialogContent>
-                    <DialogContentText id="dialog-description">
-                        {`Confirming this action all posts in the list will also be deleted.`}
-                    </DialogContentText>
-                </DialogContent>
-
-                <DialogActions>
-                    <Button onClick={() => setModalOpen(false)} color="primary">
-                        Cancel
-                    </Button>
-                    <Button onClick={deleteList} color="primary" autoFocus>
-                        Confirm
-                    </Button>
-                </DialogActions>
-            </Dialog>
+            <ModalAlert 
+                open={modalOpen} 
+                setOpen={setModalOpen}
+                title={`Would you like to delete the ${listTitle} list?`}
+                content={'Confirming this action all posts in the list will also be deleted.'}
+                handleConfirmation={deleteList}
+            />
         </>
     );
 }
