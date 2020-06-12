@@ -39,19 +39,6 @@ const useStyles = makeStyles((theme) => ({
     overflow: "hidden",
     height: `calc(100vh - ${theme.kanban.topContainer.height} - ${theme.kanban.list.header.height} - ${theme.spacing(2)}px) !important`,
   },
-  form: {
-    padding: '2px 0',
-    display: 'flex',
-    alignItems: 'center',
-    justifyContent: 'space-between',
-    borderRadius: theme.shape.borderRadius,
-    width: '100%',
-    height: 'max-content',
-    backgroundColor: '#fff',
-  },
-  iconButton: {
-    padding: 10,
-  },
   twitterHandleContainer: {
     display: "flex",
     alignItems: "center",
