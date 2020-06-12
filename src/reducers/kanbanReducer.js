@@ -2,6 +2,7 @@ import {
   UPDATE_LISTS,
   ADD_LIST,
   EDIT_LIST,
+  DELETE_LIST,
   ADD_POST,
   DELETE_POST
 } from "../actions/kanbanActionTypes";
@@ -40,6 +41,12 @@ const kanbanReducer = (state = initialState, action) => {
             ...payload
           }
         },
+      };
+    case DELETE_LIST:
+      const updatedLists = payload;
+      return {
+        ...state,
+        lists: updatedLists,
       };
     case ADD_POST:
       return {

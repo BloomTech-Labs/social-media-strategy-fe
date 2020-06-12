@@ -3,6 +3,7 @@ import {
   UPDATE_LISTS,
   ADD_LIST,
   EDIT_LIST,
+  DELETE_LIST,
   ADD_POST,
   DELETE_POST,
 } from "./kanbanActionTypes";
@@ -44,7 +45,7 @@ export const loadListsFromDb = (userId) => async (dispatch) => {
 };
 
 export const addList = (title) => async (dispatch) => {
-  let { data } = await axiosWithAuth().post(`/lists`, {
+  const { data } = await axiosWithAuth().post(`/lists`, {
     title,
   });
 
@@ -55,7 +56,7 @@ export const addList = (title) => async (dispatch) => {
 };
 
 export const updateList = (listId, changes) => async (dispatch) => {
-  let { data } = await axiosWithAuth().patch(`/lists/${listId}`, changes);
+  const { data } = await axiosWithAuth().patch(`/lists/${listId}`, changes);
 
   dispatch({
     type: EDIT_LIST,
@@ -63,11 +64,50 @@ export const updateList = (listId, changes) => async (dispatch) => {
   });
 };
 
+export const deleteList = (lists, listToDelete) => async (dispatch) => {
+  // array to save id and new index of lists that change index
+  const listsToBeUpdated = [];
+
+  const updatedLists = Object.keys(lists)
+    .filter(key => key !== listToDelete.id)
+    .reduce((result, currentId) => {
+      if(lists[currentId].index < listToDelete.index) {
+        result[currentId] = lists[currentId];
+      } else {
+        const updatedList = {
+          ...lists[currentId],
+          index: lists[currentId].index - 1
+        }
+
+        // save id and index to update/patch in DB
+        listsToBeUpdated.push({
+          id: updatedList.id,
+          index: updatedList.index
+        });
+
+        result[currentId] = updatedList;
+      }
+        
+      return result;
+  }, {});
+
+  dispatch({
+    type: DELETE_LIST,
+    payload: updatedLists,
+  });
+
+  // Delete list in DB
+  await axiosWithAuth().delete(`/lists/${listToDelete.id}`);
+
+  // Update indexes in DB
+  listsToBeUpdated.forEach(async ({ id, index }) => {
+    await axiosWithAuth().patch(`/lists/${id}`, { index });
+  })
+}
+
 export const addPost = (post) => async (dispatch) => {
   const { list_id } = post;
-  let { data } = await axiosWithAuth().post(`/lists/${list_id}/posts`, post);
-
-  console.log("new post", data);
+  const { data } = await axiosWithAuth().post(`/lists/${list_id}/posts`, post);
 
   dispatch({
     type: ADD_POST,

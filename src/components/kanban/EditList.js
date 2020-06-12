@@ -1,4 +1,6 @@
 import React, { useState } from 'react';
+import { deleteList } from '../../actions/listsActions';
+import { useDispatch, useSelector } from 'react-redux';
 import {
     InputBase,
     IconButton,
@@ -32,6 +34,7 @@ const useStyles = makeStyles(theme => ({
 const EditList = props => {
     const {
         listTitle,
+        list,
         handleInputText,
         submit
     } = props;
@@ -42,10 +45,13 @@ const EditList = props => {
         divider
     } = useStyles();
 
+    const dispatch = useDispatch();
+    const { lists } = useSelector(state => state.kanban);
+
     const [modalOpen, setModalOpen] = useState(false);
 
-    const deleteList = () => {
-        console.log('delete list');
+    const handleDeleteConfirmation = () => {
+        dispatch(deleteList(lists, list));
     }
 
     const handleBlur = e => {
@@ -82,7 +88,7 @@ const EditList = props => {
                 setOpen={setModalOpen}
                 title={`Would you like to delete the ${listTitle} list?`}
                 content={'Confirming this action all posts in the list will also be deleted.'}
-                handleConfirmation={deleteList}
+                handleConfirmation={handleDeleteConfirmation}
             />
         </>
     );

@@ -93,6 +93,7 @@ const List = ({ list, user }) => {
             { isEditing ? 
               <EditList
                 listTitle={listTitle}
+                list={list}
                 handleInputText={handleInputText} 
                 submit={submit}
               />
