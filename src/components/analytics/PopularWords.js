@@ -10,6 +10,7 @@ const useStyles = makeStyles({
     width: 500,
     margin: "1%",
     marginTop: "0!important",
+    padding: "2.5% 5.5%",
   },
   title: {
     fontSize: 40,
@@ -30,7 +31,7 @@ const useStyles = makeStyles({
 export default function PopularWords() {
   const classes = useStyles();
   return (
-    <div style={{ display: "flex", justifyContent: "center", marginTop: "4%" }}>
+    <div style={{ display: "flex", justifyContent: "center", marginTop: "4%"}}>
       <Card className={classes.root}>
         <CardContent>
           <Typography className={classes.title} style={{ color: "#4E4E4E" }}>
@@ -46,7 +47,7 @@ export default function PopularWords() {
           <div
             style={{
               display: "flex",
-              justifyContent: "space-around",
+              justifyContent: "space-between",
               marginTop: "5%",
             }}
           >
