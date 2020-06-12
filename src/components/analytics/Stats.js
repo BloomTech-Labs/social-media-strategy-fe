@@ -47,17 +47,6 @@ export default function Stats() {
   const classes = useStyles();
   return (
     <div>
-      <h1
-        style={{
-          fontFamily: "Roboto Condensed",
-          color: "#4E4E4E",
-          marginLeft: "20%",
-          marginTop: "5%",
-          fontSize: "20pt",
-        }}
-      >
-        Analytics
-      </h1>
       <div style={{ display: "flex", justifyContent: "center" }}>
         <Card className={classes.root}>
           <CardContent className={classes.card}>
@@ -77,7 +66,7 @@ export default function Stats() {
           <CardContent className={classes.card}>
             <FavoriteIcon style={{ color: "red", width: "100%" }} />
             <Typography className={classes.number}>3.6K</Typography>
-            <Typography className={classes.stat}>Favorites</Typography>
+            <Typography className={classes.stat}>Likes</Typography>
           </CardContent>
         </Card>
         <Card className={classes.root}>
