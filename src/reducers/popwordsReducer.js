@@ -1,16 +1,14 @@
-import {GET_DATA, UPDATE_DATA} from '../actions/popwordsActions';
+import {GET_WORDS, UPDATE_WORDS} from '../actions/popwordsActions';
 
-const initialState = { 
-    topics: {},
-};
+const initialState = {};
 
 const popwordsReducer = (state = initialState, action) => {
     switch(action.type) {
-        case GET_DATA:
+        case GET_WORDS:
             return {
                 ...state,
             };
-        case UPDATE_DATA:
+        case UPDATE_WORDS:
             return action.payload;
             default:
             return state;

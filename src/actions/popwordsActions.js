@@ -1,8 +1,8 @@
 import axios from "axios";
 
 
-export const GET_DATA = 'GET_DATA';
-export const UPDATE_DATA = 'UPDATE_DATA';
+export const GET_WORDS = 'GET_WORDS';
+export const UPDATE_WORDS = 'UPDATE_WORDS';
 
 export function getWords() {
     return (dispatch, getState) => {
@@ -12,7 +12,7 @@ export function getWords() {
     .then(res => {
         console.log(res);
         console.log(res.data);
-        dispatch({ type: UPDATE_DATA, payload: res.data });
+        dispatch({ type: UPDATE_WORDS, payload: res.data });
     })
     .catch(err => {
         console.log('Error fetching data', err);
