@@ -9,13 +9,12 @@ import {
   IconButton
 } from "@material-ui/core";
 // Icons
-import EditIcon from '@material-ui/icons/Edit';
 import TwitterIcon from "@material-ui/icons/Twitter";
-import DeleteIcon from '@material-ui/icons/Delete';
 
 import { Scrollbars } from "react-custom-scrollbars";
 import { updateList } from "../../actions/listsActions";
 import Post from "./Post";
+import EditList from "./EditList";
 
 
 const useStyles = makeStyles((theme) => ({
@@ -59,7 +58,7 @@ const useStyles = makeStyles((theme) => ({
   },
   twitterIcon: {
     color: "#2196F3",
-    width: "20px",
+    width: "16px",
   },
 }));
 
@@ -109,25 +108,11 @@ const List = ({ list, user }) => {
         >
           <div className={header} {...provided.dragHandleProps}>
             { isEditing ? 
-              <form onSubmit={submit} className={form} style={{width: '100%'}}>
-                <InputBase
-                  autoFocus
-                  onBlur={submit}
-                  onChange={handleInputText}
-                  id="standard-error-helper-text"
-                  defaultValue={listTitle}
-                  fullWidth
-                  inputProps={{
-                    'aria-label': 'edit tile',
-                  }}
-                />
-                <IconButton type="submit" className={iconButton} aria-label="confirm edit">
-                  <EditIcon />
-                </IconButton>
-                <IconButton className={iconButton} aria-label="delete list">
-                  <DeleteIcon />
-                </IconButton>
-              </form>
+              <EditList
+                listTitle={listTitle}
+                handleInputText={handleInputText} 
+                submit={submit}
+              />
               :
               <Typography style={{cursor: 'pointer'}} onClick={() => setIsEditing(true)} variant="h6" component="h3">
                 {listTitle}
