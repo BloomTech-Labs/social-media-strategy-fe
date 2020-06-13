@@ -11,7 +11,7 @@ import {
     Hidden
 } from '@material-ui/core';
 // Componets
-import CreatePost from '../kanban/CreatePost';
+import CreatePost from './CreatePost';
 // Icons
 import DashboardIcon from "@material-ui/icons/Dashboard";
 import AccountBoxIcon from "@material-ui/icons/AccountBox";
