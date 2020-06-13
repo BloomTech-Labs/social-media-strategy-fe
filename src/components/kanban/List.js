@@ -12,6 +12,7 @@ import TwitterIcon from "@material-ui/icons/Twitter";
 import { Scrollbars } from "react-custom-scrollbars";
 import { updateList } from "../../actions/listsActions";
 import Post from "./Post";
+import CreatePostButton from "./CreatePostButton";
 import EditList from "./EditList";
 
 
@@ -126,6 +127,7 @@ const List = ({ list, user }) => {
                   {list.posts?.map((post) => (
                     <Post key={post.id} post={post} />
                   ))}
+                  <CreatePostButton listId={list.id} />
                 </Scrollbars>
                 {provided.placeholder}
               </div>
