@@ -1,4 +1,6 @@
 import React, { useState } from "react";
+import { useDispatch } from "react-redux";
+import { deletePost } from "../../actions/listsActions";
 // Material-UI
 import {
   IconButton,
@@ -10,10 +12,9 @@ import {
 // Material-UI icons
 import MoreHorizIcon from "@material-ui/icons/MoreHoriz";
 import DeleteIcon from "@material-ui/icons/Delete";
-import { useDispatch } from "react-redux";
-import { deletePost } from "../../actions/listsActions";
+import EditIcon from "@material-ui/icons/Edit";
 
-const PostMenu = ({ post }) => {
+const PostMenu = ({ post, setEditing }) => {
   const dispatch = useDispatch();
   const [anchorEl, setAnchorEl] = useState(null);
   const isOpen = Boolean(anchorEl);
@@ -26,9 +27,9 @@ const PostMenu = ({ post }) => {
     setAnchorEl(null);
   };
 
-  // const handleEdit = async () => {
-  //   console.log("edit");
-  // };
+  const handleEdit = () => {
+    setEditing();
+  };
 
   const handleDelete = async () => {
     dispatch(deletePost(post));
@@ -63,14 +64,14 @@ const PostMenu = ({ post }) => {
         open={isOpen}
         onClose={handleClose}
       >
-        {/* { !post.posted && 
-                    <MenuItem onClick={handleEdit}>
-                        <ListItemIcon>
-                            <EditIcon fontSize="small" />
-                        </ListItemIcon>
-                        <ListItemText primary="Edit" />
-                    </MenuItem> 
-                } */}
+        { !post.posted && 
+          <MenuItem onClick={handleEdit}>
+            <ListItemIcon>
+                <EditIcon fontSize="small" />
+            </ListItemIcon>
+            <ListItemText primary="Edit" />
+          </MenuItem> 
+        }
         <MenuItem onClick={handleDelete}>
           <ListItemIcon>
             <DeleteIcon fontSize="small" />

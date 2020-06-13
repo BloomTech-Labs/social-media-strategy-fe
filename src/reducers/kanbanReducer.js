@@ -4,6 +4,7 @@ import {
   EDIT_LIST,
   DELETE_LIST,
   ADD_POST,
+  EDIT_POST,
   DELETE_POST
 } from "../actions/kanbanActionTypes";
 
@@ -49,28 +50,57 @@ const kanbanReducer = (state = initialState, action) => {
         lists: updatedLists,
       };
     case ADD_POST:
+      // payload: new post
       return {
         ...state,
         lists: {
           ...state.lists,
           [payload.list_id]: {
             ...state.lists[payload.list_id],
-            posts: [...state.lists[payload.list_id].posts, payload],
+            posts: [
+              ...state.lists[payload.list_id].posts,
+              payload
+            ],
           },
         },
       };
-    case DELETE_POST:
-      const updatedPosts = state.lists[payload.list_id].posts.filter(post => post.id !== payload.id);
-      return {
-        ...state,
-        lists: {
+    case EDIT_POST:
+      {
+        // payload: updated post
+        const updatedPosts = state.lists[payload.list_id].posts.map(post => {
+          if (post.id === payload.id) {
+            return payload;
+          } 
+
+          return post;
+        });
+
+        return {
+          ...state,
+          lists: {
             ...state.lists,
             [payload.list_id]: {
-                ...state.lists[payload.list_id],
-                posts: updatedPosts
+              ...state.lists[payload.list_id],
+              posts: updatedPosts
             }
+          }
         }
-      };
+      }
+    case DELETE_POST:
+      {
+        // payload: post to be deleted
+        const updatedPosts = state.lists[payload.list_id].posts.filter(post => post.id !== payload.id);
+        return {
+          ...state,
+          lists: {
+              ...state.lists,
+              [payload.list_id]: {
+                  ...state.lists[payload.list_id],
+                  posts: updatedPosts
+              }
+          }
+        };
+      }
     default:
       return state;
   }

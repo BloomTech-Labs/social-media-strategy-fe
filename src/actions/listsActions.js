@@ -5,6 +5,7 @@ import {
   EDIT_LIST,
   DELETE_LIST,
   ADD_POST,
+  EDIT_POST,
   DELETE_POST,
 } from "./kanbanActionTypes";
 
@@ -123,3 +124,12 @@ export const deletePost = (post) => async (dispatch) => {
     payload: post,
   });
 };
+
+export const updatePost = (postId, changes) => async (dispatch) => {
+  const { data } = await axiosWithAuth().patch(`/posts/${postId}`, changes);
+
+  dispatch({
+    type: EDIT_POST,
+    payload: data
+  });
+}

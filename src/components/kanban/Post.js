@@ -1,8 +1,10 @@
 import React, { useState } from "react";
+import { useDispatch } from "react-redux";
 import { Draggable } from "react-beautiful-dnd";
 import { axiosWithAuth } from "../../utils/axiosWithAuth";
+import { updatePost } from "../../actions/listsActions";
 // Components
-
+import EditPostText from "./EditPostText";
 import PostMenu from "./PostMenu";
 // Material-UI
 import { Typography, makeStyles, Button } from "@material-ui/core";
@@ -44,13 +46,35 @@ const Post = ({ post, index }) => {
     actionsContainer,
   } = useStyles();
 
+  const dispatch = useDispatch();
+
   const [isPosted, setPosted] = useState(post.posted);
+  const [text, setText] = useState(post.post_text || "");
+  const [isEditing, setIsEditing] = useState(false);
 
   const postToTwitter = () => {
     axiosWithAuth()
       .put(`/posts/${post.id}/postnow`)
       .then(() => setPosted(true));
   };
+
+  const handleInputText = e => {
+    setText(e.currentTarget.value);
+  }
+
+  const submit = e => {
+    e.preventDefault();
+
+    // if input is empty set text with the previous post text value
+    if (!text) {
+      setText(post.post_text);
+    } else if (text !== post.post_text) {
+      dispatch(updatePost(post.id, { post_text: text }));
+    }
+
+    console.log('submit');
+    setIsEditing(false);
+  }
 
   return (
     <Draggable key={post.id} draggableId={post.id} index={post.index}>
@@ -63,10 +87,19 @@ const Post = ({ post, index }) => {
           style={{ ...provided.draggableProps.style }}
         >
           <div className={contentContainer}>
-            <Typography style={{flexGrow: '1'}}>{post.post_text} </Typography>
-            <div>
-              <PostMenu post={post} />
-            </div>
+            { isEditing ? 
+              <EditPostText 
+                text={text}
+                handleInputText={handleInputText}
+                submit={submit}
+              />
+                :
+              <>
+                <Typography onClick={() => setIsEditing(true)} style={{flexGrow: '1'}}>{text} </Typography>
+                <PostMenu post={post} setEditing={() => setIsEditing(true)} />
+              </>
+            }
+            
           </div>
           {post.imageUrl && (
             <img className={image} src={post.imageUrl} alt="Post" />

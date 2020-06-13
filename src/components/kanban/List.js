@@ -20,7 +20,6 @@ const useStyles = makeStyles((theme) => ({
     backgroundColor: "transparent",
     height: "fit-content",
     marginLeft: theme.spacing(2),
-    marginRight: theme.spacing(2),
     width: 275,
     minWidth: 275,
   },

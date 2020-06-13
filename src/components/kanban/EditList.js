@@ -65,6 +65,7 @@ const EditList = props => {
             <form onSubmit={submit} className={form} style={{width: '100%'}}>
                 <InputBase
                     autoFocus
+                    onFocus={e => e.target.select()}
                     onBlur={handleBlur}
                     onChange={handleInputText}
                     id="standard-error-helper-text"
