@@ -23,12 +23,17 @@ const useStyles = makeStyles(theme => ({
         backgroundColor: '#fff',
     },
     iconButton: {
-        padding: 10,
+        padding: 5,
     },
     divider: {
         height: 28,
         margin: 4,
     },
+    input: {
+        fontFamily: theme.typography.h6.fontFamily,
+        fontSize: theme.typography.h6.fontSize,
+        color: theme.typography.h6.color
+    }
 }))
 
 const EditList = props => {
@@ -42,7 +47,8 @@ const EditList = props => {
     const {
         form,
         iconButton,
-        divider
+        divider,
+        input
     } = useStyles();
 
     const dispatch = useDispatch();
@@ -71,6 +77,7 @@ const EditList = props => {
                     id="standard-error-helper-text"
                     defaultValue={listTitle}
                     fullWidth
+                    className={input}
                     inputProps={{
                         'aria-label': 'edit title',
                     }}
