@@ -1,20 +1,14 @@
-import React, { useState, useEffect } from "react";
-import { useDispatch } from "react-redux";
+import React from "react";
 import { Droppable, Draggable } from "react-beautiful-dnd";
 // Material-UI
 import {
-  Typography,
   makeStyles,
 } from "@material-ui/core";
-// Icons
-import TwitterIcon from "@material-ui/icons/Twitter";
 
 import { Scrollbars } from "react-custom-scrollbars";
-import { updateList } from "../../actions/listsActions";
+import ListHeader from "./ListHeader";
 import Post from "./Post";
 import CreatePostButton from "./CreatePostButton";
-import EditList from "./EditList";
-
 
 const useStyles = makeStyles((theme) => ({
   listContainer: {
@@ -24,62 +18,18 @@ const useStyles = makeStyles((theme) => ({
     width: 275,
     minWidth: 275,
   },
-  header: {
-    paddingLeft: theme.spacing(2),
-    paddingRight: theme.spacing(1),
-    backgroundColor: "#FFF",
-    minHeight: theme.kanban.list.header.height,
-    display: "flex",
-    flexDirection: "column",
-    justifyContent: "center",
-  },
   postsContainer: {
     overflow: "hidden",
     height: `calc(100vh - ${theme.kanban.topContainer.height} - ${theme.kanban.list.header.height} - ${theme.spacing(2)}px) !important`,
   },
-  twitterHandleContainer: {
-    display: "flex",
-    alignItems: "center",
-  },
-  twitterIcon: {
-    color: "#2196F3",
-    width: "16px",
-  },
 }));
 
 const List = ({ list, user }) => {
-  const dispatch = useDispatch();
-  const [isEditing, setIsEditing] = useState(false);
-  const [listTitle, setListTitle] = useState(list?.title || "");
+  
   const {
     listContainer,
-    header,
-    postsContainer,
-    twitterHandleContainer,
-    twitterIcon
+    postsContainer
   } = useStyles();
-
-  useEffect(() => {
-    if (listTitle !== list.title) {
-      setListTitle(list.title);
-    }
-  }, [list]); // it does not work if listTitle is added to depencencies array
-
-  const handleInputText = e => {
-    setListTitle(e.currentTarget.value);
-  }
-
-  const submit = e => {
-    e.preventDefault();
-
-    if (!listTitle) {
-      setListTitle(list.title)
-    } else if (listTitle !== list.title) {
-      dispatch(updateList(list.id, { title: listTitle }));
-    }
-    
-    setIsEditing(false);
-  }
 
   return (
     <Draggable key={list.id} draggableId={list.id} index={list.index}>
@@ -89,24 +39,11 @@ const List = ({ list, user }) => {
           ref={provided.innerRef}
           {...provided.draggableProps}
         >
-          <div className={header} {...provided.dragHandleProps}>
-            { isEditing ? 
-              <EditList
-                listTitle={listTitle}
-                list={list}
-                handleInputText={handleInputText} 
-                submit={submit}
-              />
-              :
-              <Typography style={{cursor: 'pointer'}} onClick={() => setIsEditing(true)} variant="h6" component="h3">
-                {listTitle}
-              </Typography>
-            }
-            <div className={twitterHandleContainer}>
-              <TwitterIcon className={twitterIcon} />
-              <Typography variant="caption">{`@${user.twitter_handle}`}</Typography>
-            </div>
-          </div>
+          <ListHeader
+            list={list} 
+            dragHandleProps={provided.dragHandleProps}
+            user={user}
+          />
           <Droppable
             direction="vertical"
             droppableId={String(list.id)}
