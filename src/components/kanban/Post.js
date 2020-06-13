@@ -38,7 +38,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const Post = ({ post, index }) => {
+const Post = ({ post }) => {
   const {
     container,
     contentContainer,
@@ -62,7 +62,7 @@ const Post = ({ post, index }) => {
     setText(e.currentTarget.value);
   }
 
-  const submit = e => {
+  const handlePostUpdate = (e) => {
     e.preventDefault();
 
     // if input is empty set text with the previous post text value
@@ -72,7 +72,6 @@ const Post = ({ post, index }) => {
       dispatch(updatePost(post.id, { post_text: text }));
     }
 
-    console.log('submit');
     setIsEditing(false);
   }
 
@@ -91,7 +90,7 @@ const Post = ({ post, index }) => {
               <EditPostText 
                 text={text}
                 handleInputText={handleInputText}
-                submit={submit}
+                submit={handlePostUpdate}
               />
                 :
               <>

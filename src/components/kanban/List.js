@@ -124,7 +124,7 @@ const List = ({ list, user }) => {
               >
                 <Scrollbars>
                   {list.posts?.map((post) => (
-                    <Post key={post.id} post={post} index={post.index} />
+                    <Post key={post.id} post={post} />
                   ))}
                 </Scrollbars>
                 {provided.placeholder}
