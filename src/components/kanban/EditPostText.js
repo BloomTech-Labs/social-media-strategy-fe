@@ -35,6 +35,7 @@ const EditPostText = (props) => {
 					onFocus={(e) => e.target.select()}
 					onBlur={handleBlur}
 					onChange={handleInputText}
+					onKeyDown={handleInputText}
 					id="standard-error-helper-text"
 					defaultValue={text}
 					multiline
