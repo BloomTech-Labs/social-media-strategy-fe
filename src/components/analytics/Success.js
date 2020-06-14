@@ -1,4 +1,6 @@
 import React from "react";
+import { useSelector } from "react-redux";
+
 import { Card } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
 import CardContent from "@material-ui/core/CardContent";
@@ -23,10 +25,12 @@ const useStyles = makeStyles({
 
 export default function Success() {
   const classes = useStyles();
+  const popWords = useSelector(state => state.popWords.success.topics);
+
 
   return (
     <div style={{ display: "flex", justifyContent: "center", marginTop: "4%" }}>
-      <Card className={classes.root}>
+        <Card className={classes.root}>
         <div>
           <CardContent>
             <Typography className={classes.title} style={{ color: "#00BB78" }}>
@@ -47,8 +51,8 @@ export default function Success() {
           </CardContent>
           <div style={{ display: "flex", justifyContent: "space-between" }}>
             <CardContent>
-              <Typography>Testing</Typography>
-              <Typography>Testing</Typography>
+              <Typography>{console.log("testing:", popWords)}</Typography>
+              <Typography></Typography>
               <Typography>Testing</Typography>
               <Typography>Testing</Typography>
               <Typography>Testing</Typography>
