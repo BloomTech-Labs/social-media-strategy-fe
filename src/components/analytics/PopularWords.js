@@ -75,14 +75,14 @@ export default function PopularWords() {
     setOpen(false);
   };
 
-  useEffect(() => {
-    if (!popWords.success.topics) {
-      console.log("fetching data");
-      (() => {
-        dispatch(getWords());
-      })();
-    }
-  }, [popWords]);
+  // useEffect(() => {
+  //   if (!popWords) {
+  //     console.log("fetching data");
+  //     (() => {
+  //       dispatch(getWords());
+  //     })();
+  //   }
+  // }, [popWords]);
 
   const body = (
     <div style={modalStyle} className={classes.paper}>
@@ -121,7 +121,7 @@ export default function PopularWords() {
 
   return (
     <div style={{ display: "flex", justifyContent: "center", marginTop: "4%" }}>
-      {/* {(loading == false)  ? 
+      {(!popWords.loading)  ? 
       <Card className={classes.root}>
         <CardContent>
           <Typography className={classes.title} style={{ color: "#4E4E4E" }}>
@@ -165,9 +165,8 @@ export default function PopularWords() {
           </div>
         </CardContent>
       </Card>
-      : null } */}
-      {!popWords.loading ? <Success onload={(() => dispatch({type: SEARCH_REQUEST}))}/> : <Loading/> }
-      {}
+      : <Loading onload={(() => dispatch({type: SEARCH_SUCCESS}))}/>}
+      {(popWords.success == !null) ? <Success/> : null }
     </div>
   );
 };
