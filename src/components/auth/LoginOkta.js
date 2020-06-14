@@ -9,57 +9,57 @@ import {
   AppBar,
   Toolbar,
   Button,
-  CircularProgress,
+  CircularProgress
 } from "@material-ui/core";
 import loginImg from "../../assets/imgs/login.png";
 import logo from "../../assets/imgs/Logo.svg";
 import logoDark from "../../assets/imgs/Logo-dark.svg";
 
-const useStyles = makeStyles((theme) => ({
+const useStyles = makeStyles(theme => ({
   root: {
-    height: "100vh",
+    height: "100vh"
   },
   loading: {
     display: "flex",
     justifyContent: "center",
     alignItems: "center",
-    height: "100vh",
+    height: "100vh"
   },
   navbar: {
     height: theme.navbar.width.close,
     display: "flex",
-    justifyContent: "center",
+    justifyContent: "center"
   },
   imageContainer: {
     overflow: "hidden",
-    height: "100%",
+    height: "100%"
   },
   image: {
     width: "100%",
     height: "100%",
     objectFit: "cover",
-    objectPosition: "center",
+    objectPosition: "center"
   },
   logo: {
-    height: "20px",
+    height: "20px"
   },
   widgetContainer: {
     display: "flex",
     justifyContent: "center",
     alignItems: "center",
-    height: "100%",
-  },
+    height: "100%"
+  }
 }));
 
-const LoginOkta = ({ baseUrl }) => {
+const LoginOkta = () => {
   const { authService, authState } = useOktaAuth();
   const { push } = useHistory();
   const classes = useStyles();
 
-  const onSuccess = async (res) => {
+  const onSuccess = async res => {
     authService.login("/home");
     authService.redirect({
-      sessionToken: res.session.token,
+      sessionToken: res.session.token
     });
   };
 
