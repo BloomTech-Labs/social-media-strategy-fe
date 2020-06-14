@@ -11,7 +11,10 @@ import { Typography, makeStyles, Button } from "@material-ui/core";
 
 const useStyles = makeStyles((theme) => ({
 	container: {
-		paddingBottom: theme.spacing(3),
+		paddingBottom: theme.spacing(1),
+		paddingTop: theme.spacing(1),
+		marginTop: 4,
+		borderRadius: theme.shape.borderRadius,
 		backgroundColor: "#FFF",
 	},
 	contentContainer: {
@@ -24,6 +27,10 @@ const useStyles = makeStyles((theme) => ({
 		display: "flex",
 		alignItems: "flex-start",
 	},
+	postText: {
+		flexGrow: "1",
+		cursor: "pointer",
+	},
 	image: {
 		width: "100%",
 		maxHeight: "140px",
@@ -31,7 +38,7 @@ const useStyles = makeStyles((theme) => ({
 	},
 	actionsContainer: {
 		display: "flex",
-		justifyContent: "space-between",
+		justifyContent: "flex-end",
 		margin: theme.spacing(1),
 		marginRight: theme.spacing(2),
 		marginBottom: 0,
@@ -39,7 +46,13 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 const Post = ({ post }) => {
-	const { container, contentContainer, image, actionsContainer } = useStyles();
+	const {
+		container,
+		contentContainer,
+		postText,
+		image,
+		actionsContainer,
+	} = useStyles();
 
 	const dispatch = useDispatch();
 
@@ -96,7 +109,7 @@ const Post = ({ post }) => {
 								<>
 									<Typography
 										onClick={() => setIsEditing(true)}
-										style={{ flexGrow: "1" }}
+										className={postText}
 									>
 										{text}
 									</Typography>
