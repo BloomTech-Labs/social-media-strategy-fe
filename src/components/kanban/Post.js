@@ -75,46 +75,52 @@ const Post = ({ post }) => {
 	};
 
 	return (
-		<Draggable key={post.id} draggableId={post.id} index={post.index}>
-			{(provided, snapshot) => (
-				<div
-					ref={provided.innerRef}
-					{...provided.draggableProps}
-					{...provided.dragHandleProps}
-					className={container}
-					style={{ ...provided.draggableProps.style }}
-				>
-					<div className={contentContainer}>
-						{isEditing ? (
-							<EditPostText
-								text={text}
-								handleInputText={handleInputText}
-								submit={handlePostUpdate}
-							/>
-						) : (
-							<>
-								<Typography
-									onClick={() => setIsEditing(true)}
-									style={{ flexGrow: "1" }}
-								>
-									{text}{" "}
-								</Typography>
-								<PostMenu post={post} setEditing={() => setIsEditing(true)} />
-							</>
+		post && (
+			<Draggable key={post.id} draggableId={post.id} index={post.index}>
+				{(provided, snapshot) => (
+					<div
+						ref={provided.innerRef}
+						{...provided.draggableProps}
+						{...provided.dragHandleProps}
+						className={container}
+						style={{ ...provided.draggableProps.style }}
+					>
+						<div className={contentContainer}>
+							{isEditing ? (
+								<EditPostText
+									text={text}
+									handleInputText={handleInputText}
+									submit={handlePostUpdate}
+								/>
+							) : (
+								<>
+									<Typography
+										onClick={() => setIsEditing(true)}
+										style={{ flexGrow: "1" }}
+									>
+										{text}
+									</Typography>
+									<PostMenu post={post} setEditing={() => setIsEditing(true)} />
+								</>
+							)}
+						</div>
+						{post.imageUrl && (
+							<img className={image} src={post.imageUrl} alt="Post" />
 						)}
-					</div>
-					{post.imageUrl && (
-						<img className={image} src={post.imageUrl} alt="Post" />
-					)}
 
-					<div className={actionsContainer}>
-						<Button disabled={isPosted} onClick={postToTwitter} color="primary">
-							{isPosted ? "Posted" : "Post Now"}
-						</Button>
+						<div className={actionsContainer}>
+							<Button
+								disabled={isPosted}
+								onClick={postToTwitter}
+								color="primary"
+							>
+								{isPosted ? "Posted" : "Post Now"}
+							</Button>
+						</div>
 					</div>
-				</div>
-			)}
-		</Draggable>
+				)}
+			</Draggable>
+		)
 	);
 };
 
