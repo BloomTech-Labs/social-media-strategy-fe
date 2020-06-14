@@ -27,7 +27,7 @@ const needsToUpdateIndex = (source, destination, itemIndex, droppableId) => {
             return itemIndex >= destination.index;
         }
     }
-}
+};
 
 export const dragPostToDifferentList = (lists, source, destination) => dispatch => {
     const sourceList = lists[source.droppableId];
@@ -66,7 +66,7 @@ export const dragPostToDifferentList = (lists, source, destination) => dispatch 
                         ...post,
                         // update each post's index
                         index: newIndex,
-                    }
+                    };
                 } else {
                     return post;
                 }
@@ -90,13 +90,13 @@ export const dragPostToDifferentList = (lists, source, destination) => dispatch 
                         ...post,
                         // update each post's index
                         index: newIndex,
-                    }
+                    };
                 } else {
                     return post;
                 }
             }),
         },
-    }
+    };
 
     dispatch({
         type: UPDATE_LISTS,
@@ -107,7 +107,7 @@ export const dragPostToDifferentList = (lists, source, destination) => dispatch 
     postsToBeUpdated.forEach(async ({ id, updates }) => {
         await axiosWithAuth().patch(`/posts/${id}`, updates);
     });
-}
+};
 
 export const dragPostToSameList = (lists, source, destination) => dispatch => {
     const list = lists[source.droppableId];
@@ -132,13 +132,13 @@ export const dragPostToSameList = (lists, source, destination) => dispatch => {
                     return {
                         ...post,
                         index: newIndex,
-                    }
+                    };
                 } else {
                     return post;
                 }
             }),
         }
-    }
+    };
     
     dispatch({
         type: UPDATE_LISTS,
@@ -149,7 +149,7 @@ export const dragPostToSameList = (lists, source, destination) => dispatch => {
     postsToBeUpdated.forEach(async ({ id, index }) => {
         await axiosWithAuth().patch(`/posts/${id}`, { index });
     });
-}
+};
 
 export const dragList = (lists, source, destination) => async dispatch => {
     const listsArray = Object.values(lists).sort((a, b) => a.index - b.index);
@@ -168,7 +168,7 @@ export const dragList = (lists, source, destination) => async dispatch => {
             return {
                 ...list,
                 index: newIndex,
-            }
+            };
         } else {
             return list;
         }
@@ -188,4 +188,4 @@ export const dragList = (lists, source, destination) => async dispatch => {
      listsToBeUpdated.forEach(async ({ id, index }) => {
         await axiosWithAuth().patch(`/lists/${id}`, { index });
     });
-}
+};
