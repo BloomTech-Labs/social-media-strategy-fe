@@ -1,4 +1,5 @@
 import React from "react";
+import TwitterCharCount from "./TwitterCharCount";
 import { InputBase, IconButton, makeStyles } from "@material-ui/core";
 import CheckIcon from "@material-ui/icons/Check";
 
@@ -30,21 +31,24 @@ const EditPostText = (props) => {
 	return (
 		<>
 			<form onSubmit={submit} className={form} style={{ width: "100%" }}>
-				<InputBase
-					autoFocus
-					onFocus={(e) => e.target.select()}
-					onBlur={handleBlur}
-					onChange={handleInputText}
-					onKeyDown={handleInputText}
-					id="standard-error-helper-text"
-					defaultValue={text}
-					multiline
-					fullWidth
-					inputProps={{
-						"aria-label": "edit post",
-						maxLength: 280,
-					}}
-				/>
+				<div style={{ width: "100%" }}>
+					<InputBase
+						autoFocus
+						onFocus={(e) => e.target.select()}
+						onBlur={handleBlur}
+						onChange={handleInputText}
+						onKeyDown={handleInputText}
+						id="standard-error-helper-text"
+						defaultValue={text}
+						multiline
+						fullWidth
+						inputProps={{
+							"aria-label": "edit post",
+							maxLength: 280,
+						}}
+					/>
+					<TwitterCharCount text={text} />
+				</div>
 				<IconButton
 					type="submit"
 					className={iconButton}

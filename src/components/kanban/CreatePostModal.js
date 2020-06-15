@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { addList, addPost } from "../../actions/listsActions";
+import TwitterCharCount from "./TwitterCharCount";
 import {
 	makeStyles,
 	Dialog,
@@ -28,15 +29,13 @@ const useStyles = makeStyles((theme) => ({
 
 const CreatePostModal = (props) => {
 	const { listId, open, handleClose } = props;
-
+	const { content, formControl } = useStyles();
 	const dispatch = useDispatch();
 	const { lists } = useSelector((state) => state.kanban);
 	const [post, setPost] = useState({
 		list_id: "",
 		post_text: "",
 	});
-
-	const { content, formControl } = useStyles();
 
 	useEffect(() => {
 		if (lists) {
@@ -105,7 +104,6 @@ const CreatePostModal = (props) => {
 					multiline
 					rows={4}
 					rowsMax={7}
-					maxLength={280}
 					variant="outlined"
 					onChange={handlePostText}
 					onKeyDown={handlePostText}
@@ -113,6 +111,7 @@ const CreatePostModal = (props) => {
 						maxLength: 280,
 					}}
 				/>
+				<TwitterCharCount text={post.post_text} />
 
 				{/* List Select */}
 				<FormControl className={formControl}>
