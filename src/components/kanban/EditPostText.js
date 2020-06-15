@@ -14,6 +14,13 @@ const useStyles = makeStyles((theme) => ({
 		height: "max-content",
 		backgroundColor: "#fff",
 	},
+	secondColumn: {
+		display: "flex",
+		height: "100%",
+		flexDirection: "column",
+		justifyContent: "space-between",
+		alignItems: "center",
+	},
 	iconButton: {
 		padding: 10,
 	},
@@ -22,7 +29,7 @@ const useStyles = makeStyles((theme) => ({
 const EditPostText = (props) => {
 	const { text, handleInputText, submit } = props;
 
-	const { form, iconButton } = useStyles();
+	const { form, iconButton, secondColumn } = useStyles();
 
 	const handleBlur = (e) => {
 		submit(e);
@@ -31,31 +38,31 @@ const EditPostText = (props) => {
 	return (
 		<>
 			<form onSubmit={submit} className={form} style={{ width: "100%" }}>
-				<div style={{ width: "100%" }}>
-					<InputBase
-						autoFocus
-						onFocus={(e) => e.target.select()}
-						onBlur={handleBlur}
-						onChange={handleInputText}
-						onKeyDown={handleInputText}
-						id="standard-error-helper-text"
-						defaultValue={text}
-						multiline
-						fullWidth
-						inputProps={{
-							"aria-label": "edit post",
-							maxLength: 280,
-						}}
-					/>
+				<InputBase
+					autoFocus
+					onFocus={(e) => e.target.select()}
+					onBlur={handleBlur}
+					onChange={handleInputText}
+					onKeyDown={handleInputText}
+					id="standard-error-helper-text"
+					defaultValue={text}
+					multiline
+					fullWidth
+					inputProps={{
+						"aria-label": "edit post",
+						maxLength: 280,
+					}}
+				/>
+				<div className={secondColumn}>
+					<IconButton
+						type="submit"
+						className={iconButton}
+						aria-label="confirm edit"
+					>
+						<CheckIcon />
+					</IconButton>
 					<TwitterCharCount text={text} />
 				</div>
-				<IconButton
-					type="submit"
-					className={iconButton}
-					aria-label="confirm edit"
-				>
-					<CheckIcon />
-				</IconButton>
 			</form>
 		</>
 	);

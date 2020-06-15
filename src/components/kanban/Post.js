@@ -24,6 +24,7 @@ const useStyles = makeStyles((theme) => ({
 		marginRight: theme.spacing(1),
 		borderLeft: "solid 3px gray",
 		minHeight: "50px",
+		maxWidth: "100%",
 		display: "flex",
 		alignItems: "flex-start",
 	},
