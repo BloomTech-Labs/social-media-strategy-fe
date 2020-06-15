@@ -73,15 +73,6 @@ export default function PopularWords() {
     setOpen(false);
   };
 
-  useEffect(() => {
-    if (popWords.success === '') {
-      console.log("user hasn't requested data yet");
-      (() => {
-        dispatch(getWords());
-      })();
-    }
-  }, [popWords]);
-
   const body = (
     <div style={modalStyle} className={classes.paper}>
       <div style={{ padding: "4%" }}>
@@ -119,7 +110,7 @@ export default function PopularWords() {
 
   return (
     <div style={{ display: "flex", justifyContent: "center", marginTop: "4%" }}>
-      {(!popWords.loading) ? 
+      {(!popWords.loading && !popWords.success) ? 
       <Card className={classes.root}>
         <CardContent>
           <Typography className={classes.title} style={{ color: "#4E4E4E" }}>
@@ -163,9 +154,7 @@ export default function PopularWords() {
           </div>
         </CardContent>
       </Card>
-      : <Loading onload={(() => dispatch({type: SEARCH_SUCCESS}))}/>}
-      {(popWords.success.success === true) ? <Success/> : null }
-      {/* {popWords.success, <Success/>} */}
+      : (popWords.success === true) ? <Success/> : <Loading/> }
     </div>
   );
 };

@@ -25,9 +25,9 @@ const useStyles = makeStyles({
 
 export default function Success() {
   const classes = useStyles();
-  const popWords = useSelector((state) => state.popWords.success.topics);
+  const popWords = useSelector((state) => state.popWords.topics);
 
-  const arr = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
+  const colors = ['blue', 'green', 'red', 'purple', 'black'];
 
   return (
     <div style={{ display: "flex", justifyContent: "center", marginTop: "4%" }}>
@@ -52,38 +52,17 @@ export default function Success() {
             <Typography style={{ color: "#4E4E4E", fontSize: "12!important" }}>
               Grouped by topic
             </Typography>
+            <Typography>{console.log("testing", popWords)}</Typography>
           </CardContent>
           <div style={{ display: "flex", justifyContent: "space-between" }}>
-            <CardContent>
-
-            </CardContent>
-            <CardContent >
-              {arr.map((item) => (
-                <Typography style={{color: 'blue'}}> Testing </Typography>
+              {popWords.map((topic, topicIndex) => (
+                <CardContent key={topicIndex}>
+                { topic.map((word, index) => (
+                  <Typography style={{ color: colors[topicIndex] }} key={index}> {word} </Typography>
+                ))}
+                </CardContent>
               ))}
-              
-            </CardContent>
-            <CardContent>
-              {arr.map((item) => (
-                <Typography style={{color: 'green'}}> Testing </Typography>
-              ))}
-            </CardContent>
-            <CardContent>
-              {arr.map((item) => (
-                <Typography style={{color: 'red'}}> Testing </Typography>
-              ))}
-            </CardContent>
-            <CardContent>
-              {arr.map((item) => (
-                <Typography style={{color: 'purple'}}> Testing </Typography>
-              ))}
-            </CardContent>
-            <CardContent>
-              {arr.map((item) => (
-                <Typography> Testing </Typography>
-              ))}
-            </CardContent>
-          </div>
+            </div>
         </div>
       </Card>
     </div>

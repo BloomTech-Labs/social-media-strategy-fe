@@ -1,4 +1,6 @@
-import React from "react";
+import React, { useEffect } from "react";
+import { useSelector, useDispatch } from "react-redux";
+import { getWords } from "../../actions/popwordsActions";
 import { Card } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
 import CardContent from "@material-ui/core/CardContent";
@@ -25,6 +27,19 @@ const useStyles = makeStyles({
 
 export default function Loading() {
   const classes = useStyles();
+  const popWords = useSelector(state => state.popWords);
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    if (popWords.success === false && popWords.loading === true) {
+      console.log("no data yet");
+      const interval = setInterval(() => {
+        console.log('Interval triggered');
+        dispatch(getWords());
+      }, 10000);
+      return () => clearInterval(interval);
+    }
+  }, [popWords.success]);
 
   return (
     <div style={{ display: "flex", justifyContent: "center", marginTop: "4%" }}>

@@ -1,9 +1,9 @@
 import {SEARCH_REQUEST, SEARCH_SUCCESS, SEARCH_FAILURE} from '../actions/popwordsActions';
 
 const initialState = {
-    failure: '',
     loading: false,
-    success: '',
+    success: false,
+    topics: [],
 };
 
 const popwordsReducer = (state = initialState, action) => {
@@ -16,13 +16,19 @@ const popwordsReducer = (state = initialState, action) => {
         case SEARCH_FAILURE:
             return {
                 loading: false,
-                failure: action.payload,
+                success: false,
+                topics: [],
             };
         case SEARCH_SUCCESS: 
+            {
+            console.log("payload!!!", action.payload.topics);
+            const topics = Object.values(action.payload.topics).map(topic => topic);
             return {
                 loading: false,
-                success: action.payload,
-            };    
+                success: action.payload.success,
+                topics: topics,
+            };
+        }
             default:
             return state;
     }
