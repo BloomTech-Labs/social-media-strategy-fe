@@ -31,6 +31,8 @@ const useStyles = makeStyles((theme) => ({
 	postText: {
 		flexGrow: "1",
 		cursor: "pointer",
+		maxWidth: "100%",
+		lineBreak: "anywhere",
 	},
 	image: {
 		width: "100%",
