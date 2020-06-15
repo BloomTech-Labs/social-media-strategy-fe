@@ -56,7 +56,7 @@ const List = ({ list, user }) => {
 										: "transparent",
 								}}
 							>
-								<Scrollbars>
+								<Scrollbars autoHide>
 									{list.posts?.map((post, index) => (
 										<Post key={post.id} post={post} />
 									))}
