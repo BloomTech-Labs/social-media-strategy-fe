@@ -119,7 +119,7 @@ export default function PopularWords() {
 
   return (
     <div style={{ display: "flex", justifyContent: "center", marginTop: "4%" }}>
-      {/* {(!popWords.loading) ? 
+      {(!popWords.loading) ? 
       <Card className={classes.root}>
         <CardContent>
           <Typography className={classes.title} style={{ color: "#4E4E4E" }}>
@@ -164,8 +164,8 @@ export default function PopularWords() {
         </CardContent>
       </Card>
       : <Loading onload={(() => dispatch({type: SEARCH_SUCCESS}))}/>}
-      {(popWords.success.success === true) ? <Success/> : null } */}
-      {popWords.success, <Success/>}
+      {(popWords.success.success === true) ? <Success/> : null }
+      {/* {popWords.success, <Success/>} */}
     </div>
   );
 };
