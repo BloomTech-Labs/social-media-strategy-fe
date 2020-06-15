@@ -1,93 +1,88 @@
-import React, { useState, useEffect } from 'react';
-import { useDispatch } from 'react-redux';
-import EditList from './EditList';
-import { updateList } from '../../actions/listsActions';
-import {
-    makeStyles,
-    Typography
-} from '@material-ui/core';
+import React, { useState, useEffect } from "react";
+import { useDispatch } from "react-redux";
+import EditList from "./EditList";
+import { updateList } from "../../actions/listsActions";
+import { makeStyles, Typography } from "@material-ui/core";
 // Icons
 import TwitterIcon from "@material-ui/icons/Twitter";
 
-const useStyles = makeStyles(theme => ({
-    header: {
-        paddingLeft: theme.spacing(2),
-        paddingRight: theme.spacing(1),
-        backgroundColor: "#FFF",
-        minHeight: theme.kanban.list.header.height,
-        display: "flex",
-        flexDirection: "column",
-        justifyContent: "center",
-    },
-    twitterHandleContainer: {
-        display: "flex",
-        alignItems: "center",
-    },
-    twitterIcon: {
-        color: "#2196F3",
-        width: "16px",
-    },
+const useStyles = makeStyles((theme) => ({
+	header: {
+		paddingLeft: theme.spacing(2),
+		paddingRight: theme.spacing(1),
+		backgroundColor: "#FFF",
+		minHeight: theme.kanban.list.header.height,
+		borderRadius: theme.shape.borderRadius,
+		display: "flex",
+		flexDirection: "column",
+		justifyContent: "center",
+	},
+	twitterHandleContainer: {
+		display: "flex",
+		alignItems: "center",
+	},
+	twitterIcon: {
+		color: "#2196F3",
+		width: "16px",
+	},
 }));
 
 const ListHeader = (props) => {
-    const {
-        list,
-        dragHandleProps,
-        user
-    } = props;
+	const { list, dragHandleProps, user } = props;
 
-    const {
-        header,
-        twitterHandleContainer,
-        twitterIcon
-    } = useStyles();
+	const { header, twitterHandleContainer, twitterIcon } = useStyles();
 
-    const dispatch = useDispatch();
-    const [isEditing, setIsEditing] = useState(false);
-    const [listTitle, setListTitle] = useState(list?.title || "");
+	const dispatch = useDispatch();
+	const [isEditing, setIsEditing] = useState(false);
+	const [listTitle, setListTitle] = useState(list?.title || "");
 
-    useEffect(() => {
-        if (listTitle !== list.title) {
-          setListTitle(list.title);
-        }
-    }, [list]); // it does not work if listTitle is added to depencencies array
+	useEffect(() => {
+		if (listTitle !== list.title) {
+			setListTitle(list.title);
+		}
+	}, [list]); // it does not work if listTitle is added to depencencies array
 
-    const handleInputText = e => {
-        setListTitle(e.currentTarget.value);
-    }
+	const handleInputText = (e) => {
+		setListTitle(e.currentTarget.value);
+	};
 
-    const submit = e => {
-        e.preventDefault();
-    
-        if (!listTitle) {
-          setListTitle(list.title)
-        } else if (listTitle !== list.title) {
-          dispatch(updateList(list.id, { title: listTitle }));
-        }
-        
-        setIsEditing(false);
-    }
+	const submit = (e) => {
+		e.preventDefault();
 
-    return (
-        <div className={header} {...dragHandleProps}>
-            { isEditing ? 
-                <EditList
-                    listTitle={listTitle}
-                    list={list}
-                    handleInputText={handleInputText} 
-                    submit={submit}
-                />
-              :
-                <Typography style={{cursor: 'pointer'}} onClick={() => setIsEditing(true)} variant="h6" component="h3">
-                    {listTitle}
-                </Typography>
-            }
-            <div className={twitterHandleContainer}>
-                <TwitterIcon className={twitterIcon} />
-                <Typography variant="caption">{`@${user.twitter_handle}`}</Typography>
-            </div>
-        </div>
-    )
-}
+		if (!listTitle) {
+			setListTitle(list.title);
+		} else if (listTitle !== list.title) {
+			dispatch(updateList(list.id, { title: listTitle }));
+		}
+
+		setIsEditing(false);
+	};
+
+	return (
+		<div className={header} {...dragHandleProps}>
+			{isEditing ? (
+				<EditList
+					listTitle={listTitle}
+					list={list}
+					handleInputText={handleInputText}
+					submit={submit}
+				/>
+			) : (
+				<Typography
+					style={{ cursor: "pointer" }}
+					onClick={() => setIsEditing(true)}
+					variant="h6"
+					component="h3"
+				>
+					{listTitle}
+				</Typography>
+			)}
+			<div className={twitterHandleContainer}>
+				<TwitterIcon className={twitterIcon} />
+				<Typography variant="caption">{`@${user.twitter_handle}`}</Typography>
+			</div>
+		</div>
+	);
+};
 
 export default ListHeader;

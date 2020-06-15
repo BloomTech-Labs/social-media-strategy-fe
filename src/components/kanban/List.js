@@ -52,7 +52,7 @@ const List = ({ list, user }) => {
 								className={postsContainer}
 								style={{
 									background: snapshot.isDraggingOver
-										? "lightblue"
+										? "aliceblue"
 										: "transparent",
 								}}
 							>
