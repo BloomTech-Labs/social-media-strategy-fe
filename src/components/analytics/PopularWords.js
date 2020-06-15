@@ -61,8 +61,6 @@ function getModalStyle() {
 export default function PopularWords() {
   const classes = useStyles();
   const popWords = useSelector(state => state.popWords);
-  const loading = useSelector(state => state.popWords.loading);
-  const success = useSelector(state => state.popWords.success);
   const dispatch = useDispatch();
   const [modalStyle] = React.useState(getModalStyle);
   const [open, setOpen] = React.useState(false);
@@ -75,14 +73,14 @@ export default function PopularWords() {
     setOpen(false);
   };
 
-  // useEffect(() => {
-  //   if (!popWords) {
-  //     console.log("fetching data");
-  //     (() => {
-  //       dispatch(getWords());
-  //     })();
-  //   }
-  // }, [popWords]);
+  useEffect(() => {
+    if (popWords.success === '') {
+      console.log("user hasn't requested data yet");
+      (() => {
+        dispatch(getWords());
+      })();
+    }
+  }, [popWords]);
 
   const body = (
     <div style={modalStyle} className={classes.paper}>
@@ -121,7 +119,7 @@ export default function PopularWords() {
 
   return (
     <div style={{ display: "flex", justifyContent: "center", marginTop: "4%" }}>
-      {(!popWords.loading)  ? 
+      {/* {(!popWords.loading) ? 
       <Card className={classes.root}>
         <CardContent>
           <Typography className={classes.title} style={{ color: "#4E4E4E" }}>
@@ -166,7 +164,8 @@ export default function PopularWords() {
         </CardContent>
       </Card>
       : <Loading onload={(() => dispatch({type: SEARCH_SUCCESS}))}/>}
-      {(popWords.success == !null) ? <Success/> : null }
+      {(popWords.success.success === true) ? <Success/> : null } */}
+      {popWords.success, <Success/>}
     </div>
   );
 };

@@ -25,12 +25,16 @@ const useStyles = makeStyles({
 
 export default function Success() {
   const classes = useStyles();
-  const popWords = useSelector(state => state.popWords.success.topics);
+  const popWords = useSelector((state) => state.popWords.success.topics);
 
+  const arr = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
 
   return (
     <div style={{ display: "flex", justifyContent: "center", marginTop: "4%" }}>
-        <Card className={classes.root}>
+      <Card
+        className={classes.root}
+        style={{ maxHeight: 300, overflowY: "auto" }}
+      >
         <div>
           <CardContent>
             <Typography className={classes.title} style={{ color: "#00BB78" }}>
@@ -51,39 +55,33 @@ export default function Success() {
           </CardContent>
           <div style={{ display: "flex", justifyContent: "space-between" }}>
             <CardContent>
-              <Typography>{console.log("testing:", popWords)}</Typography>
-              <Typography></Typography>
-              <Typography>Testing</Typography>
-              <Typography>Testing</Typography>
-              <Typography>Testing</Typography>
+
+            </CardContent>
+            <CardContent >
+              {arr.map((item) => (
+                <Typography style={{color: 'blue'}}> Testing </Typography>
+              ))}
+              
             </CardContent>
             <CardContent>
-              <Typography>Testing</Typography>
-              <Typography>Testing</Typography>
-              <Typography>Testing</Typography>
-              <Typography>Testing</Typography>
-              <Typography>Testing</Typography>
+              {arr.map((item) => (
+                <Typography style={{color: 'green'}}> Testing </Typography>
+              ))}
             </CardContent>
             <CardContent>
-              <Typography>Testing</Typography>
-              <Typography>Testing</Typography>
-              <Typography>Testing</Typography>
-              <Typography>Testing</Typography>
-              <Typography>Testing</Typography>
+              {arr.map((item) => (
+                <Typography style={{color: 'red'}}> Testing </Typography>
+              ))}
             </CardContent>
             <CardContent>
-              <Typography>Testing</Typography>
-              <Typography>Testing</Typography>
-              <Typography>Testing</Typography>
-              <Typography>Testing</Typography>
-              <Typography>Testing</Typography>
+              {arr.map((item) => (
+                <Typography style={{color: 'purple'}}> Testing </Typography>
+              ))}
             </CardContent>
             <CardContent>
-              <Typography>Testing</Typography>
-              <Typography>Testing</Typography>
-              <Typography>Testing</Typography>
-              <Typography>Testing</Typography>
-              <Typography>Testing</Typography>
+              {arr.map((item) => (
+                <Typography> Testing </Typography>
+              ))}
             </CardContent>
           </div>
         </div>
