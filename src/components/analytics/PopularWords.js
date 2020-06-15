@@ -1,7 +1,6 @@
-import React, { useEffect } from "react";
-import { getWords } from "../../actions/popwordsActions";
+import React from "react";
 import { useSelector, useDispatch } from "react-redux";
-import {SEARCH_REQUEST, SEARCH_SUCCESS} from "../../actions/popwordsActions";
+import {SEARCH_REQUEST} from "../../actions/popwordsActions";
 import { Card } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
 import CardContent from "@material-ui/core/CardContent";
