@@ -1,110 +1,143 @@
 import React, { useState } from "react";
-import { useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { Draggable } from "react-beautiful-dnd";
-import TwitterIcon from "@material-ui/icons/Twitter";
 import { axiosWithAuth } from "../../utils/axiosWithAuth";
+import { updatePost } from "../../actions/listsActions";
 // Components
-
+import EditPostText from "./EditPostText";
 import PostMenu from "./PostMenu";
 // Material-UI
 import { Typography, makeStyles, Button } from "@material-ui/core";
 
 const useStyles = makeStyles((theme) => ({
-  container: {
-    paddingBottom: theme.spacing(3),
-    backgroundColor: "#FFF",
-  },
-  contentContainer: {
-    userSelect: "none",
-    padding: theme.spacing(1),
-    marginLeft: theme.spacing(1),
-    marginRight: theme.spacing(1),
-    borderLeft: "solid 3px gray",
-    minHeight: "50px",
-  },
-  header: {
-    display: "flex",
-    alignItems: "center",
-    justifyContent: "space-between",
-    marginBottom: theme.spacing(1),
-  },
-  twitterHandleContainer: {
-    display: "flex",
-    alignItems: "center",
-  },
-  twitterIcon: {
-    color: "#2196F3",
-    width: "20px",
-  },
-  image: {
-    width: "100%",
-    maxHeight: "140px",
-    objectFit: "cover",
-  },
-  actionsContainer: {
-    display: "flex",
-    justifyContent: "space-between",
-    margin: theme.spacing(1),
-    marginRight: theme.spacing(2),
-    marginBottom: 0,
-  },
+	container: {
+		paddingBottom: theme.spacing(1),
+		paddingTop: theme.spacing(1),
+		marginTop: 4,
+		borderRadius: theme.shape.borderRadius,
+		backgroundColor: "#FFF",
+	},
+	contentContainer: {
+		userSelect: "none",
+		padding: theme.spacing(1),
+		marginLeft: theme.spacing(1),
+		marginRight: theme.spacing(1),
+		borderLeft: "solid 3px gray",
+		minHeight: "50px",
+		maxWidth: "100%",
+		display: "flex",
+		alignItems: "flex-start",
+	},
+	postText: {
+		flexGrow: "1",
+		cursor: "pointer",
+		maxWidth: "100%",
+		lineBreak: "anywhere",
+	},
+	image: {
+		width: "100%",
+		maxHeight: "140px",
+		objectFit: "cover",
+	},
+	actionsContainer: {
+		display: "flex",
+		justifyContent: "flex-end",
+		margin: theme.spacing(1),
+		marginRight: theme.spacing(2),
+		marginBottom: 0,
+	},
 }));
 
-const Post = ({ post, index }) => {
-  const { user } = useSelector((state) => state);
-  const {
-    container,
-    contentContainer,
-    header,
-    twitterHandleContainer,
-    twitterIcon,
-    image,
-    actionsContainer,
-  } = useStyles();
+const Post = ({ post }) => {
+	const {
+		container,
+		contentContainer,
+		postText,
+		image,
+		actionsContainer,
+	} = useStyles();
 
-  const [isPosted, setPosted] = useState(post.posted);
+	const dispatch = useDispatch();
 
-  const postToTwitter = () => {
-    axiosWithAuth()
-      .put(`/posts/${post.id}/postnow`)
-      .then(() => setPosted(true));
-  };
+	const [isPosted, setPosted] = useState(post.posted);
+	const [text, setText] = useState(post.post_text || "");
+	const [isEditing, setIsEditing] = useState(false);
 
-  return (
-    <Draggable key={post.id} draggableId={post.id} index={post.index}>
-      {(provided, snapshot) => (
-        <div
-          ref={provided.innerRef}
-          {...provided.draggableProps}
-          {...provided.dragHandleProps}
-          className={container}
-          style={{ ...provided.draggableProps.style }}
-        >
-          <div className={contentContainer}>
-            <div className={header}>
-              <div className={twitterHandleContainer}>
-                <TwitterIcon className={twitterIcon} />
-                <Typography variant="caption">{`@${user.twitter_handle}`}</Typography>
-              </div>
-              <div>
-                <PostMenu post={post} />
-              </div>
-            </div>
-            {post.post_text}
-          </div>
-          {post.imageUrl && (
-            <img className={image} src={post.imageUrl} alt="Post" />
-          )}
+	const postToTwitter = () => {
+		axiosWithAuth()
+			.put(`/posts/${post.id}/postnow`)
+			.then(() => setPosted(true));
+	};
 
-          <div className={actionsContainer}>
-            <Button disabled={isPosted} onClick={postToTwitter} color="primary">
-              {isPosted ? "Posted" : "Post Now"}
-            </Button>
-          </div>
-        </div>
-      )}
-    </Draggable>
-  );
+	const handleInputText = (e) => {
+		if (e.keyCode === 13) {
+			handlePostUpdate(e);
+		} else {
+			setText(e.currentTarget.value.trim());
+		}
+	};
+
+	const handlePostUpdate = (e) => {
+		e.preventDefault();
+
+		// if input is empty set text with the previous post text value
+		if (!text.trim()) {
+			setText(post.post_text);
+		} else if (text !== post.post_text) {
+			dispatch(updatePost(post.id, { post_text: text }));
+		}
+
+		setIsEditing(false);
+	};
+
+	return (
+		post && (
+			<Draggable key={post.id} draggableId={post.id} index={post.index}>
+				{(provided, snapshot) => (
+					<div
+						ref={provided.innerRef}
+						{...provided.draggableProps}
+						{...provided.dragHandleProps}
+						className={container}
+						style={{ ...provided.draggableProps.style }}
+					>
+						<div className={contentContainer}>
+							{isEditing ? (
+								<EditPostText
+									text={text}
+									handleInputText={handleInputText}
+									submit={handlePostUpdate}
+								/>
+							) : (
+								<>
+									<Typography
+										onClick={() => setIsEditing(true)}
+										className={postText}
+									>
+										{text}
+									</Typography>
+									<PostMenu post={post} setEditing={() => setIsEditing(true)} />
+								</>
+							)}
+						</div>
+						{post.imageUrl && (
+							<img className={image} src={post.imageUrl} alt="Post" />
+						)}
+
+						<div className={actionsContainer}>
+							<Button
+								disabled={isPosted}
+								onClick={postToTwitter}
+								color="primary"
+							>
+								{isPosted ? "Posted" : "Post Now"}
+							</Button>
+						</div>
+					</div>
+				)}
+			</Draggable>
+		)
+	);
 };
 
-export default Post;
+export default React.memo(Post);
