@@ -10,8 +10,8 @@ const useStyles = makeStyles({
   root: {
     width: 700,
     margin: "1%",
-    marginTop: "0!important",
-    padding: "2.5% 5.5%",
+    // marginTop: "0!important",
+    padding: "4% 5.5%",
     display: 'flex',
     justifyContent: 'space-between',
   },
