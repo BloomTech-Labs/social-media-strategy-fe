@@ -20,7 +20,7 @@ const useStyles = makeStyles((theme) => ({
 	header: {
 		margin: theme.spacing(2),
 		width: "100%",
-		textAlign: "left",
+		textAlign: "center",
 	},
 	scrollbarContainer: {
 		height: `calc(100vh - ${theme.kanban.topContainer.height})`,
