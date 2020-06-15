@@ -45,11 +45,11 @@ const Home = () => {
 							style={{
 								...style,
 								width: "100%",
-								height: "8px",
+								height: "9px",
 								position: "absolute",
 								bottom: "0",
 								borderRadius: "15px",
-								marginBottom: "5px",
+								marginBottom: "3px",
 							}}
 						/>
 					)}

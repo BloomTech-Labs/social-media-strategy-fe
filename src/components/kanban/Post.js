@@ -24,12 +24,15 @@ const useStyles = makeStyles((theme) => ({
 		marginRight: theme.spacing(1),
 		borderLeft: "solid 3px gray",
 		minHeight: "50px",
+		maxWidth: "100%",
 		display: "flex",
 		alignItems: "flex-start",
 	},
 	postText: {
 		flexGrow: "1",
 		cursor: "pointer",
+		maxWidth: "100%",
+		lineBreak: "anywhere",
 	},
 	image: {
 		width: "100%",
@@ -70,7 +73,7 @@ const Post = ({ post }) => {
 		if (e.keyCode === 13) {
 			handlePostUpdate(e);
 		} else {
-			setText(e.currentTarget.value);
+			setText(e.currentTarget.value.trim());
 		}
 	};
 
@@ -78,7 +81,7 @@ const Post = ({ post }) => {
 		e.preventDefault();
 
 		// if input is empty set text with the previous post text value
-		if (!text) {
+		if (!text.trim()) {
 			setText(post.post_text);
 		} else if (text !== post.post_text) {
 			dispatch(updatePost(post.id, { post_text: text }));

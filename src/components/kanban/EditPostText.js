@@ -1,4 +1,5 @@
 import React from "react";
+import TwitterCharCount from "./TwitterCharCount";
 import { InputBase, IconButton, makeStyles } from "@material-ui/core";
 import CheckIcon from "@material-ui/icons/Check";
 
@@ -13,6 +14,13 @@ const useStyles = makeStyles((theme) => ({
 		height: "max-content",
 		backgroundColor: "#fff",
 	},
+	secondColumn: {
+		display: "flex",
+		height: "100%",
+		flexDirection: "column",
+		justifyContent: "space-between",
+		alignItems: "center",
+	},
 	iconButton: {
 		padding: 10,
 	},
@@ -21,7 +29,7 @@ const useStyles = makeStyles((theme) => ({
 const EditPostText = (props) => {
 	const { text, handleInputText, submit } = props;
 
-	const { form, iconButton } = useStyles();
+	const { form, iconButton, secondColumn } = useStyles();
 
 	const handleBlur = (e) => {
 		submit(e);
@@ -45,13 +53,16 @@ const EditPostText = (props) => {
 						maxLength: 280,
 					}}
 				/>
-				<IconButton
-					type="submit"
-					className={iconButton}
-					aria-label="confirm edit"
-				>
-					<CheckIcon />
-				</IconButton>
+				<div className={secondColumn}>
+					<IconButton
+						type="submit"
+						className={iconButton}
+						aria-label="confirm edit"
+					>
+						<CheckIcon />
+					</IconButton>
+					<TwitterCharCount text={text} />
+				</div>
 			</form>
 		</>
 	);
