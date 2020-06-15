@@ -64,7 +64,7 @@ const CreatePostModal = (props) => {
 			const target = e.currentTarget;
 			setPost((prevPost) => ({
 				...prevPost,
-				[target.id]: target.value,
+				[target.id]: target.value?.trim(),
 			}));
 		}
 	};

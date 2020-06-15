@@ -73,7 +73,7 @@ const Post = ({ post }) => {
 		if (e.keyCode === 13) {
 			handlePostUpdate(e);
 		} else {
-			setText(e.currentTarget.value);
+			setText(e.currentTarget.value.trim());
 		}
 	};
 
@@ -81,7 +81,7 @@ const Post = ({ post }) => {
 		e.preventDefault();
 
 		// if input is empty set text with the previous post text value
-		if (!text) {
+		if (!text.trim()) {
 			setText(post.post_text);
 		} else if (text !== post.post_text) {
 			dispatch(updatePost(post.id, { post_text: text }));
