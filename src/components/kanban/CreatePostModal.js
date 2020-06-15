@@ -104,9 +104,14 @@ const CreatePostModal = (props) => {
 					fullWidth
 					multiline
 					rows={4}
+					rowsMax={7}
+					maxLength={280}
 					variant="outlined"
 					onChange={handlePostText}
 					onKeyDown={handlePostText}
+					inputProps={{
+						maxLength: 280,
+					}}
 				/>
 
 				{/* List Select */}

@@ -39,10 +39,10 @@ const EditPostText = (props) => {
 					id="standard-error-helper-text"
 					defaultValue={text}
 					multiline
-					rows={4}
 					fullWidth
 					inputProps={{
 						"aria-label": "edit post",
+						maxLength: 280,
 					}}
 				/>
 				<IconButton
