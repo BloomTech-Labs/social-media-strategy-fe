@@ -2,92 +2,63 @@ import React, { useState } from "react";
 import { useDispatch } from "react-redux";
 // material-ui
 import {
-  Button,
-  TextField,
-  Dialog,
-  DialogActions,
-  DialogContent,
-  DialogTitle
+  InputBase,
+  IconButton
 } from "@material-ui/core";
+import AddIcon from '@material-ui/icons/Add';
 import { makeStyles } from "@material-ui/core";
 import { addList } from "../../actions";
 
 const useStyles = makeStyles(theme => ({
-  container: {
-    position: "absolute",
-    top: theme.spacing(2),
-    left: theme.spacing(2),
-    display: "flex",
-    justifyContent: "center"
+  root: {
+    padding: '2px 8px',
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'space-between',
+    borderRadius: theme.shape.borderRadius,
+    width: 275,
+    minWidth: 275,
+    marginLeft: theme.spacing(2),
+    height: 'max-content',
+    backgroundColor: '#fff',
+  },
+  input: {
+    marginLeft: theme.spacing(1),
+    flex: 1,
+  },
+  iconButton: {
+    padding: 10,
   }
 }));
 
 export default function CreateList() {
   const dispatch = useDispatch();
-  const { container } = useStyles();
-  const [open, setOpen] = useState(false);
+  const classes = useStyles();
   const [title, setTitle] = useState("");
 
-  const handleClickOpen = () => {
-    setOpen(true);
-  };
-
-  const handleClose = () => {
-    setOpen(false);
-  };
-
-  const handleAddButton = e => {
+  const handleSubmit = e => {
     e.preventDefault();
-
-    dispatch(addList(title));
-    handleClose();
+    if (title) {
+      dispatch(addList(title)); 
+    }
   };
 
   const handleTextInput = e => {
     setTitle(e.currentTarget.value);
   };
 
-  const handleEnterInput = e => {
-    if (e.keyCode === 13) {
-      dispatch(addList(title));
-      handleClose();
-    }
-  };
-
   return (
-    <div className={container}>
-      <Button variant="outlined" color="secondary" onClick={handleClickOpen}>
-        Add Topic
-      </Button>
-      <Dialog
-        open={open}
-        onClose={handleClose}
-        aria-labelledby="form-dialog-title"
-        onKeyUp={handleEnterInput}
-      >
-        <DialogTitle id="form-dialog-title">Add a Topic</DialogTitle>
-        <DialogContent>
-          <TextField
-            autoFocus
-            margin="dense"
-            id="name"
-            label="Topic Title"
-            type="Topic"
-            fullWidth
+    <form onSubmit={handleSubmit} className={classes.root}>
+        <InputBase 
+            placeholder="New list…"
+            inputProps={{ 'aria-label': 'add list' }}
             onChange={handleTextInput}
-          />
-        </DialogContent>
-        <DialogActions
-          style={{ display: "flex", justifyContent: "space-between" }}
-        >
-          <Button onClick={handleClose} color="primary">
-            Cancel
-          </Button>
-          <Button onClick={handleAddButton} color="primary">
-            Add
-          </Button>
-        </DialogActions>
-      </Dialog>
-    </div>
-  );
+            fullWidth
+        />
+
+        <IconButton type="submit" className={classes.iconButton} aria-label="search">
+          <AddIcon />
+        </IconButton>
+    </form>
+  )
 }

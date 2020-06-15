@@ -39,7 +39,7 @@ const theme = createMuiTheme({
       },
       list: {
          header: {
-            height: '50px'
+            height: '70px'
          }
       }
     },
@@ -68,12 +68,12 @@ const theme = createMuiTheme({
          }
       },
       MuiTypography: {
-         h1: { fontWeight: '600', fontFamily: 'Roboto Condensed' },
-         h2: { fontWeight: '600', fontFamily: 'Roboto Condensed' },
-         h3: { fontWeight: '600', fontFamily: 'Roboto Condensed' },
-         h4: { fontWeight: '600', fontFamily: 'Roboto Condensed' },
-         h5: { fontWeight: '600', fontFamily: 'Roboto Condensed' },
-         h6: { fontWeight: '600', fontFamily: 'Roboto Condensed' }
+         h1: { fontWeight: '600', fontFamily: 'Roboto Condensed', color: '#4E4E4E' },
+         h2: { fontWeight: '600', fontFamily: 'Roboto Condensed', color: '#4E4E4E' },
+         h3: { fontWeight: '600', fontFamily: 'Roboto Condensed', color: '#4E4E4E' },
+         h4: { fontWeight: '600', fontFamily: 'Roboto Condensed', color: '#4E4E4E' },
+         h5: { fontWeight: '600', fontFamily: 'Roboto Condensed', color: '#4E4E4E' },
+         h6: { fontWeight: '600', fontFamily: 'Roboto Condensed', color: '#4E4E4E' }
       }
     }
  });
