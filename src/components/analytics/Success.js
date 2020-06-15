@@ -30,7 +30,7 @@ export default function Success() {
   const colors = ['blue', 'green', 'red', 'purple', 'black'];
 
   return (
-    <div style={{ display: "flex", justifyContent: "center", marginTop: "4%" }}>
+    <div style={{ display: "flex", justifyContent: "center"}}>
       <Card
         className={classes.root}
         style={{ maxHeight: 300, overflowY: "auto" }}

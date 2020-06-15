@@ -12,7 +12,7 @@ const useStyles = makeStyles({
   root: {
     width: 700,
     margin: "1%",
-    // marginTop: "0!important",
+    marginTop: "0!important",
     padding: "4% 5.5%",
     display: 'flex',
     justifyContent: 'space-between',
@@ -42,7 +42,7 @@ export default function Loading() {
   }, [popWords.success]);
 
   return (
-    <div style={{ display: "flex", justifyContent: "center", marginTop: "4%" }}>
+    <div style={{ display: "flex", justifyContent: "center" }}>
       <Card className={classes.root}>
         <div>
           <CardContent>
