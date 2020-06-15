@@ -52,7 +52,6 @@ export default function Success() {
             <Typography style={{ color: "#4E4E4E", fontSize: "12!important" }}>
               Grouped by topic
             </Typography>
-            <Typography>{console.log("testing", popWords)}</Typography>
           </CardContent>
           <div style={{ display: "flex", justifyContent: "space-between" }}>
               {popWords.map((topic, topicIndex) => (
