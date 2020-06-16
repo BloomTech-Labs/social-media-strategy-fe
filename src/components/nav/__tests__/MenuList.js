@@ -18,7 +18,7 @@ jest.mock('@okta/okta-react/dist/OktaContext', () => ({
 
 jest.mock("../../kanban/CreatePost.js", () => () => (
   <div>CreatePost component</div>
-))
+));
 
 // Understand
 
