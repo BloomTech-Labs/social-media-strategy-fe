@@ -75,9 +75,6 @@ export default function PopularWords() {
 		if (user.initialized && !statusLoaded) {
 			(async () => {
 				await dispatch(getStatus(user.twitter_handle));
-			})();
-		} else if (user.initialized && statusLoaded && modelReady) {
-			(async () => {
 				await dispatch(getWords(user.twitter_handle));
 			})();
 		}
