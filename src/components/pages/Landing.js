@@ -17,8 +17,8 @@ const useStyles = makeStyles((theme) => ({
     body: {
       overflowY: "auto!important",
       height: "100%",
-      margin: "auto",
-      width: "960px",
+      // margin: "auto",
+      // width: "960px",
     },
   },
   appBar: {
@@ -210,7 +210,7 @@ export default function Landing() {
       <div
         style={{
           display: "flex",
-          justifyContent: "space-between",
+          justifyContent: "space-evenly",
           alignItems: "center",
           margin: "8%",
         }}
@@ -234,7 +234,7 @@ export default function Landing() {
       <div
         style={{
           display: "flex",
-          justifyContent: "space-between",
+          justifyContent: "space-evenly",
           alignItems: "center",
           margin: "8%",
         }}
@@ -242,10 +242,12 @@ export default function Landing() {
         <div style={{ display: "flex", flexDirection: "column" }}>
           <h1 className={classes.h1}>Get Actionable Data</h1>
           <br></br>
-          <p className={classes.p}>
-            {" "}
-            View a snapshot of your social media engagement each month. <br></br> <br></br>Gain insights into the words your followers engage with most.
-          </p>
+          <li className={classes.p}>
+            View a snapshot of your social media engagement each month. 
+            </li>
+            <br></br>
+            <li className={classes.p}>Gain insights into the words your followers engage with most.
+          </li>
         </div>
 
         <div>
