@@ -11,8 +11,10 @@ export function getWords(twitter_handle) {
 				body,
 			)
 			.then((res) => {
-				const topics = Object.values(res.data.topics);
-				dispatch({ type: SET_TOPICS, payload: topics });
+				if (res.data.success) {
+					const topics = Object.values(res.data.topics);
+					dispatch({ type: SET_TOPICS, payload: topics });
+				}
 			})
 			.catch((err) => {
 				dispatch({
@@ -36,12 +38,13 @@ export const getStatus = (twitter_handle) => async (dispatch, getState) => {
 };
 
 export const requestPopWords = (
+	twitter_handle,
 	numFollowers = 500,
 	maxAge = 7,
 	ignoredWords = [],
-) => async (dispatch, getState) => {
+) => async (dispatch) => {
 	const body = {
-		twitter_handle: `${getState().user.twitter_handle}`,
+		twitter_handle,
 		num_followers_to_scan: numFollowers,
 		max_age_of_tweet: maxAge,
 		words_to_ignore: ignoredWords,
@@ -53,5 +56,5 @@ export const requestPopWords = (
 	);
 
 	// update status
-	await dispatch(getStatus());
+	await dispatch(getStatus(twitter_handle));
 };

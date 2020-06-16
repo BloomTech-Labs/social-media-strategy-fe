@@ -63,7 +63,7 @@ function getModalStyle() {
 
 export default function PopularWords() {
 	const classes = useStyles();
-	const { statusLoaded, modelReady, processing, queued } = useSelector(
+	const { statusLoaded, modelReady, processing, queued, topics } = useSelector(
 		(state) => state.popWords,
 	);
 	const user = useSelector((state) => state.user);
@@ -86,6 +86,10 @@ export default function PopularWords() {
 
 	const handleClose = () => {
 		setOpen(false);
+	};
+
+	const handleAnalysisRequest = async () => {
+		await dispatch(requestPopWords(user.twitter_handle));
 	};
 
 	const body = (
@@ -147,7 +151,7 @@ export default function PopularWords() {
 							<Button
 								className={classes.button1}
 								variant="contained"
-								onClick={() => dispatch(requestPopWords())}
+								onClick={handleAnalysisRequest}
 							>
 								Start Analysis
 							</Button>
@@ -172,7 +176,7 @@ export default function PopularWords() {
 			) : modelReady && !processing && !queued ? (
 				<Success />
 			) : (
-				<Loading />
+				<Loading twitter_handle={user.twitter_handle} />
 			)}
 		</div>
 	) : (

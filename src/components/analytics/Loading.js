@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { getWords } from "../../actions/popwordsActions";
+import { getStatus } from "../../actions/popwordsActions";
 import { Card } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
 import CardContent from "@material-ui/core/CardContent";
@@ -24,21 +24,19 @@ const useStyles = makeStyles({
 	},
 });
 
-export default function Loading() {
+export default function Loading({ twitter_handle }) {
 	const classes = useStyles();
-	const popWords = useSelector((state) => state.popWords);
+	const { processing, queued } = useSelector((state) => state.popWords);
 	const dispatch = useDispatch();
 
 	useEffect(() => {
-		if (!popWords.success) {
-			console.log("no data yet");
-			const interval = setInterval(() => {
-				console.log("Interval triggered");
-				dispatch(getWords());
+		if (processing || queued) {
+			const interval = setInterval(async () => {
+				await dispatch(getStatus(twitter_handle));
 			}, 10000);
 			return () => clearInterval(interval);
 		}
-	}, [popWords.success]);
+	}, [processing, queued]);
 
 	return (
 		<div style={{ display: "flex", justifyContent: "center" }}>
