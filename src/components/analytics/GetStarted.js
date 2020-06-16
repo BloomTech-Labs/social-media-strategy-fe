@@ -1,6 +1,6 @@
-import React, { useEffect } from "react";
+import React from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { getWords } from "../../actions/popwordsActions";
+import {SEARCH_REQUEST} from "../../actions/popwordsActions";
 import { Card } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
 import CardContent from "@material-ui/core/CardContent";
@@ -58,18 +58,6 @@ const GetStarted = props => {
   const classes = useStyles();
   const popWords = useSelector(state => state.popWords);
   const dispatch = useDispatch();
-
-  const [modalStyle] = React.useState(getModalStyle);
-  const [open, setOpen] = React.useState(false);
-
-  useEffect(() => {
-      if(!popWords) {
-          console.log("LOADING POPULAR WORDS");
-          (() => {
-              dispatch(getWords());
-          })();
-      }
-  }, [popWords]);
 
   const handleOpen = () => {
     setOpen(true);
@@ -135,7 +123,10 @@ const GetStarted = props => {
               marginTop: "5%",
             }}
           >
-            <Button className={classes.button1} variant="contained">
+            <Button 
+              className={classes.button1} 
+              variant="contained"
+              onClick={(() => dispatch({type: SEARCH_REQUEST}))}>
               Start Analysis
             </Button>
             <Button

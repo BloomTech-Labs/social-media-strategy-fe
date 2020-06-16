@@ -71,6 +71,7 @@
   "devDependencies": {
     "@testing-library/react": "^9.5.0",
     "cross-env": "^7.0.2",
+    "redux-mock-store": "^1.5.4",
     "start-server-and-test": "^1.11.0"
   },
   "repository": {
