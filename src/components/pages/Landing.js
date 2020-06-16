@@ -8,81 +8,87 @@ import Typography from "@material-ui/core/Typography";
 import Link from "@material-ui/core/Link";
 import { makeStyles } from "@material-ui/core/styles";
 import Container from "@material-ui/core/Container";
-import BackgroundImage from "../../assets/imgs/bgDesktopLandscape.jpg";
+import {ReactComponent as Logo} from "../../assets/imgs/landing_social.svg";
 
-const useStyles = makeStyles(theme => ({
-  "@global": {
-    body: {
-      backgroundImage: `url(${BackgroundImage})`
-    }
-  },
+const useStyles = makeStyles((theme) => ({
+  // "@global": {
+  //   body: {
+  //     // backgroundImage: `url(${BackgroundImage})`
+  //   },
+  // },
   appBar: {
-    borderBottom: `1px solid ${theme.palette.divider}`,
-    backgroundColor: "#2196F3"
+    borderBottom: 'none!important',
+    boxShadow: 'none!important',
+    backgroundColor: "#fff",
   },
   toolbar: {
-    flexWrap: "wrap"
+    flexWrap: "wrap",
   },
   toolbarTitle: {
     flexGrow: 1,
     fontFamily: "sansita",
-    color: "#fff",
-    fontSize: "36px"
+    color: 'dodgerblue',
+    fontSize: "36px",
   },
   link: {
     margin: theme.spacing(1, 1.5),
-    color: "#fff",
     fontFamily: "Roboto",
     fontStyle: "normal",
-    fontWeight: 500,
+    fontWeight: 'bold',
     fontSize: "14px",
     lineHeight: "11px",
-    letterSpacing: "0.25px"
+    letterSpacing: "0.25px",
   },
   mainContent: {
     padding: theme.spacing(8, 0, 6),
-    maxWidth: 800,
+    maxWidth: 400,
     "@media (max-width: 960px)": {
-      maxWidth: 600
+      maxWidth: 600,
     },
     "@media (orientation: portrait)": {
-      marginTop: -10
-    }
+      marginTop: -10,
+    },
   },
   subContent: {
+    paddingTop: '10%',
+    display: 'flex',
+      flexDirection: 'column',
+      alignItems: 'center',
     "@media (max-width: 600px)": {
-      maxWidth: 400
+      maxWidth: 400,
     },
     marginTop: -30,
-    marginBottom: 50
+    marginBottom: 50,
+
   },
   mainHeading: {
     textAlign: "center",
-    color: "#fff",
-    fontFamily: "Roboto Condensed",
+    color: "4E4E4E",
+    fontFamily: "Sansita",
     fontStyle: "normal",
     fontWeight: "bold",
-    fontSize: 70,
+    fontSize: 50,
     marginTop: 40,
     "@media (max-width: 960px)": {
       fontSize: 32,
       marginTop: -40,
-      marginBottom: 0
+      marginBottom: 0,
     },
     "@media (max-width: 600px)": {
       fontSize: 32,
       marginTop: 60,
-      marginBottom: 50
-    }
+      marginBottom: 50,
+    },
   },
   subHeading: {
+    fontSize: '14pt',
     textAlign: "center",
     fontFamily: "Roboto Condensed",
     margin: "0 auto",
     fontWeight: "bold",
     "@media (min-width: 960px)": {
-      maxWidth: 400
-    }
+      maxWidth: 400,
+    },
   },
   button: {
     backgroundColor: "#2196F3",
@@ -94,15 +100,15 @@ const useStyles = makeStyles(theme => ({
     color: "#fff",
     padding: "15px",
     "@media (max-width: 960px)": {
-      marginTop: -20
+      marginTop: -20,
     },
     "@media (max-width: 600px)": {
-      marginTop: 10
-    }
+      marginTop: 10,
+    },
   },
   butttonContainer: {
-    textAlign: "center"
-  }
+    textAlign: "center",
+  },
 }));
 
 export default function Landing() {
@@ -127,39 +133,48 @@ export default function Landing() {
           </nav>
         </Toolbar>
       </AppBar>
-      {/* Main text */}
-      <Container component="main" className={classes.mainContent}>
-        <Typography
-          component="h1"
-          variant="h2"
-          gutterBottom
-          className={classes.mainHeading}
-        >
-          Social Media Management made easy.
-        </Typography>
-      </Container>
-      {/* End main text */}
-      {/* Sub text */}
-      <Container className={classes.subContent}>
-        <Typography component="p" className={classes.subHeading}>
-          Discover how to develop your brand and manage your digital marketing
-          strategy
-        </Typography>
-      </Container>
-      {/* End sub text */}
-      <Container
-        maxWidth="md"
-        component="main"
-        className={classes.butttonContainer}
-      >
-        <Button
-          component="button"
-          className={classes.button}
-          onClick={() => push("/login")}
-        >
-          Get Started
-        </Button>
-      </Container>
+
+      <div style={{display: "flex", justifyContent: 'space-evenly', alignItems:'center', marginTop: "1%"}}>
+        {/* Main text */}
+        <div>
+          <Container component="main" className={classes.mainContent}>
+            <Typography
+              component="h1"
+              variant="h2"
+              gutterBottom
+              className={classes.mainHeading}
+            >
+              Social Media management <br></br> made easy.
+            </Typography>
+          </Container>
+          <Container
+            maxWidth="md"
+            component="main"
+            className={classes.butttonContainer}
+          >
+            <Button
+              component="button"
+              className={classes.button}
+              onClick={() => push("/login")}
+            >
+              Get Started
+            </Button>
+          </Container>
+        </div>
+        {/* End main text */}
+
+        {/* Sub text */}
+        <div>
+          <Container className={classes.subContent}>
+            <Logo style={{width:"400px", height:"400px"}}/>
+            <Typography component="p" className={classes.subHeading}>
+              Discover how to develop your brand <br></br>and manage your digital
+              marketing strategy
+            </Typography>
+          </Container>
+          {/* End sub text */}
+        </div>
+      </div>
     </React.Fragment>
   );
 }
