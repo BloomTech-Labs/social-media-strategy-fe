@@ -63,7 +63,7 @@ function getModalStyle() {
 
 export default function PopularWords() {
 	const classes = useStyles();
-	const { statusLoaded, modelReady, processing, queued, topics } = useSelector(
+	const { statusLoaded, modelReady, processing, queued } = useSelector(
 		(state) => state.popWords,
 	);
 	const user = useSelector((state) => state.user);

@@ -1,10 +1,11 @@
 import React, { Fragment } from "react";
 import Stats from "../analytics/Stats";
 import PopularWords from "../analytics/PopularWords";
+import Scrollbars from "react-custom-scrollbars";
 
 const Analytics = () => {
 	return (
-		<Fragment>
+		<Scrollbars>
 			<div style={{ display: "flex", justifyContent: "center" }}>
 				<h1
 					style={{
@@ -18,7 +19,7 @@ const Analytics = () => {
 			</div>
 			<Stats />
 			<PopularWords />
-		</Fragment>
+		</Scrollbars>
 	);
 };
 

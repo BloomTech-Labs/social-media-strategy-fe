@@ -36,7 +36,7 @@ export default function Loading({ twitter_handle }) {
 			}, 10000);
 			return () => clearInterval(interval);
 		}
-	}, [processing, queued]);
+	}, [processing, queued, dispatch, twitter_handle]);
 
 	return (
 		<div style={{ display: "flex", justifyContent: "center" }}>
