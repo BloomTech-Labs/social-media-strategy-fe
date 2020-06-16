@@ -78,7 +78,7 @@ export default function PopularWords() {
 				await dispatch(getWords(user.twitter_handle));
 			})();
 		}
-	}, [user.initialized, statusLoaded, modelReady]);
+	}, [user, statusLoaded, modelReady, dispatch]);
 
 	const handleOpen = () => {
 		setOpen(true);
@@ -127,7 +127,7 @@ export default function PopularWords() {
 	);
 
 	return statusLoaded ? (
-		<div style={{ display: "flex", justifyContent: "center", marginTop: "4%" }}>
+		<div style={{ display: "flex", justifyContent: "center", marginTop: "2%" }}>
 			{!modelReady && !processing && !queued ? (
 				<Card className={classes.root}>
 					<CardContent>
@@ -173,8 +173,8 @@ export default function PopularWords() {
 						</div>
 					</CardContent>
 				</Card>
-			) : modelReady && !processing && !queued ? (
-				<Success />
+			) : modelReady ? (
+				<Success handleAnalysisUpdate={handleAnalysisRequest} />
 			) : (
 				<Loading twitter_handle={user.twitter_handle} />
 			)}

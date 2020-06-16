@@ -1,10 +1,11 @@
-import React from "react";
-import { useSelector } from "react-redux";
-
+import React, { useEffect } from "react";
+import { useSelector, useDispatch } from "react-redux";
+import { getStatus } from "../../actions/popwordsActions";
 import { Card } from "@material-ui/core";
-import { makeStyles } from "@material-ui/core/styles";
+import { makeStyles, Button } from "@material-ui/core";
 import CardContent from "@material-ui/core/CardContent";
 import Typography from "@material-ui/core/Typography";
+import RefreshIcon from "@material-ui/icons/Refresh";
 import Scrollbars from "react-custom-scrollbars";
 
 const useStyles = makeStyles({
@@ -24,14 +25,33 @@ const useStyles = makeStyles({
 	},
 });
 
-export default function Success() {
+export default function Success({ handleAnalysisUpdate }) {
 	const classes = useStyles();
-	const popWords = useSelector((state) => state.popWords.topics);
+	const dispatch = useDispatch();
+	const { topics, processing, queued } = useSelector((state) => state.popWords);
+	const { twitter_handle } = useSelector((state) => state.user);
 	const colors = ["blue", "green", "red", "purple", "black"];
 
+	useEffect(() => {
+		if (processing || queued) {
+			const interval = setInterval(async () => {
+				await dispatch(getStatus(twitter_handle));
+			}, 20000);
+			return () => clearInterval(interval);
+		} else {
+		}
+	}, [processing, queued, dispatch, twitter_handle]);
+
 	return (
-		popWords.length > 0 && (
-			<div style={{ display: "flex", justifyContent: "center" }}>
+		topics.length > 0 && (
+			<div
+				style={{
+					display: "flex",
+					flexDirection: "column",
+					justifyContent: "center",
+					width: "700px",
+				}}
+			>
 				<Card
 					className={classes.root}
 					style={{ maxHeight: 300, overflowY: "auto" }}
@@ -39,12 +59,22 @@ export default function Success() {
 					<Scrollbars>
 						<div style={{ padding: "0 5%" }}>
 							<CardContent>
-								<Typography
-									className={classes.title}
-									style={{ color: "#00BB78" }}
+								<div
+									style={{ display: "flex", justifyContent: "space-between" }}
 								>
-									Success!
-								</Typography>
+									<Typography
+										className={classes.title}
+										style={{ color: "#00BB78" }}
+									>
+										Success!
+									</Typography>
+									{(processing || queued) && (
+										<Typography variant="caption">
+											Status:{" "}
+											{processing ? "Processing update" : queued && "Queued"}
+										</Typography>
+									)}
+								</div>
 								<Typography
 									style={{
 										color: "#4E4E4E",
@@ -60,10 +90,9 @@ export default function Success() {
 								>
 									Grouped by topic
 								</Typography>
-								<Typography>{console.log("testing", popWords)}</Typography>
 							</CardContent>
 							<div style={{ display: "flex", justifyContent: "space-between" }}>
-								{popWords.map((topic, topicIndex) => (
+								{topics.map((topic, topicIndex) => (
 									<CardContent key={topicIndex}>
 										{topic.map((word, index) => (
 											<Typography
@@ -80,6 +109,12 @@ export default function Success() {
 						</div>
 					</Scrollbars>
 				</Card>
+				<div style={{ textAlign: "right", marginBottom: "8px" }}>
+					<Button onClick={handleAnalysisUpdate}>
+						Request analysis update
+						<RefreshIcon />
+					</Button>
+				</div>
 			</div>
 		)
 	);

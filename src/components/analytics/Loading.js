@@ -33,7 +33,7 @@ export default function Loading({ twitter_handle }) {
 		if (processing || queued) {
 			const interval = setInterval(async () => {
 				await dispatch(getStatus(twitter_handle));
-			}, 10000);
+			}, 20000);
 			return () => clearInterval(interval);
 		}
 	}, [processing, queued, dispatch, twitter_handle]);
