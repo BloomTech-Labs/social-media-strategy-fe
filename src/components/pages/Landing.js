@@ -10,6 +10,7 @@ import { makeStyles } from "@material-ui/core/styles";
 import Container from "@material-ui/core/Container";
 import { ReactComponent as Logo } from "../../assets/imgs/landing_social.svg";
 import { ReactComponent as ScheduleLogo } from "../../assets/imgs/shedule.svg";
+import {ReactComponent as AnalyzingPic} from "../../assets/imgs/blueSearch.svg";
 
 const useStyles = makeStyles((theme) => ({
   "@global": {
@@ -211,17 +212,44 @@ export default function Landing() {
           display: "flex",
           justifyContent: "space-between",
           alignItems: "center",
-          margin:  '8%'
+          margin: "8%",
         }}
       >
         <div>
           <ScheduleLogo style={{ width: "300px", height: "300px" }} />
         </div>
 
-        <div style={{display: 'flex', flexDirection:"column",}}>
+        <div style={{ display: "flex", flexDirection: "column" }}>
           <h1 className={classes.h1}>Draft, Organize, and Schedule</h1>
           <br></br>
-          <p className={classes.p}> SoMe makes it easy to streamline and optimize your social media presence in one convenient place.</p>
+          <p className={classes.p}>
+            {" "}
+            SoMe makes it easy to streamline and optimize your social media
+            presence in one convenient place.
+          </p>
+        </div>
+      </div>
+
+      {/* Start of Analytics */}
+      <div
+        style={{
+          display: "flex",
+          justifyContent: "space-between",
+          alignItems: "center",
+          margin: "8%",
+        }}
+      >
+        <div style={{ display: "flex", flexDirection: "column" }}>
+          <h1 className={classes.h1}>Get Actionable Data</h1>
+          <br></br>
+          <p className={classes.p}>
+            {" "}
+            View a snapshot of your social media engagement each month. <br></br> <br></br>Gain insights into the words your followers engage with most.
+          </p>
+        </div>
+
+        <div>
+          <AnalyzingPic style={{ width: "300px", height: "300px" }} />
         </div>
       </div>
     </React.Fragment>
