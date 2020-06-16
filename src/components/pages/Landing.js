@@ -8,17 +8,21 @@ import Typography from "@material-ui/core/Typography";
 import Link from "@material-ui/core/Link";
 import { makeStyles } from "@material-ui/core/styles";
 import Container from "@material-ui/core/Container";
-import {ReactComponent as Logo} from "../../assets/imgs/landing_social.svg";
+import { ReactComponent as Logo } from "../../assets/imgs/landing_social.svg";
+import { ReactComponent as ScheduleLogo } from "../../assets/imgs/shedule.svg";
 
 const useStyles = makeStyles((theme) => ({
-  // "@global": {
-  //   body: {
-  //     // backgroundImage: `url(${BackgroundImage})`
-  //   },
-  // },
+  "@global": {
+    body: {
+      overflowY: "auto!important",
+      height: "100%",
+      margin: "auto",
+      width: "960px",
+    },
+  },
   appBar: {
-    borderBottom: 'none!important',
-    boxShadow: 'none!important',
+    borderBottom: "none!important",
+    boxShadow: "none!important",
     backgroundColor: "#fff",
   },
   toolbar: {
@@ -27,14 +31,14 @@ const useStyles = makeStyles((theme) => ({
   toolbarTitle: {
     flexGrow: 1,
     fontFamily: "sansita",
-    color: 'dodgerblue',
+    color: "dodgerblue",
     fontSize: "36px",
   },
   link: {
     margin: theme.spacing(1, 1.5),
     fontFamily: "Roboto",
     fontStyle: "normal",
-    fontWeight: 'bold',
+    fontWeight: "bold",
     fontSize: "14px",
     lineHeight: "11px",
     letterSpacing: "0.25px",
@@ -50,16 +54,15 @@ const useStyles = makeStyles((theme) => ({
     },
   },
   subContent: {
-    paddingTop: '10%',
-    display: 'flex',
-      flexDirection: 'column',
-      alignItems: 'center',
+    paddingTop: "10%",
+    display: "flex",
+    flexDirection: "column",
+    alignItems: "center",
     "@media (max-width: 600px)": {
       maxWidth: 400,
     },
     marginTop: -30,
     marginBottom: 50,
-
   },
   mainHeading: {
     textAlign: "center",
@@ -81,7 +84,7 @@ const useStyles = makeStyles((theme) => ({
     },
   },
   subHeading: {
-    fontSize: '14pt',
+    fontSize: "14pt",
     textAlign: "center",
     fontFamily: "Roboto Condensed",
     margin: "0 auto",
@@ -109,6 +112,26 @@ const useStyles = makeStyles((theme) => ({
   butttonContainer: {
     textAlign: "center",
   },
+  h1: {
+    fontSize: "25pt",
+    textAlign: "center",
+    fontFamily: "Roboto Condensed",
+    margin: "0 auto",
+    fontWeight: 500,
+    textAlign: "center",
+    "@media (min-width: 960px)": {
+      maxWidth: 400,
+    },
+  },
+  p: {
+    fontSize: "14pt",
+    textAlign: "center",
+    fontFamily: "Roboto Condensed",
+    margin: "0 auto",
+    "@media (min-width: 960px)": {
+      maxWidth: 400,
+    },
+  },
 }));
 
 export default function Landing() {
@@ -134,7 +157,13 @@ export default function Landing() {
         </Toolbar>
       </AppBar>
 
-      <div style={{display: "flex", justifyContent: 'space-evenly', alignItems:'center', marginTop: "1%"}}>
+      <div
+        style={{
+          display: "flex",
+          justifyContent: "space-evenly",
+          alignItems: "center",
+        }}
+      >
         {/* Main text */}
         <div>
           <Container component="main" className={classes.mainContent}>
@@ -166,13 +195,33 @@ export default function Landing() {
         {/* Sub text */}
         <div>
           <Container className={classes.subContent}>
-            <Logo style={{width:"400px", height:"400px"}}/>
+            <Logo style={{ width: "400px", height: "400px" }} />
             <Typography component="p" className={classes.subHeading}>
-              Discover how to develop your brand <br></br>and manage your digital
-              marketing strategy
+              Discover how to develop your brand <br></br>and manage your
+              digital marketing strategy
             </Typography>
           </Container>
           {/* End sub text */}
+        </div>
+      </div>
+
+      {/* Start of About */}
+      <div
+        style={{
+          display: "flex",
+          justifyContent: "space-between",
+          alignItems: "center",
+          margin:  '8%'
+        }}
+      >
+        <div>
+          <ScheduleLogo style={{ width: "300px", height: "300px" }} />
+        </div>
+
+        <div style={{display: 'flex', flexDirection:"column",}}>
+          <h1 className={classes.h1}>Draft, Organize, and Schedule</h1>
+          <br></br>
+          <p className={classes.p}> SoMe makes it easy to streamline and optimize your social media presence in one convenient place.</p>
         </div>
       </div>
     </React.Fragment>
