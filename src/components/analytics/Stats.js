@@ -91,7 +91,7 @@ const Stats = props => {
               <ThumbsUpDownIcon
                 style={{ color: "blueviolet", width: "100%" }}
               />
-              <Typography className={classes.number}>{numeral(stats.engagement_ratio).format('0%')}</Typography>
+              <Typography className={classes.number}>{numeral(stats.engagement_ratio).format('0.00%')}</Typography>
               <Typography className={classes.stat}>Engagement</Typography>
             </CardContent>
           </Card>
