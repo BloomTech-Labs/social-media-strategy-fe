@@ -1,6 +1,10 @@
 import React, { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { getStatus, requestPopWords } from "../../actions/popwordsActions";
+import {
+	getStatus,
+	requestPopWords,
+	getWords,
+} from "../../actions/popwordsActions";
 import { Card } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
 import { CircularProgress } from "@material-ui/core";
@@ -72,8 +76,12 @@ export default function PopularWords() {
 			(async () => {
 				await dispatch(getStatus(user.twitter_handle));
 			})();
+		} else if (user.initialized && statusLoaded && modelReady) {
+			(async () => {
+				await dispatch(getWords(user.twitter_handle));
+			})();
 		}
-	}, [statusLoaded, user.initialized]);
+	}, [user.initialized, statusLoaded, modelReady]);
 
 	const handleOpen = () => {
 		setOpen(true);

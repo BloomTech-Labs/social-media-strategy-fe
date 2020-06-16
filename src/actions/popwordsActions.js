@@ -1,9 +1,9 @@
 import axios from "axios";
 import { UPDATE_STATUS, SET_TOPICS, ERROR } from "./popwordsActionTypes";
 
-export function getWords() {
+export function getWords(twitter_handle) {
 	return async (dispatch, getState) => {
-		const body = { twitter_handle: `${getState().user.twitter_handle}` };
+		const body = { twitter_handle };
 
 		axios
 			.post(
