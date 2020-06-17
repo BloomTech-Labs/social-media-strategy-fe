@@ -3,6 +3,7 @@ import { useDispatch } from "react-redux";
 import { Draggable } from "react-beautiful-dnd";
 import { axiosWithAuth } from "../../utils/axiosWithAuth";
 import { updatePost } from "../../actions/listsActions";
+import { postTweet } from "../../actions/twitterActions";
 // Components
 import EditPostText from "./EditPostText";
 import PostMenu from "./PostMenu";
@@ -42,7 +43,7 @@ const useStyles = makeStyles((theme) => ({
 	},
 	actionsContainer: {
 		display: "flex",
-		justifyContent: "flex-end",
+		justifyContent: "space-between",
 		margin: theme.spacing(1),
 		marginRight: theme.spacing(2),
 		marginBottom: 0,
@@ -60,14 +61,11 @@ const Post = ({ post }) => {
 
 	const dispatch = useDispatch();
 
-	const [isPosted, setPosted] = useState(post.posted);
 	const [text, setText] = useState(post.post_text || "");
 	const [isEditing, setIsEditing] = useState(false);
 
-	const postToTwitter = () => {
-		axiosWithAuth()
-			.put(`/posts/${post.id}/postnow`)
-			.then(() => setPosted(true));
+	const postToTwitter = async () => {
+		await dispatch(postTweet());
 	};
 
 	const handleInputText = (e) => {
@@ -116,6 +114,8 @@ const Post = ({ post }) => {
 										className={postText}
 									>
 										{text}
+										<br />
+										{`Index: ${post.index}`}
 									</Typography>
 									<PostMenu post={post} setEditing={() => setIsEditing(true)} />
 								</>
@@ -124,15 +124,15 @@ const Post = ({ post }) => {
 						{post.imageUrl && (
 							<img className={image} src={post.imageUrl} alt="Post" />
 						)}
-						s
+
 						<div className={actionsContainer}>
 							<SchedulePost postId={post.id} />
 							<Button
-								disabled={isPosted}
+								disabled={post.posted}
 								onClick={postToTwitter}
 								color="primary"
 							>
-								{isPosted ? "Posted" : "Post Now"}
+								{post.posted ? "Posted" : "Post Now"}
 							</Button>
 						</div>
 					</div>

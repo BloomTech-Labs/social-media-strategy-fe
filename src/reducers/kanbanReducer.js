@@ -6,6 +6,8 @@ import {
 	ADD_POST,
 	EDIT_POST,
 	DELETE_POST,
+	POST_TWEET,
+	SCHEDULE_POST,
 } from "../actions/kanbanActionTypes";
 
 const initialState = {
@@ -96,6 +98,15 @@ const kanbanReducer = (state = initialState, action) => {
 						...state.lists[payload.list_id],
 						posts: updatedPosts,
 					},
+				},
+			};
+		}
+		case POST_TWEET: {
+			const { postId, listId } = payload;
+			return {
+				...state,
+				lists: {
+					...state.lists,
 				},
 			};
 		}
