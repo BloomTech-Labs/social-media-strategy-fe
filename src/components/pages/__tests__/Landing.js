@@ -24,13 +24,13 @@ it("renders without crashing", () => {
 });
 
 it("renders 'SoMe' heading", () => {
-  const { getByText } = render(
+  const { getByTestId } = render(
     <Router>
       <Landing />
     </Router>
   );
 
-  const heading = getByText(/some/i);
+  const heading = getByTestId("some-heading");
   expect(heading).toBeInTheDocument();
 });
 
