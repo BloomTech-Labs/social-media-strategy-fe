@@ -1,39 +1,41 @@
-import {SEARCH_REQUEST, SEARCH_SUCCESS, SEARCH_FAILURE} from '../actions/popwordsActions';
+import {
+	UPDATE_STATUS,
+	SET_TOPICS,
+	ERROR,
+} from "../actions/popwordsActionTypes";
 
 const initialState = {
-    loading: false,
-    success: false,
-    topics: [],
+	statusLoaded: false,
+	processing: false,
+	modelReady: false,
+	queued: false,
+	error: "",
+	topics: [],
 };
 
 const popwordsReducer = (state = initialState, action) => {
-    switch(action.type) {
-        case SEARCH_REQUEST:
-            return {
-                ...state,
-                loading: true,
-            };
-        case SEARCH_FAILURE:
-            return {
-                loading: false,
-                success: false,
-                topics: [],
-            };
-        case SEARCH_SUCCESS: 
-            {
-            console.log("payload!!!", action.payload.topics);
-            const topics = Object.values(action.payload.topics).map(topic => topic);
-            return {
-                loading: false,
-                success: action.payload.success,
-                topics: topics,
-            };
-        }
-            default:
-            return state;
-    }
+	switch (action.type) {
+		case UPDATE_STATUS:
+			return {
+				...state,
+				statusLoaded: true,
+				queued: action.payload.queued,
+				processing: action.payload.processing,
+				modelReady: action.payload.model_ready,
+			};
+		case SET_TOPICS:
+			return {
+				...state,
+				topics: action.payload,
+			};
+		case ERROR:
+			return {
+				...state,
+				error: action.payload,
+			};
+		default:
+			return state;
+	}
 };
-
-
 
 export default popwordsReducer;
