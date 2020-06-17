@@ -21,8 +21,6 @@ const useStyles = makeStyles((theme) => ({
     body: {
       overflowY: "auto!important",
       height: "100%",
-      // margin: "auto",
-      // width: "960px",
     },
   },
   appBar: {
@@ -212,7 +210,7 @@ export default function Landing() {
       </div>
 
       {/* Start of About */}
-      <div data-aos="fade-right"
+      <div data-aos="fade-right" 
         style={{
           display: "flex",
           justifyContent: "space-evenly",
@@ -286,6 +284,11 @@ export default function Landing() {
           </p>
         </div>
       </div>
+
+      {/* Start of Footer */}
+      <footer>
+
+      </footer>
     </React.Fragment>
   );
 }
