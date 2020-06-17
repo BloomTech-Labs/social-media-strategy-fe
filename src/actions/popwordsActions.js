@@ -51,4 +51,8 @@ export const requestPopWords = (
 
 	// update status
 	await dispatch(getStatus(twitter_handle));
+<<<<<<< HEAD
 };
+=======
+};
+>>>>>>> 5d8d3d7fce8759edc2110c5485cb2112a21dfe52
