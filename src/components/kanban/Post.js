@@ -6,6 +6,7 @@ import { updatePost } from "../../actions/listsActions";
 // Components
 import EditPostText from "./EditPostText";
 import PostMenu from "./PostMenu";
+import SchedulePost from "./SchedulePost";
 // Material-UI
 import { Typography, makeStyles, Button } from "@material-ui/core";
 
@@ -125,6 +126,7 @@ const Post = ({ post }) => {
 						)}
 
 						<div className={actionsContainer}>
+							<SchedulePost />
 							<Button
 								disabled={isPosted}
 								onClick={postToTwitter}

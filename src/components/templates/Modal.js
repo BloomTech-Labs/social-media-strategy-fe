@@ -8,26 +8,27 @@ import {
 	Button,
 } from "@material-ui/core";
 
-const ModalAlert = (props) => {
-	const { open, setOpen, title, content, handleConfirmation } = props;
+const Modal = (props) => {
+	const { open, handleClose, title, content, handleConfirmation } = props;
 	return (
-		<Dialog
-			open={open}
-			onClose={() => setOpen(false)}
-			aria-labelledby="dialog-title"
-		>
+		<Dialog open={open} onClose={handleClose} aria-labelledby="dialog-title">
 			<div style={{ minWidth: 300 }}>
 				<DialogTitle id="dialog-title">{title}</DialogTitle>
-				{content && (
-					<DialogContent>
-						<DialogContentText id="dialog-description">
-							{content}
-						</DialogContentText>
-					</DialogContent>
-				)}
+
+				<DialogContent>
+					{props.children ? (
+						<>{props.children}</>
+					) : (
+						content && (
+							<DialogContentText id="dialog-description">
+								{content}
+							</DialogContentText>
+						)
+					)}
+				</DialogContent>
 
 				<DialogActions>
-					<Button onClick={() => setOpen(false)} color="primary">
+					<Button onClick={handleClose} color="primary">
 						Cancel
 					</Button>
 					{handleConfirmation && (
@@ -41,4 +42,4 @@ const ModalAlert = (props) => {
 	);
 };
 
-export default ModalAlert;
+export default Modal;

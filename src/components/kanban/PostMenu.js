@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { useDispatch } from "react-redux";
 import { deletePost } from "../../actions/listsActions";
-import ModalAlert from "../templates/ModalAlert";
+import ModalAlert from "../templates/Modal";
 // Material-UI
 import {
 	IconButton,
