@@ -231,7 +231,7 @@ export default function Landing() {
         </div>
       </div>
 
-      <h1 className={classes.h1} style={{color: 'dodgerblue'}}>Cool! But what set's us apart?</h1>
+      <h1 className={classes.h1} style={{color: 'dodgerblue'}}>Cool! But what sets us apart?</h1>
 
       {/* Start of Analytics */}
       <div
