@@ -48,24 +48,21 @@ const [open, setOpen] = React.useState(false);
 
   const body = (
     <div style={modalStyle} className={classes.paper}>
-      <div style={{ padding: "4%" }}>
+      <div style={{ padding: "8%" }}>
         <h2 id="simple-modal-title" style={{ textAlign: "center" }}>
-          Want to know what your followers are most interested in?
+          Find out what your followers<br></br> are most interested in
         </h2>
         <p id="simple-modal-description" className={classes.p}>
           SoMe can scan the most recent posts that your followers have engaged
           with and apply a machine learning technique called "topic modeling".
-          This attempts to group up the posts into five "topics", where certain
+          This attempts to group the posts into five "topics", where certain
           words are used together the most, and then return five lists of words
           that most define those topics. For example, one topic might be defined
           by the words "retweet", "sweepstakes", and "contest". Knowing this
           information might be helpful in increasing your own engagement!
         </p>
-        <p id="simple-modal-description" className={classes.p}>
-          Please keep in mind that the process of scanning your twitter
-          followers can take some time. How long depends on how many followers
-          you have, how many of them we're scanning, as well as how many other
-          users are currently queued up.
+        <p id="simple-modal-description" className={classes.p} style={{fontWeight:"bold"}}>
+            Long story short: We scan your followers most recent activity to return the 50 words your followers engage with most!
         </p>
         <span style={{ display: "flex", justifyContent: "flex-end" }}>
           <Button
