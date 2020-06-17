@@ -25,12 +25,24 @@ const useStyles = makeStyles((theme) => ({
 		color: "#2196F3",
 		width: "16px",
 	},
+	cursorGrab: {
+		cursor: "grab",
+	},
+	cursorPointer: {
+		cursor: "pointer",
+	},
 }));
 
 const ListHeader = (props) => {
 	const { list, dragHandleProps, user } = props;
 
-	const { header, twitterHandleContainer, twitterIcon } = useStyles();
+	const {
+		header,
+		twitterHandleContainer,
+		twitterIcon,
+		cursorGrab,
+		cursorPointer,
+	} = useStyles();
 
 	const dispatch = useDispatch();
 	const [isEditing, setIsEditing] = useState(false);
@@ -49,12 +61,11 @@ const ListHeader = (props) => {
 	const submit = (e) => {
 		e.preventDefault();
 
-		if (!listTitle) {
+		if (!listTitle && listTitle === "Drafts") {
 			setListTitle(list.title);
 		} else if (listTitle !== list.title) {
 			dispatch(updateList(list.id, { title: listTitle }));
 		}
-
 		setIsEditing(false);
 	};
 
@@ -69,8 +80,8 @@ const ListHeader = (props) => {
 				/>
 			) : (
 				<Typography
-					style={{ cursor: "pointer" }}
-					onClick={() => setIsEditing(true)}
+					className={listTitle === "Drafts" ? cursorGrab : cursorPointer}
+					onClick={listTitle !== "Drafts" ? () => setIsEditing(true) : null}
 					variant="h6"
 					component="h3"
 				>
