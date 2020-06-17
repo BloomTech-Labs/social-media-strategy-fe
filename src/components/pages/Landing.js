@@ -10,7 +10,9 @@ import { makeStyles } from "@material-ui/core/styles";
 import Container from "@material-ui/core/Container";
 import { ReactComponent as Logo } from "../../assets/imgs/landing_social.svg";
 import { ReactComponent as ScheduleLogo } from "../../assets/imgs/shedule.svg";
-import {ReactComponent as AnalyzingPic} from "../../assets/imgs/blueSearch.svg";
+import { ReactComponent as AnalyzingPic } from "../../assets/imgs/blueSearch.svg";
+import { ReactComponent as DataScience } from "../../assets/imgs/datascience.svg";
+import LearnMore from "../analytics/LearnMore";
 
 const useStyles = makeStyles((theme) => ({
   "@global": {
@@ -223,12 +225,13 @@ export default function Landing() {
           <h1 className={classes.h1}>Draft, Organize, and Schedule</h1>
           <br></br>
           <p className={classes.p}>
-            {" "}
             SoMe makes it easy to streamline and optimize your social media
             presence in one convenient place.
           </p>
         </div>
       </div>
+
+      <h1 className={classes.h1} style={{color: 'dodgerblue'}}>Cool! But what set's us apart?</h1>
 
       {/* Start of Analytics */}
       <div
@@ -239,19 +242,45 @@ export default function Landing() {
           margin: "8%",
         }}
       >
-        <div style={{ display: "flex", flexDirection: "column" }}>
-          <h1 className={classes.h1}>Get Actionable Data</h1>
+        <div style={{ display: "flex", flexDirection: "column"}}>
+          <h1 className={classes.h1}>Gain powerful insights</h1>
           <br></br>
-          <li className={classes.p}>
-            View a snapshot of your social media engagement each month. 
-            </li>
-            <br></br>
-            <li className={classes.p}>Gain insights into the words your followers engage with most.
-          </li>
+          <p className={classes.p}>
+            Find out the words your followers are engaging with most. We believe this information can be extremely beneficial in increasing your engagement.
+          </p>
+          <br></br>
+          <div style={{display:'flex', justifyContent:"center"}}>
+          <LearnMore/>
+          </div>
         </div>
 
         <div>
+          <DataScience style={{ width: "300px", height: "300px" }} />
+        </div>
+       
+      </div>
+
+      {/* Start of monthly snapshot */}
+      <div
+        style={{
+          display: "flex",
+          justifyContent: "space-evenly",
+          alignItems: "center",
+          margin: "8%",
+        }}
+      >
+        <div>
           <AnalyzingPic style={{ width: "300px", height: "300px" }} />
+        </div>
+
+        <div style={{ display: "flex", flexDirection: "column" }}>
+          <h1 className={classes.h1}>Track your platform growth</h1>
+          <br></br>
+          <p className={classes.p}>
+            <p className={classes.p}>
+              View a snapshot of your social media engagement each month. SoMe provides valuable metrics so you can make sure your platforms' growth remains on track. </p>
+            <br></br>
+          </p>
         </div>
       </div>
     </React.Fragment>
