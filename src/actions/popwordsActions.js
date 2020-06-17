@@ -6,10 +6,7 @@ export function getWords(twitter_handle) {
 		const body = { twitter_handle };
 
 		axios
-			.post(
-				"http://so-me-fastapi.eba-ghirpj73.us-east-1.elasticbeanstalk.com/topic_model/get_topics",
-				body,
-			)
+			.post("https://api.so-me.net/topic_model/get_topics", body)
 			.then((res) => {
 				if (res.data.success) {
 					const topics = Object.values(res.data.topics);
@@ -30,7 +27,7 @@ export const getStatus = (twitter_handle) => async (dispatch, getState) => {
 		twitter_handle,
 	};
 	const { data } = await axios.post(
-		"http://so-me-fastapi.eba-ghirpj73.us-east-1.elasticbeanstalk.com/topic_model/status",
+		"https://api.so-me.net/topic_model/status",
 		body,
 	);
 
@@ -50,10 +47,7 @@ export const requestPopWords = (
 		words_to_ignore: ignoredWords,
 	};
 
-	await axios.post(
-		"http://so-me-fastapi.eba-ghirpj73.us-east-1.elasticbeanstalk.com/topic_model/schedule",
-		body,
-	);
+	await axios.post("https://api.so-me.net/topic_model/schedule", body);
 
 	// update status
 	await dispatch(getStatus(twitter_handle));
