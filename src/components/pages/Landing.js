@@ -13,6 +13,8 @@ import { ReactComponent as ScheduleLogo } from "../../assets/imgs/shedule.svg";
 import { ReactComponent as AnalyzingPic } from "../../assets/imgs/blueSearch.svg";
 import { ReactComponent as DataScience } from "../../assets/imgs/datascience.svg";
 import LearnMore from "../analytics/LearnMore";
+import AOS from 'aos';
+import 'aos/dist/aos.css';
 
 const useStyles = makeStyles((theme) => ({
   "@global": {
@@ -140,6 +142,7 @@ const useStyles = makeStyles((theme) => ({
 export default function Landing() {
   const classes = useStyles();
   const { push } = useHistory();
+  AOS.init();
 
   return (
     <React.Fragment>
@@ -168,7 +171,7 @@ export default function Landing() {
         }}
       >
         {/* Main text */}
-        <div>
+        <div data-aos="fade-right" data-aos-easing="ease-in">
           <Container component="main" className={classes.mainContent}>
             <Typography
               component="h1"
@@ -196,7 +199,7 @@ export default function Landing() {
         {/* End main text */}
 
         {/* Sub text */}
-        <div>
+        <div data-aos="fade-left" data-aos-easing="ease-in">
           <Container className={classes.subContent}>
             <Logo style={{ width: "400px", height: "400px" }} />
             <Typography component="p" className={classes.subHeading}>
@@ -209,7 +212,7 @@ export default function Landing() {
       </div>
 
       {/* Start of About */}
-      <div
+      <div data-aos="fade-right"
         style={{
           display: "flex",
           justifyContent: "space-evenly",
@@ -234,7 +237,7 @@ export default function Landing() {
       <h1 className={classes.h1} style={{color: 'dodgerblue'}}>Cool! But what sets us apart?</h1>
 
       {/* Start of Analytics */}
-      <div
+      <div data-aos="fade-left"
         style={{
           display: "flex",
           justifyContent: "space-evenly",
@@ -261,7 +264,7 @@ export default function Landing() {
       </div>
 
       {/* Start of monthly snapshot */}
-      <div
+      <div data-aos="fade-right"
         style={{
           display: "flex",
           justifyContent: "space-evenly",
