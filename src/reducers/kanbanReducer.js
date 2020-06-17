@@ -86,16 +86,13 @@ const kanbanReducer = (state = initialState, action) => {
 			};
 		}
 		case DELETE_POST: {
-			// payload: post to be deleted
-			const updatedPosts = state.lists[payload.list_id].posts.filter(
-				(post) => post.id !== payload.id,
-			);
+			const { listId, updatedPosts } = payload;
 			return {
 				...state,
 				lists: {
 					...state.lists,
-					[payload.list_id]: {
-						...state.lists[payload.list_id],
+					[listId]: {
+						...state.lists[listId],
 						posts: updatedPosts,
 					},
 				},
