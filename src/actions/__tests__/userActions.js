@@ -2,7 +2,7 @@ import configureMockStore from "redux-mock-store";
 import thunk from "redux-thunk";
 import * as types from "../userActionTypes.js";
 import * as actions from "../userActions.js";
-import { render } from "@@testing-library/react";
+import { initializeUser } from "../userActions.js";
 
 // Understand
 
@@ -45,14 +45,29 @@ const middlewares = [thunk];
 const mockStore = configureMockStore(middlewares);
 
 describe("userActions", () => {
-  it("returns undefined if the user is not authenticated", () => {
-    const store = mockStore({
-      user: {
-        initialized: false,
-        okta_uid: null,
-        email: null,
-        twitter_handle: null
-      }
-    });
+  it("returns undefined if the user is not authenticated", async () => {
+    const mockHistory = [];
+    const mockAuthService = {
+      getUser: () => ({ twitter_handle: "SoMe_Strategy" }),
+      getAuthState: () => ({ isAuthenticated: false })
+    };
+
+    const result = await initializeUser(mockAuthService, mockHistory)();
+
+    expect(result).toBe(undefined);
+  });
+
+  it("directs the user to /connect/twitter if twitter_handle is undefined", async () => {
+    const mockHistory = [];
+    const mockAuthService = {
+      getUser: () => ({ twitter_handle: null }),
+      getAuthState: () => ({ isAuthenticated: true })
+    };
+
+    const mockDispatch = obj => obj;
+
+    await initializeUser(mockAuthService, mockHistory)(mockDispatch);
+
+    expect(mockHistory).toContain("/connect/twitter");
   });
 });
