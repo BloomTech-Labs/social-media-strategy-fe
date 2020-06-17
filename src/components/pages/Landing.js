@@ -19,6 +19,7 @@ import GitHubIcon from "@material-ui/icons/GitHub";
 import LearnMore from "../analytics/LearnMore";
 import AOS from "aos";
 import "aos/dist/aos.css";
+import "./Landing.css";
 
 const useStyles = makeStyles((theme) => ({
   "@global": {
@@ -91,8 +92,8 @@ const useStyles = makeStyles((theme) => ({
     },
     "@media (max-width: 600px)": {
       fontSize: 32,
-      marginTop: 60,
-      marginBottom: 50,
+      margin: 0,
+      padding: 0,
     },
   },
   subHeading: {
@@ -120,6 +121,9 @@ const useStyles = makeStyles((theme) => ({
     "@media (max-width: 600px)": {
       marginTop: 10,
     },
+    "@media (max-width: 400px)": {
+      margin: 0,
+    }
   },
   butttonContainer: {
     textAlign: "center",
@@ -170,7 +174,7 @@ export default function Landing() {
         </Toolbar>
       </AppBar>
 
-      <div
+      <div className="heading"
         style={{
           display: "flex",
           justifyContent: "space-evenly",
@@ -178,7 +182,7 @@ export default function Landing() {
         }}
       >
         {/* Main text */}
-        <div data-aos="fade-right" data-aos-easing="ease-in">
+        <div data-aos="fade-right" data-aos-easing="ease-in" >
           <Container component="main" className={classes.mainContent}>
             <Typography
               component="h1"
@@ -227,6 +231,7 @@ export default function Landing() {
           alignItems: "center",
           margin: "8%",
         }}
+        className="section1"
       >
         <div>
           <ScheduleLogo style={{ width: "300px", height: "300px" }} />
@@ -255,6 +260,7 @@ export default function Landing() {
           alignItems: "center",
           margin: "8%",
         }}
+        className="section2"
       >
         <div style={{ display: "flex", flexDirection: "column" }}>
           <h1 className={classes.h1}>Gain powerful insights</h1>
@@ -284,6 +290,7 @@ export default function Landing() {
           alignItems: "center",
           margin: "8%",
         }}
+        className="section1"
       >
         <div>
           <AnalyzingPic style={{ width: "300px", height: "300px" }} />
@@ -303,13 +310,14 @@ export default function Landing() {
         </div>
       </div>
 
-      {/* Start of Footer */}
+      {/* Start of CTA 2 */}
       <div
         style={{
           display: "flex",
           justifyContent: "space-evenly",
           background: "whitesmoke",
         }}
+        className="sectioncta2"
       >
         <div
           style={{
@@ -319,11 +327,11 @@ export default function Landing() {
             alignContent: "center",
           }}
         >
-          <h1 className={classes.h1} style={{ paddingTop: "20%" }}>
+          <h1 className={classes.h1} style={{ paddingTop: "20%" }} id="cta2">
             Grow and manage <br></br> your social media today!
           </h1>
-          <br></br>
-          <br></br>
+          <br className="br"></br>
+          <br className="br"></br>
           <Button
             component="button"
             className={classes.button}
@@ -333,9 +341,11 @@ export default function Landing() {
           </Button>
         </div>
         <div>
-          <Social style={{ width: "300", height: "300" }} />
+          <Social style={{ width: "300", height: "300" }} className="socialpic"/>
         </div>
       </div>
+
+      {/* Start of footer */}
       <footer
         style={{
           display: "flex",
