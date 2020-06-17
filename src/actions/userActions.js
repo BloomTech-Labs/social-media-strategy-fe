@@ -1,15 +1,12 @@
-import {
-  INITIALIZE_USER,
-  // AUTHORIZE_TWITTER,
-  // DISCONNECT_TWITTER,
-} from "./userActionTypes";
+import { INITIALIZE_USER } from "./userActionTypes";
 
-export const initializeUser = (authService, history) => async (dispatch) => {
+export const initializeUser = (authService, history) => async dispatch => {
   try {
     var user = await authService.getUser();
   } catch (err) {
     console.log(err);
   }
+
   if (!authService.getAuthState().isAuthenticated) return;
   const { sub, email, twitter_handle } = user;
   if (!twitter_handle) history.push("/connect/twitter");
@@ -20,9 +17,7 @@ export const initializeUser = (authService, history) => async (dispatch) => {
       initialized: true,
       okta_uid: sub,
       email,
-      twitter_handle,
-    },
+      twitter_handle
+    }
   });
 };
-
-export const authorizeTwitter = () => (dispatch) => {};
