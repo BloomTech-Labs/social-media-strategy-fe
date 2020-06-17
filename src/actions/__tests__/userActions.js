@@ -1,7 +1,7 @@
 import configureMockStore from "redux-mock-store";
 import thunk from "redux-thunk";
 import * as types from "../userActionTypes.js";
-import * as actions from "../userActions.js";
+//import * as actions from "../userActions.js";
 import { initializeUser } from "../userActions.js";
 
 // Understand
@@ -69,5 +69,46 @@ describe("userActions", () => {
     await initializeUser(mockAuthService, mockHistory)(mockDispatch);
 
     expect(mockHistory).toContain("/connect/twitter");
+  });
+
+  it("dispatches INITIALIZE_USER action if user is authenticated and connected their twitter account", async () => {
+    const store = mockStore({
+      user: {
+        initialized: false,
+        okta_uid: null,
+        email: null,
+        twitter_handle: "some_test"
+      }
+    });
+
+    const mockHistory = [];
+    const mockAuthService = {
+      getUser: () => ({
+        sub: null,
+        email: null,
+        twitter_handle: "some_test"
+      }),
+      getAuthState: () => ({ isAuthenticated: true })
+    };
+
+    let actions = store.getActions();
+    expect(actions).toEqual([]);
+
+    await store.dispatch(initializeUser(mockAuthService, mockHistory));
+
+    const expectedActions = [
+      {
+        type: types.INITIALIZE_USER,
+        payload: {
+          initialized: true,
+          okta_uid: null,
+          email: null,
+          twitter_handle: "some_test"
+        }
+      }
+    ];
+
+    actions = store.getActions();
+    expect(actions).toEqual(expectedActions);
   });
 });
