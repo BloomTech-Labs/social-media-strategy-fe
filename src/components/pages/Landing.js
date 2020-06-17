@@ -242,7 +242,7 @@ export default function Landing() {
         </div>
       </div>
 
-      <h1 className={classes.h1} style={{ color: "dodgerblue" }}>
+      <h1 className={classes.h1} style={{ color: "dodgerblue"}}>
         Cool! But what sets us apart?
       </h1>
 
@@ -354,19 +354,22 @@ export default function Landing() {
         <div
           style={{ display: "flex", flexDirection: "column", width: "100px" }}
         >
-          <Typography style={{ fontSize: "14px", textAlign: "center" }}>
+          <Typography style={{ fontSize: "14px", textAlign: "center", paddingBottom:"2%" }}>
             Get in Touch
           </Typography>
           <div style={{ display: "flex", justifyContent: "space-between" }}>
+            <a
+              href="https://github.com/orgs/Lambda-School-Labs/teams/labs24-some/repositories"
+              target="_blank"
+            >
+              <GitHubIcon style={{ color: "#4E4E4E" }} />
+            </a>
             <a href="https://twitter.com/some_strategy" target="_blank">
               <TwitterIcon style={{ color: "#4E4E4E" }} />
             </a>
             <a href="mailto:socialmediastrategy22@gmail.com" target="_blank">
               <EmailIcon style={{ color: "#4E4E4E" }} />
             </a>
-            <a href="https://github.com/orgs/Lambda-School-Labs/teams/labs24-some/repositories" target="_blank">
-              <GitHubIcon style={{ color: "#4E4E4E" }} />
-            </a>        
           </div>
         </div>
       </footer>
