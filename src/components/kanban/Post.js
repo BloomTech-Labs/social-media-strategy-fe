@@ -124,9 +124,9 @@ const Post = ({ post }) => {
 						{post.imageUrl && (
 							<img className={image} src={post.imageUrl} alt="Post" />
 						)}
-
+						s
 						<div className={actionsContainer}>
-							<SchedulePost />
+							<SchedulePost postId={post.id} />
 							<Button
 								disabled={isPosted}
 								onClick={postToTwitter}

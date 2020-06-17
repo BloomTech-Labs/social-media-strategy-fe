@@ -8,16 +8,16 @@ import {
 import ModalAlert from "../templates/Modal";
 import DateFnsUtils from "@date-io/date-fns";
 
-const SchedulePost = () => {
-	const [schedule, setSchedule] = useState("");
+const SchedulePost = ({ postId }) => {
+	const [schedule, setSchedule] = useState(new Date());
 	const [modalOpen, setModalOpen] = useState(false);
 
 	const handleChange = (date) => {
-		console.log("DATE********:", date);
-		setSchedule((prevSchedule) => ({
-			...prevSchedule,
-			date,
-		}));
+		setSchedule(date);
+	};
+
+	const handleSubmit = () => {
+		// dispatch action
 	};
 
 	return (
@@ -29,14 +29,16 @@ const SchedulePost = () => {
 				open={modalOpen}
 				handleClose={() => setModalOpen(false)}
 				title="Schedule Post"
-				handleConfirmation={() => console.log("confirmed")}
+				handleConfirmation={handleSubmit}
 			>
 				<MuiPickersUtilsProvider utils={DateFnsUtils}>
-					<Grid container justify="space-around">
+					<Grid container direction="column" justify="space-around">
 						<KeyboardDatePicker
+							minDate={new Date()}
 							margin="normal"
+							defa
 							id="date-picker-dialog"
-							label="Date picker dialog"
+							label="Date"
 							format="MM/dd/yyyy"
 							value={schedule}
 							onChange={handleChange}
@@ -47,7 +49,7 @@ const SchedulePost = () => {
 						<KeyboardTimePicker
 							margin="normal"
 							id="time-picker"
-							label="Time picker"
+							label="Time"
 							value={schedule}
 							onChange={handleChange}
 							KeyboardButtonProps={{
