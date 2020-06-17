@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { useOktaAuth } from "@okta/okta-react/dist/OktaContext";
+import { useOktaAuth } from "@okta/okta-react";
 import { axiosWithAuth } from "../../utils/axiosWithAuth";
 
 import twitterLogo from "../../assets/imgs/twitter-logo.svg";
