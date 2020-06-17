@@ -12,9 +12,13 @@ import { ReactComponent as Logo } from "../../assets/imgs/landing_social.svg";
 import { ReactComponent as ScheduleLogo } from "../../assets/imgs/shedule.svg";
 import { ReactComponent as AnalyzingPic } from "../../assets/imgs/blueSearch.svg";
 import { ReactComponent as DataScience } from "../../assets/imgs/datascience.svg";
+import { ReactComponent as Social } from "../../assets/imgs/social.svg";
+import TwitterIcon from "@material-ui/icons/Twitter";
+import EmailIcon from "@material-ui/icons/Email";
+import GitHubIcon from "@material-ui/icons/GitHub";
 import LearnMore from "../analytics/LearnMore";
-import AOS from 'aos';
-import 'aos/dist/aos.css';
+import AOS from "aos";
+import "aos/dist/aos.css";
 
 const useStyles = makeStyles((theme) => ({
   "@global": {
@@ -36,6 +40,11 @@ const useStyles = makeStyles((theme) => ({
     fontFamily: "sansita",
     color: "dodgerblue",
     fontSize: "36px",
+  },
+  footerTitle: {
+    fontFamily: "sansita",
+    color: "#4E4E4E",
+    fontSize: "20px",
   },
   link: {
     margin: theme.spacing(1, 1.5),
@@ -210,7 +219,8 @@ export default function Landing() {
       </div>
 
       {/* Start of About */}
-      <div data-aos="fade-right" 
+      <div
+        data-aos="fade-right"
         style={{
           display: "flex",
           justifyContent: "space-evenly",
@@ -232,10 +242,13 @@ export default function Landing() {
         </div>
       </div>
 
-      <h1 className={classes.h1} style={{color: 'dodgerblue'}}>Cool! But what sets us apart?</h1>
+      <h1 className={classes.h1} style={{ color: "dodgerblue" }}>
+        Cool! But what sets us apart?
+      </h1>
 
       {/* Start of Analytics */}
-      <div data-aos="fade-left"
+      <div
+        data-aos="fade-left"
         style={{
           display: "flex",
           justifyContent: "space-evenly",
@@ -243,26 +256,28 @@ export default function Landing() {
           margin: "8%",
         }}
       >
-        <div style={{ display: "flex", flexDirection: "column"}}>
+        <div style={{ display: "flex", flexDirection: "column" }}>
           <h1 className={classes.h1}>Gain powerful insights</h1>
           <br></br>
           <p className={classes.p}>
-            Find out the words your followers are engaging with most. We believe this information can be extremely beneficial in increasing your engagement.
+            Find out the words your followers are engaging with most. We believe
+            this information can be extremely beneficial in increasing your
+            engagement.
           </p>
           <br></br>
-          <div style={{display:'flex', justifyContent:"center"}}>
-          <LearnMore/>
+          <div style={{ display: "flex", justifyContent: "center" }}>
+            <LearnMore />
           </div>
         </div>
 
         <div>
           <DataScience style={{ width: "300px", height: "300px" }} />
         </div>
-       
       </div>
 
       {/* Start of monthly snapshot */}
-      <div data-aos="fade-right"
+      <div
+        data-aos="fade-right"
         style={{
           display: "flex",
           justifyContent: "space-evenly",
@@ -279,15 +294,81 @@ export default function Landing() {
           <br></br>
           <p className={classes.p}>
             <p className={classes.p}>
-              View a snapshot of your social media engagement each month. SoMe provides valuable metrics so you can make sure your platforms' growth remains on track. </p>
+              View a snapshot of your social media engagement each month. SoMe
+              provides valuable metrics so you can make sure your platforms'
+              growth remains on track.{" "}
+            </p>
             <br></br>
           </p>
         </div>
       </div>
 
       {/* Start of Footer */}
-      <footer>
-
+      <div
+        style={{
+          display: "flex",
+          justifyContent: "space-evenly",
+          background: "whitesmoke",
+        }}
+      >
+        <div
+          style={{
+            display: "flex",
+            flexDirection: "column",
+            alignItems: "center",
+            alignContent: "center",
+          }}
+        >
+          <h1 className={classes.h1} style={{ paddingTop: "20%" }}>
+            Grow and manage <br></br> your social media today!
+          </h1>
+          <br></br>
+          <br></br>
+          <Button
+            component="button"
+            className={classes.button}
+            onClick={() => push("/login")}
+          >
+            Start Now
+          </Button>
+        </div>
+        <div>
+          <Social style={{ width: "300", height: "300" }} />
+        </div>
+      </div>
+      <footer
+        style={{
+          display: "flex",
+          justifyContent: "space-between",
+          margin: "4%",
+        }}
+      >
+        <div>
+          <Typography variant="h6" noWrap className={classes.footerTitle}>
+            SoMe
+          </Typography>
+          <Typography style={{ fontSize: "12px" }}>
+            Social media management made easy.
+          </Typography>
+        </div>
+        <div
+          style={{ display: "flex", flexDirection: "column", width: "100px" }}
+        >
+          <Typography style={{ fontSize: "14px", textAlign: "center" }}>
+            Get in Touch
+          </Typography>
+          <div style={{ display: "flex", justifyContent: "space-between" }}>
+            <a href="https://twitter.com/some_strategy" target="_blank">
+              <TwitterIcon style={{ color: "#4E4E4E" }} />
+            </a>
+            <a href="mailto:socialmediastrategy22@gmail.com" target="_blank">
+              <EmailIcon style={{ color: "#4E4E4E" }} />
+            </a>
+            <a href="https://github.com/orgs/Lambda-School-Labs/teams/labs24-some/repositories" target="_blank">
+              <GitHubIcon style={{ color: "#4E4E4E" }} />
+            </a>        
+          </div>
+        </div>
       </footer>
     </React.Fragment>
   );
