@@ -11,7 +11,7 @@ import {
   Button,
   CircularProgress,
 } from "@material-ui/core";
-import loginImg from "../../assets/imgs/login.png";
+import { ReactComponent as LoginImg } from "../../assets/imgs/socialmedia.svg";
 import logo from "../../assets/imgs/Logo.svg";
 import logoDark from "../../assets/imgs/Logo-dark.svg";
 
@@ -33,12 +33,12 @@ const useStyles = makeStyles((theme) => ({
   imageContainer: {
     overflow: "hidden",
     height: "100%",
+    marginRight: "7%",
   },
   image: {
     width: "100%",
     height: "100%",
     objectFit: "cover",
-    objectPosition: "center",
   },
   logo: {
     height: "20px",
@@ -106,7 +106,7 @@ const LoginOkta = ({ baseUrl }) => {
       </Grid>
       <Hidden xsDown>
         <Grid item xs={5} className={classes.imageContainer}>
-          <img className={classes.image} src={loginImg} alt="Login" />
+          <LoginImg className={classes.image} alt="Login" />
         </Grid>
       </Hidden>
     </Grid>
