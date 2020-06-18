@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { useDispatch } from "react-redux";
 // redux action
 import { scheduleTweet } from "../../actions/twitterActions";
-import { Grid, Button } from "@material-ui/core";
+import { Grid, Button, Typography } from "@material-ui/core";
 import {
 	MuiPickersUtilsProvider,
 	KeyboardDatePicker,
@@ -68,7 +68,11 @@ const SchedulePost = ({ postId, scheduledTime }) => {
 								"aria-label": "change time",
 							}}
 						/>
-						{invalidDate && "Invalid date"}
+						{invalidDate && (
+							<Typography variant="caption" color="error">
+								Invalid time
+							</Typography>
+						)}
 					</Grid>
 				</MuiPickersUtilsProvider>
 			</Modal>
