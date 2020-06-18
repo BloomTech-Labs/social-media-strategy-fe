@@ -45,7 +45,9 @@ const CreatePostModal = (props) => {
 
 			if (!drafts) {
 				// create Drafts list
-				dispatch(addList("Drafts"));
+				(async () => {
+					await dispatch(addList("Drafts"));
+				})();
 			} else {
 				// set Drafts or listId from param as default list
 				setPost((prevPost) => ({

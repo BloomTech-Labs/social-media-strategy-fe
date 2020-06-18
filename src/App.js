@@ -1,4 +1,5 @@
 import React, { useEffect } from "react";
+import ReactGA from "react-ga";
 import { SecureRoute, LoginCallback } from "@okta/okta-react";
 import { Route, Switch, useHistory, useLocation } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
@@ -13,7 +14,13 @@ import Home from "./components/pages/Home";
 import Analytics from "./components/pages/Analytics";
 import NavMenuTemplate from "./components/templates/NavMenuTemplate";
 
+function initializeAnalytics() {
+  ReactGA.initialize('UA-169685720-1');
+  ReactGA.pageview(window.location.pathname + window.location.search);
+}
+
 function App(props) {
+  initializeAnalytics();
   const { authService } = useOktaAuth();
   const dispatch = useDispatch();
   const history = useHistory();

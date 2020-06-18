@@ -11,6 +11,7 @@ import Container from "@material-ui/core/Container";
 import { ReactComponent as Logo } from "../../assets/imgs/landing_social.svg";
 import { ReactComponent as ScheduleLogo } from "../../assets/imgs/shedule.svg";
 import { ReactComponent as AnalyzingPic } from "../../assets/imgs/blueSearch.svg";
+<<<<<<< HEAD
 import { ReactComponent as DataScience } from "../../assets/imgs/datascience.svg";
 import { ReactComponent as Social } from "../../assets/imgs/social.svg";
 import TwitterIcon from "@material-ui/icons/Twitter";
@@ -20,27 +21,36 @@ import LearnMore from "../analytics/LearnMore";
 import AOS from "aos";
 import "aos/dist/aos.css";
 import "./Landing.css";
+=======
+>>>>>>> master
 
-const useStyles = makeStyles((theme) => ({
+const useStyles = makeStyles(theme => ({
   "@global": {
     body: {
       overflowY: "auto!important",
+<<<<<<< HEAD
       height: "100%",
     },
+=======
+      height: "100%"
+      // margin: "auto",
+      // width: "960px",
+    }
+>>>>>>> master
   },
   appBar: {
     borderBottom: "none!important",
     boxShadow: "none!important",
-    backgroundColor: "#fff",
+    backgroundColor: "#fff"
   },
   toolbar: {
-    flexWrap: "wrap",
+    flexWrap: "wrap"
   },
   toolbarTitle: {
     flexGrow: 1,
     fontFamily: "sansita",
     color: "dodgerblue",
-    fontSize: "36px",
+    fontSize: "36px"
   },
   footerTitle: {
     fontFamily: "sansita",
@@ -54,17 +64,17 @@ const useStyles = makeStyles((theme) => ({
     fontWeight: "bold",
     fontSize: "14px",
     lineHeight: "11px",
-    letterSpacing: "0.25px",
+    letterSpacing: "0.25px"
   },
   mainContent: {
     padding: theme.spacing(8, 0, 6),
     maxWidth: 400,
     "@media (max-width: 960px)": {
-      maxWidth: 600,
+      maxWidth: 600
     },
     "@media (orientation: portrait)": {
-      marginTop: -10,
-    },
+      marginTop: -10
+    }
   },
   subContent: {
     paddingTop: "10%",
@@ -72,10 +82,10 @@ const useStyles = makeStyles((theme) => ({
     flexDirection: "column",
     alignItems: "center",
     "@media (max-width: 600px)": {
-      maxWidth: 400,
+      maxWidth: 400
     },
     marginTop: -30,
-    marginBottom: 50,
+    marginBottom: 50
   },
   mainHeading: {
     textAlign: "center",
@@ -88,13 +98,19 @@ const useStyles = makeStyles((theme) => ({
     "@media (max-width: 960px)": {
       fontSize: 32,
       marginTop: -40,
-      marginBottom: 0,
+      marginBottom: 0
     },
     "@media (max-width: 600px)": {
       fontSize: 32,
+<<<<<<< HEAD
       margin: 0,
       padding: 0,
     },
+=======
+      marginTop: 60,
+      marginBottom: 50
+    }
+>>>>>>> master
   },
   subHeading: {
     fontSize: "14pt",
@@ -103,8 +119,8 @@ const useStyles = makeStyles((theme) => ({
     margin: "0 auto",
     fontWeight: "bold",
     "@media (min-width: 960px)": {
-      maxWidth: 400,
-    },
+      maxWidth: 400
+    }
   },
   button: {
     backgroundColor: "#2196F3",
@@ -116,17 +132,21 @@ const useStyles = makeStyles((theme) => ({
     color: "#fff",
     padding: "15px",
     "@media (max-width: 960px)": {
-      marginTop: -20,
+      marginTop: -20
     },
     "@media (max-width: 600px)": {
+<<<<<<< HEAD
       marginTop: 10,
     },
     "@media (max-width: 400px)": {
       margin: 0,
+=======
+      marginTop: 10
+>>>>>>> master
     }
   },
   butttonContainer: {
-    textAlign: "center",
+    textAlign: "center"
   },
   h1: {
     fontSize: "25pt",
@@ -136,8 +156,8 @@ const useStyles = makeStyles((theme) => ({
     fontWeight: 500,
     textAlign: "center",
     "@media (min-width: 960px)": {
-      maxWidth: 400,
-    },
+      maxWidth: 400
+    }
   },
   p: {
     fontSize: "14pt",
@@ -145,9 +165,9 @@ const useStyles = makeStyles((theme) => ({
     fontFamily: "Roboto Condensed",
     margin: "0 auto",
     "@media (min-width: 960px)": {
-      maxWidth: 400,
-    },
-  },
+      maxWidth: 400
+    }
+  }
 }));
 
 export default function Landing() {
@@ -160,7 +180,12 @@ export default function Landing() {
       <CssBaseline />
       <AppBar position="static" elevation={0} className={classes.appBar}>
         <Toolbar className={classes.toolbar}>
-          <Typography variant="h6" noWrap className={classes.toolbarTitle}>
+          <Typography
+            variant="h6"
+            noWrap
+            className={classes.toolbarTitle}
+            data-testid="some-heading"
+          >
             SoMe
           </Typography>
           <nav>
@@ -178,7 +203,7 @@ export default function Landing() {
         style={{
           display: "flex",
           justifyContent: "space-evenly",
-          alignItems: "center",
+          alignItems: "center"
         }}
       >
         {/* Main text */}
@@ -229,7 +254,7 @@ export default function Landing() {
           display: "flex",
           justifyContent: "space-evenly",
           alignItems: "center",
-          margin: "8%",
+          margin: "8%"
         }}
         className="section1"
       >
@@ -258,13 +283,14 @@ export default function Landing() {
           display: "flex",
           justifyContent: "space-evenly",
           alignItems: "center",
-          margin: "8%",
+          margin: "8%"
         }}
         className="section2"
       >
         <div style={{ display: "flex", flexDirection: "column" }}>
           <h1 className={classes.h1}>Gain powerful insights</h1>
           <br></br>
+<<<<<<< HEAD
           <p className={classes.p}>
             Find out the words your followers are engaging with most. We believe
             this information can be extremely beneficial in increasing your
@@ -274,6 +300,15 @@ export default function Landing() {
           <div style={{ display: "flex", justifyContent: "center" }}>
             <LearnMore />
           </div>
+=======
+          <li className={classes.p}>
+            View a snapshot of your social media engagement each month.
+          </li>
+          <br></br>
+          <li className={classes.p}>
+            Gain insights into the words your followers engage with most.
+          </li>
+>>>>>>> master
         </div>
 
         <div>
