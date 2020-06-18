@@ -11,7 +11,6 @@ import Container from "@material-ui/core/Container";
 import { ReactComponent as Logo } from "../../assets/imgs/landing_social.svg";
 import { ReactComponent as ScheduleLogo } from "../../assets/imgs/shedule.svg";
 import { ReactComponent as AnalyzingPic } from "../../assets/imgs/blueSearch.svg";
-<<<<<<< HEAD
 import { ReactComponent as DataScience } from "../../assets/imgs/datascience.svg";
 import { ReactComponent as Social } from "../../assets/imgs/social.svg";
 import TwitterIcon from "@material-ui/icons/Twitter";
@@ -21,22 +20,13 @@ import LearnMore from "../analytics/LearnMore";
 import AOS from "aos";
 import "aos/dist/aos.css";
 import "./Landing.css";
-=======
->>>>>>> master
 
 const useStyles = makeStyles(theme => ({
   "@global": {
     body: {
       overflowY: "auto!important",
-<<<<<<< HEAD
       height: "100%",
     },
-=======
-      height: "100%"
-      // margin: "auto",
-      // width: "960px",
-    }
->>>>>>> master
   },
   appBar: {
     borderBottom: "none!important",
@@ -102,15 +92,9 @@ const useStyles = makeStyles(theme => ({
     },
     "@media (max-width: 600px)": {
       fontSize: 32,
-<<<<<<< HEAD
       margin: 0,
       padding: 0,
     },
-=======
-      marginTop: 60,
-      marginBottom: 50
-    }
->>>>>>> master
   },
   subHeading: {
     fontSize: "14pt",
@@ -135,14 +119,10 @@ const useStyles = makeStyles(theme => ({
       marginTop: -20
     },
     "@media (max-width: 600px)": {
-<<<<<<< HEAD
       marginTop: 10,
     },
     "@media (max-width: 400px)": {
       margin: 0,
-=======
-      marginTop: 10
->>>>>>> master
     }
   },
   butttonContainer: {
@@ -290,7 +270,6 @@ export default function Landing() {
         <div style={{ display: "flex", flexDirection: "column" }}>
           <h1 className={classes.h1}>Gain powerful insights</h1>
           <br></br>
-<<<<<<< HEAD
           <p className={classes.p}>
             Find out the words your followers are engaging with most. We believe
             this information can be extremely beneficial in increasing your
@@ -300,15 +279,6 @@ export default function Landing() {
           <div style={{ display: "flex", justifyContent: "center" }}>
             <LearnMore />
           </div>
-=======
-          <li className={classes.p}>
-            View a snapshot of your social media engagement each month.
-          </li>
-          <br></br>
-          <li className={classes.p}>
-            Gain insights into the words your followers engage with most.
-          </li>
->>>>>>> master
         </div>
 
         <div>
@@ -420,4 +390,4 @@ export default function Landing() {
       </footer>
     </React.Fragment>
   );
-}
+};
