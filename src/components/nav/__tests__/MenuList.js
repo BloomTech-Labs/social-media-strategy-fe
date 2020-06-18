@@ -1,24 +1,22 @@
 import React from "react";
 import MenuList from "../MenuList";
 import { render } from "@testing-library/react";
-import { MemoryRouter as Router} from "react-router-dom";
-import CreatePost from "../../kanban/CreatePost";
+import { MemoryRouter as Router } from "react-router-dom";
+import CreatePost from "../CreatePost";
 import { useOktaAuth } from "@okta/okta-react/dist/OktaContext";
 import { createStore } from "redux";
 import { Provider } from "react-redux";
 
-jest.mock('@okta/okta-react/dist/OktaContext', () => ({
+jest.mock("@okta/okta-react/dist/OktaContext", () => ({
   useOktaAuth: () => ({
-      authState: {},
-      authService: {
-        logout: jest.fn()
-      }
+    authState: {},
+    authService: {
+      logout: jest.fn()
+    }
   })
 }));
 
-jest.mock("../../kanban/CreatePost.js", () => () => (
-  <div>CreatePost component</div>
-));
+jest.mock("../CreatePost.js", () => () => <div>CreatePost component</div>);
 
 // Understand
 
@@ -34,15 +32,14 @@ jest.mock("../../kanban/CreatePost.js", () => () => (
 // - useLocation and useHistory ??
 
 it("renders navigation list", () => {
+  // const component = shallow(<MenuList/>);
 
-    // const component = shallow(<MenuList/>);
+  const { getByText } = render(
+    <Router>
+      <MenuList />
+    </Router>
+  );
 
-    const { getByText } = render(
-        <Router>
-          <MenuList/>
-        </Router>
-    );
-    
-    const mediaManager = getByText(/media manager/i);
-    expect(mediaManager).toBeInTheDocument();
-}); 
+  const mediaManager = getByText(/media manager/i);
+  expect(mediaManager).toBeInTheDocument();
+});
