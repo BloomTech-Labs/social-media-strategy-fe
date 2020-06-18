@@ -1,6 +1,8 @@
 import React, { useState } from "react";
 import { useDispatch } from "react-redux";
 import { Draggable } from "react-beautiful-dnd";
+import { getDate, getTime } from "../../utils/dateFunctions";
+// Actions
 import { updatePost } from "../../actions/listsActions";
 import { postTweet } from "../../actions/twitterActions";
 // Components
@@ -101,6 +103,13 @@ const Post = ({ post }) => {
 						className={container}
 						style={{ ...provided.draggableProps.style }}
 					>
+						{post.scheduled_time && (
+							<Typography>
+								{getDate(post.scheduled_time, false, true)}
+								<br />
+								{getTime(post.scheduled_time)}
+							</Typography>
+						)}
 						<div className={contentContainer}>
 							{isEditing ? (
 								<EditPostText
@@ -131,7 +140,7 @@ const Post = ({ post }) => {
 								<Button disabled>Posted</Button>
 							) : (
 								<>
-									<SchedulePost postId={post.id} />
+									{!post.scheduled_time && <SchedulePost postId={post.id} />}
 									<Button
 										disabled={post.posted}
 										onClick={() => setModalOpen(true)}
