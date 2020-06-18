@@ -1,3 +1,6 @@
+const testListId1 = "fc85a964-eec3-42eb-a076-4d7d2634b321";
+const testListId2 = "d2b3833d-08b3-4dd8-96fe-822e3a608d82";
+
 const listSeeds = [
   {
     id: "fc85a964-eec3-42eb-a076-4d7d2634b321",
@@ -70,17 +73,13 @@ export const axiosWithAuth = () => ({
         return Promise.resolve({
           data: listSeeds
         });
-      case `/lists/fc85a964-eec3-42eb-a076-4d7d2634b321/posts`:
+      case `/lists/${testListId1}/posts`:
         return Promise.resolve({
-          data: postSeeds.filter(
-            post => post.list_id === "fc85a964-eec3-42eb-a076-4d7d2634b321"
-          )
+          data: postSeeds.filter(post => post.list_id === testListId1)
         });
-      case "/lists/d2b3833d-08b3-4dd8-96fe-822e3a608d82/posts":
+      case `/lists/${testListId2}/posts`:
         return Promise.resolve({
-          data: postSeeds.filter(
-            post => post.list_id === "d2b3833d-08b3-4dd8-96fe-822e3a608d82"
-          )
+          data: postSeeds.filter(post => post.list_id === testListId2)
         });
     }
   })
