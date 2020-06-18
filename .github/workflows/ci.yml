@@ -3,7 +3,7 @@ name: build
 
 # What conditions trigger the workflow
 #  In this case, all pushes and pull requests
-on:  
+on:
   push:
     branches:
       - master
@@ -31,8 +31,8 @@ jobs:
         with:
           node-version: "12"
 
-      # Run the NPM install command before proceeding
-      - run: npm install
+      # Run the NPM ci command before proceeding
+      - run: npm ci
 
       # A GitHub action for running tests and publishing coverage
       - uses: paambaati/codeclimate-action@v2.4.0
