@@ -7,7 +7,9 @@ jest.mock("@okta/okta-react", () => ({
     authState: {},
     authService: {
       logout: jest.fn(),
-      getUser: () => ({ twitter_handle: "SoMe_Strategy" }),
+      getUser: jest
+        .fn()
+        .mockReturnValueOnce({ twitter_handle: "SoMe_Strategy" }),
     },
   }),
 }));
