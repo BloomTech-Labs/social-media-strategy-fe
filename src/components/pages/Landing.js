@@ -333,7 +333,7 @@ export default function Landing() {
           }}
         >
           <h1 className={classes.h1} style={{ paddingTop: "20%" }} id="cta2">
-            Grow and manage <br></br> your social media today!
+            Grow and manage <br/> your social media today!
           </h1>
           <br className="br"></br>
           <br className="br"></br>
