@@ -195,7 +195,7 @@ export default function Landing() {
               gutterBottom
               className={classes.mainHeading}
             >
-              Social Media management <br></br> made easy.
+              Social Media management <br/> made easy.
             </Typography>
           </Container>
           <Container
