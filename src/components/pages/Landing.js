@@ -361,7 +361,7 @@ export default function Landing() {
             SoMe
           </Typography>
           <Typography style={{ fontSize: "12px" }}>
-            Social media management made easy.
+            Social media growth and management made easy.
           </Typography>
         </div>
         <div
