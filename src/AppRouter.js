@@ -1,8 +1,9 @@
 import React from "react";
-import { BrowserRouter } from "react-router-dom";
+import { BrowserRouter, Route, Switch } from "react-router-dom";
 import { Security } from "@okta/okta-react";
 
 import App from "./App";
+import Landing from "./components/pages/Landing";
 
 const oktaConfig = {
   issuer: `${process.env.REACT_APP_OKTA_DOMAIN}/oauth2/default`,
@@ -14,16 +15,19 @@ const oktaConfig = {
 function AppRouter() {
   return (
     <BrowserRouter>
-      <Security
-        {...oktaConfig}
-        onAuthRequired={() => {
-          if (window.location.pathname !== "/login") {
-            window.location.pathname = "/login";
-          }
-        }}
-      >
-        <App />
-      </Security>
+      <Switch>
+        <Route exact path="/" component={Landing} />
+        <Security
+          {...oktaConfig}
+          onAuthRequired={() => {
+            if (window.location.pathname !== "/login") {
+              window.location.pathname = "/login";
+            }
+          }}
+        >
+          <App />
+        </Security>
+      </Switch>
     </BrowserRouter>
   );
 }
