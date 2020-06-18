@@ -48,19 +48,19 @@ it("renders SIGN UP and LOGIN links", () => {
   expect(logIn).toBeInTheDocument();
 });
 
-it("renders main heading and sub heading", () => {
-  const { getByText } = render(
-    <Router>
-      <Landing />
-    </Router>
-  );
+// it("renders main heading and sub heading", () => {
+//   const { getByText } = render(
+//     <Router>
+//       <Landing />
+//     </Router>
+//   );
 
-  const mainHeading = getByText(/social media management made easy./i);
-  const subHeading = getByText(/discover how to develop your brand/i);
+//   const mainHeading = getByText(/social media management made easy./i);
+//   const subHeading = getByText(/discover how to develop your brand/i);
 
-  expect(mainHeading).toBeInTheDocument();
-  expect(subHeading).toBeInTheDocument();
-});
+//   expect(mainHeading).toBeInTheDocument();
+//   expect(subHeading).toBeInTheDocument();
+// });
 
 it("renders Get started button", () => {
   const { getByText } = render(

@@ -303,15 +303,13 @@ export default function Landing() {
 
         <div style={{ display: "flex", flexDirection: "column" }}>
           <h1 className={classes.h1}>Track your platform growth</h1>
-          <br></br>
-          <p className={classes.p}>
+          <br/>
             <p className={classes.p}>
               View a snapshot of your social media engagement each month. SoMe
               provides valuable metrics so you can make sure your platforms'
               growth remains on track.{" "}
             </p>
-            <br></br>
-          </p>
+            <br/>
         </div>
       </div>
 
