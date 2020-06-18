@@ -27,15 +27,26 @@ export const postTweet = (postId) => async (dispatch, getState) => {
 	});
 };
 
-export const scheduleTweet = (postId, date) => async (dispatch) => {
+export const scheduleTweet = (postId, date) => async (dispatch, getState) => {
 	const { data } = await axiosWithAuth().put(`/posts/${postId}/schedule`, {
 		date,
+	});
+
+	const { posts } = getState().kanban.lists[data.list_id];
+
+	const updatedPosts = posts.map((post) => {
+		if (post.id === postId) {
+			return data;
+		}
+
+		return post;
 	});
 
 	dispatch({
 		type: SCHEDULE_TWEET,
 		payload: {
-			scheduledTime: data.scheduled_time,
+			listId: data.list_id,
+			updatedPosts,
 		},
 	});
 };

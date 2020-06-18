@@ -1,23 +1,35 @@
 import React, { useState } from "react";
+import { useDispatch } from "react-redux";
+// redux action
+import { scheduleTweet } from "../../actions/twitterActions";
 import { Grid, Button } from "@material-ui/core";
 import {
 	MuiPickersUtilsProvider,
 	KeyboardDatePicker,
 	KeyboardTimePicker,
 } from "@material-ui/pickers";
-import ModalAlert from "../templates/Modal";
+import Modal from "../templates/Modal";
 import DateFnsUtils from "@date-io/date-fns";
 
 const SchedulePost = ({ postId }) => {
 	const [schedule, setSchedule] = useState(new Date());
+	const [invalidDate, setInvalidDate] = useState(false);
 	const [modalOpen, setModalOpen] = useState(false);
 
-	const handleChange = (date) => {
+	const dispatch = useDispatch();
+
+	const handleChange = (date, e) => {
+		console.log(e);
+		setInvalidDate(false);
 		setSchedule(date);
 	};
 
-	const handleSubmit = () => {
-		// dispatch action
+	const handleSchedulePost = async () => {
+		if (schedule > Date.now()) {
+			await dispatch(scheduleTweet(postId, schedule));
+		} else {
+			setInvalidDate(true);
+		}
 	};
 
 	return (
@@ -25,18 +37,17 @@ const SchedulePost = ({ postId }) => {
 			<Button onClick={() => setModalOpen(true)} color="primary">
 				Schedule
 			</Button>
-			<ModalAlert
+			<Modal
 				open={modalOpen}
 				handleClose={() => setModalOpen(false)}
 				title="Schedule Post"
-				handleConfirmation={handleSubmit}
+				handleConfirmation={handleSchedulePost}
 			>
 				<MuiPickersUtilsProvider utils={DateFnsUtils}>
 					<Grid container direction="column" justify="space-around">
 						<KeyboardDatePicker
 							minDate={new Date()}
 							margin="normal"
-							defa
 							id="date-picker-dialog"
 							label="Date"
 							format="MM/dd/yyyy"
@@ -47,6 +58,7 @@ const SchedulePost = ({ postId }) => {
 							}}
 						/>
 						<KeyboardTimePicker
+							minDate={new Date()}
 							margin="normal"
 							id="time-picker"
 							label="Time"
@@ -56,9 +68,10 @@ const SchedulePost = ({ postId }) => {
 								"aria-label": "change time",
 							}}
 						/>
+						{invalidDate && "Invalid date"}
 					</Grid>
 				</MuiPickersUtilsProvider>
-			</ModalAlert>
+			</Modal>
 		</>
 	);
 };
