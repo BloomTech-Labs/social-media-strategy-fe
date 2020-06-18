@@ -63,7 +63,7 @@ const postSeeds = [
   }
 ];
 
-export const axiosWithAuth = () => {
+export const axiosWithAuth = () => ({
   get: jest.fn(url => {
     switch (url) {
       case "/lists":
@@ -83,5 +83,5 @@ export const axiosWithAuth = () => {
           )
         });
     }
-  });
-};
+  })
+});
