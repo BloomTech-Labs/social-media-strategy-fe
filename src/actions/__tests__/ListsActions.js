@@ -28,8 +28,13 @@ describe("listsActions", () => {
   //   }
   test("loadListsFromDb should get the lists for the logged in user and update the store", async () => {
     const store = mockStore({
-      user: {},
-      lists: {}
+      user: {
+        initialized: true,
+        okta_uid: null,
+        email: null,
+        twitter_handle: "some_test"
+      },
+      lists: null
     });
 
     store.dispatch(actions.loadListsFromDb("blah"));
