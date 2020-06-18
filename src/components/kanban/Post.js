@@ -1,13 +1,13 @@
 import React, { useState } from "react";
 import { useDispatch } from "react-redux";
 import { Draggable } from "react-beautiful-dnd";
-import { axiosWithAuth } from "../../utils/axiosWithAuth";
 import { updatePost } from "../../actions/listsActions";
 import { postTweet } from "../../actions/twitterActions";
 // Components
 import EditPostText from "./EditPostText";
 import PostMenu from "./PostMenu";
 import SchedulePost from "./SchedulePost";
+import Modal from "../templates/Modal";
 // Material-UI
 import { Typography, makeStyles, Button } from "@material-ui/core";
 
@@ -63,9 +63,10 @@ const Post = ({ post }) => {
 
 	const [text, setText] = useState(post.post_text || "");
 	const [isEditing, setIsEditing] = useState(false);
+	const [modalOpen, setModalOpen] = useState(false);
 
 	const postToTwitter = async () => {
-		await dispatch(postTweet());
+		await dispatch(postTweet(post.id));
 	};
 
 	const handleInputText = (e) => {
@@ -126,14 +127,26 @@ const Post = ({ post }) => {
 						)}
 
 						<div className={actionsContainer}>
-							<SchedulePost postId={post.id} />
-							<Button
-								disabled={post.posted}
-								onClick={postToTwitter}
-								color="primary"
-							>
-								{post.posted ? "Posted" : "Post Now"}
-							</Button>
+							{post.posted ? (
+								<Button disabled>Posted</Button>
+							) : (
+								<>
+									<SchedulePost postId={post.id} />
+									<Button
+										disabled={post.posted}
+										onClick={() => setModalOpen(true)}
+										color="primary"
+									>
+										Post Now
+									</Button>
+									<Modal
+										open={modalOpen}
+										handleClose={() => setModalOpen(false)}
+										title="Confirm post to twitter?"
+										handleConfirmation={postToTwitter}
+									/>
+								</>
+							)}
 						</div>
 					</div>
 				)}

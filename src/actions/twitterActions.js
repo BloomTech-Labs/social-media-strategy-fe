@@ -1,15 +1,28 @@
 import { axiosWithAuth } from "../utils/axiosWithAuth";
 import { POST_TWEET, SCHEDULE_TWEET } from "./kanbanActionTypes";
 
-export const postTweet = (postId) => async (dispatch) => {
+export const postTweet = (postId) => async (dispatch, getState) => {
 	const { data } = await axiosWithAuth().put(`/posts/${postId}/postnow`);
+
+	const { posts } = getState().kanban.lists[data.list_id];
+
+	const updatedPosts = posts.map((post) => {
+		if (post.id === postId) {
+			return {
+				...post,
+				posted: true,
+			};
+		}
+
+		return post;
+	});
 
 	// dispatch action to update redux
 	dispatch({
 		type: POST_TWEET,
 		payload: {
 			listId: data.list_id,
-			postId: data.id,
+			updatedPosts,
 		},
 	});
 };

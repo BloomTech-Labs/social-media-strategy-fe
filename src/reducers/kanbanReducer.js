@@ -99,11 +99,15 @@ const kanbanReducer = (state = initialState, action) => {
 			};
 		}
 		case POST_TWEET: {
-			const { postId, listId } = payload;
+			const { updatedPosts, listId } = payload;
 			return {
 				...state,
 				lists: {
 					...state.lists,
+					[listId]: {
+						...state.lists[listId],
+						posts: updatedPosts,
+					},
 				},
 			};
 		}

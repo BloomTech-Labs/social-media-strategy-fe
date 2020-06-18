@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { useDispatch } from "react-redux";
 import { deletePost } from "../../actions/listsActions";
-import ModalAlert from "../templates/Modal";
+import Modal from "../templates/Modal";
 // Material-UI
 import {
 	IconButton,
@@ -45,9 +45,9 @@ const PostMenu = ({ post, setEditing }) => {
 
 	return (
 		<>
-			<ModalAlert
+			<Modal
 				open={modalOpen}
-				setOpen={setModalOpen}
+				handleClose={() => setModalOpen(false)}
 				title="Delete this post?"
 				handleConfirmation={handleDeleteConfirmation}
 			/>
