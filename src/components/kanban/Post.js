@@ -21,6 +21,15 @@ const useStyles = makeStyles((theme) => ({
 		borderRadius: theme.shape.borderRadius,
 		backgroundColor: "#FFF",
 	},
+	schedule: {
+		display: "flex",
+		justifyContent: "space-between",
+		marginLeft: theme.spacing(1),
+		marginRight: theme.spacing(1),
+	},
+	scheduleText: {
+		fontWeight: "700",
+	},
 	contentContainer: {
 		userSelect: "none",
 		padding: theme.spacing(1),
@@ -55,6 +64,8 @@ const useStyles = makeStyles((theme) => ({
 const Post = ({ post }) => {
 	const {
 		container,
+		schedule,
+		scheduleText,
 		contentContainer,
 		postText,
 		image,
@@ -103,12 +114,23 @@ const Post = ({ post }) => {
 						className={container}
 						style={{ ...provided.draggableProps.style }}
 					>
-						{post.scheduled_time && (
-							<Typography>
-								{getDate(post.scheduled_time, false, true)}
-								<br />
-								{getTime(post.scheduled_time)}
-							</Typography>
+						{post.scheduled_time && !post.posted && (
+							<div className={schedule}>
+								<Typography
+									className={scheduleText}
+									variant="subtitle2"
+									color="secondary"
+								>
+									{getDate(post.scheduled_time, false, true)}
+								</Typography>
+								<Typography
+									className={scheduleText}
+									variant="subtitle2"
+									color="secondary"
+								>
+									{getTime(post.scheduled_time)}
+								</Typography>
+							</div>
 						)}
 						<div className={contentContainer}>
 							{isEditing ? (
@@ -124,8 +146,6 @@ const Post = ({ post }) => {
 										className={postText}
 									>
 										{text}
-										<br />
-										{`Index: ${post.index}`}
 									</Typography>
 									<PostMenu post={post} setEditing={() => setIsEditing(true)} />
 								</>
@@ -137,10 +157,18 @@ const Post = ({ post }) => {
 
 						<div className={actionsContainer}>
 							{post.posted ? (
-								<Button disabled>Posted</Button>
+								<Button disabled>{`Posted - ${getDate(
+									post.scheduled_time,
+									true,
+								)} | ${getTime(post.scheduled_time)}`}</Button>
 							) : (
 								<>
-									{!post.scheduled_time && <SchedulePost postId={post.id} />}
+									{!post.posted && (
+										<SchedulePost
+											scheduledTime={post.scheduled_time}
+											postId={post.id}
+										/>
+									)}
 									<Button
 										disabled={post.posted}
 										onClick={() => setModalOpen(true)}

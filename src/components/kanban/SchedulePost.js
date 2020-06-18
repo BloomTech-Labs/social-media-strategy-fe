@@ -11,8 +11,8 @@ import {
 import Modal from "../templates/Modal";
 import DateFnsUtils from "@date-io/date-fns";
 
-const SchedulePost = ({ postId }) => {
-	const [schedule, setSchedule] = useState(new Date());
+const SchedulePost = ({ postId, scheduledTime }) => {
+	const [schedule, setSchedule] = useState(scheduledTime || new Date());
 	const [invalidDate, setInvalidDate] = useState(false);
 	const [modalOpen, setModalOpen] = useState(false);
 
@@ -35,7 +35,7 @@ const SchedulePost = ({ postId }) => {
 	return (
 		<>
 			<Button onClick={() => setModalOpen(true)} color="primary">
-				Schedule
+				{scheduledTime ? "Reschedule" : "Schedule"}
 			</Button>
 			<Modal
 				open={modalOpen}
