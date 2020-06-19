@@ -3,7 +3,7 @@ import { useDispatch } from "react-redux";
 import { Draggable } from "react-beautiful-dnd";
 import { getDate, getTime } from "../../utils/dateFunctions";
 // Actions
-import { updatePost } from "../../actions/listsActions";
+import { updatePost } from "../../actions/postsActions";
 import { postTweet } from "../../actions/twitterActions";
 // Components
 import EditPostText from "./EditPostText";
@@ -141,10 +141,7 @@ const Post = ({ post }) => {
 								/>
 							) : (
 								<>
-									<Typography
-										onClick={() => setIsEditing(true)}
-										className={postText}
-									>
+									<Typography onClick={() => setIsEditing(true)} className={postText}>
 										{text}
 									</Typography>
 									<PostMenu post={post} setEditing={() => setIsEditing(true)} />
@@ -164,10 +161,7 @@ const Post = ({ post }) => {
 							) : (
 								<>
 									{!post.posted && (
-										<SchedulePost
-											scheduledTime={post.scheduled_time}
-											postId={post.id}
-										/>
+										<SchedulePost scheduledTime={post.scheduled_time} postId={post.id} />
 									)}
 									<Button
 										disabled={post.posted}

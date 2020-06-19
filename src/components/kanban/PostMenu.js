@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { useDispatch } from "react-redux";
-import { deletePost } from "../../actions/listsActions";
+import { deletePost } from "../../actions/postsActions";
 import Modal from "../templates/Modal";
 // Material-UI
 import {
