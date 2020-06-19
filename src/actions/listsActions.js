@@ -116,12 +116,46 @@ export const addPost = (post) => async (dispatch) => {
 	});
 };
 
-export const deletePost = (post) => async (dispatch) => {
-	await axiosWithAuth().delete(`/posts/${post.id}`);
+export const deletePost = (post) => async (dispatch, getState) => {
+	const { lists } = getState().kanban;
+
+	// array to save id and new index of lists posts that change index
+	const postsToBeUpdated = [];
+
+	const updatedPosts = lists[post.list_id].posts
+		.filter((current) => current.id !== post.id)
+		.map((current) => {
+			if (current.index > post.index) {
+				const newIndex = current.index - 1;
+
+				// save id and index to update/patch in DB
+				postsToBeUpdated.push({
+					id: current.id,
+					index: newIndex,
+				});
+
+				return {
+					...current,
+					index: newIndex,
+				};
+			}
+			return current;
+		});
 
 	dispatch({
 		type: DELETE_POST,
-		payload: post,
+		payload: {
+			listId: post.list_id,
+			updatedPosts,
+		},
+	});
+
+	// delete post from DB
+	await axiosWithAuth().delete(`/posts/${post.id}`);
+
+	// Update indexes in DB
+	postsToBeUpdated.forEach(async ({ id, index }) => {
+		await axiosWithAuth().patch(`/posts/${id}`, { index });
 	});
 };
 

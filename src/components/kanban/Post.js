@@ -1,11 +1,15 @@
 import React, { useState } from "react";
 import { useDispatch } from "react-redux";
 import { Draggable } from "react-beautiful-dnd";
-import { axiosWithAuth } from "../../utils/axiosWithAuth";
+import { getDate, getTime } from "../../utils/dateFunctions";
+// Actions
 import { updatePost } from "../../actions/listsActions";
+import { postTweet } from "../../actions/twitterActions";
 // Components
 import EditPostText from "./EditPostText";
 import PostMenu from "./PostMenu";
+import SchedulePost from "./SchedulePost";
+import Modal from "../templates/Modal";
 // Material-UI
 import { Typography, makeStyles, Button } from "@material-ui/core";
 
@@ -16,6 +20,15 @@ const useStyles = makeStyles((theme) => ({
 		marginTop: 4,
 		borderRadius: theme.shape.borderRadius,
 		backgroundColor: "#FFF",
+	},
+	schedule: {
+		display: "flex",
+		justifyContent: "space-between",
+		marginLeft: theme.spacing(1),
+		marginRight: theme.spacing(1),
+	},
+	scheduleText: {
+		fontWeight: "700",
 	},
 	contentContainer: {
 		userSelect: "none",
@@ -41,7 +54,7 @@ const useStyles = makeStyles((theme) => ({
 	},
 	actionsContainer: {
 		display: "flex",
-		justifyContent: "flex-end",
+		justifyContent: "space-between",
 		margin: theme.spacing(1),
 		marginRight: theme.spacing(2),
 		marginBottom: 0,
@@ -51,6 +64,8 @@ const useStyles = makeStyles((theme) => ({
 const Post = ({ post }) => {
 	const {
 		container,
+		schedule,
+		scheduleText,
 		contentContainer,
 		postText,
 		image,
@@ -59,14 +74,12 @@ const Post = ({ post }) => {
 
 	const dispatch = useDispatch();
 
-	const [isPosted, setPosted] = useState(post.posted);
 	const [text, setText] = useState(post.post_text || "");
 	const [isEditing, setIsEditing] = useState(false);
+	const [modalOpen, setModalOpen] = useState(false);
 
-	const postToTwitter = () => {
-		axiosWithAuth()
-			.put(`/posts/${post.id}/postnow`)
-			.then(() => setPosted(true));
+	const postToTwitter = async () => {
+		await dispatch(postTweet(post.id));
 	};
 
 	const handleInputText = (e) => {
@@ -101,6 +114,24 @@ const Post = ({ post }) => {
 						className={container}
 						style={{ ...provided.draggableProps.style }}
 					>
+						{post.scheduled_time && !post.posted && (
+							<div className={schedule}>
+								<Typography
+									className={scheduleText}
+									variant="subtitle2"
+									color="secondary"
+								>
+									{getDate(post.scheduled_time, false, true)}
+								</Typography>
+								<Typography
+									className={scheduleText}
+									variant="subtitle2"
+									color="secondary"
+								>
+									{getTime(post.scheduled_time)}
+								</Typography>
+							</div>
+						)}
 						<div className={contentContainer}>
 							{isEditing ? (
 								<EditPostText
@@ -125,13 +156,34 @@ const Post = ({ post }) => {
 						)}
 
 						<div className={actionsContainer}>
-							<Button
-								disabled={isPosted}
-								onClick={postToTwitter}
-								color="primary"
-							>
-								{isPosted ? "Posted" : "Post Now"}
-							</Button>
+							{post.posted ? (
+								<Button disabled>{`Posted - ${getDate(
+									post.scheduled_time,
+									true,
+								)} | ${getTime(post.scheduled_time)}`}</Button>
+							) : (
+								<>
+									{!post.posted && (
+										<SchedulePost
+											scheduledTime={post.scheduled_time}
+											postId={post.id}
+										/>
+									)}
+									<Button
+										disabled={post.posted}
+										onClick={() => setModalOpen(true)}
+										color="primary"
+									>
+										Post Now
+									</Button>
+									<Modal
+										open={modalOpen}
+										handleClose={() => setModalOpen(false)}
+										title="Confirm post to twitter?"
+										handleConfirmation={postToTwitter}
+									/>
+								</>
+							)}
 						</div>
 					</div>
 				)}
