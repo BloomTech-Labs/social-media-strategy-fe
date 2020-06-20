@@ -1,7 +1,7 @@
 import {
 	ADD_LIST_SCHEDULE,
 	REMOVE_LIST_SCHEDULE,
-} from "../actions/scheduleActionsTypes";
+} from "../actions/scheduleActionTypes";
 import {
 	UPDATE_LISTS,
 	ADD_LIST,
