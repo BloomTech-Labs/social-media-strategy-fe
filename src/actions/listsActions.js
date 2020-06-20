@@ -24,11 +24,13 @@ export const loadListsFromDb = (userId) => async (dispatch) => {
 
 	// load each list's posts
 	const listsPromises = sortedLists.map(async (list) => {
-		const res = await axiosWithAuth().get(`/lists/${list.id}/posts`);
+		const resPosts = await axiosWithAuth().get(`/lists/${list.id}/posts`);
+		const resSchedule = await axiosWithAuth().get(`/lists/${list.id}/schedule`);
 
 		return {
 			...list,
-			posts: res.data.sort((a, b) => a.index - b.index),
+			posts: resPosts.data.sort((a, b) => a.index - b.index),
+			schedule: resSchedule.data, // TODO sort schedule array
 		};
 	});
 

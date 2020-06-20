@@ -1,0 +1,2 @@
+export const ADD_SCHEDULE = "ADD_SCHEDULE";
+export const REMOVE_SCHEDULE = "REMOVE_SCHEDULE";
