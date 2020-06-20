@@ -1,17 +1,17 @@
 import { axiosWithAuth } from "../utils/axiosWithAuth";
-import { ADD_SCHEDULE, REMOVE_SCHEDULE } from "./scheduleActionTypes";
+import { ADD_LIST_SCHEDULE, REMOVE_LIST_SCHEDULE } from "./scheduleActionTypes";
 
-export const addSchedule = (listId, weekDay, hour, minute) => async (
+export const addSchedule = (listId, weekday, hour, minute) => async (
 	dispatch,
 ) => {
 	const { data } = await axiosWithAuth().post(`/lists/${listId}/schedule`, {
-		week_day: weekDay,
+		weekday,
 		hour,
 		minute,
 	});
 
 	dispatch({
-		type: ADD_SCHEDULE,
+		type: ADD_LIST_SCHEDULE,
 		payload: data,
 	});
 };
@@ -22,7 +22,7 @@ export const removeSchedule = (listId, scheduleId) => async (dispatch) => {
 	);
 
 	dispatch({
-		type: REMOVE_SCHEDULE,
+		type: REMOVE_LIST_SCHEDULE,
 		payload: {
 			listId,
 			scheduleId,
