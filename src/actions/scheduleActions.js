@@ -29,3 +29,11 @@ export const removeListSchedule = (listId, scheduleId) => async (dispatch) => {
 		},
 	});
 };
+
+export const getScheduleList = async (listId, numberOfPosts = 1) => {
+	const { data } = await axiosWithAuth().get(
+		`/lists/${listId}/schedule/${numberOfPosts}`,
+	);
+
+	return data;
+};

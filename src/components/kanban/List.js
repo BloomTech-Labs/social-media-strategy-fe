@@ -1,5 +1,7 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
+import { getScheduleList } from "../../actions/scheduleActions";
 import { Droppable, Draggable } from "react-beautiful-dnd";
+import { getDate, getTime } from "../../utils/dateFunctions";
 // Material-UI
 import { makeStyles } from "@material-ui/core";
 
@@ -26,6 +28,22 @@ const useStyles = makeStyles((theme) => ({
 
 const List = ({ list, user }) => {
 	const { listContainer, postsContainer } = useStyles();
+	const [schedule, setSchedule] = useState([]);
+
+	useEffect(() => {
+		const draggablePosts = list.posts.filter((post) => post.index !== null);
+
+		(async () => {
+			if (list.schedule.length > 0) {
+				const res = await getScheduleList(list.id, draggablePosts.length);
+				console.log("***Schedule***", res);
+				setSchedule(res);
+			}
+		})();
+	}, [list.posts.length]); // add posts.schedule
+
+	// check number of posts with indexes !== null
+	// request all schedules for that number of posts
 
 	return (
 		<Draggable key={list.id} draggableId={list.id} index={list.index}>
@@ -40,25 +58,26 @@ const List = ({ list, user }) => {
 						dragHandleProps={provided.dragHandleProps}
 						user={user}
 					/>
-					<Droppable
-						direction="vertical"
-						droppableId={String(list.id)}
-						type="post"
-					>
+					<Droppable direction="vertical" droppableId={String(list.id)} type="post">
 						{(provided, snapshot) => (
 							<div
 								{...provided.droppableProps}
 								ref={provided.innerRef}
 								className={postsContainer}
 								style={{
-									background: snapshot.isDraggingOver
-										? "aliceblue"
-										: "transparent",
+									background: snapshot.isDraggingOver ? "aliceblue" : "transparent",
 								}}
 							>
 								<Scrollbars autoHide>
 									{list.posts?.map((post, index) => (
-										<Post key={post.id} post={post} />
+										<>
+											{schedule.length > index && (
+												<p>{`${getDate(schedule[index].date, false, true)} | ${getTime(
+													schedule[index].date,
+												)}`}</p>
+											)}
+											<Post key={post.id} post={post} />
+										</>
 									))}
 									<CreatePostButton listId={list.id} />
 								</Scrollbars>
