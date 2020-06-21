@@ -1,5 +1,7 @@
 import React, { useState } from "react";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
+import { addListSchedule } from "../../actions/scheduleActions";
+import { getTime } from "../../utils/dateFunctions";
 // Material-ui
 import { makeStyles, Button, Typography } from "@material-ui/core";
 import { TimePicker } from "material-ui-time-picker";
@@ -22,6 +24,7 @@ const weekdays = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
 
 const ListSchedule = ({ listId }) => {
 	const list = useSelector((state) => state.kanban.lists[listId]);
+	const dispatch = useDispatch();
 	const [modalOpen, setModalOpen] = useState(false);
 	const [schedule, setSchedule] = useState({
 		weekday: 0,
@@ -47,8 +50,15 @@ const ListSchedule = ({ listId }) => {
 		}));
 	};
 
-	const handleAddSchedule = () => {
+	const handleAddSchedule = async () => {
 		console.log("add time");
+		const { weekday, time } = schedule;
+		const hour = time.getHours();
+		const minute = time.getMinutes();
+
+		await dispatch(addListSchedule(listId, weekday, hour, minute));
+
+		setModalOpen(false);
 	};
 
 	return (
@@ -58,6 +68,19 @@ const ListSchedule = ({ listId }) => {
 					<Typography align="center" variant="h6">
 						{day}
 					</Typography>
+					{list.schedule
+						.filter((e) => e.weekday === index)
+						.map((e) => {
+							const { hour, minute } = e;
+							const time = `${
+								(hour < 10 && "0") + hour > 12 ? hour - 12 : hour
+							}:${(minute < 10 && "0") + minute}${hour > 12 ? "pm" : "am"}`;
+							return (
+								<Typography key={e.id} variant="h6">
+									{time}
+								</Typography>
+							);
+						})}
 					<Button
 						style={{ height: 50 }}
 						fullWidth

@@ -32,11 +32,20 @@ export const scheduleTweet = (postId, date) => async (dispatch, getState) => {
 		date,
 	});
 
+	// update indexes from posts
 	const { posts } = getState().kanban.lists[data.list_id];
 
-	const updatedPosts = posts.map((post) => {
+	const updatedPosts = posts.map(async (post) => {
 		if (post.id === postId) {
-			return data;
+			const res = await axiosWithAuth().patch(`/posts/${post.id}`, {
+				index: null,
+			});
+			return res.data;
+		} else if (post.index > data.index) {
+			const res = await axiosWithAuth().patch(`/posts/${post.id}`, {
+				index: post.index - 1,
+			});
+			return res.data;
 		}
 
 		return post;
