@@ -9,23 +9,32 @@ import {
 } from "@material-ui/core";
 
 const Modal = (props) => {
-	const { open, handleClose, title, content, handleConfirmation } = props;
+	const {
+		open,
+		handleClose,
+		title,
+		content,
+		handleConfirmation,
+		noDialogContent,
+	} = props;
 	return (
 		<Dialog open={open} onClose={handleClose} aria-labelledby="dialog-title">
-			<div style={{ minWidth: 300 }}>
-				<DialogTitle id="dialog-title">{title}</DialogTitle>
+			<div style={{ minWidth: 288 }}>
+				{title && <DialogTitle id="dialog-title">{title}</DialogTitle>}
 
-				<DialogContent>
-					{props.children ? (
-						<>{props.children}</>
-					) : (
-						content && (
-							<DialogContentText id="dialog-description">
-								{content}
-							</DialogContentText>
-						)
-					)}
-				</DialogContent>
+				{noDialogContent && props.children ? (
+					<>{props.children}</>
+				) : (
+					<DialogContent>
+						{props.children ? (
+							<>{props.children}</>
+						) : (
+							content && (
+								<DialogContentText id="dialog-description">{content}</DialogContentText>
+							)
+						)}
+					</DialogContent>
+				)}
 
 				<DialogActions>
 					<Button onClick={handleClose} color="primary">

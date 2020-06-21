@@ -71,18 +71,6 @@ const MenuList = () => {
 					</ListItemIcon>
 					<ListItemText primary="Media Manager" />
 				</ListItem>
-				<ListItem button onClick={() => push("/analytics")}>
-					<ListItemIcon>
-						<TrendingUpIcon
-							className={
-								location.pathname.includes("/analytics")
-									? classes.selectedIcon
-									: classes.icon
-							}
-						/>
-					</ListItemIcon>
-					<ListItemText primary="Analytics" />
-				</ListItem>
 				<ListItem button onClick={() => push("/schedule")}>
 					<ListItemIcon>
 						<ScheduleIcon
@@ -94,6 +82,18 @@ const MenuList = () => {
 						/>
 					</ListItemIcon>
 					<ListItemText primary="Schedule" />
+				</ListItem>
+				<ListItem button onClick={() => push("/analytics")}>
+					<ListItemIcon>
+						<TrendingUpIcon
+							className={
+								location.pathname.includes("/analytics")
+									? classes.selectedIcon
+									: classes.icon
+							}
+						/>
+					</ListItemIcon>
+					<ListItemText primary="Analytics" />
 				</ListItem>
 				<ListItem button onClick={() => push("/connect/twitter")}>
 					<ListItemIcon>

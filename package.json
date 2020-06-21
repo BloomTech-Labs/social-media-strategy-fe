@@ -20,6 +20,7 @@
     "date-fns": "^2.12.0",
     "dotenv": "^8.2.0",
     "fibers": "^4.0.2",
+    "material-ui-time-picker": "^1.3.0",
     "moment": "^2.24.0",
     "node-sass": "^4.14.1",
     "numeral": "^2.0.6",
