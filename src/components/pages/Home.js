@@ -33,7 +33,7 @@ const Home = () => {
 	return (
 		<div className={root}>
 			<div className={topContainer}>
-				<Typography variant="h4" className={header}>
+				<Typography component="h1" variant="h4" className={header}>
 					Media Manager
 				</Typography>
 			</div>

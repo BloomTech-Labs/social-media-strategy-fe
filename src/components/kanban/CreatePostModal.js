@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { addList, addPost } from "../../actions/listsActions";
+import { addList } from "../../actions/listsActions";
+import { addPost } from "../../actions/postsActions";
 import TwitterCharCount from "./TwitterCharCount";
 import {
 	makeStyles,
@@ -39,9 +40,7 @@ const CreatePostModal = (props) => {
 
 	useEffect(() => {
 		if (lists) {
-			const drafts = Object.values(lists).find(
-				(list) => list.title === "Drafts",
-			);
+			const drafts = Object.values(lists).find((list) => list.title === "Drafts");
 
 			if (!drafts) {
 				// create Drafts list
@@ -90,11 +89,7 @@ const CreatePostModal = (props) => {
 	};
 
 	return (
-		<Dialog
-			open={open}
-			onClose={handleClose}
-			aria-labelledby="form-dialog-title"
-		>
+		<Dialog open={open} onClose={handleClose} aria-labelledby="form-dialog-title">
 			<DialogTitle id="form-dialog-title">Create a Post</DialogTitle>
 			<DialogContent className={content}>
 				{/* Post text */}

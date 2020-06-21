@@ -17,6 +17,7 @@ import DashboardIcon from "@material-ui/icons/Dashboard";
 import AccountBoxIcon from "@material-ui/icons/AccountBox";
 import ExitToAppIcon from "@material-ui/icons/ExitToApp";
 import TrendingUpIcon from "@material-ui/icons/TrendingUp";
+import ScheduleIcon from "@material-ui/icons/Schedule";
 // Img
 import logo from "../../assets/imgs/Logo-dark.svg";
 
@@ -69,6 +70,18 @@ const MenuList = () => {
 						/>
 					</ListItemIcon>
 					<ListItemText primary="Media Manager" />
+				</ListItem>
+				<ListItem button onClick={() => push("/schedule")}>
+					<ListItemIcon>
+						<ScheduleIcon
+							className={
+								location.pathname.includes("/schedule")
+									? classes.selectedIcon
+									: classes.icon
+							}
+						/>
+					</ListItemIcon>
+					<ListItemText primary="Schedule" />
 				</ListItem>
 				<ListItem button onClick={() => push("/analytics")}>
 					<ListItemIcon>

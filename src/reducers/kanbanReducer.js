@@ -1,4 +1,8 @@
 import {
+	ADD_LIST_SCHEDULE,
+	REMOVE_LIST_SCHEDULE,
+} from "../actions/scheduleActionTypes";
+import {
 	UPDATE_LISTS,
 	ADD_LIST,
 	EDIT_LIST,
@@ -31,6 +35,7 @@ const kanbanReducer = (state = initialState, action) => {
 					[payload.id]: {
 						...payload,
 						posts: [],
+						schedule: [],
 					},
 				},
 			};
@@ -121,6 +126,33 @@ const kanbanReducer = (state = initialState, action) => {
 					[listId]: {
 						...state.lists[listId],
 						posts: updatedPosts,
+					},
+				},
+			};
+		}
+		case ADD_LIST_SCHEDULE: {
+			// payload = created schedule obj
+			const { list_id } = payload;
+			return {
+				...state,
+				lists: {
+					...state.lists,
+					[list_id]: {
+						...state.lists[list_id],
+						schedule: [...state.lists[list_id].schedule, payload],
+					},
+				},
+			};
+		}
+		case REMOVE_LIST_SCHEDULE: {
+			const { scheduleId, listId } = payload;
+			return {
+				...state,
+				lists: {
+					...state.lists,
+					[listId]: {
+						...state.lists[listId],
+						schedule: state.lists[listId].schedule.filter((e) => e.id !== scheduleId),
 					},
 				},
 			};
