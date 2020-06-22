@@ -81,6 +81,10 @@ export const axiosWithAuth = () => ({
         return Promise.resolve({
           data: postSeeds.filter(post => post.list_id === testListId2)
         });
+      default:
+        return Promise.resolve({
+          data: null
+        });
     }
   }),
   post: jest.fn((url, body) => {
@@ -96,7 +100,26 @@ export const axiosWithAuth = () => ({
         });
     }
   }),
-  patch: jest.fn(),
+  patch: jest.fn((url, body) => {
+    switch (url) {
+      case `/lists/${testListId1}`:
+        let [list] = listSeeds.filter(list => list.id === testListId1);
+
+        list = {
+          ...list,
+          title: body.title
+        };
+
+        return Promise.resolve({
+          data: list
+        });
+
+      default:
+        return Promise.resolve({
+          data: null
+        });
+    }
+  }),
   put: jest.fn(),
   delete: jest.fn()
 });
