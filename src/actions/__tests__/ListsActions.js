@@ -126,7 +126,7 @@ describe("listsActions", () => {
     expect(dispatchedActions).toEqual(expectedActions);
   });
 
-  test("addList should post the passed in list to the BE, and then dispatch ADD_LIST actions with payload set to the newly added list", async () => {
+  test("addList should pass the title the BE, receive the newly added list and then dispatch ADD_LIST actions with payload set to the newly added list", async () => {
     const store = mockStore({
       user: {
         initialized: true,
@@ -150,6 +150,43 @@ describe("listsActions", () => {
           okta_uid: "00u4lenp4ViHhg0Gj4x6",
           index: 900,
           title: "I am a title!"
+        }
+      }
+    ];
+
+    dispatchedActions = store.getActions();
+    expect(dispatchedActions).toEqual(expectedActions);
+  });
+
+  test("updateList should take in a listId and changes, make a PATCH request to the BE, and then dispatch EDIT_LIST action with payload set to the updated list", async () => {
+    const store = mockStore({
+      user: {
+        initialized: true,
+        okta_uid: null,
+        email: null,
+        twitter_handle: "some_test"
+      },
+      lists: null
+    });
+
+    let dispatchedActions = store.getActions();
+    expect(dispatchedActions).toEqual([]);
+
+    await store.dispatch(
+      actions.updateList("fc85a964-eec3-42eb-a076-4d7d2634b321", {
+        title: "Updated title"
+      })
+    );
+
+    const expectedActions = [
+      {
+        type: types.EDIT_LIST,
+        payload: {
+          id: "fc85a964-eec3-42eb-a076-4d7d2634b321",
+          okta_uid: "00ucj17sgcvh8Axqr4x6",
+          created_at: "2020-06-08 12:51:13.821025-07",
+          index: 0,
+          title: "Updated title"
         }
       }
     ];
