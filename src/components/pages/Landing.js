@@ -134,7 +134,6 @@ const useStyles = makeStyles(theme => ({
     fontFamily: "Roboto Condensed",
     margin: "0 auto",
     fontWeight: 500,
-    textAlign: "center",
     "@media (min-width: 960px)": {
       maxWidth: 400
     }
@@ -373,14 +372,14 @@ export default function Landing() {
           <div style={{ display: "flex", justifyContent: "space-between" }}>
             <a
               href="https://github.com/orgs/Lambda-School-Labs/teams/labs24-some/repositories"
-              target="_blank"
+              target="_blank" rel="noopener noreferrer" 
             >
               <GitHubIcon style={{ color: "#4E4E4E" }} />
             </a>
-            <a href="https://twitter.com/some_strategy" target="_blank">
+            <a href="https://twitter.com/some_strategy" target="_blank" rel="noopener noreferrer" >
               <TwitterIcon style={{ color: "#4E4E4E" }} />
             </a>
-            <a href="mailto:socialmediastrategy22@gmail.com" target="_blank">
+            <a href="mailto:socialmediastrategy22@gmail.com" target="_blank" rel="noopener noreferrer" >
               <EmailIcon style={{ color: "#4E4E4E" }} />
             </a>
           </div>

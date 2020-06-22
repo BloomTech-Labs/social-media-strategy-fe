@@ -12,7 +12,6 @@ import ThumbsUpDownIcon from "@material-ui/icons/ThumbsUpDown";
 import FavoriteIcon from "@material-ui/icons/Favorite";
 
 
-
 const useStyles = makeStyles({
   root: {
     width: 200,
@@ -22,10 +21,21 @@ const useStyles = makeStyles({
   title: {
     fontSize: 14,
   },
+  statCards: {
+    display: "flex",
+    justifyContent: "center",
+    flex: "wrap",
+    "@media (max-width: 890px)": {
+      display: "flex",
+      flexDirection: "column",
+      alignItems: "center",
+    },
+  },
   card: {
     display: "flex",
     justifyContent: "center",
     flexWrap: "wrap",
+
   },
   number: {
     fontSize: "30pt",
@@ -33,6 +43,9 @@ const useStyles = makeStyles({
     color: "#rgb(50,50,50)",
     width: "100%",
     textAlign: "center",
+    "@media (max-width: 650px)": {
+      fontSize: "25pt",
+    },
   },
   stat: {
     width: "100%",
@@ -47,11 +60,11 @@ const useStyles = makeStyles({
   },
 });
 
-const Stats = props => {
+const Stats = (props) => {
   const classes = useStyles();
-  const stats = useSelector(state => state.stats);
+  const stats = useSelector((state) => state.stats);
   const dispatch = useDispatch();
-  var numeral = require('numeral');
+  var numeral = require("numeral");
 
   useEffect(() => {
     if (!stats.num_followers) {
@@ -64,25 +77,34 @@ const Stats = props => {
 
   return (
     <>
-        <div style={{ display: "flex", justifyContent: "center" }}>
+      <div className={classes.statCards}>
+        <div style={{display:"flex", justifyContent:"center", }}>
           <Card className={classes.root}>
             <CardContent className={classes.card}>
               <PersonAddIcon style={{ color: "limegreen", width: "100%" }} />
-      <Typography className={classes.number}>{numeral(stats.num_followers).format('0 a')}</Typography>
+              <Typography className={classes.number}>
+                {numeral(stats.num_followers).format("0 a")}
+              </Typography>
               <Typography className={classes.stat}>Followers</Typography>
             </CardContent>
           </Card>
           <Card className={classes.root}>
             <CardContent className={classes.card}>
               <RepeatIcon style={{ color: "royalblue", width: "100%" }} />
-              <Typography className={classes.number}>{numeral(stats.num_retweets).format('0 a')}</Typography>
+              <Typography className={classes.number}>
+                {numeral(stats.num_retweets).format("0 a")}
+              </Typography>
               <Typography className={classes.stat}>Retweets</Typography>
             </CardContent>
           </Card>
+        </div>
+        <div style={{display:"flex", justifyContent:"center",}}>
           <Card className={classes.root}>
             <CardContent className={classes.card}>
               <FavoriteIcon style={{ color: "red", width: "100%" }} />
-              <Typography className={classes.number}>{numeral(stats.num_favorites).format('0 a')}</Typography>
+              <Typography className={classes.number}>
+                {numeral(stats.num_favorites).format("0 a")}
+              </Typography>
               <Typography className={classes.stat}>Likes</Typography>
             </CardContent>
           </Card>
@@ -91,15 +113,16 @@ const Stats = props => {
               <ThumbsUpDownIcon
                 style={{ color: "blueviolet", width: "100%" }}
               />
-              <Typography className={classes.number}>{numeral(stats.engagement_ratio).format('0.00%')}</Typography>
+              <Typography className={classes.number}>
+                {numeral(stats.engagement_ratio).format("0.00%")}
+              </Typography>
               <Typography className={classes.stat}>Engagement</Typography>
             </CardContent>
           </Card>
         </div>
+      </div>
     </>
   );
 };
-
-
 
 export default Stats;
