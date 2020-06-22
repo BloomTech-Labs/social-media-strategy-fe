@@ -125,4 +125,36 @@ describe("listsActions", () => {
     dispatchedActions = store.getActions();
     expect(dispatchedActions).toEqual(expectedActions);
   });
+
+  test("addList should post the passed in list to the BE, and then dispatch ADD_LIST actions with payload set to the newly added list", async () => {
+    const store = mockStore({
+      user: {
+        initialized: true,
+        okta_uid: null,
+        email: null,
+        twitter_handle: "some_test"
+      },
+      lists: null
+    });
+
+    let dispatchedActions = store.getActions();
+    expect(dispatchedActions).toEqual([]);
+
+    await store.dispatch(actions.addList("I am a title!"));
+
+    const expectedActions = [
+      {
+        type: types.ADD_LIST,
+        payload: {
+          id: "e243cf16-549a-4861-970e-64bada40eb6d",
+          okta_uid: "00u4lenp4ViHhg0Gj4x6",
+          index: 900,
+          title: "I am a title!"
+        }
+      }
+    ];
+
+    dispatchedActions = store.getActions();
+    expect(dispatchedActions).toEqual(expectedActions);
+  });
 });
