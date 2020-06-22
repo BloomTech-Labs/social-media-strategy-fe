@@ -1,55 +1,48 @@
 import React, { useState } from "react";
 import TopNav from "./TopNav";
 import MenuList from "./MenuList";
-import {
-  Drawer,
-  makeStyles,
-  Hidden
-} from "@material-ui/core";
-import clsx from 'clsx';
+import { Drawer, makeStyles, Hidden } from "@material-ui/core";
+import clsx from "clsx";
 
-const useStyles = makeStyles(theme => ({
+const useStyles = makeStyles((theme) => ({
   drawer: {
-    position: 'fixed',
+    position: "fixed",
     width: theme.navbar.width.close,
     flexShrink: 0,
-    whiteSpace: 'nowrap',
-    overflow: 'hidden',
-    zIndex: 1000
+    whiteSpace: "nowrap",
+    zIndex: 1000,
   },
   drawerOpen: {
     width: theme.navbar.width.open,
-    overflow: 'hidden',
-    transition: theme.transitions.create('width', {
+    transition: theme.transitions.create("width", {
       easing: theme.transitions.easing.sharp,
       duration: theme.transitions.duration.enteringScreen,
     }),
   },
   drawerClose: {
-    transition: theme.transitions.create('width', {
+    transition: theme.transitions.create("width", {
       easing: theme.transitions.easing.sharp,
       duration: theme.transitions.duration.leavingScreen,
     }),
     width: theme.navbar.width.close,
-    overflow: 'hidden',
-  }
+  },
 }));
 
 const NavMenu = () => {
   const [open, setOpen] = useState(false);
-  
+
   const classes = useStyles();
 
   const closeDrawer = () => {
     setOpen(false);
-  }
+  };
 
   return (
     <>
       <Hidden smUp>
         <TopNav toggleMenu={() => setOpen(!open)} />
         <Drawer
-          variant={ "temporary"}
+          variant={"temporary"}
           open={open}
           onClose={closeDrawer}
           className={clsx(classes.drawer, {
@@ -63,12 +56,12 @@ const NavMenu = () => {
             }),
           }}
         >
-          <MenuList closeDrawer={closeDrawer} /> 
+          <MenuList closeDrawer={closeDrawer} />
         </Drawer>
       </Hidden>
       <Hidden xsDown>
         <Drawer
-          variant={ "permanent"}
+          variant={"permanent"}
           className={clsx(classes.drawer, {
             [classes.drawerOpen]: open,
             [classes.drawerClose]: !open,
@@ -82,7 +75,7 @@ const NavMenu = () => {
           onMouseEnter={() => setOpen(true)}
           onMouseLeave={closeDrawer}
         >
-          <MenuList /> 
+          <MenuList />
         </Drawer>
       </Hidden>
     </>
