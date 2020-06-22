@@ -259,6 +259,4 @@ describe("listsActions", () => {
     dispatchedActions = store.getActions();
     expect(dispatchedActions).toEqual(expectedActions);
   });
-
-  test("addPost", async () => {});
 });
