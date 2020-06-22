@@ -8,28 +8,28 @@ import { loadListsFromDb } from "../../actions/listsActions";
 import {
   dragPostToDifferentList,
   dragPostToSameList,
-  dragList,
+  dragList
 } from "../../actions/kanbanActions";
 import CreateList from "./CreateList";
 
-const useStyles = makeStyles((theme) => ({
+const useStyles = makeStyles(theme => ({
   kanban: {
-    display: 'flex',
-    width: '100%',
-    height: `calc(100vh - ${theme.kanban.topContainer.height})`,
+    display: "flex",
+    width: "100%",
+    height: `calc(100vh - ${theme.kanban.topContainer.height})`
   },
   loading: {
-    width: '100%',
-    height: '100%',
-    display: 'flex',
-    justifyContent: 'center',
-    alignItems: 'center'
+    width: "100%",
+    height: "100%",
+    display: "flex",
+    justifyContent: "center",
+    alignItems: "center"
   }
 }));
 
 const Kanban = () => {
-  const { lists } = useSelector((state) => state.kanban);
-  const user = useSelector((state) => state.user);
+  const { lists } = useSelector(state => state.kanban);
+  const user = useSelector(state => state.user);
 
   const { kanban, loading } = useStyles();
   const dispatch = useDispatch();
@@ -37,7 +37,6 @@ const Kanban = () => {
   useEffect(() => {
     if (user.okta_uid) {
       if (!lists) {
-        console.log("loading lists");
         (async () => {
           dispatch(await loadListsFromDb(user.okta_uid));
         })();
@@ -46,7 +45,7 @@ const Kanban = () => {
     // eslint-disable-next-line
   }, [user]);
 
-  const onDragEnd = (result) => {
+  const onDragEnd = result => {
     const { source, destination, type } = result;
 
     if (
@@ -71,33 +70,27 @@ const Kanban = () => {
     }
   };
 
-  return (
-    lists ? (
-      <DragDropContext onDragEnd={onDragEnd}>
-        <Droppable
-          direction="horizontal"
-          droppableId="mainDroppable"
-          type="list"
-        >
-          {(provided, snapshot) => (
-            <div
-              {...provided.droppableProps}
-              ref={provided.innerRef}
-              className={kanban}
-            >
-              {Object.entries(lists)
-                .sort((a, b) => a.index - b.index)
-                .map(([listId, list]) => (
-                  <List key={list.id} list={list} user={user} />
+  return lists ? (
+    <DragDropContext onDragEnd={onDragEnd}>
+      <Droppable direction="horizontal" droppableId="mainDroppable" type="list">
+        {(provided, snapshot) => (
+          <div
+            {...provided.droppableProps}
+            ref={provided.innerRef}
+            className={kanban}
+          >
+            {Object.entries(lists)
+              .sort((a, b) => a.index - b.index)
+              .map(([listId, list]) => (
+                <List key={list.id} list={list} user={user} />
               ))}
-              {provided.placeholder}
-              <CreateList />
-            </div>
-          )}
-        </Droppable>
-      </DragDropContext>
-    )
-  :
+            {provided.placeholder}
+            <CreateList />
+          </div>
+        )}
+      </Droppable>
+    </DragDropContext>
+  ) : (
     <div className={loading}>
       <CircularProgress />
     </div>
