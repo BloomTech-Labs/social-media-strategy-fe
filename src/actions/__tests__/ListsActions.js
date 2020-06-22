@@ -174,7 +174,8 @@ describe("listsActions", () => {
 
     await store.dispatch(
       actions.updateList("fc85a964-eec3-42eb-a076-4d7d2634b321", {
-        title: "Updated title"
+        title: "Updated title",
+        index: 0
       })
     );
 
@@ -194,4 +195,70 @@ describe("listsActions", () => {
     dispatchedActions = store.getActions();
     expect(dispatchedActions).toEqual(expectedActions);
   });
+
+  // Inputs:
+  // - array of current lists (from state.kanban.lists)
+  // - list object to delete
+
+  // Iterates through the lists that will not be deleted
+  // Updates the indexes of those lists
+  // dispatches action with type DELETE_LIST, with payload set to the lists with
+  // updated IDs
+  // Makes a delete request to the BE
+  // Makes patch request to the BE for each list
+  test("deleteList", async () => {
+    const store = mockStore({
+      user: {
+        initialized: true,
+        okta_uid: null,
+        email: null,
+        twitter_handle: "some_test"
+      },
+      lists: {
+        "fc85a964-eec3-42eb-a076-4d7d2634b321": {
+          id: "fc85a964-eec3-42eb-a076-4d7d2634b321",
+          okta_uid: "00ucj17sgcvh8Axqr4x6",
+          created_at: "2020-06-08 12:51:13.821025-07",
+          index: 0,
+          title: "list 1"
+        },
+        "d2b3833d-08b3-4dd8-96fe-822e3a608d82": {
+          id: "d2b3833d-08b3-4dd8-96fe-822e3a608d82",
+          okta_uid: "00ucj17sgcvh8Axqr4x6",
+          created_at: "2020-06-08 12:51:21.129036-07",
+          index: 1,
+          title: "list 2"
+        }
+      }
+    });
+
+    let dispatchedActions = store.getActions();
+    expect(dispatchedActions).toEqual([]);
+
+    const { lists } = store.getState();
+
+    await store.dispatch(
+      actions.deleteList(lists, lists["fc85a964-eec3-42eb-a076-4d7d2634b321"])
+    );
+
+    const expectedActions = [
+      {
+        type: types.DELETE_LIST,
+        payload: {
+          "d2b3833d-08b3-4dd8-96fe-822e3a608d82": {
+            id: "d2b3833d-08b3-4dd8-96fe-822e3a608d82",
+            okta_uid: "00ucj17sgcvh8Axqr4x6",
+            created_at: "2020-06-08 12:51:21.129036-07",
+            index: 0,
+            title: "list 2"
+          }
+        }
+      }
+    ];
+
+    dispatchedActions = store.getActions();
+    expect(dispatchedActions).toEqual(expectedActions);
+  });
+
+  test("addPost", async () => {});
 });
