@@ -39,7 +39,6 @@ const CreatePostModal = (props) => {
 		image_url: "",
 	});
 	const [loading, setLoading] = useState(false);
-	const [image, setImage] = useState('');
 
 	useEffect(() => {
 		if (lists) {
@@ -89,6 +88,7 @@ const CreatePostModal = (props) => {
 		e.preventDefault();
 
 		if (post.post_text) {
+			console.log(post);
 			dispatch(addPost(post));
 			handleClose();
 			
@@ -109,7 +109,11 @@ const CreatePostModal = (props) => {
             }
         );
         const file = await res.json();
-		setImage(file.secure_url);
+		
+		setPost((prevPost) => ({
+			...prevPost,
+			image_url: file.secure_url
+		}));
 		setLoading(false);
 	}
 
@@ -141,7 +145,7 @@ const CreatePostModal = (props) => {
 					+ Upload photo
 				</Fab>
 			</label>
-			<img src={image} style={{ width: '300px', margin: '0 auto'}}/>
+			<img src={post.image_url} style={{ width: '300px', margin: '0 auto'}}/>
 			<DialogContent className={content}>
 				{/* Post text */}
 				<TextField
