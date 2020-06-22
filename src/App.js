@@ -7,7 +7,6 @@ import { useOktaAuth } from "@okta/okta-react";
 
 import { initializeUser } from "./actions/userActions";
 
-import Landing from "./components/pages/Landing";
 import LoginOkta from "./components/auth/LoginOkta";
 import ConnectAccounts from "./components/auth/ConnectAccounts";
 import Home from "./components/pages/Home";
@@ -15,7 +14,7 @@ import Analytics from "./components/pages/Analytics";
 import NavMenuTemplate from "./components/templates/NavMenuTemplate";
 
 function initializeAnalytics() {
-  ReactGA.initialize('UA-169685720-1');
+  ReactGA.initialize("UA-169685720-1");
   ReactGA.pageview(window.location.pathname + window.location.search);
 }
 
@@ -28,8 +27,6 @@ function App(props) {
   const user = useSelector((state) => state.user);
 
   useEffect(() => {
-    console.log("App.js useEffect fired", Date.now());
-    console.log(location);
     if (location.pathname === "/connect/twitter/callback") return;
     if (!user.initialized) {
       dispatch(initializeUser(authService, history));
@@ -40,7 +37,6 @@ function App(props) {
 
   return (
     <Switch>
-      <Route exact path="/" component={Landing} />
       <Route exact path="/login" component={LoginOkta} />
       <Route path="/implicit/callback" component={LoginCallback} />
       <Route>

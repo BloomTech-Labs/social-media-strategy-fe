@@ -1,4 +1,4 @@
-import React, { Fragment } from "react";
+import React from "react";
 import Stats from "../analytics/Stats";
 import PopularWords from "../analytics/PopularWords";
 import Scrollbars from "react-custom-scrollbars";
