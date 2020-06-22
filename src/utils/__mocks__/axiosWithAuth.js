@@ -107,7 +107,8 @@ export const axiosWithAuth = () => ({
 
         list = {
           ...list,
-          title: body.title
+          title: body.title,
+          index: body.index
         };
 
         return Promise.resolve({
