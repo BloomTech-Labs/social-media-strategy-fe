@@ -80,9 +80,9 @@ const Kanban = () => {
 						ref={provided.innerRef}
 						className={kanban}
 					>
-						{Object.entries(lists)
+						{Object.values(lists)
 							.sort((a, b) => a.index - b.index)
-							.map(([listId, list]) => (
+							.map((list) => (
 								<List key={list.id} list={list} />
 							))}
 						{provided.placeholder}

@@ -1,4 +1,5 @@
 import { axiosWithAuth } from "../utils/axiosWithAuth";
+import { getScheduleList } from "./scheduleActions";
 import {
 	UPDATE_LISTS,
 	ADD_LIST,
@@ -18,6 +19,9 @@ const convertArrayToObject = (array, key) => {
 
 export const loadListsFromDb = (userId) => async (dispatch) => {
 	const { data } = await axiosWithAuth().get(`/lists`);
+	const res = await axiosWithAuth().get("/posts");
+
+	const allPosts = res.data;
 
 	// sort lists by index
 	const sortedLists = data.sort((a, b) => a.index - b.index);
@@ -26,11 +30,14 @@ export const loadListsFromDb = (userId) => async (dispatch) => {
 	const listsPromises = sortedLists.map(async (list) => {
 		const resPosts = await axiosWithAuth().get(`/lists/${list.id}/posts`);
 		const resSchedule = await axiosWithAuth().get(`/lists/${list.id}/schedule`);
+		const resScheduleDates = await getScheduleList(list.id, allPosts.length);
 
+		console.log(resScheduleDates);
 		return {
 			...list,
 			posts: resPosts.data,
 			schedule: resSchedule.data,
+			scheduleDates: resScheduleDates,
 		};
 	});
 

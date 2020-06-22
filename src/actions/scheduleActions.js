@@ -42,5 +42,5 @@ export const getScheduleList = async (listId, numberOfPosts = 1) => {
 		return 1;
 	});
 
-	return sortedByDate;
+	return sortedByDate.map((date) => date.date);
 };

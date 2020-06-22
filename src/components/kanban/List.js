@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { getScheduleList } from "../../actions/scheduleActions";
 import { Droppable, Draggable } from "react-beautiful-dnd";
-import { getDate, getTime } from "../../utils/dateFunctions";
 // Material-UI
 import { makeStyles } from "@material-ui/core";
 
@@ -26,26 +25,8 @@ const useStyles = makeStyles((theme) => ({
 	},
 }));
 
-const List = ({ list, user }) => {
+const List = ({ list }) => {
 	const { listContainer, postsContainer } = useStyles();
-
-	const [schedule, setSchedule] = useState([]);
-
-	useEffect(() => {
-		console.log("&&&&&&&&&&&&&&&&&&&");
-
-		const draggablePosts = list.posts.filter((post) => post.index !== null);
-
-		(async () => {
-			if (list.schedule.length > 0) {
-				const res = await getScheduleList(list.id, draggablePosts.length);
-				setSchedule(res);
-			}
-		})();
-	}, [list.posts.length]); // add posts.schedule
-
-	// check number of posts with indexes !== null
-	// request all schedules for that number of posts
 
 	return (
 		<Draggable key={list.id} draggableId={list.id} index={list.index}>
@@ -68,17 +49,27 @@ const List = ({ list, user }) => {
 							>
 								<Scrollbars autoHide>
 									{list.posts
-										?.filter((p) => !p.posted && p.index !== null)
-										.sort((a, b) => a.index - b.index)
-										.map((post, index) => (
-											<>
-												{schedule.length > index && (
-													<p>{`${getDate(schedule[index].date, false, true)} | ${getTime(
-														schedule[index].date,
-													)}`}</p>
-												)}
-												<Post key={post.id} post={post} />
-											</>
+										?.filter((post) => !post.posted)
+										.sort((a, b) => {
+											let dateA =
+												a.index !== null && !a.scheduled_time
+													? list.scheduleDates[a.index]
+													: a.scheduled_time;
+											let dateB =
+												b.index !== null && !b.scheduled_time
+													? list.scheduleDates[b.index]
+													: b.scheduled_time;
+											if (dateA < dateB) {
+												return -1;
+											}
+											return 1;
+										})
+										.map((post) => (
+											<Post
+												key={post.id}
+												post={post}
+												date={list.scheduleDates[post.index]}
+											/>
 										))}
 									<CreatePostButton listId={list.id} />
 								</Scrollbars>

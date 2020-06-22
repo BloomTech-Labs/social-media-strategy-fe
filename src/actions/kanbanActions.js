@@ -57,56 +57,72 @@ export const dragPostToDifferentList = (lists, source, destination) => (
 
 	const postsToBeUpdated = [];
 
+	// Update posts/posts of the source column/list
+	let updatedSourcePosts = sourcePosts.map((post) => {
+		const newIndex = sourcePosts.findIndex((el) => el.id === post.id);
+		if (needsToUpdateIndex(source, destination, newIndex, source.droppableId)) {
+			// save posts id and data that need to be updated in DB
+			postsToBeUpdated.push({
+				id: post.id,
+				updates: {
+					index: newIndex,
+				},
+			});
+			return {
+				...post,
+				// update each post's index
+				index: newIndex,
+			};
+		} else {
+			return post;
+		}
+	});
+
+	// include posts with index === null
+	updatedSourcePosts = [
+		...updatedSourcePosts,
+		...sourceList.posts.filter((post) => post.index === null),
+	];
+
+	let updatedDestPosts = destPosts.map((post) => {
+		const newIndex = destPosts.findIndex((el) => el.id === post.id);
+		if (
+			needsToUpdateIndex(source, destination, newIndex, destination.droppableId)
+		) {
+			postsToBeUpdated.push({
+				id: post.id,
+				updates: {
+					index: newIndex,
+					// make sure to send list_id to update list_id of the dragged post
+					list_id: destination.droppableId,
+				},
+			});
+			return {
+				...post,
+				// update each post's index
+				index: newIndex,
+			};
+		} else {
+			return post;
+		}
+	});
+
+	// include posts with index === null
+	updatedDestPosts = [
+		...updatedDestPosts,
+		...destList.posts.filter((post) => post.index === null),
+	];
+
 	const updatedLists = {
 		...lists,
-		// Update posts/posts of the source column/list
 		[source.droppableId]: {
 			...sourceList,
-			posts: sourcePosts.map((post) => {
-				const newIndex = sourcePosts.findIndex((el) => el.id === post.id);
-				if (needsToUpdateIndex(source, destination, newIndex, source.droppableId)) {
-					// save posts id and data that need to be updated in DB
-					postsToBeUpdated.push({
-						id: post.id,
-						updates: {
-							index: newIndex,
-						},
-					});
-					return {
-						...post,
-						// update each post's index
-						index: newIndex,
-					};
-				} else {
-					return post;
-				}
-			}),
+			posts: updatedSourcePosts,
 		},
 		// Update posts/posts of the destination column/list
 		[destination.droppableId]: {
 			...destList,
-			posts: destPosts.map((post) => {
-				const newIndex = destPosts.findIndex((el) => el.id === post.id);
-				if (
-					needsToUpdateIndex(source, destination, newIndex, destination.droppableId)
-				) {
-					postsToBeUpdated.push({
-						id: post.id,
-						updates: {
-							index: newIndex,
-							// make sure to send list_id to update list_id of the dragged post
-							list_id: destination.droppableId,
-						},
-					});
-					return {
-						...post,
-						// update each post's index
-						index: newIndex,
-					};
-				} else {
-					return post;
-				}
-			}),
+			posts: updatedDestPosts,
 		},
 	};
 
@@ -133,24 +149,32 @@ export const dragPostToSameList = (lists, source, destination) => (
 
 	const postsToBeUpdated = [];
 
+	// update posts indexes
+	let updatedPosts = posts.map((post) => {
+		const newIndex = posts.findIndex((el) => el.id === post.id);
+		if (needsToUpdateIndex(source, destination, newIndex, source.droppableId)) {
+			// save posts id to update DB
+			postsToBeUpdated.push({ id: post.id, index: newIndex });
+			return {
+				...post,
+				index: newIndex,
+			};
+		} else {
+			return post;
+		}
+	});
+
+	// include posts without index
+	updatedPosts = [
+		...updatedPosts,
+		...list.posts.filter((post) => post.index === null),
+	];
+
 	const updatedLists = {
 		...lists,
 		[source.droppableId]: {
 			...list,
-			// update posts indexes
-			posts: posts.map((post) => {
-				const newIndex = posts.findIndex((el) => el.id === post.id);
-				if (needsToUpdateIndex(source, destination, newIndex, source.droppableId)) {
-					// save posts id to update DB
-					postsToBeUpdated.push({ id: post.id, index: newIndex });
-					return {
-						...post,
-						index: newIndex,
-					};
-				} else {
-					return post;
-				}
-			}),
+			posts: updatedPosts,
 		},
 	};
 
