@@ -29,8 +29,8 @@ export const loadListsFromDb = (userId) => async (dispatch) => {
 
 		return {
 			...list,
-			posts: resPosts.data.sort((a, b) => a.index - b.index),
-			schedule: resSchedule.data, // TODO sort schedule array
+			posts: resPosts.data,
+			schedule: resSchedule.data,
 		};
 	});
 

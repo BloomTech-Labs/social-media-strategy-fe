@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import EditList from "./EditList";
 import { updateList } from "../../actions/listsActions";
 import { makeStyles, Typography } from "@material-ui/core";
@@ -34,7 +34,8 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 const ListHeader = (props) => {
-	const { list, dragHandleProps, user } = props;
+	const { list, dragHandleProps } = props;
+	const { user } = useSelector((state) => state);
 
 	const {
 		header,

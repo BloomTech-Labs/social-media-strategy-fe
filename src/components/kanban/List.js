@@ -28,15 +28,17 @@ const useStyles = makeStyles((theme) => ({
 
 const List = ({ list, user }) => {
 	const { listContainer, postsContainer } = useStyles();
+
 	const [schedule, setSchedule] = useState([]);
 
 	useEffect(() => {
+		console.log("&&&&&&&&&&&&&&&&&&&");
+
 		const draggablePosts = list.posts.filter((post) => post.index !== null);
 
 		(async () => {
 			if (list.schedule.length > 0) {
 				const res = await getScheduleList(list.id, draggablePosts.length);
-				console.log("***Schedule***", res);
 				setSchedule(res);
 			}
 		})();
@@ -53,11 +55,7 @@ const List = ({ list, user }) => {
 					ref={provided.innerRef}
 					{...provided.draggableProps}
 				>
-					<ListHeader
-						list={list}
-						dragHandleProps={provided.dragHandleProps}
-						user={user}
-					/>
+					<ListHeader list={list} dragHandleProps={provided.dragHandleProps} />
 					<Droppable direction="vertical" droppableId={String(list.id)} type="post">
 						{(provided, snapshot) => (
 							<div
@@ -69,16 +67,19 @@ const List = ({ list, user }) => {
 								}}
 							>
 								<Scrollbars autoHide>
-									{list.posts?.map((post, index) => (
-										<>
-											{schedule.length > index && (
-												<p>{`${getDate(schedule[index].date, false, true)} | ${getTime(
-													schedule[index].date,
-												)}`}</p>
-											)}
-											<Post key={post.id} post={post} />
-										</>
-									))}
+									{list.posts
+										?.filter((p) => !p.posted && p.index !== null)
+										.sort((a, b) => a.index - b.index)
+										.map((post, index) => (
+											<>
+												{schedule.length > index && (
+													<p>{`${getDate(schedule[index].date, false, true)} | ${getTime(
+														schedule[index].date,
+													)}`}</p>
+												)}
+												<Post key={post.id} post={post} />
+											</>
+										))}
 									<CreatePostButton listId={list.id} />
 								</Scrollbars>
 								{provided.placeholder}

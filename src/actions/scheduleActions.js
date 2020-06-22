@@ -35,5 +35,12 @@ export const getScheduleList = async (listId, numberOfPosts = 1) => {
 		`/lists/${listId}/schedule/${numberOfPosts}`,
 	);
 
-	return data;
+	const sortedByDate = data.sort((a, b) => {
+		if (a.date < b.date) {
+			return -1;
+		}
+		return 1;
+	});
+
+	return sortedByDate;
 };
