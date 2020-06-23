@@ -44,7 +44,7 @@ const useStyles = makeStyles((theme) => ({
 	postText: {
 		flexGrow: "1",
 		cursor: "pointer",
-		maxWidth: "100%",
+		maxWidth: "82%",
 		lineBreak: "auto",
 		overflowWrap: "break-word",
 	},
