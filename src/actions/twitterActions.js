@@ -8,10 +8,7 @@ export const postTweet = (postId) => async (dispatch, getState) => {
 
 	const updatedPosts = posts.map((post) => {
 		if (post.id === postId) {
-			return {
-				...post,
-				posted: true,
-			};
+			return data;
 		}
 
 		return post;
