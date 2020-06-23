@@ -50,15 +50,16 @@ const ListSchedule = ({ listId }) => {
 		}));
 	};
 
-	const handleAddSchedule = async () => {
+	const handleAddSchedule = async (e) => {
+		e.preventDefault();
 		console.log("add time");
 		const { weekday, time } = schedule;
 		const hour = time.getHours();
 		const minute = time.getMinutes();
 
-		await dispatch(addListSchedule(listId, weekday, hour, minute));
-
 		setModalOpen(false);
+
+		await dispatch(addListSchedule(listId, weekday, hour, minute));
 	};
 
 	return (
