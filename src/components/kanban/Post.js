@@ -44,8 +44,9 @@ const useStyles = makeStyles((theme) => ({
 	postText: {
 		flexGrow: "1",
 		cursor: "pointer",
-		maxWidth: "100%",
-		lineBreak: "anywhere",
+		maxWidth: "82%",
+		lineBreak: "auto",
+		overflowWrap: "break-word",
 	},
 	image: {
 		width: "100%",
@@ -141,10 +142,7 @@ const Post = ({ post }) => {
 								/>
 							) : (
 								<>
-									<Typography
-										onClick={() => setIsEditing(true)}
-										className={postText}
-									>
+									<Typography onClick={() => setIsEditing(true)} className={postText}>
 										{text}
 									</Typography>
 									<PostMenu post={post} setEditing={() => setIsEditing(true)} />
@@ -164,10 +162,7 @@ const Post = ({ post }) => {
 							) : (
 								<>
 									{!post.posted && (
-										<SchedulePost
-											scheduledTime={post.scheduled_time}
-											postId={post.id}
-										/>
+										<SchedulePost scheduledTime={post.scheduled_time} postId={post.id} />
 									)}
 									<Button
 										disabled={post.posted}
