@@ -117,7 +117,7 @@ const PostContent = ({ post }) => {
 				) : (
 					<>
 						<Typography onClick={() => setIsEditing(true)} className={postText}>
-							{text}
+							{text} | {post.index}
 						</Typography>
 						<PostMenu post={post} setEditing={() => setIsEditing(true)} />
 					</>

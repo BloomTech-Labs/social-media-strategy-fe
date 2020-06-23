@@ -35,7 +35,12 @@ export const loadListsFromDb = (userId) => async (dispatch) => {
 		console.log(resScheduleDates);
 		return {
 			...list,
-			posts: resPosts.data,
+			// load only post the where not posted
+			posts: resPosts.data
+				.filter(
+					(post) => post.index !== null && !post.scheduled_time && !post.posted,
+				)
+				.sort((a, b) => a.index - b.index),
 			schedule: resSchedule.data,
 			scheduleDates: resScheduleDates,
 		};

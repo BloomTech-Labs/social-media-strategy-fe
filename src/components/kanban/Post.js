@@ -1,7 +1,6 @@
 import React from "react";
 import { Draggable } from "react-beautiful-dnd";
 import { makeStyles } from "@material-ui/core";
-import { getDate, getTime } from "../../utils/dateFunctions";
 // Components
 import PostContent from "./PostContent";
 
@@ -21,6 +20,7 @@ const Post = ({ post, date }) => {
 	return (
 		post && (
 			<Draggable
+				disableInteractiveElementBlocking={false}
 				isDragDisabled={post.index === null}
 				key={post.id}
 				draggableId={post.id}
@@ -34,9 +34,6 @@ const Post = ({ post, date }) => {
 						className={container}
 						style={{ ...provided.draggableProps.style }}
 					>
-						{date && !post.schedule && post.index !== null && (
-							<p>{`${getDate(date)} | ${getTime(date)}`}</p>
-						)}
 						<PostContent post={post} />
 					</div>
 				)}

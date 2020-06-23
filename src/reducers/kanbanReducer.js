@@ -36,6 +36,7 @@ const kanbanReducer = (state = initialState, action) => {
 						...payload,
 						posts: [],
 						schedule: [],
+						scheduleDates: [],
 					},
 				},
 			};
@@ -57,14 +58,15 @@ const kanbanReducer = (state = initialState, action) => {
 				lists: updatedLists,
 			};
 		case ADD_POST:
-			// payload: new post
+			const { post, scheduleDates } = payload;
 			return {
 				...state,
 				lists: {
 					...state.lists,
-					[payload.list_id]: {
-						...state.lists[payload.list_id],
-						posts: [...state.lists[payload.list_id].posts, payload],
+					[post.list_id]: {
+						...state.lists[post.list_id],
+						posts: [...state.lists[post.list_id].posts, post],
+						scheduleDates,
 					},
 				},
 			};

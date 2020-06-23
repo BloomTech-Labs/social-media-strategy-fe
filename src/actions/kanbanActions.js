@@ -41,10 +41,8 @@ export const dragPostToDifferentList = (lists, source, destination) => (
 	const sourceList = lists[source.droppableId];
 	const destList = lists[destination.droppableId];
 
-	const sourcePosts = [
-		...sourceList.posts.filter((post) => post.index !== null),
-	];
-	const destPosts = [...destList.posts.filter((post) => post.index !== null)];
+	const sourcePosts = sourceList.posts;
+	const destPosts = destList.posts;
 
 	// remove post from source list
 	const [item] = sourcePosts.splice(source.index, 1);
@@ -58,7 +56,7 @@ export const dragPostToDifferentList = (lists, source, destination) => (
 	const postsToBeUpdated = [];
 
 	// Update posts/posts of the source column/list
-	let updatedSourcePosts = sourcePosts.map((post) => {
+	const updatedSourcePosts = sourcePosts.map((post) => {
 		const newIndex = sourcePosts.findIndex((el) => el.id === post.id);
 		if (needsToUpdateIndex(source, destination, newIndex, source.droppableId)) {
 			// save posts id and data that need to be updated in DB
@@ -78,13 +76,7 @@ export const dragPostToDifferentList = (lists, source, destination) => (
 		}
 	});
 
-	// include posts with index === null
-	updatedSourcePosts = [
-		...updatedSourcePosts,
-		...sourceList.posts.filter((post) => post.index === null),
-	];
-
-	let updatedDestPosts = destPosts.map((post) => {
+	const updatedDestPosts = destPosts.map((post) => {
 		const newIndex = destPosts.findIndex((el) => el.id === post.id);
 		if (
 			needsToUpdateIndex(source, destination, newIndex, destination.droppableId)
@@ -106,12 +98,6 @@ export const dragPostToDifferentList = (lists, source, destination) => (
 			return post;
 		}
 	});
-
-	// include posts with index === null
-	updatedDestPosts = [
-		...updatedDestPosts,
-		...destList.posts.filter((post) => post.index === null),
-	];
 
 	const updatedLists = {
 		...lists,
@@ -141,7 +127,7 @@ export const dragPostToSameList = (lists, source, destination) => (
 	dispatch,
 ) => {
 	const list = lists[source.droppableId];
-	const posts = [...list.posts.filter((post) => post.index !== null)];
+	const posts = list.posts;
 	// remove item
 	const [item] = posts.splice(source.index, 1);
 	// add item to new index
@@ -150,7 +136,7 @@ export const dragPostToSameList = (lists, source, destination) => (
 	const postsToBeUpdated = [];
 
 	// update posts indexes
-	let updatedPosts = posts.map((post) => {
+	const updatedPosts = posts.map((post) => {
 		const newIndex = posts.findIndex((el) => el.id === post.id);
 		if (needsToUpdateIndex(source, destination, newIndex, source.droppableId)) {
 			// save posts id to update DB
@@ -163,12 +149,6 @@ export const dragPostToSameList = (lists, source, destination) => (
 			return post;
 		}
 	});
-
-	// include posts without index
-	updatedPosts = [
-		...updatedPosts,
-		...list.posts.filter((post) => post.index === null),
-	];
 
 	const updatedLists = {
 		...lists,

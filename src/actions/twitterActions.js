@@ -6,16 +6,7 @@ export const postTweet = (postId) => async (dispatch, getState) => {
 
 	const { posts } = getState().kanban.lists[data.list_id];
 
-	const updatedPosts = posts.map((post) => {
-		if (post.id === postId) {
-			return {
-				...post,
-				posted: true,
-			};
-		}
-
-		return post;
-	});
+	const updatedPosts = posts.filter((post) => post.id !== postId);
 
 	// dispatch action to update redux
 	dispatch({
@@ -55,7 +46,7 @@ export const scheduleTweet = (postId, date) => async (dispatch, getState) => {
 		type: SCHEDULE_TWEET,
 		payload: {
 			listId: data.list_id,
-			updatedPosts,
+			updatedPosts: updatedPosts.filter((post) => post.index !== null),
 		},
 	});
 };

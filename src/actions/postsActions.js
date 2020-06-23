@@ -1,13 +1,20 @@
 import { axiosWithAuth } from "../utils/axiosWithAuth";
 import { ADD_POST, EDIT_POST, DELETE_POST } from "./kanbanActionTypes";
+import { getScheduleList } from "./scheduleActions";
 
-export const addPost = (post) => async (dispatch) => {
+export const addPost = (post) => async (dispatch, getState) => {
 	const { list_id } = post;
 	const { data } = await axiosWithAuth().post(`/lists/${list_id}/posts`, post);
 
+	const { posts } = getState().kanban.lists[list_id];
+	const scheduleDates = await getScheduleList(list_id, posts.length + 1);
+
 	dispatch({
 		type: ADD_POST,
-		payload: data,
+		payload: {
+			post: data,
+			scheduleDates,
+		},
 	});
 };
 

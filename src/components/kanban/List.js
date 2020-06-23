@@ -1,8 +1,8 @@
-import React, { useState, useEffect } from "react";
-import { getScheduleList } from "../../actions/scheduleActions";
+import React from "react";
+import { getDate, getTime } from "../../utils/dateFunctions";
 import { Droppable, Draggable } from "react-beautiful-dnd";
 // Material-UI
-import { makeStyles } from "@material-ui/core";
+import { makeStyles, Typography } from "@material-ui/core";
 
 import { Scrollbars } from "react-custom-scrollbars";
 import ListHeader from "./ListHeader";
@@ -48,32 +48,22 @@ const List = ({ list }) => {
 								}}
 							>
 								<Scrollbars autoHide>
-									{list.posts
-										?.filter((post) => !post.posted)
-										.sort((a, b) => {
-											let dateA =
-												a.index !== null && !a.scheduled_time
-													? list.scheduleDates[a.index]
-													: a.scheduled_time;
-											let dateB =
-												b.index !== null && !b.scheduled_time
-													? list.scheduleDates[b.index]
-													: b.scheduled_time;
-											if (dateA < dateB) {
-												return -1;
-											}
-											return 1;
-										})
-										.map((post) => (
-											<Post
-												key={post.id}
-												post={post}
-												date={list.scheduleDates[post.index]}
-											/>
-										))}
+									{list.posts.map((post) => (
+										<>
+											{list.scheduleDates[post.index] && (
+												<>
+													<Typography variant="caption">{`${getDate(
+														list.scheduleDates[post.index],
+													)} | ${getTime(list.scheduleDates[post.index])}`}</Typography>
+												</>
+											)}
+
+											<Post key={post.id} post={post} />
+										</>
+									))}
+									{provided.placeholder}
 									<CreatePostButton listId={list.id} />
 								</Scrollbars>
-								{provided.placeholder}
 							</div>
 						)}
 					</Droppable>
