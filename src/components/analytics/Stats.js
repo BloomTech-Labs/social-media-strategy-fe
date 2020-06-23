@@ -11,15 +11,14 @@ import RepeatIcon from "@material-ui/icons/Repeat";
 import ThumbsUpDownIcon from "@material-ui/icons/ThumbsUpDown";
 import FavoriteIcon from "@material-ui/icons/Favorite";
 
-
 const useStyles = makeStyles({
   root: {
     width: 200,
     margin: "1%",
-    marginTop: "0!important",
+    marginTop: "0!important"
   },
   title: {
-    fontSize: 14,
+    fontSize: 14
   },
   statCards: {
     display: "flex",
@@ -28,14 +27,13 @@ const useStyles = makeStyles({
     "@media (max-width: 890px)": {
       display: "flex",
       flexDirection: "column",
-      alignItems: "center",
-    },
+      alignItems: "center"
+    }
   },
   card: {
     display: "flex",
     justifyContent: "center",
-    flexWrap: "wrap",
-
+    flexWrap: "wrap"
   },
   number: {
     fontSize: "30pt",
@@ -44,25 +42,25 @@ const useStyles = makeStyles({
     width: "100%",
     textAlign: "center",
     "@media (max-width: 650px)": {
-      fontSize: "25pt",
-    },
+      fontSize: "25pt"
+    }
   },
   stat: {
     width: "100%",
     textAlign: "center",
     fontSize: "14pt",
     fontWeight: "bold",
-    color: "#4E4E4E",
+    color: "#4E4E4E"
   },
   change: {
     display: "flex",
-    justifyContent: "center",
-  },
+    justifyContent: "center"
+  }
 });
 
-const Stats = (props) => {
+const Stats = props => {
   const classes = useStyles();
-  const stats = useSelector((state) => state.stats);
+  const stats = useSelector(state => state.stats);
   const dispatch = useDispatch();
   var numeral = require("numeral");
 
@@ -73,12 +71,13 @@ const Stats = (props) => {
         dispatch(getData());
       })();
     }
+    // eslint-disable-next-line
   }, [stats]);
 
   return (
     <>
       <div className={classes.statCards}>
-        <div style={{display:"flex", justifyContent:"center", }}>
+        <div style={{ display: "flex", justifyContent: "center" }}>
           <Card className={classes.root}>
             <CardContent className={classes.card}>
               <PersonAddIcon style={{ color: "limegreen", width: "100%" }} />
@@ -98,7 +97,7 @@ const Stats = (props) => {
             </CardContent>
           </Card>
         </div>
-        <div style={{display:"flex", justifyContent:"center",}}>
+        <div style={{ display: "flex", justifyContent: "center" }}>
           <Card className={classes.root}>
             <CardContent className={classes.card}>
               <FavoriteIcon style={{ color: "red", width: "100%" }} />
