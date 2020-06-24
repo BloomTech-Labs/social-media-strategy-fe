@@ -34,9 +34,9 @@ const useStyles = makeStyles({
     "@media (max-width: 890px)": {
       fontSize: 14,
     },
-    "@media (max-width: 700px)": {
-      fontSize: 9,
-    },
+    // "@media (max-width: 700px)": {
+    //   fontSize: 9,
+    // },
   },
 });
 
