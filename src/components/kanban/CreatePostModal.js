@@ -14,6 +14,7 @@ import {
 	Select,
 	MenuItem,
 	Button,
+	Fab,
 } from "@material-ui/core";
 
 const useStyles = makeStyles((theme) => ({
@@ -35,7 +36,9 @@ const CreatePostModal = (props) => {
 	const [post, setPost] = useState({
 		list_id: "",
 		post_text: "",
+		image_url: "",
 	});
+	const [loading, setLoading] = useState(false);
 
 	useEffect(() => {
 		if (lists) {
@@ -67,6 +70,7 @@ const CreatePostModal = (props) => {
 			setPost((prevPost) => ({
 				...prevPost,
 				[target.id]: target.value?.trim(),
+				
 			}));
 		}
 	};
@@ -76,7 +80,7 @@ const CreatePostModal = (props) => {
 
 		setPost((prevPost) => ({
 			...prevPost,
-			list_id: target.value,
+			list_id: target.value,			
 		}));
 	};
 
@@ -84,10 +88,34 @@ const CreatePostModal = (props) => {
 		e.preventDefault();
 
 		if (post.post_text) {
+			console.log(post);
 			dispatch(addPost(post));
 			handleClose();
-		}
+			
+ 		}
 	};
+
+	const handleImageUpload = async e => {
+		const files = e.target.files;
+        const data = new FormData();
+        data.append('file', files[0]);
+        data.append('upload_preset', 'somefileupload');
+        setLoading(true);
+        const res = await fetch(
+            'https://api.cloudinary.com/v1_1/someapp/image/upload',
+            {
+                method: 'Post',
+                body: data
+            }
+        );
+        const file = await res.json();
+		
+		setPost((prevPost) => ({
+			...prevPost,
+			image_url: file.secure_url
+		}));
+		setLoading(false);
+	}
 
 	return (
 		<Dialog
@@ -96,6 +124,28 @@ const CreatePostModal = (props) => {
 			aria-labelledby="form-dialog-title"
 		>
 			<DialogTitle id="form-dialog-title">Create a Post</DialogTitle>
+			<label htmlFor="upload-photo">
+				<input
+					style={{ display: 'none' }}
+					id="upload-photo"
+					name="upload-photo"
+					type="file"
+					onChange={ handleImageUpload }
+				/>
+
+				<Fab
+					color="primary"
+					size="small"
+					component="span"
+					aria-label="add"
+					variant="extended"
+					style={{ width: '100%', borderRadius: '0', margin: '-10px 0 10px' }}
+					
+				>
+					+ Upload photo
+				</Fab>
+			</label>
+			<img src={post.image_url} style={{ width: '300px', margin: '0 auto'}}/>
 			<DialogContent className={content}>
 				{/* Post text */}
 				<TextField
